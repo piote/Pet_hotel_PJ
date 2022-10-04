@@ -1,4 +1,4 @@
-package com.myboot.pet;
+package com.myboot;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,14 +10,14 @@ public  class MainController {
 @ResponseBody
   @RequestMapping("/") 
   public String home(){
-    
-    return "main"; 
+    System.out.println("Hello Boot!!");
+    return "Hello Boot!!"; 
   }
 
   @RequestMapping("/main.do")
   public String hello(Model model){
+	System.out.println("안녕하세요");
 	
 	return "main";
-  } 
+  }
 }
-
