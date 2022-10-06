@@ -25,9 +25,15 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'javax.servlet:jstl:1.2'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	//implementation fileTree dir:'libs',include: ['*.jar']
 	//implementation files 'libs/ojdbc6.jar'
+	
+	// tiles
+    implementation 'org.apache.tiles:tiles-jsp:3.0.8'
+    implementation 'org.apache.tiles:tiles-core:3.0.8'
+    implementation 'org.apache.tiles:tiles-servlet:3.0.8'
+	
+	
 	
 	compileOnly 'org.projectlombok:lombok'
 	

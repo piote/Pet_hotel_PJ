@@ -17,14 +17,7 @@ public  class MainController {
   @RequestMapping("/main.do")
   public String hello(Model model){
 	System.out.println("안녕하세요");
-	
 	return "main";
   }
   
-  @RequestMapping("/thymeleaf.do")
-  public String ty(Model model){
-	System.out.println("안녕하세요");
-	model.addAttribute("message","타임리프");
-	return "thymeleaf";
-  }
 }
