@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+ <mappers>
+ 	<!-- 예약 mapper입니다-->
+   <mapper resource="mybatis/mappers/reservation.xml"/>
+
+ </mappers>
+</configuration>
