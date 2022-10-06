@@ -14,10 +14,10 @@ public  class MainController {
     return "Hello Boot!!"; 
   }
 
-  @RequestMapping("/main.do")
+  @RequestMapping("/reservation.do")
   public String hello(Model model){
 	System.out.println("안녕하세요");
 	
-	return "main";
+	return "reservation";
   }
 }
