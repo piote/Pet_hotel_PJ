@@ -4,8 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
  <mappers>
- 	<!-- 예약 mapper입니다-->
-   <mapper resource="mybatis/mappers/reservation.xml"/>
+ 	
 
  </mappers>
 </configuration>

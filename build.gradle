@@ -19,14 +19,19 @@ repositories {
 }
 
 dependencies {
+
+	
+	
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'javax.servlet:jstl:1.2'
+	
 	//implementation fileTree dir:'libs',include: ['*.jar']
 	//implementation files 'libs/ojdbc6.jar'
+	//implementation 'commons-io:commons-io:2.4'
 	
 	// tiles
     implementation 'org.apache.tiles:tiles-jsp:3.0.8'
@@ -36,9 +41,9 @@ dependencies {
 	
 	
 	compileOnly 'org.projectlombok:lombok'
-	
-	//runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
-	runtimeOnly 'com.h2database:h2'
+
+	//runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
