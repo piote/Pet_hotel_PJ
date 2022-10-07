@@ -14,7 +14,7 @@
 <body>
   <footer>
     <div class="footer_wrap">
-        <a class="foot_logo" href="#">Anitel</a>
+        <a class="foot_logo" href="${contextPath}/main.do">Anitel</a>
         <div class="info">
             <p class="min_title">주소</p>
             부산진구 서전로 10번길 28

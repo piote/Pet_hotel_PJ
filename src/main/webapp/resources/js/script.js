@@ -11,6 +11,12 @@ $(function(){
         $header.toggleClass('down', scrolled);
         $nav.toggleClass('nav_down', scrolled);
     });
+	
+	
+	$(".moveTopBtn").onclick = () => {
+  		window.scrollTo({ top: 0, behavior: "smooth" });  
+	}
+	
 
 
     //roll banner
@@ -44,3 +50,8 @@ $(function(){
 
 
 });
+
+//side bt _ up
+function moveTopBtn(){
+	window.scrollTo({ top: 0, behavior: "smooth" });  
+}

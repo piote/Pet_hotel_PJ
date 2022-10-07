@@ -63,6 +63,7 @@
             margin-top: 40px;
             float: right;
             transition: all 0.3s;
+            cursor: pointer;
         }
         .slider_bt:hover{
             background-color: rgba(255, 255, 255,0.5);
@@ -238,13 +239,13 @@
 <body>
 
   <div class="slider_wrap">
-    <a class="first_slider" href="#">
+    <div class="first_slider">
         <div class="txt_wrap">
             <p>Anitel</p>
             <p>펫 호텔 서비스</p>
-            <div class="slider_bt">예약하기 ></div>
+            <a class="slider_bt">예약하기 ></a>
         </div>
-    </a>
+    </div>
   </div>
 
   <section class="introduce">
