@@ -10,10 +10,7 @@ public  class reservationController {
 
 @RequestMapping("/reservation.do") 
   public String reservationMain(Model model){
-    
-	
-	
-	//테스트입니다
+ 
     return "reservationMain"; 
   }
 
