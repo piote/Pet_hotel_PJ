@@ -4,7 +4,7 @@ $(function(){
     var $nav = $('nav');
 
     var $window = $(window);
-    var pageOffsetTop = 200;
+    var pageOffsetTop = 30;
     
     $window.on('scroll', function(){ //스크롤시
         var scrolled = $window.scrollTop() >= pageOffsetTop;
