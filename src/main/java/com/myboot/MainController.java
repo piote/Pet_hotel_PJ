@@ -20,4 +20,10 @@ public  class MainController {
    return "main";	
   }
   
+  @RequestMapping("/reservation.do")
+  public String reservation(Model model){
+   //System.out.println("안녕하세요");
+   return "reservation";	
+  }
+  
 }
