@@ -28,6 +28,7 @@
             width: auto; height: 100vh;
             background-color: azure;
             position: relative;
+            margin-top: -200px;
         }
         .slider_wrap .first_slider{
             background-image: url(${contextPath}/resources/img/main_1.png);

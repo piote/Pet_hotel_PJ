@@ -1,4 +1,6 @@
+
 <!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+
     pageEncoding="UTF-8" 
     isELIgnored="false"  %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
@@ -6,7 +8,9 @@
 
 <%
   request.setCharacterEncoding("UTF-8");
+
 %>     -->
+
 
 
 <html>
@@ -15,9 +19,11 @@
     <meta charset="UTF-8">
     <title>호텔 예약창(예약단계1)</title>
     <style>
+
     	*{
     		margine:10%
     	}
+
         h2 {
             text-align: center;
             color: brown;
@@ -28,10 +34,11 @@
         #checkin {
             margin-left: 10%;
             margin-right: 10%;
+            
         }
 
         #checkin2 {
-            margin-left: 50px;
+            margin-left: 10%;
             margin-right: 10%;
             cursor: pointer;
         }
@@ -53,10 +60,11 @@
         }
 
         #mypet2 {
-            margin-left: 1%;
+            margin-left: 10%;
             margin-right: 10%;
             cursor: pointer;
         }
+
 
         #btn_addpet {
             margin-top: 10px;
@@ -76,12 +84,17 @@
         #wrap {
             text-align: center;
 
-        }
+
+        
 
         #wrap li,
         #wrap ul {
             display: inline-block;
+            
 
+        }
+        #wrap li{
+            width: 32%;
         }
 
         .reservationtext1 {
@@ -99,28 +112,15 @@
         }
 
 
-        #div1 ul li {
-            list-style: none;
-            display: inline-block;
-            color: brown;
-            font-size: 20px;
-        }
-
-
-        #div2 ul li {
-            list-style: none;
-            display: inline-block;
-            color: black;
-            font-size: 20px;
-        }
-
         .reservationtext {
             margin: 15px;
-
-          
         }
-        .reservationBox{
-           
+
+        .reservationBox {}
+
+        #btn_pet1 {
+            margin-top: 50px;
+            text-align: right;
         }
 
         #btn_pet1_1, #btn_pet2_1, #btn_pet2_2 {
@@ -201,101 +201,27 @@
 </head>
 
 <body>
-    <h2>
-        예약하기
-    </h2>
-    <hr>
-    </hr>
 
-    <div id="wrap">
-        <ul>
-            <li id="checkinBox" class="reservationBox">
-                <div id="checkin" class="reservationtext reservationtext1">| CHECK IN |</div>
-                <div id="checkin2" class="reservationtext reservationtext2"><span>현재 날짜(달력연동)</span></div>
-            </li>
-            <li id="checkoutBox" class="reservationBox">
-                <div id="mypet" class="reservationtext reservationtext1">| CHECK OUT |</div>
-                <div id="checkout2" class="reservationtext reservationtext2"><span>다음 날짜(달력연동)</span></div>
-            </li>
-            <li id="mypetBox" class="reservationBox">
-                <div id="mypet" class="reservationtext reservationtext1">| MY PET |</div>
-                <div id="mypet2" class="reservationtext reservationtext2"><span>데려오기(펫정보db)</span></div>
-            </li>
-        </ul>
-    </div>
-    <hr>
-    </hr>
-    <table id='pet_table' align="center" width="80%">
-        <tr align="center" bgcolor="bisque">
-            <td><b>Pet Name</b></td>
-            <td><b>Pet Age</b></td>
-            <td><b>Pet sex</b></td>
-            <td><b>Room</b></td>
-            <td><b>Service</b></td>
-            <td><b>Use</b></td>
-        </tr>
 
-        <c:forEach var="member" items="${membersList}">
-            <tr align="center">
-                <td>${Pet.Name}</td>
-                <td>${Pet.Age}</td>
-                <td>${Pet.Sex}</td>
-                <td>
-                    <select name="petroom" id="Pet_Room" onchange="handleOnChange(this)">
-                        <option>Standard</option>
-                        <option>Superior</option>
-                        <option>Deluxe</option>
-                    </select>
-                </td>
-                <!-- 체크박스 -->
-                <td>미용<input id="beauty" type="checkbox"> 
-                    스파<input id="spa" type="checkbox"></td>
-                <td>
-                    <select name="pet" id="Pet_Room" onchange="handleOnChange(this)">
-                        <option>Used</option>
-                        <option>Not Used</option>
-                    </select>
-                </td>
-            </tr>
-        </c:forEach>
-    </table>
-    <div id="btn_pet1">
-		<input type='button' value='추가하기' id="btn_pet1_1" onclick='addRow()'/>
-    </div>
-    <hr>
-    </hr>
-    <!-- <div>
-        <table id="add_pet_table">
-            <tr>
-                <td><input type="text" placeholder="" id="Pet_Name"></td>
-                <td><input type="text" placeholder="" id="Pet_Age"></td>
-                <td><select name="petsex" id="Pet_Sex" onchange="handleOnChange(this)">
-                    <option>male</option>
-                    <option>female</option>
-                </select></td>
-                <td><select name="petroom" id="Pet_Room" onchange="handleOnChange(this)">
-                    <option>Standard</option>
-                    <option>Superior</option>
-                    <option>Deluxe</option>
-                </select></td>
-                <td>미용<input id="beauty" type="checkbox"> 
-                    스파<input id="spa" type="checkbox"></td>
-                <td>
-                    <select name="pet" id="Pet_Room" onchange="handleOnChange(this)">
-                        <option>Used</option>
-                        <option>Not Used</option>
-                    </select>
-                </td>
-            </tr>
+            <c:forEach var="member" items="${membersList}">
+                <tr align="center">
+                    <td>${Pet.Name}</td>
+                    <td>${Pet.Age}</td>
+                    <td>${Pet.Gender}</td>
+                    <td>${Room}</td>
+                    <!-- 체크박스 -->
+                    <td>${Service}</td>
+                    <td><a href="${contextPath}/member/removeMember.do?id=${member.id }">삭제하기</a></td>
+                </tr>
+            </c:forEach>
         </table>
-    </div> -->
-    <div id="btn_pet2">
-    	<input type='button' value='요청사항' id="btn_pet2_1" onclick=' '/>
-    	<input type='button' value='다음' id="btn_pet2_2" onclick=' '/>
+        <hr>
+        </hr>
+        <div id="btn_pet1">
+            <button id="petcomment">요청사항</button>
+            <button id="next">다음</button>
+        </div>
     </div>
-    <br></br>
-    <br></br>
-
 </body>
 
 </html>
