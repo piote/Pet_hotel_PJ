@@ -16,7 +16,7 @@
 <body>
 
 	<div class="side_wrap">
-        <a class="side_btn" href="#">
+        <a class="side_btn" onclick="moveTopBtn()" style="cursor: pointer;">
             <svg class="plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23"><defs></defs><polygon class="cls-1" points="23 11.03 11.97 11.03 11.97 0 11.03 0 11.03 11.03 0 11.03 0 11.97 11.03 11.97 11.03 23 11.97 23 11.97 11.97 23 11.97 23 11.03"/></svg>
             <svg class="plus arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.53 11.97"></defs><polygon class="cls-1" points="0.71 11.97 11.26 1.41 21.82 11.97 22.53 11.26 11.97 0.71 11.26 0 0 11.26 0.71 11.97"/></svg>
         </a>
