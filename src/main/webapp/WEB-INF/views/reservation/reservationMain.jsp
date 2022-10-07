@@ -17,6 +17,8 @@
     <meta charset="UTF-8">
     <title>호텔 예약창(예약단계1)</title>
     <style>
+        
+
         #fullWrap {
             
             width: 100%;
@@ -24,7 +26,7 @@
             align-content: center;
             border: 1px solid;
             margin: 0 auto;
-            margin-top: 400px;
+            /* margin-top: 400px; */
             
         }
         #wrap {
