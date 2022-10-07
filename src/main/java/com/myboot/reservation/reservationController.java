@@ -13,7 +13,7 @@ public  class reservationController {
     
 	
 	
-	
+	//테스트입니다
     return "reservationMain"; 
   }
 
