@@ -3,11 +3,10 @@
     isELIgnored="false"  %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-
 <%
   request.setCharacterEncoding("UTF-8");
-%>     -->
-
+%>    
+ -->
 
 <html>
 
@@ -18,6 +17,7 @@
     	*{
     		margine:10%
     	}
+
     	
     	#pet_table{
     		margin:auto;
@@ -26,33 +26,29 @@
             table-layout: fixed;
     	}
 
+
         #checkin {
             margin-left: 10%;
             margin-right: 10%;
         }
-
         #checkin2 {
             margin-left: 50px;
             margin-right: 10%;
             cursor: pointer;
         }
-
         #checkout {
             margin-left: 10%;
             margin-right: 10%;
         }
-
         #checkout2 {
             margin-left: 10%;
             margin-right: 10%;
             cursor: pointer;
         }
-
         #mypet {
             margin-left: 10%;
             margin-right: 10%;
         }
-
         #mypet2 {
             margin-left: 1%;
             margin-right: 10%;
@@ -63,19 +59,17 @@
             margin-top: 10px;
             text-align: center;
         }
-
         #btn_pet1 {
             margin-top: 50px;
             text-align: center;
         }
-
         #btn_pet2 {
             margin-top: 50px;
             text-align: right;
         }
-
         #wrap {
             text-align: center;
+
 
         }
 
@@ -85,13 +79,13 @@
 
         }
 
+
         .reservationtext1 {
             list-style: none;
             display: inline-block;
             color: brown;
             font-size: 20px;
         }
-
         .reservationtext2 {
             list-style: none;
             display: inline-block;
@@ -104,6 +98,7 @@
             display: inline-block;
             color: brown;
             font-size: 20px;
+
         }
 
         #div2 ul li {
@@ -116,10 +111,10 @@
         .reservationtext {
             margin: 15px;         
         }
+
         .reservationBox{
            
         }
-
         #btn_pet1_1, #btn_pet2_1, #btn_pet2_2 {
         color: #444444;
         background: #F3F3F3;
@@ -130,14 +125,12 @@
         font-size: 9pt;
         outline: none;
         }
-
         #btn_pet1_1:hover, #btn_pet2_1:hover, #btn_pet2_2:hover {
         border: 1px #C6C6C6 solid;
         box-shadow: 1px 1px 1px #EAEAEA;
         color: #333333;
         background: #F7F7F7;
         }
-
         #btn_pet1_1:active, #btn_pet2_1:active, #btn_pet2_2:active {
         box-shadow: inset 1px 1px 1px #DFDFDF;   
         }
@@ -145,10 +138,8 @@
     <script>
         var test1 = document.getElementById('beauty');
         var test2 = document.getElementById('spa');
-
         var test1Result = test1.getAttribute("checked")
         var test2Result = test2.getAttribute("checked")
-
         function handleOnChange(e) {
         const value = e.value;
         }
@@ -176,11 +167,11 @@
         	  Cell5.innerHTML = '미용 <input id="beauty" type="checkbox"> 스파 <input id="spa" type="checkbox">';
               Cell6.innerHTML = '<select name="pet" id="Pet_Room" onchange="handleOnChange(this)"><option>Used</option><option>Not Used</option></select>';
         	}
-
     </script>
 </head>
 
 <body>
+
     <hr>
     </hr>
 
@@ -200,6 +191,7 @@
             </li>
         </ul>
     </div>
+
     <table id='pet_table' align="center" width="80%">
         <tr align="center" bgcolor="bisque">
             <td><b>Pet Name</b></td>
@@ -223,10 +215,12 @@
                     </select>
                 </td>
                 <!-- 체크박스 -->
+
                 <td>
                     미용 <input id="beauty" type="checkbox"> 
                     스파 <input id="spa" type="checkbox">
                 </td>
+
                 <td>
                     <select name="pet" id="Pet_Room" onchange="handleOnChange(this)">
                         <option>Used</option>
@@ -239,9 +233,11 @@
     <div id="btn_pet1">
 		<input type='button' value='추가하기' id="btn_pet1_1" onclick='addRow()'/>
     </div>
+
     <br></br>
     <hr>
     </hr>
+
 
     <div id="btn_pet2">
     	<input type='button' value='요청사항' id="btn_pet2_1" onclick=' '/>
