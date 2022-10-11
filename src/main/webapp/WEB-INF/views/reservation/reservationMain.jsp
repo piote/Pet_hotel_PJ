@@ -165,6 +165,33 @@
         #btn_pet2_2:active {
             box-shadow: inset 1px 1px 1px #DFDFDF;
         }
+        
+        .petcomment{
+            margin: auto;
+            border: 1px solid gray;
+            border-radius: 10px;
+            text-align: left;
+            width: 69%;
+            height: 140px;
+            display: none;
+        }
+        .click{
+            display: block;
+        }
+
+        .petcomment>input{
+            border: 1px solid gray;
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+        }
+
+        #paymentinfo{
+            margin: auto;
+            text-align: left;
+            width: 99%;
+            height: 20%;
+        }
     </style>
 
     <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
@@ -205,6 +232,11 @@
       	  Cell5.innerHTML = '스파 <input id="spa" type="checkbox">';
             Cell6.innerHTML = 'Not Used <input id="petuse" type="checkbox">';
         }
+        
+        function addtext(){
+            $(".petcomment").toggleClass('click');
+        }
+        
     </script>
 </head>
 
@@ -292,6 +324,10 @@
         <input type='button' value='다음' id="btn_pet2_2" onclick=' ' />
     </div>
     <br></br>
+    
+    <div class="petcomment">
+    	<input type="text">
+    </div>
     <br></br>
 
 </body>
