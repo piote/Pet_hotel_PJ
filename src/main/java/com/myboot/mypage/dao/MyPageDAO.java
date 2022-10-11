@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Mapper
-@Repository("MyPageDAO")
+@Repository("myPageDAO")
 public interface MyPageDAO {
 	
 
