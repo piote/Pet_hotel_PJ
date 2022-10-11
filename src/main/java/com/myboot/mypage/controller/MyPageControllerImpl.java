@@ -29,7 +29,15 @@ public class MyPageControllerImpl implements MyPageController {
 		
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.setViewName(viewName);
+		
+//		MemberVO memberVO=(MemberVO)session.getAttribute("memberInfo");
+//		String user_id = memberVO.getUser_id();
+		
+//		List<ReserveVO> myReserveList=myPageService.listMyReserve(user_id);
+//		List<ReserveVO> myReviewList=myPageService.listMyReview();
+		
+//		mav.addObject("myReserveList", myReserveList);
+//		mav.addObject("myReviewList", myReviewList);
 		return mav;
 	}
     @Override
@@ -51,7 +59,6 @@ public class MyPageControllerImpl implements MyPageController {
         
         String viewName=(String)request.getAttribute("viewName");
         ModelAndView mav = new ModelAndView(viewName);
-        mav.setViewName(viewName);
         return mav;
     }
 }

@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository("MyPageDAO")
 public interface MyPageDAO {
+	
 
 }
