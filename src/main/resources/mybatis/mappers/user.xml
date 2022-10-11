@@ -23,5 +23,64 @@
         select * from TB_USER order by joinDate desc			
       ]]>
    </select>
+   
+   <select id="selectName" resultType="String">
+   	<![CDATA[
+   		select name from TB_USER
+   		where id='hong'
+   ]]
+   </select>
+   
+   <select id ="selectPwd" resultType="int">
+   	<![CDATA[
+   		select pwd from TB_USER
+   		where id = 'hong'
+   		]]>
+   		</select>
+   	<select id="selectUserById" resultType="memberVO" parameterType="String">
+   	<![CDATA[
+   		select*from TB_USER
+   		where
+   		id=#{id}
+   	]]>
+   	</select>
+   		
+   	<select id="selectUserByPwd" resultMap="memResult" parameterType="int">
+   	<![CDATA[
+   		select*from TB_USER
+   		where
+   		pwd = #{pwd}
+   	]]>
+   	</select>
+   	
+   	<insert id="insertUser" parameterType="memberVO">
+   		<![CDATA[
+   		insert into TB_USER(id,pwd, name,email)
+   		values(#{id},#{pwd},#{name},#{email})
+   		]]>
+   	</insert>
+   	
+   	<insert id="insertUser2" parameterType="java.util.HashMap">
+   		<![CDATA[
+   			insert into TB_USER(id,pwd,name,email)
+   		]]>
+   		
+   	</insert>
+   	<update id="updateUser" parameterType="userVO">
+   		<![CDATA[
+   				update TB_USER
+   				set pwd=#{pwd}, name=#{name}, email=#{email}
+   				where
+   				id=#{id}
+   		]]>
+   	</update>
+   	
+   	<delete id="deleteUser" parameterType="String">
+   		<![CDATA[
+   			delete from TB_USER
+   			where
+   			id=#{id}
+   		]]>
+   	</delete>
 
 </mapper>
