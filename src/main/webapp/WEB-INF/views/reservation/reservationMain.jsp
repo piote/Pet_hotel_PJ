@@ -24,7 +24,7 @@
         #pet_table {
             margin: auto;
             text-align: center;
-            width: 80%;
+            width: 68%;
             table-layout: fixed;
         }
 
@@ -90,6 +90,18 @@
 
         }
 
+        #petpayment li ul{
+            display: inline-block;  
+        }
+
+        #petpayment li {
+            margin-left: auto;
+            margin-right: auto;
+            width: 68%;
+            background-color: bisque;
+            list-style: none;
+            text-align: center;
+        }
 
         .reservationtext1 {
             list-style: none;
@@ -186,20 +198,18 @@
             var Cell6 = newRow.insertCell();
 
             // Cell에 텍스트 추가
-            Cell1.innerHTML = '<input id="name="petname" type="textbox" style="text-align:center; width:150px;">';
-            Cell2.innerHTML = '<input id="name="petage" type="textbox" style="text-align:center; width:80px;">';
-            Cell3.innerHTML = '<select name="petsex" id="Pet_Sex" onchange="handleOnChange(this)"><option>male</option><option>female</option></select>';
-            Cell4.innerHTML = '<select name="petroom" id="Pet_Room" onchange="handleOnChange(this)"><option>Standard</option><option>Superior</option><option>Deluxe</option></select>';
-            Cell5.innerHTML = '미용 <input id="beauty" type="checkbox"> 스파 <input id="spa" type="checkbox">';
-            Cell6.innerHTML = '<select name="pet" id="Pet_Room" onchange="handleOnChange(this)"><option>Used</option><option>Not Used</option></select>';
+      	  Cell1.innerHTML = '<input name="petname" id="Pet_Name" type="textbox" style="text-align:center; width:150px;">';
+      	  Cell2.innerHTML = '<input name="petsex" id="Pet_Sex" type="textbox" style="text-align:center; width:80px;">';
+      	  Cell3.innerHTML = '<select name="petroom" id="Pet_Room" onchange="handleOnChange(this)"><option>Deluxe(소형견)</option><option>Superior(중형견)</option><option>Suite(대형견)</option></select>';
+      	  Cell4.innerHTML = '<select name="beauty" id="petbeauty" onchange="handleOnChange(this)"><option>Clipping</option><option>Scissoring</option></select>';
+      	  Cell5.innerHTML = '스파 <input id="spa" type="checkbox">';
+            Cell6.innerHTML = 'Not Used <input id="petuse" type="checkbox">';
         }
     </script>
 </head>
 
 <body>
 
-    <hr>
-    </hr>
 
     <div id="wrap">
         <ul>
@@ -220,41 +230,45 @@
 
     <table id='pet_table' align="center" width="80%">
         <tr align="center" bgcolor="bisque">
-            <td><b>Pet Name</b></td>
-            <td><b>Pet Age</b></td>
-            <td><b>Pet sex</b></td>
-            <td><b>Room</b></td>
-            <td><b>Service</b></td>
-            <td><b>Use</b></td>
+        	<td><b>Pet Name</b></td>
+        	<td><b>Pet sex</b></td>
+        	<td><b>Room</b></td>
+        	<td><b>Beauty</b></td>
+        	<td><b>Spa</b></td>
+        	<td><b>Use</b></td>
         </tr>
         <div id="calendarForm"></div>
         <c:forEach var="member" items="${membersList}">
-            <tr align="center">
-                <td>${Pet.Name}</td>
-                <td>${Pet.Age}</td>
-                <td>${Pet.Sex}</td>
-                <td>
-                    <select name="petroom" id="Pet_Room" onchange="handleOnChange(this)">
-                        <option>Standard</option>
-                        <option>Superior</option>
-                        <option>Deluxe</option>
-                    </select>
-                </td>
-                <!-- 체크박스 -->
-
-                <td>
-                    미용 <input id="beauty" type="checkbox">
-                    스파 <input id="spa" type="checkbox">
-                </td>
-
-                <td>
-                    <select name="pet" id="Pet_Room" onchange="handleOnChange(this)">
-                        <option>Used</option>
-                        <option>Not Used</option>
-                    </select>
-                </td>
-            </tr>
-        </c:forEach>
+        <tr align="center">
+            <td>${Pet.Name}</td>
+            <td>${Pet.Sex}</td>
+            <td>
+                <select name="petroom" id="Pet_Room" onchange="handleOnChange(this)">
+                    <option>Deluxe(소형견)</option>
+                    <option>Superior(중형견)</option>
+                    <option>Suite(대형견)</option>
+                </select>
+            </td>
+            <td>
+                <select name="beauty" id="petbeauty" onchange="handleOnChange(this)">
+                    <option>Clipping</option>
+                    <option>Scissoring</option>
+                </select>
+            </td>
+            <td>
+                스파 <input id="spa" type="checkbox">
+            </td>
+            <!-- <td>
+                <select name="pet" id="Pet_Room" onchange="handleOnChange(this)">
+                    <option>Used</option>
+                    <option>Not Used</option>
+                </select>
+            </td> -->
+            <td>
+                Not Used <input id="petuse" type="checkbox"> 
+            </td>
+        </tr>
+    </c:forEach>
     </table>
     <div id="btn_pet1">
         <input type='button' value='추가하기' id="btn_pet1_1" onclick='addRow()' />
