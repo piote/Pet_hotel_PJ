@@ -29,8 +29,8 @@ dependencies {
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'javax.servlet:jstl:1.2'
 	
-	//implementation fileTree dir:'libs',include: ['*.jar']
-	//implementation files 'libs/ojdbc6.jar'
+	//implementation fileTree(dir: 'libs', include: ['*.jar']);
+	//implementation files('libs/ojdbc6.jar')
 	//implementation 'commons-io:commons-io:2.4'
 	
 	// tiles
