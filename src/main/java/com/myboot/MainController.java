@@ -19,5 +19,10 @@ public  class MainController {
 	System.out.println("안녕하세요");
 	return "main";
   }
+  @RequestMapping("/membership.do")
+  public String membership(Model model){
+	  System.out.println("안녕하세요");
+	  return "membership";
+  }
   
 }

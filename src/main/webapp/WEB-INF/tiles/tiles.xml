@@ -19,6 +19,10 @@
       <put-attribute name="body" value="/WEB-INF/views/reservation/reservationMain.jsp" />
    </definition>
    
+   <definition name="membership" extends="baseLayout">
+      <put-attribute name="title" value="멤버쉽 안내" />
+      <put-attribute name="body" value="/WEB-INF/views/membership/membership.jsp" />
+   </definition>
    
 	
 </tiles-definitions>
