@@ -22,13 +22,12 @@
                      <img class="img_info" src="${contextPath}/resources/img/user.png" alt="회원이미지">
                   </td>
                   <td>
-                     <h4>${member.name }님입니다.</h4>
+                     <h4>${memberInfo.name }님</h4>
                      <br>
-                     <p>펫 이름: </p>
                      <br>
-                     <p>전화: </p>
+                     <p>전화: ${memberInfo.tel}</p>
                      <br>
-                     <p>이메일: </p>
+                     <p>이메일: ${memberInfo.email} </p>
                   </td>
                   <td>
                      <a href="#">회원정보수정</a>
@@ -67,10 +66,10 @@
 <%-- 					<c:when test="${not empty myReserveList }"> --%>
 <%-- 						<c:forEach var="i" items="${myReserveList }" begin="0" end="2" step="1"> --%>
 <!-- 							<tr> -->
-<%-- 								<td>${myReserveList[i].reservation_st }</td> --%>
-<%-- 								<td>${myReserveList[i].보호자name }</td> --%>
-<%-- 								<td>${myReserveList[i].강아지Name }</td> --%>
-<%-- 								<td>${myReserveList[i].Phone Number }</td> --%>
+<%-- 								<td>${myReserveList[i].user_joinDate }</td> --%>
+<%-- 								<td>${myReserveList[i].user_name }</td> --%>
+<%-- 								<td>${myReserveList[i].pet_name }</td> --%>
+<%-- 								<td>${myReserveList[i].user_tel }</td> --%>
 <!-- 							</tr> -->
 <%-- 						</c:forEach> --%>
 <%-- 					</c:when> --%>
@@ -90,11 +89,11 @@
               </tr>
 <%-- 	            <c:choose> --%>
 <%-- 	            	<c:when test="${empty myReviewList }"> --%>
-<!-- 		               <tr> -->
+		               <tr>
 		                  <td colspan=4>
 		                  	<strong>등록하신 리뷰가 없습니다.</strong>
 		                  </td>
-<!-- 		               </tr> -->
+		               </tr>
 <%-- 					</c:when> --%>
 <%-- 					<c:when test="${not empty myReviewList }"> --%>
 <%-- 						<c:forEach var="i" begin="0" end="2" step="1"> --%>

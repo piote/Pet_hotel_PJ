@@ -4,7 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
  <mappers>
- 	
-
+	<mapper resource="mybatis/mappers/mypage.xml"/>
  </mappers>
 </configuration>
