@@ -36,13 +36,6 @@
 		 		$("#endDate").datepicker( "option", "minDate", selectedDate );
 		 	}
 		});
-		    $.datepicker.setDefaults($.datepicker.regional['ko']);         //default셋팅
-		    $("#txt_prodStart" ).datepicker();  
-		    $('img.ui-datepicker-trigger').css({'cursor':'pointer', 'margin-left':'5px'});  //아이콘(icon) 위치
-		    $('.ui-datepicker ').css({ "margin-left" : "141px", "margin-top": "-200px"});  //달력(calendar) 위치
-		    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
-		    $('img.ui-datepicker-trigger').css({'display': 'inline-block'});
-		    
 		$( "#endDate" ).datepicker({
 			showButtonPanel: true,
 			buttonImage: "${contextPath}/resources/img/cale.png",
@@ -67,10 +60,56 @@
 		    $.datepicker.setDefaults($.datepicker.regional['ko']);         //default셋팅
 		    $("#txt_prodStart" ).datepicker();
 		    $('img.ui-datepicker-trigger').css({'cursor':'pointer', 'margin-left':'5px'});  //아이콘(icon) 위치
-		    $('.ui-datepicker ').css({ "margin-left" : "141px", "margin-top": "-210px"});  //달력(calendar) 위치
+		    $('.ui-datepicker ').css({ "margin-left" : "141px", "margin-top": "-220px"});  //달력(calendar) 위치
 		    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 		    $('img.ui-datepicker-trigger').css({'display': 'inline-block'});
+		
+//     	if( ${colName != null && colName != ""} &&
+//     		${searchWord != null && searchWord != ""}){
+//     		$("input[name=searchWord]").val("${searchWord}");
+//     		$("#colName").val("${colName}");
+//     	}
+
+//     	if(${endDate != null && endDate !="" && startDate != null && startDate != ""} ){
+//     		$("#startDate").val("${startDate}");
+//     		$("#endDate").val("${endDate}");
+//     	}
+    	
+// 		$("#btnSearch").click(function(){
+// 			goSearch();
+// 		});
+		
+// 		$("input[name=searchWord]").keydown(function(event){
+// 			var code = event.keyCode;
+// 			if(code == 13){
+// 				goSearch();
+// 			}
+// 		}
+		    
 	});
+	
+//     function goSearch(){
+// 		var searchWord = $("input[name=searchWord]").val().trim();
+// 		var colName = $("#colName").val();
+		
+// 		if( "" == colName){
+// 			alert("검색조건을 선택하세요.");
+// 			$("input[name=searchWord]").val("");
+// 			$("input[name=searchWord]").focus();
+// 			return;
+// 		}else if ("" == searchWord){
+// 			alert("검색어를 입력해 주세요.");
+// 			return;
+// 		}
+		
+// 		var frm = document.searchFrm;
+// 		frm.method = "GET";
+// 		frm.action = "checkReserve.do";
+// 		frm.submit();
+		
+// 	})
+	
+	
 	</script>
 </head>
 <body>
@@ -89,8 +128,8 @@
 					<div id="calendar">
 						<input type="text" id="startDate">
 						<input type="text" id="endDate">
-						<button type="button" id="btnSearch"><img src="${contextPath}/resources/img/search.png"></button>
 					</div>
+					<div id="btnSearch"><img src="${contextPath}/resources/img/search.png"></div>
 				</form>
 			</div>
 			<div id="reserve_list">
