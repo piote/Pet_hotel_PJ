@@ -17,15 +17,16 @@
         <a class="logo" href="${contextPath}/main.do">Anitel</a>
         <div class="log_wrap">
             <a id="login" href="#">로그인</a>
-            <a id="logout" href="#">로그아웃</a>
+            <a id="signup" href="#">회원가입</a>
             <a id="mypage" href="#" hidden>마이페이지</a>
+            <a id="logout" href="#" hidden>로그아웃</a>
         </div>
         <div class="hr"></div>
         <nav>
             <div class="r_menu menu_wrap">
                 <a href="${contextPath}/reservation.do" class="menu">호텔예약</a>
                 <a href="#" class="menu">호텔소개</a>
-                <a href="#" class="menu">리뷰게시판</a>
+                <a href="${contextPath}/reviewboard.do" class="menu">리뷰게시판</a>
             </div>
             <div class="l_menu menu_wrap">
                 <a href="#" class="menu">멤버쉽</a>
