@@ -30,7 +30,7 @@
                      <p>이메일: ${memberInfo.email} </p>
                   </td>
                   <td>
-                     <a href="#">회원정보수정</a>
+                  	 <a href="${contextPath}/pw_change.do">회원정보수정</a>
                      <a href="#">고객센터</a>
                      <a href="#">#</a>
                   </td>

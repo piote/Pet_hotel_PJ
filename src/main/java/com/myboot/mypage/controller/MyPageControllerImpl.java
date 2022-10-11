@@ -61,4 +61,5 @@ public class MyPageControllerImpl implements MyPageController {
         ModelAndView mav = new ModelAndView(viewName);
         return mav;
     }
+    
 }
