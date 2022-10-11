@@ -26,6 +26,7 @@
             background-image: url(${contextPath}/resources/img/m_main.jpg);
             background-size: cover;
             display: block;
+            margin-top: -200px;
         }
 
         .m_title {
@@ -52,8 +53,9 @@
 
         /* 멤버쉽 상세 안내 시작 */
         .m_main {
-            width: auto; height: 60vh;
+            width: auto; height: 100%;
             display: block;
+            position: relative;
         }
         
         .m_list {
