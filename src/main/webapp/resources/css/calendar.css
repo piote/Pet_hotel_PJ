@@ -1,0 +1,74 @@
+
+.custom_calendar_table{
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    margin: 0 auto;
+    
+}
+
+.custom_calendar_table tbody tr {
+    height: 40px;
+ 
+}
+
+.custom_calendar_table td {
+    text-align: center;
+}
+
+.custom_calendar_table thead.cal_date th {
+    font-size: 1.5rem;
+}
+
+.custom_calendar_table thead.cal_date th button {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+}
+
+.custom_calendar_table thead.cal_week th {
+    background-color: bisque;
+    /* color: #fff; */
+}
+
+.custom_calendar_table tbody td {
+    cursor: pointer;
+}
+
+
+
+.custom_calendar_table tbody td:nth-child(1) {
+    color: red;
+}
+
+.custom_calendar_table tbody td:nth-child(7) {
+    color: #288CFF;
+}
+
+.custom_calendar_table tbody td.select_day, .one_day {
+    background-color: rgb(240,235,230);
+    border-radius: 20px 20px 20px 20px;
+    /* color: #fff; */
+}
+
+.custom_calendar_table tbody td.start_day {
+    background-color: rgb(240,235,230) ;
+    border-radius: 20px 0 0 20px;
+    /* color: #fff; */
+}
+.custom_calendar_table tbody td.between_day {
+    background-color: rgb(240,235,230) ;
+    /* color: #fff; */
+}
+.custom_calendar_table tbody td.end_day {
+    background-color: rgb(240,235,230) ;
+    border-radius: 0 20px 20px 0;
+    /* color: #fff; */
+}
+
+.custom_calendar_table tbody td.to_day {
+    background-color: rgb(240,235,230) ;
+    border-radius: 20px 20px 20px 20px;
+    /* color: #fff; */
+}

@@ -9,4 +9,5 @@ public class MyPageVO {
     private String user_id;
     private String beginDate;
     private String endDate;
+
 }
