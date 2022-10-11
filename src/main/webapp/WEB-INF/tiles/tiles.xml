@@ -18,7 +18,15 @@
       <put-attribute name="title" value="예약하기" />
       <put-attribute name="body" value="/WEB-INF/views/reservation/reservationMain.jsp" />
    </definition>
-   
+ 
+ 
+	<definition name="login"  extends="baseLayout">
+      <put-attribute name="title" value="Anitel" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/user/loginForm.jsp" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
    
 	
 </tiles-definitions>
