@@ -16,15 +16,11 @@
     <meta charset="UTF-8">
     <title>호텔 예약창(예약단계1)</title>
     <style>
-        /* * {
-            margine: 10%
-        } */
-
 
         #pet_table {
             margin: auto;
             text-align: center;
-            width: 68%;
+            width: 70%;
             table-layout: fixed;
         }
 
@@ -97,7 +93,7 @@
         #petpayment li {
             margin-left: auto;
             margin-right: auto;
-            width: 68%;
+            width: 70%;
             background-color: bisque;
             list-style: none;
             text-align: center;
@@ -174,6 +170,9 @@
 
     
     <script>
+        //예약시 임시 펫 번호.
+        var petTableNum = 0;
+
         var test1 = document.getElementById('beauty');
         var test2 = document.getElementById('spa');
         var test1Result = test1.getAttribute("checked")
@@ -198,12 +197,24 @@
             var Cell6 = newRow.insertCell();
 
             // Cell에 텍스트 추가
-      	  Cell1.innerHTML = '<input name="petname" id="Pet_Name" type="textbox" style="text-align:center; width:150px;">';
-      	  Cell2.innerHTML = '<input name="petsex" id="Pet_Sex" type="textbox" style="text-align:center; width:80px;">';
-      	  Cell3.innerHTML = '<select name="petroom" id="Pet_Room" onchange="handleOnChange(this)"><option>Deluxe(소형견)</option><option>Superior(중형견)</option><option>Suite(대형견)</option></select>';
-      	  Cell4.innerHTML = '<select name="beauty" id="petbeauty" onchange="handleOnChange(this)"><option>Clipping</option><option>Scissoring</option></select>';
-      	  Cell5.innerHTML = '스파 <input id="spa" type="checkbox">';
-            Cell6.innerHTML = 'Not Used <input id="petuse" type="checkbox">';
+            Cell1.innerHTML = '<input name="petname" id="Pet_Name'+petTableNum+'" type="textbox" style="text-align:center; width:80%;">';
+            Cell2.innerHTML = '<input name="petsex" id="Pet_Sex'+petTableNum+'" type="textbox" style="text-align:center; width:70%;">';
+            Cell3.innerHTML = '<select name="petroom" id="Pet_Room'+petTableNum+'" onchange="handleOnChange(this)"><option>Deluxe(소형견)</option><option>Superior(중형견)</option><option>Suite(대형견)</option></select>';
+            Cell4.innerHTML = '<select name="beauty" id="petbeauty'+petTableNum+'" onchange="handleOnChange(this)"><option>Clipping</option><option>Scissoring</option></select>';
+            Cell5.innerHTML = '스파 <input id="spa'+petTableNum+'" type="checkbox">';
+            Cell6.innerHTML = '<input type="button" id="'+petTableNum+'" class="petUsed" value="X" >';
+
+            petTableNum++;
+
+            $(".petUsed").on("click", this , function () {
+           
+            $(this).parent().parent().remove();
+            });
+            
+        }
+
+        function onButtonClick(){
+            document.getElementById('btn_pet2_1')
         }
     </script>
 </head>
@@ -286,9 +297,61 @@
         </li>
     </div>
 
+    <br></br>
+    <div id="paymentinfo">
+        <table id='pet_table' align="center" width="80%">
+            <tr align="center" bgcolor="bisque">
+        	    <td rowspan="6" align = "center" bgcolor="bisque"><b>Room</b></td>
+        	    <td rowspan="2" align = "center" bgcolor="bisque">Deluxe(소형견)</td>
+                <td rowspan="2" align = "center" bgcolor="bisque">100,000 원</td>
+                <td rowspan="6" align = "center" bgcolor="bisque"><b>Beauty</b></td>
+        	    <td rowspan="3" align = "center" bgcolor="bisque">Clipping</td>
+        	    <td>소형견</td>
+                <td>35,000 원</td>
+                <td rowspan="6" align = "center" bgcolor="bisque"><b>Spa</b></td>
+                <td rowspan="2" align = "center" bgcolor="bisque">소형견</td>
+                <td rowspan="2" align = "center" bgcolor="bisque">100,000 원</td>
+
+            </tr>
+            <tr align="center" bgcolor="bisque">
+
+        	    <td>중형견</td>
+                <td>45,000 원</td>
+            </tr>
+            <tr align="center" bgcolor="bisque">
+
+        	    <td rowspan="2" align = "center" bgcolor="bisque">Superior(중형견)</td>
+                <td rowspan="2" align = "center" bgcolor="bisque">150,000 원</td>
+        	    <td>대형견</td>
+                <td>60,000 원</td>
+                <td rowspan="2" align = "center" bgcolor="bisque">중형견</td>
+                <td rowspan="2" align = "center" bgcolor="bisque">100,000 원</td>
+            </tr>
+            <tr align="center" bgcolor="bisque">
+
+                <td rowspan="3" align = "center" bgcolor="bisque">Scissoring</td>
+        	    <td>소형견</td>
+                <td>70,000 원</td>
+            </tr>
+            <tr align="center" bgcolor="bisque">
+
+        	    <td rowspan="2" align = "center" bgcolor="bisque">Suite(대형견)</td>
+                <td rowspan="2" align = "center" bgcolor="bisque">200,000 원</td>
+        	    <td>중형견</td>
+                <td>80,000 원</td>
+                <td rowspan="2" align = "center" bgcolor="bisque">대형견</td>
+                <td rowspan="2" align = "center" bgcolor="bisque">100,000 원</td>
+            </tr>
+            <tr align="center" bgcolor="bisque">
+
+        	    <td>대형견</td>
+                <td>100,000 원</td>
+            </tr>
+        </table>
+    </div>
 
     <div id="btn_pet2">
-        <input type='button' value='요청사항' id="btn_pet2_1" onclick=' ' />
+        <input type='button' value='요청사항' id="btn_pet2_1" onclick=' '/>
         <input type='button' value='다음' id="btn_pet2_2" onclick=' ' />
     </div>
     <br></br>
