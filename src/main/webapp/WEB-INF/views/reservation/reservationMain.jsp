@@ -5,8 +5,8 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%
   request.setCharacterEncoding("UTF-8");
-%>     -->
-
+%>    
+ -->
 
 <html>
 
@@ -17,11 +17,16 @@
     	*{
     		margine:10%
     	}
-        h2 {
+
+    	
+    	#pet_table{
+    		margin:auto;
             text-align: center;
-            color: brown;
-            font-size: 50px;
-        }
+            width: 80%;
+            table-layout: fixed;
+    	}
+
+
         #checkin {
             margin-left: 10%;
             margin-right: 10%;
@@ -49,6 +54,7 @@
             margin-right: 10%;
             cursor: pointer;
         }
+
         #btn_addpet {
             margin-top: 10px;
             text-align: center;
@@ -63,11 +69,17 @@
         }
         #wrap {
             text-align: center;
+
+
         }
+
         #wrap li,
         #wrap ul {
             display: inline-block;
+
         }
+
+
         .reservationtext1 {
             list-style: none;
             display: inline-block;
@@ -80,22 +92,26 @@
             color: black;
             font-size: 20px;
         }
+
         #div1 ul li {
             list-style: none;
             display: inline-block;
             color: brown;
             font-size: 20px;
+
         }
+
         #div2 ul li {
             list-style: none;
             display: inline-block;
             color: black;
             font-size: 20px;
         }
+
         .reservationtext {
-            margin: 15px;
-          
+            margin: 15px;         
         }
+
         .reservationBox{
            
         }
@@ -126,8 +142,9 @@
         var test2Result = test2.getAttribute("checked")
         function handleOnChange(e) {
         const value = e.value;
-        
+        }
         function addRow() {
+            
         	  // table element 찾기
         	  var table = document.getElementById('pet_table');
         	  
@@ -140,40 +157,21 @@
         	  var Cell3 = newRow.insertCell();
         	  var Cell4 = newRow.insertCell();
         	  var Cell5 = newRow.insertCell();
+              var Cell6 = newRow.insertCell();
         	  
         	  // Cell에 텍스트 추가
-        	  Cell1.innerText = 'Pet Name';
-        	  Cell2.innerText = 'Pet Age';
-        	  Cell3.innerHTML = '<td><input type="selectbox" name="Pet Sex"/></td>';
-        	  Cell4.innerHTML = '<input type="selectbox" name="Pet Sex"/>';
-        	  Cell5.innerHTML = '<input type="selectbox" name="Pet Sex"/>';
+        	  Cell1.innerHTML = '<input id="name="petname" type="textbox" style="text-align:center; width:150px;">';
+        	  Cell2.innerHTML = '<input id="name="petage" type="textbox" style="text-align:center; width:80px;">';
+        	  Cell3.innerHTML = '<select name="petsex" id="Pet_Sex" onchange="handleOnChange(this)"><option>male</option><option>female</option></select>';
+        	  Cell4.innerHTML = '<select name="petroom" id="Pet_Room" onchange="handleOnChange(this)"><option>Standard</option><option>Superior</option><option>Deluxe</option></select>';
+        	  Cell5.innerHTML = '미용 <input id="beauty" type="checkbox"> 스파 <input id="spa" type="checkbox">';
+              Cell6.innerHTML = '<select name="pet" id="Pet_Room" onchange="handleOnChange(this)"><option>Used</option><option>Not Used</option></select>';
         	}
-        
-        // function tableCreate() {
-        // 	var html = '';
-        	
-        // 	var name = $("#Pet_Name").val();
-        // 	var age = $("#Pet_Age").val();
-        // 	var sex = $("#Pet_Sex").val();
-        // 	var room = $("#Pet_Room").val();
-        // 	var beauty = $("#Pet_Beauty").val();
-        	
-        // 	html += '<tr>';
-        // 	html += '<td>'+name+'</td>';
-        // 	html += '<td>'+age+'</td>';
-        // 	html += '<tr>'+sex+'</td>';
-        // 	html += '<tr>'+room+'</td>';
-        // 	html += '<tr>'+beauty+'</td>';
-        // 	html += '</tr>';
-        // }
-    }
     </script>
 </head>
 
 <body>
-    <h2>
-        예약하기
-    </h2>
+
     <hr>
     </hr>
 
@@ -193,8 +191,7 @@
             </li>
         </ul>
     </div>
-    <hr>
-    </hr>
+
     <table id='pet_table' align="center" width="80%">
         <tr align="center" bgcolor="bisque">
             <td><b>Pet Name</b></td>
@@ -218,8 +215,12 @@
                     </select>
                 </td>
                 <!-- 체크박스 -->
-                <td>미용<input id="beauty" type="checkbox"> 
-                    스파<input id="spa" type="checkbox"></td>
+
+                <td>
+                    미용 <input id="beauty" type="checkbox"> 
+                    스파 <input id="spa" type="checkbox">
+                </td>
+
                 <td>
                     <select name="pet" id="Pet_Room" onchange="handleOnChange(this)">
                         <option>Used</option>
@@ -232,33 +233,12 @@
     <div id="btn_pet1">
 		<input type='button' value='추가하기' id="btn_pet1_1" onclick='addRow()'/>
     </div>
+
+    <br></br>
     <hr>
     </hr>
-    <!-- <div>
-        <table id="add_pet_table">
-            <tr>
-                <td><input type="text" placeholder="" id="Pet_Name"></td>
-                <td><input type="text" placeholder="" id="Pet_Age"></td>
-                <td><select name="petsex" id="Pet_Sex" onchange="handleOnChange(this)">
-                    <option>male</option>
-                    <option>female</option>
-                </select></td>
-                <td><select name="petroom" id="Pet_Room" onchange="handleOnChange(this)">
-                    <option>Standard</option>
-                    <option>Superior</option>
-                    <option>Deluxe</option>
-                </select></td>
-                <td>미용<input id="beauty" type="checkbox"> 
-                    스파<input id="spa" type="checkbox"></td>
-                <td>
-                    <select name="pet" id="Pet_Room" onchange="handleOnChange(this)">
-                        <option>Used</option>
-                        <option>Not Used</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-    </div> -->
+
+
     <div id="btn_pet2">
     	<input type='button' value='요청사항' id="btn_pet2_1" onclick=' '/>
     	<input type='button' value='다음' id="btn_pet2_2" onclick=' '/>
