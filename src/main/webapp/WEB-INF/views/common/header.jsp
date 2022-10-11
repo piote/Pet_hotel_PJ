@@ -17,8 +17,9 @@
         <a class="logo" href="${contextPath}/main.do">Anitel</a>
         <div class="log_wrap">
             <a id="login" href="#">로그인</a>
-            <a id="logout" href="#">로그아웃</a>
+            <a id="signup" href="#">회원가입</a>
             <a id="mypage" href="#" hidden>마이페이지</a>
+            <a id="logout" href="#" hidden>로그아웃</a>
         </div>
         <div class="hr"></div>
         <nav>
