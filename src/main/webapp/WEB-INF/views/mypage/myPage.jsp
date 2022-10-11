@@ -22,7 +22,7 @@
                      <img class="img_info" src="${contextPath}/resources/img/user.png" alt="회원이미지">
                   </td>
                   <td>
-                     <h4>${member.name }님</h4>
+                     <h4>${member.name }님입니다.</h4>
                      <br>
                      <p>펫 이름: </p>
                      <br>
