@@ -8,7 +8,7 @@
     padding-top: 120px;
  }
  img{
-	display: inline;
+	display: inline-block;
  }
 /*  #wrap { */
 /*     width: 100%; */
@@ -48,8 +48,10 @@
  }
  
  #btnSearch{
- 	border: none;
+ 	position: relative;
  	cursor: pointer;
+ 	left: 1325px;
+ 	top: -20px;
  }
 
 #reserve_list{
