@@ -73,6 +73,7 @@
         }
 
         #btn_pet2 {
+            width: 90%;
             margin-top: 50px;
             text-align: right;
         }
@@ -260,8 +261,16 @@
     </div>
 
     <br></br>
-    <hr>
-    </hr>
+    
+    <div id="petpayment">
+    	<li>
+        	<ul>| 결제금액 |</ul>
+        	<ul id="roomcount">| Room |</ul>
+        	<ul>| Service |</ul>
+        	<ul id="beautycount">미용</ul>
+        	<ul id="spacount">스파</ul>
+        </li>
+    </div>
 
 
     <div id="btn_pet2">
