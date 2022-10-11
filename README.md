@@ -1,4 +1,4 @@
-# Pet_hoter_PJ
+# Pet_hotel_PJ
 동물 호텔 예약 사이트
 <br>
 
@@ -20,4 +20,6 @@ https://docs.google.com/spreadsheets/d/1oCGS5Gui9EGOsG9VskbT-R855OKCKLhDkDr-4seS
 * 호스트 이름 192.168.0.220
 
 </h5>
+
+
 

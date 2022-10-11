@@ -165,6 +165,33 @@
         #btn_pet2_2:active {
             box-shadow: inset 1px 1px 1px #DFDFDF;
         }
+        
+        .petcomment{
+            margin: auto;
+            border: 1px solid gray;
+            border-radius: 10px;
+            text-align: left;
+            width: 69%;
+            height: 140px;
+            display: none;
+        }
+        .click{
+            display: block;
+        }
+
+        .petcomment>input{
+            border: 1px solid gray;
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+        }
+
+        #paymentinfo{
+            margin: auto;
+            text-align: left;
+            width: 99%;
+            height: 20%;
+        }
     </style>
 
     <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
@@ -201,12 +228,14 @@
             var Cell6 = newRow.insertCell();
 
             // Cell에 텍스트 추가
+
             Cell1.innerHTML = '<input name="petname" id="Pet_Name' + petTableNum + '" type="textbox" style="text-align:center; width:80%;">';
             Cell2.innerHTML = '<select name="petsex" id="Pet_Sex' + petTableNum + '" onchange="handleOnChange(this)"><option>male</option><option>female</option></select>';
             Cell3.innerHTML = '<select name="petroom" id="Pet_Room' + petTableNum + '" onchange="handleOnChange(this)"><option>Deluxe(소형견)</option><option>Superior(중형견)</option><option>Suite(대형견)</option></select>';
             Cell4.innerHTML = '<select name="beauty" id="petbeauty' + petTableNum + '" onchange="handleOnChange(this)"><option>Clipping</option><option>Scissoring</option></select>';
             Cell5.innerHTML = '스파 <input id="spa' + petTableNum + '" type="checkbox">';
             Cell6.innerHTML = '<input type="button" id="' + petTableNum + '" class="petUsed" value="X" >';
+
 
             petTableNum++;
 
@@ -217,8 +246,8 @@
 
         }
 
-        function onButtonClick() {
-            document.getElementById('btn_pet2_1')
+        function addtext(){
+            $(".petcomment").toggleClass('click');
         }
     </script>
 </head>
@@ -367,6 +396,13 @@
             <br></br>
         </form>
     </div>
+    <br></br>
+    
+    <div class="petcomment">
+    	<input type="text">
+    </div>
+    <br></br>
+
 
 </body>
 
