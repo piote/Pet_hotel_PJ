@@ -21,7 +21,9 @@ public class UserVO {
 	private Date joinDate;
 	
 	public UserVO() {
-		System.out.println("userVO »ý¼ºÀÚ È£Ãâ");
+		System.out.println("userVO í˜¸ì¶œ");
 	}
+	
+	
 }
 
