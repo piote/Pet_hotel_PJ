@@ -31,6 +31,7 @@
 		 	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 		 	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 		 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		 	maxDate: 1
 
 		});
 		$(function(){
@@ -52,7 +53,7 @@
 			 	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 			 	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 			 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-
+			 	maxDate: 1
 			});
 			$("#startDate").datepicker();
 			$("#endDate").datepicker();
@@ -96,15 +97,15 @@
 		var searchWord = $("input[name=searchWord]").val().trim();
 		var colName = $("#colName").val();
 		
-		if( "" == colName){
-			alert("검색조건을 선택하세요.");
-			$("input[name=searchWord]").val("");
-			$("input[name=searchWord]").focus();
-			return;
-		}else if ("" == searchWord){
-			alert("검색어를 입력해 주세요.");
-			return;
-		}
+// 		if( "" == colName){
+// 			alert("검색조건을 선택하세요.");
+// 			$("input[name=searchWord]").val("");
+// 			$("input[name=searchWord]").focus();
+// 			return;
+// 		}else if ("" == searchWord){
+// 			alert("검색어를 입력해 주세요.");
+// 			return;
+// 		}
 		
 		var frm = document.searchFrm;
 		frm.method = "GET";
@@ -112,6 +113,22 @@
 		frm.submit();
 		
 	}
+    function fn_cancel_reserve(reservation_num){
+    	var answer=confirm("예약을 취소하시겠습니까?");
+    	if(answer==true){
+    		var formObj=document.createElement("form");
+    		var i_order_id = document.createElement("input"); 
+    	    
+    	    i_order_id.name="reservation_num";
+    	    i_order_id.value=reservation_num;
+    		
+    	    formObj.appendChild(i_reservation_num);
+    	    document.body.appendChild(formObj); 
+    	    formObj.method="post";
+    	    formObj.action="${contextPath}/mypage/cancelMyReserve.do";
+    	    formObj.submit();	
+    	}
+    }
 	
 	
 	</script>
@@ -125,7 +142,7 @@
 					<select name="colName" id="colName">
 						<option value="">검색</option>
 						<option value="name">예약명</option>
-						<option value="dog_name">펫이름</option>
+						<option value="pet_name">펫이름</option>
 						<option value="tel">전화번호</option>
 					</select>
 					<input type="text" id="searchWord" name="searchWord"/> <br/><br/>
@@ -148,26 +165,47 @@
 					  <td>PetName</td>
 					  <td>Phone Number</td>
 					  <td>Status</td>
+					  <td>Cancel</td>
 				  </tr>
-<%-- 	            <c:choose> --%>
-<%-- 	            	<c:when test="${empty myReserveList }"> --%>
+	            <c:choose>
+	            	<c:when test="${empty myReserveList }">
 		               <tr>
 		                  <td colspan=4>
 		                  	<strong>예약하신 내역이 없습니다.</strong>
 		                  </td>
 		               </tr>
-<%-- 					</c:when> --%>
-<%-- 					<c:when test="${not empty myReserveList }"> --%>
-<%-- 						<c:forEach var="i" items="${myReserveList }" begin="0" end="2" step="1"> --%>
-<!-- 							<tr> -->
-<%-- 								<td>${myReserveList[i].user_joinDate }</td> --%>
-<%-- 								<td>${myReserveList[i].user_name }</td> --%>
-<%-- 								<td>${myReserveList[i].pet_name }</td> --%>
-<%-- 								<td>${myReserveList[i].user_tel }</td> --%>
-<!-- 							</tr> -->
-<%-- 						</c:forEach> --%>
-<%-- 					</c:when> --%>
-<%--                </c:choose> --%>
+					</c:when>
+					<c:when test="${not empty myReserveList }">
+						<c:forEach var="i" items="${myReserveList }">
+							<tr>
+								<td>${i.reservation_st }</td>
+								<td>${i.reservation_name }</td>
+								<td>${i.pet_name }</td>
+								<td>${i.reservation_tel }</td>
+								<td>
+									<c:choose>
+										<c:when test="${i.reservation_state == 'reservation_prepared' }">
+											예약완료
+										</c:when>
+										<c:when test="${i.reservation_state == 'cancel_reserve' }">
+											예약 취소
+										</c:when>
+									</c:choose>
+								</td>
+								<td>
+									<c:choose>
+										<c:when test="${i.reservation_state == 'reservation_prepared'}">
+											<input  type="button" onClick="fn_cancel_reserve('${i.reservation_num}')" value="주문취소"  />
+										</c:when>
+										<c:otherwise>
+											<input  type="button" onClick="fn_cancel_reserve('${i.reservation_num}')" value="주문취소" disabled />
+										</c:otherwise>
+									</c:choose>
+							    </td>	
+							</tr>
+						</c:forEach>
+					</c:when>
+               </c:choose>
 				</table>
 			 </div>
 		</div>

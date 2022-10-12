@@ -25,7 +25,7 @@
 		         order by reservation_st desc
 		]]>
 		<choose>
-			<when test="(colName == 'name' or colName == 'email' or colName == 'addr) and searchWord != null and(startDate == null or endDate == null) ">
+			<when test="(colName == 'name' or colName == 'pet_name' or colName == 'tel) and searchWord != null and(startDate == null or endDate == null) ">
 				where ${colName} like '%'|| #{searchWord} || '%'
 			</when>
 			
@@ -33,7 +33,7 @@
 				where to_char(writeday, 'yyyy-mm-dd') between #{startDate} and #{endDate} 
 			</when>
 			
-			<when test="(colName == 'name' or colName == 'email' or colName == 'addr') and searchWord != null and (startDate != null and endDate != null)">
+			<when test="(colName == 'name' or colName == 'pet_name' or colName == 'tel') and searchWord != null and (startDate != null and endDate != null)">
 				where ${colName} like '%'||#{searchWord} || '%'
 				and where to_char(writeday, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 			</when>
@@ -50,6 +50,12 @@
 		         order by reservation_date desc
 		]]>
 	</select>
+	
+	<update id="updateMyReserveCancel" parameterType="String">
+	   update tb_reservation
+	 	  set reservation_state='cancel_reserve'
+	   where reservation_num=#{reservation_num}
+	</update>
  
    
 </mapper>

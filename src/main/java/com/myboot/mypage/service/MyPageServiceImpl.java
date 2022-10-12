@@ -28,4 +28,8 @@ public class MyPageServiceImpl implements MyPageService {
 //		return myPageDAO.selectMyReviewList(user_id);
 //	}
 	
+	@Override
+	public void cancelReserve(String reservation_num) throws Exception{
+		myPageDAO.updateMyReserveCancel(reservation_num);
+	}
 }
