@@ -16,7 +16,7 @@ public class WebConfig {
 				"/WEB-INF/tiles/tiles.xml",
 				"/WEB-INF/tiles/mypage.xml"
 				
-		});
+		}); 
 		configurer.setCheckRefresh(true);
 		return configurer;
 	}
