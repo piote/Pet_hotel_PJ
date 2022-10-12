@@ -19,6 +19,8 @@ public class UserVO {
 	private String message;
 	private Date birth;
 	private Date joinDate;
+	private String grade;
+	
 	
 	public UserVO() {
 		System.out.println("userVO 호출");
