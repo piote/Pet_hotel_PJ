@@ -30,7 +30,7 @@
         	<!--  
             <a id="login" href="#">로그인</a>
             <a id="signup" href="#">회원가입</a>
-            <a id="mypage" href="#" hidden>마이페이지</a>
+            <a id="mypage" href="${contextPath}/mypage/myPage.do" hidden>마이페이지</a>
             <a id="logout" href="#" hidden>로그아웃</a>
             -->
         </div>

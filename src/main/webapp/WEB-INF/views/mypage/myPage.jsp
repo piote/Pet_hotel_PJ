@@ -22,16 +22,20 @@
                      <img class="img_info" src="${contextPath}/resources/img/user.png" alt="회원이미지">
                   </td>
                   <td>
-                     <h4>${memberInfo.name }님</h4>
+                     <h4>테스트${memberInfo.name }님</h4>
                      <br>
                      <br>
-                     <p>전화: ${memberInfo.tel}</p>
+                     <p>전화: 010-0000-0000${memberInfo.tel}</p>
                      <br>
-                     <p>이메일: ${memberInfo.email} </p>
+                     <p>이메일: testtesttest@naver.com${memberInfo.email} </p>
                   </td>
-                  <td>
+                  <td >
                      <a href="#">회원정보수정</a>
                      <a href="#">고객센터</a>
+                     <a href="#">#</a>
+                  </td>
+                  <td>
+                     <a href="#">#</a>
                      <a href="#">#</a>
                   </td>
                   <td>
@@ -55,25 +59,25 @@
 				    <td>PetName</td>
 				    <td>Phone Number</td>
 				</tr>
-<%-- 	            <c:choose> --%>
-<%-- 	            	<c:when test="${empty myReserveList }"> --%>
+	            <c:choose>
+	            	<c:when test="${empty myReserveList }">
 		               <tr>
 		                  <td colspan=4>
 		                  	<strong>예약하신 내역이 없습니다.</strong>
 		                  </td>
 		               </tr>
-<%-- 					</c:when> --%>
-<%-- 					<c:when test="${not empty myReserveList }"> --%>
-<%-- 						<c:forEach var="i" items="${myReserveList }" begin="0" end="2" step="1"> --%>
-<!-- 							<tr> -->
-<%-- 								<td>${myReserveList[i].user_joinDate }</td> --%>
-<%-- 								<td>${myReserveList[i].user_name }</td> --%>
-<%-- 								<td>${myReserveList[i].pet_name }</td> --%>
-<%-- 								<td>${myReserveList[i].user_tel }</td> --%>
-<!-- 							</tr> -->
-<%-- 						</c:forEach> --%>
-<%-- 					</c:when> --%>
-<%--                </c:choose> --%>
+					</c:when>
+					<c:when test="${not empty myReserveList }">
+						<c:forEach var="i" items="${myReserveList }" begin="0" end="2" step="1">
+							<tr>
+								<td>${myReserveList[i].user_joinDate }</td>
+								<td>${myReserveList[i].user_name }</td>
+								<td>${myReserveList[i].pet_name }</td>
+								<td>${myReserveList[i].user_tel }</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+               </c:choose>
             </table>
          </div>
          <div id="review">  
