@@ -15,13 +15,72 @@
       <result property="message" column="USER_MESSAGE" />
       <result property="birth" column="USER_BIRTH" />
       <result property="joinDate" column="JOINDATE" />
+      <result property="grade" column="USER_GRADE" />
    </resultMap> 
- 
- 
-   <select id="selectAllUserList" resultMap="userResult"   >
+
+   <select id="selectAllUserList" resultMap="userResult">
       <![CDATA[
         select * from TB_USER order by joinDate desc			
       ]]>
    </select>
+   
+   <select id="selectName" resultType="String">
+   	<![CDATA[
+   		select name from TB_USER
+   		where id='hong'
+   ]]
+   </select>
+   
+   <select id ="selectPwd" resultType="int">
+   	<![CDATA[
+   		select pwd from TB_USER
+   		where id = 'hong'
+   		]]>
+   		</select>
+   	<select id="selectUserById" resultType="userVO" parameterType="String">
+   	<![CDATA[
+   		select*from TB_USER
+   		where
+   		id=#{id}
+   	]]>
+   	</select>
+   		
+   	<select id="selectUserByPwd" resultMap="userResult" parameterType="int">
+   	<![CDATA[
+   		select*from TB_USER
+   		where
+   		pwd = #{pwd}
+   	]]>
+   	</select>
+   	
+   	<insert id="insertUser" parameterType="userVO">
+   		<![CDATA[
+   		insert into TB_USER(id,pwd, name,email)
+   		values(#{id},#{pwd},#{name},#{email})
+   		]]>
+   	</insert>
+   	
+   	<insert id="insertUser2" parameterType="java.util.HashMap">
+   		<![CDATA[
+   			insert into TB_USER(id,pwd,name,email)
+   		]]>
+   		
+   	</insert>
+   	<update id="updateUser" parameterType="userVO">
+   		<![CDATA[
+   				update TB_USER
+   				set pwd=#{pwd}, name=#{name}, email=#{email}
+   				where
+   				id=#{id}
+   		]]>
+   	</update>
+   	
+   	<delete id="deleteUser" parameterType="String">
+   		<![CDATA[
+   			delete from TB_USER
+   			where
+   			id=#{id}
+   		]]>
+   	</delete>
 
 </mapper>

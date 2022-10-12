@@ -13,16 +13,17 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="${contextPath}/resources/css/checkReserve.css">
 	<script type="text/javascript">
-	$(document).ready(function () {
-		$.datepicker.setDefaults($.datepicker.regional['ko']);
-		$( "#startDate" ).datepicker({
+		$( "#datepicker" ).datepicker({
+		 	dateFormat: "yy-mm-dd",
+		 	showOtherMonths: true,
+		 	showMonthAfterYear: true,
 			showButtonPanel: true,
+			changeMonth: true,
+			changeYear: true,
+			showOn: "both",
 			buttonImage: "${contextPath}/resources/img/cale.png",
 			buttonImageOnly: true,
 			buttonText: "Select date",
-			showOn: "both",
-			changeMonth: true,
-			changeYear: true,
 			closeText: "닫기",
 			nextText: '다음 달',
 		 	prevText: '이전 달',
@@ -30,47 +31,89 @@
 		 	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 		 	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 		 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		 	dateFormat: "yymmdd",
-		 	maxDate: 0,
-		 	onClose: function( selectedDate)  {
-		 		$("#endDate").datepicker( "option", "minDate", selectedDate );
-		 	}
+
 		});
-		    $.datepicker.setDefaults($.datepicker.regional['ko']);         //default셋팅
-		    $("#txt_prodStart" ).datepicker();  
-		    $('img.ui-datepicker-trigger').css({'cursor':'pointer', 'margin-left':'5px'});  //아이콘(icon) 위치
-		    $('.ui-datepicker ').css({ "margin-left" : "141px", "margin-top": "-200px"});  //달력(calendar) 위치
-		    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
-		    $('img.ui-datepicker-trigger').css({'display': 'inline-block'});
-		    
-		$( "#endDate" ).datepicker({
-			showButtonPanel: true,
-			buttonImage: "${contextPath}/resources/img/cale.png",
-			buttonImageOnly: true,
-			buttonText: "Select date",
-			showOn: "both",
-			changeMonth: true,
-			changeYear: true,
-			closeText: "닫기",
-			nextText: '다음 달',
-			prevText: '이전 달',
-			dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-		 	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-		 	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		 	dateFormat: "yymmdd",
-		 	maxDate: 0,
-		 	onClose: function( selectedDate)  {
-		 		$("#endDate").datepicker( "option", "minDate", selectedDate );
-		 	}
-		});
+		$(function(){
+			$.datepicker.setDefaults({
+				dateFormat: "yy-mm-dd",
+			 	showOtherMonths: true,
+			 	showMonthAfterYear: true,
+				showButtonPanel: true,
+				changeMonth: true,
+				changeYear: true,
+				showOn: "both",
+				buttonImage: "${contextPath}/resources/img/cale.png",
+				buttonImageOnly: true,
+				buttonText: "Select date",
+				closeText: "닫기",
+				nextText: '다음 달',
+			 	prevText: '이전 달',
+			 	dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+			 	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+			 	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+
+			});
+			$("#startDate").datepicker();
+			$("#endDate").datepicker();
+			
+			$("#startDate").datepicker('setDate', 'today');
+			$("#endDate").datepicker('setDate', '+1D');
+			
 		    $.datepicker.setDefaults($.datepicker.regional['ko']);         //default셋팅
 		    $("#txt_prodStart" ).datepicker();
 		    $('img.ui-datepicker-trigger').css({'cursor':'pointer', 'margin-left':'5px'});  //아이콘(icon) 위치
-		    $('.ui-datepicker ').css({ "margin-left" : "141px", "margin-top": "-210px"});  //달력(calendar) 위치
+		    $('.ui-datepicker ').css({ "margin-left" : "141px", "margin-top": "-220px"});  //달력(calendar) 위치
 		    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 		    $('img.ui-datepicker-trigger').css({'display': 'inline-block'});
+		});
+			
+	$(document).ready(function () {
+    	if( ${colName != null && colName != ""} &&
+    		${searchWord != null && searchWord != ""}){
+    		$("input[name=searchWord]").val("${searchWord}");
+    		$("#colName").val("${colName}");
+    	}
+
+    	if(${endDate != null && endDate !="" && startDate != null && startDate != ""} ){
+    		$("#startDate").val("${startDate}");
+    		$("#endDate").val("${endDate}");
+    	}
+    	
+		$("#btnSearch").click(function(){
+			goSearch();
+		});
+		
+		$("input[name=searchWord]").keydown(function(event){
+			var code = event.keyCode;
+			if(code == 13){
+				goSearch();
+			}
+		});
 	});
+	
+    function goSearch(){
+		var searchWord = $("input[name=searchWord]").val().trim();
+		var colName = $("#colName").val();
+		
+		if( "" == colName){
+			alert("검색조건을 선택하세요.");
+			$("input[name=searchWord]").val("");
+			$("input[name=searchWord]").focus();
+			return;
+		}else if ("" == searchWord){
+			alert("검색어를 입력해 주세요.");
+			return;
+		}
+		
+		var frm = document.searchFrm;
+		frm.method = "GET";
+		frm.action = "checkReserve.do";
+		frm.submit();
+		
+	}
+	
+	
 	</script>
 </head>
 <body>
@@ -89,8 +132,9 @@
 					<div id="calendar">
 						<input type="text" id="startDate">
 						<input type="text" id="endDate">
-						<button type="button" id="btnSearch"><img src="${contextPath}/resources/img/search.png"></button>
 					</div>
+					<input type="text" style="display: none;" />
+					<div id="btnSearch"><img src="${contextPath}/resources/img/search.png"></div>
 				</form>
 			</div>
 			<div id="reserve_list">
@@ -105,9 +149,25 @@
 					  <td>Phone Number</td>
 					  <td>Status</td>
 				  </tr>
-				   <tr>
-					  <td>예약 리스트</td>
-				   </tr>
+<%-- 	            <c:choose> --%>
+<%-- 	            	<c:when test="${empty myReserveList }"> --%>
+		               <tr>
+		                  <td colspan=4>
+		                  	<strong>예약하신 내역이 없습니다.</strong>
+		                  </td>
+		               </tr>
+<%-- 					</c:when> --%>
+<%-- 					<c:when test="${not empty myReserveList }"> --%>
+<%-- 						<c:forEach var="i" items="${myReserveList }" begin="0" end="2" step="1"> --%>
+<!-- 							<tr> -->
+<%-- 								<td>${myReserveList[i].user_joinDate }</td> --%>
+<%-- 								<td>${myReserveList[i].user_name }</td> --%>
+<%-- 								<td>${myReserveList[i].pet_name }</td> --%>
+<%-- 								<td>${myReserveList[i].user_tel }</td> --%>
+<!-- 							</tr> -->
+<%-- 						</c:forEach> --%>
+<%-- 					</c:when> --%>
+<%--                </c:choose> --%>
 				</table>
 			 </div>
 		</div>

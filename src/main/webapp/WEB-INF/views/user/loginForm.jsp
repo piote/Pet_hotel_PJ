@@ -23,16 +23,16 @@ function result(){
 <body>
 	<H3>회원 로그인 창</H3>
 	<DIV id="detail_table">
-	<form action="${contextPath}/member/login.do" method="post">
+	<form action="${contextPath}/user/login.do" method="post">
 		<TABLE>
 			<TBODY>
 				<TR class="dot_line">
 					<TD class="fixed_join">아이디</TD>
-					<TD><input name="member_id" type="text" size="20" /></TD>
+					<TD><input name="user_id" type="text" size="20" /></TD>
 				</TR>
 				<TR class="solid_line">
 					<TD class="fixed_join">비밀번호</TD>
-					<TD><input name="member_pw" type="password" size="20" /></TD>
+					<TD><input name="user_pw" type="password" size="20" /></TD>
 				</TR>
 			</TBODY>
 		</TABLE>
@@ -43,7 +43,7 @@ function result(){
 		<Br><br>
 		   <a href="#">아이디 찾기</a>  | 
 		   <a href="#">비밀번호 찾기</a> | 
-		   <a href="${contextPath}/member/addMember.do">회원가입</a>    | 
+		   <a href="${contextPath}/member/addUser.do">회원가입</a>    | 
 		   <a href="#">고객 센터</a>
 					   
 	</form>		

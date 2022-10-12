@@ -14,11 +14,33 @@
       <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
    </definition>
    
+   <!--  예약 페이지 -->
+   
    <definition name="reservationMain" extends="baseLayout">
       <put-attribute name="title" value="예약하기" />
       <put-attribute name="body" value="/WEB-INF/views/reservation/reservationMain.jsp" />
-   </definition>
+   </definition> 
+ 
+  <!--  로그인 -->
+	
+  <definition name="loginForm"  extends="baseLayout">
+      <put-attribute name="title" value="로그인" />
+      <put-attribute name="body" value="/WEB-INF/views/user/loginForm.jsp" />
+  </definition>
+
    
+    <!-- 리뷰 게시판 -->
+   
+	<definition name="reviewBoard" extends="baseLayout">
+	      <put-attribute name="title" value="리뷰 게시판" />
+	      <put-attribute name="body" value="/WEB-INF/views/review/reviewBoard.jsp" />
+	</definition>
+			  	
+	<definition name="reviewDetail" extends="baseLayout">
+	      <put-attribute name="title" value="리뷰" />
+	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail.jsp" />
+	</definition>			  		
+
    
 	
 </tiles-definitions>

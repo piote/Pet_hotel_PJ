@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myboot.mypage.dao.MyPageDAO">
+   <resultMap id="reserveResult" type="MyPageVO">
+
+   </resultMap> 
+   <resultMap id="reserveResult" type="reviewVO">
+
+   </resultMap> 
+	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="String"  >
+		<![CDATA[
+		select * from tb_reservation
+		         where user_id=#{user_id}
+		         order by reservation_st desc
+		]]>
+	</select>
+
+	<select id="selectMyReservesList" resultMap="com.myboot.user.vo.UserVO"  parameterType="HashMap"  >
+		<![CDATA[
+		select * from tb_reservation
+		         where user_id=#{user_id}
+		         order by reservation_st desc
+		]]>
+		<choose>
+			<when test="(colName == 'name' or colName == 'email' or colName == 'addr) and searchWord != null and(startDate == null or endDate == null) ">
+				where ${colName} like '%'|| #{searchWord} || '%'
+			</when>
+			
+			<when test="(colName == null or colName == '') and (StartDate != null and endDate != null)">
+				where to_char(writeday, 'yyyy-mm-dd') between #{startDate} and #{endDate} 
+			</when>
+			
+			<when test="(colName == 'name' or colName == 'email' or colName == 'addr') and searchWord != null and (startDate != null and endDate != null)">
+				where ${colName} like '%'||#{searchWord} || '%'
+				and where to_char(writeday, 'yyyy-mm-dd') between #{startDate} and #{endDate}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+
+	<select id="selectMyReviewList" resultMap="reserveResult"  parameterType="String"  >
+		<![CDATA[
+		select * from tb_review
+		         where user_id=#{user_id}
+		         order by reservation_date desc
+		]]>
+	</select>
+ 
+   
+</mapper>
