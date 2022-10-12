@@ -15,10 +15,10 @@
       <result property="message" column="USER_MESSAGE" />
       <result property="birth" column="USER_BIRTH" />
       <result property="joinDate" column="JOINDATE" />
+      <result property="grade" column="USER_GRADE" />
    </resultMap> 
- 
- 
-   <select id="selectAllUserList" resultMap="userResult"   >
+
+   <select id="selectAllUserList" resultMap="userResult">
       <![CDATA[
         select * from TB_USER order by joinDate desc			
       ]]>
@@ -37,7 +37,7 @@
    		where id = 'hong'
    		]]>
    		</select>
-   	<select id="selectUserById" resultType="memberVO" parameterType="String">
+   	<select id="selectUserById" resultType="userVO" parameterType="String">
    	<![CDATA[
    		select*from TB_USER
    		where
@@ -45,7 +45,7 @@
    	]]>
    	</select>
    		
-   	<select id="selectUserByPwd" resultMap="memResult" parameterType="int">
+   	<select id="selectUserByPwd" resultMap="userResult" parameterType="int">
    	<![CDATA[
    		select*from TB_USER
    		where
@@ -53,7 +53,7 @@
    	]]>
    	</select>
    	
-   	<insert id="insertUser" parameterType="memberVO">
+   	<insert id="insertUser" parameterType="userVO">
    		<![CDATA[
    		insert into TB_USER(id,pwd, name,email)
    		values(#{id},#{pwd},#{name},#{email})
