@@ -163,14 +163,14 @@
 		 <div class="img_c">
 			
 		  <ul class="gnb_w">
-	        <li><a href="${contextPath}/reviewDetail.do"></a></li>
-	        <li><a href=""></a></li>
-	        <li><a href=""></a></li>   
+	        <li><a href="${contextPath}/reviewDetail_1.do"></a></li>
+	        <li><a href="${contextPath}/reviewDetail_2.do"></a></li>
+	        <li><a href="${contextPath}/reviewDetail_3.do"></a></li>   
 	       </ul>
 	       
-	       <a href="" class="room_name_1">소형견(임시)</a>
-	       <a href="" class="room_name_2">중형견(임시)</a>   
-	       <a href="" class="room_name_3">대형견(임시)</a>   
+	       <a href="${contextPath}/reviewDetail_1.do" class="room_name_1">소형견(임시)</a>
+	       <a href="${contextPath}/reviewDetail_2.do" class="room_name_2">중형견(임시)</a>   
+	       <a href="${contextPath}/reviewDetail_3.do" class="room_name_3">대형견(임시)</a>   
 	      
        
 		 </div>
