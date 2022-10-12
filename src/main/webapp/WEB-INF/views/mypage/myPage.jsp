@@ -70,10 +70,10 @@
 					<c:when test="${not empty myReserveList }">
 						<c:forEach var="i" items="${myReserveList }" begin="0" end="2" step="1">
 							<tr>
-								<td>${myReserveList[i].user_joinDate }</td>
-								<td>${myReserveList[i].user_name }</td>
-								<td>${myReserveList[i].pet_name }</td>
-								<td>${myReserveList[i].user_tel }</td>
+								<td>${i.reservation_st }</td>
+								<td>${i.reservation_name }</td>
+								<td>${i.pet_name }</td>
+								<td>${i.reservation_tel }</td>
 							</tr>
 						</c:forEach>
 					</c:when>
@@ -91,24 +91,24 @@
                   <td>Subject</td>
                   <td>Contents</td>
               </tr>
-<%-- 	            <c:choose> --%>
-<%-- 	            	<c:when test="${empty myReviewList }"> --%>
+	            <c:choose>
+	            	<c:when test="${empty myReviewList }">
 		               <tr>
 		                  <td colspan=4>
 		                  	<strong>등록하신 리뷰가 없습니다.</strong>
 		                  </td>
 		               </tr>
-<%-- 					</c:when> --%>
-<%-- 					<c:when test="${not empty myReviewList }"> --%>
-<%-- 						<c:forEach var="i" begin="0" end="2" step="1"> --%>
-<!-- 							<tr> -->
-<%-- 								<td>${myReviewList[i].review_date }</td> --%>
-<%-- 								<td>${myReviewList[i].review_title }</td> --%>
-<%-- 								<td>${myReviewList[i].review_con }</td> --%>
-<!-- 							</tr> -->
-<%-- 						</c:forEach> --%>
-<%-- 					</c:when> --%>
-<%--                </c:choose> --%>
+					</c:when>
+					<c:when test="${not empty myReviewList }">
+						<c:forEach var="i" begin="0" end="2" step="1">
+							<tr>
+								<td>${i.review_date }</td>
+								<td>${i.review_title }</td>
+								<td>${i.review_con }</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+               </c:choose>
             </table>
          </div>
       </div>

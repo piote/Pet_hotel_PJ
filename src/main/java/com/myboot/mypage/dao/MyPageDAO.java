@@ -14,5 +14,5 @@ public interface MyPageDAO {
 //	 public Map selectMyReservesList(Map paraMap) throws DataAccessException;
 
 //	 public List<ReserveVO> selectMyReviewList(String user_id) throws DataAccessException;
-
+		public void updateMyReserveCancel(String order_id) throws DataAccessException;
 }
