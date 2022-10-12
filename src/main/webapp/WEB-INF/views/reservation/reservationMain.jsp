@@ -365,9 +365,12 @@
 
             <div class="paymentinfo1">
             <table id="pet_table1" align="center" width="79%">
+<<<<<<< Updated upstream
                 <tr align="center" bgcolor="bisque" height="40px">
                     <td colspan="10" align="center" bgcolor="bisque"><b>결제창</b></td>
                 </tr>
+=======
+>>>>>>> Stashed changes
                 <tr align="center" bgcolor="bisque">
                     <td rowspan="6" align="center" bgcolor="bisque"><b>Room</b></td>
                     <td rowspan="2" align="center" bgcolor="bisque">Deluxe(소형견)</td>
@@ -379,12 +382,23 @@
                     <td rowspan="6" align="center" bgcolor="bisque"><b>Spa</b></td>
                     <td rowspan="2" align="center" bgcolor="bisque">소형견</td>
                     <td rowspan="2" align="center" bgcolor="bisque"></td>
+<<<<<<< Updated upstream
                 </tr>
                 <tr align="center" bgcolor="bisque">
+=======
+
+                </tr>
+                <tr align="center" bgcolor="bisque">
+
+>>>>>>> Stashed changes
                     <td>중형견</td>
                     <td></td>
                 </tr>
                 <tr align="center" bgcolor="bisque">
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
                     <td rowspan="2" align="center" bgcolor="bisque">Superior(중형견)</td>
                     <td rowspan="2" align="center" bgcolor="bisque"></td>
                     <td>대형견</td>
@@ -393,11 +407,19 @@
                     <td rowspan="2" align="center" bgcolor="bisque"></td>
                 </tr>
                 <tr align="center" bgcolor="bisque">
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
                     <td rowspan="3" align="center" bgcolor="bisque">Scissoring</td>
                     <td>소형견</td>
                     <td></td>
                 </tr>
                 <tr align="center" bgcolor="bisque">
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
                     <td rowspan="2" align="center" bgcolor="bisque">Suite(대형견)</td>
                     <td rowspan="2" align="center" bgcolor="bisque"></td>
                     <td>중형견</td>
@@ -406,12 +428,19 @@
                     <td rowspan="2" align="center" bgcolor="bisque"></td>
                 </tr>
                 <tr align="center" bgcolor="bisque">
+<<<<<<< Updated upstream
                     <td>대형견</td>
                     <td></td>
                 </tr>
                 <tr align="center" bgcolor="bisque" height="40px">
                     <td colspan="10" align="center" bgcolor="bisque"><b>최종금액창</b></td>
                 </tr>
+=======
+
+                    <td>대형견</td>
+                    <td></td>
+                </tr>
+>>>>>>> Stashed changes
             </table>
         </div>
             
