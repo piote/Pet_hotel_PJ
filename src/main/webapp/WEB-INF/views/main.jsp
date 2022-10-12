@@ -243,7 +243,7 @@
         <div class="txt_wrap">
             <p>Anitel</p>
             <p>펫 호텔 서비스</p>
-            <a class="slider_bt">예약하기 ></a>
+            <a class="slider_bt" href="${contextPath}/reservation.do" >예약하기 ></a>
         </div>
     </div>
   </div>

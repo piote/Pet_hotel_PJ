@@ -15,6 +15,7 @@
       <result property="message" column="USER_MESSAGE" />
       <result property="birth" column="USER_BIRTH" />
       <result property="joinDate" column="JOINDATE" />
+      <result property="grade" column="USER_GRADE" />
    </resultMap> 
 
    <select id="selectAllUserList" resultMap="userResult">
