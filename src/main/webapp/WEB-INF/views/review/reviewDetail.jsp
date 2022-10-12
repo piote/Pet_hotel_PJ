@@ -20,13 +20,9 @@
 <html>
 <head>
   <style>
-  .w_h1 {
-	  magin-top: 300px;
-	  
-	  text-align: center;
-	  font size: 50px;
-  }
- 
+
+
+      
  </style> 
 
 <meta charset="UTF-8">
@@ -36,9 +32,11 @@
 
 <body>
 
-<h1 class="w_h1">리뷰 상세 페이지 테스트 입니다 ! </h1>
-<div></div>
+
+
 </body>
 </html>
+
+
 
 
