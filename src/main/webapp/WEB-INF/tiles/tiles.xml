@@ -14,10 +14,23 @@
       <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
    </definition>
    
+   <!--  예약 페이지 -->
+   
    <definition name="reservationMain" extends="baseLayout">
       <put-attribute name="title" value="예약하기" />
       <put-attribute name="body" value="/WEB-INF/views/reservation/reservationMain.jsp" />
+   </definition> 
+ 
+  <!--  로그인 -->
+	
+  <definition name="login"  extends="baseLayout">
+      <put-attribute name="title" value="Anitel" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/user/loginForm.jsp" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
+
    
     <!-- 리뷰 게시판 -->
    
@@ -30,6 +43,7 @@
 	      <put-attribute name="title" value="리뷰" />
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail.jsp" />
 	</definition>			  		
+
    
 	
 </tiles-definitions>
