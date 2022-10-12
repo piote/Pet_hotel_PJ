@@ -15,7 +15,7 @@
   <header>
     <div class="header_box">
         <a class="logo" href="${contextPath}/main.do">Anitel</a>
-
+        
         <div id ="head_link">
         	<ul>
         	<c:choose>
