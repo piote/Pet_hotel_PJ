@@ -44,6 +44,12 @@ public class UserControllerImpl implements UserController{
 		
 		return a;
 	}
+	
+	@RequestMapping("/loginForm.do") 
+	  public String reservationMain(Model model){
+	 
+	    return "loginForm"; 
+	  }
 
 	@Override
 	@RequestMapping(value="/pw_change.do" ,method = RequestMethod.GET)
