@@ -21,11 +21,15 @@
    
     <!-- 리뷰 게시판 -->
    
-	<definition name="reviewboard" extends="baseLayout">
+	<definition name="reviewBoard" extends="baseLayout">
 	      <put-attribute name="title" value="리뷰 게시판" />
-	      <put-attribute name="body" value="/WEB-INF/views/review/reviewboard.jsp" />
+	      <put-attribute name="body" value="/WEB-INF/views/review/reviewBoard.jsp" />
 	</definition>
-			  
+			  	
+	<definition name="reviewDetail" extends="baseLayout">
+	      <put-attribute name="title" value="리뷰" />
+	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail.jsp" />
+	</definition>			  		
    
 	
 </tiles-definitions>
