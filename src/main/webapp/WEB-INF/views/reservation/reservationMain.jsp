@@ -113,13 +113,14 @@
   
         
         /* 결제정보창 */
-        #paymentinfo{
+        .paymentinfo{
             margin: auto;
             width: 100%;
             height: 20%;
             text-align: center;
             table-layout: fixed;
-        }
+            display: none;
+      	}
         /* 여기까지 */
 
         .reservationtext1 {
@@ -159,7 +160,8 @@
 
         #btn_pet1_1,
         #btn_pet2_1,
-        #btn_pet2_2 {
+        #btn_pet2_2,
+        #btn_pet2_3 {
             color: #444444;
             background: #F3F3F3;
             border: 1px #DADADA solid;
@@ -172,7 +174,8 @@
 
         #btn_pet1_1:hover,
         #btn_pet2_1:hover,
-        #btn_pet2_2:hover {
+        #btn_pet2_2:hover,
+        #btn_pet2_3:hover {
             border: 1px #C6C6C6 solid;
             box-shadow: 1px 1px 1px #EAEAEA;
             color: #333333;
@@ -181,7 +184,8 @@
 
         #btn_pet1_1:active,
         #btn_pet2_1:active,
-        #btn_pet2_2:active {
+        #btn_pet2_2:active,
+        #btn_pet2_3:active {
             box-shadow: inset 1px 1px 1px #DFDFDF;
         }
         
@@ -264,6 +268,10 @@
 
         function addtext(){
             $(".petcomment").toggleClass('click');
+        }
+        
+        function addcost(){
+            $(".paymentinfo").toggleClass('click');
         }
     </script>
 </head>
@@ -352,7 +360,8 @@
             </div>
 
             <br></br>
-            <div id="paymentinfo">
+            
+            <div class="paymentinfo">
                 <table id='pet_table' align="center" width="79%">
                     <tr align="center" bgcolor="bisque">
                         <td rowspan="6" align="center" bgcolor="bisque"><b>Room</b></td>
@@ -406,6 +415,7 @@
 
             <div id="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
+                <input type='button' value='가격안내' id="btn_pet2_3" onclick="addcost()" />
                 <input type='button' value='다음' id="btn_pet2_2" onclick=' ' />
             </div>
         </form>
