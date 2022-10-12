@@ -23,13 +23,10 @@
  
   <!--  로그인 -->
 	
-  <definition name="login"  extends="baseLayout">
-      <put-attribute name="title" value="Anitel" />
-      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-      <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+  <definition name="loginForm"  extends="baseLayout">
+      <put-attribute name="title" value="로그인" />
       <put-attribute name="body" value="/WEB-INF/views/user/loginForm.jsp" />
-      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
-   </definition>
+  </definition>
 
    
     <!-- 리뷰 게시판 -->
