@@ -35,7 +35,7 @@
   .review {
 	  margin-top: -40px;
 	  text-align: left; font-size: 25px;
-	  margin-left: 15%;
+	  margin-left: 17%;
 	  
   	}
  
@@ -62,6 +62,32 @@
 		  text-decoration: none;
 		 
 	  }
+  
+  	 .room_name_1 {
+      font-size: 25px;
+      text-decoration: none;
+      color: black;
+      position: absolute;
+      left: 26%;
+      margin-top: 15px;
+      
+     }
+     .room_name_2 {
+      font-size: 25px;
+      text-decoration: none;
+      color: black;
+      position: absolute;
+      left: 46%;
+      margin-top: 15px;
+     }
+     .room_name_3 {
+      font-size: 25px;
+      text-decoration: none;
+      color: black;
+      position: absolute;
+      left: 66%;
+      margin-top: 15px;
+     }
 
 	/*  img {width: 25%;
 	  height: 350px;
@@ -89,7 +115,7 @@
 	margin-top: 10px;
 	border: 2px solid gray;
     width: 12%;
-    margin-left: 15%;
+    margin-left: 17%;
     
   }
 
@@ -141,7 +167,12 @@
 	        <li><a href=""></a></li>
 	        <li><a href=""></a></li>   
 	       </ul>
-	
+	       
+	       <a href="" class="room_name_1">소형견(임시)</a>
+	       <a href="" class="room_name_2">중형견(임시)</a>   
+	       <a href="" class="room_name_3">대형견(임시)</a>   
+	      
+       
 		 </div>
  
 		<br><br><br><br><br>
