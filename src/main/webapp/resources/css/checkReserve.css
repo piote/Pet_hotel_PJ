@@ -7,6 +7,9 @@
     text-align: center;
     padding-top: 120px;
  }
+ img{
+	display: inline-block;
+ }
 /*  #wrap { */
 /*     width: 100%; */
 /*     height: 100%; */
@@ -45,8 +48,10 @@
  }
  
  #btnSearch{
- 	border: none;
+ 	position: relative;
  	cursor: pointer;
+ 	left: 1325px;
+ 	top: -20px;
  }
 
 #reserve_list{
