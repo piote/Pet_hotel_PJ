@@ -75,8 +75,7 @@ public class MyPageControllerImpl implements MyPageController {
         return mav;
     }
     
-<<<<<<< HEAD
-=======
+
 	@Override
 	@RequestMapping(value="/cancelMyReserve.do" ,method = RequestMethod.POST)
 	public ModelAndView cancelMyReserve(@RequestParam("reservation_num")  String reservation_num,HttpServletRequest request, HttpServletResponse response)  throws Exception {
@@ -86,5 +85,5 @@ public class MyPageControllerImpl implements MyPageController {
 		mav.setViewName("redirect:/mypage/checkReserve.do");
 		return mav;
 	}
->>>>>>> e959c2e7e84e356bdfeaa897de0e2028241ad531
+
 }
