@@ -63,14 +63,10 @@
 	         </tr>
 	         
 	      </table>
-	      <section id="box">
 	         <tr>
-	            <td width="200"><p>&nbsp;</p></td>
-	            <td width="400"><input type="button" value="수정하기"></td>
-		        <td width="200"><p>&nbsp;</p></td>
-		        <td width="400"><input type="button" value="수정취소"></td>
+	            <td class="btn1"><input type="button" value="수정하기"></td>
+		        <td class="btn2"><input type="button" value="수정취소"></td>
 		     </tr>
-	      </section>
 	      
 	      <ul id="box1">
 	         <li>아이디, 이름, 가입일은 수정이 불가능합니다.</li>

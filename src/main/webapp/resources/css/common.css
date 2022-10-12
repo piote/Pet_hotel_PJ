@@ -31,10 +31,18 @@
     position: relative;
 }  */
 
-#box{
-    position: relative;
-    left: 200px;
-    
+.btn1{
+	background: #ddd;
+    border-radius: 3px;
+    text-align: center;
+    width: 60px;
+}
+
+.btn2{
+	background: #ddd;
+    border-radius: 3px;
+    text-align: center;
+    width: 60px;
 }
 #box1{
     position: relative;
