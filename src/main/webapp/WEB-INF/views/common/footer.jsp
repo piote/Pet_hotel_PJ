@@ -32,7 +32,7 @@
                 <li class="min_title">서비스</li>
                 <li><a href="${contextPath}/reservation.do">호텔 예약</a></li>
                 <li><a href="#">예약 조회</a></li>
-                <li><a href="#">고객 리뷰</a></li>
+                <li><a href="${contextPath}/reviewBoard.do">고객 리뷰</a></li>
             </ul>
             <div class="h_hr"></div>
             <ul>

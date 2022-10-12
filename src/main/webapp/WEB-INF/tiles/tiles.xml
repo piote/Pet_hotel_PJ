@@ -36,11 +36,20 @@
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewBoard.jsp" />
 	</definition>
 			  	
-	<definition name="reviewDetail" extends="baseLayout">
+	<definition name="reviewDetail_1" extends="baseLayout">
 	      <put-attribute name="title" value="리뷰" />
-	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail.jsp" />
-	</definition>			  		
-
+	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail_1.jsp" />
+	</definition>	
+	
+	<definition name="reviewDetail_2" extends="baseLayout">
+	      <put-attribute name="title" value="리뷰" />
+	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail_2.jsp" />
+	</definition>
+	
+	<definition name="reviewDetail_3" extends="baseLayout">
+	      <put-attribute name="title" value="리뷰" />
+	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail_3.jsp" />
+	</definition>		  		
    
 	
 </tiles-definitions>
