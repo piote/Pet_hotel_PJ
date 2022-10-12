@@ -1,5 +1,10 @@
 package com.myboot.mypage.service;
 
-public interface MyPageService {
+import java.util.List;
 
+public interface MyPageService {
+	public List listMyReserve(String user_id) throws Exception;
+//	public Map listMyReserve(Map paraMap) throws Exception;
+//	public List<ReserveVO> listMyReview() throws Exception;
+	
 }
