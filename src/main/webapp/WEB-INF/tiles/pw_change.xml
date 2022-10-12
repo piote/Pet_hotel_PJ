@@ -7,23 +7,13 @@
       <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
       <put-attribute name="body" value="" />
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
-<<<<<<< HEAD
-   </definition>  
-    
-    <definition name="/pw_change" extends="baseLayout">
-      <put-attribute name="title" value="회원수정" />
-      <put-attribute name="body" value="/WEB-INF/views/member/pw_change.jsp" />
-   </definition>
-   
-   
-=======
+
    </definition> 
     
     <definition name="/pw_change" extends="baseLayout">
       <put-attribute name="title" value="회원정보수정" />
       <put-attribute name="body" value="/WEB-INF/views/member/pw_change.jsp" />
    </definition>
-   
->>>>>>> e959c2e7e84e356bdfeaa897de0e2028241ad531
+
 	
 </tiles-definitions>
