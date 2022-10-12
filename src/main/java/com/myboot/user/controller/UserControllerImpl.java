@@ -44,6 +44,10 @@ public class UserControllerImpl implements UserController{
 		
 		return a;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> e959c2e7e84e356bdfeaa897de0e2028241ad531
 	@Override
 	@RequestMapping(value="/pw_change.do" ,method = RequestMethod.GET)
 	public ModelAndView pw_change(HttpServletRequest request, HttpServletResponse response)  throws Exception {
@@ -66,3 +70,4 @@ public class UserControllerImpl implements UserController{
 		return mav;
 	}
 }
+
