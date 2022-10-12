@@ -137,7 +137,7 @@
 		 <div class="img_c">
 			
 		  <ul class="gnb_w">
-	        <li><a href="${contextPath}/main.do"></a></li>
+	        <li><a href="${contextPath}/reviewDetail.do"></a></li>
 	        <li><a href=""></a></li>
 	        <li><a href=""></a></li>   
 	       </ul>
