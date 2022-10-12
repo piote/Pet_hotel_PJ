@@ -27,6 +27,20 @@
             width: 69%;
             table-layout: fixed;
         }
+        
+        #pet_table1 {
+            margin: auto;
+            text-align: center;
+            width: 69%;
+            table-layout: fixed;
+        }
+        
+        #pet_table2 {
+            margin: auto;
+            text-align: center;
+            width: 69%;
+            table-layout: fixed;
+        }
 
 
         #checkin {
@@ -72,7 +86,7 @@
             text-align: center;
         }
 
-        #btn_pet2 {
+        .btn_pet2 {
             margin-left: auto;
             margin-right: auto;
             width: 68%;
@@ -113,7 +127,7 @@
   
         
         /* 결제정보창 */
-        .paymentinfo{
+        .paymentinfo2{
             margin: auto;
             width: 100%;
             height: 20%;
@@ -174,8 +188,8 @@
 
         #btn_pet1_1:hover,
         #btn_pet2_1:hover,
-        #btn_pet2_2:hover,
-        #btn_pet2_3:hover {
+        #btn_pet2_2:hover
+        #btn_pet2_3:hover, {
             border: 1px #C6C6C6 solid;
             box-shadow: 1px 1px 1px #EAEAEA;
             color: #333333;
@@ -271,7 +285,7 @@
         }
         
         function addcost(){
-            $(".paymentinfo").toggleClass('click');
+            $(".paymentinfo2").toggleClass('click');
         }
     </script>
 </head>
@@ -349,20 +363,64 @@
 
             <br></br>
 
-            <div id="petpayment">
-                <li>
-                    <ul>| 결제금액 |</ul>
-                    <ul id="roomcount">| Room |</ul>
-                    <ul>| Service |</ul>
-                    <ul id="beautycount">미용</ul>
-                    <ul id="spacount">스파</ul>
-                </li>
-            </div>
-
-            <br></br>
+            <div class="paymentinfo1">
+            <table id="pet_table1" align="center" width="79%">
+                <tr align="center" bgcolor="bisque" height="40px">
+                    <td colspan="10" align="center" bgcolor="bisque"><b>결제창</b></td>
+                </tr>
+                <tr align="center" bgcolor="bisque">
+                    <td rowspan="6" align="center" bgcolor="bisque"><b>Room</b></td>
+                    <td rowspan="2" align="center" bgcolor="bisque">Deluxe(소형견)</td>
+                    <td rowspan="2" align="center" bgcolor="bisque"></td>
+                    <td rowspan="6" align="center" bgcolor="bisque"><b>Beauty</b></td>
+                    <td rowspan="3" align="center" bgcolor="bisque">Clipping</td>
+                    <td>소형견</td>
+                    <td></td>
+                    <td rowspan="6" align="center" bgcolor="bisque"><b>Spa</b></td>
+                    <td rowspan="2" align="center" bgcolor="bisque">소형견</td>
+                    <td rowspan="2" align="center" bgcolor="bisque"></td>
+                </tr>
+                <tr align="center" bgcolor="bisque">
+                    <td>중형견</td>
+                    <td></td>
+                </tr>
+                <tr align="center" bgcolor="bisque">
+                    <td rowspan="2" align="center" bgcolor="bisque">Superior(중형견)</td>
+                    <td rowspan="2" align="center" bgcolor="bisque"></td>
+                    <td>대형견</td>
+                    <td></td>
+                    <td rowspan="2" align="center" bgcolor="bisque">중형견</td>
+                    <td rowspan="2" align="center" bgcolor="bisque"></td>
+                </tr>
+                <tr align="center" bgcolor="bisque">
+                    <td rowspan="3" align="center" bgcolor="bisque">Scissoring</td>
+                    <td>소형견</td>
+                    <td></td>
+                </tr>
+                <tr align="center" bgcolor="bisque">
+                    <td rowspan="2" align="center" bgcolor="bisque">Suite(대형견)</td>
+                    <td rowspan="2" align="center" bgcolor="bisque"></td>
+                    <td>중형견</td>
+                    <td></td>
+                    <td rowspan="2" align="center" bgcolor="bisque">대형견</td>
+                    <td rowspan="2" align="center" bgcolor="bisque"></td>
+                </tr>
+                <tr align="center" bgcolor="bisque">
+                    <td>대형견</td>
+                    <td></td>
+                </tr>
+                <tr align="center" bgcolor="bisque" height="40px">
+                    <td colspan="10" align="center" bgcolor="bisque"><b>최종금액창</b></td>
+                </tr>
+            </table>
+        </div>
             
-            <div class="paymentinfo">
-                <table id='pet_table' align="center" width="79%">
+            <div class="btn_pet2">
+            	<input type='button' value='가격안내' id="btn_pet2_3" onclick="addcost()" />
+            </div>
+            
+            <div class="paymentinfo2">
+                <table id="pet_table2" align="center" width="79%">
                     <tr align="center" bgcolor="bisque">
                         <td rowspan="6" align="center" bgcolor="bisque"><b>Room</b></td>
                         <td rowspan="2" align="center" bgcolor="bisque">Deluxe(소형견)</td>
@@ -413,14 +471,12 @@
                 </table>
             </div>
 
-            <div id="btn_pet2">
+            <div class="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
-                <input type='button' value='가격안내' id="btn_pet2_3" onclick="addcost()" />
                 <input type='button' value='다음' id="btn_pet2_2" onclick=' ' />
             </div>
         </form>
     </div>
-    <br></br>
     
     <div class="petcomment">
     	<input type="text">
