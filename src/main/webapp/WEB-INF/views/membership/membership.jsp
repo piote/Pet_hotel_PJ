@@ -23,7 +23,7 @@
         .m_section {
             position: relative;
             width: auto; height: 100vh;
-            background-image: url(${contextPath}/resources/img/m_main.jpg);
+            background-image: url(${contextPath}/resources/img/mem_main.jpg);
             background-size: cover;
             display: block;
             margin-top: -200px;
@@ -192,13 +192,13 @@
     <section class="m_main">
         <div class="m_list">
             <div>
-                <img src="${contextPath}/resources/img/bonus.png">
+                <img src="${contextPath}/resources/img/bonus_icon.png">
                 <h2>멤버쉽 할인</h2>
                 <p>연간 이용횟수에 따라 할인 프로그램을 제공해드립니다.</p>
             </div>
             <ul id="m_menu">
                 <li class="m_bronze">
-                    <img class="m_icon" src="${contextPath}/resources/img/bronze-medal.png">
+                    <img class="m_icon" src="${contextPath}/resources/img/bronze_medal.png">
                     <h3>브론즈</h3>
                     <div class="box">
                         <p>연간 이용횟수 5회 이상</p>
@@ -206,7 +206,7 @@
                     </div>
                 </li>
                 <li class="m_silver">
-                    <img class="m_icon" src="${contextPath}/resources/img/silver-medal.png">
+                    <img class="m_icon" src="${contextPath}/resources/img/silver_medal.png">
                     <h3>실버</h3>
                     <div class="box">
                         <p>연간 이용횟수 10회 이상</p>
@@ -215,7 +215,7 @@
                     </div>
                 </li>
                 <li class="m_gold">
-                    <img class="m_icon" src="${contextPath}/resources/img/gold-medal.png">
+                    <img class="m_icon" src="${contextPath}/resources/img/gold_medal.png">
                     <h3>골드</h3>
                     <div class="box">
                         <p>연간 이용횟수 20회 이상</p>
@@ -229,32 +229,28 @@
         <div class="m_qna">
             <h2>Anitel 멤버쉽 QnA</h2>
             <div class="qna">
-                <button class="q_btn" data-num="0">Q1 질문1입니다.</button>
+                <button class="q_btn" data-num="0">Q1 첫번째 질문입니다.</button>
                 <div class="answer">답변 1입니다.</div>
             </div>
             <div class="qna">
-                <button class="q_btn" data-num="1">Q2 질문2입니다.</button>
+                <button class="q_btn" data-num="1">Q2 두번째 질문입니다.</button>
                 <div class="answer">답변 2입니다.</div>
             </div>
             <div class="qna">
-                <button class="q_btn" data-num="2">Q3 질문3입니다.</button>
+                <button class="q_btn" data-num="2">Q3 세번째 질문입니다.</button>
                 <div class="answer">답변 3입니다.</div>
             </div>
             <div class="qna">
-                <button class="q_btn" data-num="3">Q4 질문4입니다.</button>
+                <button class="q_btn" data-num="3">Q4 네번째 질문입니다.</button>
                 <div class="answer">답변 4입니다.</div>
             </div>
             <div class="qna">
-                <button class="q_btn" data-num="4">Q5 질문5입니다.</button>
+                <button class="q_btn" data-num="4">Q5 다섯번째 질문입니다.</button>
                 <div class="answer">답변 5입니다.</div>
             </div>
             <div class="qna">
-                <button class="q_btn" data-num="5">Q6 질문6입니다.</button>
+                <button class="q_btn" data-num="5">Q6 여섯번째 질문입니다.</button>
                 <div class="answer">답변 6입니다.</div>
-            </div>
-            <div class="qna">
-                <button class="q_btn" data-num="6">Q7 질문7입니다.</button>
-                <div class="answer">답변 7입니다.</div>
             </div>
         </div>
     </section>
