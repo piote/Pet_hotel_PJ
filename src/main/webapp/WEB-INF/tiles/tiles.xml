@@ -74,5 +74,11 @@
       	  <put-attribute name="title" value="예약내역" />
       	  <put-attribute name="body" value="/WEB-INF/views/mypage/checkReserve.jsp" />
    </definition>
+   
+   <!-- 문의게시판 -->
+   <definition name="questionsForm" extends="baseLayout">
+      	  <put-attribute name="title" value="문의하기" />
+      	  <put-attribute name="body" value="/WEB-INF/views/questions/questionsForm.jsp" />
+   </definition>
 	
 </tiles-definitions>
