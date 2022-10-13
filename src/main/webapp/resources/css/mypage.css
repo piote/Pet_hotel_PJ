@@ -26,22 +26,25 @@ p {
     font-size: 14px;
 }
 .mypage_info{
-   width: 1200px;
+   width: 1050px;
    height: 220px;
    border: 1px solid black;
    position: relative;
    margin: 0 auto;
 }
 .img_info {
-    margin-left: 45px;
+    margin-left: 60px;
     margin-top: 32px;
     width: 150px;
     height: 150px;
 }
 .mypage_info td:nth-child(2){
+	display: inline-block;
+	width: 310px;
+    height: 180px;
     position: relative;
     top: 13px;
-    left: 30px;
+    left: 60px;
     padding: 10px;
     border-left: 1px solid rgba(200, 200, 200, 0.5);
 }
@@ -50,49 +53,60 @@ p {
     margin-left: 50px;
     margin-top: 5px;
 }
+.mypage_info td:nth-child(3){
+    height: 180px;
+    position: relative;
+    left: 95px;
+    top: 11px;
+    border-left: 1px solid rgba(200, 200, 200, 0.5);
+}
+
 .mypage_info td:nth-child(3) a{
     display: block;
     position: relative;
-    left: 150px;
     font-size: 13px;
     margin-left: 50px;
     padding: 10px;
     margin-top: 5px;
+    top: 20px;
+    right: -70px;
+    
 }
-.mypage_info td:nth-child(3){
+.mypage_info td:nth-child(4) {
     position: relative;
-    left: 60px;
-    top: 13px;
-    border-right: 1px solid rgba(200, 200, 200, 0.5);
+    left: 105px;
+    top: 11px;
+}
+.mypage_info td:nth-child(4) a {
+    display: block;
+    position: relative;
+    font-size: 13px;
+    margin-left: 50px;
+    padding: 10px;
+    margin-top: 5px;
+    top: 20px;
+    right: -55px;
+}
+.mypage_info td:nth-child(5) {
+    position: relative;
+    left: 105px;
 }
 .img_membership {
     position: absolute;
-    right: 220px;
-    top: 50px;
+    right: 105px;
+    top: 25px;
     width: 30px;
     height: 30px;
 }
 .membership {
     position: absolute;
-    right: 90px;
-    top: 53px;
+    right: 55px;
+    top: 28px;
     font-size: 18px;
 }
-.img_point {
-    position: absolute;
-    top: 120px;
-    right: 220px;
-    width: 30px;
-    height: 30px;
-}
-.point {
-    position: absolute;
-    right: 130px;
-    top: 119px;
-    font-size: 20px;
-}
+
 #reserve{
-	width: 1200px;
+	width: 1050px;
 	height: 70px;
 	margin: 0 auto;
     position: relative;
@@ -109,7 +123,7 @@ p {
     height: 15px;
 }
 .mypage_reserve{
-   width: 1200px;
+   width: 1050px;
    height: 200px;
    border-top: 1px solid black;
    margin-top: 40px;
@@ -119,20 +133,20 @@ p {
     border-top: 1px solid rgba(200, 200, 200, 0.5);
     border-bottom: 1px solid rgba(200, 200, 200, 0.5);
     text-align: center;
-    width: 1200px;
+    width: 1050px;
     height: 100%;
     position: relative;
     top: 10px;
 }
 .reserve-center td{
    padding: 0 70px;
-   margin-right: 85px;
+   margin-right: 50px;
    text-align: center;
    display: inline-block;
    margin-top: 10px;
 }
 #review{
-	width: 1200px;
+	width: 1050px;
 	height: 70px;
    	margin: 0 auto;
     position: relative;
@@ -149,7 +163,7 @@ p {
     height: 15px;
 }
 .mypage_review{
-    width: 1200px;
+    width: 1050px;
     height: 200px;
     border-top: 1px solid black;
     margin: 0 auto;
@@ -158,14 +172,14 @@ p {
     border-top: 1px solid rgba(200, 200, 200, 0.5);
     border-bottom: 1px solid rgba(200, 200, 200, 0.5);
     text-align: center;
-    width: 1200px;
+    width: 1100px;
     height: 100%;
     position: relative;
     top: 10px;
 }
 .review-center td{
    padding: 0 70px;
-   margin-right: 205px;
+   margin-right: 150px;
    text-align: center;
    display: inline-block;
    margin-top: 10px;

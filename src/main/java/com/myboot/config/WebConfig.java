@@ -13,10 +13,9 @@ public class WebConfig {
 	public TilesConfigurer tilesConfigurer() {
 		final TilesConfigurer configurer = new TilesConfigurer();
 		configurer.setDefinitions(new String[] {
-				"/WEB-INF/tiles/tiles.xml",
-				"/WEB-INF/tiles/mypage.xml"
+				"/WEB-INF/tiles/tiles.xml"
 				
-		});
+		}); 
 		configurer.setCheckRefresh(true);
 		return configurer;
 	}
