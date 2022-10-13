@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+#wrap{
+	width: 1920px;
+    margin: 0 auto;
+}
+
+.container{
+ 	width: 1200px;
+    margin: 0 auto;
+}
+.container h3{
+	text-align: center;
+	font-size:21px;
+}
+
+.modCon{
+    width: 500px;
+    margin: 50px auto;
+}
+.modCon table{width:100%;}
+.modCon tr p{
+	margin:5px 0;
+	width: 150px;
+}
+.modCon tr input{margin:5px 0;}
+.modCon tr .txtBox{width:300px;}
+.btn{
+	background: #ddd;
+    border-radius: 3px;
+    text-align: center;
+    width: 100%;
+    height:40px;
+    margin-top: 10px;
+    border:none;    
+}
+.modCon > ul{margin-top: 30px;}
+.modCon > p{
+	margin:50px 0;
+	text-align: center;
+	}
+
