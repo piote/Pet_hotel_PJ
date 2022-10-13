@@ -114,7 +114,7 @@
   #under {
 	margin-top: 10px;
 	border: 2px solid gray;
-    width: 12%;
+    width: 260px;
     margin-left: 17%;
     
   }
