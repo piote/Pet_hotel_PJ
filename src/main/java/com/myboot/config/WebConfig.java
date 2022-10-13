@@ -18,7 +18,7 @@ public class WebConfig {
 				"/WEB-INF/tiles/member.xml",
 				"/WEB-INF/tiles/pw_change.xml"
 				
-		});
+		}); 
 		configurer.setCheckRefresh(true);
 		return configurer;
 	}

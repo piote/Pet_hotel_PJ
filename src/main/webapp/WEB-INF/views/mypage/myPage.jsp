@@ -30,12 +30,7 @@
                      <p>이메일: testtesttest@naver.com${memberInfo.email} </p>
                   </td>
                   <td>
-<<<<<<< HEAD
-                  	 <a href="${contextPath}/pw_change.do">회원정보수정</a>
-=======
                      <a href="${contextPath}/pw_change.do">회원정보수정</a>
-
->>>>>>> e959c2e7e84e356bdfeaa897de0e2028241ad531
                      <a href="#">고객센터</a>
                      <a href="#">#</a>
                   </td>
