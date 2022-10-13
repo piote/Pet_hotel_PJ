@@ -15,11 +15,26 @@
   <header>
     <div class="header_box">
         <a class="logo" href="${contextPath}/main.do">Anitel</a>
-        <div class="log_wrap">
+        
+        <div class="log_wrap" id ="head_link">
+        <c:choose>
+        		<c:when test="${isLogOn==true and not empty userInfo}">
+                    <a id="mypage" href="${contextPath}/user/logout.do">마이페이지</a>
+        			<a id="logout" href="${contextPath}/user/logout.do">로그아웃</a>
+        		</c:when>
+           <c:otherwise>
+           		<a id="login" href="${contextPath}/user/loginForm.do">로그인</a>
+        		<a id="signup" href="${contextPath}/user/userForm.do">회원가입</a>
+        	</c:otherwise>
+        	</c:choose>
+        	<!--  
             <a id="login" href="#">로그인</a>
-            <a id="logout" href="#">로그아웃</a>
-            <a id="mypage" href="#" hidden>마이페이지</a>
+            <a id="signup" href="#">회원가입</a>
+            <a id="mypage" href="${contextPath}/mypage/myPage.do" hidden>마이페이지</a>
+            <a id="logout" href="#" hidden>로그아웃</a>
+            -->
         </div>
+        
         <div class="hr"></div>
         <nav>
             <div class="r_menu menu_wrap">
