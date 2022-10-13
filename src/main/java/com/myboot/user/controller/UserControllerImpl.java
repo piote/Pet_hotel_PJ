@@ -40,8 +40,8 @@ public class UserControllerImpl implements UserController{
 	}
 	
 	@RequestMapping("/loginForm.do") 
-	  public String reservationMain(Model model){
-	 
+//	  public String reservationMain(Model model){
+	public String loginnMain(Model model){
 	    return "loginForm"; 
 	  }
 
