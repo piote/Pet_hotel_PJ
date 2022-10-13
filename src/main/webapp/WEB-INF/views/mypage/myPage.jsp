@@ -7,7 +7,6 @@
 <html>
 <head>
    <link rel="stylesheet" href="${contextPath}/resources/css/mypage.css">
-   <script src="/js/scriptTest.js" type="text/javascript"></script>
    <meta charset="utf-8"  />
    <title>My Page</title>
 </head>
@@ -30,19 +29,16 @@
                      <p>이메일: testtesttest@naver.com${memberInfo.email} </p>
                   </td>
                   <td>
-                     <a href="${contextPath}/pw_change.do">회원정보수정</a>
-                     <a href="#">고객센터</a>
-                     <a href="#">#</a>
+                     <a href="${contextPath}/pw_change.do">내정보수정</a>
+                     <a href="#">멤버쉽</a>
                   </td>
                   <td>
-                     <a href="#">#</a>
-                     <a href="#">#</a>
+                     <a href="${contextPath}/mypage/checkReserve.do">예약 내역</a>
+                     <a href="#">고객센터</a>
                   </td>
                   <td>
                      <img class="img_membership" src="${contextPath}/resources/img/crown.png" alt="My 혜택">
-                     <a class="membership" href="#">MemberShip</a>
-                     <img class="img_point" src="${contextPath}/resources/img/point.png" alt="포인트">
-                     <a class="point" href="#">0 Point</a>
+                     <p class="membership">Gold${memberInfo.grade}</p>
                   </td>
                </tr>
             </table>
@@ -100,7 +96,7 @@
 		               </tr>
 					</c:when>
 					<c:when test="${not empty myReviewList }">
-						<c:forEach var="i" begin="0" end="2" step="1">
+						<c:forEach var="i" items="${myReviewList}" begin="0" end="2" step="1">
 							<tr>
 								<td>${i.review_date }</td>
 								<td>${i.review_title }</td>

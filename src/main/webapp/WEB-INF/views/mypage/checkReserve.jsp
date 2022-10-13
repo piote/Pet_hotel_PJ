@@ -117,15 +117,15 @@
     	var answer=confirm("예약을 취소하시겠습니까?");
     	if(answer==true){
     		var formObj=document.createElement("form");
-    		var i_order_id = document.createElement("input"); 
+    		var i_reserve_id = document.createElement("input"); 
     	    
-    	    i_order_id.name="reservation_num";
-    	    i_order_id.value=reservation_num;
+    	    i_reserve_id.name = "reservation_num";
+    	    i_reserve_id.value = reservation_num;
     		
     	    formObj.appendChild(i_reservation_num);
     	    document.body.appendChild(formObj); 
-    	    formObj.method="post";
-    	    formObj.action="${contextPath}/mypage/cancelMyReserve.do";
+    	    formObj.method = "post";
+    	    formObj.action ="${contextPath}/mypage/cancelMyReserve.do";
     	    formObj.submit();	
     	}
     }
@@ -184,10 +184,13 @@
 								<td>${i.reservation_tel }</td>
 								<td>
 									<c:choose>
-										<c:when test="${i.reservation_state == 'reservation_prepared' }">
-											예약완료
+										<c:when test="${i.reservation_state == 'N' }">
+											이용 전
 										</c:when>
-										<c:when test="${i.reservation_state == 'cancel_reserve' }">
+										<c:when test="${i.reservation_state == 'Y' }">
+											이용 완료
+										</c:when>
+										<c:when test="${i.reservation_state == 'C' }">
 											예약 취소
 										</c:when>
 									</c:choose>

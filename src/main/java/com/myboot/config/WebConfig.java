@@ -14,7 +14,6 @@ public class WebConfig {
 		final TilesConfigurer configurer = new TilesConfigurer();
 		configurer.setDefinitions(new String[] {
 				"/WEB-INF/tiles/tiles.xml",
-				"/WEB-INF/tiles/mypage.xml",
 				"/WEB-INF/tiles/member.xml",
 				"/WEB-INF/tiles/pw_change.xml"
 				

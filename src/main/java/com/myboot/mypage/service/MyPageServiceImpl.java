@@ -18,15 +18,15 @@ public class MyPageServiceImpl implements MyPageService {
 		return myPageDAO.selectMyReservesList(user_id);
 	}
 
-//	@Override
-//	public Map listMyReserve(Map paraMap) throws Exception{
-//		return myPageDAO.selectMyReservesList(paraMap);
-//	}
+	@Override
+	public Map listMyReserve(Map paraMap) throws Exception{
+		return myPageDAO.selectMyReservesList(paraMap);
+	}
 	
-//	@Override
-//	public List<ReserveVO> listMyReview(String user_id) throws Exception{
-//		return myPageDAO.selectMyReviewList(user_id);
-//	}
+	@Override
+	public List listMyReview(String user_id) throws Exception{
+		return myPageDAO.selectMyReviewList(user_id);
+	}
 	
 	@Override
 	public void cancelReserve(String reservation_num) throws Exception{

@@ -1,6 +1,7 @@
 package com.myboot.mypage.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +36,7 @@ public class MyPageControllerImpl implements MyPageController {
 //		String user_id = userVO.getId();
 		
 //		List myReserveList = myPageService.listMyReserve(user_id);
-//		List<ReserveVO> myReviewList = myPageService.listMyReview(user_id);
+//		List myReviewList = myPageService.listMyReview(user_id);
 		
 //		mav.addObject("myReserveList", myReserveList);
 //		mav.addObject("myReviewList", myReviewList);
@@ -45,7 +46,7 @@ public class MyPageControllerImpl implements MyPageController {
     @Override
     @RequestMapping(value="/checkReserve.do" ,method = RequestMethod.GET)
     public ModelAndView checkReserve(HttpServletRequest request, HttpServletResponse response)  throws Exception {
-        HttpSession session=request.getSession();
+        HttpSession session = request.getSession();
         session=request.getSession();
         
         String colName = request.getParameter("colName");
@@ -81,7 +82,7 @@ public class MyPageControllerImpl implements MyPageController {
 	public ModelAndView cancelMyReserve(@RequestParam("reservation_num")  String reservation_num,HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		ModelAndView mav = new ModelAndView();
 		myPageService.cancelReserve(reservation_num);
-		mav.addObject("message", "cancel_reserve");
+		mav.addObject("message", "C");
 		mav.setViewName("redirect:/mypage/checkReserve.do");
 		return mav;
 	}
