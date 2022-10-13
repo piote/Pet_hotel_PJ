@@ -12,7 +12,9 @@
 	<head>
 	   <link rel="stylesheet" href="${contextPath}/resources/css/common.css">
 	   <meta charset="UTF-8">
+
 	   <title>회원 수정창</title>
+
 	</head>
 	<body>
 	   <div id="wrap">
@@ -22,6 +24,7 @@
 	      <table id="container1">
 	         <tr>
 		            <td width="200"><p align="center">아이디</td>
+
 		            <td width="400"><input type="text" name="id"  <%-- value="${memberInfo.member_id }"  --%> disabled/> </td>
 	         </tr>
 	         <tr>
@@ -71,13 +74,13 @@
 	      <ul id="box1">
 	         <li>아이디, 이름, 가입일은 수정이 불가능합니다.</li>
 	      </ul>
-	      
 	       <div id="box2">
 	      	<tr>
 	            <td width="200"><p>&nbsp;</p></td>
 	            <td width="400"><input type="button" value="탈퇴하기"></td>
 	        </tr>
 	        </div>    
+
 		   </form>
 	   </section>
 	   </div>
