@@ -31,8 +31,11 @@
 		 	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 		 	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 		 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		 	maxDate: 1
-
+		 	maxDate: 1,
+		 	onClose: function(selectedDate){
+		 		$("#endDate").datepicker("option", "minDate",selectedDate);
+		 		$("#startDate").datepicker("option", "maxDate",selectedDate);
+		 	}
 		});
 		$(function(){
 			$.datepicker.setDefaults({
@@ -53,11 +56,14 @@
 			 	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 			 	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 			 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			 	maxDate: 1
+			 	maxDate: 1,
+			 	onClose: function(selectedDate){
+			 		$("#endDate").datepicker("option", "minDate",selectedDate);
+			 		$("#startDate").datepicker("option", "maxDate",selectedDate);
+			 	}
 			});
 			$("#startDate").datepicker();
-			$("#endDate").datepicker();
-			
+			$("#endDate").datepicker(); 
 			$("#startDate").datepicker('setDate', 'today');
 			$("#endDate").datepicker('setDate', '+1D');
 			
@@ -198,10 +204,10 @@
 								<td>
 									<c:choose>
 										<c:when test="${i.reservation_state == 'reservation_prepared'}">
-											<input  type="button" onClick="fn_cancel_reserve('${i.reservation_num}')" value="주문취소"  />
+											<input type="image" src="${contextPath}/resources/img/close.png" onClick="fn_cancel_reserve('${i.reservation_num}')" value="예약취소"  />
 										</c:when>
 										<c:otherwise>
-											<input  type="button" onClick="fn_cancel_reserve('${i.reservation_num}')" value="주문취소" disabled />
+											<input type="image" src="${contextPath}/resources/img/close.png" onClick="fn_cancel_reserve('${i.reservation_num}')" value="예약취소" disabled />
 										</c:otherwise>
 									</c:choose>
 							    </td>	
