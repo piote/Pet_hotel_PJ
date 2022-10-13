@@ -24,19 +24,15 @@
       ]]>
    </select>
    
-   <select id="selectName" resultType="String">
+   <select id="login" resultType="userVO" parameterType="java.util.Map">
    	<![CDATA[
-   		select name from TB_USER
-   		where id='hong'
-   ]]
+   		select*from TB_USER
+   		where user_id=#{user_id}
+   		and user_pw=#{user_pw}
+   	]]>
    </select>
    
-   <select id ="selectPwd" resultType="int">
-   	<![CDATA[
-   		select pwd from TB_USER
-   		where id = 'hong'
-   		]]>
-   		</select>
+
    	<select id="selectUserById" resultType="userVO" parameterType="String">
    	<![CDATA[
    		select*from TB_USER

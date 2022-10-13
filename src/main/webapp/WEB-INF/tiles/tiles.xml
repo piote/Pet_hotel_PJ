@@ -27,8 +27,8 @@
       <put-attribute name="title" value="로그인" />
       <put-attribute name="body" value="/WEB-INF/views/user/loginForm.jsp" />
   </definition>
+  
 
-   
     <!-- 리뷰 게시판 -->
    
 	<definition name="reviewBoard" extends="baseLayout">
