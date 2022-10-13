@@ -10,7 +10,7 @@
 %>  
 
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 
 <head>
     <meta charset="UTF-8">
