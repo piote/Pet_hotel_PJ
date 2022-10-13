@@ -188,8 +188,8 @@
 
         #btn_pet1_1:hover,
         #btn_pet2_1:hover,
-        #btn_pet2_2:hover
-        #btn_pet2_3:hover, {
+        #btn_pet2_2:hover,
+        #btn_pet2_3:hover {
             border: 1px #C6C6C6 solid;
             box-shadow: 1px 1px 1px #EAEAEA;
             color: #333333;
@@ -225,6 +225,17 @@
             margin: 5px 0;
         }
         /* 여기까지 */
+        .paymentinfo1 tr{
+            position: relative;
+        }
+        .totalamount{
+            display: block;
+            width: 140px;
+            height: 25px;
+            position: absolute; 
+            right: 150px;
+            top: 10px;
+        }
 
     </style>
 
@@ -266,8 +277,8 @@
             Cell1.innerHTML = '<input name="petname" id="Pet_Name' + petTableNum + '" type="textbox" style="text-align:center; width:80%;">';
             Cell2.innerHTML = '<select name="petsex" id="Pet_Sex' + petTableNum + '" onchange="handleOnChange(this)"><option>male</option><option>female</option></select>';
             Cell3.innerHTML = '<select name="petroom" id="Pet_Room' + petTableNum + '" onchange="handleOnChange(this)"><option>Deluxe(소형견)</option><option>Superior(중형견)</option><option>Suite(대형견)</option></select>';
-            Cell4.innerHTML = '<select name="beauty" id="petbeauty' + petTableNum + '" onchange="handleOnChange(this)"><option>Clipping</option><option>Scissoring</option></select>';
-            Cell5.innerHTML = '스파 <input id="spa' + petTableNum + '" type="checkbox">';
+            Cell4.innerHTML = '<select name="beauty" id="petbeauty' + petTableNum + '" onchange="handleOnChange(this)"><option>이용안함</option><option>Clipping</option><option>Scissoring</option></select>';
+            Cell5.innerHTML = '<input id="spa' + petTableNum + '" type="checkbox">';
             Cell6.innerHTML = '<input type="button" id="' + petTableNum + '" class="petUsed" value="X" >';
 
 
@@ -316,17 +327,17 @@
             </div>
 
             <table id="pet_table" align="center" width="79%">
-                <tr align="center" bgcolor="bisque">
+                <tr align="center" bgcolor="bisque" height="40px">
                     <td><b>Pet Name</b></td>
                     <td><b>Pet sex</b></td>
                     <td><b>Room</b></td>
                     <td><b>Beauty</b></td>
                     <td><b>Spa</b></td>
-                    <td><b>Use</b></td>
+                    <td><b>이용여부</b></td>
                 </tr>
                 <div id="calendarForm"></div>
                 <c:forEach var="member" items="${membersList}">
-                    <tr align="center">
+                    <tr align="center" height="30px">
                         <td>${Pet.Name}</td>
                         <td>${Pet.Sex}</td>
                         <td>
@@ -338,21 +349,16 @@
                         </td>
                         <td>
                             <select name="beauty" id="petbeauty" onchange="handleOnChange(this)">
+                            	<option>이용안함</option>
                                 <option>Clipping</option>
                                 <option>Scissoring</option>
                             </select>
                         </td>
                         <td>
-                            스파 <input id="spa" type="checkbox">
+                            <input id="spa" type="checkbox">
                         </td>
-                        <!-- <td>
-	                <select name="pet" id="Pet_Room" onchange="handleOnChange(this)">
-	                    <option>Used</option>
-	                    <option>Not Used</option>
-	                </select>
-	            </td> -->
                         <td>
-                            Not Used <input id="petuse" type="checkbox">
+                            <input type="button" class="petUsed" value="X" >
                         </td>
                     </tr>
                 </c:forEach>
@@ -366,7 +372,7 @@
             <div class="paymentinfo1">
             <table id="pet_table1" align="center" width="79%">
                 <tr align="center" bgcolor="bisque" height="40px">
-                    <td colspan="10" align="center" bgcolor="bisque"><b>결제창</b></td>
+                    <td colspan="10" align="center" bgcolor="bisque"><b>Reservation Detail</b></td>
                 </tr>
                 <tr align="center" bgcolor="bisque">
                     <td rowspan="6" align="center" bgcolor="bisque"><b>Room</b></td>
@@ -410,7 +416,7 @@
                     <td></td>
                 </tr>
                 <tr align="center" bgcolor="bisque" height="40px">
-                    <td colspan="10" align="center" bgcolor="bisque"><b>최종금액창</b></td>
+                    <td colspan="10" bgcolor="bisque"><b class="totalamount">The Total Amount</b></td>
                 </tr>
             </table>
         </div>
