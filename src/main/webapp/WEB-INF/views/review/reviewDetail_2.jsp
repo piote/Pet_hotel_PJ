@@ -20,8 +20,28 @@
 <html>
 <head>
   <style>
+  
+  .review {
+     margin-top: -40px;
+     text-align: left; font-size: 25px;
+     margin-left: 17%;
+     
+     }    
+  #under {
+   margin-top: 10px;
+   border: 2px solid gray;
+    width: 260px;
+    margin-left: 17%;
+    
+  }
 
+  .all {
+     margin-top: 250px;
+  }
+  
+   
 
+     
       
  </style> 
 
@@ -33,10 +53,21 @@
 <body>
 
 
+<div class="all">
+      
+   <br><br><br><br>
+   
+      <h2 class="review">소형견 Review</h2>
+      <p id="under"></p>
+      <br><br><br>
+      <!--방에 맞는 이미지 사용-->
+       
+ 
+      <br><br><br><br><br>
+
+</div>
+
+
 
 </body>
 </html>
-
-
-
-
