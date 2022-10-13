@@ -49,11 +49,18 @@
 	<definition name="reviewDetail_3" extends="baseLayout">
 	      <put-attribute name="title" value="리뷰" />
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail_3.jsp" />
-	</definition>		 
+	</definition>		
+	 
+	 <!-- 회원수정 -->
 	 		
     <definition name="/modMember" extends="baseLayout">
       <put-attribute name="title" value="회원수정" />
-      <put-attribute name="body" value="/WEB-INF/views/member/modMember.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/user/modMember.jsp" />
+   </definition>
+   
+    <definition name="/pw_change" extends="baseLayout">
+      <put-attribute name="title" value="회원정보수정" />
+      <put-attribute name="body" value="/WEB-INF/views/user/pw_change.jsp" />
    </definition>
    
    

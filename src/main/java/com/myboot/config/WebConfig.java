@@ -15,8 +15,6 @@ public class WebConfig {
 		configurer.setDefinitions(new String[] {
 				"/WEB-INF/tiles/tiles.xml",
 				"/WEB-INF/tiles/mypage.xml",
-				"/WEB-INF/tiles/member.xml",
-				"/WEB-INF/tiles/pw_change.xml"
 				
 		}); 
 		configurer.setCheckRefresh(true);
