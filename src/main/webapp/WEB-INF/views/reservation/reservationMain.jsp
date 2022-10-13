@@ -188,8 +188,8 @@
 
         #btn_pet1_1:hover,
         #btn_pet2_1:hover,
-        #btn_pet2_2:hover
-        #btn_pet2_3:hover, {
+        #btn_pet2_2:hover,
+        #btn_pet2_3:hover {
             border: 1px #C6C6C6 solid;
             box-shadow: 1px 1px 1px #EAEAEA;
             color: #333333;
