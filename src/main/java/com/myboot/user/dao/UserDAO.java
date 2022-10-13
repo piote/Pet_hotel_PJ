@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.myboot.user.vo.UserVO;
 
-@Mapper
-@Repository("userDAO")
+
+
 public interface UserDAO {
 	public UserVO login(Map loginMap) throws DataAccessException;
 	public String selectOverlappedID(String id) throws DataAccessException;

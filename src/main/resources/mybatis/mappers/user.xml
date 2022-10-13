@@ -3,19 +3,19 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.myboot.user.dao.UserDAO">
+<mapper namespace="mapper.user">
 
-   <resultMap id="userResult" type="userVO">
-      <result property="id" column="USER_ID" />
-      <result property="pwd" column="USER_PW" />
-      <result property="name" column="USER_NAME" />
-      <result property="email" column="USER_EMAIL" />
-      <result property="tel" column="USER_TEL" />
-      <result property="tel_sub" column="USER_TEL_SUB" />
-      <result property="message" column="USER_MESSAGE" />
-      <result property="birth" column="USER_BIRTH" />
-      <result property="joinDate" column="JOINDATE" />
-      <result property="grade" column="USER_GRADE" />
+   <resultMap id="userResult" type="UserVO">
+      <result property="user_id" column="USER_id" />
+      <result property="user_pwd" column="user_pw" />
+      <result property="user_name" column="user_name" />
+      <result property="user_email" column="user_email" />
+      <result property="user_tel" column="user_tel" />
+      <result property="user_tel_sub" column="user_tel_sub" />
+      <result property="user_message" column="user_message" />
+      <result property="user_birth" column="user_birth" />
+      <result property="joinDate" column="joinDate" />
+      <result property="user_grade" column="user_grade" />
    </resultMap> 
 
    <select id="selectAllUserList" resultMap="userResult">
@@ -24,59 +24,14 @@
       ]]>
    </select>
    
-   <select id="login" resultType="userVO" parameterType="java.util.Map">
-   	<![CDATA[
-   		select*from TB_USER
-   		where user_id=#{user_id}
-   		and user_pw=#{user_pw}
-   	]]>
-   </select>
-   
-
-   	<select id="selectUserById" resultType="userVO" parameterType="String">
-   	<![CDATA[
-   		select*from TB_USER
-   		where
-   		id=#{id}
-   	]]>
-   	</select>
-   		
-   	<select id="selectUserByPwd" resultMap="userResult" parameterType="int">
-   	<![CDATA[
-   		select*from TB_USER
-   		where
-   		pwd = #{pwd}
-   	]]>
-   	</select>
-   	
-   	<insert id="insertUser" parameterType="userVO">
-   		<![CDATA[
-   		insert into TB_USER(id,pwd, name,email)
-   		values(#{id},#{pwd},#{name},#{email})
-   		]]>
-   	</insert>
-   	
-   	<insert id="insertUser2" parameterType="java.util.HashMap">
-   		<![CDATA[
-   			insert into TB_USER(id,pwd,name,email)
-   		]]>
-   		
-   	</insert>
-   	<update id="updateUser" parameterType="userVO">
-   		<![CDATA[
-   				update TB_USER
-   				set pwd=#{pwd}, name=#{name}, email=#{email}
-   				where
-   				id=#{id}
-   		]]>
-   	</update>
-   	
-   	<delete id="deleteUser" parameterType="String">
-   		<![CDATA[
-   			delete from TB_USER
-   			where
-   			id=#{id}
-   		]]>
-   	</delete>
-
+  
+	<select id="login" resultType="userVO"  parameterType="java.util.Map"  >
+	    <![CDATA[
+			select * from TB_USER
+			 where member_id=#{user_id}
+			 and member_pw=#{user_pw}			
+			 
+		]]>
+	</select>
+ 
 </mapper>
