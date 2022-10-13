@@ -17,15 +17,36 @@
             margine: 10%
         } */
 
-        #reservationForm {
+        #reservationForm{
             align-items: center;
         }
 
+        /* 소제목태그 */
+        #under{
+        margin-top: 10px;
+        border: 2px solid gray;
+        width: 260px;
+        margin-left: 17%;    
+        }
+        
+        .reservationtag {
+            margin-top: 291px;
+            text-align: left; font-size: 25px;
+            margin-left: 17%;           
+        }
+        /* 여기까지 */
+
+        /* 테이블 */
         #pet_table {
             margin: auto;
             text-align: center;
             width: 69%;
+            height: 40px;
             table-layout: fixed;
+        }
+
+        #pet_table td{
+            height: 30px;
         }
         
         #pet_table1 {
@@ -41,7 +62,7 @@
             width: 69%;
             table-layout: fixed;
         }
-
+        /* 여기까지 */
 
         #checkin {
             margin-left: 10%;
@@ -119,7 +140,7 @@
         #petpayment li {
             margin-left: auto;
             margin-right: auto;
-            background-color: bisque;
+            background-color: white;
             list-style: none;
             text-align: center;
         }
@@ -225,6 +246,19 @@
             margin: 5px 0;
         }
         /* 여기까지 */
+        
+        .paymentinfo1 tr{
+            position: relative;
+        }
+
+        .totalamount{
+            display: block;
+            width: 140px;
+            height: 25px;
+            position: absolute; 
+            right: 150px;
+            top: 10px;
+        }
 
     </style>
 
@@ -266,8 +300,8 @@
             Cell1.innerHTML = '<input name="petname" id="Pet_Name' + petTableNum + '" type="textbox" style="text-align:center; width:80%;">';
             Cell2.innerHTML = '<select name="petsex" id="Pet_Sex' + petTableNum + '" onchange="handleOnChange(this)"><option>male</option><option>female</option></select>';
             Cell3.innerHTML = '<select name="petroom" id="Pet_Room' + petTableNum + '" onchange="handleOnChange(this)"><option>Deluxe(소형견)</option><option>Superior(중형견)</option><option>Suite(대형견)</option></select>';
-            Cell4.innerHTML = '<select name="beauty" id="petbeauty' + petTableNum + '" onchange="handleOnChange(this)"><option>Clipping</option><option>Scissoring</option></select>';
-            Cell5.innerHTML = '스파 <input id="spa' + petTableNum + '" type="checkbox">';
+            Cell4.innerHTML = '<select name="beauty" id="petbeauty' + petTableNum + '" onchange="handleOnChange(this)"><option>이용안함</option><option>Clipping</option><option>Scissoring</option></select>';
+            Cell5.innerHTML = '<input id="spa' + petTableNum + '" type="checkbox">';
             Cell6.innerHTML = '<input type="button" id="' + petTableNum + '" class="petUsed" value="X" >';
 
 
@@ -295,6 +329,9 @@
 
     <div id="reservationWrap">
         <form id="reservationForm" action="#">
+            <h2 class="reservationtag"> Reservation</h2>
+            <p id="under"></p>
+            <br><br>
             <div id="checkwrap">
                 <ul>
                     <li id="checkinBox" class="reservationBox">
@@ -316,17 +353,17 @@
             </div>
 
             <table id="pet_table" align="center" width="79%">
-                <tr align="center" bgcolor="bisque">
+                <tr align="center" bgcolor="#e5e4e2" height="40px">
                     <td><b>Pet Name</b></td>
                     <td><b>Pet sex</b></td>
                     <td><b>Room</b></td>
                     <td><b>Beauty</b></td>
                     <td><b>Spa</b></td>
-                    <td><b>Use</b></td>
+                    <td><b>이용여부</b></td>
                 </tr>
                 <div id="calendarForm"></div>
                 <c:forEach var="member" items="${membersList}">
-                    <tr align="center">
+                    <tr align="center" height="30px">
                         <td>${Pet.Name}</td>
                         <td>${Pet.Sex}</td>
                         <td>
@@ -338,21 +375,16 @@
                         </td>
                         <td>
                             <select name="beauty" id="petbeauty" onchange="handleOnChange(this)">
+                            	<option>이용안함</option>
                                 <option>Clipping</option>
                                 <option>Scissoring</option>
                             </select>
                         </td>
                         <td>
-                            스파 <input id="spa" type="checkbox">
+                            <input id="spa" type="checkbox">
                         </td>
-                        <!-- <td>
-	                <select name="pet" id="Pet_Room" onchange="handleOnChange(this)">
-	                    <option>Used</option>
-	                    <option>Not Used</option>
-	                </select>
-	            </td> -->
                         <td>
-                            Not Used <input id="petuse" type="checkbox">
+                            <input type="button" class="petUsed" value="X" >
                         </td>
                     </tr>
                 </c:forEach>
@@ -365,52 +397,52 @@
 
             <div class="paymentinfo1">
             <table id="pet_table1" align="center" width="79%">
-                <tr align="center" bgcolor="bisque" height="40px">
-                    <td colspan="10" align="center" bgcolor="bisque"><b>결제창</b></td>
+                <tr align="center" bgcolor="white" height="40px">
+                    <td colspan="10" align="center" bgcolor="#e5e4e2"><b>Reservation Detail</b></td>
                 </tr>
-                <tr align="center" bgcolor="bisque">
-                    <td rowspan="6" align="center" bgcolor="bisque"><b>Room</b></td>
-                    <td rowspan="2" align="center" bgcolor="bisque">Deluxe(소형견)</td>
-                    <td rowspan="2" align="center" bgcolor="bisque"></td>
-                    <td rowspan="6" align="center" bgcolor="bisque"><b>Beauty</b></td>
-                    <td rowspan="3" align="center" bgcolor="bisque">Clipping</td>
+                <tr align="center" bgcolor="white">
+                    <td rowspan="6" align="center" bgcolor="white"><b>Room</b></td>
+                    <td rowspan="2" align="center" bgcolor="white">Deluxe(소형견)</td>
+                    <td rowspan="2" align="center" bgcolor="white"></td>
+                    <td rowspan="6" align="center" bgcolor="white"><b>Beauty</b></td>
+                    <td rowspan="3" align="center" bgcolor="white">Clipping</td>
                     <td>소형견</td>
                     <td></td>
-                    <td rowspan="6" align="center" bgcolor="bisque"><b>Spa</b></td>
-                    <td rowspan="2" align="center" bgcolor="bisque">소형견</td>
-                    <td rowspan="2" align="center" bgcolor="bisque"></td>
+                    <td rowspan="6" align="center" bgcolor="white"><b>Spa</b></td>
+                    <td rowspan="2" align="center" bgcolor="white">소형견</td>
+                    <td rowspan="2" align="center" bgcolor="white"></td>
                 </tr>
-                <tr align="center" bgcolor="bisque">
+                <tr align="center" bgcolor="white">
                     <td>중형견</td>
                     <td></td>
                 </tr>
-                <tr align="center" bgcolor="bisque">
-                    <td rowspan="2" align="center" bgcolor="bisque">Superior(중형견)</td>
-                    <td rowspan="2" align="center" bgcolor="bisque"></td>
+                <tr align="center" bgcolor="white">
+                    <td rowspan="2" align="center" bgcolor="white">Superior(중형견)</td>
+                    <td rowspan="2" align="center" bgcolor="white"></td>
                     <td>대형견</td>
                     <td></td>
-                    <td rowspan="2" align="center" bgcolor="bisque">중형견</td>
-                    <td rowspan="2" align="center" bgcolor="bisque"></td>
+                    <td rowspan="2" align="center" bgcolor="white">중형견</td>
+                    <td rowspan="2" align="center" bgcolor="white"></td>
                 </tr>
-                <tr align="center" bgcolor="bisque">
-                    <td rowspan="3" align="center" bgcolor="bisque">Scissoring</td>
+                <tr align="center" bgcolor="white">
+                    <td rowspan="3" align="center" bgcolor="white">Scissoring</td>
                     <td>소형견</td>
                     <td></td>
                 </tr>
-                <tr align="center" bgcolor="bisque">
-                    <td rowspan="2" align="center" bgcolor="bisque">Suite(대형견)</td>
-                    <td rowspan="2" align="center" bgcolor="bisque"></td>
+                <tr align="center" bgcolor="white">
+                    <td rowspan="2" align="center" bgcolor="white">Suite(대형견)</td>
+                    <td rowspan="2" align="center" bgcolor="white"></td>
                     <td>중형견</td>
                     <td></td>
-                    <td rowspan="2" align="center" bgcolor="bisque">대형견</td>
-                    <td rowspan="2" align="center" bgcolor="bisque"></td>
+                    <td rowspan="2" align="center" bgcolor="white">대형견</td>
+                    <td rowspan="2" align="center" bgcolor="white"></td>
                 </tr>
-                <tr align="center" bgcolor="bisque">
+                <tr align="center" bgcolor="white">
                     <td>대형견</td>
                     <td></td>
                 </tr>
-                <tr align="center" bgcolor="bisque" height="40px">
-                    <td colspan="10" align="center" bgcolor="bisque"><b>최종금액창</b></td>
+                <tr align="center" bgcolor="white" height="40px">
+                    <td colspan="10" bgcolor="#e5e4e2"><b class="totalamount">The Total Amount</b></td>
                 </tr>
             </table>
         </div>
@@ -420,50 +452,53 @@
             </div>
             
             <div class="paymentinfo2">
-                <table id="pet_table2" align="center" width="79%">
-                    <tr align="center" bgcolor="bisque">
-                        <td rowspan="6" align="center" bgcolor="bisque"><b>Room</b></td>
-                        <td rowspan="2" align="center" bgcolor="bisque">Deluxe(소형견)</td>
-                        <td rowspan="2" align="center" bgcolor="bisque">100,000 원</td>
-                        <td rowspan="6" align="center" bgcolor="bisque"><b>Beauty</b></td>
-                        <td rowspan="3" align="center" bgcolor="bisque">Clipping</td>
+                <table id="pet_table2" align="center">
+                    <tr align="center" bgcolor="white" height="40px">
+                        <td colspan="10" align="center" bgcolor="#e5e4e2"><b>Payment Detail</b></td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td rowspan="6" align="center" bgcolor="white"><b>Room</b></td>
+                        <td rowspan="2" align="center" bgcolor="white">Deluxe(소형견)</td>
+                        <td rowspan="2" align="center" bgcolor="white">100,000 원</td>
+                        <td rowspan="6" align="center" bgcolor="white"><b>Beauty</b></td>
+                        <td rowspan="3" align="center" bgcolor="white">Clipping</td>
                         <td>소형견</td>
                         <td>35,000 원</td>
-                        <td rowspan="6" align="center" bgcolor="bisque"><b>Spa</b></td>
-                        <td rowspan="2" align="center" bgcolor="bisque">소형견</td>
-                        <td rowspan="2" align="center" bgcolor="bisque">50,000 원</td>
+                        <td rowspan="6" align="center" bgcolor="white"><b>Spa</b></td>
+                        <td rowspan="2" align="center" bgcolor="white">소형견</td>
+                        <td rowspan="2" align="center" bgcolor="white">50,000 원</td>
 
                     </tr>
-                    <tr align="center" bgcolor="bisque">
+                    <tr align="center" bgcolor="white">
 
                         <td>중형견</td>
                         <td>45,000 원</td>
                     </tr>
-                    <tr align="center" bgcolor="bisque">
+                    <tr align="center" bgcolor="white">
 
-                        <td rowspan="2" align="center" bgcolor="bisque">Superior(중형견)</td>
-                        <td rowspan="2" align="center" bgcolor="bisque">150,000 원</td>
+                        <td rowspan="2" align="center" bgcolor="white">Superior(중형견)</td>
+                        <td rowspan="2" align="center" bgcolor="white">150,000 원</td>
                         <td>대형견</td>
                         <td>60,000 원</td>
-                        <td rowspan="2" align="center" bgcolor="bisque">중형견</td>
-                        <td rowspan="2" align="center" bgcolor="bisque">80,000 원</td>
+                        <td rowspan="2" align="center" bgcolor="white">중형견</td>
+                        <td rowspan="2" align="center" bgcolor="white">80,000 원</td>
                     </tr>
-                    <tr align="center" bgcolor="bisque">
+                    <tr align="center" bgcolor="white">
 
-                        <td rowspan="3" align="center" bgcolor="bisque">Scissoring</td>
+                        <td rowspan="3" align="center" bgcolor="white">Scissoring</td>
                         <td>소형견</td>
                         <td>70,000 원</td>
                     </tr>
-                    <tr align="center" bgcolor="bisque">
+                    <tr align="center" bgcolor="white">
 
-                        <td rowspan="2" align="center" bgcolor="bisque">Suite(대형견)</td>
-                        <td rowspan="2" align="center" bgcolor="bisque">200,000 원</td>
+                        <td rowspan="2" align="center" bgcolor="white">Suite(대형견)</td>
+                        <td rowspan="2" align="center" bgcolor="white">200,000 원</td>
                         <td>중형견</td>
                         <td>80,000 원</td>
-                        <td rowspan="2" align="center" bgcolor="bisque">대형견</td>
-                        <td rowspan="2" align="center" bgcolor="bisque">120,000 원</td>
+                        <td rowspan="2" align="center" bgcolor="white">대형견</td>
+                        <td rowspan="2" align="center" bgcolor="white">120,000 원</td>
                     </tr>
-                    <tr align="center" bgcolor="bisque">
+                    <tr align="center" bgcolor="white">
 
                         <td>대형견</td>
                         <td>100,000 원</td>

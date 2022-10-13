@@ -39,7 +39,7 @@
         <nav>
             <div class="r_menu menu_wrap">
                 <a href="${contextPath}/reservation.do" class="menu">호텔예약</a>
-                <a href="#" class="menu">호텔소개</a>
+                <a href="${contextPath}/introduce.do" class="menu">호텔소개</a>
                 <a href="${contextPath}/reviewBoard.do" class="menu">리뷰게시판</a>
             </div>
             <div class="l_menu menu_wrap">

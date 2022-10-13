@@ -37,7 +37,7 @@
       #under {
 	margin-top: 10px;
 	border: 2px solid gray;
-    width: 6%;
+	width: 120px;
     margin-left: 17%;
    
   }
@@ -48,7 +48,7 @@
       }   
 
   .w_contents_1 {
-    width: 350px;
+	width: 18.5%;
     margin-left: 17%;
     height: 800px;
     background-color: aquamarine;
@@ -108,7 +108,7 @@
 		 
          <div class="w_contents_2">
             
-            <button class="w_but" onclick="window.location.href='${contextPath}/maim.do'">글쓰기</button>
+        
 
         </div>
  
