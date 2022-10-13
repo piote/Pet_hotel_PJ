@@ -19,12 +19,12 @@
         <div class="log_wrap" id ="head_link">
         <c:choose>
         		<c:when test="${isLogOn==true and not empty userInfo}">
-                    <a id="mypage" href="${contextPath}/user/logout.do">마이페이지</a>
-        			<a id="logout" href="${contextPath}/user/logout.do">로그아웃</a>
+                    <a id="mypage" href="${contextPath}/logout.do">마이페이지</a>
+        			<a id="logout" href="${contextPath}/logout.do">로그아웃</a>
         		</c:when>
            <c:otherwise>
-           		<a id="login" href="${contextPath}/user/loginForm.do">로그인</a>
-        		<a id="signup" href="${contextPath}/user/userForm.do">회원가입</a>
+           		<a id="login" href="${contextPath}/loginForm.do">로그인</a>
+        		<a id="signup" href="${contextPath}/userForm.do">회원가입</a>
         	</c:otherwise>
         	</c:choose>
         	<!--  
@@ -39,7 +39,7 @@
         <nav>
             <div class="r_menu menu_wrap">
                 <a href="${contextPath}/reservation.do" class="menu">호텔예약</a>
-                <a href="#" class="menu">호텔소개</a>
+                <a href="${contextPath}/introduce.do" class="menu">호텔소개</a>
                 <a href="${contextPath}/reviewBoard.do" class="menu">리뷰게시판</a>
             </div>
             <div class="l_menu menu_wrap">

@@ -7,59 +7,42 @@
 }
 
 #wrap{
+	width: 1920px;
     margin: 0 auto;
-    width: 1920px;
-} 
-
-#wrap1{
-    position: relative;
-    left: 140px;
-<<<<<<< HEAD
-} 
+}
 
 .container{
+ 	width: 1200px;
     margin: 0 auto;
-    width: 1080px;
-=======
-    height: 70px;
-    font-size: 30px;
-} 
-
-.container{
- 	width: 1270px;
-    margin: 100px auto;
-    position: relative;
-    left: 410px;
-    
->>>>>>> e959c2e7e84e356bdfeaa897de0e2028241ad531
-   /*  border: 1px solid #333; */
+}
+.container h3{
+	text-align: center;
+	font-size:28px;
 }
 
-/* #container1{
-    position: relative;
-}  */
+.modCon{
+    width: 500px;
+    margin: 50px auto;
+}
+.modCon table{width:100%;}
+.modCon tr p{
+	margin:5px 0;
+	width: 150px;
+}
+.modCon tr input{margin:5px 0;}
+.modCon tr .txtBox{width:300px;}
+.btn{
+	background: #ddd;
+    border-radius: 3px;
+    text-align: center;
+    width: 100%;
+    height:40px;
+    margin-top: 10px;
+    border:none;    
+}
+.modCon > ul{margin-top: 30px;}
+.modCon > p{
+	margin:50px 0;
+	text-align: center;
+	}
 
-#box{
-    position: relative;
-<<<<<<< HEAD
-    left: 50px;
-}
-#box1{
-    position: relative;
-    left: 120px;
-}
-=======
-    left: 200px;
-    
-}
-#box1{
-    position: relative;
-    left: 75px;
-
-}
-#box2 {
-	position: relative;
-    left: 65px;
-}
-
->>>>>>> e959c2e7e84e356bdfeaa897de0e2028241ad531
