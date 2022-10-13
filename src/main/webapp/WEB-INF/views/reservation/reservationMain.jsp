@@ -17,10 +17,26 @@
             margine: 10%
         } */
 
-        #reservationForm {
+        #reservationForm{
             align-items: center;
         }
 
+        /* 소제목태그 */
+        #under{
+        margin-top: 10px;
+        border: 2px solid gray;
+        width: 260px;
+        margin-left: 17%;    
+        }
+        
+        .reservationtag {
+            margin-top: 241px;
+            text-align: left; font-size: 25px;
+            margin-left: 17%;           
+        }
+        /* 여기까지 */
+
+        /* 테이블 */
         #pet_table {
             margin: auto;
             text-align: center;
@@ -46,7 +62,7 @@
             width: 69%;
             table-layout: fixed;
         }
-
+        /* 여기까지 */
 
         #checkin {
             margin-left: 10%;
@@ -313,6 +329,9 @@
 
     <div id="reservationWrap">
         <form id="reservationForm" action="#">
+            <h2 class="reservationtag"> Reservation</h2>
+            <p id="under"></p>
+            <br><br>
             <div id="checkwrap">
                 <ul>
                     <li id="checkinBox" class="reservationBox">
