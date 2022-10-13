@@ -253,7 +253,7 @@
         <div class="bar"></div>
         <p class="sec_title">Introduce</p>
         <p class="sec_p">반려동물의 행복을 최우선으로 생각하는<br>저희 호텔을 소개드립니다.</p>
-        <a class="more" href="#">더보기 +</a>
+        <a class="more" href="${contextPath}/introduce.do">더보기 +</a>
     </div>
     <div class="intro_con_wrap">
         <div class="con">
@@ -291,7 +291,7 @@
         <div class="bar"></div>
         <p class="sec_title">Facilities</p>
         <p class="sec_p">반려동물을 위한 특별하고 깔끔한 룸,<br>주요 시설들을 소개드립니다.</p>
-        <a class="more" href="#">더보기 +</a>
+        <a class="more" href="${contextPath}/facilities.do">더보기 +</a>
     </div>
 </section>
 

@@ -50,6 +50,18 @@
 	      <put-attribute name="title" value="리뷰" />
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail_3.jsp" />
 	</definition>		  		
+	
+	   	<!-- 호텔 소개  -->
+   	<definition name="introduce" extends="baseLayout">
+	      <put-attribute name="title" value="호텔소개" />
+	      <put-attribute name="body" value="/WEB-INF/views/introduce/introduce.jsp" />
+	</definition>
+	
+   	<!-- 시설 소개 -->
+   	<definition name="facilities" extends="baseLayout">
+	      <put-attribute name="title" value="시설소개" />
+	      <put-attribute name="body" value="/WEB-INF/views/facilities/facilities.jsp" />
+	</definition>
    
 	
 </tiles-definitions>
