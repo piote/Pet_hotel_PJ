@@ -30,7 +30,7 @@
         }
         
         .reservationtag {
-            margin-top: 241px;
+            margin-top: 291px;
             text-align: left; font-size: 25px;
             margin-left: 17%;           
         }
