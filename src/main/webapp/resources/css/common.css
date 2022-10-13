@@ -14,6 +14,13 @@
 #wrap1{
     position: relative;
     left: 140px;
+<<<<<<< HEAD
+} 
+
+.container{
+    margin: 0 auto;
+    width: 1080px;
+=======
     height: 70px;
     font-size: 30px;
 } 
@@ -23,7 +30,8 @@
     margin: 100px auto;
     position: relative;
     left: 410px;
-
+    
+>>>>>>> e959c2e7e84e356bdfeaa897de0e2028241ad531
    /*  border: 1px solid #333; */
 }
 
@@ -33,6 +41,14 @@
 
 #box{
     position: relative;
+<<<<<<< HEAD
+    left: 50px;
+}
+#box1{
+    position: relative;
+    left: 120px;
+}
+=======
     left: 200px;
     
 }
@@ -45,3 +61,5 @@
 	position: relative;
     left: 65px;
 }
+
+>>>>>>> e959c2e7e84e356bdfeaa897de0e2028241ad531
