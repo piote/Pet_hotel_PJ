@@ -21,12 +21,11 @@
  <head>
    <style>
    .all {
-       position: relative;
+       
+       margin-top: 250px;
        height: 1200px;
    }
-   
-   
-   
+
  .w_review {
 	  margin-top: -40px;
 	  text-align: left; font-size: 25px;
@@ -37,7 +36,7 @@
       #under {
 	margin-top: 10px;
 	border: 2px solid gray;
-	width: 120px;
+	width: 215px;
     margin-left: 17%;
    
   }
@@ -59,7 +58,7 @@
 
   .w_contents_2 {
     width:47.5%;
-    
+    font-size: 17px;
     height: 800px;
     background-color: burlywood;
     position: absolute;
@@ -82,6 +81,31 @@
     right: 20px;
     margin-top: 75%;
   }
+  
+  	.w_review {
+	    width: 90%;
+	   margin-bottom: 15px;
+	    
+	    
+	  }
+
+	  .w_tr {
+	            width: 100%;   
+	        } 
+
+	  .w_tr>td {
+	    border: 1x solid rgba(107, 107, 107, 0.3);
+	    font-size: 17px;
+	  }
+
+	  .under_p {
+	    border: 1px solid rgba(107, 107, 107, 0.3);
+	    width: 90%;
+	  }
+
+	  .b_div {
+	    border: 1px solid black;
+	  }
   </style> 
  
  <meta charset="UTF-8">
@@ -96,7 +120,7 @@
 		
 	<br><br><br><br>
 	
-	<h2 class="w_review"><a class="w_a" href="${contextPath}/reviewBoard.do" >Review</a></h2>
+	<h2 class="w_review"><a class="w_a" href="${contextPath}/reviewBoard.do" >소형견 Review</a></h2>
 		<p id="under"></p>
 		<br><br><br>
 	
@@ -106,14 +130,73 @@
 
 		 </div>
 		 
-         <div class="w_contents_2">
-            
-        
+	      <div class="w_contents_2">
+          <br>
 
-        </div>
- 
-		<br><br><br><br><br>
-		
+          <table align="right" class="w_review">
+            <tr class="w_tr">
+                <td width="15%">별점</td>
+                <td width="50%" rowspan="2">컨텐츠</td>
+                <td width="20%" rowspan="2">이미지</td>
+                <td width="15%" >작성일</td>
+            </tr>
+            <tr class="w_tr">
+                <td>유저ID</td>
+                <td>좋아요</td>
+            </tr>    
+           </table>
+
+          <table align="right" class="w_review">
+            <tr class="w_tr">
+                <td width="15%">별점</td>
+                <td width="50%" rowspan="2">컨텐츠</td>
+                <td width="20%" rowspan="2">이미지</td>
+                <td width="15%" >작성일</td>
+            </tr>
+            <tr class="w_tr">
+                <td>유저ID</td>
+                <td>좋아요</td>
+            </tr>    
+           </table>
+           
+          <table align="right" class="w_review">
+            <tr class="w_tr">
+                <td width="15%">별점</td>
+                <td width="50%" rowspan="2">컨텐츠</td>
+                <td width="20%" rowspan="2">이미지</td>
+                <td width="15%" >작성일</td>
+            </tr>
+            <tr class="w_tr">
+                <td>유저ID</td>
+                <td>좋아요</td>
+            </tr>    
+          </table>	
+          
+        <table align="right" class="w_review">
+          <tr class="w_tr">
+              <td width="15%">별점</td>
+              <td width="50%" rowspan="2">컨텐츠</td>
+              <td width="20%" rowspan="2">이미지</td>
+              <td width="15%" >작성일</td>
+          </tr>
+          <tr class="w_tr">
+              <td>유저ID</td>
+              <td>좋아요</td>
+          </tr>    
+        </table>
+          <table align="right" class="w_review">
+            <tr class="w_tr">
+                <td width="15%">별점</td>
+                <td width="50%" rowspan="2">컨텐츠</td>
+                <td width="20%" rowspan="2">이미지</td>
+                <td width="15%" >작성일</td>
+            </tr>
+            <tr class="w_tr">
+                <td>유저ID</td>
+                <td>좋아요</td>
+            </tr>    
+           </table>
+
 </div>
 
 
