@@ -137,18 +137,18 @@
 
         <form name="articleForm" method="post" action="#">
 
-            <li class="atc_tb">
-                <ul class="user_name">
+            <ul class="atc_tb">
+                <li class="user_name">
                     <span>${user.name }</span>님!  무엇을 도와드릴까요?
-                </ul>
-                <ul class="atc_title">
+                </li>
+                <li class="atc_title">
                     <p>글제목</p>
                     <input type="text" name="title" spellcheck="false" maxlength="500" placeholder="제목을 입력해주세요." />
-                </ul>
-                <ul class="atc_content">
+                </li>
+                <li class="atc_content">
                     <textarea name="content" spellcheck="false" maxlength="4000" placeholder="내용을 입력해주세요."></textarea>
-                </ul>
-            </li>
+                </li>
+            </ul>
             <div class="bt_wrap">
                 <input type="submit" value="문의하기" />
                 <input type=button value="목록보기"onClick="backToList(this.form)" />
