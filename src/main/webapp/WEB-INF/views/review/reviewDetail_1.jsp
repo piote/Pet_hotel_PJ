@@ -6,10 +6,10 @@
  -->
 
  <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
- <c:set  var="articlesList"  value="${articlesMap.articlesList}" />
- <c:set  var="totArticles"  value="${articlesMap.totArticles}" />
- <c:set  var="section"  value="${articlesMap.section}" />
- <c:set  var="pageNum"  value="${articlesMap.pageNum}" />
+ <c:set  var="reviewList"  value="${reviewMap.reviewList}" />
+ <c:set  var="totArticles"  value="${reviewMap.totArticles}" />
+ <c:set  var="section"  value="${reviewMap.section}" />
+ <c:set  var="pageNum"  value="${reviewMap.pageNum}" />
  
  <!--
  <%
@@ -91,7 +91,7 @@
         } 
 
   .w_tr>.w_td {
-    border: 0px solid rgba(107, 107, 107, 0.3) !important;
+    border: 1px solid rgba(107, 107, 107, 0.3) !important;
     font-size: 17px !important ;
     
   }
@@ -105,7 +105,7 @@
  
  <title>리뷰</title>
  </head>
- 
+
  <body>
  
 
@@ -142,20 +142,20 @@
 
         <table align="right" class="w_review">
         <c:choose>
-        <c:when test="${articlesList !=null }" >
-          <c:forEach  var="article" items="${articlesList }" varStatus="articleNum" >
+        <c:when test="${reviewList !=null }" >
+          <c:forEach  var="review" items="${reviewList }" varStatus="reviewNum" >
        
        
        
         <tr class="w_tr">
-          <td class="w_td" width="15%">${article.star}</td>
-          <td class="w_td" width="50%" rowspan="2">${article.title}</td>
-          <td class="w_td" width="20%" rowspan="2">${article.image}</td>
-          <td class="w_td" width="15%" >${article.writeDate}</td>
+          <td class="w_td" width="15%">${review.star}</td>
+          <td class="w_td" width="50%" rowspan="2">${review.title}</td>
+          <td class="w_td" width="20%" rowspan="2">${review.image}</td>
+          <td class="w_td" width="15%" >${review.date}</td>
       </tr>
       <tr class="w_tr">
-          <td class="w_td">${article.id}</td>
-          <td class="w_td">${article.date}</td>
+          <td class="w_td">${review.id}</td>	
+          <td class="w_td">${review.con}</td>
       </tr>    
     </c:forEach>
   </c:when>
