@@ -23,7 +23,7 @@ function result(){
 <body>
 	<H3>회원 로그인 창</H3>
 	<DIV id="detail_table">
-	<form action="${contextPath}/login.do" method="post">
+	<form action="${contextPath}/user/login.do" method="post">
 		<TABLE>
 			<TBODY>
 				<TR class="dot_line">

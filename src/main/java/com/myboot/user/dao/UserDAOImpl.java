@@ -15,20 +15,20 @@ public class UserDAOImpl  implements UserDAO{
 	@Autowired
 	private SqlSession sqlSession;	
 	
-	
+	@Override
 	public UserVO login(Map loginMap) throws DataAccessException{
 		UserVO user=(UserVO)sqlSession.selectOne("mapper.user.login",loginMap);
 	   return user;
 	}
-	
-
-	public String selectOverlappedID(String id) throws DataAccessException {
-		String result =  sqlSession.selectOne("mapper.user.selectOverlappedID",id);
-		return result;
-	}
-
-
-	
+//	
+//	@Override
+//	public String selectOverlappedID(String id) throws DataAccessException {
+//		String result =  sqlSession.selectOne("mapper.user.selectOverlappedID",id);
+//		return result;
+//	}
+//
+//
+	@Override
 	public List selectAllUserList() throws DataAccessException {
 		// TODO Auto-generated method stub
 		return null;

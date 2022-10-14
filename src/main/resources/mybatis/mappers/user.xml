@@ -6,7 +6,7 @@
 <mapper namespace="mapper.user">
 
    <resultMap id="userResult" type="UserVO">
-      <result property="user_id" column="USER_id" />
+      <result property="user_id" column="user_id" />
       <result property="user_pwd" column="user_pw" />
       <result property="user_name" column="user_name" />
       <result property="user_email" column="user_email" />

@@ -13,7 +13,7 @@ import com.myboot.user.vo.UserVO;
 
 public interface UserDAO {
 	public UserVO login(Map loginMap) throws DataAccessException;
-	public String selectOverlappedID(String id) throws DataAccessException;
+//	public String selectOverlappedID(String id) throws DataAccessException;
 	public List selectAllUserList() throws DataAccessException;
 	
 }

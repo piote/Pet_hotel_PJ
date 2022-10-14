@@ -18,16 +18,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myboot.common.base.BaseController;
 import com.myboot.user.service.UserService;
 import com.myboot.user.vo.UserVO;
 
 @Controller("userController")
-public class UserControllerImpl implements UserController{
+@RequestMapping(value="/user")
+public class UserControllerImpl extends BaseController implements UserController{
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private UserVO userVO;
-		
+	
+	@Override
+	@RequestMapping(value="/login.do" ,method = RequestMethod.POST)
+	public ModelAndView login(@RequestParam Map<String, String>loginMap, HttpServletRequest request, HttpServletResponse response)throws Exception{
+		ModelAndView mav = new ModelAndView();
+		 userVO=userService.login(loginMap);
+		if(userVO!= null && userVO.getId()!=null){
+			HttpSession session=request.getSession();
+			session=request.getSession();
+			session.setAttribute("isLogOn", true);
+			session.setAttribute("userInfo",userVO);
+			mav.setViewName("redirect:/main.do");
+	}else{
+		String message="다시 입력해주십시오";
+		mav.addObject("message", message);
+		mav.setViewName("/user/loginForm");
+	}
+	return mav;
+}
 	@ResponseBody
 	@RequestMapping("/user.do") 
 	public String userMain(Model model){
@@ -54,45 +74,27 @@ public class UserControllerImpl implements UserController{
 	public String loginnMain(Model model){
 	    return "loginForm"; 
 	  }
-//	로그인 기능 구현
-	@RequestMapping(value="/login.do",method=RequestMethod.POST)
-	public ModelAndView login(@RequestParam Map<String,String> loginMap, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		ModelAndView mav = new ModelAndView();
-		userVO = userService.login(loginMap);
-		if(userVO!= null&& userVO.getId()!=null) {
-			HttpSession session =request.getSession();
-			session=request.getSession();
-			session.setAttribute("isLogOn", true);
-			session.setAttribute("userInfo",userVO);
-			mav.setViewName("redirect:/main.do");
-			
-		}else {
-			String message="아이디나 비밀번호가 틀립니다. 다시 로그인 해주세요";
-			 mav.addObject("message",message);
-			 mav.setViewName("redirect:/user/loginForm");
-			 
-		}
-		return mav;
-	}
+
+	
 // 로그아웃 기능 구현
-	@RequestMapping(value="/logout.do" ,method = RequestMethod.GET)
-	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		HttpSession session=request.getSession();
-		session.setAttribute("isLogOn", false);
-		session.removeAttribute("userInfo");
-		mav.setViewName("redirect:/main/main.do");
-		return mav;
-	}
+//	@RequestMapping(value="/logout.do" ,method = RequestMethod.GET)
+//	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		ModelAndView mav = new ModelAndView();
+//		HttpSession session=request.getSession();
+//		session.setAttribute("isLogOn", false);
+//		session.removeAttribute("userInfo");
+//		mav.setViewName("redirect:/main/main.do");
+//		return mav;
+//	}
 // id 중복검사 기능 구현
-	@Override
-	@RequestMapping(value="/overlapped.do" ,method = RequestMethod.POST)
-	public ResponseEntity overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
-		ResponseEntity resEntity = null;
-		String result = userService.overlapped(id);
-		resEntity =new ResponseEntity(result, HttpStatus.OK);
-		return resEntity;
-	}
+//	@Override
+//	@RequestMapping(value="/overlapped.do" ,method = RequestMethod.POST)
+//	public ResponseEntity overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
+//		ResponseEntity resEntity = null;
+//		String result = userService.overlapped(id);
+//		resEntity =new ResponseEntity(result, HttpStatus.OK);
+//		return resEntity;
+//	}
 	
 	@Override
 	@RequestMapping(value="/pw_change.do" ,method = RequestMethod.GET)
