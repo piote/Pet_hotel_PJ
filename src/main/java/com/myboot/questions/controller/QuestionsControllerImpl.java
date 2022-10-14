@@ -31,6 +31,7 @@ public class QuestionsControllerImpl implements QuestionsController{
 	@RequestMapping(value= "/questionsList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView questionsList(@RequestParam(value ="section", required = false) String _section, 
 									  @RequestParam(value ="pageNum", required = false) String _pageNum,
+									  @RequestParam(value ="keyword", required = false) String keyword,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		int section = Integer.parseInt(((_section==null)? "1":_section) );
@@ -40,7 +41,7 @@ public class QuestionsControllerImpl implements QuestionsController{
 		pagingMap.put("section", section);
 		pagingMap.put("pageNum", pageNum);
 		
-		Map questionsMap=questionsService.listQuestions_page(pagingMap);
+		Map questionsMap=questionsService.listQuestions_page(pagingMap,keyword);
 		
 		questionsMap.put("section", section);
 		questionsMap.put("pageNum", pageNum);

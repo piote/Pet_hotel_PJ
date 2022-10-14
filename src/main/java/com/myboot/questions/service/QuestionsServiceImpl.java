@@ -25,10 +25,20 @@ public class QuestionsServiceImpl implements QuestionsService {
 	}
 	
 	@Override
-	public Map listQuestions_page(Map<String, Integer> pagingMap) throws Exception {
+	public Map listQuestions_page(Map pagingMap,String keyword) throws Exception {
 		Map articlesMap = new HashMap();
-		List<QuestionsVO> questionsList = questionsDAO.selectAllQuestionsList_page(pagingMap);
-		int totArticles = questionsDAO.selectTotQuestions();
+		List<QuestionsVO> questionsList = null;
+		int totArticles=0;
+		if(keyword==null) {
+			questionsList = questionsDAO.selectAllQuestionsList_page(pagingMap);
+			totArticles = questionsDAO.selectTotQuestions();
+		}else {
+			pagingMap.put("keyword", keyword);
+			questionsList = questionsDAO.searchQuestionsList(pagingMap);
+			articlesMap.put("keyword", keyword);
+			//totArticles = questionsDAO.selectTotQuestions();
+		}
+		
 		articlesMap.put("questionsList", questionsList);
 		articlesMap.put("totArticles", totArticles);
 		return articlesMap;
