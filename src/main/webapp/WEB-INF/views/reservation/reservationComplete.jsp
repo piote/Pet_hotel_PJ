@@ -69,6 +69,7 @@
             display: block;
             position: relative;
             text-align: center;
+            bottom: 30px
         }
 
         /* 여기까지 */
@@ -135,13 +136,13 @@
                     </tr>
                     <br><br><br>
                     <tr align="center">
-                        <td align="center"><b>☆★☆★☆★</b>님의 예약이 완료되었습니다</td>
+                        <td align="center"><b>☆★☆★☆★</b>님의 예약이 완료되었습니다.</td>
                     </tr>
                     <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
                     <tr align="center">
                         <td align="center">자세한 내용은 ANITEL 고객센터로 문의해주시기 바랍니다.</td>
                     </tr>
-                    <tr></tr><tr></tr><tr></tr><tr></tr>
+                    <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
                     <tr align="center">
                         <td align="center">문의전화 : 000 - 0000 - 0000</td>
                     </tr>

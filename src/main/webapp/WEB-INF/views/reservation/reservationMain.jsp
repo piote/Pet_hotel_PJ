@@ -603,7 +603,7 @@
                     </tr>
                     <tr align="center" bgcolor="white" height="40px">
                         <td colspan="10" bgcolor="#e5e4e2">
-                            <img src="/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
+                            <img src="${contextPath}/resources/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
                             <b class="membership">Bronze Membership : Discount 2%</b>
                             <b class="totalpayment">The Total Payment</b>
                             <b class="totalcost"> : 1,000,000 원</b>
