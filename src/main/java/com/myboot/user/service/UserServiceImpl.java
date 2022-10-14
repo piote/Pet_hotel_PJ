@@ -31,5 +31,10 @@ public class UserServiceImpl implements UserService {
 //	public String overlapped(String id) throws Exception{
 //		return userDAO.selectOverlappedID(id);
 //	}
+	
+	@Override
+	public void addUser(UserVO userVO) throws Exception{
+		userDAO.insertNewUser(userVO);
+	}
 
 }

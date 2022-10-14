@@ -27,7 +27,11 @@ public class UserDAOImpl  implements UserDAO{
 //		return result;
 //	}
 //
-//
+//회원가입
+	@Override
+	public void insertNewUser(UserVO userVO) throws DataAccessException{
+		sqlSession.insert("mapper.user.insertNewUser",userVO);
+	}
 	@Override
 	public List selectAllUserList() throws DataAccessException {
 		// TODO Auto-generated method stub

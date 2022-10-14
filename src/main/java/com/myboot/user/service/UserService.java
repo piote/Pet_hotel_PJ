@@ -9,4 +9,5 @@ public interface UserService {
 	public List listUser() throws Exception;
 	public UserVO login(Map  loginMap) throws Exception;
 //	public String overlapped(String id) throws Exception;
+	public void addUser(UserVO userVO) throws Exception;
 }
