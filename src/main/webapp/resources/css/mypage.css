@@ -125,27 +125,29 @@ p {
     height: 15px;
 }
 .mypage_reserve{
-   width: 1050px;
-   height: 200px;
-   border-top: 1px solid black;
-   margin-top: 40px;
-   margin: 0 auto;
+    width: 1050px;
+    height: 50px;
+    line-height: 30px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+    margin: 0 auto;
+    background-color: rgb(245, 245, 245); 
 }
-.mypage_reserve tr:nth-child(2) td {
-    border-top: 1px solid rgba(200, 200, 200, 0.5);
+.reserve-center {
+	width: 1050px;
+	height: 40px;
+}
+.reserve-list td {
     border-bottom: 1px solid rgba(200, 200, 200, 0.5);
     text-align: center;
     width: 1050px;
-    height: 100%;
+    height: 30px;
     position: relative;
     top: 10px;
 }
 .reserve-center td{
-   padding: 0 70px;
-   margin-right: 50px;
    text-align: center;
-   display: inline-block;
-   margin-top: 10px;
+
 }
 #review{
 	width: 1050px;
@@ -153,6 +155,7 @@ p {
    	margin: 0 auto;
     position: relative;
     top: 40px;
+    margin-top: 150px;
 }
 #review a {
     position: absolute;
@@ -166,24 +169,26 @@ p {
 }
 .mypage_review{
     width: 1050px;
-    height: 200px;
+    height: 50px;
+    line-height: 30px;
     border-top: 1px solid black;
+    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
     margin: 0 auto;
+    background-color: rgb(245, 245, 245); 
 }
-.mypage_review tr:nth-child(2) td {
-    border-top: 1px solid rgba(200, 200, 200, 0.5);
+.review-center {
+	width: 1050px;
+	height: 40px;
+}
+.review-list td {
     border-bottom: 1px solid rgba(200, 200, 200, 0.5);
     text-align: center;
-    width: 1100px;
-    height: 100%;
+    width: 1050px;
+    height: 30px;
     position: relative;
     top: 10px;
 }
 .review-center td{
-   padding: 0 70px;
-   margin-right: 150px;
    text-align: center;
-   display: inline-block;
-   margin-top: 10px;
 }
 

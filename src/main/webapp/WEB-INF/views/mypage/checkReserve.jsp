@@ -66,16 +66,6 @@
 			$("#endDate").datepicker(); 
 			$("#startDate").datepicker('setDate', 'today');
 			$("#endDate").datepicker('setDate', '+1D');
-			
-		    $.datepicker.setDefaults($.datepicker.regional['ko']);         //default셋팅
-		    $("#txt_prodStart" ).datepicker();
-		    $('img.ui-datepicker-trigger').css({'cursor':'pointer', 'margin-left':'5px'});  //아이콘(icon) 위치
-		    $('.ui-datepicker ').css({ "margin-left" : "141px", "margin-top": "-220px"});  //달력(calendar) 위치
-		    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
-		    $('img.ui-datepicker-trigger').css({'display': 'inline-block'});
-// 		    $('img.ui-datepicker-trigger').css({'position': 'relative'});
-// 		    $('img.ui-datepicker-trigger').css({'left': '500px'});
-		    
 		});
 			
 	$(document).ready(function () {
@@ -138,8 +128,6 @@
     	    formObj.submit();	
     	}
     }
-	
-	
 	</script>
 </head>
 <body>
@@ -171,48 +159,48 @@
 			 <div class="detail_reserve">
 				<table>
 				   <tr class="detail-center">
-					  <td>Date</td>
-					  <td>Name</td>
-					  <td>PetName</td>
-					  <td>Phone Number</td>
-					  <td>Status</td>
-					  <td>Cancel</td>
+					  <td width="10%">Date</td>
+					  <td width="20%">Name</td>
+					  <td width="20%">PetName</td>
+					  <td width="20%">Phone Number</td>
+					  <td width="20%">Status</td>
+					  <td width="10%">Cancel</td>
 				  </tr>
 	            <c:choose>
 	            	<c:when test="${empty myReserveList }">
-		               <tr>
-		                  <td colspan=4>
+		               <tr class="detail-list">
+		                  <td colspan=6>
 		                  	<strong>예약하신 내역이 없습니다.</strong>
 		                  </td>
 		               </tr>
 					</c:when>
 					<c:when test="${not empty myReserveList }">
-						<c:forEach var="i" items="${myReserveList }">
-							<tr>
-								<td>${i.reservation_st }</td>
-								<td>${i.reservation_name }</td>
-								<td>${i.pet_name }</td>
-								<td>${i.reservation_tel }</td>
+						<c:forEach var="reserves" items="${myReserveList }">
+							<tr class="detail-list">
+								<td>${reserves.reservation_st }</td>
+								<td>${reserves.reservation_name }</td>
+								<td>${reserves.pet_name }</td>
+								<td>${reserves.reservation_tel }</td>
 								<td>
 									<c:choose>
-										<c:when test="${i.reservation_state == 'N' }">
+										<c:when test="${reserves.reservation_state == 'N' }">
 											이용 전
 										</c:when>
-										<c:when test="${i.reservation_state == 'Y' }">
+										<c:when test="${reserves.reservation_state == 'Y' }">
 											이용 완료
 										</c:when>
-										<c:when test="${i.reservation_state == 'C' }">
+										<c:when test="${reserves.reservation_state == 'C' }">
 											예약 취소
 										</c:when>
 									</c:choose>
 								</td>
 								<td>
 									<c:choose>
-										<c:when test="${i.reservation_state == 'reservation_prepared'}">
-											<input type="image" src="${contextPath}/resources/img/close.png" onClick="fn_cancel_reserve('${i.reservation_num}')" value="예약취소"  />
+										<c:when test="${reserves.reservation_state == 'reservation_prepared'}">
+											<input type="image" src="${contextPath}/resources/img/close.png" onClick="fn_cancel_reserve('${reserves.reservation_num}')" value="예약취소"  />
 										</c:when>
 										<c:otherwise>
-											<input type="image" src="${contextPath}/resources/img/close.png" onClick="fn_cancel_reserve('${i.reservation_num}')" value="예약취소" disabled />
+											<input type="image" src="${contextPath}/resources/img/close.png" onClick="fn_cancel_reserve('${reserves.reservation_num}')" value="예약취소" disabled />
 										</c:otherwise>
 									</c:choose>
 							    </td>	
