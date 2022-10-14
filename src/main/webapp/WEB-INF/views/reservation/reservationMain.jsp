@@ -292,196 +292,12 @@
         }
     </style>
 
-    <link rel="stylesheet" href="./css/calendar.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" src="./js/reservationCal.js"></script>
-    <!-- <script type="text/javascript" src="./js/reservation.js"></script> -->
-    <script>
-        //예약시 임시 펫 번호.
-        var petTableNum = 0;
-        //존재하는 테이블 갯수
-        var totalTableNum = 0;
-
-        var petmap = new Map();
-
-        var servicemap = new Map();
-
-        function handleOnChange(e) {
-            const value = e.value;
-        }
-
-        function addRow() {
-
-            // table element 찾기
-            var table = document.getElementById('pet_table');
-
-            // 새 행(Row) 추가 (테이블 중간에)
-            var newRow = table.insertRow();
-
-            //row에 id 추가
-            newRow.id = 'tbnum' + petTableNum;
-
-            // 새 행(Row)에 Cell 추가
-            var Cell1 = newRow.insertCell();
-            var Cell2 = newRow.insertCell();
-            var Cell3 = newRow.insertCell();
-            var Cell4 = newRow.insertCell();
-            var Cell5 = newRow.insertCell();
-            var Cell6 = newRow.insertCell();
-
-            // Cell에 텍스트 추가
-
-            Cell1.innerHTML = '<input name="petname" class="pet_status" id="Pet_Name' + petTableNum + '" type="textbox" style="text-align:center; width:80%;">';
-            Cell2.innerHTML = '<select name="petsex" class="pet_status" id="Pet_Sex' + petTableNum + '" onchange="handleOnChange(this)"><option>male</option><option>female</option></select>';
-            Cell3.innerHTML = '<select name="petroom" class="pet_status" id="Pet_Room' + petTableNum + '" onchange="handleOnChange(this)"><option>Deluxe(소형견)</option><option>Superior(중형견)</option><option>Suite(대형견)</option></select>';
-            Cell4.innerHTML = '<select name="beauty" class="pet_status" id="pet_Beauty' + petTableNum + '" onchange="handleOnChange(this)"><option>이용안함</option><option>Clipping</option><option>Scissoring</option></select>';
-            Cell5.innerHTML = '<input name="spa" class="pet_status" id="pet_Spa' + petTableNum + '" type="checkbox">';
-            Cell6.innerHTML = '<input type="button" id="' + petTableNum + '" class="petUsed" value="X" >';
-
-            //테이블 이벤트 생성 이름, 성별 방 미용 스파 삭제 이벤트
-            pet_table_event(petTableNum);
-
-            //삭제처리
-            $("#" + petTableNum).on("click", this, function () {
-                //맵에서 테이블 값 제거
-                petmap.delete('Pet_Name' + $(this).attr('id'))
-                petmap.delete('Pet_Sex' + $(this).attr('id'))
-                petmap.delete('Pet_Room' + $(this).attr('id'))
-                petmap.delete('pet_Beauty' + $(this).attr('id'))
-                petmap.delete('pet_Spa' + $(this).attr('id'))
-                //html에서 제거
-                $(this).parent().parent().remove();
-                totalTableNum--;
-                //콘솔 테스트
-                console.log(petmap);
-                console.log('총 테이블' + totalTableNum);
-            });
-
-
-
-
-            petTableNum++;
-            totalTableNum++;
-            console.log('총 테이블' + totalTableNum);
-
-
-        }
-
-        function pet_table_event(petTableNum) {
-            //이름 이벤트
-            $('#Pet_Name' + petTableNum).change(this, function () {
-
-                petmap.set($(this).attr('id'), $(this).val());
-
-                //콘솔테스트
-                console.log(petmap);
-
-                if (tablecheck(this)) {
-                    costresult(this)
-                }
-            });
-            //성별 이벤트
-            $('#Pet_Sex' + petTableNum).change(this, function () {
-
-                petmap.set($(this).attr('id'), $(this).val());
-
-                //콘솔테스트
-                console.log(petmap);
-
-                if (tablecheck(this)) {
-                    costresult(this)
-                }
-            });
-            //방 이벤트
-            $('#Pet_Room' + petTableNum).change(this, function () {
-
-
-                petmap.set($(this).attr('id'), $(this).val());
-                //콘솔테스트
-                console.log(petmap);
-
-                if (tablecheck(this)) {
-                    costresult(this)
-                }
-            });
-            //미용 이벤트
-            $('#pet_Beauty' + petTableNum).change(this, function () {
-
-
-                petmap.set($(this).attr('id'), $(this).val());
-
-                //콘솔테스트
-                console.log(petmap);
-
-                if (tablecheck(this)) {
-                    costresult(this)
-                }
-            });
-            //스파 이벤트
-            $('#pet_Spa' + petTableNum).change(this, function () {
-
-                petmap.set($(this).attr('id'), $(this).prop("checked"));
-
-                //콘솔테스트
-                console.log(petmap);
-
-                if (tablecheck(this)) {
-                    costresult(this)
-                }
-            });
-
-        }
-        //테이블 확인 성별과 이름이 둘다 입력되었는가.
-        function tablecheck(petTableElement) {
-            var tbnum = $(petTableElement).parent().parent().attr('id').substr(5);
-            console.log('Pet_Name-' + tbnum + petmap.get('Pet_Name' + tbnum) + 'Pet_Sex-' + tbnum + petmap.get('Pet_Sex' + tbnum))
-
-            if (petmap.get('Pet_Name' + tbnum) != null && petmap.get('Pet_Sex' + tbnum) != null) {
-                console.log("table_OK")
-                return 1;
-            } else {
-                console.log("성별 또는 이름")
-                return 0;
-            }
-        }
-
-        //이름 확인 거르고 map 을 제공. 제공된 것으로 결과 계산
-        function costresult(petTableElement) {
-
-            var tbnum = $(petTableElement).parent().parent().attr('id').substr(5);
-
-
-
-            var petservice = [petmap.get('Pet_Name' + tbnum), petmap.get('Pet_Sex' + tbnum), petmap.get('Pet_Room' + tbnum), petmap.get('pet_Beauty' + tbnum), petmap.get('pet_Spa' + tbnum)];
-            console.log(petservice);
-            servicemap.set('service' + tbnum, petservice);
-            console.log(servicemap);
-
-            return petservice;
-        }
-        // function costresult(petServiceMap){    
-
-        //     var tbnum = $(petTableElement).parent().parent().attr('id').substr(5);
-
-
-
-        //     var petservice = [petmap.get('Pet_Name'+tbnum), petmap.get('Pet_Sex'+tbnum), petmap.get('Pet_Room'+tbnum),petmap.get('pet_Beauty'+tbnum),petmap.get('pet_Spa'+tbnum)];
-        //     console.log(petservice);
-        //     servicemap.set( 'service'+tbnum , petservice);
-        //     console.log(servicemap);
-
-        //     return petservice;
-        // }
-
-        function addtext() {
-            $(".petcomment").toggleClass('click');
-        }
-
-        function addcost() {
-            $(".paymentinfo2").toggleClass('click');
-        }
-    </script>
+    <script type="text/javascript" src="${contextPath}/resources/js/reservationCal.js"></script>
+    <script type="text/javascript" src="${contextPath}/resources/js/reservation.js"></script>
+    
 </head>
 
 <body>
@@ -528,16 +344,16 @@
                         <td>${Pet.Sex}</td>
                         <td>
                             <select name="petroom" id="Pet_Room" onchange="handleOnChange(this)">
-                                <option>Deluxe(소형견)</option>
-                                <option>Superior(중형견)</option>
-                                <option>Suite(대형견)</option>
+                                <option value="1">Deluxe(소형견)</option>
+                                <option value="2">Superior(중형견)</option>
+                                <option value="3">Suite(대형견)</option>
                             </select>
                         </td>
                         <td>
                             <select name="beauty" id="petbeauty" onchange="handleOnChange(this)">
                                 <option>이용안함</option>
-                                <option>Clipping</option>
-                                <option>Scissoring</option>
+                                <option value="1">Clipping</option>
+                                <option value="2">Scissoring</option>
                             </select>
                         </td>
                         <td>
@@ -558,55 +374,55 @@
             <div class="paymentinfo1">
                 <table id="pet_table1" align="center" width="79%">
                     <tr align="center" bgcolor="white" height="40px">
-                        <td colspan="10" align="center" bgcolor="#e5e4e2"><b>Reservation Detail</b></td>
+                        <td colspan="10" align="center" bgcolor="#e5e4e2"><b id="dateResult">Reservation Detail</b></td>
                     </tr>
                     <tr align="center" bgcolor="white">
                         <td rowspan="6" align="center" bgcolor="white"><b>Room</b></td>
                         <td rowspan="2" align="center" bgcolor="white">Deluxe(소형견)</td>
-                        <td rowspan="2" align="center" bgcolor="white"></td>
+                        <td id="S_R" rowspan="2" align="center" bgcolor="white">0 원</td>
                         <td rowspan="6" align="center" bgcolor="white"><b>Beauty</b></td>
                         <td rowspan="3" align="center" bgcolor="white">Clipping</td>
                         <td>소형견</td>
-                        <td></td>
+                        <td id="S_BC">0 원</td>
                         <td rowspan="6" align="center" bgcolor="white"><b>Spa</b></td>
                         <td rowspan="2" align="center" bgcolor="white">소형견</td>
-                        <td rowspan="2" align="center" bgcolor="white"></td>
+                        <td id="S_S" rowspan="2" align="center" bgcolor="white">0 원</td>
                     </tr>
                     <tr align="center" bgcolor="white">
                         <td>중형견</td>
-                        <td></td>
+                        <td id="M_BC">0 원</td>
                     </tr>
                     <tr align="center" bgcolor="white">
                         <td rowspan="2" align="center" bgcolor="white">Superior(중형견)</td>
-                        <td rowspan="2" align="center" bgcolor="white"></td>
+                        <td id="M_R" rowspan="2" align="center" bgcolor="white">0 원</td>
                         <td>대형견</td>
-                        <td></td>
+                        <td id="L_BC">0 원</td>
                         <td rowspan="2" align="center" bgcolor="white">중형견</td>
-                        <td rowspan="2" align="center" bgcolor="white"></td>
+                        <td  id="M_S" rowspan="2" align="center" bgcolor="white">0 원</td>
                     </tr>
                     <tr align="center" bgcolor="white">
                         <td rowspan="3" align="center" bgcolor="white">Scissoring</td>
                         <td>소형견</td>
-                        <td></td>
+                        <td id="S_BS">0 원</td>
                     </tr>
                     <tr align="center" bgcolor="white">
                         <td rowspan="2" align="center" bgcolor="white">Suite(대형견)</td>
-                        <td rowspan="2" align="center" bgcolor="white"></td>
+                        <td id="L_R" rowspan="2" align="center" bgcolor="white">0 원</td>
                         <td>중형견</td>
-                        <td></td>
+                        <td id="M_BS">0 원</td>
                         <td rowspan="2" align="center" bgcolor="white">대형견</td>
-                        <td rowspan="2" align="center" bgcolor="white"></td>
+                        <td id="L_S" rowspan="2" align="center" bgcolor="white">0 원</td>
                     </tr>
                     <tr align="center" bgcolor="white">
                         <td>대형견</td>
-                        <td></td>
+                        <td id="L_BS">0 원</td>
                     </tr>
                     <tr align="center" bgcolor="white" height="40px">
                         <td colspan="10" bgcolor="#e5e4e2">
                             <img src="${contextPath}/resources/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
                             <b class="membership">Bronze Membership : Discount 2%</b>
                             <b class="totalpayment">The Total Payment</b>
-                            <b class="totalcost"> : 1,000,000 원</b>
+                            <b class="totalcost"> : 0 원</b>
                         </td>
                     </tr>
                     <td rowspan="6" align="center" bgcolor="white"><b></b></td>
