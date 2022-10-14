@@ -21,13 +21,11 @@
  <head>
    <style>
    .all {
-            
+       
        margin-top: 250px;
        height: 1200px;
    }
-   
-   
-   
+
  .w_review {
 	  margin-top: -40px;
 	  text-align: left; font-size: 25px;
@@ -48,41 +46,57 @@
           font-size: 25px;
       }   
 
-  .w_contents_1 {
-	width: 18.5%;
-    margin-left: 17%;
-    height: 800px;
-    background-color: aquamarine;
-    position: absolute;
-    left: 0%;
+      .w_contents_1 {
+    	    width: 18.5%;
+    	    margin-left: 17%;
+    	    height: 100%;
+    	    
+    	    position: absolute;
+    	    left: 0%;
+    	    display: inline-block;
+    	    
+    	  }
+
+    	  .w_contents_2 {
+    	    width:47.5%;
+    	    
+    	    height: 100%;
+    	    
+    	    position: absolute;
+    	    right: 17%;
+    	    
+    	  }
+    	  .re_room1 {
+    	  text-align: center;
+    	  border-radius: 5%;
+
+    	  }
+    	  .re_p1 {
+    	    font-size: 30px;
+    	    text-align: center;
+    	    margin-top: 10px;
+
+    	  }
+
+
+
+  .w_review2 {
+    width: 90%;
+   margin-bottom: 30px !important;
+  
+  }
+
+  .w_tr {
+            width: 100% !important;  
+        } 
+
+  .w_tr>.w_td {
+    border: 0px solid rgba(107, 107, 107, 0.3) !important;
+    font-size: 17px !important ;
     
   }
 
-  .w_contents_2 {
-    width:47.5%;
-    
-    height: 800px;
-    background-color: burlywood;
-    position: absolute;
-    right: 17%;
- 
-  }
-  .re_room1 {
-  text-align: center;
-  border-radius: 5%;
-
-  }
-  .re_p1 {
-    font-size: 30px;
-    text-align: center;
-    margin-top: 10px;
-
-  }
-  .w_but {
-    position: absolute;
-    right: 20px;
-    margin-top: 75%;
-  }
+	
   </style> 
  
  <meta charset="UTF-8">
@@ -98,26 +112,107 @@
 	<br><br><br><br>
 	
 	<h2 class="w_review"><a class="w_a" href="${contextPath}/reviewBoard.do" >중형견 Review</a></h2>
-		<p id="under"></p>
-		<br><br><br>
-	
-		 <div class="w_contents_1">
-            <img class="re_room1" src="${contextPath}/resources/img/pet_room_2.PNG" alt="중형견 룸">
-            <p class="re_p1">중형견</p>
+	<p id="under"></p>
+	<br><br><br>
 
-		 </div>
-		 
-         <div class="w_contents_2">
-            
+	 <div class="w_contents_1">
+        <img class="re_room1" src="${contextPath}/resources/img/pet_room_2.PNG" alt="중형견 룸">
+        <p class="re_p1">중형견</p>
+
+	 </div>
+
+		 <div class="w_contents_2">
+         <br>
+
+         <div>
+         <table align="right" class="w_review2">
+           <tr class="w_tr">
+             <td class="w_td" width="15%">별점</td>
+             <td class="w_td" width="50%" rowspan="2">컨텐츠</td>
+             <td class="w_td" width="20%" rowspan="2">이미지</td>
+             <td class="w_td" width="15%" >작성일</td>
+         </tr>
+         <tr class="w_tr">
+             <td class="w_td">유저ID</td>
+             <td class="w_td">좋아요</td>
+         </tr>    
+        </table>
+
+       <table align="right" class="w_review2">
+         <tr class="w_tr">
+             <td class="w_td" width="15%" >별점</td>
+             <td class="w_td" width="50%" rowspan="2">컨텐츠</td>
+             <td class="w_td" width="20%" rowspan="2">이미지</td>
+             <td class="w_td" width="15%" >작성일</td>
+         </tr>
+         <tr class="w_tr">
+             <td class="w_td">유저ID</td>
+             <td class="w_td">좋아요</td>
+         </tr>    
+        </table>
+          
+         </div>
+     
+         <div>
+         <table align="right" class="w_review2">
+           <tr class="w_tr">
+               <td class="w_td" width="15%">별점</td>
+               <td class="w_td" width="50%" rowspan="2">컨텐츠</td>
+               <td class="w_td" width="20%" rowspan="2">이미지</td>
+               <td class="w_td" width="15%" >작성일</td>
+           </tr>
+           <tr class="w_tr">
+               <td class="w_td">유저ID</td>
+               <td class="w_td">좋아요</td>
+           </tr>    
+         </table>
+         
+       </div>
         
 
-        </div>
- 
+       <div>
+       <table align="right" class="w_review2">
+         <tr class="w_tr">
+             <td class="w_td" width="15%">별점</td>
+             <td class="w_td" width="50%" rowspan="2">컨텐츠</td>
+             <td class="w_td" width="20%" rowspan="2">이미지</td>
+             <td class="w_td" width="15%" >작성일</td>
+         </tr>
+         <tr class="w_tr">
+             <td class="w_td">유저ID</td>
+             <td class="w_td">좋아요</td>
+         </tr>    
+       </table>
+     </div> 
+       
+         <table align="right" class="w_review2">
+           <tr class="w_tr">
+               <td class="w_td" width="15%">별점</td>
+               <td class="w_td" width="50%" rowspan="2">컨텐츠</td>
+               <td class="w_td" width="20%" rowspan="2">이미지</td>
+               <td class="w_td" width="15%" >작성일</td>
+           </tr>
+           <tr class="w_tr">
+               <td class="w_td">유저ID</td>
+               <td class="w_td">좋아요</td>
+           </tr>    
+          </table>
+            
+
+       </div>
+
 		<br><br><br><br><br>
-		
+
 </div>
 
 
- 
- </body>
- </html>
+
+
+
+</body>
+</html>
+
+
+
+
+

@@ -20,6 +20,11 @@
       <put-attribute name="title" value="예약하기" />
       <put-attribute name="body" value="/WEB-INF/views/reservation/reservationMain.jsp" />
    </definition> 
+   
+   <definition name="reservationComplete" extends="baseLayout">
+      <put-attribute name="title" value="예약완료" />
+      <put-attribute name="body" value="/WEB-INF/views/reservation/reservationComplete.jsp" />
+   </definition> 
  
   <!--  로그인 -->
 	
@@ -96,7 +101,7 @@
    
    <!-- 문의게시판 -->
    
-   <definition name="questionsList" extends="baseLayout">
+   <definition name="/questionsList" extends="baseLayout">
       	  <put-attribute name="title" value="문의게시판" />
       	  <put-attribute name="body" value="/WEB-INF/views/questions/questionsList.jsp" />
    </definition>

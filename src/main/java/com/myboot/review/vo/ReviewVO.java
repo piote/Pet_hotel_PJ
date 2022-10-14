@@ -22,10 +22,4 @@ public class ReviewVO {
 	private String image;
 	private int rec;
 	
-	
-	public	ReviewVO() {
-		System.out.println("ReviewVO 호출");
-	}
-	
-	
 }

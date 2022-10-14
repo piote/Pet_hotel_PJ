@@ -17,23 +17,25 @@
             margine: 10%
         } */
 
-        #reservationForm{
+        #reservationForm {
             align-items: center;
         }
 
         /* 소제목태그 */
-        #under{
-        margin-top: 10px;
-        border: 2px solid gray;
-        width: 260px;
-        margin-left: 17%;    
+        #under {
+            margin-top: 10px;
+            border: 2px solid gray;
+            width: 260px;
+            margin-left: 17%;
         }
-        
+
         .reservationtag {
             margin-top: 291px;
-            text-align: left; font-size: 25px;
-            margin-left: 17%;           
+            text-align: left;
+            font-size: 25px;
+            margin-left: 17%;
         }
+
         /* 여기까지 */
 
         /* 테이블 */
@@ -45,23 +47,24 @@
             table-layout: fixed;
         }
 
-        #pet_table td{
+        #pet_table td {
             height: 30px;
         }
-        
+
         #pet_table1 {
             margin: auto;
             text-align: center;
             width: 69%;
             table-layout: fixed;
         }
-        
+
         #pet_table2 {
             margin: auto;
             text-align: center;
             width: 69%;
             table-layout: fixed;
         }
+
         /* 여기까지 */
 
         #checkin {
@@ -124,15 +127,15 @@
             display: inline-block;
 
         }
-        
+
         /* 결제상황창 */
-        #petpayment{
+        #petpayment {
             width: 68.8%;
             margin: auto;
             text-align: center;
             table-layout: fixed;
         }
-        
+
         #petpayment li ul {
             display: inline-block;
         }
@@ -144,18 +147,20 @@
             list-style: none;
             text-align: center;
         }
+
         /* 여기까지 */
-  
-        
+
+
         /* 결제정보창 */
-        .paymentinfo2{
+        .paymentinfo2 {
             margin: auto;
             width: 100%;
             height: 20%;
             text-align: center;
             table-layout: fixed;
             display: none;
-      	}
+        }
+
         /* 여기까지 */
 
         .reservationtext1 {
@@ -192,7 +197,7 @@
         }
 
 
-
+        /* 버튼 */
         #btn_pet1_1,
         #btn_pet2_1,
         #btn_pet2_2,
@@ -223,185 +228,76 @@
         #btn_pet2_3:active {
             box-shadow: inset 1px 1px 1px #DFDFDF;
         }
-        
+        /* 여기까지 */
+
         /* 요청사항 */
-        .petcomment{
+        .petcomment {
             margin: auto;
             border-radius: 10px;
             text-align: center;
             height: 140px;
             display: none;
         }
-        .click{
+
+        .click {
             display: block;
         }
 
-        .petcomment>input{
+        .petcomment>input {
             border: 1px solid black;
             box-sizing: border-box;
             border-radius: 15px;
             width: 69%;
-            height: 80%;            
+            height: 80%;
             padding: 10px 20px;
             margin: 5px 0;
         }
+
         /* 여기까지 */
-        
-        .paymentinfo1 tr{
+
+        .paymentinfo1 tr {
             position: relative;
         }
 
-        /* .totalamount{
+        .totalpayment {
             display: block;
-            width: 140px;
+            width: 145px;
             height: 25px;
-            position: absolute; 
-            right: 150px;
-            top: 10px;
-        } */
-
-        /* 1번안 
-        .totalamount{
-            display: block;
-            width: 140px;
-            height: 25px;
-            position: absolute; 
-            right: 150px;
-            top: 10px;
-        }
-
-        .membership{
-            display: block;
-            width: 400px;
-            height: 25px;
-            position: absolute; 
-            right: -60px;
-            top: 10px;
-        } */
-        
-
-        /*2번안 
-        .totalamount{
-            display: block;
-            width: 200px;
-            height: 25px;
-            position: absolute; 
-            right: 150px;
-            top: 10px;
-        }
-
-        .membership{
-            display: block;
-            width: 540px;
-            height: 0px;
-            position: absolute; 
-            right: -80px;
-            top: 10px;
-        }
-        
-        #bronzeimg{
-            display: block;
             position: absolute;
-            top: 5px;
-            right: 330px;
-        }*/
-       
-
-        /*3번안*/
-        .totalamount{
-            display: block;
-            width: 140px;
-            height: 25px;
-            position: absolute; 
             right: 160px;
             top: 10px;
         }
-            
-        .membership{
+
+        .membership {
             display: block;
             width: 2300px;
             height: 25px;
-            position: absolute; 
-            right: -60px;
-            top: 10px;            
+            position: absolute;
+            left: -970px;
+            top: 10px;
         }
-
-        #bronzeimg{
+        
+        #bronzeimg {
             display: block;
             position: absolute;
             top: 5px;
             left: 10px;
         }
-        
-        .totalcost{
+
+        .totalcost {
             display: block;
             position: absolute;
             top: 10px;
             right: 50px;
         }
-
     </style>
 
     <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCal.js"></script>
-
-
-    <script>
-        //예약시 임시 펫 번호.
-        var petTableNum = 0;
-
-        var test1 = document.getElementById('beauty');
-        var test2 = document.getElementById('spa');
-        var test1Result = test1.getAttribute("checked")
-        var test2Result = test2.getAttribute("checked")
-        function handleOnChange(e) {
-            const value = e.value;
-        }
-        function addRow() {
-
-            // table element 찾기
-            var table = document.getElementById('pet_table');
-
-            // 새 행(Row) 추가 (테이블 중간에)
-            var newRow = table.insertRow();
-
-            // 새 행(Row)에 Cell 추가
-            var Cell1 = newRow.insertCell();
-            var Cell2 = newRow.insertCell();
-            var Cell3 = newRow.insertCell();
-            var Cell4 = newRow.insertCell();
-            var Cell5 = newRow.insertCell();
-            var Cell6 = newRow.insertCell();
-
-            // Cell에 텍스트 추가
-
-            Cell1.innerHTML = '<input name="petname" id="Pet_Name' + petTableNum + '" type="textbox" style="text-align:center; width:80%;">';
-            Cell2.innerHTML = '<select name="petsex" id="Pet_Sex' + petTableNum + '" onchange="handleOnChange(this)"><option>male</option><option>female</option></select>';
-            Cell3.innerHTML = '<select name="petroom" id="Pet_Room' + petTableNum + '" onchange="handleOnChange(this)"><option>Deluxe(소형견)</option><option>Superior(중형견)</option><option>Suite(대형견)</option></select>';
-            Cell4.innerHTML = '<select name="beauty" id="petbeauty' + petTableNum + '" onchange="handleOnChange(this)"><option>이용안함</option><option>Clipping</option><option>Scissoring</option></select>';
-            Cell5.innerHTML = '<input id="spa' + petTableNum + '" type="checkbox">';
-            Cell6.innerHTML = '<input type="button" id="' + petTableNum + '" class="petUsed" value="X" >';
-
-
-            petTableNum++;
-
-            $(".petUsed").on("click", this, function () {
-
-                $(this).parent().parent().remove();
-            });
-
-        }
-
-        function addtext(){
-            $(".petcomment").toggleClass('click');
-        }
-        
-        function addcost(){
-            $(".paymentinfo2").toggleClass('click');
-        }
-    </script>
+    <script type="text/javascript" src="${contextPath}/resources/js/reservation.js"></script>
+    
 </head>
 
 <body>
@@ -448,23 +344,23 @@
                         <td>${Pet.Sex}</td>
                         <td>
                             <select name="petroom" id="Pet_Room" onchange="handleOnChange(this)">
-                                <option>Deluxe(소형견)</option>
-                                <option>Superior(중형견)</option>
-                                <option>Suite(대형견)</option>
+                                <option value="1">Deluxe(소형견)</option>
+                                <option value="2">Superior(중형견)</option>
+                                <option value="3">Suite(대형견)</option>
                             </select>
                         </td>
                         <td>
                             <select name="beauty" id="petbeauty" onchange="handleOnChange(this)">
-                            	<option>이용안함</option>
-                                <option>Clipping</option>
-                                <option>Scissoring</option>
+                                <option>이용안함</option>
+                                <option value="1">Clipping</option>
+                                <option value="2">Scissoring</option>
                             </select>
                         </td>
                         <td>
                             <input id="spa" type="checkbox">
                         </td>
                         <td>
-                            <input type="button" class="petUsed" value="X" >
+                            <input type="button" class="petUsed" value="X">
                         </td>
                     </tr>
                 </c:forEach>
@@ -476,73 +372,59 @@
             <br></br>
 
             <div class="paymentinfo1">
-            <table id="pet_table1" align="center" width="79%">
-                <tr align="center" bgcolor="white" height="40px">
-                    <td colspan="10" align="center" bgcolor="#e5e4e2"><b>Reservation Detail</b></td>
-                </tr>
-                <tr align="center" bgcolor="white">
-                    <td rowspan="6" align="center" bgcolor="white"><b>Room</b></td>
-                    <td rowspan="2" align="center" bgcolor="white">Deluxe(소형견)</td>
-                    <td rowspan="2" align="center" bgcolor="white"></td>
-                    <td rowspan="6" align="center" bgcolor="white"><b>Beauty</b></td>
-                    <td rowspan="3" align="center" bgcolor="white">Clipping</td>
-                    <td>소형견</td>
-                    <td></td>
-                    <td rowspan="6" align="center" bgcolor="white"><b>Spa</b></td>
-                    <td rowspan="2" align="center" bgcolor="white">소형견</td>
-                    <td rowspan="2" align="center" bgcolor="white"></td>
-                </tr>
-                <tr align="center" bgcolor="white">
-                    <td>중형견</td>
-                    <td></td>
-                </tr>
-                <tr align="center" bgcolor="white">
-                    <td rowspan="2" align="center" bgcolor="white">Superior(중형견)</td>
-                    <td rowspan="2" align="center" bgcolor="white"></td>
-                    <td>대형견</td>
-                    <td></td>
-                    <td rowspan="2" align="center" bgcolor="white">중형견</td>
-                    <td rowspan="2" align="center" bgcolor="white"></td>
-                </tr>
-                <tr align="center" bgcolor="white">
-                    <td rowspan="3" align="center" bgcolor="white">Scissoring</td>
-                    <td>소형견</td>
-                    <td></td>
-                </tr>
-                <tr align="center" bgcolor="white">
-                    <td rowspan="2" align="center" bgcolor="white">Suite(대형견)</td>
-                    <td rowspan="2" align="center" bgcolor="white"></td>
-                    <td>중형견</td>
-                    <td></td>
-                    <td rowspan="2" align="center" bgcolor="white">대형견</td>
-                    <td rowspan="2" align="center" bgcolor="white"></td>
-                </tr>
-                <tr align="center" bgcolor="white">
-                    <td>대형견</td>
-                    <td></td>
-                </tr>
-
-                <!-- <tr align="center" bgcolor="white" height="40px">
-                    <td colspan="10" bgcolor="#e5e4e2"><b class="totalamount">The Total Amount</b></td> -->
-                    
-                <!-- 1번안 -->
-                <!-- <tr align="center" bgcolor="white" height="40px">
-                    <td colspan="10" bgcolor="#e5e4e2"><b class="totalamount">The Total Amount</b></td> -->
-
-                <!-- 2번안--> 
-                <!-- <tr align="center" bgcolor="white" height="40px">
-                    <td colspan="10" bgcolor="#e5e4e2">
-                        <img src="/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg"><b class="membership">Bronze Membership : Discount 2%</b></td> -->
-
-                <!-- 3번안 -->
-                <tr align="center" bgcolor="white" height="40px">
-                    <td colspan="10" bgcolor="#e5e4e2">
-                        <img src="/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
-                        <b class="membership">Bronze Membership : Discount 2%</b>
-                        <b class="totalamount">The Total Amount</b> 
-                        <b class="totalcost"> :  1,000,000 원</b>
-                    </td>
-                </tr>
+                <table id="pet_table1" align="center" width="79%">
+                    <tr align="center" bgcolor="white" height="40px">
+                        <td colspan="10" align="center" bgcolor="#e5e4e2"><b id="dateResult">Reservation Detail</b></td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td rowspan="6" align="center" bgcolor="white"><b>Room</b></td>
+                        <td rowspan="2" align="center" bgcolor="white">Deluxe(소형견)</td>
+                        <td id="S_R" rowspan="2" align="center" bgcolor="white">0 원</td>
+                        <td rowspan="6" align="center" bgcolor="white"><b>Beauty</b></td>
+                        <td rowspan="3" align="center" bgcolor="white">Clipping</td>
+                        <td>소형견</td>
+                        <td id="S_BC">0 원</td>
+                        <td rowspan="6" align="center" bgcolor="white"><b>Spa</b></td>
+                        <td rowspan="2" align="center" bgcolor="white">소형견</td>
+                        <td id="S_S" rowspan="2" align="center" bgcolor="white">0 원</td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>중형견</td>
+                        <td id="M_BC">0 원</td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td rowspan="2" align="center" bgcolor="white">Superior(중형견)</td>
+                        <td id="M_R" rowspan="2" align="center" bgcolor="white">0 원</td>
+                        <td>대형견</td>
+                        <td id="L_BC">0 원</td>
+                        <td rowspan="2" align="center" bgcolor="white">중형견</td>
+                        <td  id="M_S" rowspan="2" align="center" bgcolor="white">0 원</td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td rowspan="3" align="center" bgcolor="white">Scissoring</td>
+                        <td>소형견</td>
+                        <td id="S_BS">0 원</td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td rowspan="2" align="center" bgcolor="white">Suite(대형견)</td>
+                        <td id="L_R" rowspan="2" align="center" bgcolor="white">0 원</td>
+                        <td>중형견</td>
+                        <td id="M_BS">0 원</td>
+                        <td rowspan="2" align="center" bgcolor="white">대형견</td>
+                        <td id="L_S" rowspan="2" align="center" bgcolor="white">0 원</td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>대형견</td>
+                        <td id="L_BS">0 원</td>
+                    </tr>
+                    <tr align="center" bgcolor="white" height="40px">
+                        <td colspan="10" bgcolor="#e5e4e2">
+                            <img src="${contextPath}/resources/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
+                            <b class="membership">Bronze Membership : Discount 2%</b>
+                            <b class="totalpayment">The Total Payment</b>
+                            <b class="totalcost"> : 0 원</b>
+                        </td>
+                    </tr>
                     <td rowspan="6" align="center" bgcolor="white"><b></b></td>
                     <td rowspan="2" align="center" bgcolor="white"></td>
                     <td rowspan="2" align="center" bgcolor="white"></td>
@@ -550,21 +432,13 @@
                     <td rowspan="3" align="center" bgcolor="white"></td>
                     <td></td>
                     <td></td>
-
-                    <!-- 1번안 -->
-                    <!-- <td colspan="3" align="left" bgcolor="#e5e4e2" height="40px"><img src="/img/bronze_medal.png" width="30px" height="30px"><b class="membership">Bronze Membership : Discount 2%</b></td> -->
-
-                    <!-- 2번안--> 
-                    <!-- <td colspan="3" align="left" bgcolor="#e5e4e2" height="40px"><b class="totalamount">The Total Amount</b></td>
-                    </tr>
-                    </tr> -->
-            </table>
-        </div>
-            
-            <div class="btn_pet2">
-            	<input type='button' value='가격안내' id="btn_pet2_3" onclick="addcost()" />
+                </table>
             </div>
-            
+
+            <div class="btn_pet2">
+                <input type='button' value='가격안내' id="btn_pet2_3" onclick="addcost()" />
+            </div>
+
             <div class="paymentinfo2">
                 <table id="pet_table2" align="center">
                     <tr align="center" bgcolor="white" height="40px">
@@ -622,13 +496,13 @@
 
             <div class="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
-                <input type='button' value='완료' id="btn_pet2_2" onclick=' ' />
+                <button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationcomplete.do'">완료</button>
             </div>
         </form>
     </div>
-    
+
     <div class="petcomment">
-    	<input type="text">
+        <input type="text">
     </div>
     <br></br>
 

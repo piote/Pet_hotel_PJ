@@ -4,13 +4,20 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.myboot.mypage.dao.MyPageDAO">
-   <!--<resultMap id="reserveResult" type="reservationVO">
+<!--    <resultMap id="reserveResult" type="reservationVO">
 
-   </resultMap> 
-   <resultMap id="reviewResult" type="reviewVO">
-
-   </resultMap> 
-	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="String"  >
+   </resultMap>  -->
+<resultMap id="reviewResult" type="reviewVO">
+    <result property="num" column="review_num" />
+    <result property="title" column="review_title" />
+    <result property="con" column="review_con" />
+    <result property="star" column="review_star" />
+    <result property="date" column="review_date" />
+    <result property="image" column="review_image" />
+    <result property="rec" column="review_rec" />
+  </resultMap> 
+   
+<!-- 	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="String"  >
 		<![CDATA[
 		select * from tb_reservation , tb_service , tb_user
 		         where user_id=#{user_id}
@@ -40,23 +47,22 @@
 			<otherwise>
 			</otherwise>
 		</choose>
-	</select>
+	</select> -->
 	
 
-	<select id="selectMyReviewList" resultMap="reviewResult"  parameterType="String"  >
+	<select id="selectMyReviewList" resultMap="reviewResult">
 		<![CDATA[
-		select * from tb_review
-		         where user_id=#{user_id}
-		         order by review_date desc
+		select review_date, review_num, review_title, review_con from tb_review
+			         order by review_date desc
 		]]>
 	</select>
 
 	
-	<update id="updateMyReserveCancel" parameterType="String">
+<!-- 	<update id="updateMyReserveCancel" parameterType="String">
 	    update tb_reservation
 	 	   set reservation_state='C'
 	    where reservation_num=#{reservation_num}
-	</update>
+	</update> -->
  
-     -->
+    
 </mapper>
