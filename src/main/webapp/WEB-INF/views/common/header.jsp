@@ -43,7 +43,7 @@
                 <a href="${contextPath}/reviewBoard.do" class="menu">리뷰게시판</a>
             </div>
             <div class="l_menu menu_wrap">
-                <a href="#" class="menu">멤버쉽</a>
+                <a href="${contextPath}/membership.do" class="menu">멤버쉽</a>
                 <a href="#" class="menu">고객센터</a>
             </div>
         </nav>

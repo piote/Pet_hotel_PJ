@@ -82,6 +82,13 @@
       	  <put-attribute name="body" value="/WEB-INF/views/mypage/myPage.jsp" />
    </definition>
    
+   <!-- 멤버쉽 안내 -->
+   
+   <definition name="membership" extends="baseLayout">
+      <put-attribute name="title" value="멤버쉽 안내" />
+      <put-attribute name="body" value="/WEB-INF/views/membership/membership.jsp" />
+   </definition>
+   
    <definition name="/mypage/checkReserve" extends="baseLayout">
       	  <put-attribute name="title" value="예약내역" />
       	  <put-attribute name="body" value="/WEB-INF/views/mypage/checkReserve.jsp" />
