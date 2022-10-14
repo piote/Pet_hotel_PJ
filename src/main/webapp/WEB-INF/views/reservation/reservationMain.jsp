@@ -251,6 +251,16 @@
             position: relative;
         }
 
+        /* .totalamount{
+            display: block;
+            width: 140px;
+            height: 25px;
+            position: absolute; 
+            right: 150px;
+            top: 10px;
+        } */
+
+        /* 1번안 
         .totalamount{
             display: block;
             width: 140px;
@@ -258,6 +268,76 @@
             position: absolute; 
             right: 150px;
             top: 10px;
+        }
+
+        .membership{
+            display: block;
+            width: 400px;
+            height: 25px;
+            position: absolute; 
+            right: -60px;
+            top: 10px;
+        } */
+        
+
+        /*2번안 
+        .totalamount{
+            display: block;
+            width: 200px;
+            height: 25px;
+            position: absolute; 
+            right: 150px;
+            top: 10px;
+        }
+
+        .membership{
+            display: block;
+            width: 540px;
+            height: 0px;
+            position: absolute; 
+            right: -80px;
+            top: 10px;
+        }
+        
+        #bronzeimg{
+            display: block;
+            position: absolute;
+            top: 5px;
+            right: 330px;
+        }*/
+       
+
+        /*3번안*/
+        .totalamount{
+            display: block;
+            width: 140px;
+            height: 25px;
+            position: absolute; 
+            right: 160px;
+            top: 10px;
+        }
+            
+        .membership{
+            display: block;
+            width: 2300px;
+            height: 25px;
+            position: absolute; 
+            right: -60px;
+            top: 10px;            
+        }
+
+        #bronzeimg{
+            display: block;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+        }
+        
+        .totalcost{
+            display: block;
+            position: absolute;
+            top: 10px;
+            right: 50px;
         }
 
     </style>
@@ -441,9 +521,43 @@
                     <td>대형견</td>
                     <td></td>
                 </tr>
+
+                <!-- <tr align="center" bgcolor="white" height="40px">
+                    <td colspan="10" bgcolor="#e5e4e2"><b class="totalamount">The Total Amount</b></td> -->
+                    
+                <!-- 1번안 -->
+                <!-- <tr align="center" bgcolor="white" height="40px">
+                    <td colspan="10" bgcolor="#e5e4e2"><b class="totalamount">The Total Amount</b></td> -->
+
+                <!-- 2번안--> 
+                <!-- <tr align="center" bgcolor="white" height="40px">
+                    <td colspan="10" bgcolor="#e5e4e2">
+                        <img src="/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg"><b class="membership">Bronze Membership : Discount 2%</b></td> -->
+
+                <!-- 3번안 -->
                 <tr align="center" bgcolor="white" height="40px">
-                    <td colspan="10" bgcolor="#e5e4e2"><b class="totalamount">The Total Amount</b></td>
+                    <td colspan="10" bgcolor="#e5e4e2">
+                        <img src="/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
+                        <b class="membership">Bronze Membership : Discount 2%</b>
+                        <b class="totalamount">The Total Amount</b> 
+                        <b class="totalcost"> :  1,000,000 원</b>
+                    </td>
                 </tr>
+                    <td rowspan="6" align="center" bgcolor="white"><b></b></td>
+                    <td rowspan="2" align="center" bgcolor="white"></td>
+                    <td rowspan="2" align="center" bgcolor="white"></td>
+                    <td rowspan="6" align="center" bgcolor="white"><b></b></td>
+                    <td rowspan="3" align="center" bgcolor="white"></td>
+                    <td></td>
+                    <td></td>
+
+                    <!-- 1번안 -->
+                    <!-- <td colspan="3" align="left" bgcolor="#e5e4e2" height="40px"><img src="/img/bronze_medal.png" width="30px" height="30px"><b class="membership">Bronze Membership : Discount 2%</b></td> -->
+
+                    <!-- 2번안--> 
+                    <!-- <td colspan="3" align="left" bgcolor="#e5e4e2" height="40px"><b class="totalamount">The Total Amount</b></td>
+                    </tr>
+                    </tr> -->
             </table>
         </div>
             
@@ -508,7 +622,7 @@
 
             <div class="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
-                <input type='button' value='다음' id="btn_pet2_2" onclick=' ' />
+                <input type='button' value='완료' id="btn_pet2_2" onclick=' ' />
             </div>
         </form>
     </div>
