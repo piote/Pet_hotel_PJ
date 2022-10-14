@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="${contextPath}/resources/css/password.css">
 </head>
 	<body>
-		<form method="post"   action="${contextPath}/member/modMember.do">
+		<form method="post"   action="${contextPath}/user/modMember.do">
 		    <div id="wrap">
 		        <section class="pw_wrap">
 		             <div class="pw_tit">

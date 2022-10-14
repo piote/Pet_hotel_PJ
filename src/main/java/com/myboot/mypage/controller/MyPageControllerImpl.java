@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myboot.mypage.service.MyPageService;
+import com.myboot.user.vo.UserVO;
 
 @Controller("myPageController")
 @RequestMapping(value="/mypage")
@@ -33,7 +34,7 @@ public class MyPageControllerImpl implements MyPageController {
 		ModelAndView mav = new ModelAndView(viewName);
 		
 //		UserVO userVO=(UserVO)session.getAttribute("memberInfo");
-//		String user_id = userVO.getId();
+//		String user_id = userVO.getId();	
 		
 //		List myReserveList = myPageService.listMyReserve(user_id);
 //		List myReviewList = myPageService.listMyReview(user_id);
