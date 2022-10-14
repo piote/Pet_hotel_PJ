@@ -603,7 +603,7 @@
                     </tr>
                     <tr align="center" bgcolor="white" height="40px">
                         <td colspan="10" bgcolor="#e5e4e2">
-                            <img src="/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
+                            <img src="${contextPath}/resources/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
                             <b class="membership">Bronze Membership : Discount 2%</b>
                             <b class="totalpayment">The Total Payment</b>
                             <b class="totalcost"> : 1,000,000 원</b>
@@ -680,7 +680,7 @@
 
             <div class="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
-                <input type='button' value='완료' id="btn_pet2_2" onclick=' ' />
+                <button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationcomplete.do'">완료</button>
             </div>
         </form>
     </div>
