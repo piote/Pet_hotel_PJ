@@ -20,14 +20,17 @@
                   <td>
                      <img class="img_info" src="${contextPath}/resources/img/user.png" alt="회원이미지">
                   </td>
+                  <td></td>
                   <td>
+                     <img class="img_membership" src="${contextPath}/resources/img/crown.png" alt="My 혜택">
+                     <p class="membership">Gold${memberInfo.grade}</p>
                      <h4>테스트${memberInfo.name }님</h4>
-                     <br>
                      <br>
                      <p>전화: 010-0000-0000${memberInfo.tel}</p>
                      <br>
                      <p>이메일: testtesttest@naver.com${memberInfo.email} </p>
                   </td>
+                  <td></td>
                   <td>
                      <a href="${contextPath}/pw_change.do">내정보수정</a>
                      <a href="#">멤버쉽</a>
@@ -35,10 +38,6 @@
                   <td>
                      <a href="${contextPath}/mypage/checkReserve.do">예약 내역</a>
                      <a href="#">고객센터</a>
-                  </td>
-                  <td>
-                     <img class="img_membership" src="${contextPath}/resources/img/crown.png" alt="My 혜택">
-                     <p class="membership">Gold${memberInfo.grade}</p>
                   </td>
                </tr>
             </table>
