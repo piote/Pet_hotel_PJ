@@ -5,13 +5,13 @@
 
 <mapper namespace="mapper.board">
 <resultMap id="reviewResult" type="reviewVO">
-    <result property="review_num" column="review_num" />
-    <result property="review_title" column="review_title" />
-    <result property="review_con" column="review_con" />
-    <result property="review_star" column="review_star" />
-    <result property="review_date" column="review_date" />
-    <result property="review_image" column="review_image" />
-    <result property="review_rec" column="review_rec" />
+    <result property="num" column="review_num" />
+    <result property="title" column="review_title" />
+    <result property="con" column="review_con" />
+    <result property="star" column="review_star" />
+    <result property="date" column="review_date" />
+    <result property="image" column="review_image" />
+    <result property="rec" column="review_rec" />
   </resultMap> 
 	  
 	  <!-- 이미지   
