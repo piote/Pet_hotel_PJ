@@ -21,11 +21,17 @@
       <put-attribute name="body" value="/WEB-INF/views/reservation/reservationMain.jsp" />
    </definition> 
  
-  <!--  로그인 -->
+  <!--  로그인창 -->
 	
   <definition name="loginForm"  extends="baseLayout">
       <put-attribute name="title" value="로그인" />
       <put-attribute name="body" value="/WEB-INF/views/user/loginForm.jsp" />
+  </definition>
+  
+   <!-- 회원가입창 -->
+  <definition name="userForm"  extends="baseLayout">
+      <put-attribute name="title" value="회원가입" />
+      <put-attribute name="body" value="/WEB-INF/views/user/userForm.jsp" />
   </definition>
   
 
