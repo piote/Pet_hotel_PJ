@@ -1,6 +1,8 @@
 package com.myboot.questions.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +22,15 @@ public class QuestionsServiceImpl implements QuestionsService {
 	public List<QuestionsVO> listQuestions() throws Exception{
 		List<QuestionsVO> articlesList =  questionsDAO.selectAllQuestionsList();
         return articlesList;
+	}
+	
+	@Override
+	public Map listQuestions_page(Map<String, Integer> pagingMap) throws Exception {
+		Map articlesMap = new HashMap();
+		List<QuestionsVO> questionsList = questionsDAO.selectAllQuestionsList_page(pagingMap);
+		int totArticles = questionsDAO.selectTotQuestions();
+		articlesMap.put("questionsList", questionsList);
+		articlesMap.put("totArticles", totArticles);
+		return articlesMap;
 	}
 }
