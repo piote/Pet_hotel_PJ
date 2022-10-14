@@ -44,9 +44,9 @@
             <div class="h_hr"></div>
             <ul>
                 <li class="min_title">지원</li>
-                <li><a href="#">고객 센터</a></li>
-                <li><a href="#">전화 상담</a></li>
-                <li><a href="#">카카오톡 상담</a></li>
+                <li><a href="${contextPath}/questionsList.do">고객 센터</a></li>
+                <li><a href="tel:000-0000-0000">전화 상담</a></li>
+                <li><a href="${contextPath}/questionsList.do">카카오톡 상담</a></li>
             </ul>
         </div>
         <div class="hr"></div>
