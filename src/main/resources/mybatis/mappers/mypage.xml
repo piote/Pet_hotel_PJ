@@ -4,7 +4,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.myboot.mypage.dao.MyPageDAO">
-   <resultMap id="reserveResult" type="reservationVO">
+   <!--<resultMap id="reserveResult" type="reservationVO">
 
    </resultMap> 
    <resultMap id="reviewResult" type="reviewVO">
@@ -58,5 +58,5 @@
 	    where reservation_num=#{reservation_num}
 	</update>
  
-   
+     -->
 </mapper>
