@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myboot.questions.dao.QuestionsDAO">
+
+   <resultMap id="questionsResult" type="questionsVO">
+   	  <result property="level" column="level" />
+      <result property="q_num" column="Q_NUM" />
+      <result property="id" column="USER_ID" />
+      <result property="q_Date" column="Q_DATE" />
+      <result property="q_title" column="Q_TITLE" />
+      <result property="q_content" column="Q_CONTENT" />
+      <result property="q_parentNo" column="Q_PARENTNO" />
+   </resultMap> 
+  
+  <select id="selectAllQuestionsList" resultMap="questionsResult" >
+    <![CDATA[
+      SELECT level, q_num, q_parentNo, q_title, q_content, q_Date, USER_ID
+      from TB_QBOARD
+      START WITH  q_parentNo=0
+      CONNECT BY PRIOR q_num=q_parentNo 
+      ORDER SIBLINGS BY q_num DESC
+    ]]>
+  </select>
+
+</mapper>

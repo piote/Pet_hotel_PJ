@@ -7,6 +7,8 @@
 
 	<mapper resource="mybatis/mappers/mypage.xml"/>
  	<mapper resource="mybatis/mappers/user.xml"/>
+ 	<mapper resource="mybatis/mappers/questions.xml"/>
+ 	
 
  </mappers>
 </configuration>
