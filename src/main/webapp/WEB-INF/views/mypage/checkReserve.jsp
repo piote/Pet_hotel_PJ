@@ -73,6 +73,9 @@
 		    $('.ui-datepicker ').css({ "margin-left" : "141px", "margin-top": "-220px"});  //달력(calendar) 위치
 		    $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 		    $('img.ui-datepicker-trigger').css({'display': 'inline-block'});
+// 		    $('img.ui-datepicker-trigger').css({'position': 'relative'});
+// 		    $('img.ui-datepicker-trigger').css({'left': '500px'});
+		    
 		});
 			
 	$(document).ready(function () {
@@ -145,19 +148,21 @@
 			<h2>예약 조회 및 취소</h2>
 			<div id="searchFrm">
 				<form name="searchFrm">
-					<select name="colName" id="colName">
-						<option value="">검색</option>
-						<option value="name">예약명</option>
-						<option value="pet_name">펫이름</option>
-						<option value="tel">전화번호</option>
-					</select>
-					<input type="text" id="searchWord" name="searchWord"/> <br/><br/>
 					<div id="calendar">
 						<input type="text" id="startDate">
 						<input type="text" id="endDate">
 					</div>
-					<input type="text" style="display: none;" />
-					<div id="btnSearch"><img src="${contextPath}/resources/img/search.png"></div>
+					<div id="search_text">
+						<select name="colName" id="colName">
+							<option value="">검색</option>
+							<option value="name">예약명</option>
+							<option value="pet_name">펫이름</option>
+							<option value="tel">전화번호</option>
+						</select>
+						<input type="text" id="searchWord" name="searchWord"/> <br/><br/>
+						<input type="text" style="display: none;" />
+						<input type="image" id="btnSearch" src="${contextPath}/resources/img/search.png">
+					</div>
 				</form>
 			</div>
 			<div id="reserve_list">

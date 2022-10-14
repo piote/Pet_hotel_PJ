@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myboot.questions.dao.QuestionsDAO">
+
+   <resultMap id="questionsResult" type="questionsVO">
+   	  <result property="level" column="LVL" />
+      <result property="q_num" column="Q_NUM" />
+      <result property="id" column="USER_ID" />
+      <result property="q_Date" column="Q_DATE" />
+      <result property="q_title" column="Q_TITLE" />
+      <result property="q_content" column="Q_CONTENT" />
+      <result property="q_parentNo" column="Q_PARENTNO" />
+   </resultMap> 
+  
+  <select id="selectAllQuestionsList" resultMap="questionsResult" >
+    <![CDATA[
+      SELECT level as LVL, Q_NUM, Q_PARENTNO, Q_TITLE, Q_CONTENT, Q_DATE, USER_ID
+      from TB_QBOARD
+      START WITH  Q_PARENTNO=0
+      CONNECT BY PRIOR Q_NUM=Q_PARENTNO 
+      ORDER SIBLINGS BY Q_NUM DESC
+    ]]>
+  </select>
+  
+  <!-- 페이지 -->
+  <select id="selectAllQuestionsList_page" parameterType="java.util.Map" resultMap="questionsResult"   >
+    <![CDATA[
+      SELECT * FROM ( 
+		SELECT ROWNUM as recNum, LVL, Q_NUM, Q_PARENTNO, Q_TITLE, USER_ID, Q_DATE
+			from (select LEVEL as LVL, Q_NUM, Q_PARENTNO, Q_TITLE, USER_ID, Q_DATE
+					from TB_QBOARD
+	                START WITH  Q_PARENTNO=0
+					CONNECT BY PRIOR Q_NUM = Q_PARENTNO
+					ORDER SIBLINGS BY Q_NUM DESC)
+			)                    
+		where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10	
+    ]]>
+  </select>
+  
+  <!-- 글 총 갯수 -->
+  <select id="selectTotQuestions" resultType="int"   >
+    <![CDATA[
+      select count(Q_NUM) from TB_QBOARD
+    ]]>
+  </select>
+
+</mapper>
