@@ -680,7 +680,7 @@
 
             <div class="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
-                <input type='button' value='완료' id="btn_pet2_2" onclick=' ' />
+                <button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationcomplete.do'">완료</button>
             </div>
         </form>
     </div>
