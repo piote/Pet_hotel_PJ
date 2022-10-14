@@ -16,7 +16,8 @@
 }
 h2 {
    text-align: center;
-   margin: 40px 0 20px 0; 
+   margin: 20px auto;
+   width: 1050px;
 }
 a {
     text-decoration: none;
@@ -39,8 +40,6 @@ p {
     height: 150px;
 }
 .mypage_info td:nth-child(2){
-	display: inline-block;
-	width: 310px;
     height: 180px;
     position: relative;
     top: 13px;
@@ -48,60 +47,63 @@ p {
     padding: 10px;
     border-left: 1px solid rgba(200, 200, 200, 0.5);
 }
-.mypage_info td:nth-child(2) h4,p{
-    display: block;
-    margin-left: 50px;
-    margin-top: 5px;
-}
 .mypage_info td:nth-child(3){
+	display: inline-block;
+	width: 310px;
     height: 180px;
     position: relative;
-    left: 95px;
+    top: 13px;
+    left: 30px;
+    padding: 10px;
+}
+.mypage_info td:nth-child(3) h4,p{
+    display: block;
+    margin-left: 50px;
+}
+.mypage_info td:nth-child(4){
+    height: 180px;
+    position: relative;
+    left: 105px;
     top: 11px;
     border-left: 1px solid rgba(200, 200, 200, 0.5);
 }
 
-.mypage_info td:nth-child(3) a{
-    display: block;
-    position: relative;
-    font-size: 13px;
-    margin-left: 50px;
-    padding: 10px;
-    margin-top: 5px;
-    top: 20px;
-    right: -70px;
-    
-}
-.mypage_info td:nth-child(4) {
-    position: relative;
-    left: 105px;
-    top: 11px;
-}
-.mypage_info td:nth-child(4) a {
-    display: block;
-    position: relative;
-    font-size: 13px;
-    margin-left: 50px;
-    padding: 10px;
-    margin-top: 5px;
-    top: 20px;
-    right: -55px;
-}
 .mypage_info td:nth-child(5) {
+    display: inline-block;
     position: relative;
-    left: 105px;
+    font-size: 13px;
+    padding: 10px;
+    left: 190px;
+    top: -20px
+}
+
+.mypage_info td:nth-child(5) a{
+	padding-left: 30px
+}
+
+.mypage_info td:nth-child(6) {
+    display: block;
+    position: relative;
+    font-size: 13px;
+    margin-left: 50px;
+    padding: 10px;
+    top: 5px;
+    left: 140px;
+}
+
+.mypage_info td:nth-child(6) a{
+	padding-left: 30px
 }
 .img_membership {
-    position: absolute;
-    right: 105px;
-    top: 25px;
+    position: relative;
+    right: -45px;
     width: 30px;
     height: 30px;
 }
 .membership {
-    position: absolute;
-    right: 55px;
-    top: 28px;
+    position: relative;
+    right: -40px;
+    top: -23px;
     font-size: 18px;
 }
 

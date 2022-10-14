@@ -181,7 +181,7 @@
         </tr>
 
       <c:choose>
-        <c:when test="${articlesList ==null }" >
+        <c:when test="${questionsList==null }" >
           <tr>
             <td colspan="4">
               <p align="center">
@@ -191,27 +191,27 @@
           </tr>
         </c:when>
 
-        <c:when test="${articlesList !=null }" >
-          <c:forEach  var="article" items="${articlesList }" varStatus="articleNum" >
+        <c:when test="${questionsList !=null }" >
+          <c:forEach  var="questions" items="${questionsList }" varStatus="q_num" >
             <tr align="center">
-              <td class="sf">${articleNum.count}</td>
+              <td class="sf">${q_num.count}</td>
               <td align="left">
                 <span style="padding-right:30px"></span>
                 <c:choose>
-                  <c:when test='${article.level > 1 }'>  
-                    <c:forEach begin="1" end="${article.level }" step="1">
+                  <c:when test='${questions.level > 1 }'>  
+                    <c:forEach begin="1" end="${questions.level }" step="1">
                       <span style="padding-left:10px"></span>    
                     </c:forEach>
                     <span>[답변]</span>
-                    <a href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
+                    <a href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${questions.q_title}</a>
                   </c:when>
                   <c:otherwise>
-                    <a href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a>
+                    <a href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${questions.q_title }</a>
                   </c:otherwise>
                 </c:choose>
               </td>
-            <td class="sf">${article.id }</td>
-            <td class="sf">${article.writeDate}</td> 
+            <td class="sf">${questions.id }</td>
+            <td class="sf">${questions.q_Date}</td> 
             </tr>
           </c:forEach>
         </c:when>

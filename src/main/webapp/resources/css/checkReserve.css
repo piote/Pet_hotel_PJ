@@ -5,10 +5,17 @@
  }
  h2 {
     text-align: center;
-    padding-top: 120px;
+	padding-top: 120px;
+    width: 1200px;
+    height: 20px;
+    margin: 0 auto;
  }
  img{
 	display: inline-block;
+ }
+ h3{
+ 	width: 80px;
+ 	margin-top: 30px;
  }
 /*  #wrap { */
 /*     width: 100%; */
@@ -24,46 +31,52 @@
     position: relative;
  }
  #searchFrm {
-    /* border: 1px solid red; */
+    width: 1200px;
+    height: 30px;
+    margin: 0 auto;
     position: relative;
-    top: 40px;
+    top: 80px;
+ }
+ #search_text{
+    position: relative;
+    top: -10px;
+    left: 690px;
  }
  #colName {
-    position: absolute;
-    top: 15px;
-    left: 650px;
-    /* border: 10px solid black; */
+    height:22px;
  }
  #searchWord{
-    margin: 0 auto;
+    margin-left: 5px;
     position: absolute;
-    top: 15px;
-    left: 730px;
+    height:22px;
  }
  
  #startDate, #endDate {
 	text-align: center;
+    height:22px;
  }
  
  #calendar {
-	width:600px;
-    position: absolute;
+	height: 25px;
+    position: relative;
     top: 12px;
-    left: 960px;
+    left: 250px;
+
  }
  
  #btnSearch{
  	position: relative;
  	cursor: pointer;
- 	left: 1325px;
- 	top: -20px;
+ 	top: -40px;
+ 	left: 235px;
  }
 
 #reserve_list{
 	text-align: left;
     position: relative;
-    top: 40px;
-    left: 350px;
+    top: 80px;
+    width: 1200px;
+    margin: 0 auto;
     
 }
 .detail_reserve{
@@ -71,7 +84,8 @@
    width: 1200px;
    height: 200px;
    border-top: 1px solid black;
-   margin-top: 40px;
+   position: relative;
+   top: 90px;
 }
 .detail_reserve tr:nth-child(2) td {
     border-top: 1px solid rgba(200, 200, 200, 0.5);
