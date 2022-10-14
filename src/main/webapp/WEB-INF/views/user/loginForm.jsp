@@ -1,51 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"
-	 isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    isELIgnored="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<!DOCTYPE html >
+<%
+   request.setCharacterEncoding("UTF-8");
+%>     
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<c:if test='${not empty message }'>
-<script>
-window.onload=function()
-{
-  result();
-}
-
-function result(){
-	alert("아이디나  비밀번호가 틀립니다. 다시 로그인해주세요");
-}
-</script>
-</c:if>
+  <meta charset="UTF-8">
+<title>로그인창</title>
+<c:choose>
+	<c:when test="${result=='loginFailed' }">
+	  <script>
+	    window.onload=function(){
+	      alert("아이디나 비밀번호가 틀립니다.다시 로그인 하세요!");
+	    }
+	  </script>
+	</c:when>
+</c:choose>  
 </head>
+
 <body>
-	<H3>회원 로그인 창</H3>
-	<DIV id="detail_table">
-	<form action="${contextPath}/user/login.do" method="post">
-		<TABLE>
-			<TBODY>
-				<TR class="dot_line">
-					<TD class="fixed_join">아이디</TD>
-					<TD><input name="user_id" type="text" size="20" /></TD>
-				</TR>
-				<TR class="solid_line">
-					<TD class="fixed_join">비밀번호</TD>
-					<TD><input name="user_pw" type="password" size="20" /></TD>
-				</TR>
-			</TBODY>
-		</TABLE>
-		<br><br>
-		<INPUT	type="submit" value="로그인"> 
-		<INPUT type="button" value="초기화">
-		
-		<Br><br>
-		   <a href="#">아이디 찾기</a>  | 
-		   <a href="#">비밀번호 찾기</a> | 
-		   <a href="${contextPath}/member/addUser.do">회원가입</a>    | 
-		   <a href="#">고객 센터</a>
-					   
-	</form>		
+<form name="frmLogin" method="post"  action="${contextPath}/member/login.do">
+   <table border="1"  width="80%" align="center" >
+      <tr align="center">
+         <td>아이디</td>
+         <td>비밀번호</td>
+      </tr>
+      <tr align="center">
+         <td>
+	    <input type="text" name="id" value="" size="20">
+	 </td>
+         <td>
+	    <input type="password" name="pwd" value="" size="20">
+	 </td>
+      </tr>
+      <tr align="center">
+         <td colspan="2">
+            <input type="submit" value="로그인" > 
+            <input type="reset"  value="다시입력" > 
+         </td>
+      </tr>
+   </table>
+</form>
 </body>
 </html>

@@ -14,7 +14,7 @@
 
 
 function fn_overlapped(){
-    var _id=$("#_member_id").val();
+    var _id=$("#_user_id").val();
     if(_id==''){
    	 alert("ID를 입력하세요");
    	 return;

@@ -1,6 +1,7 @@
 package com.myboot.user.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
@@ -12,4 +13,5 @@ import com.myboot.user.vo.UserVO;
 @Repository("userDAO")
 public interface UserDAO {
 	public List selectAllUserList() throws DataAccessException;
+	public UserVO loginById(UserVO userVO) throws DataAccessException;
 }
