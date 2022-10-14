@@ -37,9 +37,9 @@
             <div class="h_hr"></div>
             <ul>
                 <li class="min_title">소개</li>
-                <li><a href="#">호텔 소개</a></li>
-                <li><a href="#">호텔 시설</a></li>
-                <li><a href="#">멤버쉽 소개</a></li>
+                <li><a href="${contextPath}/introduce.do">호텔 소개</a></li>
+                <li><a href="${contextPath}/facilities.do">호텔 시설</a></li>
+                <li><a href="${contextPath}/membership.do">멤버쉽 소개</a></li>
             </ul>
             <div class="h_hr"></div>
             <ul>
