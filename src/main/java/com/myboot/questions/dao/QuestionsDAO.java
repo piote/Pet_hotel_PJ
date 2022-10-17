@@ -16,5 +16,8 @@ public interface QuestionsDAO {
 	
 	public List selectAllQuestionsList_page(Map<String, Integer> pagingMap) throws DataAccessException;
 	public int selectTotQuestions() throws DataAccessException;
+	public List searchQuestionsList(Map pagingMap) throws DataAccessException;
+	public int searchTotQuestions(String keyword) throws DataAccessException;
+	
 	
 }

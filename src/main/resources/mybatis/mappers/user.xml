@@ -7,7 +7,7 @@
 
    <resultMap id="userResult" type="userVO">
       <result property="id" column="USER_ID" />
-      <result property="pwd" column="USER_PW" />
+      <result property="pw" column="USER_PW" />
       <result property="name" column="USER_NAME" />
       <result property="email" column="USER_EMAIL" />
       <result property="tel" column="USER_TEL" />
@@ -18,55 +18,65 @@
       <result property="grade" column="USER_GRADE" />
    </resultMap> 
 
+<select id="loginById" resultType="userVO" parameterType="userVO" >
+	<![CDATA[
+		select USER_ID as id, USER_PW as pw, USER_NAME as name, USER_EMAIL as email,
+	      USER_TEL as tel, USER_TEL_SUB as tel_sub, USER_MESSAGE as message,
+	      USER_BIRTH as birth, JOINDATE, USER_GRADE as grade
+	      from tb_user
+	      where USER_ID=#{id} 
+	]]>
+  </select>
+  
    <select id="selectAllUserList" resultMap="userResult">
       <![CDATA[
         select * from TB_USER order by joinDate desc			
       ]]>
    </select>
    
-   <select id="selectName" resultType="String">
-   	<![CDATA[
-   		select name from TB_USER
-   		where id='hong'
-   ]]
-   </select>
+<!--    <select id="selectName" resultType="String"> -->
+<!--    	<![CDATA[ -->
+<!--    		select USER_NAME from TB_USER -->
+<!--    		where USER_ID='hong' -->
+<!--    ]] -->
+<!--    </select> -->
    
-   <select id ="selectPwd" resultType="int">
-   	<![CDATA[
-   		select pwd from TB_USER
-   		where id = 'hong'
-   		]]>
-   		</select>
-   	<select id="selectUserById" resultType="userVO" parameterType="String">
-   	<![CDATA[
-   		select*from TB_USER
-   		where
-   		id=#{id}
-   	]]>
-   	</select>
+<!--    <select id ="selectPwd" resultType="int"> -->
+<!--    	<![CDATA[ -->
+<!--    		select pwd from TB_USER -->
+<!--    		where id = 'hong' -->
+<!--    		]]> -->
+<!--    		</select> -->
+<!--    	<select id="selectUserById" resultType="userVO" parameterType="String"> -->
+<!--    	<![CDATA[ -->
+<!--    		select*from TB_USER -->
+<!--    		where -->
+<!--    		id=#{id} -->
+<!--    	]]> -->
+<!--    	</select> -->
    		
-   	<select id="selectUserByPwd" resultMap="userResult" parameterType="int">
-   	<![CDATA[
-   		select*from TB_USER
-   		where
-   		pwd = #{pwd}
-   	]]>
-   	</select>
+<!--    	<select id="selectUserByPwd" resultMap="userResult" parameterType="int"> -->
+<!--    	<![CDATA[ -->
+<!--    		select*from TB_USER -->
+<!--    		where -->
+<!--    		pw = #{pw} -->
+<!--    	]]> -->
+<!--    	</select> -->
    	
-   	<insert id="insertUser" parameterType="userVO">
-   		<![CDATA[
-   		insert into TB_USER(id,pwd, name,email)
-   		values(#{id},#{pwd},#{name},#{email})
-   		]]>
-   	</insert>
+<!--    	<insert id="insertUser" parameterType="userVO"> -->
+<!--    		<![CDATA[ -->
+<!--    		insert into TB_USER(id,pwd, name,email) -->
+<!--    		values(#{id},#{pwd},#{name},#{email}) -->
+<!--    		]]> -->
+<!--    	</insert> -->
    	
-   	<insert id="insertUser2" parameterType="java.util.HashMap">
-   		<![CDATA[
-   			insert into TB_USER(id,pwd,name,email)
-   		]]>
-   		
-   	</insert>
-   	<update id="updateUser" parameterType="userVO">
+<!--    	<insert id="insertUser2" parameterType="java.util.HashMap"> -->
+<!--    		<![CDATA[ -->
+<!--    			insert into TB_USER(id,pwd,name,email) -->
+<!--    		]]> -->
+<!--    	</insert> -->
+
+     	<update id="updateUser" parameterType="userVO">
    		<![CDATA[
    				update TB_USER
    				set pwd=#{pwd}, email=#{email}, tel=#{tel},
@@ -74,14 +84,14 @@
    				where
    				id=#{id}
    		]]>
-   	</update>
+   	  </update>
    	
-   	<delete id="deleteUser" parameterType="String">
-   		<![CDATA[
-   			delete from TB_USER
-   			where
-   			id=#{id}
-   		]]>
-   	</delete>
+<!--    	<delete id="deleteUser" parameterType="String"> -->
+<!--    		<![CDATA[ -->
+<!--    			delete from TB_USER -->
+<!--    			where -->
+<!--    			id=#{id} -->
+<!--    		]]> -->
+<!--    	</delete> -->
 
 </mapper>

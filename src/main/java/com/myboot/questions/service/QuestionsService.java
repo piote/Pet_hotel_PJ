@@ -7,5 +7,5 @@ import com.myboot.questions.vo.QuestionsVO;
 
 public interface QuestionsService {
 	public List<QuestionsVO> listQuestions() throws Exception;
-	public Map listQuestions_page(Map<String, Integer> pagingMap) throws Exception;
+	public Map listQuestions_page(Map pagingMap,String ketword) throws Exception;
 }

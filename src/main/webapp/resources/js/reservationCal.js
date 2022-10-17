@@ -193,31 +193,21 @@ function calendarMaker(target, date) {
 
                     end_day = new Date(selectDay);
 
-                    if (start_day < end_day) {
-                        $(this).addClass("end_day");
-
-                    } else if (start_day.getDate() == end_day.getDate()) {
-
-                        $(this).addClass("one_day");
-                        $(this).removeClass("start_day");
-                    }
+                
+                    $(this).addClass("end_day");
 
                     console.log(end_day);
                     console.log("end select = " + $(this).text());
                     //비교할때 숫자로 바꾸기
 
-
-                    if (start_day < end_day) {
-                        console.log("start_day < end_day");
-                        settingDay = new Date(start_day)
-                        //선택 날짜 사이에 날짜를 지정하여 표시
-                        for (between_day = new Date(settingDay.setDate(settingDay.getDate() + 1)); between_day < end_day; between_day.setDate(between_day.getDate() + 1)) {
-                            $("#CalDate" + between_day.getDate()).addClass("between_day");
-
-                        }
-
+                    console.log("start_day < end_day");
+                    settingDay = new Date(start_day)
+                    //선택 날짜 사이에 날짜를 지정하여 표시
+                    for (between_day = new Date(settingDay.setDate(settingDay.getDate() + 1)); between_day < end_day; between_day.setDate(between_day.getDate() + 1)) {
+                        $("#CalDate" + between_day.getDate()).addClass("between_day");
 
                     }
+
 
 
                     $("#end_dayBox").text(end_day.toLocaleDateString());
@@ -243,9 +233,10 @@ function calendarMaker(target, date) {
                     // $(".custom_calendar_table").remove();
                     //박수 초기화
                     $("#dateResult").text("Reservation Detail");
+                    $("#dateResult").val('');
 
                     //결과 창 초기화
-                    costTB(servicemap)
+                    costTB(servicemap,false)
                     
                 }
 
@@ -261,7 +252,7 @@ function calendarMaker(target, date) {
                 var date = new Date(indate);
 
                 var year = date.getFullYear();
-                var month = date.getMonth() + 1;
+                var month = date.getMonth();
                 var day = date.getDate();
 
                 var stDate = new Date(year, month, day);
@@ -270,7 +261,7 @@ function calendarMaker(target, date) {
                 var date = new Date(outdate);
 
                 var year = date.getFullYear();
-                var month = date.getMonth() + 1;
+                var month = date.getMonth();
                 var day = date.getDate();
 
                 var endDate = new Date(year, month, day);
@@ -278,11 +269,11 @@ function calendarMaker(target, date) {
                 var btMs = endDate.getTime() - stDate.getTime();
                 var btDay = btMs / (1000 * 60 * 60 * 24);
                 console.log(start_day.toLocaleDateString()+'-'+end_day.toLocaleDateString());
-                $("#dateResult").text('Reservation Detail || '+start_day.toLocaleDateString() + ' - ' + end_day.toLocaleDateString() + '  ||  ' + btDay + '박');
+                $("#dateResult").text(' || '+start_day.toLocaleDateString() + ' - ' + end_day.toLocaleDateString() + '  ||  ' + btDay + '박');
                 $("#dateResult").val(btDay);
 
                 if(servicemap !=null){
-                    costTB(servicemap)
+                    costTB(servicemap, true)
                 }
             }
 

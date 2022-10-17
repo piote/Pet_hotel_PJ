@@ -116,12 +116,12 @@
     	var answer=confirm("예약을 취소하시겠습니까?");
     	if(answer==true){
     		var formObj=document.createElement("form");
-    		var i_reserve_id = document.createElement("input"); 
+    		var reserves_reserve_id = document.createElement("input"); 
     	    
-    	    i_reserve_id.name = "reservation_num";
-    	    i_reserve_id.value = reservation_num;
+    	    reserves_reserve_id.name = "reservation_num";
+    	    reserves_reserve_id.value = reservation_num;
     		
-    	    formObj.appendChild(i_reservation_num);
+    	    formObj.appendChild(reserves_reservation_num);
     	    document.body.appendChild(formObj); 
     	    formObj.method = "post";
     	    formObj.action ="${contextPath}/mypage/cancelMyReserve.do";
@@ -133,7 +133,7 @@
 <body>
 	<div id="wrap">
 		 <div id="container">
-			<h2>예약 조회 및 취소</h2>
+			<h2>예약 조회</h2>
 			<div id="searchFrm">
 				<form name="searchFrm">
 					<div id="calendar">
@@ -177,7 +177,9 @@
 					<c:when test="${not empty myReserveList }">
 						<c:forEach var="reserves" items="${myReserveList }">
 							<tr class="detail-list">
-								<td>${reserves.reservation_st }</td>
+								<td>
+									<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.reservation_st }"></a>${reserves.reservation_st }
+								</td>
 								<td>${reserves.reservation_name }</td>
 								<td>${reserves.pet_name }</td>
 								<td>${reserves.reservation_tel }</td>
