@@ -15,7 +15,7 @@
 		  	if(isLogOn != '' && isLogOn != 'false'){
 		    	location.href=reservationForm;
 		  	}else{
-		   		alert("로그인 후 글쓰기가 가능합니다.")
+		   		alert("로그인 후 예약해주세요.")
 		    	location.href=loginForm+'?action=/reservation.do';
 		  	}
 		}
@@ -64,7 +64,7 @@
             <div class="r_menu menu_wrap">
                 <a href="${contextPath}/introduce.do" class="menu">호텔소개</a>
                 <a href="${contextPath}/facilities.do" class="menu">시설소개</a>
-                <a href="${contextPath}/reservation.do" class="menu">호텔예약</a>
+                <a href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservation.do','${contextPath}/loginForm.do')" class="menu">호텔예약</a>
                 <a href="${contextPath}/reviewBoard.do" class="menu">리뷰게시판</a>
             </div>
             <div class="l_menu menu_wrap">
