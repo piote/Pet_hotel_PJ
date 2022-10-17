@@ -19,15 +19,15 @@
    
 <!-- 	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="String"  >
 		<![CDATA[
-		select * from tb_reservation , tb_service , tb_user
+		select * from tb_reservation , tb_petservice , tb_user
 		         where user_id=#{user_id}
 		         order by reservation_st desc
 		]]>
 	</select>
 
-	<select id="selectMyReservesList" resultMap="com.myboot.user.vo.UserVO"  parameterType="HashMap"  >
+	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="HashMap"  >
 		<![CDATA[
-		select * from tb_reservation, tb_service , tb_user 
+		select * from tb_reservation, tb_petservice , tb_user 
 		         where user_id=#{user_id}
 		         order by reservation_st desc
 		]]>

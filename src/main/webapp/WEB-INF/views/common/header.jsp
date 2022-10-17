@@ -18,15 +18,24 @@
         
         <div class="log_wrap" id ="head_link">
         <c:choose>
-        		<c:when test="${isLogOn==true and not empty userInfo}">
-                    <a id="mypage" href="${contextPath}/logout.do">마이페이지</a>
-        			<a id="logout" href="${contextPath}/logout.do">로그아웃</a>
-        		</c:when>
-           <c:otherwise>
-           		<a id="login" href="${contextPath}/loginForm.do">로그인</a>
-        		<a id="signup" href="${contextPath}/userForm.do">회원가입</a>
-        	</c:otherwise>
-        	</c:choose>
+          <c:when test="${isLogOn == true  && user!= null}">
+            <h3>환영합니다. ${user.name}님!</h3>
+            <a href="${contextPath}/logout.do"><h3>로그아웃</h3></a>
+          </c:when>
+          <c:otherwise>
+	        <a href="${contextPath}/loginForm.do"><h3>로그인</h3></a>
+	      </c:otherwise>
+	   </c:choose>     
+<%--         <c:choose> --%>
+<%--         		<c:when test="${isLogOn==true and not empty userInfo}"> --%>
+<%--                     <a id="mypage" href="${contextPath}/logout.do">마이페이지</a> --%>
+<%--         			<a id="logout" href="${contextPath}/logout.do">로그아웃</a> --%>
+<%--         		</c:when> --%>
+<%--            <c:otherwise> --%>
+<%--            		<a id="login" href="${contextPath}/loginForm.do">로그인</a> --%>
+<%--         		<a id="signup" href="${contextPath}/userForm.do">회원가입</a> --%>
+<%--         	</c:otherwise> --%>
+<%--         	</c:choose> --%>
         	<!--  
             <a id="login" href="#">로그인</a>
             <a id="signup" href="#">회원가입</a>
