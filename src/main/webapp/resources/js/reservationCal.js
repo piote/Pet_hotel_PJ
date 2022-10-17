@@ -278,7 +278,7 @@ function calendarMaker(target, date) {
                 var btMs = endDate.getTime() - stDate.getTime();
                 var btDay = btMs / (1000 * 60 * 60 * 24);
                 console.log(start_day.toLocaleDateString()+'-'+end_day.toLocaleDateString());
-                $("#dateResult").text('Reservation Detail || '+start_day.toLocaleDateString() + ' - ' + end_day.toLocaleDateString() + '  ||  ' + btDay + '박');
+                $("#dateResult").text(' || '+start_day.toLocaleDateString() + ' - ' + end_day.toLocaleDateString() + '  ||  ' + btDay + '박');
                 $("#dateResult").val(btDay);
 
                 if(servicemap !=null){
