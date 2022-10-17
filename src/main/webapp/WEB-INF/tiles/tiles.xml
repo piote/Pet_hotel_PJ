@@ -28,7 +28,7 @@
  
   <!--  로그인 -->
 	
-  <definition name="loginForm"  extends="baseLayout">
+  <definition name="/loginForm"  extends="baseLayout">
       <put-attribute name="title" value="로그인" />
       <put-attribute name="body" value="/WEB-INF/views/user/loginForm.jsp" />
   </definition>
