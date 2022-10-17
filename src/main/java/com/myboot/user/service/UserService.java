@@ -16,4 +16,6 @@ public interface UserService {
 //	로그인 기능
 	public UserVO login(UserVO userVO) throws Exception;
 	public List listUser() throws Exception;
+//	회원가입 회원정보 추가
+	public int addUser(UserVO userVO) throws Exception;
 }

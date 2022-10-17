@@ -76,6 +76,17 @@ public class UserControllerImpl implements UserController{
 		
 		return mav;
 	}
+//	회원가입 회원추가
+	@Override
+	@RequestMapping(value="/addUser.do" ,method = RequestMethod.POST)
+	public ModelAndView addUser(@ModelAttribute("user") UserVO user,
+			                  HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		int result = 0;
+		result = userService.addUser(user);
+		ModelAndView mav = new ModelAndView("redirect:/listusers.do");
+		return mav;
+	}
 	
 	@RequestMapping("/loginForm.do") 
 	  public String reservationMain(Model model){

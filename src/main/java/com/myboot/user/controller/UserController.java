@@ -18,6 +18,7 @@ public interface UserController {
 	public ModelAndView login(@ModelAttribute("user") UserVO userVO,
             RedirectAttributes  redirectAttributes,
            HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView addUser(@ModelAttribute("info") UserVO userVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public ModelAndView pw_change(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public String userMain(Model model);

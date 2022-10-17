@@ -47,7 +47,7 @@ function fn_overlapped(){
 </head>
 <body>
 	<h3>필수입력사항</h3>
-	<form action="${contextPath}/member/addUser.do" method="post">	
+	<form action="${contextPath}/addUser.do" method="post">	
 	<div id="detail_table">
 		<table>
 			<tbody>

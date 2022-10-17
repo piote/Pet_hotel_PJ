@@ -31,5 +31,10 @@ public class UserServiceImpl implements UserService {
 		userList = userDAO.selectAllUserList();
 		return userList;
 	}
+//	회원가입 회원정보 추가
+	@Override
+	public int addUser(UserVO user) throws Exception {
+		return userDAO.insertUser(user);
+	}
 
 }
