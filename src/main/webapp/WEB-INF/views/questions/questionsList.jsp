@@ -8,6 +8,7 @@
 <c:set  var="totArticles"  value="${questionsMap.totArticles}" />
 <c:set  var="section"  value="${questionsMap.section}" />
 <c:set  var="pageNum"  value="${questionsMap.pageNum}" />
+
 <%
   request.setCharacterEncoding("UTF-8");
 %>  
@@ -102,13 +103,15 @@
           background-color: #eee;
           outline: none;
       }
-  .search_wrap a{
-  width: 17px;
-  height: 17px;
+  .seh_icon{
+  width: 17px;height: 17px;
   display: block;
   position: absolute;
   right: 10px;
   top: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
   }
 
   .bottom_bt_wrap{
@@ -231,9 +234,10 @@
     </table>
     <div class="page">
       <c:if test="${totArticles != null }" >
+        
            <c:choose>
              <c:when test="${totArticles >100 }">  <!-- 글 개수가 100 초과인경우 -->
-               <c:forEach   var="page" begin="1" end="10" step="1" >
+               <c:forEach var="page" begin="1" end="10" step="1" >
                   <c:if test="${section >1 && page==1 }">
                      <a class="no-uline" href="${contextPath }/questionsList.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
                   </c:if>
@@ -242,6 +246,7 @@
                      <a class="no-uline" href="${contextPath }/questionsList.do?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
                   </c:if>
                </c:forEach>
+
              </c:when>
              <c:when test="${totArticles ==100 }" >  <!--등록된 글 개수가 100개인경우  -->
                <c:forEach   var="page" begin="1" end="10" step="1" >
@@ -262,12 +267,12 @@
                </c:forEach>
              </c:when>
            </c:choose>
-        </c:if>
+      </c:if>
    </div>
-    <form action="#" method="post">
+    <form action="${contextPath }/questionsList.do?keyword=${keyword}" method="get">
         <div class="search_wrap">
-            <input type="text" id="seh" placeholder="Search">
-            <a href="#" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg>
+            <input type="text" id="seh" placeholder="Search" name="keyword">
+            <button type="submit" class="seh_icon" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
         </div>
     </form>
     

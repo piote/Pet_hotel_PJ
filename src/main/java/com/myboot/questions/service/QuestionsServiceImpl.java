@@ -36,9 +36,8 @@ public class QuestionsServiceImpl implements QuestionsService {
 			pagingMap.put("keyword", keyword);
 			questionsList = questionsDAO.searchQuestionsList(pagingMap);
 			articlesMap.put("keyword", keyword);
-			//totArticles = questionsDAO.selectTotQuestions();
+			totArticles = questionsDAO.searchTotQuestions(keyword);
 		}
-		
 		articlesMap.put("questionsList", questionsList);
 		articlesMap.put("totArticles", totArticles);
 		return articlesMap;
