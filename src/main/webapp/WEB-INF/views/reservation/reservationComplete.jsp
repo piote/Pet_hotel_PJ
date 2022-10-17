@@ -38,7 +38,7 @@
 
         /* 컨텐츠 */
         .success{
-            border: 2px solid #e5e4e2;
+            border: 3px solid black;
             border-radius: 15px;
             margin: auto;
             width: 69%;
@@ -136,7 +136,7 @@
                     </tr>
                     <br><br><br>
                     <tr align="center">
-                        <td align="center"><b>☆★☆★☆★</b>님의 예약이 완료되었습니다.</td>
+                        <td align="center"><b color=pink>☆★☆★☆★</b>님의 예약이 완료되었습니다.</td>
                     </tr>
                     <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
                     <tr align="center">
