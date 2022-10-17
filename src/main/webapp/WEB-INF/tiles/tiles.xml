@@ -110,5 +110,9 @@
       	  <put-attribute name="title" value="문의하기" />
       	  <put-attribute name="body" value="/WEB-INF/views/questions/questionsForm.jsp" />
    </definition>
+      <definition name="/questionViewArticle" extends="baseLayout">
+      	  <put-attribute name="title" value="상세창" />
+      	  <put-attribute name="body" value="/WEB-INF/views/questions/questionsViewArticle.jsp" />
+   </definition>
 	
 </tiles-definitions>

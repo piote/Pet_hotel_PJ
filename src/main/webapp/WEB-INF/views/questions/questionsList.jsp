@@ -221,10 +221,10 @@
                       <span style="padding-left:10px"></span>    
                     </c:forEach>
                     <span>[답변]</span>
-                    <a href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${questions.q_title}</a>
+                    <a href="${contextPath}/questionViewArticle.do?articleNO=${questions.q_num}">${questions.q_title}</a>
                   </c:when>
                   <c:otherwise>
-                    <a href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${questions.q_title }</a>
+                    <a href="${contextPath}/questionViewArticle.do?articleNO=${questions.q_num}">${questions.q_title }</a>
                   </c:otherwise>
                 </c:choose>
               </td>

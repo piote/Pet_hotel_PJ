@@ -69,7 +69,6 @@ public class QuestionsControllerImpl implements QuestionsController{
 		return "questionsForm";
 	  }
 	
-	
 //	test _ 작성자 아이디 호출
 	@ResponseBody
 	@RequestMapping("/QTest.do") 
@@ -86,5 +85,16 @@ public class QuestionsControllerImpl implements QuestionsController{
 			e.printStackTrace();
 		}
 		return a;
+	}
+
+@RequestMapping(value="/questionViewArticle.do" ,method = RequestMethod.GET)
+public ModelAndView questionViewArticle(@RequestParam("articleNO") int articleNO,
+                                HttpServletRequest request, HttpServletResponse response) throws Exception{
+	String viewName = (String)request.getAttribute("viewName");
+	questionsVO=questionsService.questionsViewArticle(articleNO);
+	ModelAndView mav = new ModelAndView();
+	mav.setViewName(viewName);
+	mav.addObject("article", questionsVO);
+	return mav;
 	}
 }
