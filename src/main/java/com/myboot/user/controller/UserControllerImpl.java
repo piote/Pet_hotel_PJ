@@ -100,12 +100,24 @@ public class UserControllerImpl implements UserController{
 		ModelAndView mav = new ModelAndView("redirect:/listusers.do");
 		return mav;
 	}
-	
+//	@RequestMapping(value = "/loginForm.do", method =  RequestMethod.GET)
+//	public ModelAndView loginForm(@RequestParam(value= "result", required=false) String result,
+//			                  @RequestParam(value= "action", required=false) String action,
+//			                  HttpServletRequest request, 
+//			                  HttpServletResponse response) throws Exception {
+//		String viewName = (String)request.getAttribute("viewName");
+//		HttpSession session = request.getSession();
+//		session.setAttribute("action", action); 
+//		
+//		ModelAndView mav = new ModelAndView(viewName);
+//		mav.addObject("result",result);
+//		return mav;
+//	}
 	@RequestMapping("/loginForm.do") 
-	  public String reservationMain(Model model){
+	public String loginForm(Model model){
 	 
-	    return "loginForm"; 
-	  }
+		return "loginForm"; 
+	}
 
 	@Override
 	@RequestMapping(value="/pw_change.do" ,method = RequestMethod.GET)

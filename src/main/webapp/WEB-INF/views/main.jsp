@@ -243,7 +243,7 @@
         <div class="txt_wrap">
             <p>Anitel</p>
             <p>펫 호텔 서비스</p>
-            <a class="slider_bt" href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservation.do','${contextPath}/loginForm.do')" >예약하기 ></a>
+            <a class="slider_bt" href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservationForm.do','${contextPath}/loginForm.do')" >예약하기 ></a>
         </div>
     </div>
   </div>

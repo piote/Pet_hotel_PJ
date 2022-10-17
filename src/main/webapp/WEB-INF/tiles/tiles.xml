@@ -16,12 +16,12 @@
    
    <!--  예약 페이지 -->
    
-   <definition name="reservationMain" extends="baseLayout">
+   <definition name="/reservationForm" extends="baseLayout">
       <put-attribute name="title" value="예약하기" />
-      <put-attribute name="body" value="/WEB-INF/views/reservation/reservationMain.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/reservation/reservationForm.jsp" />
    </definition> 
    
-   <definition name="reservationComplete" extends="baseLayout">
+   <definition name="/reservationComplete" extends="baseLayout">
       <put-attribute name="title" value="예약완료" />
       <put-attribute name="body" value="/WEB-INF/views/reservation/reservationComplete.jsp" />
    </definition> 
