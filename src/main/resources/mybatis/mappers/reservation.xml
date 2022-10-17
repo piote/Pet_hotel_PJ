@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myboot.reservation.dao.ReservationDAO">
+<!--    <resultMap id="reserveResult" type="reservationVO">
+
+   </resultMap>  -->
+<resultMap id="reservationResult" type="reservationVO">
+    <result property="res_num" column="RESERVATION_NUM" />
+    <result property="res_st" column="RESERVATION_ST" />
+    <result property="res_end" column="RESERVATION_END" />
+    <result property="id" column="USER_ID" />
+    <result property="res_comment" column="RS_COMMENT" />
+    <result property="totalCost" column="TOTAL_COST" />
+    <result property="payTime" column="PAY_TIME" />
+    <result property="res_state" column="RESERVATION_STATE" />
+  </resultMap> 
+   
+<!-- 	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="String"  >
+		<![CDATA[
+		select * from tb_reservation , tb_service , tb_user
+		         where user_id=#{user_id}
+		         order by reservation_st desc
+		]]>
+	</select>
+
+	<select id="selectMyReservesList" resultMap="com.myboot.user.vo.UserVO"  parameterType="HashMap"  >
+		<![CDATA[
+		select * from tb_reservation, tb_service , tb_user 
+		         where user_id=#{user_id}
+		         order by reservation_st desc
+		]]>
+		<choose>
+			<when test="(colName == 'name' or colName == 'pet_name' or colName == 'tel) and searchWord != null and(startDate == null or endDate == null) ">
+				where ${colName} like '%'|| #{searchWord} || '%'
+			</when>
+			
+			<when test="(colName == null or colName == '') and (StartDate != null and endDate != null)">
+				where to_char(reservation_st, 'yyyy-mm-dd') between #{startDate} and #{endDate} 
+			</when>
+			
+			<when test="(colName == 'name' or colName == 'pet_name' or colName == 'tel') and searchWord != null and (startDate != null and endDate != null)">
+				where ${colName} like '%'||#{searchWord} || '%'
+				and where to_char(reservation_st, 'yyyy-mm-dd') between #{startDate} and #{endDate}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select> -->
+	
+
+	<select id="selectReservationList" resultMap="reservationResult">
+		<![CDATA[
+		select review_date, review_num, review_title, review_con from tb_review
+			         order by review_date desc
+		]]>
+	</select>
+
+	
+<!-- 	<update id="updateMyReserveCancel" parameterType="String">
+	    update tb_reservation
+	 	   set reservation_state='C'
+	    where reservation_num=#{reservation_num}
+	</update> -->
+ 
+    
+</mapper>
