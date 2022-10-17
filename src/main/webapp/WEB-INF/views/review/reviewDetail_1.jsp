@@ -23,7 +23,7 @@
    .all {
        
        margin-top: 250px;
-       height: 1200px;
+       height: 1300px;
    }
 
  .w_review {
@@ -81,23 +81,41 @@
 
 
   .w_review2 {
-    width: 90%;
-   margin-bottom: 30px !important;
-  
+	  width:90%;
+	    border:1px;
+	    font-size: 17px;
+	    border-collapse: collapse;
+	    padding: 5px;
   }
 
   .w_tr {
             width: 100% !important;  
+            height: 40px;
+     
+            border-collapse: collapse;
         } 
 
   .w_tr>.w_td {
-    border: 1px solid rgba(107, 107, 107, 0.3) !important;
+   
     font-size: 17px !important ;
+    height: 40px;
     
   }
+  .w_date{
+	  text-align: right;
+	  
+  }
   
+  .w_margin1 {
+	  border-top: 0px solid #ddd;
+  }
+  .w_margin2 {
+	  border-bottom: 1px solid #ddd;
+  }
+  .w_margin3 {
+	  border-bottom: 50px solid #fff;
+  }
  
-  
 	
   </style> 
  
@@ -127,36 +145,35 @@
          <br>
 
          <div>
-         <table align="right" class="w_review2">
-           <tr class="w_tr">
-             <td class="w_td" width="15%">별점</td>
-             <td class="w_td" width="50%" rowspan="2">컨텐츠</td>
-             <td class="w_td" width="20%" rowspan="2">이미지</td>
-             <td class="w_td" width="15%" >작성일</td>
-         </tr>
-         <tr class="w_tr">
-             <td class="w_td">유저ID</td>
-             <td class="w_td">좋아요</td>
-         </tr>    
-        </table>
+   
 
-        <table align="right" class="w_review">
+        <table align="right" class="w_review2">
         <c:choose>
+        <c:when test="${reviewList ==null }" >
+          <tr  height="10">
+            <td colspan="4">
+               <p align="center">
+                  <b><span style="font-size:15pt;">등록된 글이 없습니다.</span></b>
+              </p>
+            </td>  
+          </tr>
+        </c:when>
         <c:when test="${reviewList !=null }" >
           <c:forEach  var="review" items="${reviewList }" varStatus="reviewNum" >
-       
-       
-       
-        <tr class="w_tr">
+
+        <tr class="w_tr w_margin1">
           <td class="w_td" width="15%">${review.star}</td>
           <td class="w_td" width="50%" rowspan="2">${review.title}</td>
           <td class="w_td" width="20%" rowspan="2">${review.image}</td>
-          <td class="w_td" width="15%" >${review.date}</td>
+          <td class="w_td w_date"  width="15%" >${review.date}</td>
       </tr>
-      <tr class="w_tr">
+      <tr class="w_tr" class="w_tr2">
           <td class="w_td">${review.id}</td>	
-          <td class="w_td">${review.con}</td>
-      </tr>    
+          <td class="w_td" align=center >${review.rec}</td>
+      </tr>  
+      <tr class="w_margin2"></tr>
+      <tr class="w_margin3"></tr>
+      
     </c:forEach>
   </c:when>
  </c:choose>    
