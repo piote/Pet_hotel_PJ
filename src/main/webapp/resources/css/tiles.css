@@ -36,6 +36,7 @@ header{
     position: absolute;
     top: 60px; right: 35px;
 }
+
 #signup, #logout{
     margin-left: 20px;
 }
@@ -44,6 +45,12 @@ header{
     position: relative;
     top: 100px;
     background-color: rgba(70, 70, 70, 0.3);
+}
+
+.login_msg{
+	display: inline-block;
+    margin-right: 20px;
+    font-size: 15px;
 }
 nav{
     width: 100%; height: 20px;
