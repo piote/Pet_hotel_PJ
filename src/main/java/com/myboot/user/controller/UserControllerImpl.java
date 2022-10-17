@@ -65,7 +65,7 @@ public class UserControllerImpl implements UserController{
 			if(action!= null) {
 				mav.setViewName("redirect:"+action);
 			}else {
-				mav.setViewName("redirect:/user/listUsers.do");	
+				mav.setViewName("redirect:/main.do");	
 			}
 			
 		}else {
@@ -76,6 +76,18 @@ public class UserControllerImpl implements UserController{
 		
 		return mav;
 	}
+//	로그아웃 기능추가
+	@Override
+	@RequestMapping(value = "/logout.do", method =  RequestMethod.GET)
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		session.removeAttribute("user");
+		session.setAttribute("isLogOn",false);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/main.do");
+		return mav;
+	}	
 //	회원가입 회원추가
 	@Override
 	@RequestMapping(value="/addUser.do" ,method = RequestMethod.POST)
