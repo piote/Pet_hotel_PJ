@@ -69,4 +69,13 @@
       select count(Q_NUM) from TB_QBOARD WHERE Q_TITLE LIKE '%'||#{keyword}||'%'
     ]]>
   </select>
+  
+  <!-- 글 조회 -->
+  <select id="selectQuestions" resultType="questionsVO"   parameterType="int">
+    <![CDATA[
+      SELECT * from TB_QBOARD
+      where Q_NUM = #{q_num}
+    ]]>
+  </select>
+  
 </mapper>
