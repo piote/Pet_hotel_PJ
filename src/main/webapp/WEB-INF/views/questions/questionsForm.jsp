@@ -85,6 +85,7 @@
             font-size: 15px;
             padding: 20px;
             transition: background-color 0.2s;
+            margin-bottom: 30px
         }
         .atc_content textarea::placeholder{
             color: #909090;
@@ -93,6 +94,54 @@
             background-color: rgb(232, 232, 232);
             outline: none;
         }
+        
+        .imageFile_wrap label{
+        	display: inline-block;
+		    width: 100px;
+		    height: 25px;
+		    border: 1px solid #aaa;
+		    border-radius: 7px;
+		    background-color: #fff;
+		    font-size: 13px;
+		    line-height: 25px;
+		    text-align: center;
+		    color: #444;
+        }
+        .imageFile_wrap label:hover{
+        	background-color: #eee;
+        }
+        .upload-name{
+	        display: inline-block;
+		    height: 30px;
+		    padding: 0 10px;
+		    vertical-align: middle;
+		    border: none;
+		    width: 78%;
+		    color: #999999;
+        }
+        .upload-name:focus {
+          background-color: #fff;
+          outline: none;
+      	}
+        .imageFile_wrap input[type="file"] {
+		    position: absolute;
+		    width: 0;
+		    height: 0;
+		    padding: 0;
+		    overflow: hidden;
+		    border: 0;
+		}
+		
+        .img_bt{
+        	width: 100px; height: 30px;
+            border: 1px solid #999;
+            border-radius: 20px;
+            background-color: #fff;
+        }
+        #preview{
+        	margin-top: 30px;
+        }
+        
         .bt_wrap{
             width: 100%; height: auto;
             position: relative;
@@ -123,7 +172,19 @@
             obj.action="${contextPath}/board/listArticles.do";
             obj.submit();
         }
-
+        
+        //이미지파일 추가
+		function readURL(input) {
+      		if (input.files && input.files[0]) {
+      			var fileName = $("#imageFileName").val();
+		      	var reader = new FileReader();
+		      	reader.onload = function (e) {
+		        	$('#preview').attr('src', e.target.result);
+	          	}
+		      	$(".upload-name").val(fileName);
+	         	reader.readAsDataURL(input.files[0]);
+      		}
+  		}
     </script>
 </head>
 <body>
@@ -147,6 +208,14 @@
                 </li>
                 <li class="atc_content">
                     <textarea name="content" spellcheck="false" maxlength="4000" placeholder="내용을 입력해주세요."></textarea>
+                </li>
+                <li class="atc_imageFile">
+                	<div class="imageFile_wrap">
+                		<label for="imageFileName">이미지 파일</label>
+                		<input class="upload-name" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL(this);"  disabled >
+	                	<input type="file" id="imageFileName" name="imageFileName"  onchange="readURL(this);"/>
+                		<img id="preview" src="#" height=350 onerror="this.src='${contextPath}/resources/img/no_img.png'"/>
+                	</div>
                 </li>
             </ul>
             <div class="bt_wrap">
