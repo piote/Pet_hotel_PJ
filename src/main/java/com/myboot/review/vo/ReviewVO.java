@@ -10,21 +10,21 @@ import lombok.Data;
 @Data
 @Component("reviewVO")
 public class ReviewVO {
-	private String id;
-	private String pwd;
-	private String name;
-	private String email;
-	private String tel;
-	private String tel_sub;
-	private String message;
-	private Date birth;
-	private Date joinDate;
-	private String grade;
+	private int level;
+	private int num;
+	private int parentNO;
+	private String title;
+	private String con;
+	private int star ;
+	private Date date;
+	private String image;
+	private int rec;
 	
 	
 	public ReviewVO() {
-		System.out.println("userVO 호출");
+		System.out.println("reviewVO 호출");
 	}
+	
 	
 	
 }
