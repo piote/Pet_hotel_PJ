@@ -282,7 +282,7 @@
     <div class="bottom_bt_wrap">
       <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 22.621l-3.521-6.795c-.008.004-1.974.97-2.064 1.011-2.24 1.086-6.799-7.82-4.609-8.994l2.083-1.026-3.493-6.817-2.106 1.039c-7.202 3.755 4.233 25.982 11.6 22.615.121-.055 2.102-1.029 2.11-1.033z"/></svg>
       <a class="tel" href="tel:000-0000-0000">전화 상담 : 000-0000-0000</a>
-      <a class="cls1" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/questionsForm.do','${contextPath}/member/loginForm.do')">
+      <a class="cls1" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/questionsForm.do','${contextPath}/loginForm.do')">
       문의글쓰기</a>
     </div>
  </div>

@@ -10,6 +10,16 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+	<script>
+		function fn_reservationForm(isLogOn,reservationForm,loginForm){
+		  	if(isLogOn != '' && isLogOn != 'false'){
+		    	location.href=reservationForm;
+		  	}else{
+		   		alert("로그인 후 글쓰기가 가능합니다.")
+		    	location.href=loginForm+'?action=/reservation.do';
+		  	}
+		}
+	</script>
 </head>
 <body>
   <header>
