@@ -169,7 +169,7 @@
         
         //목록보기
         function backToList(obj){
-            obj.action="${contextPath}/board/listArticles.do";
+            obj.action="${contextPath }/questionsList.do";
             obj.submit();
         }
         
