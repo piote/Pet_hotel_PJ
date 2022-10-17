@@ -1,11 +1,20 @@
 package com.myboot.review.service;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public  class ReviewService {
+public  interface ReviewService {
+
+	Map listReview_page(Map pagingMap);
+
+//	public List<ReviewsVO> listReview() throws Exception;
+/*	
+	public Map listReview_page(Map pagingMap) {
+		// TODO Auto-generated method stub
+		return null;*/
+	}
 
 	
-}
+
