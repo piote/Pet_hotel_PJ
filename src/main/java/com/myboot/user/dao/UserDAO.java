@@ -13,5 +13,6 @@ import com.myboot.user.vo.UserVO;
 @Repository("userDAO")
 public interface UserDAO {
 	public List selectAllUserList() throws DataAccessException;
+//	로그인 기능 구현
 	public UserVO loginById(UserVO userVO) throws DataAccessException;
 }

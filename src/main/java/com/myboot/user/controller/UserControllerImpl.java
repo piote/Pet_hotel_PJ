@@ -53,8 +53,9 @@ public class UserControllerImpl implements UserController{
 			                  RedirectAttributes  rAttr,
 			                  HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		System.out.println(user);
 		userVO = userService.login(user);
-		if(userVO != null) {
+		if(userVO!= null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", userVO);
 			session.setAttribute("isLogOn", true);
@@ -64,12 +65,12 @@ public class UserControllerImpl implements UserController{
 			if(action!= null) {
 				mav.setViewName("redirect:"+action);
 			}else {
-				mav.setViewName("redirect:/user/listmember.do");	
+				mav.setViewName("redirect:/user/listUsers.do");	
 			}
 			
 		}else {
 			rAttr.addAttribute("result","loginFailed");
-			mav.setViewName("redirect:/user/loginForm.do");
+			mav.setViewName("redirect:/loginForm.do");
 		}
 		
 		

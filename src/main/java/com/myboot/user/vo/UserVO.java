@@ -11,7 +11,7 @@ import lombok.Data;
 @Component("userVO")
 public class UserVO {
 	private String id;
-	private String pwd;
+	private String pw;
 	private String name;
 	private String email;
 	private String tel;

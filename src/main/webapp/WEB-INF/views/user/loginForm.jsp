@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<form name="frmLogin" method="post"  action="${contextPath}/member/login.do">
+<form name="frmLogin" method="post"  action="${contextPath}/login.do">
    <table border="1"  width="80%" align="center" >
       <tr align="center">
          <td>아이디</td>
@@ -35,7 +35,7 @@
 	    <input type="text" name="id" value="" size="20">
 	 </td>
          <td>
-	    <input type="password" name="pwd" value="" size="20">
+	    <input type="password" name="pw" value="" size="20">
 	 </td>
       </tr>
       <tr align="center">

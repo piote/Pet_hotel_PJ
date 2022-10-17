@@ -1,12 +1,17 @@
 package com.myboot.user.service;
 
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myboot.user.dao.UserDAO;
 import com.myboot.user.vo.UserVO;
@@ -18,9 +23,9 @@ public class UserServiceImpl implements UserService {
 	private UserDAO userDAO;
 //	로그인
 	public UserVO login(UserVO userVO) throws Exception{
+		System.out.println(userDAO.loginById(userVO));
 		return userDAO.loginById(userVO);
 	}
-	
 	public List listUser() throws Exception {
 		List userList = null;
 		userList = userDAO.selectAllUserList();

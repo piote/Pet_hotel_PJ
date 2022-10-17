@@ -14,9 +14,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.myboot.user.vo.UserVO;
 
 public interface UserController {
-	public ModelAndView login(@ModelAttribute("user") UserVO user,
-            RedirectAttributes  rAttr,
-            HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	로그인 기능 구현
+	public ModelAndView login(@ModelAttribute("user") UserVO userVO,
+            RedirectAttributes  redirectAttributes,
+           HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public ModelAndView pw_change(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public String userMain(Model model);
