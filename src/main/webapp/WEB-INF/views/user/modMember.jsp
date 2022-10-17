@@ -13,13 +13,13 @@
 	   <link rel="stylesheet" href="${contextPath}/resources/css/member.css">
 	   <meta charset="UTF-8">
 	   <title>회원 수정창</title>
-	   <script>
+	 <!--   <script>
 	   	function leave() {
 	   		if(confirm("탈퇴 하시겠습니까?") == true) {
 	   		}
 	   	}
 	    
-	   </script>
+	   </script> -->
 	   
 	</head>
 	<body>

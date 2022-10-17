@@ -12,10 +12,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myboot.user.vo.UserVO;
 
+import org.springframework.dao.DataAccessException;
+
+import com.myboot.user.vo.UserVO;
+
 public interface UserService {
 //	로그인 기능
 	public UserVO login(UserVO userVO) throws Exception;
 	public List listUser() throws Exception;
+	public int modMember(UserVO userVO) throws DataAccessException; 
+	public int removeMember(String id) throws DataAccessException;
 //	회원가입 회원정보 추가
 	public int addUser(UserVO userVO) throws Exception;
 }
