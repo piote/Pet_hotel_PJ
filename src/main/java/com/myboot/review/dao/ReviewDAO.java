@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Mapper
 @Repository("reviewDAO")
-public interface reviewDAO {
+public interface ReviewDAO {
 	public List selectAllReviewList() throws DataAccessException;
 	
 	
