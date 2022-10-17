@@ -96,7 +96,7 @@ public class UserControllerImpl implements UserController{
 		request.setCharacterEncoding("utf-8");
 		int result = 0;
 		result = userService.addUser(user);
-		ModelAndView mav = new ModelAndView("redirect:/listusers.do");
+		ModelAndView mav = new ModelAndView("redirect:/main.do");
 		return mav;
 	}
 	

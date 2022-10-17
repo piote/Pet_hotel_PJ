@@ -20,6 +20,7 @@ public interface UserController {
            HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	로그아웃 기능 구현
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	회원가입 기능 구현
 	public ModelAndView addUser(@ModelAttribute("info") UserVO userVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public ModelAndView pw_change(HttpServletRequest request, HttpServletResponse response)  throws Exception;
