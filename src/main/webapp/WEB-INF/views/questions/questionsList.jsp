@@ -3,15 +3,16 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set  var="questionsList"  value="${questionsMap.questionsList}" />
 <c:set  var="totArticles"  value="${questionsMap.totArticles}" />
 <c:set  var="section"  value="${questionsMap.section}" />
 <c:set  var="pageNum"  value="${questionsMap.pageNum}" />
-
 <%
   request.setCharacterEncoding("UTF-8");
-%>  
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -171,6 +172,8 @@
 	    location.href=loginForm+'?action=/questionsForm.do';
 	  }
 	}
+
+
 </script>
 </head>
 
@@ -239,11 +242,11 @@
              <c:when test="${totArticles >100 }">  <!-- 글 개수가 100 초과인경우 -->
                <c:forEach var="page" begin="1" end="10" step="1" >
                   <c:if test="${section >1 && page==1 }">
-                     <a class="no-uline" href="${contextPath }/questionsList.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
+                     <a class="no-uline" href="${contextPath }/questionsList.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&keyword=${keyword}">&nbsp; pre </a>
                   </c:if>
-                   <a class="no-uline" href="${contextPath }/questionsList.do?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
+                   <a class="no-uline" href="${contextPath }/questionsList.do?section=${section}&pageNum=${page}&keyword=${keyword}">${(section-1)*10 +page } </a>
                   <c:if test="${page ==10 }">
-                     <a class="no-uline" href="${contextPath }/questionsList.do?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
+                     <a class="no-uline" href="${contextPath }/questionsList.do?section=${section+1}&pageNum=${section*10+1}&keyword=${keyword}">&nbsp; next</a>
                   </c:if>
                </c:forEach>
 
@@ -258,10 +261,10 @@
                <c:forEach   var="page" begin="1" end="${totArticles/10 +1}" step="1" >
                   <c:choose>
                       <c:when test="${page==pageNum }">
-                       <a class="sel-page"  href="${contextPath }/questionsList.do?section=${section}&pageNum=${page}">${page } </a>
+                       <a class="sel-page"  href="${contextPath }/questionsList.do?section=${section}&pageNum=${page}&keyword=${keyword}">${page } </a>
                      </c:when>
                      <c:otherwise>
-                       <a class="no-uline"  href="${contextPath }/questionsList.do?section=${section}&pageNum=${page}">${page } </a>
+                       <a class="no-uline"  href="${contextPath }/questionsList.do?section=${section}&pageNum=${page}&keyword=${keyword}">${page } </a>
                      </c:otherwise>
                  </c:choose>
                </c:forEach>
