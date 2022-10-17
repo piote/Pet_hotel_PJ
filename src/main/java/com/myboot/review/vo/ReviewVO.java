@@ -2,24 +2,30 @@ package com.myboot.review.vo;
 
 import java.sql.Date;
 
+import org.apache.ibatis.type.Alias;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.myboot.user.vo.UserVO;
 
 import lombok.Data;
 
 @Data
-@Component("ReviewVO")
+@Component("reviewVO")
 public class ReviewVO {
-	private int num;
-	private String title;
-	private String	con;
-	private int star;
-	private Date date;
-	private String image;
-	private int rec;
+	private String id;
+	private String pwd;
+	private String name;
+	private String email;
+	private String tel;
+	private String tel_sub;
+	private String message;
+	private Date birth;
+	private Date joinDate;
+	private String grade;
+	
+	
+	public ReviewVO() {
+		System.out.println("userVO 호출");
+	}
+	
 	
 }
+

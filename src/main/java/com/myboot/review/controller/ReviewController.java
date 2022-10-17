@@ -1,12 +1,11 @@
-package com.myboot.review.dao;
+package com.myboot.review.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public  class reviewDAO {
+public  class ReviewController {
 
-	
 	 
 }

@@ -3,15 +3,20 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.board">
+<mapper namespace="com.myboot.review.dao.reviewDAO">
 <resultMap id="reviewResult" type="reviewVO">
+	<result property="level" column="LVL" />
     <result property="num" column="review_num" />
+    <result property="parentNO" column="review_parentNO" />
     <result property="title" column="review_title" />
     <result property="con" column="review_con" />
     <result property="star" column="review_star" />
     <result property="date" column="review_date" />
     <result property="image" column="review_image" />
     <result property="rec" column="review_rec" />
+    
+    <result property="id" column="user_id" />
+    
   </resultMap> 
 	  
 	  <!-- 이미지   
@@ -22,6 +27,16 @@
 	 </resultMap>
 	 -->
 
+	<select id="selectAllReviewList" resultMap="reviewResult" >
+    <![CDATA[
+      SELECT level as LVL, review_num, review_title, review_con, review_star, review_date, review_image, review_rec
+      from tb_review
+      START WITH  review_parentNO=0
+      CONNECT BY PRIOR review_num=review_parentNO 
+      ORDER SIBLINGS BY review_num DESC
+    ]]>
+
+</select>
  
   <select id="selectNewReviewNum" resultType="int"  >
 		<![CDATA[
@@ -51,65 +66,33 @@
       delete from tb_review
       where review_num in (
          SELECT review_num FROM  tb_review
-         START WITH review_num = #{review_num})
-        
+         START WITH review_num = #{review_num}
+       	 CONNECT BY PRIOR  review_num = review_parentNO)
      
     ]]>      
   </delete>
-<!--  55번줄 문구(부모글도 같게해서 같이지우는 기능같음)  CONNECT BY PRIOR  articleNO = parentNO )-->
 
- <!--다중 이미지 추가 SQL문 -->   
-   
-    <insert id="insertNewArticle"  parameterType="java.util.Map">
-    <![CDATA[
-      insert into t_board(articleNO, id, title, content, imageFileName)
-      values(#{articleNO}, #{id}, #{title}, #{content}, null)
-    ]]>      
-  </insert>
 
- 
-   <insert id="insertNewImage"  parameterType="java.util.Map">
-    <foreach item="item"  collection="list"   open="INSERT ALL" 
-                  separator=" " close="SELECT * FROM DUAL" >
-      INTO t_imageFile(imageFileNO, imageFileName, articleNO, regDate)
-      VALUES (#{item.imageFileNO}, #{item.imageFileName}, #{item.articleNO}, sysdate)
-    </foreach>
-  </insert>
- 
- 
-  <select id="selectNewImageFileNO" resultType="int"  >
-    <![CDATA[
-      SELECT  nvl(max(imageFileNO),0) from t_imageFile		
-    ]]>
-  </select>
-	
 
-  <select  id="selectImageFileList" resultMap="imgResult" parameterType="int">
-    <![CDATA[
-      SELECT * from t_imageFile
-      where articleNO=#{articleNO}	
-    ]]>
-  </select> 
   
-  
-<select id = "selectAllArticlesList" parameterType="java.util.Map" resultMap="articlesResult">  
+<select id = "selectAllReviewList" parameterType="java.util.Map" resultMap="articlesResult">  
 <![CDATA[
   SELECT * FROM ( 						 select ROWNUM  as recNum,LVL,
-							articleNO,
+							review_num,
 							parentNO,
-							title,
-							id,
-							writeDate
+							review_title,
+							user_id,
+							review_Date
 				                  from (select LEVEL as LVL, 
-								articleNO,
+								review_num,
 								parentNO,
-								title,
-								id,
-								writeDate
-							    from t_board 
-							    START WITH  parentNO=0
-							    CONNECT BY PRIOR articleNO = parentNO
-							    ORDER SIBLINGS BY articleNO DESC)
+								review_title,
+								user_id,
+								review_Date
+							    from tb_review 
+							    START WITH  review_parentNO=0
+							    CONNECT BY PRIOR review_num = review_parentNO
+							    ORDER SIBLINGS BY review_num DESC)
 					)                         
 					where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
 					]]>
@@ -120,4 +103,8 @@
   	select count(review_num) from tb_review
   ]]>
   </select>
+  
+  
+  
+  
 </mapper>
