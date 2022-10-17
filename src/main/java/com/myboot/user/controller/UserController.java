@@ -24,5 +24,6 @@ public interface UserController {
 	public ModelAndView addUser(@ModelAttribute("info") UserVO userVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public ModelAndView pw_change(HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public String userMain(Model model);
 }

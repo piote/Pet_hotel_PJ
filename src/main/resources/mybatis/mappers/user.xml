@@ -74,16 +74,17 @@
 <!--    		<![CDATA[ -->
 <!--    			insert into TB_USER(id,pwd,name,email) -->
 <!--    		]]> -->
-   		
 <!--    	</insert> -->
-<!--    	<update id="updateUser" parameterType="userVO"> -->
-<!--    		<![CDATA[ -->
-<!--    				update TB_USER -->
-<!--    				set pwd=#{pwd}, name=#{name}, email=#{email} -->
-<!--    				where -->
-<!--    				id=#{id} -->
-<!--    		]]> -->
-<!--    	</update> -->
+
+     	<update id="updateUser" parameterType="userVO">
+   		<![CDATA[
+   				update TB_USER
+   				set pwd=#{pwd}, email=#{email}, tel=#{tel},
+   					tel_sub=#{tel_sub}, message=#{message}, birth=#{birth}
+   				where
+   				id=#{id}
+   		]]>
+   	  </update>
    	
 <!--    	<delete id="deleteUser" parameterType="String"> -->
 <!--    		<![CDATA[ -->

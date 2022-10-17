@@ -10,46 +10,37 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<script>
-p
-</script>
+
+	<script>
+		function fn_reservationForm(isLogOn,reservationForm,loginForm){
+		  	if(isLogOn != '' && isLogOn != 'false'){
+		    	location.href=reservationForm;
+		  	}else{
+		   		alert("로그인 후 글쓰기가 가능합니다.")
+		    	location.href=loginForm+'?action=/reservation.do';
+		  	}
+		}
+	</script>
+
 </head>
 <body>
   <header>
     <div class="header_box">
         <a class="logo" href="${contextPath}/main.do">Anitel</a>
-        
         <div class="log_wrap" id ="head_link">
         <c:choose>
           <c:when test="${isLogOn == true  && user!= null}">
-          <a id="mypage" href="${contextPath}/logout.do">마이페이지</a>
-          		  <p>환영합니다. ${user.name}님!</p>
+            
+            <p class="login_msg">환영합니다. ${user.name}님!</p>
+            <a id="mypage" href="${contextPath}/mypage/myPage.do">마이페이지</a>
       			<a id="logout" href="${contextPath}/logout.do">로그아웃</a> 
-            <a href="${contextPath}/logout.do">로그아웃</a>
           </c:when>
           <c:otherwise>
-	        <a href="${contextPath}/loginForm.do">로그인</a>
-	         <a id="signup" href="${contextPath}/userForm.do">회원가입</a>
-	        
-	      </c:otherwise>
-	   </c:choose>     
-<%--         <c:choose> --%>
-<%--         		<c:when test="${isLogOn==true and not empty userInfo}"> --%>
-<%--                     <a id="mypage" href="${contextPath}/logout.do">마이페이지</a> --%>
-<%--         			<a id="logout" href="${contextPath}/logout.do">로그아웃</a> --%>
-<%--         		</c:when> --%>
-<%--            <c:otherwise> --%>
-<%--            		<a id="login" href="${contextPath}/loginForm.do">로그인</a> --%>
-<%--         		<a id="signup" href="${contextPath}/userForm.do">회원가입</a> --%>
-<%--         	</c:otherwise> --%>
-<%--         	</c:choose> --%>
-        	<!--  
-            <a id="login" href="#">로그인</a>
-            <a id="signup" href="#">회원가입</a>
-            <a id="mypage" href="${contextPath}/mypage/myPage.do" hidden>마이페이지</a>
-            <a id="logout" href="#" hidden>로그아웃</a>
-            -->
-        </div>
+	          <a id="login" href="${contextPath}/loginForm.do">로그인</a>
+	          <a id="signup" href="${contextPath}/userForm.do">회원가입</a>
+	        </c:otherwise>
+	      </c:choose>     
+      </div>
         
         <div class="hr"></div>
         <nav>

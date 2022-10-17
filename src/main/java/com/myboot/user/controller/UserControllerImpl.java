@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -127,5 +128,16 @@ public class UserControllerImpl implements UserController{
 		ModelAndView mav = new ModelAndView(viewName);
 		return mav;
 	}
+	
+	@Override
+	@RequestMapping(value="removeMember.do" ,method = RequestMethod.GET)
+	public ModelAndView removeMember(@RequestParam("id") String id, 
+			           HttpServletRequest request, HttpServletResponse response) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		userService.removeMember(id);
+		ModelAndView mav = new ModelAndView("redirect:/main.do");
+		return mav;
+	}
+	
 }
 
