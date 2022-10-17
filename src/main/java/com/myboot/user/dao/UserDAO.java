@@ -12,4 +12,7 @@ import com.myboot.user.vo.UserVO;
 @Repository("userDAO")
 public interface UserDAO {
 	public List selectAllUserList() throws DataAccessException;
+	 public int updateMember(UserVO userVO) throws DataAccessException;
+	 public int deleteMember(String id) throws DataAccessException;
+	
 }

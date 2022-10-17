@@ -69,7 +69,8 @@
    	<update id="updateUser" parameterType="userVO">
    		<![CDATA[
    				update TB_USER
-   				set pwd=#{pwd}, name=#{name}, email=#{email}
+   				set pwd=#{pwd}, email=#{email}, tel=#{tel},
+   					tel_sub=#{tel_sub}, message=#{message}, birth=#{birth}
    				where
    				id=#{id}
    		]]>
