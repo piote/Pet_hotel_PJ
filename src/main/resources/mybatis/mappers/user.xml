@@ -20,8 +20,11 @@
 
 <select id="loginById" resultType="userVO" parameterType="userVO" >
 	<![CDATA[
-		select * from tb_user	
-		where USER_ID=#{id} and USER_PW=#{pw}
+		select USER_ID as id, USER_PW as pw, USER_NAME as name, USER_EMAIL as email,
+	      USER_TEL as tel, USER_TEL_SUB as tel_sub, USER_MESSAGE as message,
+	      USER_BIRTH as birth, JOINDATE, USER_GRADE as grade
+	      from tb_user
+	      where USER_ID=#{id} 
 	]]>
   </select>
   
