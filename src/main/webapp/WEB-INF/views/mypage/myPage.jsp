@@ -23,12 +23,12 @@
                   <td></td>
                   <td>
                      <img class="img_membership" src="${contextPath}/resources/img/crown.png" alt="My 혜택">
-                     <p class="membership">Gold${memberInfo.grade}</p>
-                     <h4>테스트${memberInfo.name }님</h4>
+                     <p class="membership">${user.grade}</p>
+                     <h4>${user.name }님</h4>
                      <br>
-                     <p>전화: 010-0000-0000${memberInfo.tel}</p>
+                     <p>전화: ${user.tel}</p>
                      <br>
-                     <p>이메일: testtesttest@naver.com${memberInfo.email} </p>
+                     <p>이메일: ${user.email} </p>
                   </td>
                   <td></td>
                   <td>
@@ -65,10 +65,10 @@
 					<c:when test="${not empty myReserveList }">
 						<c:forEach var="reserves" items="${myReserveList }" begin="0" end="2" step="1" varStatus="reservation_st">
 							<tr class="reserve-list">
-								<td>${reserves.reservation_st }</td>
-								<td>${reserves.reservation_name }</td>
+								<td>${reserves.res_st }</td>
+								<td>${reserves.user_name }</td>
 								<td>${reserves.pet_name }</td>
-								<td>${reserves.reservation_tel }</td>
+								<td>${reserves.user_tel }</td>
 							</tr>
 						</c:forEach>
 					</c:when>
