@@ -10,6 +10,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<script>
+p
+</script>
 </head>
 <body>
   <header>
@@ -19,15 +22,14 @@
         <div class="log_wrap" id ="head_link">
         <c:choose>
           <c:when test="${isLogOn == true  && user!= null}">
-          <a id="mypage" href="${contextPath}/logout.do">마이페이지</a> --%>
+          <a id="mypage" href="${contextPath}/logout.do">마이페이지</a>
           		  <p>환영합니다. ${user.name}님!</p>
       			<a id="logout" href="${contextPath}/logout.do">로그아웃</a> 
-            <a href="${contextPath}/logout.do"><h3>로그아웃</h3></a>
+            <a href="${contextPath}/logout.do">로그아웃</a>
           </c:when>
           <c:otherwise>
-	        <a href="${contextPath}/loginForm.do"><h3>로그인</h3></a>
-	         <a href="${contextPath}/loginForm.do"><h3>아이디찾기</h3></a>
-	          <a href="${contextPath}/loginForm.do"><h3>비밀번호찾기</h3></a>
+	        <a href="${contextPath}/loginForm.do">로그인</a>
+	         <a id="signup" href="${contextPath}/userForm.do">회원가입</a>
 	        
 	      </c:otherwise>
 	   </c:choose>     
