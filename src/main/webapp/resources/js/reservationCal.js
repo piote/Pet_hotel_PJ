@@ -261,7 +261,7 @@ function calendarMaker(target, date) {
                 var date = new Date(indate);
 
                 var year = date.getFullYear();
-                var month = date.getMonth() + 1;
+                var month = date.getMonth();
                 var day = date.getDate();
 
                 var stDate = new Date(year, month, day);
@@ -270,7 +270,7 @@ function calendarMaker(target, date) {
                 var date = new Date(outdate);
 
                 var year = date.getFullYear();
-                var month = date.getMonth() + 1;
+                var month = date.getMonth();
                 var day = date.getDate();
 
                 var endDate = new Date(year, month, day);
