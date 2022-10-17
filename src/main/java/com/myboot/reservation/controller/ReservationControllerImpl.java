@@ -5,16 +5,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("reservationController")
-public  class reservationControllerImpl {
+public  class ReservationControllerImpl {
 
 	@RequestMapping("/reservation.do") 
-		public String reservationMain(Model model){
+		public String ReservationMain(Model model){
  
 		return "reservationMain"; 
     	}
 
 	@RequestMapping("/reservationcomplete.do")
-		public String reservationComplete(Model model){
+		public String ReservationComplete(Model model){
 	
 		return "reservationComplete";
 		}
