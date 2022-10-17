@@ -38,7 +38,7 @@
 
         /* 컨텐츠 */
         .success{
-            border: 1px solid #e5e4e2;
+            border: 2px solid #e5e4e2;
             border-radius: 15px;
             margin: auto;
             width: 69%;
