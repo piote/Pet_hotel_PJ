@@ -33,11 +33,11 @@
                   <td></td>
                   <td>
                      <a href="${contextPath}/pw_change.do">내정보수정</a>
-                     <a href="#">멤버쉽</a>
+                     <a href="${contextPath}/membership.do">멤버쉽</a>
                   </td>
                   <td>
                      <a href="${contextPath}/mypage/checkReserve.do">예약 내역</a>
-                     <a href="#">고객센터</a>
+                     <a href="${contextPath}/questionsList.do">고객센터</a>
                   </td>
                </tr>
             </table>
@@ -49,26 +49,26 @@
          <div class="mypage_reserve">
             <table>
 				<tr class="reserve-center">
-				    <td>Date</td>
-				    <td>Name</td>
-				    <td>PetName</td>
-				    <td>Phone Number</td>
+				    <td width="10%">Date</td>
+				    <td width="20%">Name</td>
+				    <td width="20%">PetName</td>
+				    <td width="40%">Phone Number</td>
 				</tr>
 	            <c:choose>
 	            	<c:when test="${empty myReserveList }">
-		               <tr>
+		               <tr class="reserve-list">
 		                  <td colspan=4>
 		                  	<strong>예약하신 내역이 없습니다.</strong>
 		                  </td>
 		               </tr>
 					</c:when>
 					<c:when test="${not empty myReserveList }">
-						<c:forEach var="i" items="${myReserveList }" begin="0" end="2" step="1">
-							<tr>
-								<td>${i.reservation_st }</td>
-								<td>${i.reservation_name }</td>
-								<td>${i.pet_name }</td>
-								<td>${i.reservation_tel }</td>
+						<c:forEach var="reserves" items="${myReserveList }" begin="0" end="2" step="1" varStatus="reservation_st">
+							<tr class="reserve-list">
+								<td>${reserves.reservation_st }</td>
+								<td>${reserves.reservation_name }</td>
+								<td>${reserves.pet_name }</td>
+								<td>${reserves.reservation_tel }</td>
 							</tr>
 						</c:forEach>
 					</c:when>
@@ -82,24 +82,26 @@
          <div class="mypage_review">
             <table>
                <tr class="review-center">
-                  <td>Date</td>
-                  <td>Subject</td>
-                  <td>Contents</td>
+                  <td width="8%">NO</td>
+                  <td width="10%">Date</td>
+                  <td width="32%">Subject</td>
+                  <td width="50%">Contents</td>
               </tr>
 	            <c:choose>
 	            	<c:when test="${empty myReviewList }">
-		               <tr>
+		               <tr class="review-list">
 		                  <td colspan=4>
 		                  	<strong>등록하신 리뷰가 없습니다.</strong>
 		                  </td>
 		               </tr>
 					</c:when>
 					<c:when test="${not empty myReviewList }">
-						<c:forEach var="i" items="${myReviewList}" begin="0" end="2" step="1">
-							<tr>
-								<td>${i.review_date }</td>
-								<td>${i.review_title }</td>
-								<td>${i.review_con }</td>
+						<c:forEach var="reviews" items="${myReviewList}" begin="0" end="2" step="1" varStatus="q_num">
+							<tr class="review-list">
+								<td>${reviews.num }</td>
+								<td>${reviews.date }</td>
+								<td>${reviews.title }</td>
+								<td>${reviews.con }</td>
 							</tr>
 						</c:forEach>
 					</c:when>

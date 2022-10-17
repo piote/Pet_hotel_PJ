@@ -74,7 +74,7 @@
 #reserve_list{
 	text-align: left;
     position: relative;
-    top: 80px;
+    top: 100px;
     width: 1200px;
     margin: 0 auto;
     
@@ -82,25 +82,40 @@
 .detail_reserve{
    margin: 0 auto;
    width: 1200px;
-   height: 200px;
+   height: 50px;
+   line-height: 30px;
    border-top: 1px solid black;
+   border-bottom: 1px solid rgba(200, 200, 200, 0.5);
    position: relative;
-   top: 90px;
+   top: 110px;
+   background-color: rgb(245, 245, 245); 
 }
-.detail_reserve tr:nth-child(2) td {
-    border-top: 1px solid rgba(200, 200, 200, 0.5);
+.detail-center {
+	width: 1200px;
+	height: 40px;
+}
+.detail-list td{
     border-bottom: 1px solid rgba(200, 200, 200, 0.5);
     text-align: center;
     width: 1200px;
-    height: 100%;
+    height: 30px;
     position: relative;
     top: 10px;
 }
 .detail-center td{
-   padding: 0 70px;
    text-align: center;
-   display: inline-block;
-   margin-top: 10px;
 }
 
+img.ui-datepicker-trigger{
+	display: inline-block;
+	cursor: pointer;
+	margin-left: 5px;
+    position: relative;
+    top: 3px;
+}
+
+.ui-datepicker{
+	margin-left: 141px;
+	margin-top: -220px;
+}
  
