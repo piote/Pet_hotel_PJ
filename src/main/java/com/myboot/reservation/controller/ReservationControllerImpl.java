@@ -28,18 +28,25 @@ public  class ReservationControllerImpl {
 		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-//		mav.setViewName(viewName);
-		System.out.println(viewName);
 		
 		return mav;
 		
 	}
+	@RequestMapping(value= "/reservationComplete.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView ReservationComplete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
 
-	@RequestMapping("/reservationcomplete.do")
-		public String ReservationComplete(Model model){
-	
-		return "reservationComplete";
-		}
+		return mav;
+		
+	}
+
+//	@RequestMapping("/reservationcomplete.do")
+//		public String ReservationComplete(Model model){
+//	
+//		return "reservationComplete";
+//	}
 	
 }
 

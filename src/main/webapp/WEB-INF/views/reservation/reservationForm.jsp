@@ -419,9 +419,22 @@
                     </tr>
                     <tr align="center" bgcolor="white" height="40px">
                         <td colspan="10" bgcolor="#e5e4e2">
-                            <img src="${contextPath}/resources/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
-                            <b class="membership">Bronze Membership : Discount 2%</b>
-                            <b class="totalpayment">The Total Payment : </b>
+	                        <c:choose>
+	                        	<c:when test="${user.grade eq 'Bronze'}">
+	                        		<img src="${contextPath}/resources/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
+                            		<b class="membership">Bronze Membership : Discount 2%</b>
+	                        	</c:when>
+	                        	<c:when test="${user.grade eq 'Silver'}">
+	                        		<img src="${contextPath}/resources/img/silver_medal.png" width="30px" height="30px" id="bronzeimg">
+                            		<b class="membership">Silver Membership : Discount 5%</b>
+	                        	</c:when>
+	                        	<c:when test="${user.grade eq 'Gold'}">
+	                        		<img src="${contextPath}/resources/img/gold_medal.png" width="30px" height="30px" id="bronzeimg">
+                            		<b class="membership">Gold Membership : Discount 10%</b>
+	                        	</c:when>
+	                        </c:choose>
+                            <input id="membership" type="hidden" value="${user.grade}">
+                            <b class="totalpayment"> Total Payment : </b>
                             <b class="totalcost">0 원</b>
                         </td>
                     </tr>
@@ -496,7 +509,7 @@
 
             <div class="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
-                <button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationcomplete.do'">완료</button>
+                <button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationComplete.do'">완료</button>
             </div>
         </form>
     </div>
