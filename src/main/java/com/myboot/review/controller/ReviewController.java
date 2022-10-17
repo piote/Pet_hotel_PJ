@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 public  interface ReviewController {
-	public ModelAndView reviewList(HttpServletRequest request, HttpServletResponse response) throws Exception ;
+	public ModelAndView reviewDetail_1(HttpServletRequest request, HttpServletResponse response) throws Exception ;
 
 	String reviewForm(Model model);
 	 

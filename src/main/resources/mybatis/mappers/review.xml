@@ -7,7 +7,7 @@
 <resultMap id="reviewResult" type="reviewVO">
 	<result property="level" column="LVL" />
     <result property="num" column="review_num" />
-    <result property="parentNO" column="review_parentNO" />
+    <result property="parentNO" column="parentNO" />
     <result property="title" column="review_title" />
     <result property="con" column="review_con" />
     <result property="star" column="review_star" />
@@ -80,24 +80,15 @@
   
 <select id = "selectAllReviewList" parameterType="java.util.Map" resultMap="reviewResult">  
 <![CDATA[
-  SELECT * FROM ( 						 select ROWNUM  as recNum,LVL,
-							review_num,
-							parentNO,
-							review_title,
-							user_id,
-							review_Date
-				                  from (select LEVEL as LVL, 
-								review_num,
-								parentNO,
-								review_title,
-								user_id,
-								review_Date
-							    from tb_review 
-							    START WITH  review_parentNO=0
-							    CONNECT BY PRIOR review_num = review_parentNO
-							    ORDER SIBLINGS BY review_num DESC)
+  SELECT * FROM ( 
+		SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image
+			from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image
+					from TB_REVIEW
+                    START WITH  parentNO is null
+					CONNECT BY PRIOR review_num = parentNO
+					ORDER SIBLINGS BY review_num DESC)
 					)                         
-					where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
+				    	where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
 					]]>
   </select>
   

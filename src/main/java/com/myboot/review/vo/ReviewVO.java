@@ -19,6 +19,7 @@ public class ReviewVO {
 	private Date date;
 	private String image;
 	private int rec;
+	private String id;
 	
 	
 	public ReviewVO() {

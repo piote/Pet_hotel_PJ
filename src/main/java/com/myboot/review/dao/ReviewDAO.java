@@ -12,12 +12,9 @@ import com.myboot.review.vo.ReviewVO;
 @Mapper
 @Repository("reviewDAO")
 public interface ReviewDAO {
-	public List selectAllReviewList() throws DataAccessException;
-	
-	
-	public int selectTotReview() throws DataAccessException;
-
 
 	public List<ReviewVO> selectAllReviewList(Map pagingMap);
+
+	public int selectTotReview();
 	
 }

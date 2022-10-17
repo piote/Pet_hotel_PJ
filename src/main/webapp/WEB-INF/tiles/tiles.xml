@@ -41,7 +41,7 @@
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewBoard.jsp" />
 	</definition>
 			  	
-	<definition name="reviewDetail_1" extends="baseLayout">
+	<definition name="/review/reviewDetail_1" extends="baseLayout">
 	      <put-attribute name="title" value="리뷰" />
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail_1.jsp" />
 	</definition>	
