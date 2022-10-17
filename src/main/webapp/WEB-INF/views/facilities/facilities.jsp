@@ -56,17 +56,16 @@
                 line-height: 30px;
             }
             /* common 공통 끝 */
-            /* header_box_back 시작 */
+
             .header_box_back {
 	   bottom: 200px; 
                 margin: 0;
                 position: relative;
                 width: 100%;
-                /* right: -324px; */
                 height: 160px;
-                background-color: rgb(231, 226, 219);
+                background-color: white;
             }
-            /* header_box_back 시작 */
+            
             /* index 시작 */
             .index {
                 margin: 0;
@@ -479,10 +478,8 @@
         </style>
     </head>
     <body>
-        <!-- header_box_back 시작 -->
         <section class="header_box_back">
         </section>
-        <!-- header_box_back 끝 -->
         <!-- index 시작 -->
         <section class="index">
             <div class="txt_index">

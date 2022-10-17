@@ -286,19 +286,14 @@
                 margin: 0;
                 position: relative;
                 width: 100%;
-                /* right: -324px; */
                 height: 160px;
-                background-color: rgb(231, 226, 219);
+                background-color: white;
             }
-
-
         </style>
     </head>
     <body>
-        <!-- header_box_back 시작 -->
         <section class="header_box_back">
         </section>
-        <!-- header_box_back 끝 -->
         <!-- outline 개요 시작  -->
         <section class="outline">
             <div class="txt_outline">
