@@ -7,7 +7,6 @@ import com.myboot.mypage.vo.MyPageVO;
 import org.apache.ibatis.type.Alias;
 import lombok.Data;
 
-
 @Data
 @Component("reservationVO")
 public class ReservationVO {
