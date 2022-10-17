@@ -271,7 +271,7 @@ function costTB(petserviceMap) {
         total *= dayCal;
         total += sbc * 35000 + mbc * 45000 + lbc * 60000 + sbs * 70000 + mbs * 80000 + lbs * 100000;
         total += ss * 50000 + ms * 80000 + ls * 120000;
-        $(".totalcost").text(' : ' + total.toLocaleString()  + ' 원');
+        $(".totalcost").text(total.toLocaleString()  + ' 원');
 
 }
 

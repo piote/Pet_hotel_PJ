@@ -261,7 +261,7 @@
 
         .totalpayment {
             display: block;
-            width: 145px;
+            width: 160px;
             height: 25px;
             position: absolute;
             right: 160px;
@@ -421,8 +421,8 @@
                         <td colspan="10" bgcolor="#e5e4e2">
                             <img src="${contextPath}/resources/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
                             <b class="membership">Bronze Membership : Discount 2%</b>
-                            <b class="totalpayment">The Total Payment</b>
-                            <b class="totalcost"> : 0 원</b>
+                            <b class="totalpayment">The Total Payment : </b>
+                            <b class="totalcost">0 원</b>
                         </td>
                     </tr>
                     <td rowspan="6" align="center" bgcolor="white"><b></b></td>
