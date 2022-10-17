@@ -89,6 +89,28 @@ public class UserControllerImpl implements UserController{
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}	
+	
+
+	    /**
+	     * 회원가입 폼
+	     * @return
+	     */
+	    @GetMapping("/addUser.do")
+	    public String signUpForm() {
+	        return "signup";
+	    }
+
+	    /**
+	     * 회원가입 진행
+	     * @param user
+	     * @return
+	     */
+	    @PostMapping("/addUser.do")
+	    public String signUp(UserVo userVo) {
+	        userService.joinUser(userVo);
+	        return "redirect:/login"; //로그인 구현 예정
+	    }
+	}
 //	회원가입 회원추가
 	@Override
 	@RequestMapping(value="/addUser.do" ,method = RequestMethod.POST)
