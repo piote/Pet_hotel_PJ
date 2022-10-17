@@ -3,7 +3,7 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.myboot.review.dao.reviewDAO">
+<mapper namespace="com.myboot.review.dao.ReviewDAO">
 <resultMap id="reviewResult" type="reviewVO">
 	<result property="level" column="LVL" />
     <result property="num" column="review_num" />
@@ -27,6 +27,7 @@
 	 </resultMap>
 	 -->
 
+<!-- 
 	<select id="selectAllReviewList" resultMap="reviewResult" >
     <![CDATA[
       SELECT level as LVL, review_num, review_title, review_con, review_star, review_date, review_image, review_rec
@@ -37,7 +38,9 @@
     ]]>
 
 </select>
- 
+  -->
+  
+  
   <select id="selectNewReviewNum" resultType="int"  >
 		<![CDATA[
 			SELECT  nvl(max(REVIEW_NUM), 0) + 1 from tb_review		
@@ -75,7 +78,7 @@
 
 
   
-<select id = "selectAllReviewList" parameterType="java.util.Map" resultMap="articlesResult">  
+<select id = "selectAllReviewList" parameterType="java.util.Map" resultMap="reviewResult">  
 <![CDATA[
   SELECT * FROM ( 						 select ROWNUM  as recNum,LVL,
 							review_num,
