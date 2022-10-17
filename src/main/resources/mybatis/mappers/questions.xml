@@ -13,6 +13,7 @@
       <result property="q_title" column="Q_TITLE" />
       <result property="q_content" column="Q_CONTENT" />
       <result property="q_parentNo" column="Q_PARENTNO" />
+      <result property="imageFileName" column="IMAGEFILENAME" />
    </resultMap> 
   
   <select id="selectAllQuestionsList" resultMap="questionsResult" >
@@ -46,5 +47,26 @@
       select count(Q_NUM) from TB_QBOARD
     ]]>
   </select>
-
+  
+  <!-- 검색기능 -->
+  <select id="searchQuestionsList" parameterType="java.util.Map" resultMap="questionsResult"   >
+    <![CDATA[
+      SELECT * FROM ( 
+		SELECT ROWNUM as recNum, LVL, Q_NUM, Q_PARENTNO, Q_TITLE, USER_ID, Q_DATE
+			from (select LEVEL as LVL, Q_NUM, Q_PARENTNO, Q_TITLE, USER_ID, Q_DATE
+					from TB_QBOARD WHERE Q_TITLE LIKE '%'||#{keyword}||'%'
+	                START WITH  Q_PARENTNO=0
+					CONNECT BY PRIOR Q_NUM = Q_PARENTNO
+					ORDER SIBLINGS BY Q_NUM DESC)
+			)                    
+		where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10	
+    ]]>
+  </select>
+  
+  <!-- 검색용 글 총 갯수 -->
+	<select id="searchTotQuestions" parameterType="String" resultType="int" >
+    <![CDATA[
+      select count(Q_NUM) from TB_QBOARD WHERE Q_TITLE LIKE '%'||#{keyword}||'%'
+    ]]>
+  </select>
 </mapper>

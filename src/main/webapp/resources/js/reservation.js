@@ -52,7 +52,7 @@ function addRow() {
         petmap.delete('pet_Spa' + $(this).attr('id'));
         console.log('service' + $(this).attr('id'));
         servicemap.delete('service' + $(this).attr('id'));
-        costTB(servicemap);//삭제한 결과 출력
+        costTB(servicemap, false);//삭제한 결과 출력
 
         //html에서 제거
         $(this).parent().parent().remove();
@@ -80,7 +80,7 @@ function pet_table_event(petTableNum) {
 
         if (tablecheck(this)) {
             console.log(costresult(this));
-            costTB(costresult(this));
+            costTB(costresult(this),true);
         }
     });
     //성별 이벤트
@@ -90,7 +90,7 @@ function pet_table_event(petTableNum) {
 
         if (tablecheck(this)) {
             console.log(costresult(this));
-            costTB(costresult(this));
+            costTB(costresult(this),true);
         }
     });
     //방 이벤트
@@ -101,7 +101,7 @@ function pet_table_event(petTableNum) {
 
         if (tablecheck(this)) {
             console.log(costresult(this));
-            costTB(costresult(this));
+            costTB(costresult(this),true);
         }
     });
     //미용 이벤트
@@ -112,7 +112,7 @@ function pet_table_event(petTableNum) {
 
         if (tablecheck(this)) {
             console.log(costresult(this));
-            costTB(costresult(this));
+            costTB(costresult(this),true);
         }
     });
     //스파 이벤트
@@ -122,7 +122,7 @@ function pet_table_event(petTableNum) {
 
         if (tablecheck(this)) {
             console.log(costresult(this));
-            costTB(costresult(this));
+            costTB(costresult(this),true);
         }
     });
 
@@ -144,7 +144,7 @@ function tablecheck(petTableElement) {
         console.log("table_OK")
         return 1;
     } else {
-        console.log("성별 또는 이름")
+        alert("이름을 입력해 주세요.");
         return 0;
     }
 }
@@ -163,7 +163,7 @@ function costresult(petTableElement) {
     return servicemap;
 }
 
-function costTB(petserviceMap) {
+function costTB(petserviceMap, datecheck) {
     // s소형 m중형 l대형,   
     //r방
     var sr = 0;
@@ -231,25 +231,29 @@ function costTB(petserviceMap) {
     }
 
     var dayCal = $("#dateResult").val();
-    if(dayCal == null || dayCal == ''){
-        alert("날짜를 선택해 주세요.");
-        // s소형 m중형 l대형,   
-        //r방
-        var sr = 0;
-        var mr = 0;
-        var lr = 0;
-        //b미용
-        var sbc = 0;
-        var mbc = 0;
-        var lbc = 0;
-        var sbs = 0;
-        var mbs = 0;
-        var lbs = 0;
-        // s스파.
-        var ss = 0;
-        var ms = 0;
-        var ls = 0;
-    }
+    
+        if(dayCal == null || dayCal == ''){
+            if(datecheck == true){
+                alert("날짜를 선택해 주세요.");
+            }
+            // s소형 m중형 l대형,   
+            //r방
+            var sr = 0;
+            var mr = 0;
+            var lr = 0;
+            //b미용
+            var sbc = 0;
+            var mbc = 0;
+            var lbc = 0;
+            var sbs = 0;
+            var mbs = 0;
+            var lbs = 0;
+            // s스파.
+            var ss = 0;
+            var ms = 0;
+            var ls = 0;
+        }
+    
         //room
         $("#S_R").text((dayCal * sr * 100000).toLocaleString() + ' 원');
         $("#M_R").text((dayCal * mr * 150000).toLocaleString() + ' 원');

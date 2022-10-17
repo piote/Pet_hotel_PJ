@@ -9,6 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface QuestionsController {
 	//public ModelAndView questionsList(HttpServletRequest request, HttpServletResponse response) throws Exception ;
-	public ModelAndView questionsList(@RequestParam(value ="section", required = false) String _section, @RequestParam(value ="pageNum", required = false) String _pageNum, HttpServletRequest request, HttpServletResponse response) throws Exception ;
+	public ModelAndView questionsList(@RequestParam(value ="section", required = false) String _section, @RequestParam(value ="pageNum", required = false) String _pageNum,@RequestParam(value ="keyword", required = false) String keyword, HttpServletRequest request, HttpServletResponse response) throws Exception ;
 	public String questionsForm(Model model);
 }

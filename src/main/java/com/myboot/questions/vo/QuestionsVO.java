@@ -17,6 +17,7 @@ public class QuestionsVO {
 	private String q_title;
 	private String q_content;
 	private int q_parentNo;
+	private String imageFileName;
 	
 	public QuestionsVO() {
 		System.out.println("questionsVO 호출");
