@@ -3,7 +3,7 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.myboot.review.dao.reviewDAO">
+<mapper namespace="com.myboot.review.dao.ReviewDAO">
 <resultMap id="reviewResult" type="reviewVO">
 	<result property="level" column="LVL" />
     <result property="num" column="review_num" />
