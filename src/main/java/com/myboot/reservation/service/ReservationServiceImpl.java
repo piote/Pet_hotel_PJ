@@ -1,6 +1,7 @@
 package com.myboot.reservation.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +24,12 @@ public class ReservationServiceImpl implements ReservationService {
 		ResList = reservationDAO.selectReservationList();
 		return ResList;
 	}
-
-//	@Override
-//	public int addMember(MemberVO member) throws Exception {
-//		return memberDAO.insertMember(member);
-//	}
-//	
+	
+	@Override
+	public int addPetService(Map petServiceMap) throws Exception {
+		return reservationDAO.insertPetserviceMap(petServiceMap);
+	}
+	
 //	@Override
 //	public int modMember(MemberVO member) throws Exception {
 //		return memberDAO.updateMember(member);

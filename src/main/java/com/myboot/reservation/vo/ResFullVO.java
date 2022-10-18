@@ -13,7 +13,7 @@ public class ResFullVO {
 	private int res_num;
 	private String res_st;
 	private String res_end;
-	private String id;
+	private String id;//유저아이디
 	private String res_comment;
 	private String totalCost;
 	private String payTime;
@@ -22,7 +22,7 @@ public class ResFullVO {
 	//pet
 		private int pet_num;
 		private String pet_name;
-		private String pet_sex;
+		private String pet_gender;
 		private String room_grade;
 		private String service_beauty;
 		private String service_spa;
