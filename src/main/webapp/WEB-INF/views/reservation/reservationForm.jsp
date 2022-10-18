@@ -264,7 +264,7 @@
             width: 160px;
             height: 25px;
             position: absolute;
-            right: 200px;
+            right: 240px;
             top: 10px;
         }
 
@@ -288,7 +288,7 @@
             display: block;
             position: absolute;
             top: 10px;
-            right: 50px;
+            right: 20px;
         }
     </style>
 
