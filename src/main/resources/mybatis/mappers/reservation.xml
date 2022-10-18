@@ -15,8 +15,35 @@
     <result property="payTime" column="PAY_TIME" />
     <result property="res_state" column="RESERVATION_STATE" />
   </resultMap> 
+  
+  <resultMap id="petserviceResult" type="petserviceVO">
+    <result property="pet_num" column="PET_NUM" />
+    <result property="pet_name" column="PET_NAME" />
+    <result property="pet_sex" column="PET_SEX" />
+    <result property="room_grade" column="ROOM_GRADE" />
+    <result property="service_beauty" column="SERVICE_BEAUTY" />
+    <result property="service_spa" column="SERVICE_SPA" />
+  </resultMap> 
 	
-   <select id="selectReservationList" resultMap="reservationResult">
+	<resultMap id="resfullResult" type="resfullVO">
+    <result property="res_num" column="RESERVATION_NUM" />
+    <result property="res_st" column="RESERVATION_ST" />
+    <result property="res_end" column="RESERVATION_END" />
+    <result property="id" column="USER_ID" />
+    <result property="res_comment" column="RS_COMMENT" />
+    <result property="totalCost" column="TOTAL_COST" />
+    <result property="payTime" column="PAY_TIME" />
+    <result property="res_state" column="RESERVATION_STATE" />
+    <result property="pet_num" column="PET_NUM" />
+    <result property="pet_name" column="PET_NAME" />
+    <result property="pet_sex" column="PET_SEX" />
+    <result property="room_grade" column="ROOM_GRADE" />
+    <result property="service_beauty" column="SERVICE_BEAUTY" />
+    <result property="service_spa" column="SERVICE_SPA" />
+  </resultMap> 
+	
+	
+   <select id="selectReservationList" resultMap="resfullResult">
 		<![CDATA[
 		SELECT RESERVATION_NUM, RESERVATION_ST, RESERVATION_END, USER_ID, RS_COMMENT, TOTAL_COST, PAY_TIME, RESERVATION_STATE 
 		FROM TB_RESERVATION
