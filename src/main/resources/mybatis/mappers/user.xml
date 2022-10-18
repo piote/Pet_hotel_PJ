@@ -24,8 +24,7 @@
 	      USER_TEL as tel, USER_TEL_SUB as tel_sub, USER_MESSAGE as message,
 	      USER_BIRTH as birth, JOINDATE, USER_GRADE as grade
 	      from tb_user
-	      where USER_ID=#{id} 
-	]]>
+	      where USER_ID=#{id} and USER_PW=#{pw}
   </select>
   
   <select id="selectOverlappedID" parameterType="String" resultType="String">
