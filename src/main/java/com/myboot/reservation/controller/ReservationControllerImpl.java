@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myboot.reservation.service.ReservationService;
 import com.myboot.reservation.vo.PetserviceVO;
 import com.myboot.reservation.vo.ReservationVO;
+import com.myboot.user.vo.UserVO;
 
 @Controller("reservationController")
 public  class ReservationControllerImpl implements ReservationController{
@@ -67,12 +70,17 @@ public  class ReservationControllerImpl implements ReservationController{
 			
 		return ResList;
 	}
-
-	@Override
+	
+	@ResponseBody
+	
 	@RequestMapping(value= "/reservationAdd.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView reservationAdd(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		//String datest = request.getAttribute("checkin");
-		return null;
+	public String reservationAdd(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session=request.getSession();
+		UserVO userVO = (UserVO) session.getAttribute("user");
+		String checkinDate = (String) request.getParameter("checkinDate");
+		String petcomment = (String) request.getParameter("petcomment");
+		String total = checkinDate + petcomment +userVO.getName();
+		return total;
 	}
 	
 	

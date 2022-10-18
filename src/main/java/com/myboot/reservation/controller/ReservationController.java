@@ -12,6 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 public interface ReservationController {
 	public ModelAndView reservationMain(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView reservationComplete(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView reservationAdd(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	//public ModelAndView reservationAdd(HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	public String reservationComplete(Model model);
 }

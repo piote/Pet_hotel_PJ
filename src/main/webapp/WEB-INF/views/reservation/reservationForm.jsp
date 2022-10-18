@@ -299,14 +299,18 @@
     
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCal.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservation.js"></script>
-    
+    <script>
+    	function reservationSubmit(obj){
+	    	obj.submit();
+     	}
+    </script>
 </head>
 
 <body>
 
 
     <div id="reservationWrap">
-        <form id="reservationForm" action="#">
+        <form id="reservationForm" action="${contextPath}/reservationAdd.do">
             <h2 class="reservationtag"> Reservation</h2>
             <p id="under"></p>
             <br><br>
@@ -515,8 +519,9 @@
 
             <div class="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
-                <button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationComplete.do'">완료</button>
-            	<input type=>
+                <!--<button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationComplete.do'">완료</button>-->
+                <button type="button" id="btn_pet2_2" onclick="reservationSubmit(this.form)">완료</button>
+            	
             </div>
     
     </div>
