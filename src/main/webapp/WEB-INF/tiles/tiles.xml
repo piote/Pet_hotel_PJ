@@ -33,6 +33,11 @@
       <put-attribute name="body" value="/WEB-INF/views/user/loginForm.jsp" />
   </definition>
 
+<!--  회원가입 -->
+ <definition name="/userForm"  extends="baseLayout">
+      <put-attribute name="title" value="회원가입" />
+      <put-attribute name="body" value="/WEB-INF/views/user/userForm.jsp" />
+  </definition>
    
     <!-- 리뷰 게시판 -->
    
