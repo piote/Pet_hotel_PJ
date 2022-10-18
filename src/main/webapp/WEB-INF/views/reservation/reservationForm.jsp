@@ -512,12 +512,13 @@
             <div class="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
                 <button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationComplete.do'">완료</button>
+            	<input type=>
             </div>
-       
+    
     </div>
 
     <div class="petcomment">
-        <input type="text">
+        <input type="text" name="petcomment">
     </div>
      </form>
     <br></br>

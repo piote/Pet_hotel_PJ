@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +19,7 @@ import com.myboot.reservation.vo.PetserviceVO;
 import com.myboot.reservation.vo.ReservationVO;
 
 @Controller("reservationController")
-public  class ReservationControllerImpl {
+public  class ReservationControllerImpl implements ReservationController{
 
 	@Autowired
 	private ReservationService resService;
@@ -32,9 +33,9 @@ public  class ReservationControllerImpl {
 // 
 //		return "reservationMain"; 
 //    	}
-
+	@Override
 	@RequestMapping(value= "/reservationForm.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView ReservationMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView reservationMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -42,9 +43,9 @@ public  class ReservationControllerImpl {
 		return mav;
 		
 	}
-	
+	@Override
 	@RequestMapping(value= "/reservationComplete.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView ReservationComplete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView reservationComplete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -66,6 +67,15 @@ public  class ReservationControllerImpl {
 			
 		return ResList;
 	}
+
+	@Override
+	@RequestMapping(value= "/reservationAdd.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView reservationAdd(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		//String datest = request.getAttribute("checkin");
+		return null;
+	}
+	
+	
 
 //	@RequestMapping("/reservationcomplete.do")
 //		public String ReservationComplete(Model model){
