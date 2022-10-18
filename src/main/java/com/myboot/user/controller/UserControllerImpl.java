@@ -106,18 +106,9 @@ public class UserControllerImpl implements UserController{
 	 
 	    return "loginForm"; 
 	  }
-
-	@Override
-	@RequestMapping(value="/pw_change.do" ,method = RequestMethod.GET)
-	public ModelAndView pw_change(HttpServletRequest request, HttpServletResponse response)  throws Exception {
-		HttpSession session=request.getSession();
-		session=request.getSession();
-		
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		return mav;
-    }
 	
+	
+	// 회원 정보 수정
 	@Override
 	@RequestMapping(value="/modMember.do" ,method = RequestMethod.GET)
 	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception {
@@ -129,15 +120,53 @@ public class UserControllerImpl implements UserController{
 		return mav;
 	}
 	
+	// 비밀번호 한번 더 입력
+//	@Override
+//	@RequestMapping(value="/pw_change.do" ,method = RequestMethod.GET)
+//	public ModelAndView pw_change(HttpServletRequest request, HttpServletResponse response)  throws Exception {
+//		HttpSession session=request.getSession();
+//		session=request.getSession();
+//		
+//		String viewName=(String)request.getAttribute("viewName");
+//		ModelAndView mav = new ModelAndView(viewName);
+//		return mav;
+//    }
+	
+	// 한번 더 비밀번호 입력
 	@Override
-	@RequestMapping(value="removeMember.do" ,method = RequestMethod.GET)
-	public ModelAndView removeMember(@RequestParam("id") String id, 
-			           HttpServletRequest request, HttpServletResponse response) throws Exception{
-		request.setCharacterEncoding("utf-8");
-		userService.removeMember(id);
-		ModelAndView mav = new ModelAndView("redirect:/main.do");
+	@RequestMapping(value="/pw_change.do" ,method = RequestMethod.GET)
+	public ModelAndView pw_change(RedirectAttributes rAttr, 
+				HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		if(userVO!= null) {
+			HttpSession session = request.getSession();
+			userVO = (UserVO) session.getAttribute("user");
+			System.out.println(userVO);
+			userVO = userService.password(userVO);
+			
+			//mav.setViewName("redirect:/pw_change.do");	
+			
+			String viewName=(String)request.getAttribute("viewName");
+			mav = new ModelAndView(viewName);
+			return mav;
+			
+		}else {
+			rAttr.addAttribute("result","passwordFailed");
+			mav.setViewName("redirect:/modMember.do");
+		}
+		
 		return mav;
 	}
 	
+	// 탈퇴하기
+	@Override
+	@RequestMapping(value="removeMember.do" ,method = RequestMethod.GET)
+	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		userService.removeMember(id);
+		mav.setViewName("redirect:/main.do");
+		return mav;
+	}
 }
 
