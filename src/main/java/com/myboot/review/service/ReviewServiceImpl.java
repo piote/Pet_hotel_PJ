@@ -31,6 +31,15 @@ public class ReviewServiceImpl  implements ReviewService{
 	}
 	
 
+//다중 이미지 추가하기	
+	@Override
+	public int addNewReview(Map reviewMap) throws Exception{
+		int reviewNO = reviewDAO.insertNewReview(reviewMap);
+		reviewMap.put("reviewNO", reviewNO);
+		reviewDAO.insertNewImage(reviewMap);
+		return reviewNO;
+	}
 	
-
+	
+	
 }

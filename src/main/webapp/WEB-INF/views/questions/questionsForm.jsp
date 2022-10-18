@@ -170,7 +170,7 @@
         
         //목록보기
         function backToList(obj){
-            obj.action="${contextPath }/questionsList.do";
+            obj.action="${contextPath }/questions/questionsList.do";
             obj.submit();
         }
         
@@ -197,7 +197,7 @@
 
         <div class="hr"></div>
 
-        <form name="articleForm" method="post" action="#">
+        <form name="articleForm" method="post" action="${contextPath }/questions/addNewQuestion.do"  enctype="multipart/form-data">
 
             <ul class="atc_tb">
                 <li class="user_name">

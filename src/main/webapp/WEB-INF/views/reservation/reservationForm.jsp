@@ -314,13 +314,17 @@
                 <ul>
                     <li id="checkinBox" class="reservationBox">
                         <div id="checkin" class="reservationtext reservationtext1">| CHECK IN |</div>
-                        <div id="checkin2" class="reservationtext reservationtext2"><span id="start_dayBox">0000. 00.
-                                00.</span></div>
+                        <div id="checkin2" class="reservationtext reservationtext2">
+                        	<span id="start_dayBox">0000.00.00.</span>
+                        	<input type="hidden" name="checkinDate" id="checkinDate">
+                     	</div>
                     </li>
                     <li id="checkoutBox" class="reservationBox">
                         <div id="mypet" class="reservationtext reservationtext1">| CHECK OUT |</div>
-                        <div id="checkout2" class="reservationtext reservationtext2"><span id="end_dayBox">0000. 00.
-                                00.</span></div>
+                        <div id="checkout2" class="reservationtext reservationtext2">
+                        	<span id="end_dayBox">0000.00.00.</span>
+                            <input type="hidden" name="checkoutDate" id="checkoutDate">
+                        </div>
                     </li>
                     <li id="mypetBox" class="reservationBox">
                         <div id="mypet" class="reservationtext reservationtext1">| MY PET |</div>

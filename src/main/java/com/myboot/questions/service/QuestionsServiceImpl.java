@@ -52,6 +52,16 @@ public class QuestionsServiceImpl implements QuestionsService {
 	}
 	
 	
+//  게시글 추가
+	@Override
+	public int addNewQuestions(Map questionsMap) throws Exception{
+		int q_Num = questionsDAO.selectNewQ_NUM();
+		questionsMap.put("q_Num", q_Num);
+		questionsDAO.insertNewQuestions(questionsMap);
+		return q_Num;
+	}
+	
+	
 //	@Override
 //	public void modArticle(Map articleMap) throws Exception {
 //		questionsDAO.updateArticle(articleMap);

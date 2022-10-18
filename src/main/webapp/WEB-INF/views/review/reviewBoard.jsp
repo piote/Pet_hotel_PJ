@@ -135,6 +135,13 @@
     	 height: 100%;
      }
      
+     .w_review {
+    	 position: absolute;
+    	 margin-top: -40px;
+    	 text-align: left; font-size: 25px;
+    	margin-left: 50%;
+     }
+     
       
  </style> 
 
@@ -152,6 +159,14 @@
    
       <h2 class="review"> Customer Review</h2>
       <p id="under"></p>
+      
+      <div class="w_review">
+      <a href="${contextPath}/reviewForm.do">글쓰기(임시)</a>
+      </div>
+  					
+      
+      
+      
       <br><br><br>
       <!--방에 맞는 이미지 사용-->
        <div class="img_c">
@@ -176,6 +191,7 @@
 	           	<a href="${contextPath}/reviewDetail_3.do" class="room_name">대형견(임시)</a>
 	        </div>   
           </div>
+          
           
 
           

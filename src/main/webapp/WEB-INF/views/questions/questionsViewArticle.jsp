@@ -181,7 +181,7 @@
    <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
    <script type="text/javascript" >
     function backToList(obj){
-	    obj.action="${contextPath }/questionsList.do";
+	    obj.action="${contextPath }/questions/questionsList.do";
 	    obj.submit();
     }
 	 function fn_enable(obj){
@@ -273,7 +273,7 @@
                         <c:when test="${not empty article.imageFileName && article.imageFileName!='null' }">
                             <li id="imagebox">
                                 <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-                                <img src="${contextPath}/download.do?articleNO=${article.q_num}&imageFileName=${article.imageFileName}" id="preview" onerror="this.src='${contextPath}/resources/img/no_img.png'" /><br>
+                                <img src="${contextPath}/qDownload.do?articleNO=${article.q_num}&imageFileName=${article.imageFileName}" id="preview" onerror="this.src='${contextPath}/resources/img/no_img.png'" /><br>
                                 <!--  <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />--> 
                             </li>
                         </c:when>
