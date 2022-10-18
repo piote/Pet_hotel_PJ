@@ -2,7 +2,6 @@ package com.myboot.user.vo;
 
 import java.sql.Date;
 
-import org.apache.ibatis.type.Alias;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
