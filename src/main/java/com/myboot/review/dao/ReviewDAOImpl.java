@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Mapper;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.myboot.review.vo.ImageVO;
-@Mapper
+import com.myboot.review.vo.ReviewVO;
+
+
 @Repository("reviewDAO")
 
-public abstract  class ReviewDAOImpl implements ReviewDAO {
+public class ReviewDAOImpl implements ReviewDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -57,6 +59,18 @@ public abstract  class ReviewDAOImpl implements ReviewDAO {
 
 	private int selectNewReviewNO() {
 		return sqlSession.selectOne("mapper.review.selectNewReviewNO");
+	}
+
+	@Override
+	public List<ReviewVO> selectAllReviewList(Map pagingMap) {
+		
+		return null;
+	}
+
+	@Override
+	public int selectTotReview() {
+
+		return 0;
 	}
 	
 
