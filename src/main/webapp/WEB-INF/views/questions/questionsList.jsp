@@ -72,6 +72,12 @@
     background-color: rgb(245, 245, 245); 
     text-align: center;
    }
+   .reply{
+   		font-size: 12px;
+   		color: #999;
+   		position: relative;
+    	top: -1px;
+   }
   .sf{
     font-size: 13px;
     color: #aaa;
@@ -220,7 +226,7 @@
                     <c:forEach begin="1" end="${questions.level }" step="1">
                       <span style="padding-left:10px"></span>    
                     </c:forEach>
-                    <span>[답변]</span>
+                    <span class="reply">[답변]</span>
                     <a href="${contextPath}/questionViewArticle.do?articleNO=${questions.q_num}">${questions.q_title}</a>
                   </c:when>
                   <c:otherwise>
@@ -228,7 +234,7 @@
                   </c:otherwise>
                 </c:choose>
               </td>
-            <td class="sf">${questions.id }</td>
+            <td class="sf">${questions.user_id}</td>
             <td class="sf">${questions.q_Date}</td> 
             </tr>
           </c:forEach>

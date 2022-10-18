@@ -69,32 +69,16 @@ public class QuestionsControllerImpl implements QuestionsController{
 		return "questionsForm";
 	  }
 	
-//	test _ 작성자 아이디 호출
-	@ResponseBody
-	@RequestMapping("/QTest.do") 
-	public String Main(Model model){
-		String a= "";
-		try {
-			List QList = questionsService.listQuestions();
-			  int totalElements = QList.size();
-			for(int i=0;i<QList.size();i++) {
-				QuestionsVO vo = (QuestionsVO) QList.get(i);
-				a += vo.getId()+" ";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return a;
-	}
 
-@RequestMapping(value="/questionViewArticle.do" ,method = RequestMethod.GET)
-public ModelAndView questionViewArticle(@RequestParam("articleNO") int articleNO,
-                                HttpServletRequest request, HttpServletResponse response) throws Exception{
-	String viewName = (String)request.getAttribute("viewName");
-	questionsVO=questionsService.questionsViewArticle(articleNO);
-	ModelAndView mav = new ModelAndView();
-	mav.setViewName(viewName);
-	mav.addObject("article", questionsVO);
-	return mav;
-	}
+    // 게시글 조회
+	@RequestMapping(value="/questionViewArticle.do" ,method = RequestMethod.GET)
+	public ModelAndView questionViewArticle(@RequestParam("articleNO") int articleNO,
+	                                HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		questionsVO=questionsService.questionsViewArticle(articleNO);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("article", questionsVO);
+		return mav;
+		}
 }

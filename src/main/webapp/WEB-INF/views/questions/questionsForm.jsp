@@ -51,6 +51,7 @@
 
         .user_name span{
             color: #e59f5a;
+            padding-left: 5px;
         }
         .atc_title{
             margin-bottom: 50px;
@@ -169,7 +170,7 @@
         
         //목록보기
         function backToList(obj){
-            obj.action="${contextPath}/board/listArticles.do";
+            obj.action="${contextPath }/questionsList.do";
             obj.submit();
         }
         
@@ -200,7 +201,7 @@
 
             <ul class="atc_tb">
                 <li class="user_name">
-                    <span>${user.name }</span>님!  무엇을 도와드릴까요?
+                    <span>${user.name }</span> 님!  무엇을 도와드릴까요?
                 </li>
                 <li class="atc_title">
                     <p>글제목</p>
