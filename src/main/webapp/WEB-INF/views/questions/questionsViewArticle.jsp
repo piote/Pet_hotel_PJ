@@ -181,7 +181,7 @@
    <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
    <script type="text/javascript" >
     function backToList(obj){
-	    obj.action="${contextPath }/questionsList.do";
+	    obj.action="${contextPath }/questions/questionsList.do";
 	    obj.submit();
     }
 	 function fn_enable(obj){
