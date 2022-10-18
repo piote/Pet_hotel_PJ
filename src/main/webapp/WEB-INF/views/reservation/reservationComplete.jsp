@@ -71,6 +71,10 @@
             text-align: center;
             bottom: 30px
         }
+        
+        #star{
+        	color : #1E90FF;
+        }
 
         /* 여기까지 */
 
@@ -131,12 +135,12 @@
                     <br><br>
                     <tr align="center">
                     	<td>
-                    		<img src="${contextPath}/resources/img/check.png" style="width:100px; height:100px;" id="checkimg">
+                    		<img src="${contextPath}/resources/img/bluecheck.png" style="width:100px; height:100px;" id="checkimg">
                     	</td>
                     </tr>
                     <br><br><br>
                     <tr align="center">
-                        <td align="center"><b color=pink>☆★☆★☆★</b>님의 예약이 완료되었습니다.</td>
+                        <td align="center"><b><span id="star">anitel</span></b> 님의 예약이 완료되었습니다.</td>
                     </tr>
                     <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
                     <tr align="center">
