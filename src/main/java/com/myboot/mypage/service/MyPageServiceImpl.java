@@ -19,7 +19,7 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public Map listMyReserve(Map paraMap) throws Exception{
+	public List listMyReserve(Map paraMap) throws Exception{
 		return myPageDAO.selectMyReservesList(paraMap);
 	}
 	

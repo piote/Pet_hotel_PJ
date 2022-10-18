@@ -4,9 +4,17 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.myboot.mypage.dao.MyPageDAO">
-<!--    <resultMap id="reserveResult" type="reservationVO">
+<resultMap id="reserveResult" type="reservationVO">
+	<result property="res_num" column="RESERVATION_NUM" />
+	<result property="res_st" column="RESERVATION_ST" />
+	<result property="res_end" column="RESERVATION_END" />
+	<result property="id" column="USER_ID" />
+	<result property="res_comment" column="RS_COMMENT" />
+	<result property="totalCost" column="TOTAL_COST" />
+	<result property="payTime" column="PAY_TIME" />
+	<result property="res_state" column="RESERVATION_STATE" />
+</resultMap> 
 
-   </resultMap>  -->
 <resultMap id="reviewResult" type="reviewVO">
     <result property="num" column="review_num" />
     <result property="title" column="review_title" />
@@ -15,21 +23,32 @@
     <result property="date" column="review_date" />
     <result property="image" column="review_image" />
     <result property="rec" column="review_rec" />
-  </resultMap> 
-   
-<!-- 	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="String"  >
+</resultMap>
+
+<resultMap id="searchResult" type="java.util.HashMap">
+	<result property="res_st" column="reservation_st" />
+	<result property="user_name" column="user_name" />
+	<result property="user_tel" column="user_tel" />
+	<result property="pet_name" column="pet_name" />
+	<result property="res_state" column="reservation_state" />
+
+</resultMap> 
+
+	<select id="selectMyReservesList" resultMap="searchResult"  parameterType="String"  >
 		<![CDATA[
-		select * from tb_reservation , tb_petservice , tb_user
-		         where user_id=#{user_id}
-		         order by reservation_st desc
+		select r.reservation_st, u.user_name, u.user_tel, p.pet_name
+        from tb_reservation r, tb_user u, tb_petservice p
+                 where u.user_id = #{user_id}
+		         order by r.reservation_st desc
 		]]>
 	</select>
 
-	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="HashMap"  >
+<!-- 	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="HashMap"  >
 		<![CDATA[
-		select * from tb_reservation, tb_petservice , tb_user 
-		         where user_id=#{user_id}
-		         order by reservation_st desc
+		select r.reservation_st, r.reservation_state, u.user_name, u.user_tel, p.pet_name
+        from tb_reservation r, tb_user u, tb_petservice p
+                 where u.user_id = #{user_id}
+		         order by r.reservation_st desc
 		]]>
 		<choose>
 			<when test="(colName == 'name' or colName == 'pet_name' or colName == 'tel) and searchWord != null and(startDate == null or endDate == null) ">
@@ -53,16 +72,17 @@
 	<select id="selectMyReviewList" resultMap="reviewResult">
 		<![CDATA[
 		select review_date, review_num, review_title, review_con from tb_review
-			         order by review_date desc
+			         where user_id=#{user_id}
+			         order by review_date desc	
 		]]>
 	</select>
 
 	
-<!-- 	<update id="updateMyReserveCancel" parameterType="String">
+	<update id="updateMyReserveCancel" parameterType="String">
 	    update tb_reservation
 	 	   set reservation_state='C'
 	    where reservation_num=#{reservation_num}
-	</update> -->
+	</update>
  
     
 </mapper>
