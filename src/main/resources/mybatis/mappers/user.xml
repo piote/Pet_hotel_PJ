@@ -25,6 +25,7 @@
 	      USER_BIRTH as birth, JOINDATE, USER_GRADE as grade
 	      from tb_user
 	      where USER_ID=#{id} and USER_PW=#{pw}
+	]]>
   </select>
   
   <select id="selectOverlappedID" parameterType="String" resultType="String">
@@ -32,7 +33,7 @@
   		selct decode(count(*),1, 'true',0,'false')
   		from TB_USER
   		where USER_ID=#{id}
-  	]]
+  	 ]]>
   </select>
   
    <select id="selectAllUserList" resultMap="userResult">

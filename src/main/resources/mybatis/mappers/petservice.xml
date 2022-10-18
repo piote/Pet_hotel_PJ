@@ -4,7 +4,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.myboot.reservation.dao.ReservationDAO">
-
+<!-- 
 <resultMap id="petserviceResult" type="petserviceVO">
     <result property="pet_num" column="PET_NUM" />
     <result property="pet_name" column="PET_NAME" />
@@ -21,7 +21,7 @@
 		ORDER BY PET_NUM DESC
 		]]>
 	</select>
-   
+   -->
 <!-- 	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="String"  >
 		<![CDATA[
 		select * from tb_reservation , tb_service , tb_user
