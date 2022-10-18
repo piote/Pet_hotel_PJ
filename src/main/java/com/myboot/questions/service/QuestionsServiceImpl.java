@@ -42,9 +42,12 @@ public class QuestionsServiceImpl implements QuestionsService {
 		articlesMap.put("totArticles", totArticles);
 		return articlesMap;				
 	}
+	
+//	게시글 조회
 	@Override
 	public QuestionsVO questionsViewArticle(int q_num) throws Exception {
 		QuestionsVO questionsVO = questionsDAO.selectQuestions(q_num);
+		System.out.println(questionsVO);
 		return questionsVO;
 	}
 	

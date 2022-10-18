@@ -113,7 +113,7 @@
         background-color: #eee;
         outline: none;
    	}
-   	.qDate{
+   	.qDate, .userid{
    		padding-left: 10px
    	}
     #tr_file_upload{
@@ -159,9 +159,6 @@
 		    overflow: hidden;
 		    border: 0;
 		}
-		
-		
-        
     #tr_btn_modify{
        display:none;
        float: right;
@@ -265,7 +262,7 @@
                     </li>
                     <li>
                         <p>아이디</p> 
-                        <input type=text value="${article.id }" name="writer" class="textbox" disabled />
+                        <input type=text value="${article.user_id }" name="writer" class="textbox userid" disabled />
                     </li>
                     <li>
                         <p>작성일</p>  
@@ -310,7 +307,7 @@
                 <div id="tr_btn">
                     <input type=button value="목록"  onClick="backToList(this.form)">
                     <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.q_num})">
-                    <c:if test="${member.id == article.id }">
+                    <c:if test="${user.id == article.user_id }">
                         <input type=button value="수정하기" onClick="fn_enable(this.form)">
                         <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.q_num})">
                     </c:if>	    

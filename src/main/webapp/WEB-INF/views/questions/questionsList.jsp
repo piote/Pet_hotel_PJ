@@ -228,7 +228,7 @@
                   </c:otherwise>
                 </c:choose>
               </td>
-            <td class="sf">${questions.id }</td>
+            <td class="sf">${questions.user_id}</td>
             <td class="sf">${questions.q_Date}</td> 
             </tr>
           </c:forEach>

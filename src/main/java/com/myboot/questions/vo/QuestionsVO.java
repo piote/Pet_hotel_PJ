@@ -12,7 +12,7 @@ import lombok.Data;
 public class QuestionsVO {
 	private int  level;
 	private int q_num;
-	private String id;
+	private String user_id;
 	private Date q_Date;
 	private String q_title;
 	private String q_content;
