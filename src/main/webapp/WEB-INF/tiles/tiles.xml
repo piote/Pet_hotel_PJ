@@ -111,16 +111,16 @@
    
    <!-- 문의게시판 -->
    
-   <definition name="/questionsList" extends="baseLayout">
+   <definition name="/questions/questionsList" extends="baseLayout">
       	  <put-attribute name="title" value="문의게시판" />
       	  <put-attribute name="body" value="/WEB-INF/views/questions/questionsList.jsp" />
    </definition>
    
-   <definition name="questionsForm" extends="baseLayout">
+   <definition name="/questions/questionsForm" extends="baseLayout">
       	  <put-attribute name="title" value="문의하기" />
       	  <put-attribute name="body" value="/WEB-INF/views/questions/questionsForm.jsp" />
    </definition>
-      <definition name="/questionViewArticle" extends="baseLayout">
+      <definition name="/questions/questionViewArticle" extends="baseLayout">
       	  <put-attribute name="title" value="상세창" />
       	  <put-attribute name="body" value="/WEB-INF/views/questions/questionsViewArticle.jsp" />
    </definition>
