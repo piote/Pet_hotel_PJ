@@ -156,7 +156,7 @@
                 </table>
             </div>
             <div class="btn_pet3">
-        		<input type='button' value='예약조회 및 수정' id="btn_pet3" onclick="addcost()" />
+            <button type="button" id="btn_pet3" onclick="location.href='${contextPath}/mypage/checkReserve.do'">예약조회 및 수정</button>
         	</div>
             <br><br><br><br>
         </form>
