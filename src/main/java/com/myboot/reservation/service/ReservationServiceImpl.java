@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myboot.reservation.dao.ReservationDAO;
+import com.myboot.reservation.vo.ReservationVO;
 
 
 @Service("reservationService")
@@ -23,6 +24,10 @@ public class ReservationServiceImpl implements ReservationService {
 		List ResList = null;
 		ResList = reservationDAO.selectReservationList();
 		return ResList;
+	}
+	@Override
+	public int addReservation(ReservationVO reservationVO) throws Exception {
+		return reservationDAO.insertReservation(reservationVO);
 	}
 	
 	@Override
