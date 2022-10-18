@@ -4,9 +4,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.myboot.reservation.dao.ReservationDAO">
-<!--    <resultMap id="reserveResult" type="reservationVO">
 
-   </resultMap>  -->
 <resultMap id="reservationResult" type="reservationVO">
     <result property="res_num" column="RESERVATION_NUM" />
     <result property="res_st" column="RESERVATION_ST" />
@@ -17,6 +15,14 @@
     <result property="payTime" column="PAY_TIME" />
     <result property="res_state" column="RESERVATION_STATE" />
   </resultMap> 
+	
+   <select id="selectReservationList" resultMap="reservationResult">
+		<![CDATA[
+		SELECT RESERVATION_NUM, RESERVATION_ST, RESERVATION_END, USER_ID, RS_COMMENT, TOTAL_COST, PAY_TIME, RESERVATION_STATE 
+		FROM TB_RESERVATION
+		ORDER BY RESERVATION_NUM DESC
+		]]>
+	</select>
    
 <!-- 	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="String"  >
 		<![CDATA[
@@ -51,13 +57,7 @@
 	</select> -->
 	
 
-	<select id="selectReservationList" resultMap="reservationResult">
-		<![CDATA[
-		select review_date, review_num, review_title, review_con from tb_review
-			         order by review_date desc
-		]]>
-	</select>
-
+	
 	
 <!-- 	<update id="updateMyReserveCancel" parameterType="String">
 	    update tb_reservation
