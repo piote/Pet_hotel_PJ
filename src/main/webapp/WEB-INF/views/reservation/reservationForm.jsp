@@ -264,7 +264,7 @@
             width: 160px;
             height: 25px;
             position: absolute;
-            right: 160px;
+            right: 200px;
             top: 10px;
         }
 
