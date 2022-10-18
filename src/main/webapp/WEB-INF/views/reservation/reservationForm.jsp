@@ -322,7 +322,7 @@
                     </li>
                     <li id="mypetBox" class="reservationBox">
                         <div id="mypet" class="reservationtext reservationtext1">| MY PET |</div>
-                        <div id="mypet2" class="reservationtext reservationtext2"><span>데려오기(펫정보db)</span>
+                        <div id="mypet2" class="reservationtext reservationtext2"><span id="com_mypet">데려오기</span>
                         </div>
                     </li>
                 </ul>
