@@ -19,7 +19,9 @@ repositories {
 }
 
 dependencies {
-
+		
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	implementation 'mysql:mysql-connector-java:5.1.29'
 	
 	
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
@@ -37,7 +39,8 @@ dependencies {
     implementation 'org.apache.tiles:tiles-jsp:3.0.8'
     implementation 'org.apache.tiles:tiles-core:3.0.8'
     implementation 'org.apache.tiles:tiles-servlet:3.0.8'
-	
+	// https://mvnrepository.com/artifact/commons-io/commons-io
+	implementation group: 'commons-io', name: 'commons-io', version: '2.4'
 	
 	
 	compileOnly 'org.projectlombok:lombok'
