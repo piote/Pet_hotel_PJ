@@ -16,23 +16,28 @@
    
    <!--  예약 페이지 -->
    
-   <definition name="reservationMain" extends="baseLayout">
+   <definition name="/reservationForm" extends="baseLayout">
       <put-attribute name="title" value="예약하기" />
-      <put-attribute name="body" value="/WEB-INF/views/reservation/reservationMain.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/reservation/reservationForm.jsp" />
    </definition> 
    
-   <definition name="reservationComplete" extends="baseLayout">
+   <definition name="/reservationComplete" extends="baseLayout">
       <put-attribute name="title" value="예약완료" />
       <put-attribute name="body" value="/WEB-INF/views/reservation/reservationComplete.jsp" />
    </definition> 
  
   <!--  로그인 -->
 	
-  <definition name="loginForm"  extends="baseLayout">
+  <definition name="/loginForm"  extends="baseLayout">
       <put-attribute name="title" value="로그인" />
       <put-attribute name="body" value="/WEB-INF/views/user/loginForm.jsp" />
   </definition>
 
+<!--  회원가입 -->
+ <definition name="/userForm"  extends="baseLayout">
+      <put-attribute name="title" value="회원가입" />
+      <put-attribute name="body" value="/WEB-INF/views/user/userForm.jsp" />
+  </definition>
    
     <!-- 리뷰 게시판 -->
    
@@ -41,7 +46,7 @@
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewBoard.jsp" />
 	</definition>
 			  	
-	<definition name="reviewDetail_1" extends="baseLayout">
+	<definition name="/review/reviewDetail_1" extends="baseLayout">
 	      <put-attribute name="title" value="리뷰" />
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail_1.jsp" />
 	</definition>	
@@ -55,6 +60,11 @@
 	      <put-attribute name="title" value="리뷰" />
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail_3.jsp" />
 	</definition>		
+	 
+	 <definition name="reviewForm" extends="baseLayout">
+	      <put-attribute name="title" value="리뷰 쓰기" />
+	      <put-attribute name="body" value="/WEB-INF/views/review/reviewForm.jsp" />
+	</definition>	
 	 
 	 <!-- 회원수정 -->
 	 		
@@ -101,14 +111,18 @@
    
    <!-- 문의게시판 -->
    
-   <definition name="/questionsList" extends="baseLayout">
+   <definition name="/questions/questionsList" extends="baseLayout">
       	  <put-attribute name="title" value="문의게시판" />
       	  <put-attribute name="body" value="/WEB-INF/views/questions/questionsList.jsp" />
    </definition>
    
-   <definition name="questionsForm" extends="baseLayout">
+   <definition name="/questions/questionsForm" extends="baseLayout">
       	  <put-attribute name="title" value="문의하기" />
       	  <put-attribute name="body" value="/WEB-INF/views/questions/questionsForm.jsp" />
+   </definition>
+      <definition name="/questions/questionViewArticle" extends="baseLayout">
+      	  <put-attribute name="title" value="상세창" />
+      	  <put-attribute name="body" value="/WEB-INF/views/questions/questionsViewArticle.jsp" />
    </definition>
 	
 </tiles-definitions>

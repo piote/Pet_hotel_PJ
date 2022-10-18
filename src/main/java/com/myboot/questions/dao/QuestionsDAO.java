@@ -18,6 +18,8 @@ public interface QuestionsDAO {
 	public int selectTotQuestions() throws DataAccessException;
 	public List searchQuestionsList(Map pagingMap) throws DataAccessException;
 	public int searchTotQuestions(String keyword) throws DataAccessException;
-	
+	public QuestionsVO selectQuestions(int q_num) throws DataAccessException;
+	public int selectNewQ_NUM() throws DataAccessException;
+	public void insertNewQuestions(Map questionsMap) throws DataAccessException;
 	
 }

@@ -40,6 +40,35 @@ public class QuestionsServiceImpl implements QuestionsService {
 		}
 		articlesMap.put("questionsList", questionsList);
 		articlesMap.put("totArticles", totArticles);
-		return articlesMap;
+		return articlesMap;				
 	}
+	
+//	게시글 조회
+	@Override
+	public QuestionsVO questionsViewArticle(int q_num) throws Exception {
+		QuestionsVO questionsVO = questionsDAO.selectQuestions(q_num);
+		System.out.println(questionsVO);
+		return questionsVO;
+	}
+	
+	
+//  게시글 추가
+	@Override
+	public int addNewQuestions(Map questionsMap) throws Exception{
+		int q_Num = questionsDAO.selectNewQ_NUM();
+		questionsMap.put("q_Num", q_Num);
+		questionsDAO.insertNewQuestions(questionsMap);
+		return q_Num;
+	}
+	
+	
+//	@Override
+//	public void modArticle(Map articleMap) throws Exception {
+//		questionsDAO.updateArticle(articleMap);
+//	}
+//	
+//	@Override
+//	public void removeArticle(int articleNO) throws Exception {
+//		questionsDAO.deleteArticle(articleNO);
+//	}
 }

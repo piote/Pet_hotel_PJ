@@ -8,65 +8,89 @@
    <resultMap id="questionsResult" type="questionsVO">
    	  <result property="level" column="LVL" />
       <result property="q_num" column="Q_NUM" />
-      <result property="id" column="USER_ID" />
+      <result property="user_id" column="USER_ID" />
       <result property="q_Date" column="Q_DATE" />
       <result property="q_title" column="Q_TITLE" />
       <result property="q_content" column="Q_CONTENT" />
       <result property="q_parentNo" column="Q_PARENTNO" />
       <result property="imageFileName" column="IMAGEFILENAME" />
    </resultMap> 
-  
-  <select id="selectAllQuestionsList" resultMap="questionsResult" >
-    <![CDATA[
-      SELECT level as LVL, Q_NUM, Q_PARENTNO, Q_TITLE, Q_CONTENT, Q_DATE, USER_ID
-      from TB_QBOARD
-      START WITH  Q_PARENTNO=0
-      CONNECT BY PRIOR Q_NUM=Q_PARENTNO 
-      ORDER SIBLINGS BY Q_NUM DESC
-    ]]>
-  </select>
-  
-  <!-- 페이지 -->
-  <select id="selectAllQuestionsList_page" parameterType="java.util.Map" resultMap="questionsResult"   >
-    <![CDATA[
-      SELECT * FROM ( 
-		SELECT ROWNUM as recNum, LVL, Q_NUM, Q_PARENTNO, Q_TITLE, USER_ID, Q_DATE
+	  
+	<select id="selectAllQuestionsList" resultMap="questionsResult" >
+		<![CDATA[
+			SELECT level as LVL, Q_NUM, Q_PARENTNO, Q_TITLE, Q_CONTENT, Q_DATE, USER_ID
+			from TB_QBOARD
+			START WITH  Q_PARENTNO=0
+			CONNECT BY PRIOR Q_NUM=Q_PARENTNO 
+			ORDER SIBLINGS BY Q_NUM DESC
+		]]>
+	</select>
+	
+	<!-- 페이지 -->
+	<select id="selectAllQuestionsList_page" parameterType="java.util.Map" resultMap="questionsResult"   >
+	  	<![CDATA[
+		    SELECT * FROM ( 
+			SELECT ROWNUM as recNum, LVL, Q_NUM, Q_PARENTNO, Q_TITLE, USER_ID, Q_DATE
 			from (select LEVEL as LVL, Q_NUM, Q_PARENTNO, Q_TITLE, USER_ID, Q_DATE
 					from TB_QBOARD
-	                START WITH  Q_PARENTNO=0
+		            START WITH  Q_PARENTNO=0
 					CONNECT BY PRIOR Q_NUM = Q_PARENTNO
 					ORDER SIBLINGS BY Q_NUM DESC)
 			)                    
-		where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10	
-    ]]>
-  </select>
-  
-  <!-- 글 총 갯수 -->
-  <select id="selectTotQuestions" resultType="int"   >
-    <![CDATA[
-      select count(Q_NUM) from TB_QBOARD
-    ]]>
-  </select>
-  
-  <!-- 검색기능 -->
-  <select id="searchQuestionsList" parameterType="java.util.Map" resultMap="questionsResult"   >
-    <![CDATA[
-      SELECT * FROM ( 
-		SELECT ROWNUM as recNum, LVL, Q_NUM, Q_PARENTNO, Q_TITLE, USER_ID, Q_DATE
+			where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10	
+	  	]]>
+	</select>
+	
+	<!-- 글 총 갯수 -->
+	<select id="selectTotQuestions" resultType="int"   >
+	  	<![CDATA[
+			select count(Q_NUM) from TB_QBOARD
+		]]>
+	</select>
+	
+	<!-- 검색기능 -->
+	<select id="searchQuestionsList" parameterType="java.util.Map" resultMap="questionsResult"   >
+		<![CDATA[
+			SELECT * FROM ( 
+			SELECT ROWNUM as recNum, LVL, Q_NUM, Q_PARENTNO, Q_TITLE, USER_ID, Q_DATE
 			from (select LEVEL as LVL, Q_NUM, Q_PARENTNO, Q_TITLE, USER_ID, Q_DATE
-					from TB_QBOARD WHERE Q_TITLE LIKE '%'||#{keyword}||'%'
-	                START WITH  Q_PARENTNO=0
-					CONNECT BY PRIOR Q_NUM = Q_PARENTNO
-					ORDER SIBLINGS BY Q_NUM DESC)
+				from TB_QBOARD WHERE Q_TITLE LIKE '%'||#{keyword}||'%'
+	            START WITH  Q_PARENTNO=0
+				CONNECT BY PRIOR Q_NUM = Q_PARENTNO
+				ORDER SIBLINGS BY Q_NUM DESC)
 			)                    
-		where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10	
-    ]]>
-  </select>
-  
-  <!-- 검색용 글 총 갯수 -->
+			where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10	
+	  	]]>
+	</select>
+	
+	<!-- 검색용 글 총 갯수 -->
 	<select id="searchTotQuestions" parameterType="String" resultType="int" >
-    <![CDATA[
-      select count(Q_NUM) from TB_QBOARD WHERE Q_TITLE LIKE '%'||#{keyword}||'%'
-    ]]>
-  </select>
+		<![CDATA[
+			select count(Q_NUM) from TB_QBOARD WHERE Q_TITLE LIKE '%'||#{keyword}||'%'
+		]]>
+	</select>
+	
+	<!-- 글 조회 -->
+	<select id="selectQuestions" resultType="questionsVO"   parameterType="int">
+	  	<![CDATA[
+			SELECT * from TB_QBOARD
+			where Q_NUM = #{q_num}
+		]]>
+	</select>
+	
+	<!-- 새글 번호 -->
+	<select id="selectNewQ_NUM" resultType="int"  >
+		<![CDATA[
+			SELECT  nvl(max(Q_NUM), 0) + 1 from TB_QBOARD		
+		]]>
+	</select>
+	
+	<!-- 새글 추가 -->
+	<insert id="insertNewQuestions" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT into TB_QBOARD(Q_NUM, Q_TITLE, Q_CONTENT, IMAGEFILENAME, USER_ID)
+			VALUES(#{q_Num}, #{title},	#{content}, #{imageFileName},#{id} )
+		]]>      
+	</insert>
+	  
 </mapper>

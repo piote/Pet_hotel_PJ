@@ -36,6 +36,13 @@
 	]]>
   </select>
   
+  <select id="selectOverlappedID" parameterType="String" resultType="String">
+  	<![CDATA[
+  		selct decode(count(*),1, 'true',0,'false')
+  		from TB_USER
+  		where USER_ID=#{id}
+  	 ]]>
+  </select>
   
    <select id="selectAllUserList" resultMap="userResult">
       <![CDATA[
@@ -72,12 +79,12 @@
 <!--    	]]> -->
 <!--    	</select> -->
    	
-<!--    	<insert id="insertUser" parameterType="userVO"> -->
-<!--    		<![CDATA[ -->
-<!--    		insert into TB_USER(id,pwd, name,email) -->
-<!--    		values(#{id},#{pwd},#{name},#{email}) -->
-<!--    		]]> -->
-<!--    	</insert> -->
+   	<insert id="insertNewUser" parameterType="userVO">
+   		<![CDATA[
+    		insert into TB_USER(id,pwd, name,email) 
+    		values(#{id},#{pwd},#{name},#{email}) 
+    	]]> 
+   	</insert>
    	
 <!--    	<insert id="insertUser2" parameterType="java.util.HashMap"> -->
 <!--    		<![CDATA[ -->

@@ -187,7 +187,8 @@ function calendarMaker(target, date) {
                     //텍스트에 날짜 정보
 
                     $("#start_dayBox").text(start_day.toLocaleDateString());
-
+                    $("#checkinDate").val(start_day);//===========================================
+					
                     //checkout 날짜 선택
                 } else if (start_day != null && end_day == null && start_day < selectDay) {
 

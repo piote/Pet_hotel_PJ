@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository("myPageDAO")
 public interface MyPageDAO {
 	 public List selectMyReservesList(String user_id) throws DataAccessException;
-	 public Map selectMyReservesList(Map paraMap) throws DataAccessException;
+	 public List selectMyReservesList(Map paraMap) throws DataAccessException;
 
 	 public List selectMyReviewList(String user_id) throws DataAccessException;
 	 public void updateMyReserveCancel(String reservation_num) throws DataAccessException;

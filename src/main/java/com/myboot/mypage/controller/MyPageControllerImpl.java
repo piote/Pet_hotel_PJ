@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myboot.mypage.service.MyPageService;
+import com.myboot.reservation.vo.ReservationVO;
 import com.myboot.user.vo.UserVO;
 
 @Controller("myPageController")
@@ -33,14 +34,14 @@ public class MyPageControllerImpl implements MyPageController {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
-//		UserVO userVO=(UserVO)session.getAttribute("memberInfo");
-//		String user_id = userVO.getId();	
+		UserVO userVO=(UserVO)session.getAttribute("user");
+		String user_id = userVO.getId();	
 		
-//		List myReserveList = myPageService.listMyReserve(user_id);
-//		List myReviewList = myPageService.listMyReview(user_id);
+		List myReserveList = myPageService.listMyReserve(user_id);
+		List myReviewList = myPageService.listMyReview(user_id);
 		
-//		mav.addObject("myReserveList", myReserveList);
-//		mav.addObject("myReviewList", myReviewList);
+		mav.addObject("myReserveList", myReserveList);
+		mav.addObject("myReviewList", myReviewList);
 		return mav;
 	}
 	
@@ -62,7 +63,7 @@ public class MyPageControllerImpl implements MyPageController {
         paraMap.put("startDate", startDate);
         paraMap.put("endDate", endDate);
         
-//        List<ReserveVO> myReserveList = myPageService.listMyReserve(paraMap);
+//        List myReserveList = myPageService.listMyReserve(paraMap);
         String viewName=(String)request.getAttribute("viewName");
         ModelAndView mav = new ModelAndView(viewName);
         if(!"name".equals(colName) && !"pet_name".equals(colName) && !"tel".equals(colName)) {

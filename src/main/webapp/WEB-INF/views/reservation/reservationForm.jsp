@@ -264,7 +264,7 @@
             width: 160px;
             height: 25px;
             position: absolute;
-            right: 160px;
+            right: 240px;
             top: 10px;
         }
 
@@ -288,7 +288,7 @@
             display: block;
             position: absolute;
             top: 10px;
-            right: 50px;
+            right: 20px;
         }
     </style>
 
@@ -312,17 +312,21 @@
                 <ul>
                     <li id="checkinBox" class="reservationBox">
                         <div id="checkin" class="reservationtext reservationtext1">| CHECK IN |</div>
-                        <div id="checkin2" class="reservationtext reservationtext2"><span id="start_dayBox">0000. 00.
-                                00.</span></div>
+                        <div id="checkin2" class="reservationtext reservationtext2">
+                        	<span id="start_dayBox">0000.00.00.</span>
+                        	<input type="hidden" name="checkinDate" id="checkinDate">
+                     	</div>
                     </li>
                     <li id="checkoutBox" class="reservationBox">
                         <div id="mypet" class="reservationtext reservationtext1">| CHECK OUT |</div>
-                        <div id="checkout2" class="reservationtext reservationtext2"><span id="end_dayBox">0000. 00.
-                                00.</span></div>
+                        <div id="checkout2" class="reservationtext reservationtext2">
+                        	<span id="end_dayBox">0000.00.00.</span>
+                            <input type="hidden" name="checkoutDate" id="checkoutDate">
+                        </div>
                     </li>
                     <li id="mypetBox" class="reservationBox">
                         <div id="mypet" class="reservationtext reservationtext1">| MY PET |</div>
-                        <div id="mypet2" class="reservationtext reservationtext2"><span>데려오기(펫정보db)</span>
+                        <div id="mypet2" class="reservationtext reservationtext2"><span id="com_mypet">데려오기</span>
                         </div>
                     </li>
                 </ul>
@@ -419,9 +423,22 @@
                     </tr>
                     <tr align="center" bgcolor="white" height="40px">
                         <td colspan="10" bgcolor="#e5e4e2">
-                            <img src="${contextPath}/resources/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
-                            <b class="membership">Bronze Membership : Discount 2%</b>
-                            <b class="totalpayment">The Total Payment : </b>
+	                        <c:choose>
+	                        	<c:when test="${user.grade eq 'Bronze'}">
+	                        		<img src="${contextPath}/resources/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
+                            		<b class="membership">Bronze Membership : Discount 2%</b>
+	                        	</c:when>
+	                        	<c:when test="${user.grade eq 'Silver'}">
+	                        		<img src="${contextPath}/resources/img/silver_medal.png" width="30px" height="30px" id="bronzeimg">
+                            		<b class="membership">Silver Membership : Discount 5%</b>
+	                        	</c:when>
+	                        	<c:when test="${user.grade eq 'Gold'}">
+	                        		<img src="${contextPath}/resources/img/gold_medal.png" width="30px" height="30px" id="bronzeimg">
+                            		<b class="membership">Gold Membership : Discount 10%</b>
+	                        	</c:when>
+	                        </c:choose>
+                            <input id="membership" type="hidden" value="${user.grade}">
+                            <b class="totalpayment"> Total Payment : </b>
                             <b class="totalcost">0 원</b>
                         </td>
                     </tr>
@@ -496,7 +513,7 @@
 
             <div class="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
-                <button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationcomplete.do'">완료</button>
+                <button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationComplete.do'">완료</button>
             </div>
         </form>
     </div>

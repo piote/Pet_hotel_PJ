@@ -1,11 +1,15 @@
 package com.myboot.reservation.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myboot.reservation.dao.ReservationDAO;
+import com.myboot.reservation.vo.ReservationVO;
 
 
 @Service("reservationService")
@@ -14,18 +18,23 @@ public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	private ReservationDAO reservationDAO;
 
-//	@Override
-//	public List listMembers() throws Exception {
-//		List membersList = null;
-//		membersList = reservationDAO.selectAllMemberList();
-//		return membersList;
-//	}
-//
-//	@Override
-//	public int addMember(MemberVO member) throws Exception {
-//		return memberDAO.insertMember(member);
-//	}
-//	
+	//테스트용, 예약된 것들을 조회
+	@Override
+	public List listReservation() throws Exception {
+		List ResList = null;
+		ResList = reservationDAO.selectReservationList();
+		return ResList;
+	}
+	@Override
+	public int addReservation(ReservationVO reservationVO) throws Exception {
+		return reservationDAO.insertReservation(reservationVO);
+	}
+	
+	@Override
+	public int addPetService(Map petServiceMap) throws Exception {
+		return reservationDAO.insertPetserviceMap(petServiceMap);
+	}
+	
 //	@Override
 //	public int modMember(MemberVO member) throws Exception {
 //		return memberDAO.updateMember(member);
