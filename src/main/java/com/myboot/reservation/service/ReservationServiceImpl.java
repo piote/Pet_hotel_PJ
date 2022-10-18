@@ -1,6 +1,7 @@
 package com.myboot.reservation.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myboot.reservation.dao.ReservationDAO;
+import com.myboot.reservation.vo.ReservationVO;
 
 
 @Service("reservationService")
@@ -23,12 +25,16 @@ public class ReservationServiceImpl implements ReservationService {
 		ResList = reservationDAO.selectReservationList();
 		return ResList;
 	}
-
-//	@Override
-//	public int addMember(MemberVO member) throws Exception {
-//		return memberDAO.insertMember(member);
-//	}
-//	
+	@Override
+	public int addReservation(ReservationVO reservationVO) throws Exception {
+		return reservationDAO.insertReservation(reservationVO);
+	}
+	
+	@Override
+	public int addPetService(Map petServiceMap) throws Exception {
+		return reservationDAO.insertPetserviceMap(petServiceMap);
+	}
+	
 //	@Override
 //	public int modMember(MemberVO member) throws Exception {
 //		return memberDAO.updateMember(member);

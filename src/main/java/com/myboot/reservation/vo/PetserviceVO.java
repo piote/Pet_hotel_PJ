@@ -11,8 +11,10 @@ import lombok.Data;
 @Component("petserviceVO")
 public class PetserviceVO {
 	private int pet_num;
+	private int res_num;
+	private String id;//유저아이디
 	private String pet_name;
-	private String pet_sex;
+	private String pet_gender;
 	private String room_grade;
 	private String service_beauty;
 	private String service_spa;
