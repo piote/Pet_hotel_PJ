@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -90,27 +92,6 @@ public class UserControllerImpl implements UserController{
 		return mav;
 	}	
 	
-
-	    /**
-	     * 회원가입 폼
-	     * @return
-	     */
-	    @GetMapping("/addUser.do")
-	    public String signUpForm() {
-	        return "signup";
-	    }
-
-	    /**
-	     * 회원가입 진행
-	     * @param user
-	     * @return
-	     */
-	    @PostMapping("/addUser.do")
-	    public String signUp(UserVo userVo) {
-	        userService.joinUser(userVo);
-	        return "redirect:/login"; //로그인 구현 예정
-	    }
-	}
 //	회원가입 회원추가
 	@Override
 	@RequestMapping(value="/addUser.do" ,method = RequestMethod.POST)
@@ -121,6 +102,17 @@ public class UserControllerImpl implements UserController{
 		result = userService.addUser(user);
 		ModelAndView mav = new ModelAndView("redirect:/main.do");
 		return mav;
+	}
+//	회원가입 id 중복 확인 기능
+	@Override
+	@RequestMapping(value="/overlapped.do",method=RequestMethod.POST)
+	public ResponseEntity overlapped(@RequestParam("id") String id,
+			HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		ResponseEntity resEntity= null;
+		String result = userService.overlapped(id);
+		resEntity = new ResponseEntity(result, HttpStatus.OK);
+		return resEntity;
 	}
 	
 	@RequestMapping("/loginForm.do") 
