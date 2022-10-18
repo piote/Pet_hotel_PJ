@@ -293,8 +293,10 @@
     </style>
 
     <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
-
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCal.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservation.js"></script>
     
@@ -511,12 +513,13 @@
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
                 <button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationComplete.do'">완료</button>
             </div>
-        </form>
+       
     </div>
 
     <div class="petcomment">
         <input type="text">
     </div>
+     </form>
     <br></br>
 
 
