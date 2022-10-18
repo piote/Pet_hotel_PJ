@@ -159,9 +159,9 @@
         <div class="gnb_w">
         	<div class="w_wrap">
 	        	<div class="img_wrap">
-	           	<a href="${contextPath}/reviewDetail_1.do"></a>
+	           	<a href="${contextPath}/review/reviewDetail_1.do"></a>
 	           	</div>
-	           	<a href="${contextPath}/reviewDetail_1.do" class="room_name">소형견(임시)</a>
+	           	<a href="${contextPath}/review/reviewDetail_1.do" class="room_name">소형견(임시)</a>
         	</div>
         	<div class="w_wrap">
 	           	<div class="img_wrap">

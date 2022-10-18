@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository("reservationDAO")
 public interface ReservationDAO {
-	 public List selectAllMemberList() throws DataAccessException;
+	 public List selectReservationList() throws DataAccessException;
 //	 public int insertMember(MemberVO memberVO) throws DataAccessException ;
 //	 
 //	 public int updateMember(MemberVO memberVO) throws DataAccessException ;

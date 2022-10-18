@@ -276,6 +276,23 @@ function costTB(petserviceMap, datecheck) {
         total += sbc * 35000 + mbc * 45000 + lbc * 60000 + sbs * 70000 + mbs * 80000 + lbs * 100000;
         total += ss * 50000 + ms * 80000 + ls * 120000;
         $(".totalcost").text(total.toLocaleString()  + ' 원');
+        console.log($("#membership").val());
+        console.log($("#membership").val()=='Silver');
+        if($("#membership").val()=='Gold' && total != 0){
+			var disTotal = total * (1 - 10 / 100);//10퍼 할인
+			$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
+		
+        }else if($("#membership").val()=='Silver' && total != 0){
+			var disTotal = total * (1 - 5 / 100);//5퍼 할인
+			$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
+		
+		}else if($("#membership").val()=='Bronze' && total != 0){
+			var disTotal = total * (1 - 2 / 100);//2퍼 할인
+			$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
+		
+		}else{
+			$(".totalcost").text(total.toLocaleString()  + ' 원');
+		}
 
 }
 

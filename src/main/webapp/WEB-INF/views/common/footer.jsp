@@ -30,7 +30,7 @@
         <div class="foot_menu_wrap">
             <ul>
                 <li class="min_title">서비스</li>
-                <li><a href="${contextPath}/reservation.do">호텔 예약</a></li>
+                <li><a href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservation.do','${contextPath}/loginForm.do')">호텔 예약</a></li>
                 <li><a href="#">예약 조회</a></li>
                 <li><a href="${contextPath}/reviewBoard.do">고객 리뷰</a></li>
             </ul>

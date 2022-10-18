@@ -14,18 +14,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myboot.review.service.ReviewService;
+import com.myboot.review.vo.ReviewVO;
 
 @Controller("reivewController")
 public  class ReviewControllerImpl  implements ReviewController {
 
 	 	@Autowired
 	 	private ReviewService reviewService;
-//	 	@Autowired
-//	 	private ReviewVO reviewVO;
+	 	
+	 	@Autowired
+	 	private ReviewVO reviewVO;
 	 	
 	 	@Override
-	 	@RequestMapping(value= "/reviewList.do", method = {RequestMethod.GET, RequestMethod.POST})
-	 	public ModelAndView reviewList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	 	@RequestMapping(value= "/review/reviewDetail_1.do", method = {RequestMethod.GET, RequestMethod.POST})
+	 	public ModelAndView reviewDetail_1(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 	 		String _section=request.getParameter("section");
 	 		String _pageNum=request.getParameter("pageNum");
@@ -34,7 +36,7 @@ public  class ReviewControllerImpl  implements ReviewController {
 	 		Map pagingMap=new HashMap();
 	 		pagingMap.put("section", section);
 	 		pagingMap.put("pageNum", pageNum);
-	 		Map reviewMap=reviewService.listReview_page(pagingMap);
+	 		Map reviewMap=reviewService.reviewDetail_1(pagingMap);
 	 		
 	 		reviewMap.put("section", section);
 	 		reviewMap.put("pageNum", pageNum);
@@ -60,11 +62,10 @@ public  class ReviewControllerImpl  implements ReviewController {
 			return "reviewBoard";
 		  }
 		 
-		 @RequestMapping("/reviewDetail_1.do")
-		  public String detail_1(Model model){
-			System.out.println("리뷰");
-			return "reviewDetail_1";
-		  }
+			/*
+			 * @RequestMapping("/reviewDetail_1.do") public String detail_1(Model model){
+			 * System.out.println("리뷰"); return "reviewDetail_1"; }
+			 */
 		 @RequestMapping("/reviewDetail_2.do")
 		  public String detail_2(Model model){
 			System.out.println("리뷰");
