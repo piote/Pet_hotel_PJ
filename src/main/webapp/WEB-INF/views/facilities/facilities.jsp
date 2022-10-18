@@ -77,6 +77,7 @@
                 background-color: rgb(231, 226, 219);
                 /* border: 1px double #e59f5a; */
                 border-radius: 20px;
+                z-index: 5;
             }
             .index .txt_index {
                 text-align: center;
@@ -474,6 +475,7 @@
                 position: relative;
                 right: -660px;
                 bottom: 330px;
+                width: 440px;
             }   
         </style>
     </head>
