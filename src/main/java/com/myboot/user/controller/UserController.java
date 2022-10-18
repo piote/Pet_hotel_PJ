@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +21,10 @@ public interface UserController {
            HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	로그아웃 기능 구현
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView addUser(@ModelAttribute("info") UserVO userVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	회원가입 기능 구현
+//	public ModelAndView addUser(@ModelAttribute("info") UserVO userVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	회원가입 id 중복확인 기능
+	public ResponseEntity   overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public ModelAndView pw_change(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
