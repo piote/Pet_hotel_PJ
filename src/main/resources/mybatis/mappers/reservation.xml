@@ -19,7 +19,7 @@
   <resultMap id="petserviceResult" type="petserviceVO">
     <result property="pet_num" column="PET_NUM" />
     <result property="pet_name" column="PET_NAME" />
-    <result property="pet_sex" column="PET_SEX" />
+    <result property="pet_gender" column="PET_GENDER" />
     <result property="room_grade" column="ROOM_GRADE" />
     <result property="service_beauty" column="SERVICE_BEAUTY" />
     <result property="service_spa" column="SERVICE_SPA" />
@@ -36,20 +36,41 @@
     <result property="res_state" column="RESERVATION_STATE" />
     <result property="pet_num" column="PET_NUM" />
     <result property="pet_name" column="PET_NAME" />
-    <result property="pet_sex" column="PET_SEX" />
+    <result property="pet_gender" column="PET_GENDER" />
     <result property="room_grade" column="ROOM_GRADE" />
     <result property="service_beauty" column="SERVICE_BEAUTY" />
     <result property="service_spa" column="SERVICE_SPA" />
   </resultMap> 
 	
 	
-   <select id="selectReservationList" resultMap="resfullResult">
+   <select id="selectReservationList" resultMap="reservationResult">
 		<![CDATA[
 		SELECT RESERVATION_NUM, RESERVATION_ST, RESERVATION_END, USER_ID, RS_COMMENT, TOTAL_COST, PAY_TIME, RESERVATION_STATE 
 		FROM TB_RESERVATION
 		ORDER BY RESERVATION_NUM DESC
 		]]>
 	</select>
+
+	<insert id="insertReservation"  parameterType="reservationVO">
+		<![CDATA[
+		 INSERT INTO TB_RESERVATION(RESERVATION_NUM,RESERVATION_ST, RESERVATION_END, USER_ID, RS_COMMENT, TOTAL_COST, PAY_TIME, RESERVATION_STATE)
+		 VALUES(#{res_num}, #{res_st}, #{res_end}, #{id}, #{res_comment}, #{totalCost}, SYSDATE, #{res_state})
+		]]>      
+	</insert>
+	<!--  멀티 이미지 참고해서 적용해야함 for each 면 될듯 -->
+	<insert id="insertPetservice"  parameterType="petserviceVO">
+		<![CDATA[
+		 INSERT INTO TB_PETSERVICE(PET_NUM, RESERVATION_NUM, USER_ID, PET_NAME, PET_GENDER, ROOM_GRADE, SERVICE_BEAUTY, SERVICE_SPA)
+		 VALUES(#{pet_num}, #{res_num},#{id},#{pet_name}, #{pet_sex}, #{room_grade}, #{service_beauty}, #{service_spa})
+		]]>      
+	</insert>
+	<!--  멀티 이미지 참고해서 적용해야함 foreach를 이용한 다중 insert 문-->
+	<insert id="insertPetserviceMap"  parameterType="java.util.Map">
+	    <foreach item="item"  collection="list"   open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" >
+	      INTO TB_PETSERVICE(PET_NUM, RESERVATION_NUM, USER_ID, PET_NAME, PET_GENDER, ROOM_GRADE, SERVICE_BEAUTY, SERVICE_SPA)
+	      VALUES (#{item.pet_num}, #{item.res_num},#{item.id},#{item.pet_name}, #{item.pet_sex}, #{item.room_grade}, #{item.service_beauty}, #{item.service_spa})
+	    </foreach>
+  	</insert>
    
 <!-- 	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="String"  >
 		<![CDATA[
