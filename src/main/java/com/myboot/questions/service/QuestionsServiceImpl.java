@@ -66,9 +66,10 @@ public class QuestionsServiceImpl implements QuestionsService {
 //	public void modArticle(Map articleMap) throws Exception {
 //		questionsDAO.updateArticle(articleMap);
 //	}
-//	
-//	@Override
-//	public void removeArticle(int articleNO) throws Exception {
-//		questionsDAO.deleteArticle(articleNO);
-//	}
+	
+	//삭제하기
+	@Override
+	public void removeQuestionsArticle(int q_num) throws Exception {
+		questionsDAO.deleteQusetionsArticle(q_num);
+	}
 }
