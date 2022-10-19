@@ -95,47 +95,46 @@ public  class ReservationControllerImpl implements ReservationController{
 		String[] petBeauty = request.getParameterValues("beauty");
 		String[] petSpa = request.getParameterValues("spa");
 
+		//데이터 베이스 - 예약번호 찾기
 		int resNum = resService.useReservationNum();
-		
-		
-		resNum
-		
+		System.out.println("예약번호============="+resNum);
+			
+		//pet서비스 vo map만들기
 		Map petServiceMap = new HashMap();
-		
-		int listIndex = 0;
+		List<PetserviceVO> petServiceList = new ArrayList<PetserviceVO>();
+
 		for(int i=0;i<petName.length;i++) {
 			
 			if(petName[i] != null && petName[i] != "") {
 				
-				List<PetserviceVO> petServiceList = new ArrayList<PetserviceVO>();
-				
-				petServiceList.add(petName[i]);
-				
-				petServiceList.add(petGender[i]);
-						
-				petServiceList.add(petRoom[i]);
-				
-				petServiceList.add(petBeauty[i]);
-				
-				petServiceList.add(petSpa[i]);
-			
-				petServiceMap.put("petServiceList"+listIndex, petServiceList);
-				
-				listIndex++;
+				PetserviceVO petserVO = new PetserviceVO();
+				petserVO.setRes_num(resNum);
+				petserVO.setId(userVO.getId());
+				petserVO.setPet_name(petName[i]);
+				petserVO.setPet_gender(petGender[i]);
+				petserVO.setRoom_grade(petRoom[i]);
+				petserVO.setService_beauty(petBeauty[i]);
+				petserVO.setService_spa(petSpa[i]);
+
+				petServiceList.add(petserVO);
+		
 			}
 		}
 		
+		petServiceMap.put("petServiceList", petServiceList);
 		
+		ReservationVO reserVO = new ReservationVO();
+		//예약 vo
+		reserVO.setRes_num(resNum);
+		reserVO.setRes_st(checkinDate);
+		reserVO.setRes_end(checkoutDate);
+		reserVO.setRes_comment(petcomment);
+		reserVO.setId(userVO.getName());
+		reserVO.setTotalCost(costResult);
 		
-		resVO.setRes_st(checkinDate);
-		resVO.setRes_end(checkoutDate);
-		resVO.setRes_comment(petcomment);
-		resVO.setId(userVO.getName());
-		resVO.setTotalCost(costResult);
-		
-		resService.addReservation(resVO);
+		//데이터 베이스
+		resService.addReservation(reserVO);
 		resService.addPetService(petServiceMap);
-		
 		
 		String viewName = (String)request.getAttribute("redirect:/reservationComplete.do");
 		ModelAndView mav = new ModelAndView(viewName);

@@ -71,7 +71,7 @@
 	<insert id="insertReservation"  parameterType="reservationVO">
 		<![CDATA[
 		 INSERT INTO TB_RESERVATION(RESERVATION_NUM,RESERVATION_ST, RESERVATION_END, USER_ID, RS_COMMENT, TOTAL_COST, PAY_TIME, RESERVATION_STATE)
-		 VALUES((SELECT MAX(RESERVATION_NUM) FROM TB_RESERVATION)+1, #{res_st}, #{res_end}, #{id}, #{res_comment}, #{totalCost}, SYSDATE, "N")
+		 VALUES(#{res_num}, #{res_st}, #{res_end}, #{id}, #{res_comment}, #{totalCost}, SYSDATE, "N")
 		]]>      
 	</insert>
 	<!--  멀티 이미지 참고해서 적용해야함 for each 면 될듯 
