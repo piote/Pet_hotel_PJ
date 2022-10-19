@@ -66,9 +66,9 @@ public class QuestionsServiceImpl implements QuestionsService {
 //	public void modArticle(Map articleMap) throws Exception {
 //		questionsDAO.updateArticle(articleMap);
 //	}
-//	
-//	@Override
-//	public void removeArticle(int articleNO) throws Exception {
-//		questionsDAO.deleteArticle(articleNO);
-//	}
+	
+	@Override
+	public void removeQuestionsArticle(int q_num) throws Exception {
+		questionsDAO.deleteQuestionsArticle(q_num);
+	}
 }

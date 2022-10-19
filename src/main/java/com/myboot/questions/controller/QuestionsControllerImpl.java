@@ -200,4 +200,37 @@ public class QuestionsControllerImpl implements QuestionsController{
 		return imageFileName;
 	}
 	
+	//삭제하기
+	 @Override
+	  @RequestMapping(value="/questions/removeArticle.do" ,method = RequestMethod.POST)
+	  @ResponseBody
+	  public ResponseEntity  removeQuestionsArticle(@RequestParam("q_num") int q_num,
+	                              HttpServletRequest request, HttpServletResponse response) throws Exception{
+	   response.setContentType("text/html; charset=UTF-8");
+	   String message;
+	   ResponseEntity resEnt=null;
+	   HttpHeaders responseHeaders = new HttpHeaders();
+	   responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	   try {
+		   questionsService.removeQuestionsArticle(q_num);
+	      File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+q_num);
+	      FileUtils.deleteDirectory(destDir);
+	      
+	      message = "<script>";
+	      message += " alert('글을 삭제했습니다.');";
+	      message += " location.href='"+request.getContextPath()+"/questions/questionsList.do';";
+	      message +=" </script>";
+	       resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	          
+	   }catch(Exception e) {
+	      message = "<script>";
+	      message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
+	      message += " location.href='"+request.getContextPath()+"/questions/questionsList.do';";
+	      message +=" </script>";
+	       resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	       e.printStackTrace();
+	   }
+	   return resEnt;
+	  }  
+	
 }
