@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,7 +33,9 @@ import com.myboot.user.vo.UserVO;
 @Controller("questionsController")
 public class QuestionsControllerImpl implements QuestionsController{
 	
-	private static final String ARTICLE_IMAGE_REPO = "C:\\questions\\questions_image";
+	
+	//private static final String ARTICLE_IMAGE_REPO = "C:\\questions\\questions_image";
+	
 	
 	@Autowired
 	QuestionsService questionsService;
@@ -84,9 +87,16 @@ public class QuestionsControllerImpl implements QuestionsController{
 
 	@RequestMapping(value = "/questions/*Form.do", method =  RequestMethod.GET)
 	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
+		
+		//서블릿에서 경로를 받아와서 세션에 저장하는 코드 
+		ServletContext context = request.getSession().getServletContext();
+		String realPath = context.getRealPath("");
+		session.setAttribute("realPath", realPath);
+		
 		return mav;
 	}
 	
@@ -129,14 +139,19 @@ public class QuestionsControllerImpl implements QuestionsController{
 		
 		String message;
 		ResponseEntity resEnt=null;
+		
+		//세션에 저장된 경로를 받아온다
+		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
+		System.out.println("in "+path);
+		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
 			int articleNO = questionsService.addNewQuestions(articleMap);
 			if(imageFileName!=null && imageFileName.length()!=0) {
 				File srcFile = new 
-				File(ARTICLE_IMAGE_REPO+ "\\" + "temp"+ "\\" + imageFileName);
-				File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+articleNO);
+				File(path+ "\\" + "temp"+ "\\" + imageFileName);
+				File destDir = new File(path+"\\"+articleNO);
 				FileUtils.moveFileToDirectory(srcFile, destDir,true);
 			}
 	
@@ -146,9 +161,8 @@ public class QuestionsControllerImpl implements QuestionsController{
 			message +=" </script>";
 		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		}catch(Exception e) {
-			File srcFile = new File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
+			File srcFile = new File(path+"\\"+"temp"+"\\"+imageFileName);
 			srcFile.delete();
-			
 			message = " <script>";
 			message +=" alert('오류가 발생했습니다. 다시 시도해 주세요');');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/questions/questionsList.do'; ";
@@ -156,6 +170,8 @@ public class QuestionsControllerImpl implements QuestionsController{
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
 		}
+		//다 쓴 경로 삭제
+		session.removeAttribute("realPath");
 		return resEnt;
 	}
 	
@@ -165,18 +181,21 @@ public class QuestionsControllerImpl implements QuestionsController{
 		String imageFileName= null;
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 		
+		//세션에 있는 경로를 받아온다
+		HttpSession session = multipartRequest.getSession();
+		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
+		
 		while(fileNames.hasNext()){
 			String fileName = fileNames.next();
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			imageFileName=mFile.getOriginalFilename();
-			File file = new File(ARTICLE_IMAGE_REPO +"\\"+"temp"+"\\" + fileName);
+			File file = new File(path +"\\"+"temp"+"\\" + fileName);
 			if(mFile.getSize()!=0){ //File Null Check
 				if(!file.exists()){ //경로상에 파일이 존재하지 않을 경우
 					file.getParentFile().mkdirs();  //경로에 해당하는 디렉토리들을 생성
-					mFile.transferTo(new File(ARTICLE_IMAGE_REPO +"\\"+"temp"+ "\\"+imageFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
+					mFile.transferTo(new File(path +"\\"+"temp"+ "\\"+imageFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
 				}
 			}
-			
 		}
 		return imageFileName;
 	}
