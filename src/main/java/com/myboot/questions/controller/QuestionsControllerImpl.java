@@ -93,6 +93,7 @@ public class QuestionsControllerImpl implements QuestionsController{
 		mav.setViewName(viewName);
 		
 		//서블릿에서 경로를 받아와서 세션에 저장하는 코드 
+		session.removeAttribute("realPath");
 		ServletContext context = request.getSession().getServletContext();
 		String realPath = context.getRealPath("");
 		session.setAttribute("realPath", realPath);
@@ -111,6 +112,14 @@ public class QuestionsControllerImpl implements QuestionsController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("article", questionsVO);
+		
+		//서블릿에서 경로를 받아와서 세션에 저장하는 코드 
+		HttpSession session = request.getSession();
+		session.removeAttribute("realPath");
+		ServletContext context = request.getSession().getServletContext();
+		String realPath = context.getRealPath("");
+		session.setAttribute("realPath", realPath);
+		
 		return mav;
 		}
 	
@@ -211,9 +220,15 @@ public class QuestionsControllerImpl implements QuestionsController{
 	   ResponseEntity resEnt=null;
 	   HttpHeaders responseHeaders = new HttpHeaders();
 	   responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	   
+		 //세션에 저장된 경로를 받아온다
+	   	HttpSession session = request.getSession();
+		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
+		System.out.println("in "+path);
+	   
 	   try {
-		   questionsService.removeQuestionsArticle(q_num);
-	      File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+q_num);
+		  questionsService.removeQuestionsArticle(q_num);
+	      File destDir = new File(path+"\\"+q_num);
 	      FileUtils.deleteDirectory(destDir);
 	      
 	      message = "<script>";
