@@ -13,14 +13,19 @@
 	   <link rel="stylesheet" href="${contextPath}/resources/css/member.css">
 	   <meta charset="UTF-8">
 	   <title>회원 수정창</title>
-	 <!--   <script>
-	   	function leave() {
-	   		if(confirm("탈퇴 하시겠습니까?") == true) {
-	   		}
-	   	}
-	    
-	   </script> -->
-	   
+	   <script>
+			function checkOnlyOne(element) {
+		  
+			  const checkboxes 
+			      = document.getElementsByName("emailsts_yn");
+			  
+			  checkboxes.forEach((cb) => {
+			    cb.checked = false;
+			  })
+		  
+		  		element.checked = true;
+		}
+	</script>
 	</head>
 	<body>
 		<form method="post" action="${contextPath}/mypage/myPage.do?id=${userInfo.id}">
@@ -31,33 +36,33 @@
 			      <table>
 			         <tr>
 				            <td><p align="center">아이디</td>
-				            <td><input class="txtBox" type="text" name="id" value="${userInfo.id }" disabled/> </td>
+				            <td><input class="txtBox" type="text" name="id" value="${user.id }" disabled/> </td>
 			         </tr>
 			         <tr>
 				            <td><p align="center">비밀번호</td>
-				            <td><input class="txtBox" type="password" name="pwd"  value="${userInfo.pw }" /></td>
+				            <td><input class="txtBox" type="password" name="pwd"  value="${user.pw }" /></td>
 			         </tr>
 			         <tr>
 				            <td><p align="center">이름</P></td>
-				            <td><input class="txtBox" type="text" name="name"  value="${userInfo.name }" disabled/></td>
+				            <td><input class="txtBox" type="text" name="name"  value="${user.name }" disabled/></td>
 			         </tr>
 			 		 <tr>
 				            <td><p align="center">이메일</P></td>
-				            <td><input class="txtBox" type="text" name="email"  value="${userInfo.email }"></td>
+				            <td><input class="txtBox" type="text" name="email"  value="${user.email }"></td>
 			         </tr>
 			          <tr>
 			                <td><p align="center">휴대전화</P></td>
-			                <td><input class="txtBox" type="text" name="tel"  value="${userInfo.tel }"></td>
+			                <td><input class="txtBox" type="text" name="tel"  value="${user.tel }"></td>
 			         </tr>
 			          <tr>
 			                <td><p align="center">비상전화</P></td>
-			                <td><input class="txtBox" type="text" name="tel_sub" value="${userInfo.tel_sub}"></td>
+			                <td><input class="txtBox" type="text" name="tel_sub" value="${user.tel_sub}"></td>
 			          </tr>
 			          <tr>
 			               <td><p align="center">수신여부</P></td>
 			               <td>
-			                  <input type="checkbox" name="emailsts_yn"  value="N"  /> Yes
-			                  <input type="checkbox" name="emailsts_yn"  value="N"  /> No	
+			                 <input type="checkbox" name="emailsts_yn"  value="N" onclick= 'checkOnlyOne(this)'  />Yes
+			                 <input type="checkbox" name="emailsts_yn"  value="N" onclick= 'checkOnlyOne(this)' />No	
 			               </td>
 		               </tr>
 			           <tr>
@@ -66,7 +71,7 @@
 		               </tr>
 			         <tr>
 				           <td><p align="center">가입일</td>
-				           <td><input class="txtBox" type="text" name="joinDate" size="20" value="${userInfo.joinDate}"  disabled/></td>
+				           <td><input class="txtBox" type="text" name="joinDate" size="20" value="${user.joinDate}"  disabled/></td>
 			         </tr>
 			         
 			     </table>

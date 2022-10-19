@@ -28,14 +28,6 @@
 	]]>
   </select>
   
- <select id="password" resultType="userVO" parameterType="userVO">
-	<![CDATA[
-		select USER_PW as pw 
-	 	from tb_user
-		where USER_PW=#{pw} 
-	]]>
-  </select>
-  
   <select id="selectOverlappedID" parameterType="String" resultType="String">
   	<![CDATA[
   		selct decode(count(*),1, 'true',0,'false')

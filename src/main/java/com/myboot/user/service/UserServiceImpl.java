@@ -26,24 +26,25 @@ public class UserServiceImpl implements UserService {
 		userList = userDAO.selectAllUserList();
 		return userList;
 	}
-  // 회원 정보 수정
 	
+  // 비밀번호 한번 더 입력
+	@Override
+	public UserVO password(UserVO  userVO) throws DataAccessException{
+		return userDAO.password(userVO);
+	}
+		
+		
+  // 회원 정보 수정
+	@Override
 	public int modMember(UserVO userVO) throws DataAccessException {
 	    return userDAO.updateMember(userVO);
 	}
   
   // 회원 탈퇴
-	
+	@Override
 	public int removeMember(String id) throws DataAccessException {
 		return  userDAO.deleteMember(id);
 	}
-	
- // 비밀번호 한번 더 입력
-	
-	public UserVO password(UserVO  userVO) throws Exception{
-		return userDAO.password(userVO);
-	}
-
 	
 //	회원가입 회원정보 추가
 	

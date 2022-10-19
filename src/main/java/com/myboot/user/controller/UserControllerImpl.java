@@ -163,56 +163,69 @@ public class UserControllerImpl implements UserController{
 				mav.setViewName(viewName);
 				return mav;
 	}
-
-	@Override
-	@RequestMapping(value="/modMember.do" ,method = RequestMethod.GET)
-	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception {
-		HttpSession session=request.getSession();
-		session=request.getSession();
+	
+	// 한번 더 비밀번호 입력 폼
+	@RequestMapping(value = "/pw_changeForm.do", method =  RequestMethod.GET)
+	private ModelAndView Form(@RequestParam(value= "result", required=false) String result,
+			                  @RequestParam(value= "action", required=false) String action,
+			                  HttpServletRequest request, 
+			                  HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action); 
 		
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",result);
+		mav.setViewName(viewName);
 		return mav;
 	}
-	
-	// 비밀번호 한번 더 입력
-//	@Override
-//	@RequestMapping(value="/pw_change.do" ,method = RequestMethod.GET)
-//	public ModelAndView pw_change(HttpServletRequest request, HttpServletResponse response)  throws Exception {
-//		HttpSession session=request.getSession();
-//		session=request.getSession();
-//		
-//		String viewName=(String)request.getAttribute("viewName");
-//		ModelAndView mav = new ModelAndView(viewName);
-//		return mav;
-//    }
 	
 	// 한번 더 비밀번호 입력
 	@Override
-	@RequestMapping(value="/pw_change.do" ,method = RequestMethod.GET)
-	public ModelAndView pw_change(RedirectAttributes rAttr, 
+	@RequestMapping(value="/pw_change.do" , method = RequestMethod.POST)
+	public ModelAndView pw_change(
+            @RequestParam(value= "password", required=false) String password,
+			RedirectAttributes rAttr, 
 				HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
-		if(userVO!= null) {
 			HttpSession session = request.getSession();
 			userVO = (UserVO) session.getAttribute("user");
 			System.out.println(userVO);
-			userVO = userService.password(userVO);
+			System.out.println(password);
+			System.out.println(userVO.getPw());
+			//userVO = userService.password(userVO);
+			String userPw =userVO.getPw();
 			
-			//mav.setViewName("redirect:/pw_change.do");	
+			if (userPw.equals(password)) {
+				System.out.println("성공");
+				
+				mav.setViewName("redirect:/modMember.do");	
+			
+				//String viewName=(String)request.getAttribute("viewName");
+				//mav = new ModelAndView(viewName);
+				
+			}else {
+				rAttr.addAttribute("result","passwordFailed");
+				mav.setViewName("redirect:/pw_changeForm.do");
+				System.out.println("실패");
+			}
+		return mav;
+			
+	}
+	
+	// 회원 정보 수정
+		@Override
+		@RequestMapping(value="/modMember.do" ,method = RequestMethod.GET)
+		public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception {
+			HttpSession session=request.getSession();
+			session=request.getSession();
 			
 			String viewName=(String)request.getAttribute("viewName");
-			mav = new ModelAndView(viewName);
+			ModelAndView mav = new ModelAndView(viewName);
 			return mav;
-			
-		}else {
-			rAttr.addAttribute("result","passwordFailed");
-			mav.setViewName("redirect:/modMember.do");
 		}
 		
-		return mav;
-	}
 	
 	// 탈퇴하기
 	@Override
