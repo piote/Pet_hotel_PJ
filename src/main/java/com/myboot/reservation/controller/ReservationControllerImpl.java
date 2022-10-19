@@ -1,5 +1,6 @@
 package com.myboot.reservation.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -83,8 +84,8 @@ public  class ReservationControllerImpl implements ReservationController{
 		HttpSession session=request.getSession();
 		UserVO userVO = (UserVO) session.getAttribute("user");
 		// 예약 정보
-		String checkinDate = (String) request.getParameter("checkinDate");
-		String checkoutDate = (String) request.getParameter("checkoutDate");
+		Date checkinDate = (Date) request.getParameter("checkinDate");//스트링 데이터로 변환하기 포멧
+		Date checkoutDate = (Date) request.getParameter("checkoutDate");//
 		String petcomment = (String) request.getParameter("petcomment");
 		String costResult = (String) request.getParameter("totalcost");
 		
