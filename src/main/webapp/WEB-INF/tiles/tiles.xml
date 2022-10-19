@@ -73,9 +73,9 @@
       <put-attribute name="body" value="/WEB-INF/views/user/modMember.jsp" />
    </definition>
    
-    <definition name="/pw_change" extends="baseLayout">
-      <put-attribute name="title" value="회원정보수정" />
-      <put-attribute name="body" value="/WEB-INF/views/user/pw_change.jsp" />
+    <definition name="/pw_changeForm" extends="baseLayout">
+      <put-attribute name="title" value="비밀번호창" />
+      <put-attribute name="body" value="/WEB-INF/views/user/pw_changeForm.jsp" />
    </definition>  		
 	
 	   	<!-- 호텔 소개  -->
