@@ -1,5 +1,6 @@
 package com.myboot.mypage.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,5 +11,6 @@ public interface MyPageService {
 	public List listMyDetailReserve(Map paraMap) throws Exception;
 	public List listMyReview(String user_id) throws Exception;
 	public void cancelReserve(String res_num) throws Exception;
+	
 	
 }
