@@ -198,7 +198,7 @@
 	 }
 	 
 	 function fn_modify_article(obj){
-		 obj.action="${contextPath}/board/modArticle.do";
+		 obj.action="${contextPath}/questions/modQuestionsArticle.do";
 		 obj.submit();
 	 }
 	 
@@ -289,7 +289,7 @@
                             	</c:if>
                                 <%-- <input type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
                                 <img class="imagebox"  />
-                                <input  type="file"  name="imageFileName " id="i_imageFileName"  disabled onchange="readURL(this);"   /> --%>
+                                <input  type="file"  name="imageFileName " id="i_imageFileName" disabled onchange="readURL(this);"   /> --%>
                                 <input type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
                                 <label for="i_imageFileName">이미지 파일</label>
                 				<input class="upload-name" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL(this);"  disabled >

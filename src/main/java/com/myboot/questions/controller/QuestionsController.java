@@ -17,8 +17,8 @@ public interface QuestionsController {
             HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, 
 			HttpServletResponse response) throws Exception;
-	  public ResponseEntity  removeQuestionsArticle(@RequestParam("q_num") int q_num,
-              HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
-	
+    public ResponseEntity  removeQuestionsArticle(@RequestParam("q_num") int q_num,
+            HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public ResponseEntity modQuestionsArticle(MultipartHttpServletRequest multipartRequest,  
+	        HttpServletResponse response) throws Exception;		
 }
