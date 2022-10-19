@@ -76,13 +76,13 @@ public  class ReservationControllerImpl implements ReservationController{
 			
 		return ResList;
 	}
-	
-	@SuppressWarnings("null")
-	@ResponseBody
+	@Override
 	@RequestMapping(value= "/reservationAdd.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String reservationAdd( HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView reservationAdd( HttpServletRequest request, HttpServletResponse response) throws Exception{
+		//유저 정보
 		HttpSession session=request.getSession();
 		UserVO userVO = (UserVO) session.getAttribute("user");
+		// 예약 정보
 		String checkinDate = (String) request.getParameter("checkinDate");
 		String checkoutDate = (String) request.getParameter("checkoutDate");
 		String petcomment = (String) request.getParameter("petcomment");
@@ -93,19 +93,18 @@ public  class ReservationControllerImpl implements ReservationController{
 		String[] petGender = request.getParameterValues("petsex");
 		String[] petRoom = request.getParameterValues("petroom");
 		String[] petBeauty = request.getParameterValues("beauty");
-		
 		String[] petSpa = request.getParameterValues("spa");
-		
-		System.out.println(petBeauty.length);
-		System.out.println(petSpa.length);
-		
+
 		
 		Map petServiceMap = new HashMap();
 		
 		int listIndex = 0;
 		for(int i=0;i<petName.length;i++) {
+			
 			if(petName[i] != null && petName[i] != "") {
+				
 				List<String> petServiceList = new ArrayList<String>();
+				
 				petServiceList.add(petName[i]);
 				
 				petServiceList.add(petGender[i]);
@@ -117,21 +116,26 @@ public  class ReservationControllerImpl implements ReservationController{
 				petServiceList.add(petSpa[i]);
 			
 				petServiceMap.put("petServiceList"+listIndex, petServiceList);
+				
 				listIndex++;
 			}
 		}
+		resVO.setRes_st(checkinDate);
+		resVO.setRes_end(checkoutDate);
+		resVO.setRes_comment(petcomment);
+		resVO.setId(userVO.getName());
+		resVO.setTotalCost(costResult);
 		
-		String total = checkinDate +checkoutDate+ petcomment +userVO.getName() +"<br>"+petServiceMap;
-		return total;
+		resService.addReservation(resVO);
+		resService.addPetService(petServiceMap);
+		
+		
+		String viewName = (String)request.getAttribute("redirect:/reservationComplete.do");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		return mav;
 	}
-	
-	
 
-//	@RequestMapping("/reservationcomplete.do")
-//		public String ReservationComplete(Model model){
-//	
-//		return "reservationComplete";
-//	}
 	
 }
 

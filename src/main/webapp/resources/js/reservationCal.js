@@ -281,9 +281,6 @@ function calendarMaker(target, date) {
             }
 
 
-
-
-
         });
     }
 

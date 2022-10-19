@@ -121,12 +121,14 @@ function pet_table_event(petTableNum) {
     $('#pet_Spa' + petTableNum).change(this, function () {
 
         petmap.set($(this).attr('id'), $(this).prop("checked"));
+        
         if($(this).prop("checked")){
-			$($(this).attr('id')+'_hidden').attr("disabled", true);
+			$("#"+$(this).attr('id')+'_hidden').attr("disabled", true);
+		}else{
+			$("#"+$(this).attr('id')+'_hidden').attr("disabled", false);
 		}
 		
-		
-
+		//결과창
         if (tablecheck(this)) {
             console.log(costresult(this));
             costTB(costresult(this),true);
