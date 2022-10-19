@@ -11,7 +11,7 @@ import com.myboot.user.vo.UserVO;
 @Mapper
 @Repository("userDAO")
 public interface UserDAO {
-	public List selectAllUserList() throws DataAccessException;
+	 public List selectAllUserList() throws DataAccessException;
 	 public int updateMember(UserVO userVO) throws DataAccessException;
 	 public int deleteMember(String id) throws DataAccessException;
 	 public UserVO password(UserVO userVO) throws DataAccessException;

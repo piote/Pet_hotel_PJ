@@ -114,7 +114,7 @@ public class UserControllerImpl implements UserController{
 		return null;
 		
 	}
-
+//  회원가입 회워
 //	회원가입 id 중복 확인 기능
 	 @ResponseBody // 값 변환을 위해 꼭 필요함
 		@GetMapping("idCheck") // 아이디 중복확인을 위한 값으로 따로 매핑

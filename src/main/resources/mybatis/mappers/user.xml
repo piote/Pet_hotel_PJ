@@ -69,13 +69,14 @@
 <!--    		pw = #{pw} -->
 <!--    	]]> -->
 <!--    	</select> -->
-   	
+<!--  회원가입 회원 저장 -->
    	<insert id="insertNewUser" parameterType="userVO">
    		<![CDATA[
     		insert into TB_USER(id,pwd, name,email) 
-    		values(#{id},#{pwd},#{name},#{email}) 
+    		values((#{id},#{pw},#{Name},#{email},#{tel},#{tel_sub},#{message},#{birth)) 
     	]]> 
    	</insert>
+   	.
    	
 <!--    	<insert id="insertUser2" parameterType="java.util.HashMap"> -->
 <!--    		<![CDATA[ -->
