@@ -15,8 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FileDownloadController {
+	
+	String r = this.getClass().getResource("/").getPath().replaceAll("/WEB-INF/classes/","/");
+	String r1 = this.getClass().getResource("/").getPath();
+	
 	private static final String ARTICLE_IMAGE_REPO = "";
-	private static final String QUESTIONS_IMAGE_REPO = "C:\\questions\\questions_image";
+	//private static final String QUESTIONS_IMAGE_REPO = "C:\\questions\\questions_image";
+	private final String QUESTIONS_IMAGE_REPO = r1+ "webapp/resources/questions/questions_image";
+	
 	@RequestMapping("/download.do")
 	protected void download(@RequestParam("imageFileName") String imageFileName,
 							@RequestParam("articleNO") String articleNO,
@@ -43,7 +49,7 @@ public class FileDownloadController {
 			@RequestParam("articleNO") String articleNO,
 			HttpServletResponse response)throws Exception {
 		OutputStream out = response.getOutputStream();
-		String downFile = QUESTIONS_IMAGE_REPO + "\\" +articleNO+"\\"+ imageFileName;
+		String downFile = QUESTIONS_IMAGE_REPO + "/" +articleNO+"/"+ imageFileName;
 		File file = new File(downFile);
 		
 		response.setHeader("Cache-Control", "no-cache");
