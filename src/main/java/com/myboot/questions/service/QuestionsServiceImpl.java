@@ -67,8 +67,9 @@ public class QuestionsServiceImpl implements QuestionsService {
 //		questionsDAO.updateArticle(articleMap);
 //	}
 	
+	//삭제하기
 	@Override
 	public void removeQuestionsArticle(int q_num) throws Exception {
-		questionsDAO.deleteQuestionsArticle(q_num);
+		questionsDAO.deleteQusetionsArticle(q_num);
 	}
 }

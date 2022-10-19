@@ -94,12 +94,12 @@
 	</insert>
 	  
 	  <!-- 글 삭제하기 -->
-	   <delete id="deleteQusetionsArticle"  parameterType="int">
+	<delete id="deleteQusetionsArticle" parameterType="int">
     <![CDATA[
       delete from TB_QBOARD
-      where articleNO in (
+      where Q_NUM in (
          SELECT Q_NUM FROM  TB_QBOARD
-         START WITH Q_NUM = #{Q_NUM}
+         START WITH Q_NUM = #{q_num}
          CONNECT BY PRIOR  Q_NUM = Q_PARENTNO )
     ]]>      
   </delete>
