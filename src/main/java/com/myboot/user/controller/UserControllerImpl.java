@@ -7,11 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -109,9 +107,21 @@ public class UserControllerImpl implements UserController{
 	}
 	
 ////	회원가입 회원추가
+	@Override
+	public ModelAndView addUser(UserVO userVO, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+		
+	}
 
 //	회원가입 id 중복 확인 기능
-	
+	 @ResponseBody // 값 변환을 위해 꼭 필요함
+		@GetMapping("idCheck") // 아이디 중복확인을 위한 값으로 따로 매핑
+		public int overlappedID(UserVO userVO) throws Exception{
+			int result = userService.overlappedID(userVO); // 중복확인한 값을 int로 받음
+			return result;
+		}
 	
 	
 	//myboot3에서 *form을 그대로 들고왔습니다.

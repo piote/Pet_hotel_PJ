@@ -23,5 +23,6 @@ public interface UserService {
 //	회원가입 회원정보 추가
 	public int addUser(UserVO userVO) throws Exception;
 //	회원가입 아이디중복 검사 기능
-	public int overlapped(UserVO vo) throws Exception;
-	}
+	 public int overlappedID(UserVO userVO) throws Exception;
+	
+}

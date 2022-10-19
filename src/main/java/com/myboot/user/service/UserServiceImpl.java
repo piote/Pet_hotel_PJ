@@ -44,16 +44,14 @@ public class UserServiceImpl implements UserService {
 		return userDAO.password(userVO);
 	}
 
-	
+// 회원가입 아이디 중복 확인
+	public int overlappedID(UserVO userVO) throws Exception{
+		int result =userDAO.overlappedID(userVO);
+		return result;
+	}
 //	회원가입 회원정보 추가
 	
 	public int addUser(UserVO user) throws Exception {
 		return userDAO.insertUser(user);
-	}
-//	회원가입 아이디 중복검사
-	
-	public int overlapped(UserVO vo) throws Exception{
-		int result = userDAO.selectOverlappedID(vo));
-		return result;
 	}
 }

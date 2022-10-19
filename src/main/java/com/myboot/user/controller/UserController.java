@@ -22,8 +22,8 @@ public interface UserController {
 //	회원가입 기능 구현
 	public ModelAndView addUser(@ModelAttribute("info") UserVO userVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	회원가입 id 중복확인 기능
-	public ResponseEntity   overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
-  
+//	public ResponseEntity   overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public int overlappedID(UserVO userVO) throws Exception;
 	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	
 	// 비밀번호 한번 더 입력

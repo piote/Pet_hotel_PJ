@@ -21,6 +21,6 @@ public interface UserDAO {
 //	회원가입 회원정보 추가
 	public int insertUser(UserVO userVO) throws DataAccessException;
 //	회원가입 id중복 확인ㄴ
-	public int selectOverlappedID(UserVO vo) throws DataAccessException;
+	public int overlappedID(UserVO userVO) throws Exception;
 	}
 
