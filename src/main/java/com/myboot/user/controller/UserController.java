@@ -1,7 +1,5 @@
 package com.myboot.user.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,8 +23,21 @@ public interface UserController {
 //	public ModelAndView addUser(@ModelAttribute("info") UserVO userVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	회원가입 id 중복확인 기능
 	public ResponseEntity   overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
+  
 	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
-	public ModelAndView pw_change(HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	
+	// 비밀번호 한번 더 입력
+	/*
+	 * public ModelAndView pw_change(HttpServletRequest request, HttpServletResponse
+	 * response) throws Exception;
+	 */
+	
+	// 비밀번호 한번더 입력
+	public ModelAndView pw_change(RedirectAttributes rAttr, 
+						HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	// 탈퇴하기
 	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	public String userMain(Model model);
+	
 }
