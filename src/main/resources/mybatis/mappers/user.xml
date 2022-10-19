@@ -24,7 +24,15 @@
 	      USER_TEL as tel, USER_TEL_SUB as tel_sub, USER_MESSAGE as message,
 	      USER_BIRTH as birth, JOINDATE, USER_GRADE as grade
 	      from tb_user
-	      where USER_ID=#{id} and USER_PW=#{pw}
+	      where USER_ID=#{id} AND USER_PW=#{pw}
+	]]>
+  </select>
+  
+ <select id="password" resultType="userVO" parameterType="userVO">
+	<![CDATA[
+		select USER_PW as pw 
+	 	from tb_user
+		where USER_PW=#{pw} 
 	]]>
   </select>
   
@@ -84,10 +92,11 @@
 <!--    		]]> -->
 <!--    	</insert> -->
 
+ 		<!-- 회원 정보 수정 -->
      	<update id="updateUser" parameterType="userVO">
    		<![CDATA[
    				update TB_USER
-   				set pwd=#{pwd}, email=#{email}, tel=#{tel},
+   				set pw=#{pw}, email=#{email}, tel=#{tel},
    					tel_sub=#{tel_sub}, message=#{message}, birth=#{birth}
    				where
    				id=#{id}

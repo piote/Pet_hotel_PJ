@@ -102,6 +102,14 @@
     position: relative;
     top: 10px;
 }
+.detail-list td a {
+	text-decoration: underline;
+	transition: all 0.5s;
+}
+.detail-list td:nth-child(1) a:hover {
+	color:gray;
+	text-decoration: none;
+}
 .detail-center td{
    text-align: center;
 }

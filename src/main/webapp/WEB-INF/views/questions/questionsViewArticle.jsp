@@ -85,10 +85,11 @@
 	    }
 	#imagebox{
         padding: 15px;
-        height:250px;
+        height:400px;
 	}
 	#preview{
 		margin-top: 20px;
+		height: 350px;
 	}
     #i_content{
         width: 800px;
@@ -278,7 +279,10 @@
                             </li>
                         </c:when>
                         <c:otherwise>
-                            <li id="tr_file_upload" > 
+                            
+                        </c:otherwise>
+                    </c:choose>
+                    <li id="tr_file_upload" > 
                             	<c:if test="${empty article.imageFileName || article.imageFileName=='null' }">
                             		<img id="preview" src="#" height=350 onerror="this.src='${contextPath}/resources/img/no_img.png'"/>
                             	</c:if>
@@ -289,10 +293,7 @@
                                 <label for="i_imageFileName">이미지 파일</label>
                 				<input class="upload-name" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL(this);"  disabled >
                 				<input type="file" id="i_imageFileName" name="imageFileName"  onchange="readURL(this);"/>
-                				
                             </li>
-                        </c:otherwise>
-                    </c:choose>
                     <li class="content_box">
                         <textarea  class="textbox"  name="content"  id="i_content" spellcheck="false" disabled />${article.q_content }</textarea> 
                     </li>  

@@ -2,17 +2,11 @@ package com.myboot.user.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myboot.user.dao.UserDAO;
 import com.myboot.user.vo.UserVO;
@@ -43,6 +37,14 @@ public class UserServiceImpl implements UserService {
 	public int removeMember(String id) throws DataAccessException {
 		return  userDAO.deleteMember(id);
 	}
+	
+ // 비밀번호 한번 더 입력
+	
+	public UserVO password(UserVO  userVO) throws Exception{
+		return userDAO.password(userVO);
+	}
+
+	
 //	회원가입 회원정보 추가
 	
 	public int addUser(UserVO user) throws Exception {

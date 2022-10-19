@@ -56,34 +56,37 @@ public class MyPageControllerImpl implements MyPageController {
         
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
+		UserVO userVO=(UserVO)session.getAttribute("user");
+		String user_id = userVO.getId();
         
         Map<String,String> paraMap = new HashMap<String,String>();
         paraMap.put("colName", colName);
-        paraMap.put("searchWord", searchWord);
         paraMap.put("startDate", startDate);
         paraMap.put("endDate", endDate);
+        paraMap.put("searchWord", searchWord);
+        paraMap.put("user_id", user_id);
         
-//        List myReserveList = myPageService.listMyReserve(paraMap);
+        List myReserveList = myPageService.listMyDetailReserve(paraMap);
         String viewName=(String)request.getAttribute("viewName");
         ModelAndView mav = new ModelAndView(viewName);
-        if(!"name".equals(colName) && !"pet_name".equals(colName) && !"tel".equals(colName)) {
+        if(!"user_name".equals(colName) && !"pet_name".equals(colName) && !"user_tel".equals(colName)) {
         	mav.addObject("colName", colName);
         }else {
         	mav.addObject("colName", colName);
         }
-        	
-//        mav.addObject("myReserveList", myReserveList);
+        mav.addObject("myReserveList", myReserveList);
         mav.addObject("startDate", startDate);
         mav.addObject("endDate", endDate);
+        mav.addObject("searchWord", searchWord);
         return mav;
     }
     
 
 	@Override
 	@RequestMapping(value="/cancelMyReserve.do" ,method = RequestMethod.POST)
-	public ModelAndView cancelMyReserve(@RequestParam("reservation_num")  String reservation_num,HttpServletRequest request, HttpServletResponse response)  throws Exception {
+	public ModelAndView cancelMyReserve(@RequestParam("res_num")  String res_num,HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		ModelAndView mav = new ModelAndView();
-		myPageService.cancelReserve(reservation_num);
+		myPageService.cancelReserve(res_num);
 		mav.addObject("message", "C");
 		mav.setViewName("redirect:/mypage/checkReserve.do");
 		return mav;

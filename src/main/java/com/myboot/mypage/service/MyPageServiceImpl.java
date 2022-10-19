@@ -19,8 +19,8 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public List listMyReserve(Map paraMap) throws Exception{
-		return myPageDAO.selectMyReservesList(paraMap);
+	public List listMyDetailReserve(Map paraMap) throws Exception{
+		return myPageDAO.selectMyDetailReservesList(paraMap);
 	}
 	
 	@Override
@@ -29,7 +29,7 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 	
 	@Override
-	public void cancelReserve(String reservation_num) throws Exception{
-		myPageDAO.updateMyReserveCancel(reservation_num);
+	public void cancelReserve(String res_num) throws Exception{
+		myPageDAO.updateMyReserveCancel(res_num);
 	}
 }
