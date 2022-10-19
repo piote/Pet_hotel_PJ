@@ -13,7 +13,7 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<style type="text/css">
-		#overlappedID {background-color: GhostWhite; width: 15%; height: 40px;}
+		#overlappedID {background-color: GhostWhite; width: 30%; height: 20px;}
 		.olmessagef {color: red; font-style: Italic;}
 		.olmessaget {color: blue; font-style: Italic;}
 	</style>
