@@ -95,6 +95,10 @@ public  class ReservationControllerImpl implements ReservationController{
 		String[] petBeauty = request.getParameterValues("beauty");
 		String[] petSpa = request.getParameterValues("spa");
 
+		int resNum = resService.useReservationNum();
+		
+		
+		resNum
 		
 		Map petServiceMap = new HashMap();
 		
@@ -103,7 +107,7 @@ public  class ReservationControllerImpl implements ReservationController{
 			
 			if(petName[i] != null && petName[i] != "") {
 				
-				List<String> petServiceList = new ArrayList<String>();
+				List<PetserviceVO> petServiceList = new ArrayList<PetserviceVO>();
 				
 				petServiceList.add(petName[i]);
 				
@@ -120,6 +124,9 @@ public  class ReservationControllerImpl implements ReservationController{
 				listIndex++;
 			}
 		}
+		
+		
+		
 		resVO.setRes_st(checkinDate);
 		resVO.setRes_end(checkoutDate);
 		resVO.setRes_comment(petcomment);

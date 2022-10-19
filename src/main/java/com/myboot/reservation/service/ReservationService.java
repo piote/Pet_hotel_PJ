@@ -10,6 +10,7 @@ public interface ReservationService {
 	 public List listReservation() throws Exception;
 	 public int addReservation(ReservationVO reservationVO) throws Exception;
 	 public int addPetService(Map petServiceMap) throws Exception;
+	 public int useReservationNum() throws Exception;
 //	 
 //	 public int modMember(MemberVO memberVO) throws Exception;
 //	 

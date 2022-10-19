@@ -18,6 +18,9 @@ public interface ReservationDAO {
 	 // 예약, 펫 서비스 등록
 	 public int insertReservation(ReservationVO petserviceMap) throws DataAccessException;
 	 public int insertPetserviceMap(Map petserviceMap) throws DataAccessException;
+	 // 사용가능한 예약 번호 
+	 public int useReservationNum() throws DataAccessException;
+	 
 //	 
 //	 public int updateMember(MemberVO memberVO) throws DataAccessException ;
 //	 

@@ -35,6 +35,12 @@ public class ReservationServiceImpl implements ReservationService {
 		return reservationDAO.insertPetserviceMap(petServiceMap);
 	}
 	
+	@Override
+	public int useReservationNum() throws Exception {
+		return reservationDAO.useReservationNum();
+	}
+	
+	
 //	@Override
 //	public int modMember(MemberVO member) throws Exception {
 //		return memberDAO.updateMember(member);
