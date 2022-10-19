@@ -300,7 +300,10 @@
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCal.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservation.js"></script>
     <script>
+	   
     	function reservationSubmit(obj){
+    		
+
 	    	obj.submit();
      	}
     </script>
@@ -310,7 +313,7 @@
 
 
     <div id="reservationWrap">
-        <form id="reservationForm" action="${contextPath}/reservationAdd.do">
+        <form id="reservationForm" action="${contextPath}/reservationAdd.do" method="post">
             <h2 class="reservationtag"> Reservation</h2>
             <p id="under"></p>
             <br><br>
@@ -446,6 +449,7 @@
                             <input id="membership" type="hidden" value="${user.grade}">
                             <b class="totalpayment"> Total Payment : </b>
                             <b class="totalcost">0 원</b>
+                            <input type="hidden" name="totalcost" id="totalcost" />
                         </td>
                     </tr>
                     <td rowspan="6" align="center" bgcolor="white"><b></b></td>

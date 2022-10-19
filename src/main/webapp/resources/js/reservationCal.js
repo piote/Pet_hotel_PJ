@@ -173,6 +173,7 @@ function calendarMaker(target, date) {
                     }
 
                     $("#end_dayBox").text(end_day.toLocaleDateString());
+                    $("#checkoutDate").val(end_day.toLocaleDateString());
 
                     dayCal = dateCal(start_day, end_day)
                     //차수출력
@@ -187,7 +188,7 @@ function calendarMaker(target, date) {
                     //텍스트에 날짜 정보
 
                     $("#start_dayBox").text(start_day.toLocaleDateString());
-                    $("#checkinDate").val(start_day);//===========================================
+                    $("#checkinDate").val(start_day.toLocaleDateString());//===========================================
 					
                     //checkout 날짜 선택
                 } else if (start_day != null && end_day == null && start_day < selectDay) {
@@ -212,6 +213,7 @@ function calendarMaker(target, date) {
 
 
                     $("#end_dayBox").text(end_day.toLocaleDateString());
+                    $("#checkoutDate").val(end_day.toLocaleDateString());//===========================================
                     //차수 출력
                     dateCal(start_day, end_day);
 
