@@ -50,7 +50,8 @@ public class UserServiceImpl implements UserService {
 	}
 //	회원가입 아이디 중복검사
 	
-	public String overlapped(String id) throws Exception{
-		return userDAO.selectOverlappedID(id);
+	public int overlapped(UserVO vo) throws Exception{
+		int result = userDAO.selectOverlappedID(vo));
+		return result;
 	}
 }

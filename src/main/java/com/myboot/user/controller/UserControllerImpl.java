@@ -109,44 +109,10 @@ public class UserControllerImpl implements UserController{
 	}
 	
 ////	회원가입 회원추가
-//	@Override
-//	@RequestMapping(value="/addUser.do" ,method = RequestMethod.POST)
-//	public ResponseEntity addUser(@ModelAttribute("userVO") UserVO _userVO,
-//			                HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		response.setContentType("text/html; charset=UTF-8");
-//		request.setCharacterEncoding("utf-8");
-//		String message = null;
-//		ResponseEntity resEntity = null;
-//		HttpHeaders responseHeaders = new HttpHeaders();
-//		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-//		try {
-//		    userService.addUser(_userVO);
-//		    message  = "<script>";
-//		    message +=" alert('ȸ�� ������ ���ƽ��ϴ�.�α���â���� �̵��մϴ�.');";
-//		    message += " location.href='"+request.getContextPath()+"/loginForm.do';";
-//		    message += " </script>";
-//		    
-//		}catch(Exception e) {
-//			message  = "<script>";
-//		    message +=" alert('�۾� �� ������ �߻��߽��ϴ�. �ٽ� �õ��� �ּ���');";
-//		    message += " location.href='"+request.getContextPath()+"/userForm.do';";
-//		    message += " </script>";
-//			e.printStackTrace();
-//		}
-//		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-//		return resEntity;
-//	}
+
 //	회원가입 id 중복 확인 기능
-	@Override
-	@RequestMapping(value="/overlapped.do",method=RequestMethod.POST)
-	public ResponseEntity overlapped(@RequestParam("id") String id,
-			HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
-		ResponseEntity resEntity= null;
-		String result = userService.overlapped(id);
-		resEntity = new ResponseEntity(result, HttpStatus.OK);
-		return resEntity;
-	}
+	
+	
 	
 	//myboot3에서 *form을 그대로 들고왔습니다.
 	@RequestMapping(value = "/loginForm.do", method =  RequestMethod.GET) 

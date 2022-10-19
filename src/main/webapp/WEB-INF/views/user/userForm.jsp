@@ -23,6 +23,11 @@
                 alert("아이디를 입력하세요.");
                 return false;
             }
+            if(!document.userInfo.idDuplication.value="idCheck"){
+            	alert("아이디 중복체크를 해주세요");
+            	return false;
+            }
+            	
             
             if(!document.userInfo.password.value){
                 alert("비밀번호를 입력하세요.");
@@ -35,6 +40,9 @@
                 return false;
             }
         }
+       function inputIdChk(){
+    	   document.userInfo.idDuplication.value="idUncheck";
+       }
         
         // 취소 버튼 클릭시 로그인 화면으로 이동
         function goLoginForm() {
@@ -59,8 +67,9 @@
                 <tr>
                     <td id="title">아이디</td>
                     <td>
-                        <input type="text" name="id" maxlength="50">
-                        <input type="button" value="중복확인" >    
+                        <input type="text" name="id" maxlength="50" onkeydown="inputIdChk()">
+                        <input type="button" value="중복확인" onclick="openIdChk()" >  
+                        <input type="hidden" name="idDuplication" value="idUncheck">  
                     </td>
                 </tr>
                         

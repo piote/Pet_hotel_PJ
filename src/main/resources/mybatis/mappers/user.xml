@@ -28,9 +28,9 @@
 	]]>
   </select>
   
-  <select id="selectOverlappedID" parameterType="String" resultType="String">
+  <select id="selectOverlappedID"  resultType="int">
   	<![CDATA[
-  		selct decode(count(*),1, 'true',0,'false')
+  		selct count(*) 
   		from TB_USER
   		where USER_ID=#{id}
   	 ]]>
