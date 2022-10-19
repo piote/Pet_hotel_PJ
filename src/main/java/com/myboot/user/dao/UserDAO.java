@@ -19,4 +19,7 @@ public interface UserDAO {
 	public UserVO loginById(UserVO userVO) throws DataAccessException;
 //	회원가입 회원정보 추가
 	public int insertUser(UserVO userVO) throws DataAccessException;
-}
+//	회원가입 id중복 확인ㄴ
+	public String selectOverlappedID(String id) throws DataAccessException;
+	}
+

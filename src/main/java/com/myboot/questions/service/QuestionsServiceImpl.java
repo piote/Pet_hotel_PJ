@@ -40,6 +40,25 @@ public class QuestionsServiceImpl implements QuestionsService {
 		}
 		articlesMap.put("questionsList", questionsList);
 		articlesMap.put("totArticles", totArticles);
-		return articlesMap;
+		return articlesMap;				
 	}
+	
+//	게시글 조회
+	@Override
+	public QuestionsVO questionsViewArticle(int q_num) throws Exception {
+		QuestionsVO questionsVO = questionsDAO.selectQuestions(q_num);
+		System.out.println(questionsVO);
+		return questionsVO;
+	}
+	
+	
+//	@Override
+//	public void modArticle(Map articleMap) throws Exception {
+//		questionsDAO.updateArticle(articleMap);
+//	}
+//	
+//	@Override
+//	public void removeArticle(int articleNO) throws Exception {
+//		questionsDAO.deleteArticle(articleNO);
+//	}
 }

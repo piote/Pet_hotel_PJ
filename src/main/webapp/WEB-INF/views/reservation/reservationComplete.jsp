@@ -71,6 +71,10 @@
             text-align: center;
             bottom: 30px
         }
+        
+        #star{
+        	color : #0096FF;
+        }
 
         /* 여기까지 */
 
@@ -131,12 +135,12 @@
                     <br><br>
                     <tr align="center">
                     	<td>
-                    		<img src="${contextPath}/resources/img/check.png" style="width:100px; height:100px;" id="checkimg">
+                    		<img src="${contextPath}/resources/img/bluecheck.png" style="width:100px; height:100px;" id="checkimg">
                     	</td>
                     </tr>
                     <br><br><br>
                     <tr align="center">
-                        <td align="center"><b color=pink>☆★☆★☆★</b>님의 예약이 완료되었습니다.</td>
+                        <td align="center"><b><span id="star">${user.id}</span></b> 님의 예약이 완료되었습니다.</td>
                     </tr>
                     <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
                     <tr align="center">
@@ -152,7 +156,7 @@
                 </table>
             </div>
             <div class="btn_pet3">
-        		<input type='button' value='예약조회 및 수정' id="btn_pet3" onclick="addcost()" />
+            <button type="button" id="btn_pet3" onclick="location.href='${contextPath}/mypage/checkReserve.do'">예약조회 및 수정</button>
         	</div>
             <br><br><br><br>
         </form>

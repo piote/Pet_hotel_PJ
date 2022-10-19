@@ -1,174 +1,141 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"
-	isELIgnored="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    isELIgnored="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<!DOCTYPE html >
+<%
+   request.setCharacterEncoding("UTF-8");
+%>     
 <html>
 <head>
-<meta charset="utf-8">
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
-
-
-
-
-function fn_overlapped(){
-    var _id=$("#_user_id").val();
-    if(_id==''){
-   	 alert("ID를 입력하세요");
-   	 return;
-    }
-    $.ajax({
-       type:"post",
-       async:false,  
-       url:"${contextPath}/member/overlapped.do",
-       dataType:"text",
-       data: {id:_id},
-       success:function (data,textStatus){
-          if(data=='false'){
-       	    alert("사용할 수 있는 ID입니다.");
-       	    $('#btnOverlapped').prop("disabled", true);
-       	    $('#_member_id').prop("disabled", true);
-       	    $('#member_id').val(_id);
-          }else{
-        	  alert("사용할 수 없는 ID입니다.");
-          }
-       },
-       error:function(data,textStatus){
-          alert("에러가 발생했습니다.");ㅣ
-       },
-       complete:function(data,textStatus){
-          //alert("작업을완료 했습니다");
-       }
-    });  //end ajax	 
- }	
-</script>
+    <title>회원가입 화면</title>
+    
+    <!-- css 파일 분리 -->
+   
+ 
+    <script type="text/javascript">
+    
+        // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
+        function checkValue()
+        {
+            if(!document.userInfo.id.value){
+                alert("아이디를 입력하세요.");
+                return false;
+            }
+            
+            if(!document.userInfo.password.value){
+                alert("비밀번호를 입력하세요.");
+                return false;
+            }
+            
+            // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
+            if(document.userInfo.password.value != document.userInfo.passwordcheck.value ){
+                alert("비밀번호를 동일하게 입력하세요.");
+                return false;
+            }
+        }
+        
+        // 취소 버튼 클릭시 로그인 화면으로 이동
+        function goLoginForm() {
+            location.href="LoginForm.jsp";
+        }
+    </script>
+    
 </head>
 <body>
-	<h3>필수입력사항</h3>
-	<form action="${contextPath}/addUser.do" method="post">	
-	<div id="detail_table">
-		<table>
-			<tbody>
-				<tr class="dot_line">
-					<td class="fixed_join">아이디</td>
-					<td>
-					  <input type="text" name="_user_id"  id="_user_id"  size="20" />
-					  <input type="hidden" name="user_id"  id="user_id" />
-					  
-					  <input type="button"  id="btnOverlapped" value="중복체크" onClick="fn_overlapped()" />
-					</td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">비밀번호</td>
-					<td><input name="user_pw" type="password" size="20" /></td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">이름</td>
-					<td><input name="user_name" type="text" size="20" /></td>
-				</tr>
-				
-				<tr class="dot_line">
-					<td class="fixed_join">법정생년월일</td>
-					<td>
-					<select name="member_birth">
-					 
-					     <c:forEach var="year" begin="1" end="100">
-					       <c:choose>
-					         <c:when test="${year==80}">
-							   <option value="${ 1920+year}" selected>${ 1920+year} </option>
-							</c:when>
-							<c:otherwise>
-							  <option value="${ 1920+year}" >${ 1920+year} </option>
-							</c:otherwise>
-							</c:choose>
-					   	</c:forEach> 
-							
-				       <c:choose>
-					         <c:when test="${month==5 }">
-							   <option value="${month }" selected>${month }</option>
-							</c:when>
-							<c:otherwise>
-							  <option value="${month }">${month}</option>
-							</c:otherwise>
-							</c:choose>
-					
-							<c:forEach var="day" begin="1" end="31">
-					       <c:choose>
-					         <c:when test="${day==10 }">
-							   <option value="${day}" selected>${day}</option>
-							</c:when>
-							<c:otherwise>
-							  <option value="${day}">${day}</option>
-							</c:otherwise>
-							</c:choose>
-					   	</c:forEach>
-					</select>일 <span style="padding-left:50px"></span>
-					  <input type="radio" name="member_birth_gn" value="2" checked />양력
-						 <span style="padding-left:50px"></span>
-						<input type="radio"  name="member_birth_gn" value="1" />음력
-				  </td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">휴대폰번호</td>
-					<td><select  name="user_tel">
-						<option>없음</option>
-							<option selected value="010">010</option>
-							<option value="011">011</option>
-							<option value="016">016</option>
-							<option value="017">017</option>
-							<option value="018">018</option>
-							<option value="019">019</option>
-					   </select> - <input  size="10px" type="text" name="tel2"> - <input size="10px"  type="text" name="tel3">
-					</td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">비상시번호</td>
-					<td><select  name="user_tel_sub">
-							<option>없음</option>
-							<option selected value="010">010</option>
-							<option value="011">011</option>
-							<option value="016">016</option>
-							<option value="017">017</option>
-							<option value="018">018</option>
-							<option value="019">019</option>
-					</select> - <input size="10px"  type="text" name="hp2"> - <input size="10px"  type="text"name="hp3"><br> <br> 
-					<input type="checkbox"	name="smssts_yn" value="Y" checked /> 쇼핑몰에서 발송하는 SMS 소식을 수신합니다.</td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">이메일<br>(e-mail)</td>
-					<td><input size="10px"   type="text" name="email1" /> @ <input  size="10px"  type="text"name="email2" /> 
-						  <select name="email2" onChange=""	title="직접입력">
-									<option value="non">직접입력</option>
-									<option value="hanmail.net">hanmail.net</option>
-									<option value="naver.com">naver.com</option>
-									<option value="yahoo.co.kr">yahoo.co.kr</option>
-									<option value="hotmail.com">hotmail.com</option>
-									<option value="paran.com">paran.com</option>
-									<option value="nate.com">nate.com</option>
-									<option value="google.com">google.com</option>
-									<option value="gmail.com">gmail.com</option>
-									<option value="empal.com">empal.com</option>
-									<option value="korea.com">korea.com</option>
-									<option value="freechal.com">freechal.com</option>
-							</select><br> <br> <input type="checkbox" name="emailsts_yn" value="Y" checked /> 쇼핑몰에서 발송하는 e-mail을 수신합니다.</td>
-				</tr>
-			
-			</tbody>
-		</table>
-		</div>
-		<div class="clear">
-		<br><br>
-		<table align=center>
-		<tr >
-			<td >
-				<input type="submit"  value="회원 가입">
-				<input  type="reset"  value="다시입력">
-			</td>
-		</tr>
-	</table>
-	</div>
-</form>	
+    <!-- div 왼쪽, 오른쪽 바깥여백을 auto로 주면 중앙정렬된다.  -->
+    <div id="wrap">
+        <br><br>
+        <b><font size="6" color="gray">회원가입</font></b>
+        <br><br><br>
+        
+        
+        <!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
+       
+        <form method="post" action="${contextPath}/addUser.do}" name="userInfo" 
+                onsubmit="return checkValue()">
+            <table>
+                <tr>
+                    <td id="title">아이디</td>
+                    <td>
+                        <input type="text" name="id" maxlength="50">
+                        <input type="button" value="중복확인" >    
+                    </td>
+                </tr>
+                        
+                <tr>
+                    <td id="title">비밀번호</td>
+                    <td>
+                        <input type="password" name="password" maxlength="50">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td id="title">비밀번호 확인</td>
+                    <td>
+                        <input type="password" name="passwordcheck" maxlength="50">
+                    </td>
+                </tr>
+                    
+                <tr>
+                    <td id="title">이름</td>
+                    <td>
+                        <input type="text" name="name" maxlength="50">
+                    </td>
+                </tr>
+                  <tr>
+                    <td id="title">이메일</td>
+                    <td>
+                        <input type="text" name="mail1" maxlength="50">@
+                        <select name="mail2">
+                            <option>naver.com</option>
+                            <option>daum.net</option>
+                            <option>gmail.com</option>
+                            <option>nate.com</option>                        
+                        </select>
+                    </td>
+                </tr>
+                 <tr>
+                    <td id="title">휴대전화</td>
+                    <td>
+                        <input type="text" name="tel" />
+                    </td>
+                </tr>
+                 <tr>
+                    <td id="title">휴대전화_2</td>
+                    <td>
+                        <input type="text" name="tel_sub" />
+                    </td>
+                </tr>
+                    
+                <tr>
+                    <td id="title">생일</td>
+                    <td>
+                        <input type="text" name="birthyy" maxlength="4" placeholder="년(4자)" size="6" >
+                        <select name="birthmm">
+                            <option value="">월</option>
+                            <option value="01" >1</option>
+                            <option value="02" >2</option>
+                            <option value="03" >3</option>
+                            <option value="04" >4</option>
+                            <option value="05" >5</option>
+                            <option value="06" >6</option>
+                            <option value="07" >7</option>
+                            <option value="08" >8</option>
+                            <option value="09" >9</option>
+                            <option value="10" >10</option>
+                            <option value="11" >11</option>
+                            <option value="12" >12</option>
+                        </select>
+                        <input type="text" name="birthdd" maxlength="2" placeholder="일" size="4" >
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <input type="submit" value="가입"/>  
+            <input type="button" value="취소" onclick="goLoginForm()">
+        </form>
+    </div>
 </body>
 </html>

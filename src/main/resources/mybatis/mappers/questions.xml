@@ -8,7 +8,7 @@
    <resultMap id="questionsResult" type="questionsVO">
    	  <result property="level" column="LVL" />
       <result property="q_num" column="Q_NUM" />
-      <result property="id" column="USER_ID" />
+      <result property="user_id" column="USER_ID" />
       <result property="q_Date" column="Q_DATE" />
       <result property="q_title" column="Q_TITLE" />
       <result property="q_content" column="Q_CONTENT" />
@@ -69,4 +69,13 @@
       select count(Q_NUM) from TB_QBOARD WHERE Q_TITLE LIKE '%'||#{keyword}||'%'
     ]]>
   </select>
+  
+  <!-- 글 조회 -->
+  <select id="selectQuestions" resultType="questionsVO"   parameterType="int">
+    <![CDATA[
+      SELECT * from TB_QBOARD
+      where Q_NUM = #{q_num}
+    ]]>
+  </select>
+  
 </mapper>
