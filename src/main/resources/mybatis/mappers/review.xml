@@ -6,7 +6,7 @@
 <mapper namespace="com.myboot.review.dao.ReviewDAO">
 <resultMap id="reviewResult" type="reviewVO">
 	<result property="level" column="LVL" />
-    <result property="num" column="review_num" />
+    <result property="reviewNO" column="review_num" />
     <result property="parentNO" column="parentNO" />
     <result property="title" column="review_title" />
     <result property="con" column="review_con" />
@@ -14,10 +14,17 @@
     <result property="date" column="review_date" />
     <result property="image" column="review_image" />
     <result property="rec" column="review_rec" />
-    
+    <result property="imageFileName" column="imageFileName" />
     <result property="id" column="user_id" />
     
   </resultMap> 
+  
+<!--    <resultMap id="imgResult" type="imageVO"> -->
+<!-- 	  <result property="imageFileNO" column="imageFileNO" /> -->
+<!-- 	  <result property="reviewNO" column="reviewNO" /> -->
+<!-- 	  <result property="imageFileName" column="imageFileName" /> -->
+<!--  </resultMap> -->
+  
 	  
 	  <!-- 이미지   
 	  <resultMap id="imgResult" type="imageVO">
@@ -40,10 +47,25 @@
 </select>
   -->
   
+  <!--다중 이미지 추가 SQL문 --> 
   
-  <select id="selectNewReviewNum" resultType="int"  >
+  <insert id="insertNewReview"  parameterType="java.util.Map">
+    <![CDATA[
+      insert into tb_review(review_num, user_id, review_title, review_Date, review_rec,review_star,RESERVATION_NUM)
+      values(#{reviewNO}, #{id}, #{title}, sysdate, #{rec},#{star}, #{res_num})
+    ]]>      
+  </insert>
+  
+  <!-- 
+  	insert into tb_review( review_num, review_title, user_id, review_Date, review_rec, review_star , RESERVATION_NUM)
+    values(8, '안녕하세요 제목길이 다음글입니다 ', 'aaa',sysdate, '0' ,'5' , '1');
+   -->
+  
+  
+  
+  <select id="selectNewReviewNO" resultType="int"  >
 		<![CDATA[
-			SELECT  nvl(max(REVIEW_NUM), 0) + 1 from tb_review		
+			SELECT  nvl(max(review_num), 0) + 1 from tb_review		
 		]]>
 	</select>
 	

@@ -56,7 +56,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 		sqlSession.insert("mapper.review.insertNewReview",reviewMap);
 		return reviewNO;
 	}
-
+				
 	private int selectNewReviewNO() {
 		return sqlSession.selectOne("mapper.review.selectNewReviewNO");
 	}
