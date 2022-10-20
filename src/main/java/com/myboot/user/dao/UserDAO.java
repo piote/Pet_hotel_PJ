@@ -12,8 +12,6 @@ import com.myboot.user.vo.UserVO;
 @Repository("userDAO")
 public interface UserDAO {
 	 public List selectAllUserList() throws DataAccessException;
-	 public int updateMember(UserVO userVO) throws DataAccessException;
-	 public int deleteMember(String id) throws DataAccessException;
 	 //비밀번호 폼
 	 public UserVO password(UserVO userVO) throws DataAccessException;
 

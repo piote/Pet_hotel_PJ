@@ -18,7 +18,7 @@
       <result property="grade" column="USER_GRADE" />
    </resultMap> 
 
-<select id="loginById" resultType="userVO" parameterType="userVO" >
+	<select id="loginById" resultType="userVO" parameterType="userVO" >
 	<![CDATA[
 		select USER_ID as id, USER_PW as pw, USER_NAME as name, USER_EMAIL as email,
 	      USER_TEL as tel, USER_TEL_SUB as tel_sub, USER_MESSAGE as message,
@@ -26,7 +26,7 @@
 	      from tb_user
 	      where USER_ID=#{id} AND USER_PW=#{pw}
 	]]>
-  </select>
+ 	 </select>
   
    <select id="selectAllUserList" resultMap="userResult">
       <![CDATA[
@@ -35,7 +35,9 @@
    </select>
   
    <select id="overlappedID" parameterType="UserVO" resultType="int">
+   <![CDATA[
 		select count(USER_ID) From TB_USER where USER_ID=#{id}
+		 ]]>
 	</select>
    
 <!--    <select id="selectName" resultType="String"> -->
@@ -73,8 +75,7 @@
     		values((#{id},#{pw},#{Name},#{email},#{tel},#{tel_sub},#{message},#{birth)) 
     	]]> 
    	</insert>
-   	.
-   	
+   
 <!--    	<insert id="insertUser2" parameterType="java.util.HashMap"> -->
 <!--    		<![CDATA[ -->
 <!--    			insert into TB_USER(id,pwd,name,email) -->
@@ -99,5 +100,4 @@
 <!--    			id=#{id} -->
 <!--    		]]> -->
 <!--    	</delete> -->
-
 </mapper>
