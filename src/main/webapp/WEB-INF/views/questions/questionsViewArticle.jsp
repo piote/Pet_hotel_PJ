@@ -108,11 +108,16 @@
         height: auto;
         transition: background-color 0.2s;
         resize: none;
+        -ms-overflow-style: none; /* IE and Edge */
+    	scrollbar-width: none; /* Firefox */
     }
     .textbox:focus{
         background-color: #eee;
         outline: none;
    	}
+   	.textbox::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera*/
+	}
    	.qDate, .userid{
    		padding-left: 10px
    	}
@@ -180,14 +185,17 @@
    </style>
    <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
    <script type="text/javascript" >
+   
+   //목록보기
     function backToList(obj){
 	    obj.action="${contextPath }/questions/questionsList.do";
 	    obj.submit();
     }
+    
+    //글 수정하기 클릭 시, 숨겨진 버튼 보이기
 	 function fn_enable(obj){
 		 document.getElementById("i_title").disabled=false;
 		 document.getElementById("i_content").disabled=false;
-		 //document.getElementById("i_imageFileName").disabled=false;
 		 document.getElementById("tr_btn_modify").style.display="block";
 		 document.getElementById("tr_file_upload").style.display="block";
 		 document.getElementById("tr_btn").style.display="none";
@@ -196,11 +204,13 @@
          
 	 }
 	 
+	 //글 수정
 	 function fn_modify_article(obj){
 		 obj.action="${contextPath}/questions/modQuestionsArticle.do";
 		 obj.submit();
 	 }
 	 
+	 //글 삭제
 	 function fn_remove_article(url,q_num){
 		 var form = document.createElement("form");
 		 form.setAttribute("method", "post");
@@ -216,6 +226,7 @@
 	 
 	 }
 	 
+	 //답글쓰기
 	 function fn_reply_form(url, parentNO){
 		 var form = document.createElement("form");
 		 form.setAttribute("method", "post");
@@ -230,6 +241,7 @@
 		 form.submit();
 	 }
 	 
+	//이미지파일 추가
 	 function readURL(input) {
 	     if (input.files && input.files[0]) {
 	    	 var fileName = $("#i_imageFileName").val();
@@ -241,6 +253,12 @@
 	         reader.readAsDataURL(input.files[0]);
 	     }
 	 }  
+	 
+	//textarea 글 작성시 자동 크기조정
+		function resize(obj) {
+         obj.style.height = '1px';
+         obj.style.height = (12 + obj.scrollHeight) + 'px';
+		}
  </script>
     </head>
     <body>
@@ -291,11 +309,18 @@
                 				<input type="file" id="i_imageFileName" name="imageFileName"  onchange="readURL(this);"/>
                             </li>
                     <li class="content_box">
-                        <textarea  class="textbox"  name="q_content"  id="i_content" spellcheck="false" disabled >${article.q_content }</textarea> 
+                        <textarea  class="textbox"  name="q_content"  id="i_content" spellcheck="false" disabled onkeydown="resize(this)" onkeyup="resize(this)">${article.q_content }</textarea> 
                     </li>  
                 </ul>
-
-
+					<script>
+					    var txtArea = $(".textbox");
+					    if (txtArea) {
+					        txtArea.each(function(){
+					            $(this).height(this.scrollHeight);
+					        });
+					    }
+					</script>
+				
                 <div id="tr_btn_modify" >
                     <input type=button value="수정반영하기"   onClick="fn_modify_article(frmArticle)"  >
                     <input type=button value="취소"  onClick="backToList(frmArticle)">	    

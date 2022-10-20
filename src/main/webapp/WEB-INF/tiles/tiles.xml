@@ -68,9 +68,9 @@
 	 
 	 <!-- 회원수정 -->
 	 		
-    <definition name="/modMember" extends="baseLayout">
-      <put-attribute name="title" value="회원수정" />
-      <put-attribute name="body" value="/WEB-INF/views/user/modMember.jsp" />
+    <definition name="/modMemberForm" extends="baseLayout">
+      <put-attribute name="title" value="회원수정창" />
+      <put-attribute name="body" value="/WEB-INF/views/user/modMemberForm.jsp" />
    </definition>
    
     <definition name="/pw_changeForm" extends="baseLayout">

@@ -19,5 +19,4 @@ public class PetserviceVO {
 	private String service_beauty;
 	private String service_spa;
 
-	
 }
