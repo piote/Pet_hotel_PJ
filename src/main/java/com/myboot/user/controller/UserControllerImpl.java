@@ -7,11 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,7 +33,7 @@ public class UserControllerImpl implements UserController{
 	public String userMain(Model model){
 		String a= "";
 		try {
-			List userList = userService.listUser();
+			List userList = userService.listUsers();
 			
 			  int totalElements = userList.size();
 
@@ -50,6 +48,19 @@ public class UserControllerImpl implements UserController{
 		
 		return a;
 	}
+	@Override
+	@RequestMapping(value= "/listUsers.do", method = RequestMethod.GET)
+	public ModelAndView listUsers(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	//public String listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//String viewName = (String)request.getAttribute("viewName");
+		List usersList = userService.listUsers();
+		//ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView("/user/listMembers");
+		
+		mav.addObject("usersList", usersList);
+		return mav;
+	}
+	
 //	로그인창
 	@Override
 	@RequestMapping(value = "/login.do", method =  RequestMethod.POST)
@@ -109,44 +120,30 @@ public class UserControllerImpl implements UserController{
 	}
 	
 ////	회원가입 회원추가
-//	@Override
-//	@RequestMapping(value="/addUser.do" ,method = RequestMethod.POST)
-//	public ResponseEntity addUser(@ModelAttribute("userVO") UserVO _userVO,
-//			                HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		response.setContentType("text/html; charset=UTF-8");
-//		request.setCharacterEncoding("utf-8");
-//		String message = null;
-//		ResponseEntity resEntity = null;
-//		HttpHeaders responseHeaders = new HttpHeaders();
-//		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-//		try {
-//		    userService.addUser(_userVO);
-//		    message  = "<script>";
-//		    message +=" alert('ȸ�� ������ ���ƽ��ϴ�.�α���â���� �̵��մϴ�.');";
-//		    message += " location.href='"+request.getContextPath()+"/loginForm.do';";
-//		    message += " </script>";
-//		    
-//		}catch(Exception e) {
-//			message  = "<script>";
-//		    message +=" alert('�۾� �� ������ �߻��߽��ϴ�. �ٽ� �õ��� �ּ���');";
-//		    message += " location.href='"+request.getContextPath()+"/userForm.do';";
-//		    message += " </script>";
-//			e.printStackTrace();
-//		}
-//		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-//		return resEntity;
-//	}
-//	회원가입 id 중복 확인 기능
 	@Override
-	@RequestMapping(value="/overlapped.do",method=RequestMethod.POST)
-	public ResponseEntity overlapped(@RequestParam("id") String id,
-			HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
-		ResponseEntity resEntity= null;
-		String result = userService.overlapped(id);
-		resEntity = new ResponseEntity(result, HttpStatus.OK);
-		return resEntity;
+	@RequestMapping(value = "/addUser.do", method =  RequestMethod.POST)
+	public ModelAndView addUser(@ModelAttribute("user") UserVO user,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+			
+		request.setCharacterEncoding("utf-8");
+		int result = 0;
+		result = userService.addUser(user);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/main.do");
+		return mav;
+		
 	}
+
+//	회원가입 id 중복 확인 기능
+	 @ResponseBody // 값 변환을 위해 꼭 필요함
+		@GetMapping("idCheck") // 아이디 중복확인을 위한 값으로 따로 매핑
+		public int overlappedID(UserVO userVO) throws Exception{
+			int result = userService.overlappedID(userVO); // 중복확인한 값을 int로 받음
+			return result;
+		}
+	
 	
 	//myboot3에서 *form을 그대로 들고왔습니다.
 	@RequestMapping(value = "/loginForm.do", method =  RequestMethod.GET) 
@@ -163,56 +160,69 @@ public class UserControllerImpl implements UserController{
 				mav.setViewName(viewName);
 				return mav;
 	}
-
-	@Override
-	@RequestMapping(value="/modMember.do" ,method = RequestMethod.GET)
-	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception {
-		HttpSession session=request.getSession();
-		session=request.getSession();
+	
+	// 한번 더 비밀번호 입력 폼
+	@RequestMapping(value = "/pw_changeForm.do", method =  RequestMethod.GET)
+	private ModelAndView Form(@RequestParam(value= "result", required=false) String result,
+			                  @RequestParam(value= "action", required=false) String action,
+			                  HttpServletRequest request, 
+			                  HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action); 
 		
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",result);
+		mav.setViewName(viewName);
 		return mav;
 	}
-	
-	// 비밀번호 한번 더 입력
-//	@Override
-//	@RequestMapping(value="/pw_change.do" ,method = RequestMethod.GET)
-//	public ModelAndView pw_change(HttpServletRequest request, HttpServletResponse response)  throws Exception {
-//		HttpSession session=request.getSession();
-//		session=request.getSession();
-//		
-//		String viewName=(String)request.getAttribute("viewName");
-//		ModelAndView mav = new ModelAndView(viewName);
-//		return mav;
-//    }
 	
 	// 한번 더 비밀번호 입력
 	@Override
-	@RequestMapping(value="/pw_change.do" ,method = RequestMethod.GET)
-	public ModelAndView pw_change(RedirectAttributes rAttr, 
+	@RequestMapping(value="/pw_change.do" , method = RequestMethod.POST)
+	public ModelAndView pw_change(
+            @RequestParam(value= "password", required=false) String password,
+			RedirectAttributes rAttr, 
 				HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
-		if(userVO!= null) {
 			HttpSession session = request.getSession();
 			userVO = (UserVO) session.getAttribute("user");
 			System.out.println(userVO);
-			userVO = userService.password(userVO);
+			System.out.println(password);
+			System.out.println(userVO.getPw());
+			//userVO = userService.password(userVO);
+			String userPw =userVO.getPw();
 			
-			//mav.setViewName("redirect:/pw_change.do");	
+			if (userPw.equals(password)) {
+				System.out.println("성공");
+				
+				mav.setViewName("redirect:/modMember.do");	
+			
+				//String viewName=(String)request.getAttribute("viewName");
+				//mav = new ModelAndView(viewName);
+				
+			}else {
+				rAttr.addAttribute("result","passwordFailed");
+				mav.setViewName("redirect:/pw_changeForm.do");
+				System.out.println("실패");
+			}
+		return mav;
+			
+	}
+	
+	// 회원 정보 수정
+		@Override
+		@RequestMapping(value="/modMember.do" ,method = RequestMethod.GET)
+		public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception {
+			HttpSession session=request.getSession();
+			session=request.getSession();
 			
 			String viewName=(String)request.getAttribute("viewName");
-			mav = new ModelAndView(viewName);
+			ModelAndView mav = new ModelAndView(viewName);
 			return mav;
-			
-		}else {
-			rAttr.addAttribute("result","passwordFailed");
-			mav.setViewName("redirect:/modMember.do");
 		}
 		
-		return mav;
-	}
 	
 	// 탈퇴하기
 	@Override

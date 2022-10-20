@@ -17,8 +17,8 @@
       <result property="joinDate" column="JOINDATE" />
       <result property="grade" column="USER_GRADE" />
    </resultMap> 
-
-<select id="loginById" resultType="userVO" parameterType="userVO" >
+<!-- 로그인 기능 -->
+	<select id="loginById" resultType="userVO" parameterType="userVO" >
 	<![CDATA[
 		select USER_ID as id, USER_PW as pw, USER_NAME as name, USER_EMAIL as email,
 	      USER_TEL as tel, USER_TEL_SUB as tel_sub, USER_MESSAGE as message,
@@ -26,29 +26,19 @@
 	      from tb_user
 	      where USER_ID=#{id} AND USER_PW=#{pw}
 	]]>
-  </select>
-  
- <select id="password" resultType="userVO" parameterType="userVO">
-	<![CDATA[
-		select USER_PW as pw 
-	 	from tb_user
-		where USER_PW=#{pw} 
-	]]>
-  </select>
-  
-  <select id="selectOverlappedID" parameterType="String" resultType="String">
-  	<![CDATA[
-  		selct decode(count(*),1, 'true',0,'false')
-  		from TB_USER
-  		where USER_ID=#{id}
-  	 ]]>
-  </select>
+ 	 </select>
   
    <select id="selectAllUserList" resultMap="userResult">
       <![CDATA[
         select * from TB_USER order by joinDate desc			
       ]]>
    </select>
+  <!-- 회원가입 아이디 중복검사 -->
+   <select id="overlappedID" parameterType="UserVO" resultType="int">
+   <![CDATA[
+		select count(USER_ID) From TB_USER where USER_ID=#{id}
+		 ]]>
+	</select>
    
 <!--    <select id="selectName" resultType="String"> -->
 <!--    	<![CDATA[ -->
@@ -78,14 +68,15 @@
 <!--    		pw = #{pw} -->
 <!--    	]]> -->
 <!--    	</select> -->
-   	
+<!--  회원가입 회원 저장 -->
    	<insert id="insertNewUser" parameterType="userVO">
    		<![CDATA[
-    		insert into TB_USER(id,pwd, name,email) 
-    		values(#{id},#{pwd},#{name},#{email}) 
+    		insert into TB_USER(USER_ID, USER_PW, USER_NAME, USER_EMAIL,
+	      USER_TEL, USER_TEL_SUB, USER_MESSAGE,USER_BIRTH) 
+    		values(#{id},#{pw},#{name},#{email},#{tel},#{tel_sub},#{message},#{birth}) 
     	]]> 
    	</insert>
-   	
+   
 <!--    	<insert id="insertUser2" parameterType="java.util.HashMap"> -->
 <!--    		<![CDATA[ -->
 <!--    			insert into TB_USER(id,pwd,name,email) -->
@@ -110,5 +101,4 @@
 <!--    			id=#{id} -->
 <!--    		]]> -->
 <!--    	</delete> -->
-
 </mapper>

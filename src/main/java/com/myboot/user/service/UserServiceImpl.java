@@ -16,24 +16,33 @@ import com.myboot.user.vo.UserVO;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
+	
+	
+	public List listUsers() throws Exception {
+		List usersList = null;
+		usersList = userDAO.selectAllUserList();
+		return usersList;
+	}
 //	로그인
 	public UserVO login(UserVO userVO) throws Exception{
 		System.out.println(userDAO.loginById(userVO));
 		return userDAO.loginById(userVO);
 	}
+
 	public List listUser() throws Exception {
 		List userList = null;
 		userList = userDAO.selectAllUserList();
 		return userList;
 	}
+
   // 회원 정보 수정
-	
+	@Override
 	public int modMember(UserVO userVO) throws DataAccessException {
 	    return userDAO.updateMember(userVO);
 	}
   
   // 회원 탈퇴
-	
+	@Override
 	public int removeMember(String id) throws DataAccessException {
 		return  userDAO.deleteMember(id);
 	}
@@ -44,15 +53,16 @@ public class UserServiceImpl implements UserService {
 		return userDAO.password(userVO);
 	}
 
-	
+// 회원가입 아이디 중복 확인
+	public int overlappedID(UserVO userVO) throws Exception{
+		int result =userDAO.overlappedID(userVO);
+		return result;
+	}
+  
 //	회원가입 회원정보 추가
 	
 	public int addUser(UserVO user) throws Exception {
-		return userDAO.insertUser(user);
+		return userDAO.insertNewUser(user);
 	}
-//	회원가입 아이디 중복검사
-	
-	public String overlapped(String id) throws Exception{
-		return userDAO.selectOverlappedID(id);
-	}
+
 }

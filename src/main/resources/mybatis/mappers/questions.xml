@@ -92,5 +92,26 @@
 			VALUES(#{q_Num}, #{title},	#{content}, #{imageFileName},#{id} )
 		]]>      
 	</insert>
+	
+	  <!-- 글 수정하기 -->
+	<update id="updateQusetionsArticle"  parameterType="java.util.Map">
+         update TB_QBOARD
+         set Q_title=#{q_title},    
+         Q_content=#{q_content}
+          <if test="imageFileName!='' and imageFileName!=null">
+           , imageFileName=#{imageFileName}
+         </if>
+         where Q_NUM=#{q_num}
+   </update>
 	  
+	  <!-- 글 삭제하기 -->
+	<delete id="deleteQusetionsArticle" parameterType="int">
+    <![CDATA[
+      delete from TB_QBOARD
+      where Q_NUM in (
+         SELECT Q_NUM FROM  TB_QBOARD
+         START WITH Q_NUM = #{q_num}
+         CONNECT BY PRIOR  Q_NUM = Q_PARENTNO )
+    ]]>      
+  </delete>
 </mapper>
