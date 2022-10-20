@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Iterator;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -48,6 +49,8 @@ public class ReviewControllerImpl implements ReviewController {
 	@RequestMapping(value = "/review/reviewDetail_1.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView reviewDetail_1(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		
+		
 		String _section = request.getParameter("section");
 		String _pageNum = request.getParameter("pageNum");
 		int section = Integer.parseInt(((_section == null) ? "1" : _section));
@@ -129,9 +132,16 @@ public class ReviewControllerImpl implements ReviewController {
 			String value = multipartRequest.getParameter(name);
 			reviewMap.put(name, value);
 		}
-
+		
+	
+		
 		// 로그인 시 세션에 저장된 회원 정보에서 글쓴이 아이디를 얻어와서 Map에 저장합니다.
 		HttpSession session = multipartRequest.getSession();
+		
+		session.removeAttribute("realPath");
+		ServletContext context = multipartRequest.getSession().getServletContext();
+		String realPath = context.getRealPath("");
+		session.setAttribute("realPath", realPath);
 
 		UserVO userVO = (UserVO) session.getAttribute("user");
 		String id = userVO.getId();
@@ -140,7 +150,9 @@ public class ReviewControllerImpl implements ReviewController {
 		reviewMap.put("parentNO", parentNO);
 		reviewMap.put("res_num", 1);
 
-		List<String> fileList = upload(multipartRequest);
+		String path = (String) session.getAttribute("realPath")+"resources\\review\\review_image";
+		
+		List<String> fileList = upload(multipartRequest, path);
 		List<ImageVO> imageFileList = new ArrayList<ImageVO>();
 		if (fileList != null && fileList.size() != 0) {
 			for (String fileName : fileList) {
@@ -155,17 +167,43 @@ public class ReviewControllerImpl implements ReviewController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-			int reviewNO = reviewService.addNewReview(reviewMap);
+			
+			
+			
+			System.out.println("in "+path);
+			
 			if (imageFileList != null && imageFileList.size() != 0) {
-				for (ImageVO imageVO : imageFileList) {
-					imageFileName = imageVO.getImageFileName();
-					File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-					File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + reviewNO);
-					// destDir.mkdirs();
-					FileUtils.moveFileToDirectory(srcFile, destDir, true);
-				}
-			}
+				   ImageVO imageVO = imageFileList.get(0);
+				   imageFileName = imageVO.getImageFileName();
+				   
+				   int reviewNO = reviewService.addNewReview(reviewMap, imageFileName);
+				   
+				   File srcFile = new File(path + "\\" + "temp" + "\\" + imageFileName);
+				   File destDir = new File(path + "\\" + reviewNO);
+				     // destDir.mkdirs();
+				   FileUtils.moveFileToDirectory(srcFile, destDir, true);
+				               
+				   }
+			
+//			int reviewNO = reviewService.addNewReview(reviewMap);
+//			if (imageFileList != null && imageFileList.size() != 0) {
+//				for (ImageVO imageVO : imageFileList) {
+//					imageFileName = imageVO.getImageFileName();
+//					File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
+//					File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + reviewNO);
+//					// destDir.mkdirs();
+//					FileUtils.moveFileToDirectory(srcFile, destDir, true);
+//				}
+//			}
 
+			
+			
+			
+			
+			
+			
+			
+			
 			message = "<script>";
 			message += " alert('새글을 추가했습니다.');";
 			message += " location.href='" + multipartRequest.getContextPath() + "/review/reviewDetail_1.do'; ";
@@ -176,7 +214,7 @@ public class ReviewControllerImpl implements ReviewController {
 			if (imageFileList != null && imageFileList.size() != 0) {
 				for (ImageVO imageVO : imageFileList) {
 					imageFileName = imageVO.getImageFileName();
-					File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
+					File srcFile = new File(path + "\\" + "temp" + "\\" + imageFileName);
 					srcFile.delete();
 				}
 			}
@@ -191,7 +229,7 @@ public class ReviewControllerImpl implements ReviewController {
 		return resEnt;
 	}
 
-	private List<String> upload(MultipartHttpServletRequest multipartRequest) throws Exception {
+	private List<String> upload(MultipartHttpServletRequest multipartRequest, String path) throws Exception {
 		List<String> fileList = new ArrayList<String>();
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 		while (fileNames.hasNext()) {
@@ -199,11 +237,11 @@ public class ReviewControllerImpl implements ReviewController {
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			String originalFileName = mFile.getOriginalFilename();
 			fileList.add(originalFileName);
-			File file = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + fileName);
+			File file = new File(path + "\\" + "temp" + "\\" + fileName);
 			if (mFile.getSize() != 0) { // File Null Check
 				if (!file.exists()) { // 경로상에 파일이 존재하지 않을 경우
 					file.getParentFile().mkdirs(); // 경로에 해당하는 디렉토리들을 생성
-					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + originalFileName)); // 임시로 저장된
+					mFile.transferTo(new File(path + "\\" + "temp" + "\\" + originalFileName)); // 임시로 저장된
 																												// multipartFile을
 																												// 실제
 																												// 파일로

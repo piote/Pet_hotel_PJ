@@ -38,12 +38,15 @@ public class ReviewServiceImpl  implements ReviewService{
 	//	articlesMap.put("totArticles", 170);
 		return reviewMap;
 	}
-	
 
-//다중 이미지 추가하기	
 	@Override
-	public int addNewReview(Map reviewMap) throws Exception{
-		int reviewNO = reviewDAO.insertNewReview(reviewMap);
+	public int addNewReview(Map reviewMap, String fileName) throws Exception {
+		int reviewNO = reviewDAO.selectNewReviewNO();
+		reviewMap.put("reviewNO", reviewNO);
+		String fileUrl = "resources/review/review_image" + "/" + reviewNO + "/" + fileName;
+		reviewMap.put("review_image_url", fileUrl);
+		
+		reviewDAO.insertNewReview(reviewMap);
 		reviewMap.put("reviewNO", reviewNO);
 		List<ImageVO> imageFileList = (ArrayList)reviewMap.get("imageFileList");
 		
@@ -52,6 +55,12 @@ public class ReviewServiceImpl  implements ReviewService{
 		}
 		return reviewNO;
 	}
+
+	
+	
+
+//다중 이미지 추가하기	
+	
 	
 	
 	

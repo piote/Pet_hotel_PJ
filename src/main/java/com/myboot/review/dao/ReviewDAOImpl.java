@@ -56,14 +56,13 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 	
 	@Override
-	public int insertNewReview(Map reviewMap) throws DataAccessException {
-		int reviewNO = selectNewReviewNO();
-		reviewMap.put("reviewNO", reviewNO);
+	public void insertNewReview(Map reviewMap) throws DataAccessException {
+		
 		sqlSession.insert("com.myboot.review.dao.ReviewDAO.insertNewReview",reviewMap);
-		return reviewNO;
+		
 	}
 
-	private int selectNewReviewNO() {
+	public int selectNewReviewNO() {
 		return sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectNewReviewNO");
 	}							 //("mapper.review.selectNewReviewNO");
 

@@ -166,7 +166,7 @@
         <tr class="w_tr w_margin1">
           <td class="w_td" width="15%">${review.star}</td>
           <td class="w_td" width="50%" rowspan="2">${review.title}</td>
-          <td class="w_td" width="20%" rowspan="2">${review.image}</td>
+          <td class="w_td" width="20%" rowspan="2"><img src="${contextPath}/${review.image}" width="150" height="150"></td>
           <td class="w_td w_date"  width="15%" >${reviewDate}</td>
           
         </tr>

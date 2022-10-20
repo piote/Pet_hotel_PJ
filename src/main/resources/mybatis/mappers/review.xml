@@ -12,7 +12,7 @@
     <result property="con" column="review_con" />
     <result property="star" column="review_star" />
     <result property="date" column="review_date" />
-    <result property="image" column="review_image" />
+    <result property="image" column="review_image_url" />
     <result property="rec" column="review_rec" />
     
     <result property="res_num" column="RESERVATION_NUM" />
@@ -83,8 +83,8 @@
    
     <insert id="insertNewReview"  parameterType="java.util.Map">
     <![CDATA[
-      insert into tb_review(review_num, user_id, review_title, review_star,review_rec, review_date ,RESERVATION_NUM)
-      values(#{reviewNO}, #{id}, #{title}, #{star}, #{rec}, sysdate, #{res_num})
+      insert into tb_review(review_num, user_id, review_title, review_star,review_rec, review_date ,RESERVATION_NUM, review_image_url)
+      values(#{reviewNO}, #{id}, #{title}, #{star}, #{rec}, sysdate, #{res_num}, #{review_image_url})
     ]]>      
   </insert>
   
@@ -93,12 +93,9 @@
   
 <select id = "selectAllReviewList" parameterType="java.util.Map" resultMap="reviewResult">  
 <![CDATA[
-	 
-
-
-	  SELECT * FROM ( 
-			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image
-				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image
+	SELECT * FROM ( 
+			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url
+				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image_url
 						from TB_REVIEW
 	                    START WITH  parentNO is null
 						CONNECT BY PRIOR review_num = parentNO
