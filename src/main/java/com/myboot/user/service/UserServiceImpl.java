@@ -26,14 +26,16 @@ public class UserServiceImpl implements UserService {
 		userList = userDAO.selectAllUserList();
 		return userList;
 	}
-  // 회원 정보 수정
 	
+		
+  // 회원 정보 수정
+	@Override
 	public int modMember(UserVO userVO) throws DataAccessException {
 	    return userDAO.updateMember(userVO);
 	}
   
   // 회원 탈퇴
-	
+	@Override
 	public int removeMember(String id) throws DataAccessException {
 		return  userDAO.deleteMember(id);
 	}
@@ -49,6 +51,7 @@ public class UserServiceImpl implements UserService {
 		int result =userDAO.overlappedID(userVO);
 		return result;
 	}
+  
 //	회원가입 회원정보 추가
 	
 	public int addUser(UserVO user) throws Exception {

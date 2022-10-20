@@ -202,14 +202,14 @@
 		 obj.submit();
 	 }
 	 
-	 function fn_remove_article(url,articleNO){
+	 function fn_remove_article(url,q_num){
 		 var form = document.createElement("form");
 		 form.setAttribute("method", "post");
 		 form.setAttribute("action", url);
 	     var articleNOInput = document.createElement("input");
 	     articleNOInput.setAttribute("type","hidden");
-	     articleNOInput.setAttribute("name","articleNO");
-	     articleNOInput.setAttribute("value", articleNO);
+	     articleNOInput.setAttribute("name","q_num");
+	     articleNOInput.setAttribute("value", q_num);
 		 
 	     form.appendChild(articleNOInput);
 	     document.body.appendChild(form);
@@ -311,7 +311,7 @@
                     <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.q_num})">
                     <c:if test="${user.id == article.user_id }">
                         <input type=button value="수정하기" onClick="fn_enable(this.form)">
-                        <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.q_num})">
+                        <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/questions/removeArticle.do', ${article.q_num})">
                     </c:if>	    
                 </div>
             </form>
