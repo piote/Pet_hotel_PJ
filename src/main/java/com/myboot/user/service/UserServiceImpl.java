@@ -16,6 +16,12 @@ import com.myboot.user.vo.UserVO;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
+	@Override
+	public List listUsers() throws Exception {
+		List usersList = null;
+		usersList = userDAO.selectAllUserList();
+		return usersList;
+	}
 //	로그인
 	public UserVO login(UserVO userVO) throws Exception{
 		System.out.println(userDAO.loginById(userVO));

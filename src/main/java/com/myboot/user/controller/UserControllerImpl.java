@@ -33,7 +33,7 @@ public class UserControllerImpl implements UserController{
 	public String userMain(Model model){
 		String a= "";
 		try {
-			List userList = userService.listUser();
+			List userList = userService.listUsers();
 			
 			  int totalElements = userList.size();
 
@@ -48,6 +48,19 @@ public class UserControllerImpl implements UserController{
 		
 		return a;
 	}
+	@Override
+	@RequestMapping(value= "/listUsers.do", method = RequestMethod.GET)
+	public ModelAndView listUsers(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	//public String listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//String viewName = (String)request.getAttribute("viewName");
+		List usersList = userService.listUsers();
+		//ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView("/user/listMembers");
+		
+		mav.addObject("usersList", usersList);
+		return mav;
+	}
+	
 //	로그인창
 	@Override
 	@RequestMapping(value = "/login.do", method =  RequestMethod.POST)
