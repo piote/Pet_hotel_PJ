@@ -264,7 +264,7 @@ public class QuestionsControllerImpl implements QuestionsController{
 	   String imageFileName= upload(multipartRequest);
 	   articleMap.put("imageFileName", imageFileName);
 	   
-	   String articleNO=(String)articleMap.get("articleNO");
+	   String articleNO=(String)articleMap.get("q_num");
 	   String message;
 	   ResponseEntity resEnt=null;
 	   HttpHeaders responseHeaders = new HttpHeaders();
@@ -299,6 +299,7 @@ public class QuestionsControllerImpl implements QuestionsController{
 	     message += " location.href='"+multipartRequest.getContextPath()+"/questions/questionViewArticle.do?articleNO="+articleNO+"';";
 	     message +=" </script>";
 	      resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	      e.printStackTrace();
 	    }
 	    return resEnt;
 	  }

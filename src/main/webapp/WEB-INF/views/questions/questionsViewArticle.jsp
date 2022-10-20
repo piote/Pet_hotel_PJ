@@ -7,7 +7,6 @@
 <%-- 
 <c:set var="article"  value="${articleMap.article}"  />
 <c:set var="imageFileList"  value="${articleMap.imageFileList}"  />
-
  --%>
 <%
   request.setCharacterEncoding("UTF-8");
@@ -259,7 +258,7 @@
                 <ul class="view_table"  >
                     <li >
                         <p>제목</p> 
-                        <input type=text value="${article.q_title }"  name="title"  id="i_title" class="textbox" spellcheck="false" disabled />
+                        <input type=text value="${article.q_title }"  name="q_title"  id="i_title" class="textbox" spellcheck="false" disabled />
                     </li>
                     <li>
                         <p>아이디</p> 
@@ -274,9 +273,7 @@
                         <c:when test="${not empty article.imageFileName && article.imageFileName!='null' }">
                             <li id="imagebox">
                                 <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-                                <%-- <img src="${contextPath}/qDownload.do?articleNO=${article.q_num}&imageFileName=${article.imageFileName}" id="preview" onerror="this.src='${contextPath}/resources/img/no_img.png'" /><br> --%>
                                 <img src="${contextPath}/resources/questions/questions_image/${article.q_num}/${article.imageFileName}" id="preview" onerror="this.src='${contextPath}/resources/img/no_img.png'" /><br>
-                                <!--  <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />--> 
                             </li>
                         </c:when>
                         <c:otherwise>
@@ -287,16 +284,14 @@
                             	<c:if test="${empty article.imageFileName || article.imageFileName=='null' }">
                             		<img id="preview" src="#" height=350 onerror="this.src='${contextPath}/resources/img/no_img.png'"/>
                             	</c:if>
-                                <%-- <input type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-                                <img class="imagebox"  />
-                                <input  type="file"  name="imageFileName " id="i_imageFileName" disabled onchange="readURL(this);"   /> --%>
                                 <input type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
+                                <input type= "hidden"   name="q_num" value="${article.q_num }" />
                                 <label for="i_imageFileName">이미지 파일</label>
                 				<input class="upload-name" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL(this);"  disabled >
                 				<input type="file" id="i_imageFileName" name="imageFileName"  onchange="readURL(this);"/>
                             </li>
                     <li class="content_box">
-                        <textarea  class="textbox"  name="content"  id="i_content" spellcheck="false" disabled />${article.q_content }</textarea> 
+                        <textarea  class="textbox"  name="q_content"  id="i_content" spellcheck="false" disabled >${article.q_content }</textarea> 
                     </li>  
                 </ul>
 
