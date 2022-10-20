@@ -233,6 +233,8 @@ function calendarMaker(target, date) {
 
                     $("#start_dayBox").text("0000. 00. 00.");
                     $("#end_dayBox").text("0000. 00. 00.");
+                    $("#checkinDate").val("");
+                    $("#checkoutDate").val("");
                     
                     //달력 초기화 
                     // $(".custom_calendar_table").remove();
