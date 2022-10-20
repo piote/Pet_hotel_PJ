@@ -51,6 +51,11 @@ public class MyPageControllerImpl implements MyPageController {
         HttpSession session = request.getSession();
         session=request.getSession();
         
+		String _section = request.getParameter("section");
+		String _pageNum = request.getParameter("pageNum");
+		int section = Integer.parseInt(((_section==null)? "1":_section));
+		int pageNum = Integer.parseInt(((_pageNum==null)? "1":_pageNum));
+        
         String colName = request.getParameter("colName");
         String searchWord = request.getParameter("searchWord");
         
@@ -58,15 +63,27 @@ public class MyPageControllerImpl implements MyPageController {
         String endDate = request.getParameter("endDate");
 		UserVO userVO=(UserVO)session.getAttribute("user");
 		String user_id = userVO.getId();
+		session.removeAttribute("colName");
+		
+		if(colName!=null && colName!="") {
+			session.setAttribute("colName", colName);
+		}
         
-        Map<String,String> paraMap = new HashMap<String,String>();
+        Map paraMap = new HashMap();
         paraMap.put("colName", colName);
         paraMap.put("startDate", startDate);
         paraMap.put("endDate", endDate);
         paraMap.put("searchWord", searchWord);
         paraMap.put("user_id", user_id);
         
-        List myReserveList = myPageService.listMyDetailReserve(paraMap);
+		paraMap.put("section", section);
+		paraMap.put("pageNum", pageNum);
+        
+        Map myReserveMap = myPageService.listMyDetailReserve(paraMap, colName);
+        
+		myReserveMap.put("section", section);
+		myReserveMap.put("pageNum", pageNum);
+		
         String viewName=(String)request.getAttribute("viewName");
         ModelAndView mav = new ModelAndView(viewName);
         if(!"user_name".equals(colName) && !"pet_name".equals(colName) && !"user_tel".equals(colName)) {
@@ -74,7 +91,7 @@ public class MyPageControllerImpl implements MyPageController {
         }else {
         	mav.addObject("colName", colName);
         }
-        mav.addObject("myReserveList", myReserveList);
+        mav.addObject("myReserveMap", myReserveMap);
         mav.addObject("startDate", startDate);
         mav.addObject("endDate", endDate);
         mav.addObject("searchWord", searchWord);
