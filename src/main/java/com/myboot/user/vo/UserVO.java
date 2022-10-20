@@ -1,7 +1,5 @@
 package com.myboot.user.vo;
 
-
-
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
