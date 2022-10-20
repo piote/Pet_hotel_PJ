@@ -43,6 +43,11 @@
             <input type="submit" value="로그인" > 
             <input type="reset"  value="다시입력" > 
          </td>
+        <br>
+		   <a href="${contextPath}/find_id_form.do">아이디 찾기</a>  | 
+		   <a href="#">비밀번호 찾기</a> | 
+		   <a href="${contextPath}/userForm.do">회원가입</a>  
+         
       </tr>
    </table>
 </form>

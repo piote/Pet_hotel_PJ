@@ -293,18 +293,42 @@
     </style>
 
     <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
-
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCal.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservation.js"></script>
-    
+    <script>
+	   
+    	function reservationSubmit(obj){
+    		
+			if($("#checkoutDate").val() != null && $("#checkoutDate").val() != ""){//날짜가 있으면
+				
+				if(totalTableNum != 0){//테이블이 존재하면
+						
+					if($("#totalcost").val()!="0" && $("#totalcost").val()!=null){//가격이 있으면
+						
+						obj.submit();
+					}else{
+						alert("맡기실 아이를 선택해주세요.");	
+					}
+				}else{
+					alert("맡기실 아이를 추가해주세요.");
+				}
+			}else{
+				alert("날짜를 선택해주세요.");
+			}
+    		
+     	}
+    </script>
 </head>
 
 <body>
 
 
     <div id="reservationWrap">
-        <form id="reservationForm" action="#">
+        <form id="reservationForm" action="${contextPath}/reservationAdd.do" method="post">
             <h2 class="reservationtag"> Reservation</h2>
             <p id="under"></p>
             <br><br>
@@ -313,14 +337,14 @@
                     <li id="checkinBox" class="reservationBox">
                         <div id="checkin" class="reservationtext reservationtext1">| CHECK IN |</div>
                         <div id="checkin2" class="reservationtext reservationtext2">
-                        	<span id="start_dayBox">0000.00.00.</span>
+                        	<span id="start_dayBox">0000. 00. 00.</span>
                         	<input type="hidden" name="checkinDate" id="checkinDate">
                      	</div>
                     </li>
                     <li id="checkoutBox" class="reservationBox">
                         <div id="mypet" class="reservationtext reservationtext1">| CHECK OUT |</div>
                         <div id="checkout2" class="reservationtext reservationtext2">
-                        	<span id="end_dayBox">0000.00.00.</span>
+                        	<span id="end_dayBox">0000. 00. 00.</span>
                             <input type="hidden" name="checkoutDate" id="checkoutDate">
                         </div>
                     </li>
@@ -342,32 +366,7 @@
                     <td><b>이용여부</b></td>
                 </tr>
                 <div id="calendarForm"></div>
-                <c:forEach var="member" items="${membersList}">
-                    <tr align="center" height="30px">
-                        <td>${Pet.Name}</td>
-                        <td>${Pet.Sex}</td>
-                        <td>
-                            <select name="petroom" id="Pet_Room" onchange="handleOnChange(this)">
-                                <option value="1">Deluxe(소형견)</option>
-                                <option value="2">Superior(중형견)</option>
-                                <option value="3">Suite(대형견)</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select name="beauty" id="petbeauty" onchange="handleOnChange(this)">
-                                <option>이용안함</option>
-                                <option value="1">Clipping</option>
-                                <option value="2">Scissoring</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input id="spa" type="checkbox">
-                        </td>
-                        <td>
-                            <input type="button" class="petUsed" value="X">
-                        </td>
-                    </tr>
-                </c:forEach>
+                
             </table>
             <div id="btn_pet1">
                 <input type='button' value='추가하기' id="btn_pet1_1" onclick='addRow()' />
@@ -440,6 +439,7 @@
                             <input id="membership" type="hidden" value="${user.grade}">
                             <b class="totalpayment"> Total Payment : </b>
                             <b class="totalcost">0 원</b>
+                            <input type="hidden" name="totalcost" id="totalcost" />
                         </td>
                     </tr>
                     <td rowspan="6" align="center" bgcolor="white"><b></b></td>
@@ -513,14 +513,17 @@
 
             <div class="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
-                <button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationComplete.do'">완료</button>
+                <!--<button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationComplete.do'">완료</button>-->
+                <button type="button" id="btn_pet2_2" onclick="reservationSubmit(this.form)">완료</button>
+            	
             </div>
-        </form>
+    
     </div>
 
     <div class="petcomment">
-        <input type="text">
+        <input type="text" name="petcomment">
     </div>
+     </form>
     <br></br>
 
 

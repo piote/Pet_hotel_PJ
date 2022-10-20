@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"
+	pageEncoding="utf-8"	
 	isELIgnored="false"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-
 <!DOCTYPE html >
 <html>
 <head>
@@ -37,6 +36,9 @@
 		 		$("#startDate").datepicker("option", "maxDate",selectedDate);
 		 	}
 		});
+		
+		$('#datepicker').datepicker('setDate', 'today');
+		
 		$(function(){
 			$.datepicker.setDefaults({
 				dateFormat: "yy-mm-dd",
@@ -63,7 +65,9 @@
 			 	}
 			});
 			$("#startDate").datepicker();
-			$("#endDate").datepicker(); 
+			$("#endDate").datepicker();
+			$("#startDate").datepicker('setDate', 'today');
+			$("#endDate").datepicker('setDate', '+1D');
 		});
 			
 	$(document).ready(function () {
@@ -173,11 +177,18 @@
 		                  </td>
 		               </tr>
 					</c:when>
-					<c:when test="${not empty myReserveList }">
+					<c:when test="${not empty myReserveList}">
 						<c:forEach var="reserves" items="${myReserveList }" varStatus="res_st">
 							<tr class="detail-list">
 								<td>
-									<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.res_st }</a>
+									<c:choose>
+										<c:when test="${reserves.res_state=='N' }">
+											<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.res_st }</a>
+										</c:when>
+										<c:otherwise>
+											<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.res_st }</a>
+										</c:otherwise>
+									</c:choose>
 								</td>
 								<td>${reserves.user_name }</td>
 								<td>${reserves.pet_name }</td>

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.myboot.user.vo.UserVO;
 
 public interface UserController {
+	public ModelAndView listUsers(HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	로그인 기능 구현
 	public ModelAndView login(@ModelAttribute("user") UserVO userVO,
             RedirectAttributes  redirectAttributes,
@@ -20,7 +21,9 @@ public interface UserController {
 //	로그아웃 기능 구현
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	회원가입 기능 구현
-	public ModelAndView addUser(@ModelAttribute("info") UserVO userVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView addUser(
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception;
 	
    //	회원가입 id 중복확인 기능     
 //	public ResponseEntity   overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
@@ -31,11 +34,20 @@ public interface UserController {
 				HttpServletRequest request, HttpServletResponse response)  throws Exception;
         
 	// 회원 정보 수정
-	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	public ModelAndView modMember(@ModelAttribute("user") UserVO user, 
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	
 	// 탈퇴하기
 	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public String userMain(Model model);
+	// 로그인 아이디 찾기
+	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception;
 	
+	
+		
+	public String userMain(Model model);
 }
+	
+	
+

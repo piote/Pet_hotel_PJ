@@ -1,5 +1,7 @@
 package com.myboot.user.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,12 +30,13 @@ public class UserControllerImpl implements UserController{
 	@Autowired
 	private UserVO userVO;
 	
+	
 	@ResponseBody
 	@RequestMapping("/user.do") 
 	public String userMain(Model model){
 		String a= "";
 		try {
-			List userList = userService.listUser();
+			List userList = userService.listUsers();
 			
 			  int totalElements = userList.size();
 
@@ -48,6 +51,19 @@ public class UserControllerImpl implements UserController{
 		
 		return a;
 	}
+	@Override
+	@RequestMapping(value= "/listUsers.do", method = RequestMethod.GET)
+	public ModelAndView listUsers(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	//public String listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//String viewName = (String)request.getAttribute("viewName");
+		List usersList = userService.listUsers();
+		//ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView("/user/listMembers");
+		
+		mav.addObject("usersList", usersList);
+		return mav;
+	}
+	
 //	로그인창
 	@Override
 	@RequestMapping(value = "/login.do", method =  RequestMethod.POST)
@@ -105,13 +121,54 @@ public class UserControllerImpl implements UserController{
 		return mav;
 		
 	}
-	
+	@RequestMapping(value = "/find_id_form.do")
+	public ModelAndView find_id_form(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		return mav;
+	}
 ////	회원가입 회원추가
 	@Override
-	public ModelAndView addUser(UserVO userVO, HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping(value = "/addUser.do", method = RequestMethod.POST)
+	public ModelAndView addUser(
+			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+			
+		request.setCharacterEncoding("utf-8");
+		int result = 0;
+		String id= request.getParameter("id");
+		String pw= request.getParameter("pw");
+		String name= request.getParameter("name");
+		String email=request.getParameter("email");
+		String tel=request.getParameter("tel");
+		String tel_sub=request.getParameter("tel_sub");
+		String message=request.getParameter("message");
+		String birth=request.getParameter("birth");
+		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date formatDate = dtFormat.parse(birth);
+		System.out.println(birth);
+		
+		
+		UserVO userVO= new UserVO();
+		userVO.setId(id);
+		userVO.setPw(pw);
+		userVO.setName(name);
+		userVO.setEmail(email);
+		userVO.setTel(tel);
+		userVO.setTel_sub(tel_sub);
+		userVO.setMessage(message);
+		if(message==null || message==""){
+			userVO.setMessage("N");
+			System.out.println("N");
+		}
+		userVO.setBirth(formatDate);
+		System.out.println(userVO.getId()+userVO.getPw()+userVO.getName()+userVO.getEmail()+userVO.getTel()+userVO.getTel_sub()+userVO.getMessage()+userVO.getBirth());
+		result = userService.addUser(userVO);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/main.do");
+		return mav;
 		
 	}
 
@@ -139,7 +196,12 @@ public class UserControllerImpl implements UserController{
 				mav.setViewName(viewName);
 				return mav;
 	}
-	
+//	로그인 아이디 찾기
+	@RequestMapping(value = "/find_id.do", method = RequestMethod.POST)
+	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
+		md.addAttribute("id", userService.find_id(response, email));
+		return "/find_id";
+	}
 	// 한번 더 비밀번호 입력 폼
 	@RequestMapping(value = "/pw_changeForm.do", method =  RequestMethod.GET)
 	private ModelAndView Form(@RequestParam(value= "result", required=false) String result,
@@ -176,7 +238,7 @@ public class UserControllerImpl implements UserController{
 			if (userPw.equals(password)) {
 				System.out.println("성공");
 				
-				mav.setViewName("redirect:/modMember.do");	
+				mav.setViewName("redirect:/modMemberForm.do");	
 			
 				//String viewName=(String)request.getAttribute("viewName");
 				//mav = new ModelAndView(viewName);
@@ -191,18 +253,42 @@ public class UserControllerImpl implements UserController{
 	}
 	
 	// 회원 정보 수정
-		@Override
-		@RequestMapping(value="/modMember.do" ,method = RequestMethod.GET)
-		public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception {
-			HttpSession session=request.getSession();
-			session=request.getSession();
-			
-			String viewName=(String)request.getAttribute("viewName");
-			ModelAndView mav = new ModelAndView(viewName);
-			return mav;
-		}
-		
+	@Override
+	@RequestMapping(value="/modMember.do" ,method = RequestMethod.POST)
+	public ModelAndView modMember(@ModelAttribute("user") UserVO user, 
+		HttpServletRequest request, HttpServletResponse response) throws Exception{
+		int result = 0;
+		result = userService.modMember(user);
+		ModelAndView mav = new ModelAndView("redirect:/mypage/myPage.do");
+		return mav;
+	}
 	
+//	@RequestMapping(value = "/modMemberForm.do", method =  RequestMethod.GET)
+//	public ModelAndView modMemberForm(@RequestParam("id") String id, 
+//		HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		UserVO user = userService.findUser(id);
+//		request.setAttribute("user",user);
+//		String viewName = (String)request.getAttribute("viewName");
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName(viewName);
+//		return mav;
+//	}
+	
+	@RequestMapping(value = "/modMemberForm.do", method =  RequestMethod.GET)
+	private ModelAndView modMemberForm(@RequestParam(value= "result", required=false) String result,
+			                  @RequestParam(value= "action", required=false) String action,
+			                  HttpServletRequest request, 
+			                  HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action); 
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",result);
+		mav.setViewName(viewName);
+		return mav;
+	}
+
 	// 탈퇴하기
 	@Override
 	@RequestMapping(value="removeMember.do" ,method = RequestMethod.GET)

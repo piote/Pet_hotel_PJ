@@ -1,6 +1,8 @@
 
 window.onload = function () {
-
+	
+	addRow();
+	
     $("#checkin2").on("click", function () {
         $("#start_dayBox").text("0000. 00. 00.");
         $("#end_dayBox").text("0000. 00. 00.");
@@ -171,8 +173,9 @@ function calendarMaker(target, date) {
 
 
                     }
-
+					
                     $("#end_dayBox").text(end_day.toLocaleDateString());
+                    $("#checkoutDate").val(end_day.toLocaleDateString());
 
                     dayCal = dateCal(start_day, end_day)
                     //차수출력
@@ -187,7 +190,7 @@ function calendarMaker(target, date) {
                     //텍스트에 날짜 정보
 
                     $("#start_dayBox").text(start_day.toLocaleDateString());
-                    $("#checkinDate").val(start_day);//===========================================
+                    $("#checkinDate").val(start_day.toLocaleDateString());//===========================================
 					
                     //checkout 날짜 선택
                 } else if (start_day != null && end_day == null && start_day < selectDay) {
@@ -212,6 +215,7 @@ function calendarMaker(target, date) {
 
 
                     $("#end_dayBox").text(end_day.toLocaleDateString());
+                    $("#checkoutDate").val(end_day.toLocaleDateString());//===========================================
                     //차수 출력
                     dateCal(start_day, end_day);
 
@@ -229,6 +233,8 @@ function calendarMaker(target, date) {
 
                     $("#start_dayBox").text("0000. 00. 00.");
                     $("#end_dayBox").text("0000. 00. 00.");
+                    $("#checkinDate").val("");
+                    $("#checkoutDate").val("");
                     
                     //달력 초기화 
                     // $(".custom_calendar_table").remove();
@@ -277,9 +283,6 @@ function calendarMaker(target, date) {
                     costTB(servicemap, true)
                 }
             }
-
-
-
 
 
         });
