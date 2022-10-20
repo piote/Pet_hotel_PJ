@@ -27,6 +27,10 @@
 	      where USER_ID=#{id} AND USER_PW=#{pw}
 	]]>
  	 </select>
+<!-- 로그인 아이디찾기 -->
+	<select id="find_id" parameterType="String" resultType="String">
+		select USER_ID from TB_USER where USER_EMAIL = #{email}
+	</select>
   
    <select id="selectAllUserList" resultMap="userResult">
       <![CDATA[
@@ -84,7 +88,7 @@
 <!--    	</insert> -->
 
  		<!-- 회원 정보 수정 -->
-     	<update id="updateUser" parameterType="userVO">
+ 	<update id="updateUser" parameterType="userVO">
    		<![CDATA[
    				update TB_USER
    				set pw=#{pw}, email=#{email}, tel=#{tel},
@@ -93,12 +97,24 @@
    				id=#{id}
    		]]>
    	  </update>
-   	
-<!--    	<delete id="deleteUser" parameterType="String"> -->
-<!--    		<![CDATA[ -->
-<!--    			delete from TB_USER -->
-<!--    			where -->
-<!--    			id=#{id} -->
-<!--    		]]> -->
-<!--    	</delete> -->
+   	  
+   	  <select id="selectUserById" resultType="userVO"  parameterType="String" >
+      <![CDATA[
+         select * from TB_USER
+         where
+         id=#{id}			
+      ]]>
+	 </select>	
+   	  
+   	  
+   	<!-- 회원 탈퇴 -->
+	<delete id="deleteUser" parameterType="String">
+   		<![CDATA[
+   			delete from TB_USER
+   			where
+   			id=#{id}
+   		]]>
+   	</delete>
+
+
 </mapper>

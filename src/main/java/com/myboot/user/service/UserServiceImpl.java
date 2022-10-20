@@ -1,6 +1,9 @@
 package com.myboot.user.service;
 
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -29,16 +32,42 @@ public class UserServiceImpl implements UserService {
 		return userDAO.loginById(userVO);
 	}
 
+
 	public List listUser() throws Exception {
 		List userList = null;
 		userList = userDAO.selectAllUserList();
 		return userList;
 	}
 
+// 로그인 아이디 찾기
+	@Override
+	public String find_id(HttpServletResponse response, String email) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String id = userDAO.find_id(email);
+		
+		if (id == null) {
+			out.println("<script>");
+			out.println("alert('가입된 아이디가 없습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		} else {
+			return id;
+		}
+	}
+	
+
   // 회원 정보 수정
 	@Override
 	public int modMember(UserVO userVO) throws DataAccessException {
-	    return userDAO.updateMember(userVO);
+	    return userDAO.updateUser(userVO);
+	}
+	
+	@Override
+	public UserVO findUser(String id) throws DataAccessException{
+		return userDAO.selectUserById(id);
 	}
   
   // 회원 탈퇴
@@ -49,6 +78,7 @@ public class UserServiceImpl implements UserService {
 	
  // 비밀번호 한번 더 입력
 	
+	@Override
 	public UserVO password(UserVO  userVO) throws Exception{
 		return userDAO.password(userVO);
 	}
@@ -64,5 +94,5 @@ public class UserServiceImpl implements UserService {
 	public int addUser(UserVO user) throws Exception {
 		return userDAO.insertNewUser(user);
 	}
-
+// 로그인 아이디 찾기
 }
