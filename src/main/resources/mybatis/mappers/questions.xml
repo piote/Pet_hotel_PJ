@@ -93,4 +93,14 @@
 		]]>      
 	</insert>
 	  
+	  <!-- 글 삭제하기 -->
+	<delete id="deleteQusetionsArticle" parameterType="int">
+    <![CDATA[
+      delete from TB_QBOARD
+      where Q_NUM in (
+         SELECT Q_NUM FROM  TB_QBOARD
+         START WITH Q_NUM = #{q_num}
+         CONNECT BY PRIOR  Q_NUM = Q_PARENTNO )
+    ]]>      
+  </delete>
 </mapper>

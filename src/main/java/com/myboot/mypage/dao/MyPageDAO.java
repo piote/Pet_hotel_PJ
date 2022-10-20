@@ -1,5 +1,6 @@
 package com.myboot.mypage.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,4 +16,5 @@ public interface MyPageDAO {
 
 	 public List selectMyReviewList(String user_id) throws DataAccessException;
 	 public void updateMyReserveCancel(String res_num) throws DataAccessException;
+	 
 }

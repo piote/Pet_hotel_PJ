@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 		userList = userDAO.selectAllUserList();
 		return userList;
 	}
-			
+
   // 회원 정보 수정
 	@Override
 	public int modMember(UserVO userVO) throws DataAccessException {

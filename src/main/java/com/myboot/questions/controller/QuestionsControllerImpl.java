@@ -93,6 +93,7 @@ public class QuestionsControllerImpl implements QuestionsController{
 		mav.setViewName(viewName);
 		
 		//서블릿에서 경로를 받아와서 세션에 저장하는 코드 
+		session.removeAttribute("realPath");
 		ServletContext context = request.getSession().getServletContext();
 		String realPath = context.getRealPath("");
 		session.setAttribute("realPath", realPath);
@@ -111,6 +112,14 @@ public class QuestionsControllerImpl implements QuestionsController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("article", questionsVO);
+		
+		//서블릿에서 경로를 받아와서 세션에 저장하는 코드 
+		HttpSession session = request.getSession();
+		session.removeAttribute("realPath");
+		ServletContext context = request.getSession().getServletContext();
+		String realPath = context.getRealPath("");
+		session.setAttribute("realPath", realPath);
+		
 		return mav;
 		}
 	
@@ -199,5 +208,44 @@ public class QuestionsControllerImpl implements QuestionsController{
 		}
 		return imageFileName;
 	}
+	
+	//삭제하기
+	 @Override
+	  @RequestMapping(value="/questions/removeArticle.do" ,method = RequestMethod.POST)
+	  @ResponseBody
+	  public ResponseEntity  removeQuestionsArticle(@RequestParam("q_num") int q_num,
+	                              HttpServletRequest request, HttpServletResponse response) throws Exception{
+	   response.setContentType("text/html; charset=UTF-8");
+	   String message;
+	   ResponseEntity resEnt=null;
+	   HttpHeaders responseHeaders = new HttpHeaders();
+	   responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	   
+		 //세션에 저장된 경로를 받아온다
+	   	HttpSession session = request.getSession();
+		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
+		System.out.println("in "+path);
+	   
+	   try {
+		  questionsService.removeQuestionsArticle(q_num);
+	      File destDir = new File(path+"\\"+q_num);
+	      FileUtils.deleteDirectory(destDir);
+	      
+	      message = "<script>";
+	      message += " alert('글을 삭제했습니다.');";
+	      message += " location.href='"+request.getContextPath()+"/questions/questionsList.do';";
+	      message +=" </script>";
+	       resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	          
+	   }catch(Exception e) {
+	      message = "<script>";
+	      message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
+	      message += " location.href='"+request.getContextPath()+"/questions/questionsList.do';";
+	      message +=" </script>";
+	       resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	       e.printStackTrace();
+	   }
+	   return resEnt;
+	  }  
 	
 }
