@@ -28,27 +28,15 @@
 	]]>
   </select>
   
- <select id="password" resultType="userVO" parameterType="userVO">
-	<![CDATA[
-		select USER_PW as pw 
-	 	from tb_user
-		where USER_PW=#{pw} 
-	]]>
-  </select>
-  
-  <select id="selectOverlappedID" parameterType="String" resultType="String">
-  	<![CDATA[
-  		selct decode(count(*),1, 'true',0,'false')
-  		from TB_USER
-  		where USER_ID=#{id}
-  	 ]]>
-  </select>
-  
    <select id="selectAllUserList" resultMap="userResult">
       <![CDATA[
         select * from TB_USER order by joinDate desc			
       ]]>
    </select>
+  
+   <select id="overlappedID" parameterType="UserVO" resultType="int">
+		select count(USER_ID) From TB_USER where USER_ID=#{id}
+	</select>
    
 <!--    <select id="selectName" resultType="String"> -->
 <!--    	<![CDATA[ -->

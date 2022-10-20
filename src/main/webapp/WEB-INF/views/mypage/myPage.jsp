@@ -32,7 +32,7 @@
                   </td>
                   <td></td>
                   <td>
-                     <a href="${contextPath}/pw_change.do">내정보수정</a>
+                     <a href="${contextPath}/pw_changeForm.do">내정보수정</a>
                      <a href="${contextPath}/membership.do">멤버쉽</a>
                   </td>
                   <td>

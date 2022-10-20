@@ -10,8 +10,15 @@
 %>     
 <html>
 <head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<style type="text/css">
+		#overlappedID {background-color: GhostWhite; width: 15%; height: 40px;}
+		.olmessagef {color: red; font-style: Italic;}
+		.olmessaget {color: blue; font-style: Italic;}
+	</style>
     <title>회원가입 화면</title>
-    
+  
     <!-- css 파일 분리 -->
    
  
@@ -24,6 +31,8 @@
                 alert("아이디를 입력하세요.");
                 return false;
             }
+           
+            	
             
             if(!document.userInfo.password.value){
                 alert("비밀번호를 입력하세요.");
@@ -36,11 +45,36 @@
                 return false;
             }
         }
+        //회원가입 중복확인 기능
+        function lappedID(){
+        	$("#signup").attr("type", "button");
+    		const id = $("#user_id").val();
+    		$.ajax({
+    		type: "get",
+    		async: false,
+    		url: "http://localhost:8090/idCheck",
+    		data: {id: id},
+    		success: function (data) {
+    		if(data == 1) {
+    			$("#olmessage").text("이미 사용중인 ID 입니다.");
+    			$("#olmessage").addClass("olmessagef");
+    			$("#olmessage").removeClass("olmessaget");
+    			}else {
+    			$("#olmessage").text("사용 가능한 ID 입니다.");
+    			$("#olmessage").addClass("olmessaget");
+    			$("#olmessage").removeClass("olmessagef");
+    			$("#signup").attr("type", "submit");
+    			}
+    			}
+    		})
+        }
         
         // 취소 버튼 클릭시 로그인 화면으로 이동
         function goLoginForm() {
             location.href="LoginForm.jsp";
+            
         }
+     
     </script>
     
 </head>
@@ -54,15 +88,16 @@
         
         <!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
        
-        <form method="post" action="${contextPath}/addUser.do}" name="userInfo" 
-                onsubmit="return checkValue()">
+        <form  method="post" action="${contextPath}/addUser.do}" name="userInfo" >
             <table>
                 <tr>
-                    <td id="title">아이디</td>
-                    <td>
-                        <input type="text" name="id" maxlength="50">
-                        <input type="button" value="중복확인" >    
-                    </td>
+					<td id="title">아이디</td>
+					<td>
+						<input type="text" id="user_id" name="id" placeholder="영어로 작성하시오"  maxlength="20" required autofocus required>
+						<button id="overlappedID" type="button" onclick="lappedID()" >중복확인</button><br>
+						<span id="olmessage"></span>
+					</td>
+                    
                 </tr>
                         
                 <tr>
@@ -134,7 +169,7 @@
                 </tr>
             </table>
             <br>
-            <input type="submit" value="가입"/>  
+            <input type="submit" id="signup" value="가입"/>  
             <input type="button" value="취소" onclick="goLoginForm()">
         </form>
     </div>

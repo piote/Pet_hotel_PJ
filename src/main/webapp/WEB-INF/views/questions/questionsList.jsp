@@ -155,6 +155,7 @@
     border: 1px solid #999;
     border-radius: 20px;
     background-color: #fff;
+    font-size:14px;
     text-align: center;
     line-height: 30px;
     position: absolute; right: 0; top: 0;
