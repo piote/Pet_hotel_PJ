@@ -204,7 +204,6 @@
             <p class="titie">문의하기</p>
         </div>
 
-        <div class="hr"></div>
 
         <form name="articleForm" method="post" action="${contextPath }/questions/addNewQuestion.do"  enctype="multipart/form-data">
 
