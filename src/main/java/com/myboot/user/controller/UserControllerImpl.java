@@ -1,5 +1,7 @@
 package com.myboot.user.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,7 @@ public class UserControllerImpl implements UserController{
 	private UserService userService;
 	@Autowired
 	private UserVO userVO;
+	
 	
 	@ResponseBody
 	@RequestMapping("/user.do") 
@@ -118,17 +121,50 @@ public class UserControllerImpl implements UserController{
 		return mav;
 		
 	}
-	
+	@RequestMapping(value = "/find_id_form.do")
+	public ModelAndView find_id_form(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		return mav;
+	}
 ////	회원가입 회원추가
 	@Override
-	@RequestMapping(value = "/addUser.do", method =  RequestMethod.POST)
-	public ModelAndView addUser(@ModelAttribute("user") UserVO user,
+	@RequestMapping(value = "/addUser.do", method = RequestMethod.POST)
+	public ModelAndView addUser(
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 			
 		request.setCharacterEncoding("utf-8");
 		int result = 0;
-		result = userService.addUser(user);
+		String id= request.getParameter("id");
+		String pw= request.getParameter("pw");
+		String name= request.getParameter("name");
+		String email=request.getParameter("email");
+		String tel=request.getParameter("tel");
+		String tel_sub=request.getParameter("tel_sub");
+		String message=request.getParameter("message");
+		String birth=request.getParameter("birth");
+		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date formatDate = dtFormat.parse(birth);
+		System.out.println(birth);
+		
+		
+		UserVO userVO= new UserVO();
+		userVO.setId(id);
+		userVO.setPw(pw);
+		userVO.setName(name);
+		userVO.setEmail(email);
+		userVO.setTel(tel);
+		userVO.setTel_sub(tel_sub);
+		userVO.setMessage(message);
+		if(message==null || message==""){
+			userVO.setMessage("N");
+			System.out.println("N");
+		}
+		userVO.setBirth(formatDate);
+		System.out.println(userVO.getId()+userVO.getPw()+userVO.getName()+userVO.getEmail()+userVO.getTel()+userVO.getTel_sub()+userVO.getMessage()+userVO.getBirth());
+		result = userService.addUser(userVO);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/main.do");
@@ -160,8 +196,13 @@ public class UserControllerImpl implements UserController{
 				mav.setViewName(viewName);
 				return mav;
 	}
-	
-	// 한번 더 비밀번호 입력 
+//	로그인 아이디 찾기
+	@RequestMapping(value = "/find_id.do", method = RequestMethod.POST)
+	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
+		md.addAttribute("id", userService.find_id(response, email));
+		return "/find_id";
+	}
+	// 한번 더 비밀번호 입력 폼
 	@RequestMapping(value = "/pw_changeForm.do", method =  RequestMethod.GET)
 	private ModelAndView Form(@RequestParam(value= "result", required=false) String result,
 			                  @RequestParam(value= "action", required=false) String action,
