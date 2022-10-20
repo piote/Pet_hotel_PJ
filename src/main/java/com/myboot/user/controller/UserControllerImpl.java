@@ -140,7 +140,7 @@ public class UserControllerImpl implements UserController{
 				return mav;
 	}
 	
-	// 한번 더 비밀번호 입력 폼
+	// 한번 더 비밀번호 입력 
 	@RequestMapping(value = "/pw_changeForm.do", method =  RequestMethod.GET)
 	private ModelAndView Form(@RequestParam(value= "result", required=false) String result,
 			                  @RequestParam(value= "action", required=false) String action,
