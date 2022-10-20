@@ -1,5 +1,6 @@
 package com.myboot.review.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myboot.review.dao.ReviewDAO;
+import com.myboot.review.vo.ImageVO;
 import com.myboot.review.vo.ReviewVO;
+
 
 @Service("reviewService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -18,6 +21,12 @@ public class ReviewServiceImpl  implements ReviewService{
 	
 	@Autowired
 	ReviewDAO reviewDAO;
+	
+	/*
+	 * @Override public List<ReviewVO> reviewDetail_1() throws Exception{
+	 * List<ReviewVO> reviewList = reviewDAO.selectAllReviewList(); return
+	 * reviewList; }
+	 */
 	
 	@Override
 	public Map reviewDetail_1(Map pagingMap) throws Exception{
@@ -36,7 +45,11 @@ public class ReviewServiceImpl  implements ReviewService{
 	public int addNewReview(Map reviewMap) throws Exception{
 		int reviewNO = reviewDAO.insertNewReview(reviewMap);
 		reviewMap.put("reviewNO", reviewNO);
+		List<ImageVO> imageFileList = (ArrayList)reviewMap.get("imageFileList");
+		
+		if(imageFileList != null && imageFileList.size() != 0) {
 		reviewDAO.insertNewImage(reviewMap);
+		}
 		return reviewNO;
 	}
 	

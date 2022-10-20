@@ -161,10 +161,9 @@
       <p id="under"></p>
       
       <div class="w_review">
-      <a href="${contextPath}/reviewForm.do">글쓰기(임시)</a>
+      <a href="${contextPath}/review/reviewForm.do">글쓰기(임시)</a>
       </div>
   					
-      
       
       
       <br><br><br>

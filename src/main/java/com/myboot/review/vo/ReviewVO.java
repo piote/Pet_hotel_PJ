@@ -11,7 +11,7 @@ import lombok.Data;
 @Component("reviewVO")
 public class ReviewVO {
 	private int level;
-	private int num;
+	private int reviewNO;
 	private int parentNO;
 	private String title;
 	private String con;
