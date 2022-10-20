@@ -9,7 +9,7 @@ import com.myboot.user.vo.UserVO;
 public interface UserService {
 //	로그인 기능
 	public UserVO login(UserVO userVO) throws Exception;
-	public List listUser() throws Exception;
+	public List listUsers() throws Exception;
 	
 // 비밀번호 한번 더 입력
 	public UserVO password(UserVO  userVO) throws Exception;
@@ -27,3 +27,4 @@ public interface UserService {
 	 public int overlappedID(UserVO userVO) throws Exception;
 	
 }
+	
