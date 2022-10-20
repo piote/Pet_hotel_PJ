@@ -213,10 +213,10 @@
                 </li>
                 <li class="atc_title">
                     <p>글제목</p>
-                    <input type="text" name="title" spellcheck="false" maxlength="500" placeholder="제목을 입력해주세요." />
+                    <input type="text" name="title" spellcheck="false" maxlength="50" placeholder="제목을 입력해주세요." />
                 </li>
                 <li class="atc_content">
-                    <textarea name="content" spellcheck="false" maxlength="4000" placeholder="내용을 입력해주세요." onkeydown="resize(this)" onkeyup="resize(this)"></textarea>
+                    <textarea name="content" spellcheck="false" maxlength="1000" placeholder="내용을 입력해주세요." onkeydown="resize(this)" onkeyup="resize(this)"></textarea>
                 </li>
                 <li class="atc_imageFile">
                 	<div class="imageFile_wrap">
