@@ -33,7 +33,7 @@ public class UserControllerImpl implements UserController{
 	public String userMain(Model model){
 		String a= "";
 		try {
-			List userList = userService.listUser();
+			List userList = userService.listUsers();
 			
 			  int totalElements = userList.size();
 
@@ -48,6 +48,19 @@ public class UserControllerImpl implements UserController{
 		
 		return a;
 	}
+	@Override
+	@RequestMapping(value= "/listUsers.do", method = RequestMethod.GET)
+	public ModelAndView listUsers(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	//public String listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//String viewName = (String)request.getAttribute("viewName");
+		List usersList = userService.listUsers();
+		//ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView("/user/listMembers");
+		
+		mav.addObject("usersList", usersList);
+		return mav;
+	}
+	
 //	로그인창
 	@Override
 	@RequestMapping(value = "/login.do", method =  RequestMethod.POST)
@@ -108,10 +121,18 @@ public class UserControllerImpl implements UserController{
 	
 ////	회원가입 회원추가
 	@Override
-	public ModelAndView addUser(UserVO userVO, HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping(value = "/addUser.do", method =  RequestMethod.POST)
+	public ModelAndView addUser(@ModelAttribute("user") UserVO user,
+			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+			
+		request.setCharacterEncoding("utf-8");
+		int result = 0;
+		result = userService.addUser(user);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/main.do");
+		return mav;
 		
 	}
 

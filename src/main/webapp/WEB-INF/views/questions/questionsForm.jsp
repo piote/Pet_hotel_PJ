@@ -79,14 +79,16 @@
         }
         .atc_content textarea{
             box-sizing: border-box;
-            width: 100%; height: 300px;
-            resize: vertical;
+            width: 100%; min-height:300px;
+            resize: none;
             border: 0;
             background-color: #eee;
             font-size: 15px;
             padding: 20px;
             transition: background-color 0.2s;
-            margin-bottom: 30px
+            margin-bottom: 30px;
+            -ms-overflow-style: none; /* IE and Edge */
+    		scrollbar-width: none; /* Firefox */
         }
         .atc_content textarea::placeholder{
             color: #909090;
@@ -95,7 +97,9 @@
             background-color: rgb(232, 232, 232);
             outline: none;
         }
-        
+	   	.atc_content textarea::-webkit-scrollbar {
+		    display: none; /* Chrome, Safari, Opera*/
+		}
         .imageFile_wrap label{
         	display: inline-block;
 		    width: 100px;
@@ -132,7 +136,6 @@
 		    overflow: hidden;
 		    border: 0;
 		}
-		
         .img_bt{
         	width: 100px; height: 30px;
             border: 1px solid #999;
@@ -186,6 +189,12 @@
 	         	reader.readAsDataURL(input.files[0]);
       		}
   		}
+        
+        //textarea 글 작성시 자동 크기조정
+		function resize(obj) {
+            obj.style.height = '1px';
+            obj.style.height = (12 + obj.scrollHeight) + 'px';
+		}
     </script>
 </head>
 <body>
@@ -208,7 +217,7 @@
                     <input type="text" name="title" spellcheck="false" maxlength="500" placeholder="제목을 입력해주세요." />
                 </li>
                 <li class="atc_content">
-                    <textarea name="content" spellcheck="false" maxlength="4000" placeholder="내용을 입력해주세요."></textarea>
+                    <textarea name="content" spellcheck="false" maxlength="4000" placeholder="내용을 입력해주세요." onkeydown="resize(this)" onkeyup="resize(this)"></textarea>
                 </li>
                 <li class="atc_imageFile">
                 	<div class="imageFile_wrap">

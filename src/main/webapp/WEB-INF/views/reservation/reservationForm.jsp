@@ -293,18 +293,27 @@
     </style>
 
     <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
-
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCal.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservation.js"></script>
-    
+    <script>
+	   
+    	function reservationSubmit(obj){
+    		
+
+	    	obj.submit();
+     	}
+    </script>
 </head>
 
 <body>
 
 
     <div id="reservationWrap">
-        <form id="reservationForm" action="#">
+        <form id="reservationForm" action="${contextPath}/reservationAdd.do" method="post">
             <h2 class="reservationtag"> Reservation</h2>
             <p id="under"></p>
             <br><br>
@@ -440,6 +449,7 @@
                             <input id="membership" type="hidden" value="${user.grade}">
                             <b class="totalpayment"> Total Payment : </b>
                             <b class="totalcost">0 원</b>
+                            <input type="hidden" name="totalcost" id="totalcost" />
                         </td>
                     </tr>
                     <td rowspan="6" align="center" bgcolor="white"><b></b></td>
@@ -513,14 +523,17 @@
 
             <div class="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
-                <button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationComplete.do'">완료</button>
+                <!--<button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationComplete.do'">완료</button>-->
+                <button type="button" id="btn_pet2_2" onclick="reservationSubmit(this.form)">완료</button>
+            	
             </div>
-        </form>
+    
     </div>
 
     <div class="petcomment">
-        <input type="text">
+        <input type="text" name="petcomment">
     </div>
+     </form>
     <br></br>
 
 

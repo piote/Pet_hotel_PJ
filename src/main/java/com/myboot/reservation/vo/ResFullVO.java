@@ -20,12 +20,12 @@ public class ResFullVO {
 	private String res_state;
 	
 	//pet
-		private int pet_num;
-		private String pet_name;
-		private String pet_gender;
-		private String room_grade;
-		private String service_beauty;
-		private String service_spa;
+	private int pet_num;
+	private String pet_name;
+	private String pet_gender;
+	private String room_grade;
+	private String service_beauty;
+	private String service_spa;
 		
 		
 }
