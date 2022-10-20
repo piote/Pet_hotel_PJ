@@ -1,3 +1,5 @@
+
+
 //예약시 임시 펫 번호.
 var petTableNum = 0;
 //존재하는 테이블 갯수
@@ -146,7 +148,7 @@ function tablecheck(petTableElement) {
         petmap.set('Pet_Sex' + tbnum, 'male');
     }
     if (petmap.get('Pet_Room' + tbnum) == null) {
-        petmap.set('Pet_Room' + tbnum, '1');
+        petmap.set('Pet_Room' + tbnum, 'Deluxe');    // 12:20 수정
     }
 
     if (petmap.get('Pet_Name' + tbnum) != null && petmap.get('Pet_Sex' + tbnum) != null) {
@@ -193,46 +195,46 @@ function costTB(petserviceMap, datecheck) {
     for (let petlist of petserviceMap.values()) {
         var list = petlist;
         //2index는 room
-        if (list[2] == '1') {//소형일경우
+        if (list[2] == 'Deluxe') {//소형일경우
             sr++;
             if (list[3] == null) {//미용
 
-            } else if (list[3] == '1') {
+            } else if (list[3] == 'Clipping') {     // 12:20 수정
                 sbc++;
-            } else if (list[3] == '2') {
+            } else if (list[3] == 'Scissoring') {     // 12:20 수정
                 sbs++;
             }
 
-            if (list[4] == true) {//스파
+            if (list[4] == true) {//스파       // 12:20 수정
                 ss++;
             }
 
-        } else if (list[2] == '2') {//중형
+        } else if (list[2] == 'Superior') {//중형     // 12:20 수정
             mr++;
 
-            if (list[3] == null) {//미용
-
-            } else if (list[3] == '1') {
+            if (list[3] == null) {//미용       // 12:20 수정
+ 
+            } else if (list[3] == 'Clipping') {      // 12:20 수정
                 mbc++;
-            } else if (list[3] == '2') {
+            } else if (list[3] == 'Scissoring') {      // 12:20 수정
                 mbs++;
             }
 
-            if (list[4] == true) {//스파
+            if (list[4] == true) {//스파       // 12:20 수정
                 ms++;
             }
-        } else if (list[2] == '3') {//대형
+        } else if (list[2] == 'Sweet') {//대형     // 12:20 수정
             lr++;
 
             if (list[3] == null) {//미용
 
-            } else if (list[3] == '1') {
+            } else if (list[3] == 'Clipping') {      // 12:20 수정
                 lbc++;
-            } else if (list[3] == '2') {
+            } else if (list[3] == 'Scissoring') {      // 12:20 수정
                 lbs++;
             }
 
-            if (list[4] == true) {//스파
+            if (list[4] == true) {//스파        // 12:20 수정
                 ls++;
             }
         }

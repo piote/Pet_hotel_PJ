@@ -1,6 +1,8 @@
 
 window.onload = function () {
-
+	
+	addRow();
+	
     $("#checkin2").on("click", function () {
         $("#start_dayBox").text("0000. 00. 00.");
         $("#end_dayBox").text("0000. 00. 00.");
@@ -171,7 +173,7 @@ function calendarMaker(target, date) {
 
 
                     }
-
+					
                     $("#end_dayBox").text(end_day.toLocaleDateString());
                     $("#checkoutDate").val(end_day.toLocaleDateString());
 
