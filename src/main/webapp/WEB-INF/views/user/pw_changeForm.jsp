@@ -43,7 +43,7 @@
 		            </div>
 		            <div class="pw_btn">
 		                <!-- <a href="modMember.do"><p>정보 수정하기</p></a> -->
-		                <input type="submit" id= "" value= "정보 수정하기">
+		                <input type="submit" id= "box" value= "정보 수정하기">
 		            </div>
 		        </section>
 		    </div>

@@ -16,18 +16,25 @@ import com.myboot.user.vo.UserVO;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
+	
+	
+	public List listUsers() throws Exception {
+		List usersList = null;
+		usersList = userDAO.selectAllUserList();
+		return usersList;
+	}
 //	로그인
 	public UserVO login(UserVO userVO) throws Exception{
 		System.out.println(userDAO.loginById(userVO));
 		return userDAO.loginById(userVO);
 	}
+
 	public List listUser() throws Exception {
 		List userList = null;
 		userList = userDAO.selectAllUserList();
 		return userList;
 	}
-	
-		
+
   // 회원 정보 수정
 	@Override
 	public int modMember(UserVO userVO) throws DataAccessException {
@@ -55,6 +62,7 @@ public class UserServiceImpl implements UserService {
 //	회원가입 회원정보 추가
 	
 	public int addUser(UserVO user) throws Exception {
-		return userDAO.insertUser(user);
+		return userDAO.insertNewUser(user);
 	}
+
 }
