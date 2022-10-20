@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myboot.reservation.dao.ReservationDAO;
+import com.myboot.reservation.vo.PetserviceVO;
 import com.myboot.reservation.vo.ReservationVO;
 
 
@@ -31,8 +32,8 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	
 	@Override
-	public int addPetService(Map petServiceMap) throws Exception {
-		return reservationDAO.insertPetserviceMap(petServiceMap);
+	public int addPetService(List<PetserviceVO> petServiceList) throws Exception {
+		return reservationDAO.insertPetserviceList(petServiceList);
 	}
 	
 	@Override

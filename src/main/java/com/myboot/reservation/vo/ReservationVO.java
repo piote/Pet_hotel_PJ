@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.myboot.mypage.vo.MyPageVO;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 import lombok.Data;

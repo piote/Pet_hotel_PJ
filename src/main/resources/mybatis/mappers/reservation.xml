@@ -83,10 +83,10 @@
 	</insert>
 	-->
 	<!--  멀티 이미지 참고해서 적용해야함 foreach를 이용한 다중 insert 문-->
-	<insert id="insertPetserviceMap"  parameterType="java.util.Map">
-	    <foreach item="item"  collection="list"   open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" >
+	<insert id="insertPetserviceList"  parameterType="List">
+	    <foreach item="item"  collection="list"   open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" index="index">
 	      INTO TB_PETSERVICE(PET_NUM, RESERVATION_NUM, USER_ID, PET_NAME, PET_GENDER, ROOM_GRADE, SERVICE_BEAUTY, SERVICE_SPA)
-	      VALUES ((SELECT MAX(PET_NUM) FROM TB_PETSERVICE)+1, #{item.res_num},#{item.id},#{item.pet_name}, #{item.pet_gender}, #{item.room_grade}, #{item.service_beauty}, #{item.service_spa})
+	      VALUES ((SELECT MAX(PET_NUM) FROM TB_PETSERVICE)+#{index}+1, #{item.res_num},#{item.id},#{item.pet_name}, #{item.pet_gender}, #{item.room_grade}, #{item.service_beauty}, #{item.service_spa})
 	    </foreach>
   	</insert>
    
