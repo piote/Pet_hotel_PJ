@@ -161,7 +161,7 @@ public class UserControllerImpl implements UserController{
 				return mav;
 	}
 	
-	// 한번 더 비밀번호 입력 폼
+	// 한번 더 비밀번호 입력 
 	@RequestMapping(value = "/pw_changeForm.do", method =  RequestMethod.GET)
 	private ModelAndView Form(@RequestParam(value= "result", required=false) String result,
 			                  @RequestParam(value= "action", required=false) String action,
@@ -197,7 +197,7 @@ public class UserControllerImpl implements UserController{
 			if (userPw.equals(password)) {
 				System.out.println("성공");
 				
-				mav.setViewName("redirect:/modMember.do");	
+				mav.setViewName("redirect:/modMemberForm.do");	
 			
 				//String viewName=(String)request.getAttribute("viewName");
 				//mav = new ModelAndView(viewName);
@@ -212,18 +212,42 @@ public class UserControllerImpl implements UserController{
 	}
 	
 	// 회원 정보 수정
-		@Override
-		@RequestMapping(value="/modMember.do" ,method = RequestMethod.GET)
-		public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception {
-			HttpSession session=request.getSession();
-			session=request.getSession();
-			
-			String viewName=(String)request.getAttribute("viewName");
-			ModelAndView mav = new ModelAndView(viewName);
-			return mav;
-		}
-		
+	@Override
+	@RequestMapping(value="/modMember.do" ,method = RequestMethod.POST)
+	public ModelAndView modMember(@ModelAttribute("user") UserVO user, 
+		HttpServletRequest request, HttpServletResponse response) throws Exception{
+		int result = 0;
+		result = userService.modMember(user);
+		ModelAndView mav = new ModelAndView("redirect:/mypage/myPage.do");
+		return mav;
+	}
 	
+//	@RequestMapping(value = "/modMemberForm.do", method =  RequestMethod.GET)
+//	public ModelAndView modMemberForm(@RequestParam("id") String id, 
+//		HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		UserVO user = userService.findUser(id);
+//		request.setAttribute("user",user);
+//		String viewName = (String)request.getAttribute("viewName");
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName(viewName);
+//		return mav;
+//	}
+	
+	@RequestMapping(value = "/modMemberForm.do", method =  RequestMethod.GET)
+	private ModelAndView modMemberForm(@RequestParam(value= "result", required=false) String result,
+			                  @RequestParam(value= "action", required=false) String action,
+			                  HttpServletRequest request, 
+			                  HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action); 
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",result);
+		mav.setViewName(viewName);
+		return mav;
+	}
+
 	// 탈퇴하기
 	@Override
 	@RequestMapping(value="removeMember.do" ,method = RequestMethod.GET)
