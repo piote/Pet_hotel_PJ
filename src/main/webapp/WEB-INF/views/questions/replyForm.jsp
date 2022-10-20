@@ -105,7 +105,7 @@
 		    color: #444;
         }
         .imageFile_wrap label:hover{
-        	background-color: #eee;
+        	background-color: #cdedff;
         }
         .upload-name{
 	        display: inline-block;
@@ -115,6 +115,7 @@
 		    border: none;
 		    width: 78%;
 		    color: #999999;
+		    background: #ebfbfffe;
         }
         .upload-name:focus {
           background-color: #fff;
@@ -156,7 +157,7 @@
 
         .bt_wrap input:hover{
             border-color: #e59f5a;
-            background-color: #e59f5a;
+            background-color: #0775db;
             color: #fff;
         }
 
@@ -165,7 +166,7 @@
 <script type="text/javascript">
 
  function backToList(obj){
- obj.action="${contextPath}/board/listArticles.do";
+ obj.action="${contextPath}/questions/questionsList/.do";
  obj.submit();
  }
  
