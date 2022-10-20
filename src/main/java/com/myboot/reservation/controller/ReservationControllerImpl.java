@@ -148,8 +148,7 @@ public  class ReservationControllerImpl implements ReservationController{
 		resService.addReservation(reserVO);
 		resService.addPetService(petServiceList);
 		
-		String viewName = (String)request.getAttribute("redirect:/reservationComplete.do");
-		ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView("redirect:/reservationComplete.do");
 		
 		return mav;
 	}
