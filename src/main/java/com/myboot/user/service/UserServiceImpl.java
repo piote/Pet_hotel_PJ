@@ -28,7 +28,13 @@ public class UserServiceImpl implements UserService {
 		System.out.println(userDAO.loginById(userVO));
 		return userDAO.loginById(userVO);
 	}
-	
+
+	public List listUser() throws Exception {
+		List userList = null;
+		userList = userDAO.selectAllUserList();
+		return userList;
+	}
+
   // 회원 정보 수정
 	@Override
 	public int modMember(UserVO userVO) throws DataAccessException {
