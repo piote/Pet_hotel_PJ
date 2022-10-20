@@ -26,14 +26,7 @@ public class UserServiceImpl implements UserService {
 		userList = userDAO.selectAllUserList();
 		return userList;
 	}
-	
-  // 비밀번호 한번 더 입력
-	@Override
-	public UserVO password(UserVO  userVO) throws DataAccessException{
-		return userDAO.password(userVO);
-	}
-		
-		
+			
   // 회원 정보 수정
 	@Override
 	public int modMember(UserVO userVO) throws DataAccessException {
