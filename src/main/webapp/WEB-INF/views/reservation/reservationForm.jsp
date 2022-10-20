@@ -322,14 +322,14 @@
                     <li id="checkinBox" class="reservationBox">
                         <div id="checkin" class="reservationtext reservationtext1">| CHECK IN |</div>
                         <div id="checkin2" class="reservationtext reservationtext2">
-                        	<span id="start_dayBox">0000.00.00.</span>
+                        	<span id="start_dayBox">0000. 00. 00.</span>
                         	<input type="hidden" name="checkinDate" id="checkinDate">
                      	</div>
                     </li>
                     <li id="checkoutBox" class="reservationBox">
                         <div id="mypet" class="reservationtext reservationtext1">| CHECK OUT |</div>
                         <div id="checkout2" class="reservationtext reservationtext2">
-                        	<span id="end_dayBox">0000.00.00.</span>
+                        	<span id="end_dayBox">0000. 00. 00.</span>
                             <input type="hidden" name="checkoutDate" id="checkoutDate">
                         </div>
                     </li>
@@ -351,32 +351,7 @@
                     <td><b>이용여부</b></td>
                 </tr>
                 <div id="calendarForm"></div>
-                <c:forEach var="member" items="${membersList}">
-                    <tr align="center" height="30px">
-                        <td>${Pet.Name}</td>
-                        <td>${Pet.Sex}</td>
-                        <td>
-                            <select name="petroom" id="Pet_Room" onchange="handleOnChange(this)">
-                                <option value="1">Deluxe(소형견)</option>
-                                <option value="2">Superior(중형견)</option>
-                                <option value="3">Suite(대형견)</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select name="beauty" id="petbeauty" onchange="handleOnChange(this)">
-                                <option>이용안함</option>
-                                <option value="1">Clipping</option>
-                                <option value="2">Scissoring</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input id="spa" type="checkbox">
-                        </td>
-                        <td>
-                            <input type="button" class="petUsed" value="X">
-                        </td>
-                    </tr>
-                </c:forEach>
+                
             </table>
             <div id="btn_pet1">
                 <input type='button' value='추가하기' id="btn_pet1_1" onclick='addRow()' />
