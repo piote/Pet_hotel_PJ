@@ -11,7 +11,7 @@ import com.myboot.review.vo.ReviewVO;
 
 public interface ReviewDAO {
 
-	public List<ReviewVO> selectAllReviewList(Map pagingMap);
+	public List<ReviewVO> selectAllReviewList(Map pagingMap)throws DataAccessException;
 
 	public int selectTotReview();
 	

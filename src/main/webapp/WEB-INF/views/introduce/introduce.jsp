@@ -282,13 +282,29 @@
             }
             /* walk 산책 끝 */
             .header_box_back {
-	   bottom: 200px;
+	            bottom: 200px;
                 margin: 0;
                 position: relative;
                 width: 100%;
                 height: 160px;
                 background-color: white;
             }
+            /* 카카오맵 API 시작 */
+            #map {
+                position: relative;
+                left: 500px;
+                top: -200px; 
+            }
+            .map_wrap {
+                position: relative;
+                left: 900px;
+                top: -240px; 
+            }
+            .map_wrap .bar {
+                position: relative;
+                left: 7px;
+            }
+            /* 카카오맵 API 끝 */
         </style>
     </head>
     <body>
@@ -400,6 +416,35 @@
             </div>
         </section>
         <!-- walk 산책 끝 -->
+        <!-- 카카오 맵 API 시작 -->
+        <div class="map_wrap">
+            <div class="bar"></div>
+            <p class="sec_title">찾아오시는 길</p>
+        </div>
+        <div id="map" style="width:1000px;height:400px;"></div>
+        <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cd7c1513375b2b6ac51ccdf37b0de2ea"></script>
+        <script>
+            var mapContainer = document.getElementById('map'), 
+                mapOption = {
+                    center: new kakao.maps.LatLng(35.1567474688023,129.059888286246),
+                    level: 3, 
+                    mapTypeId : kakao.maps.MapTypeId.ROADMAP 
+                }; 
+            var map = new kakao.maps.Map(mapContainer, mapOption); 
+            var mapTypeControl = new kakao.maps.MapTypeControl();
+            map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);	
+            var zoomControl = new kakao.maps.ZoomControl();
+            map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+            var marker = new kakao.maps.Marker({
+                position: new kakao.maps.LatLng(35.1567474688023,129.059888286246), 
+                map: map 
+            });
+            var infowindow = new kakao.maps.InfoWindow({
+                content : '<div style="padding:5px; font-size:25px; line-height:20px;">　　　　　Anitel</div><div style="padding:5px; font-size:17px; line-height:12px;">부산 부산진구 서전로10번길 28 오기빌딩</div><div style="padding:5px; font-size:15px; line-height:12px;">　　　　(우) 47291(지번) 부전동 156-28</div>'
+            });
+            infowindow.open(map, marker);
+        </script>
+        <!-- 카카오 맵 API 끝 -->
         <!-- side 버튼 시작 -->
         <div class="side_wrap">
             <a class="side_btn" href="#">

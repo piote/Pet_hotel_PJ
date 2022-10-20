@@ -52,13 +52,24 @@ public class QuestionsServiceImpl implements QuestionsService {
 	}
 	
 	
-//	@Override
-//	public void modArticle(Map articleMap) throws Exception {
-//		questionsDAO.updateArticle(articleMap);
-//	}
-//	
-//	@Override
-//	public void removeArticle(int articleNO) throws Exception {
-//		questionsDAO.deleteArticle(articleNO);
-//	}
+//  게시글 추가
+	@Override
+	public int addNewQuestions(Map questionsMap) throws Exception{
+		int q_Num = questionsDAO.selectNewQ_NUM();
+		questionsMap.put("q_Num", q_Num);
+		questionsDAO.insertNewQuestions(questionsMap);
+		return q_Num;
+	}
+	
+	//게시글 수정하기
+	@Override
+	public void modQuestionsArticle(Map articleMap) throws Exception {
+		questionsDAO.updateQusetionsArticle(articleMap);
+	}
+	
+	//게시글 삭제하기
+	@Override
+	public void removeQuestionsArticle(int q_num) throws Exception {
+		questionsDAO.deleteQusetionsArticle(q_num);
+	}
 }

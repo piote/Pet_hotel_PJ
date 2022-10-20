@@ -32,7 +32,7 @@
                   </td>
                   <td></td>
                   <td>
-                     <a href="${contextPath}/pw_change.do">내정보수정</a>
+                     <a href="${contextPath}/pw_changeForm.do">내정보수정</a>
                      <a href="${contextPath}/membership.do">멤버쉽</a>
                   </td>
                   <td>
@@ -63,7 +63,7 @@
 		               </tr>
 					</c:when>
 					<c:when test="${not empty myReserveList }">
-						<c:forEach var="reserves" items="${myReserveList }" begin="0" end="2" step="1" varStatus="reservation_st">
+						<c:forEach var="reserves" items="${myReserveList }" begin="0" end="2" step="1" varStatus="res_st">
 							<tr class="reserve-list">
 								<td>${reserves.res_st }</td>
 								<td>${reserves.user_name }</td>

@@ -7,7 +7,6 @@
 <%-- 
 <c:set var="article"  value="${articleMap.article}"  />
 <c:set var="imageFileList"  value="${articleMap.imageFileList}"  />
-
  --%>
 <%
   request.setCharacterEncoding("UTF-8");
@@ -85,10 +84,11 @@
 	    }
 	#imagebox{
         padding: 15px;
-        height:250px;
+        height:400px;
 	}
 	#preview{
 		margin-top: 20px;
+		height: 350px;
 	}
     #i_content{
         width: 800px;
@@ -108,11 +108,16 @@
         height: auto;
         transition: background-color 0.2s;
         resize: none;
+        -ms-overflow-style: none; /* IE and Edge */
+    	scrollbar-width: none; /* Firefox */
     }
     .textbox:focus{
         background-color: #eee;
         outline: none;
    	}
+   	.textbox::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera*/
+	}
    	.qDate, .userid{
    		padding-left: 10px
    	}
@@ -180,14 +185,17 @@
    </style>
    <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
    <script type="text/javascript" >
+   
+   //목록보기
     function backToList(obj){
-	    obj.action="${contextPath }/questionsList.do";
+	    obj.action="${contextPath }/questions/questionsList.do";
 	    obj.submit();
     }
+    
+    //글 수정하기 클릭 시, 숨겨진 버튼 보이기
 	 function fn_enable(obj){
 		 document.getElementById("i_title").disabled=false;
 		 document.getElementById("i_content").disabled=false;
-		 //document.getElementById("i_imageFileName").disabled=false;
 		 document.getElementById("tr_btn_modify").style.display="block";
 		 document.getElementById("tr_file_upload").style.display="block";
 		 document.getElementById("tr_btn").style.display="none";
@@ -196,19 +204,21 @@
          
 	 }
 	 
+	 //글 수정
 	 function fn_modify_article(obj){
-		 obj.action="${contextPath}/board/modArticle.do";
+		 obj.action="${contextPath}/questions/modQuestionsArticle.do";
 		 obj.submit();
 	 }
 	 
-	 function fn_remove_article(url,articleNO){
+	 //글 삭제
+	 function fn_remove_article(url,q_num){
 		 var form = document.createElement("form");
 		 form.setAttribute("method", "post");
 		 form.setAttribute("action", url);
 	     var articleNOInput = document.createElement("input");
 	     articleNOInput.setAttribute("type","hidden");
-	     articleNOInput.setAttribute("name","articleNO");
-	     articleNOInput.setAttribute("value", articleNO);
+	     articleNOInput.setAttribute("name","q_num");
+	     articleNOInput.setAttribute("value", q_num);
 		 
 	     form.appendChild(articleNOInput);
 	     document.body.appendChild(form);
@@ -216,6 +226,7 @@
 	 
 	 }
 	 
+	 //답글쓰기
 	 function fn_reply_form(url, parentNO){
 		 var form = document.createElement("form");
 		 form.setAttribute("method", "post");
@@ -230,6 +241,7 @@
 		 form.submit();
 	 }
 	 
+	//이미지파일 추가
 	 function readURL(input) {
 	     if (input.files && input.files[0]) {
 	    	 var fileName = $("#i_imageFileName").val();
@@ -241,6 +253,12 @@
 	         reader.readAsDataURL(input.files[0]);
 	     }
 	 }  
+	 
+	//textarea 글 작성시 자동 크기조정
+		function resize(obj) {
+         obj.style.height = '1px';
+         obj.style.height = (12 + obj.scrollHeight) + 'px';
+		}
  </script>
     </head>
     <body>
@@ -258,7 +276,7 @@
                 <ul class="view_table"  >
                     <li >
                         <p>제목</p> 
-                        <input type=text value="${article.q_title }"  name="title"  id="i_title" class="textbox" spellcheck="false" disabled />
+                        <input type=text value="${article.q_title }"  name="q_title"  id="i_title" class="textbox" spellcheck="false" disabled maxlength='50'/>
                     </li>
                     <li>
                         <p>아이디</p> 
@@ -273,32 +291,36 @@
                         <c:when test="${not empty article.imageFileName && article.imageFileName!='null' }">
                             <li id="imagebox">
                                 <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-                                <img src="${contextPath}/download.do?articleNO=${article.q_num}&imageFileName=${article.imageFileName}" id="preview" onerror="this.src='${contextPath}/resources/img/no_img.png'" /><br>
-                                <!--  <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />--> 
+                                <img src="${contextPath}/resources/questions/questions_image/${article.q_num}/${article.imageFileName}" id="preview" onerror="this.src='${contextPath}/resources/img/no_img.png'" /><br>
                             </li>
                         </c:when>
                         <c:otherwise>
-                            <li id="tr_file_upload" > 
+                            
+                        </c:otherwise>
+                    </c:choose>
+                    <li id="tr_file_upload" > 
                             	<c:if test="${empty article.imageFileName || article.imageFileName=='null' }">
                             		<img id="preview" src="#" height=350 onerror="this.src='${contextPath}/resources/img/no_img.png'"/>
                             	</c:if>
-                                <%-- <input type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-                                <img class="imagebox"  />
-                                <input  type="file"  name="imageFileName " id="i_imageFileName"  disabled onchange="readURL(this);"   /> --%>
                                 <input type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
+                                <input type= "hidden"   name="q_num" value="${article.q_num }" />
                                 <label for="i_imageFileName">이미지 파일</label>
                 				<input class="upload-name" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL(this);"  disabled >
                 				<input type="file" id="i_imageFileName" name="imageFileName"  onchange="readURL(this);"/>
-                				
                             </li>
-                        </c:otherwise>
-                    </c:choose>
                     <li class="content_box">
-                        <textarea  class="textbox"  name="content"  id="i_content" spellcheck="false" disabled />${article.q_content }</textarea> 
+                        <textarea  class="textbox"  name="q_content"  id="i_content" spellcheck="false" disabled onkeydown="resize(this)" onkeyup="resize(this)" maxlength='1000'>${article.q_content }</textarea> 
                     </li>  
                 </ul>
-
-
+					<script>
+					    var txtArea = $(".textbox");
+					    if (txtArea) {
+					        txtArea.each(function(){
+					            $(this).height(this.scrollHeight);
+					        });
+					    }
+					</script>
+				
                 <div id="tr_btn_modify" >
                     <input type=button value="수정반영하기"   onClick="fn_modify_article(frmArticle)"  >
                     <input type=button value="취소"  onClick="backToList(frmArticle)">	    
@@ -309,7 +331,7 @@
                     <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.q_num})">
                     <c:if test="${user.id == article.user_id }">
                         <input type=button value="수정하기" onClick="fn_enable(this.form)">
-                        <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.q_num})">
+                        <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/questions/removeArticle.do', ${article.q_num})">
                     </c:if>	    
                 </div>
             </form>

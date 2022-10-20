@@ -14,30 +14,26 @@
     <result property="date" column="review_date" />
     <result property="image" column="review_image" />
     <result property="rec" column="review_rec" />
-    <result property="imageFileName" column="imageFileName" />
+    
+    <result property="res_num" column="RESERVATION_NUM" />
     <result property="id" column="user_id" />
     
   </resultMap> 
-  
-<!--    <resultMap id="imgResult" type="imageVO"> -->
-<!-- 	  <result property="imageFileNO" column="imageFileNO" /> -->
-<!-- 	  <result property="reviewNO" column="reviewNO" /> -->
-<!-- 	  <result property="imageFileName" column="imageFileName" /> -->
-<!--  </resultMap> -->
-  
 	  
-	  <!-- 이미지   
+	 
 	  <resultMap id="imgResult" type="imageVO">
 		  <result property="imageFileNO" column="imageFileNO" />
 		  <result property="articleNO" column="articleNO" />
 		  <result property="imageFileName" column="imageFileName" />
 	 </resultMap>
-	 -->
+	
+	
+	
 
 <!-- 
 	<select id="selectAllReviewList" resultMap="reviewResult" >
     <![CDATA[
-      SELECT level as LVL, review_num, review_title, review_con, review_star, review_date, review_image, review_rec
+      SELECT level as LVL, review_num, review_title, review_con, review_star, review_date, review_image, review_rec, RESERVATION_NUM
       from tb_review
       START WITH  review_parentNO=0
       CONNECT BY PRIOR review_num=review_parentNO 
@@ -47,25 +43,10 @@
 </select>
   -->
   
-  <!--다중 이미지 추가 SQL문 --> 
-  
-  <insert id="insertNewReview"  parameterType="java.util.Map">
-    <![CDATA[
-      insert into tb_review(review_num, user_id, review_title, review_Date, review_rec,review_star,RESERVATION_NUM)
-      values(#{reviewNO}, #{id}, #{title}, sysdate, #{rec},#{star}, #{res_num})
-    ]]>      
-  </insert>
-  
-  <!-- 
-  	insert into tb_review( review_num, review_title, user_id, review_Date, review_rec, review_star , RESERVATION_NUM)
-    values(8, '안녕하세요 제목길이 다음글입니다 ', 'aaa',sysdate, '0' ,'5' , '1');
-   -->
-  
-  
   
   <select id="selectNewReviewNO" resultType="int"  >
 		<![CDATA[
-			SELECT  nvl(max(review_num), 0) + 1 from tb_review		
+			SELECT  nvl(max(REVIEW_NUM), 0) + 1 from tb_review		
 		]]>
 	</select>
 	
@@ -98,20 +79,31 @@
   </delete>
 
 
-
+ <!--다중 이미지 추가 SQL문 -->   
+   
+    <insert id="insertNewReview"  parameterType="java.util.Map">
+    <![CDATA[
+      insert into tb_review(review_num, user_id, review_title, review_star,review_rec, review_date ,RESERVATION_NUM)
+      values(#{reviewNO}, #{id}, #{title}, #{star}, #{rec}, sysdate, #{res_num})
+    ]]>      
+  </insert>
+  
+ <!--  SELECT tb_image.img_name, tb_image.img_num, tb_image.img_regdata, tb_image.review_num from tb_image join 
+		tb_review on (tb_image.review_num = tb_review.review_num) -->
   
 <select id = "selectAllReviewList" parameterType="java.util.Map" resultMap="reviewResult">  
 <![CDATA[
-  SELECT * FROM ( 
-		SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image
-			from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image
-					from TB_REVIEW
-                    START WITH  parentNO is null
-					CONNECT BY PRIOR review_num = parentNO
-					ORDER SIBLINGS BY review_num DESC)
-					)                         
-				    	where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
-					]]>
+	 
+	  SELECT * FROM ( 
+			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image
+				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image
+						from TB_REVIEW
+	                    START WITH  parentNO is null
+						CONNECT BY PRIOR review_num = parentNO
+						ORDER SIBLINGS BY review_num DESC)
+						)                         
+					    	where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
+						]]>
   </select>
   
   <select id = "selectTotReview" resultType="int">
@@ -121,6 +113,22 @@
   </select>
   
   
+  
+    <select id="selectNewImageFileNO" resultType="int"  >
+    <![CDATA[
+      SELECT  nvl(max(img_num),0) from tb_image		
+    ]]>
+   </select>
+  
+    <insert id="insertNewImage"  parameterType="java.util.Map">
+    <foreach item="item"  collection="list"   open="INSERT ALL" 
+                  separator=" " close="SELECT * FROM DUAL" >
+      INTO tb_image(img_num, img_name, review_num, img_regdata)
+      VALUES (#{item.imageFileNO}, #{item.imageFileName}, #{item.reviewNO}, sysdate)
+    </foreach>
+  </insert>
+
+
   
   
 </mapper>
