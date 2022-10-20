@@ -31,7 +31,9 @@ public interface UserController {
 				HttpServletRequest request, HttpServletResponse response)  throws Exception;
         
 	// 회원 정보 수정
-	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	public ModelAndView modMember(@ModelAttribute("user") UserVO user, 
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	public ModelAndView modMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	
 	// 탈퇴하기
 	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;

@@ -18,7 +18,9 @@ public interface UserDAO {
 //	 public UserVO pwUser(String pw) throws DataAccessException;
 	 
 	 // 회원 정보 수정
-	 public int updateMember(UserVO userVO) throws DataAccessException;
+	 public int updateUser(UserVO userVO) throws DataAccessException;
+	 
+	 public UserVO selectUserById(String id) throws DataAccessException;
 	 
 	 // 회원 탈퇴
 	 public int deleteMember(String id) throws DataAccessException;
