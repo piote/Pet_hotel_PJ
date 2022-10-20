@@ -88,7 +88,7 @@
         
         <!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
        
-        <form  method="post" action="${contextPath}/addUser.do}" name="userInfo" >
+        <form  method="post" action="${contextPath}/addUser.do" name="userInfo" >
             <table>
                 <tr>
 					<td id="title">아이디</td>
@@ -103,7 +103,7 @@
                 <tr>
                     <td id="title">비밀번호</td>
                     <td>
-                        <input type="password" name="password" maxlength="50">
+                        <input type="password" name="pw" maxlength="50">
                     </td>
                 </tr>
                 
@@ -148,7 +148,7 @@
                 <tr>
                     <td id="title">생일</td>
                     <td>
-                        <input type="text" name="birthyy" maxlength="4" placeholder="년(4자)" size="6" >
+                        <!-- <input type="text" name="birthyy" maxlength="4" placeholder="년(4자)" size="6" >
                         <select name="birthmm">
                             <option value="">월</option>
                             <option value="01" >1</option>
@@ -164,7 +164,10 @@
                             <option value="11" >11</option>
                             <option value="12" >12</option>
                         </select>
-                        <input type="text" name="birthdd" maxlength="2" placeholder="일" size="4" >
+                        <input type="text" name="birthdd" maxlength="2" placeholder="일" size="4" > -->
+                        
+                       <input type="date" name="birth" >
+                        
                     </td>
                 </tr>
             </table>

@@ -121,13 +121,21 @@ public class UserControllerImpl implements UserController{
 	
 ////	회원가입 회원추가
 	@Override
-	public ModelAndView addUser(UserVO userVO, HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping(value = "/addUser.do", method =  RequestMethod.POST)
+	public ModelAndView addUser(@ModelAttribute("user") UserVO user,
+			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+			
+		request.setCharacterEncoding("utf-8");
+		int result = 0;
+		result = userService.addUser(user);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/main.do");
+		return mav;
 		
 	}
-//  회원가입 회워
+
 //	회원가입 id 중복 확인 기능
 	 @ResponseBody // 값 변환을 위해 꼭 필요함
 		@GetMapping("idCheck") // 아이디 중복확인을 위한 값으로 따로 매핑

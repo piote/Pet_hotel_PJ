@@ -17,7 +17,7 @@
       <result property="joinDate" column="JOINDATE" />
       <result property="grade" column="USER_GRADE" />
    </resultMap> 
-
+<!-- 로그인 기능 -->
 	<select id="loginById" resultType="userVO" parameterType="userVO" >
 	<![CDATA[
 		select USER_ID as id, USER_PW as pw, USER_NAME as name, USER_EMAIL as email,
@@ -33,7 +33,7 @@
         select * from TB_USER order by joinDate desc			
       ]]>
    </select>
-  
+  <!-- 회원가입 아이디 중복검사 -->
    <select id="overlappedID" parameterType="UserVO" resultType="int">
    <![CDATA[
 		select count(USER_ID) From TB_USER where USER_ID=#{id}
@@ -71,8 +71,9 @@
 <!--  회원가입 회원 저장 -->
    	<insert id="insertNewUser" parameterType="userVO">
    		<![CDATA[
-    		insert into TB_USER(id,pwd, name,email) 
-    		values((#{id},#{pw},#{Name},#{email},#{tel},#{tel_sub},#{message},#{birth)) 
+    		insert into TB_USER(USER_ID, USER_PW, USER_NAME, USER_EMAIL,
+	      USER_TEL, USER_TEL_SUB, USER_MESSAGE,USER_BIRTH) 
+    		values(#{id},#{pw},#{name},#{email},#{tel},#{tel_sub},#{message},#{birth}) 
     	]]> 
    	</insert>
    

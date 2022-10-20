@@ -21,7 +21,9 @@ public interface UserController {
 //	로그아웃 기능 구현
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	회원가입 기능 구현
-	public ModelAndView addUser(@ModelAttribute("info") UserVO userVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView addUser(@ModelAttribute("user") UserVO user,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception;
 	
    //	회원가입 id 중복확인 기능     
 //	public ResponseEntity   overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
