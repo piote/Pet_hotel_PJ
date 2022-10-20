@@ -28,7 +28,8 @@
 	</script>
 	</head>
 	<body>
-		<form method="post" action="${contextPath}/mypage/myPage.do?id=${userInfo.id}">
+		<form method="post" action="${contextPath}/modMember.do?id=${user.id}">
+		<%-- <form method="post" action="${contextPath}/mypage/myPage.do?id=${userInfo.id}"> --%>
 		   <div id="wrap">
 		   	<section class="container">
 		      <h3>회원 정보 수정</h3>

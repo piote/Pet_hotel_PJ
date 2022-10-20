@@ -158,8 +158,7 @@ public class QuestionsControllerImpl implements QuestionsController{
 		try {
 			int articleNO = questionsService.addNewQuestions(articleMap);
 			if(imageFileName!=null && imageFileName.length()!=0) {
-				File srcFile = new 
-				File(path+ "\\" + "temp"+ "\\" + imageFileName);
+				File srcFile = new File(path+ "\\" + "temp"+ "\\" + imageFileName);
 				File destDir = new File(path+"\\"+articleNO);
 				FileUtils.moveFileToDirectory(srcFile, destDir,true);
 			}
@@ -209,7 +208,7 @@ public class QuestionsControllerImpl implements QuestionsController{
 		return imageFileName;
 	}
 	
-	//삭제하기
+	//게시글 삭제하기
 	 @Override
 	  @RequestMapping(value="/questions/removeArticle.do" ,method = RequestMethod.POST)
 	  @ResponseBody
@@ -247,5 +246,61 @@ public class QuestionsControllerImpl implements QuestionsController{
 	   }
 	   return resEnt;
 	  }  
-	
+
+	  //한 개 이미지 수정 기능
+	  @RequestMapping(value="/questions/modQuestionsArticle.do" ,method = RequestMethod.POST)
+	  @ResponseBody
+	  public ResponseEntity modQuestionsArticle(MultipartHttpServletRequest multipartRequest,  
+	    HttpServletResponse response) throws Exception{
+	    multipartRequest.setCharacterEncoding("utf-8");
+	   Map<String,Object> articleMap = new HashMap<String, Object>();
+	   Enumeration enu=multipartRequest.getParameterNames();
+	   while(enu.hasMoreElements()){
+	      String name=(String)enu.nextElement();
+	      String value=multipartRequest.getParameter(name);
+	      articleMap.put(name,value);
+	   }
+	   
+	   String imageFileName= upload(multipartRequest);
+	   articleMap.put("imageFileName", imageFileName);
+	   
+	   String articleNO=(String)articleMap.get("q_num");
+	   String message;
+	   ResponseEntity resEnt=null;
+	   HttpHeaders responseHeaders = new HttpHeaders();
+	   responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	   
+	   //세션에 저장된 경로를 받아온다
+	   	HttpSession session = multipartRequest.getSession();
+		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
+		System.out.println("in "+path);
+	   
+	    try {
+	    	questionsService.modQuestionsArticle(articleMap);
+	       if(imageFileName!=null && imageFileName.length()!=0) {
+	         File srcFile =  new File(path+ "\\" + "temp"+ "\\" + imageFileName);
+	         File destDir = new File(path+"\\"+articleNO);
+	         FileUtils.moveFileToDirectory(srcFile, destDir, true);
+	         
+	         String originalFileName = (String)articleMap.get("originalFileName");
+	         File oldFile = new File(path+"\\"+articleNO+"\\"+originalFileName);
+	         oldFile.delete();
+	       }   
+	       message = "<script>";
+	      message += " alert('글을 수정했습니다.');";
+	      message += " location.href='"+multipartRequest.getContextPath()+"/questions/questionViewArticle.do?articleNO="+articleNO+"';";
+	      message +=" </script>";
+	       resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	    }catch(Exception e) {
+	      File srcFile = new File(path+ "\\" + "temp"+ "\\" + imageFileName);
+	      srcFile.delete();
+	      message = "<script>";
+	     message += " alert('오류가 발생했습니다.다시 수정해주세요');";
+	     message += " location.href='"+multipartRequest.getContextPath()+"/questions/questionViewArticle.do?articleNO="+articleNO+"';";
+	     message +=" </script>";
+	      resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	      e.printStackTrace();
+	    }
+	    return resEnt;
+	  }
 }

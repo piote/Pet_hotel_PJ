@@ -88,7 +88,7 @@
 <!--    	</insert> -->
 
  		<!-- 회원 정보 수정 -->
-     	<update id="updateUser" parameterType="userVO">
+ 	<update id="updateUser" parameterType="userVO">
    		<![CDATA[
    				update TB_USER
    				set pw=#{pw}, email=#{email}, tel=#{tel},
@@ -97,13 +97,24 @@
    				id=#{id}
    		]]>
    	  </update>
-   	
-<!--    	<delete id="deleteUser" parameterType="String"> -->
-<!--    		<![CDATA[ -->
-<!--    			delete from TB_USER -->
-<!--    			where -->
-<!--    			id=#{id} -->
-<!--    		]]> -->
-<!--    	</delete> -->
+   	  
+   	  <select id="selectUserById" resultType="userVO"  parameterType="String" >
+      <![CDATA[
+         select * from TB_USER
+         where
+         id=#{id}			
+      ]]>
+	 </select>	
+   	  
+   	  
+   	<!-- 회원 탈퇴 -->
+	<delete id="deleteUser" parameterType="String">
+   		<![CDATA[
+   			delete from TB_USER
+   			where
+   			id=#{id}
+   		]]>
+   	</delete>
+
 
 </mapper>

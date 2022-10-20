@@ -1,8 +1,10 @@
+
+
 //예약시 임시 펫 번호.
 var petTableNum = 0;
 //존재하는 테이블 갯수
 var totalTableNum = 0;
-
+    		
 var petmap = new Map();
 
 var servicemap = new Map();
@@ -34,9 +36,10 @@ function addRow() {
 
     Cell1.innerHTML = '<input name="petname" class="pet_status" id="Pet_Name' + petTableNum + '" type="textbox" style="text-align:center; width:80%;">';
     Cell2.innerHTML = '<select name="petsex" class="pet_status" id="Pet_Sex' + petTableNum + '" onchange="handleOnChange(this)"><option>male</option><option>female</option></select>';
-    Cell3.innerHTML = '<select name="petroom" class="pet_status" id="Pet_Room' + petTableNum + '" onchange="handleOnChange(this)"><option value="1">Deluxe(소형견)</option><option value="2">Superior(중형견)</option><option value="3">Suite(대형견)</option></select>';
-    Cell4.innerHTML = '<select name="beauty" class="pet_status" id="pet_Beauty' + petTableNum + '" onchange="handleOnChange(this)"><option>이용안함</option><option value="1">Clipping</option><option value="2">Scissoring</option></select>';
-    Cell5.innerHTML = '<input name="spa" class="pet_status" id="pet_Spa' + petTableNum + '" type="checkbox">';
+    Cell3.innerHTML = '<select name="petroom" class="pet_status" id="Pet_Room' + petTableNum + '" onchange="handleOnChange(this)"><option value="Deluxe">Deluxe(소형견)</option><option value="Superior">Superior(중형견)</option><option value="Sweet">Suite(대형견)</option></select>';
+    Cell4.innerHTML = '<select name="beauty" class="pet_status" id="pet_Beauty' + petTableNum + '" onchange="handleOnChange(this)"><option value="N">이용안함</option><option value="Clipping">Clipping</option><option value="Scissoring">Scissoring</option></select>';
+    Cell5.innerHTML = '<input name="spa" class="pet_status" id="pet_Spa' + petTableNum + '" type="checkbox" value="Y">';
+    Cell5.innerHTML += '<input type="hidden" name="spa"  id="pet_Spa' + petTableNum + '_hidden" value="N"/>'
     Cell6.innerHTML = '<input type="button" id="' + petTableNum + '" class="petUsed" value="X" >';
 
     //테이블 이벤트 생성 이름, 성별 방 미용 스파 삭제 이벤트
@@ -50,6 +53,7 @@ function addRow() {
         petmap.delete('Pet_Room' + $(this).attr('id'));
         petmap.delete('pet_Beauty' + $(this).attr('id'));
         petmap.delete('pet_Spa' + $(this).attr('id'));
+        
         console.log('service' + $(this).attr('id'));
         servicemap.delete('service' + $(this).attr('id'));
         costTB(servicemap, false);//삭제한 결과 출력
@@ -119,7 +123,14 @@ function pet_table_event(petTableNum) {
     $('#pet_Spa' + petTableNum).change(this, function () {
 
         petmap.set($(this).attr('id'), $(this).prop("checked"));
-
+        
+        if($(this).prop("checked")){
+			$("#"+$(this).attr('id')+'_hidden').attr("disabled", true);
+		}else{
+			$("#"+$(this).attr('id')+'_hidden').attr("disabled", false);
+		}
+		
+		//결과창
         if (tablecheck(this)) {
             console.log(costresult(this));
             costTB(costresult(this),true);
@@ -137,7 +148,7 @@ function tablecheck(petTableElement) {
         petmap.set('Pet_Sex' + tbnum, 'male');
     }
     if (petmap.get('Pet_Room' + tbnum) == null) {
-        petmap.set('Pet_Room' + tbnum, '1');
+        petmap.set('Pet_Room' + tbnum, 'Deluxe');    // 12:20 수정
     }
 
     if (petmap.get('Pet_Name' + tbnum) != null && petmap.get('Pet_Sex' + tbnum) != null) {
@@ -184,46 +195,46 @@ function costTB(petserviceMap, datecheck) {
     for (let petlist of petserviceMap.values()) {
         var list = petlist;
         //2index는 room
-        if (list[2] == '1') {//소형일경우
+        if (list[2] == 'Deluxe') {//소형일경우
             sr++;
             if (list[3] == null) {//미용
 
-            } else if (list[3] == '1') {
+            } else if (list[3] == 'Clipping') {     // 12:20 수정
                 sbc++;
-            } else if (list[3] == '2') {
+            } else if (list[3] == 'Scissoring') {     // 12:20 수정
                 sbs++;
             }
 
-            if (list[4] == true) {//스파
+            if (list[4] == true) {//스파       // 12:20 수정
                 ss++;
             }
 
-        } else if (list[2] == '2') {//중형
+        } else if (list[2] == 'Superior') {//중형     // 12:20 수정
             mr++;
 
-            if (list[3] == null) {//미용
-
-            } else if (list[3] == '1') {
+            if (list[3] == null) {//미용       // 12:20 수정
+ 
+            } else if (list[3] == 'Clipping') {      // 12:20 수정
                 mbc++;
-            } else if (list[3] == '2') {
+            } else if (list[3] == 'Scissoring') {      // 12:20 수정
                 mbs++;
             }
 
-            if (list[4] == true) {//스파
+            if (list[4] == true) {//스파       // 12:20 수정
                 ms++;
             }
-        } else if (list[2] == '3') {//대형
+        } else if (list[2] == 'Sweet') {//대형     // 12:20 수정
             lr++;
 
             if (list[3] == null) {//미용
 
-            } else if (list[3] == '1') {
+            } else if (list[3] == 'Clipping') {      // 12:20 수정
                 lbc++;
-            } else if (list[3] == '2') {
+            } else if (list[3] == 'Scissoring') {      // 12:20 수정
                 lbs++;
             }
 
-            if (list[4] == true) {//스파
+            if (list[4] == true) {//스파        // 12:20 수정
                 ls++;
             }
         }
@@ -277,21 +288,26 @@ function costTB(petserviceMap, datecheck) {
         total += ss * 50000 + ms * 80000 + ls * 120000;
         $(".totalcost").text(total.toLocaleString()  + ' 원');
         console.log($("#membership").val());
-        console.log($("#membership").val()=='Silver');
+
+        
         if($("#membership").val()=='Gold' && total != 0){
 			var disTotal = total * (1 - 10 / 100);//10퍼 할인
 			$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
+			$("#totalcost").val(disTotal);
 		
         }else if($("#membership").val()=='Silver' && total != 0){
 			var disTotal = total * (1 - 5 / 100);//5퍼 할인
 			$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
+			$("#totalcost").val(disTotal);
 		
 		}else if($("#membership").val()=='Bronze' && total != 0){
 			var disTotal = total * (1 - 2 / 100);//2퍼 할인
 			$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
-		
+			$("#totalcost").val(disTotal);
 		}else{
+			//0원일시
 			$(".totalcost").text(total.toLocaleString()  + ' 원');
+			$("#totalcost").val(total);
 		}
 
 }
