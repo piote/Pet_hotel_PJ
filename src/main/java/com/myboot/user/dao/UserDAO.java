@@ -11,10 +11,10 @@ import com.myboot.user.vo.UserVO;
 @Mapper
 @Repository("userDAO")
 public interface UserDAO {
-	public List selectAllUserList() throws DataAccessException;
-	
-	//비밀 번호 폼
+	 public List selectAllUserList() throws DataAccessException;
+	 //비밀번호 폼
 	 public UserVO password(UserVO userVO) throws DataAccessException;
+
 //	 public UserVO pwUser(String pw) throws DataAccessException;
 	 
 	 // 회원 정보 수정
@@ -28,8 +28,8 @@ public interface UserDAO {
 //	로그인 기능 구현
 	public UserVO loginById(UserVO userVO) throws DataAccessException;
 //	회원가입 회원정보 추가
-	public int insertUser(UserVO userVO) throws DataAccessException;
-//	회원가입 id중복 확인ㄴ
+	public int insertNewUser(UserVO userVO) throws DataAccessException;
+//	회원가입 id중복 확인
 	public int overlappedID(UserVO userVO) throws Exception;
 	}
 
