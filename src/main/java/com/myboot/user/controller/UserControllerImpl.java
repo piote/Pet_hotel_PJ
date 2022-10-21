@@ -137,6 +137,19 @@ public class UserControllerImpl implements UserController{
 		
 		return mav;
 	}
+//	로그인 아이디 찾기
+	@RequestMapping(value = "/find_id.do", method = RequestMethod.POST)
+	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
+		md.addAttribute("id", userService.find_id(response, email));
+		return "/find_id";
+	}
+//	로그인 비밀번호 찾기
+	@RequestMapping(value = "/find_pw.do", method = RequestMethod.POST)
+	public String find_pw(HttpServletResponse response, @RequestParam("tel") String tel, Model md) throws Exception{
+		md.addAttribute("id", userService.find_pw(response, tel));
+		return "/find_pw";
+	}
+	
 ////	회원가입 회원추가
 	@Override
 	@RequestMapping(value = "/addUser.do", method = RequestMethod.POST)
@@ -205,12 +218,7 @@ public class UserControllerImpl implements UserController{
 				mav.setViewName(viewName);
 				return mav;
 	}
-//	로그인 아이디 찾기
-	@RequestMapping(value = "/find_id.do", method = RequestMethod.POST)
-	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
-		md.addAttribute("id", userService.find_id(response, email));
-		return "/find_id";
-	}
+	
 	// 한번 더 비밀번호 입력 폼
 	@RequestMapping(value = "/pw_changeForm.do", method =  RequestMethod.GET)
 	private ModelAndView Form(@RequestParam(value= "result", required=false) String result,

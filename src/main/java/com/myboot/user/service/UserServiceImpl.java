@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 			return id;
 		}
 	}
-// 로그인 아이디 찾기
+// 로그인 비밀번호 찾기
 	@Override
 	public String find_pw(HttpServletResponse response, String tel) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
