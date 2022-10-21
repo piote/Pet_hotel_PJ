@@ -121,8 +121,17 @@ public class UserControllerImpl implements UserController{
 		return mav;
 		
 	}
+//	로그인 아이디 찾기 폼
 	@RequestMapping(value = "/find_id_form.do")
 	public ModelAndView find_id_form(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		return mav;
+	}
+//	로그인 비밀번호 찾기 폼
+	@RequestMapping(value = "/find_pw_form.do")
+	public ModelAndView find_pw_form(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
