@@ -191,7 +191,7 @@
             <p class="titie">답글쓰기</p>
         </div>   
 
-  <form name="frmReply" method="post"  action="${contextPath}/questions/addNewQuestion.do"   enctype="multipart/form-data">
+  <form name="frmReply" method="post"  action="${contextPath}/questions/addReplyQuestion.do"   enctype="multipart/form-data">
     
             <ul class="atc_tb">
                 <li class="user_name">
@@ -207,9 +207,9 @@
                 <li class="atc_imageFile">
                 	<div class="imageFile_wrap">
                 		<label for="imageFileName">이미지 파일</label>
-                		<input class="upload-name" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL(this);"  disabled >
+                		<input class="upload-name" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL(this);"  disabled/ >
 	                	<input type="file" id="imageFileName" name="imageFileName"  onchange="readURL(this);"/>
-                		<img id="preview" src="#" height=350 onerror="this.src='${contextPath}/resources/img/no_img.png' />
+                		<img id="preview" src="#" height=350 onerror="this.src='${contextPath}/resources/img/no_img.png'" />
                 	</div>
                 </li>
             </ul>
