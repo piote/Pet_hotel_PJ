@@ -5,7 +5,7 @@
    
 <mapper namespace="com.myboot.admin.user.dao.AdminUserDAO">
 
-	<resultMap id="userResult" type="userVO">
+	<resultMap id="userResult" type="java.util.HashMap">
       <result property="id" column="USER_ID" />
       <result property="pw" column="USER_PW" />
       <result property="name" column="USER_NAME" />
@@ -16,11 +16,17 @@
       <result property="birth" column="USER_BIRTH" />
       <result property="joinDate" column="JOINDATE" />
       <result property="grade" column="USER_GRADE" />
+      <result property="resState" column="RES_STATE" />
    </resultMap> 
 	
 	<select id="selectAllUserList" resultMap="userResult">
       <![CDATA[
-        select * from TB_USER order by joinDate desc			
+        select U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
+		    from TB_USER U 
+		    LEFT JOIN ( select user_id, RESERVATION_STATE from TB_RESERVATION WHERE RESERVATION_STATE='N' ) R
+		ON U.user_id = R.user_id 
+		GROUP BY U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE
+		order by joinDate desc
       ]]>
    </select>
 	

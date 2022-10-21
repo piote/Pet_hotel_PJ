@@ -209,7 +209,7 @@
 			                html += '<td class="user_joinDate">'+joinDate_s+'</td>';
 			                html += '<td class="user_email">'+this.email+'</td>';
 			                html += '<td class="user_tel">'+this.tel+'</td>';
-			                html += '<td class="user_resState">예약여부</td>';
+			                html += '<td class="user_resState">'+this.resState+'</td>';
 			                html += '</tr>';
 
 							$('.list_tb').html(html);
