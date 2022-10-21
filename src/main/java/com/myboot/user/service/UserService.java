@@ -27,7 +27,7 @@ public interface UserService {
 	public UserVO findUser(String id) throws DataAccessException;
 	
 // 회원 탈퇴	
-	public int removeMember(String id) throws DataAccessException;
+	public int retiring(String id) throws DataAccessException;
 	
 //	회원가입 회원정보 추가
 	public int addUser(UserVO userVO) throws Exception;

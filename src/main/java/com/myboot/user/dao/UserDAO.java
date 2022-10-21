@@ -23,7 +23,7 @@ public interface UserDAO {
 	 public UserVO selectUserById(String id) throws DataAccessException;
 	 
 	 // 회원 탈퇴
-	 public int deleteMember(String id) throws DataAccessException;
+	 public int deleteUser(String id) throws DataAccessException;
 	 
 
 	 

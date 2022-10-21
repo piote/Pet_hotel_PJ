@@ -234,6 +234,12 @@ public class UserControllerImpl implements UserController{
 			System.out.println(userVO.getPw());
 			//userVO = userService.password(userVO);
 			String userPw =userVO.getPw();
+			//날짜 포맷    			
+    		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
+    		// String 타입을 Date 타입으로 변환
+			/* Date joinDate_format = newDtFormat.parse(userVO.getBirth()); */
+    		String strNowDate = newDtFormat.format(userVO.getBirth());
+    		session.setAttribute("birth", strNowDate);
 			
 			if (userPw.equals(password)) {
 				System.out.println("성공");
@@ -253,27 +259,45 @@ public class UserControllerImpl implements UserController{
 	}
 	
 	// 회원 정보 수정
-	@Override
-	@RequestMapping(value="/modMember.do" ,method = RequestMethod.POST)
-	public ModelAndView modMember(@ModelAttribute("user") UserVO user, 
-		HttpServletRequest request, HttpServletResponse response) throws Exception{
-		int result = 0;
-		result = userService.modMember(user);
-		ModelAndView mav = new ModelAndView("redirect:/mypage/myPage.do");
-		return mav;
-	}
-	
-//	@RequestMapping(value = "/modMemberForm.do", method =  RequestMethod.GET)
-//	public ModelAndView modMemberForm(@RequestParam("id") String id, 
-//		HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		UserVO user = userService.findUser(id);
-//		request.setAttribute("user",user);
-//		String viewName = (String)request.getAttribute("viewName");
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName(viewName);
+//	@Override
+//	@RequestMapping(value="/modMember.do" ,method = RequestMethod.POST)
+//	public ModelAndView modMember(@ModelAttribute("user") UserVO user, 
+//		HttpServletRequest request, HttpServletResponse response) throws Exception{
+//		int result = 0;
+//		result = userService.modMember(user);
+//		ModelAndView mav = new ModelAndView("redirect:/mypage/myPage.do");
 //		return mav;
 //	}
+    @Override
+	@RequestMapping(value="/modMember.do" , method = RequestMethod.GET)
+	public ModelAndView modMember(
+            @RequestParam(value= "user", required=false) UserVO user,
+			RedirectAttributes rAttr, 
+				HttpServletRequest request, HttpServletResponse response)  throws Exception {
+  
+//    	//날짜 포맷
+//    		String joinDate = (String) request.getParameter("joinDate");
+//    			
+//    		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
+//    	// String 타입을 Date 타입으로 변환
+//    		Date joinDate_format = newDtFormat.parse(joinDate);
+    	
+    		ModelAndView mav = new ModelAndView();
+			HttpSession session = request.getSession();
+			userVO = (UserVO) session.getAttribute("user");
+			System.out.println(userVO);
+			//userVO = userService.password(userVO);
+			//String userPw =userVO.getPw();
+			
+			if (userVO.equals(user)) {
+				System.out.println("성공");
+				
+				mav.setViewName("redirect:/mypage/myPage.do");
+			}
+				return mav;
+    }
 	
+
 	@RequestMapping(value = "/modMemberForm.do", method =  RequestMethod.GET)
 	private ModelAndView modMemberForm(@RequestParam(value= "result", required=false) String result,
 			                  @RequestParam(value= "action", required=false) String action,
@@ -290,13 +314,19 @@ public class UserControllerImpl implements UserController{
 	}
 
 	// 탈퇴하기
+
 	@Override
-	@RequestMapping(value="removeMember.do" ,method = RequestMethod.GET)
-	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	@RequestMapping(value="/retiring.do" ,method = RequestMethod.POST)
+	public ModelAndView retiring(@RequestParam("id") String id, 
+			           HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		session.removeAttribute("user");
+		session.setAttribute("isLogOn",false);
+		userService.retiring(id);
 		ModelAndView mav = new ModelAndView();
-		userService.removeMember(id);
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
+	
 }
 
