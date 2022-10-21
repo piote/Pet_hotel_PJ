@@ -191,7 +191,7 @@
             <p class="titie">답글쓰기</p>
         </div>   
 
-  <form name="frmReply" method="post"  action="${contextPath}/questions/addNewQuestion.do"   enctype="multipart/form-data">
+  <form name="frmReply" method="post"  action="${contextPath}/questions/addReplyQuestion.do"   enctype="multipart/form-data">
     
             <ul class="atc_tb">
                 <li class="user_name">

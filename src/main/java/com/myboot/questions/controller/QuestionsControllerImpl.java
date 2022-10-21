@@ -183,6 +183,65 @@ public class QuestionsControllerImpl implements QuestionsController{
 		return resEnt;
 	}
 	
+//	답글 쓰기
+	@Override
+	@RequestMapping(value="/questions/addReplyQuestion.do" ,method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity addReplyQuestion(MultipartHttpServletRequest multipartRequest, 
+			HttpServletResponse response) throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String,Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu=multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=multipartRequest.getParameter(name);
+			articleMap.put(name,value);
+		}
+		
+		String imageFileName= upload(multipartRequest);
+		HttpSession session = multipartRequest.getSession();
+		UserVO userVO = (UserVO) session.getAttribute("user");
+		String id = userVO.getId();
+		articleMap.put("id", id);
+		articleMap.put("imageFileName", imageFileName);
+		
+		String message;
+		ResponseEntity resEnt=null;
+		
+		//세션에 저장된 경로를 받아온다
+		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
+		System.out.println("in "+path);
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			int articleNO = questionsService.addNewQuestions(articleMap);
+			if(imageFileName!=null && imageFileName.length()!=0) {
+				File srcFile = new File(path+ "\\" + "temp"+ "\\" + imageFileName);
+				File destDir = new File(path+"\\"+articleNO);
+				FileUtils.moveFileToDirectory(srcFile, destDir,true);
+			}
+			
+			message = "<script>";
+			message += " alert('새글을 추가했습니다.');";
+			message += " location.href='"+multipartRequest.getContextPath()+"/questions/questionsList.do'; ";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		}catch(Exception e) {
+			File srcFile = new File(path+"\\"+"temp"+"\\"+imageFileName);
+			srcFile.delete();
+			message = " <script>";
+			message +=" alert('오류가 발생했습니다. 다시 시도해 주세요');');";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/questions/questionsList.do'; ";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		//다 쓴 경로 삭제
+		session.removeAttribute("realPath");
+		return resEnt;
+	}
+	
 	
 	//한개 이미지 업로드하기
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception{
