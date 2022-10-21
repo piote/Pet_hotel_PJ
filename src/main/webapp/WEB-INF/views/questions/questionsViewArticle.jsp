@@ -328,7 +328,7 @@
 
                 <div id="tr_btn">
                     <input type=button value="목록"  onClick="backToList(this.form)">
-                    <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.q_num})">
+                    <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/questions/replyForm.do', ${article.q_num})">
                     <c:if test="${user.id == article.user_id }">
                         <input type=button value="수정하기" onClick="fn_enable(this.form)">
                         <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/questions/removeArticle.do', ${article.q_num})">
