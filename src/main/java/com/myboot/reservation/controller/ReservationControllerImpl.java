@@ -81,7 +81,6 @@ public  class ReservationControllerImpl implements ReservationController{
 		
 	}
 	
-	
 	@ResponseBody
 	@RequestMapping("/resList.do") 
 	public List resListGet(Model model){
