@@ -70,23 +70,27 @@
         #checkin {
             margin-left: 10%;
             margin-right: 10%;
+            font-size: 30px;
         }
 
         #checkin2 {
             margin-left: 10%;
             margin-right: 10%;
             cursor: pointer;
+            font-size: 30px;
         }
 
         #checkout {
             margin-left: 10%;
             margin-right: 10%;
+            font-size: 30px;
         }
 
         #checkout2 {
             margin-left: 10%;
             margin-right: 10%;
             cursor: pointer;
+            font-size: 30px;
         }
 
         #mypet {
@@ -300,6 +304,7 @@
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCal.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservation.js"></script>
     <script>
+    
     	var loginStateCheck = <c:out value="${user.id}"/>;
     	function reservationSubmit(obj){
     		
