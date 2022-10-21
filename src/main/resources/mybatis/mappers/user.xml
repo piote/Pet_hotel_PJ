@@ -31,7 +31,12 @@
 	<select id="find_id" parameterType="String" resultType="String">
 		select USER_ID from TB_USER where USER_EMAIL = #{email}
 	</select>
-  
+	
+ <!-- 로그인 비밀번호찾기 -->
+	<select id="find_pw" parameterType="String" resultType="String">
+		select USER_PW from TB_USER where USER_ID =#{id}
+	</select>
+	
    <select id="selectAllUserList" resultMap="userResult">
       <![CDATA[
         select * from TB_USER order by joinDate desc			

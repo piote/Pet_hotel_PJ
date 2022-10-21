@@ -44,6 +44,8 @@ public interface UserController {
 	// 로그인 아이디 찾기
 	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception;
 	
+	// 로그인 비밀번호 찾기
+	public String find_pw(HttpServletResponse response, @RequestParam("id") String id, Model md) throws Exception;
 	
 		
 	public String userMain(Model model);

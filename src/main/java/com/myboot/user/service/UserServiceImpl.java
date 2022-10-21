@@ -57,6 +57,24 @@ public class UserServiceImpl implements UserService {
 			return id;
 		}
 	}
+// 로그인 비밀번호 찾기
+	@Override
+	public String find_pw(HttpServletResponse response, String id) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String pw = userDAO.find_pw(id);
+			
+		if (pw == null) {
+			out.println("<script>");
+			out.println("alert('가입된 비밀번호가 없습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		} else {
+			return pw;
+		}
+	}	
 	
 
   // 회원 정보 수정

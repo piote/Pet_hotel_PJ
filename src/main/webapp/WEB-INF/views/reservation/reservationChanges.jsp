@@ -30,7 +30,7 @@
         }
 
         .reservationtag {
-            margin-top: 291px;
+            margin-top: 286px;
             text-align: left;
             font-size: 25px;
             margin-left: 17%;
@@ -247,7 +247,7 @@
             display: block;
         }
 
-        .petcomment>textarea {
+        .petcomment>input {
             border: 1px solid black;
             box-sizing: border-box;
             border-radius: 15px;
@@ -255,14 +255,6 @@
             height: 80%;
             padding: 10px 20px;
             margin: 5px 0;
-            resize: none;
-            font-size: 18px;
-            
-        }
-        #petcommentLengh{
-        	margin: auto;
-        	width: 69%;
-        	text-align: right;
         }
 
         /* 여기까지 */
@@ -312,7 +304,8 @@
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCal.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservation.js"></script>
     <script>
-
+        
+    	var loginStateCheck = <c:out value="${user.id}"/>;
     	function reservationSubmit(obj){
     		
 			if($("#checkoutDate").val() != null && $("#checkoutDate").val() != ""){//날짜가 있으면
@@ -343,7 +336,7 @@
 
     <div id="reservationWrap">
         <form id="reservationForm" action="${contextPath}/reservationAdd.do" method="post">
-            <h2 class="reservationtag"> Reservation</h2>
+            <h2 class="reservationtag"> Reservation Changes</h2>
             <p id="under"></p>
             <br><br>
             <div id="checkwrap">
@@ -529,10 +522,7 @@
     </div>
 
     <div class="petcomment">
-   	 	<textarea id="petcommentBox" name="petcomment" spellcheck="false" maxlength="500" placeholder="요청사항을 적어주세요."></textarea>
-   	 	<br>
-   	 	<div id="petcommentLengh"><span id="petcommentinfo">0</span>/500</div>
-        <!-- <input type="text" name="petcomment"> -->
+        <input type="text" name="petcomment">
     </div>
      </form>
     <br></br>

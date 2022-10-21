@@ -36,8 +36,6 @@
                 return false;
             }
             
-            	
-            
             if(!document.userInfo.pw.value){
                 alert("비밀번호를 입력하세요.");
                 return false;
@@ -66,6 +64,7 @@
             }
             $("#userInfo").submit()
         }
+        
         //회원가입 중복확인 기능
         function lappedID(){
 
@@ -95,10 +94,9 @@
         
         // 취소 버튼 클릭시 로그인 화면으로 이동
         function goLoginForm() {
-            location.href="LoginForm.jsp";
-            
+            location.href="LoginForm.jsp";     
         }
-     
+
     </script>
     
 </head>
@@ -142,13 +140,13 @@
                 <tr>
                     <td id="title">이름</td>
                     <td>
-                        <input type="text" name="name" maxlength="50">
+                        <input type="text" name="name" maxlength="20">
                     </td>
                 </tr>
                   <tr>
                     <td id="title">이메일</td>
                     <td>
-                        <input type="text" name="email" maxlength="50">@
+                        <input type="text" name="email" maxlength="30">@
                         <select name="mail2">
                             <option>naver.com</option>
                             <option>daum.net</option>
@@ -159,13 +157,13 @@
                 </tr>
                    <td id="title">휴대전화</td>
                     <td>
-                        <input type="text" name="tel" />
+                    <input type="number" name="tel" id="tel" placeholder="핸드폰번호 입력" maxlength="13" />
                     </td>
                 </tr>
                  <tr>
                     <td id="title">휴대전화_2</td>
                     <td>
-                        <input type="text" name="tel_sub" />
+                       <input type="number" name="tel_sub" id="tel_sub" placeholder="핸드폰번호 입력" maxlength="13" />
                     </td>
                 </tr>
                 <tr>

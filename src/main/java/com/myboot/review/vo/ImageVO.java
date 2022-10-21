@@ -10,6 +10,8 @@ public class ImageVO {
 	private String imageFileName;
 	private Date regDate;
 	private int reviewNO;
+	
+	
 	public void setImageFileName(String fileName) {
 		this.imageFileName = fileName;
 		

@@ -3,6 +3,12 @@ window.onload = function () {
 
 	addRow();
 	
+	$("#petcommentBox").on('keyup', function (event) {
+        var currentString = $("#petcommentBox").val()
+        $("#petcommentinfo").html(currentString.length);
+    });
+    
+    
     $("#checkin2").on("click", function () {
         $("#start_dayBox").text("0000. 00. 00.");
         $("#end_dayBox").text("0000. 00. 00.");
@@ -20,7 +26,8 @@ window.onload = function () {
         })();
     });
     $(".custom_calendar_table").remove();
-
+	
+	
 }
 var dayCal;
 

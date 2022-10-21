@@ -31,6 +31,8 @@ public interface UserDAO {
 	public UserVO loginById(UserVO userVO) throws DataAccessException;
 //  로그인 아이디 찾기
 	public String find_id(String email) throws DataAccessException;
+//  로그인 비밀번호 찾기
+	public String find_pw(String id) throws DataAccessException;
 //	회원가입 회원정보 추가
 	public int insertNewUser(UserVO userVO) throws DataAccessException;
 //	회원가입 id중복 확인

@@ -121,6 +121,7 @@ public class UserControllerImpl implements UserController{
 		return mav;
 		
 	}
+//	로그인 아이디 찾기 폼
 	@RequestMapping(value = "/find_id_form.do")
 	public ModelAndView find_id_form(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
@@ -128,6 +129,27 @@ public class UserControllerImpl implements UserController{
 		
 		return mav;
 	}
+//	로그인 비밀번호 찾기 폼
+	@RequestMapping(value = "/find_pw_form.do")
+	public ModelAndView find_pw_form(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		return mav;
+	}
+//	로그인 아이디 찾기
+	@RequestMapping(value = "/find_id.do", method = RequestMethod.POST)
+	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
+		md.addAttribute("id", userService.find_id(response, email));
+		return "/find_id";
+	}
+//	로그인 비밀번호 찾기
+	@RequestMapping(value = "/find_pw.do", method = RequestMethod.POST)
+	public String find_pw(HttpServletResponse response, @RequestParam("id") String id, Model md) throws Exception{
+		md.addAttribute("pw", userService.find_pw(response, id));
+		return "/find_pw";
+	}
+	
 ////	회원가입 회원추가
 	@Override
 	@RequestMapping(value = "/addUser.do", method = RequestMethod.POST)
@@ -141,6 +163,7 @@ public class UserControllerImpl implements UserController{
 		String pw= request.getParameter("pw");
 		String name= request.getParameter("name");
 		String email=request.getParameter("email");
+		String mail2=request.getParameter("mail2");
 		String tel=request.getParameter("tel");
 		String tel_sub=request.getParameter("tel_sub");
 		String message=request.getParameter("message");
@@ -154,7 +177,7 @@ public class UserControllerImpl implements UserController{
 		userVO.setId(id);
 		userVO.setPw(pw);
 		userVO.setName(name);
-		userVO.setEmail(email);
+		userVO.setEmail(email+"@"+mail2);
 		userVO.setTel(tel);
 		userVO.setTel_sub(tel_sub);
 		userVO.setMessage(message);
@@ -196,12 +219,7 @@ public class UserControllerImpl implements UserController{
 				mav.setViewName(viewName);
 				return mav;
 	}
-//	로그인 아이디 찾기
-	@RequestMapping(value = "/find_id.do", method = RequestMethod.POST)
-	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
-		md.addAttribute("id", userService.find_id(response, email));
-		return "/find_id";
-	}
+	
 	// 한번 더 비밀번호 입력 폼
 	@RequestMapping(value = "/pw_changeForm.do", method =  RequestMethod.GET)
 	private ModelAndView Form(@RequestParam(value= "result", required=false) String result,
