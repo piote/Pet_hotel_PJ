@@ -95,11 +95,11 @@
  		<!-- 회원 정보 수정 -->
  	<update id="updateUser" parameterType="userVO">
    		<![CDATA[
-   				update TB_USER
-   				set pw=#{pw}, email=#{email}, tel=#{tel},
-   					tel_sub=#{tel_sub}, message=#{message}, birth=#{birth}
-   				where
-   				id=#{id}
+   			update TB_USER(USER_ID, USER_PW, USER_NAME, USER_EMAIL,
+	      	USER_TEL, USER_TEL_SUB, USER_MESSAGE,USER_BIRTH) 
+    		values(#{id},#{pw},#{name},#{email},#{tel},#{tel_sub},#{message},#{birth})
+    		 where
+         	id=#{id}
    		]]>
    	  </update>
    	  
@@ -116,8 +116,7 @@
 	<delete id="deleteUser" parameterType="String">
    		<![CDATA[
    			delete from TB_USER
-   			where
-   			id=#{id}
+   			where user_id=#{id}
    		]]>
    	</delete>
 

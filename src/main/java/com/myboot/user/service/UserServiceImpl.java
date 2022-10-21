@@ -90,8 +90,8 @@ public class UserServiceImpl implements UserService {
   
   // 회원 탈퇴
 	@Override
-	public int removeMember(String id) throws DataAccessException {
-		return  userDAO.deleteMember(id);
+	public int retiring(String id) throws DataAccessException {
+		return  userDAO.deleteUser(id);
 	}
 	
  // 비밀번호 한번 더 입력
