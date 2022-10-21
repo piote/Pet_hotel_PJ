@@ -12,7 +12,9 @@ public  interface ReviewService {
 
 	public Map reviewDetail_1(Map pagingMap) throws Exception;
 
-	public int addNewReview(Map reviewMap) throws Exception;
+	
+
+	public int addNewReview(Map reviewMap, String imageFileName)throws Exception;
 
 	
 

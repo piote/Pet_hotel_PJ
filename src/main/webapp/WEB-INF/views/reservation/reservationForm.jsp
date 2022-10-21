@@ -300,12 +300,29 @@
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCal.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservation.js"></script>
     <script>
-	   
+    	var loginStateCheck = <c:out value="${user.id}"/>;
     	function reservationSubmit(obj){
     		
-
-	    	obj.submit();
+			if($("#checkoutDate").val() != null && $("#checkoutDate").val() != ""){//날짜가 있으면
+				
+				if(totalTableNum != 0){//테이블이 존재하면
+						
+					if($("#totalcost").val()!="0" && $("#totalcost").val()!=null){//가격이 있으면
+						
+						obj.submit();
+					}else{
+						alert("맡기실 아이를 선택해주세요.");	
+					}
+				}else{
+					alert("맡기실 아이를 추가해주세요.");
+				}
+			}else{
+				alert("날짜를 선택해주세요.");
+			}
+    		
      	}
+    	
+    	
     </script>
 </head>
 

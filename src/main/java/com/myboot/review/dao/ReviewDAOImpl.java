@@ -14,6 +14,8 @@ import com.myboot.review.vo.ImageVO;
 import com.myboot.review.vo.ReviewVO;
 
 
+
+
 @Repository("reviewDAO")
 
 public class ReviewDAOImpl implements ReviewDAO {
@@ -22,51 +24,58 @@ public class ReviewDAOImpl implements ReviewDAO {
 	private SqlSession sqlSession;
 	
 	@Override
+	
+	
 	public void insertNewImage(Map reviewMap) throws DataAccessException {
 		List<ImageVO> imageFileList = (ArrayList)reviewMap.get("imageFileList");
-		int reviewNO = (Integer)reviewMap.get("reviewNO");
-		int imageFileNO = selectNewImageFileNO();
+	
 		
 		if(imageFileList != null && imageFileList.size() != 0) {
+			int reviewNO = (Integer)reviewMap.get("reviewNO");
+			int imageFileNO = selectNewImageFileNO();
+			
 			for(ImageVO imageVO : imageFileList){
 				imageVO.setImageFileNO(++imageFileNO);
 				imageVO.setReviewNO(reviewNO);
 			 }
-			sqlSession.insert("mapper.review.insertNewImage",imageFileList);
+			sqlSession.insert("com.myboot.review.dao.ReviewDAO.insertNewImage",imageFileList);
 		} 
 		
 	}
 
 	public List selectImageFileList(int reviewNO) throws DataAccessException {
 		List<ImageVO> imageFileList = null;
-		imageFileList = sqlSession.selectList("mapper.review.selectImageFileList",reviewNO);
+		imageFileList = sqlSession.selectList("com.myboot.review.dao.ReviewDAO.selectImageFileList",reviewNO);
 		return imageFileList;
 	}
 	
 	
 	private int selectNewImageFileNO() {
-		return sqlSession.selectOne("mapper.review.selectNewImageFileNO");
+		return sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectNewImageFileNO");
 		
 	}
 	
 	@Override
-	public int insertNewReview(Map reviewMap) throws DataAccessException {
-		int reviewNO = selectNewReviewNO();
-		reviewMap.put("reviewNO", reviewNO);
-		sqlSession.insert("mapper.review.insertNewReview",reviewMap);
-		return reviewNO;
-	}
-
-	private int selectNewReviewNO() {
-		return sqlSession.selectOne("mapper.review.selectNewReviewNO");
-	}
-
-	@Override
-	public List<ReviewVO> selectAllReviewList(Map pagingMap) {
+	public void insertNewReview(Map reviewMap) throws DataAccessException {
 		
-		return null;
+		sqlSession.insert("com.myboot.review.dao.ReviewDAO.insertNewReview",reviewMap);
+		
 	}
 
+	public int selectNewReviewNO() {
+		return sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectNewReviewNO");
+	}							 //("mapper.review.selectNewReviewNO");
+
+	
+	  @Override public List<ReviewVO> selectAllReviewList(Map pagingMap) {
+			List<ReviewVO> reviewList = sqlSession.selectList("com.myboot.review.dao.ReviewDAO.selectAllReviewList", pagingMap);
+			return reviewList;
+	  }
+	 
+	
+	  
+	
+	  
 	@Override
 	public int selectTotReview() {
 

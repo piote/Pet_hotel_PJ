@@ -1,9 +1,10 @@
-<!--<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- -->
+
+
 
  <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
  <c:set  var="reviewList"  value="${reviewMap.reviewList}" />
@@ -125,7 +126,7 @@
  </head>
 
  <body>
- 
+
 
 <div class="all">
 		
@@ -160,13 +161,16 @@
         </c:when>
         <c:when test="${reviewList !=null }" >
           <c:forEach  var="review" items="${reviewList }" varStatus="reviewNum" >
-
+          <fmt:formatDate var="reviewDate" value="${review.date}" pattern="yyyy.MM.dd"/>
+          
         <tr class="w_tr w_margin1">
           <td class="w_td" width="15%">${review.star}</td>
           <td class="w_td" width="50%" rowspan="2">${review.title}</td>
-          <td class="w_td" width="20%" rowspan="2">${review.image}</td>
-          <td class="w_td w_date"  width="15%" >${review.date}</td>
-      </tr>
+          <td class="w_td" width="20%" rowspan="2"><img src="${contextPath}/${review.image}" width="150" height="150"></td>
+          <td class="w_td w_date"  width="15%" >${reviewDate}</td>
+          
+        </tr>
+      
       <tr class="w_tr" class="w_tr2">
           <td class="w_td">${review.id}</td>	
           <td class="w_td" align=center >${review.rec}</td>

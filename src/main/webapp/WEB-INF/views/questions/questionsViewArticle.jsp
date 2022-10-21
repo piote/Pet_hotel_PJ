@@ -276,7 +276,7 @@
                 <ul class="view_table"  >
                     <li >
                         <p>제목</p> 
-                        <input type=text value="${article.q_title }"  name="q_title"  id="i_title" class="textbox" spellcheck="false" disabled />
+                        <input type=text value="${article.q_title }"  name="q_title"  id="i_title" class="textbox" spellcheck="false" disabled maxlength='50'/>
                     </li>
                     <li>
                         <p>아이디</p> 
@@ -309,7 +309,7 @@
                 				<input type="file" id="i_imageFileName" name="imageFileName"  onchange="readURL(this);"/>
                             </li>
                     <li class="content_box">
-                        <textarea  class="textbox"  name="q_content"  id="i_content" spellcheck="false" disabled onkeydown="resize(this)" onkeyup="resize(this)">${article.q_content }</textarea> 
+                        <textarea  class="textbox"  name="q_content"  id="i_content" spellcheck="false" disabled onkeydown="resize(this)" onkeyup="resize(this)" maxlength='1000'>${article.q_content }</textarea> 
                     </li>  
                 </ul>
 					<script>

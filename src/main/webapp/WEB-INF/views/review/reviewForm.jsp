@@ -36,7 +36,8 @@
 	  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
 	  cnt++;
   }  
-
+  	
+ 
 </script>
 <!--  <title>글쓰기창</title> -->
 </head>
@@ -53,9 +54,16 @@
 			   <td colspan="2"><input type="text" size="67"  maxlength="500" name="title" /></td>
 		 </tr>
 	 		<tr>
-				<td align="right" valign="top"><br>글내용: </td>
-				<td colspan=2><textarea name="content" rows="10" cols="65" maxlength="4000"></textarea> </td>
+
+
+				<td align="right" valign="top"><br>별점: </td>
+				<td colspan=2><textarea name="star" rows="10" cols="65" maxlength="50"></textarea> </td>
+
      </tr>
+ 	<tr>
+	<td align="right" valign="top"><br>추천: </td>
+	<td colspan=2><textarea name="rec" rows="10" cols="65" maxlength="50"></textarea> </td>
+</tr>
      <tr>
 		<!--  <td align="right">이미지파일 첨부:  </td>
 			  <td><input type="file" name="imageFileName"  onchange="readURL(this);" /></td>

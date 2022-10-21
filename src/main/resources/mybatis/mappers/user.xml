@@ -27,6 +27,10 @@
 	      where USER_ID=#{id} AND USER_PW=#{pw}
 	]]>
  	 </select>
+<!-- 로그인 아이디찾기 -->
+	<select id="find_id" parameterType="String" resultType="String">
+		select USER_ID from TB_USER where USER_EMAIL = #{email}
+	</select>
   
    <select id="selectAllUserList" resultMap="userResult">
       <![CDATA[

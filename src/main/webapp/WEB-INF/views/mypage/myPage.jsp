@@ -85,7 +85,7 @@
                   <td width="8%">NO</td>
                   <td width="10%">Date</td>
                   <td width="32%">Subject</td>
-                  <td width="50%">Contents</td>
+                  
               </tr>
 	            <c:choose>
 	            	<c:when test="${empty myReviewList }">
@@ -98,10 +98,10 @@
 					<c:when test="${not empty myReviewList }">
 						<c:forEach var="reviews" items="${myReviewList}" begin="0" end="2" step="1" varStatus="q_num">
 							<tr class="review-list">
-								<td>${reviews.num }</td>
+								<td>${reviews.reviewNO }</td>
 								<td>${reviews.date }</td>
 								<td>${reviews.title }</td>
-								<td>${reviews.con }</td>
+								
 							</tr>
 						</c:forEach>
 					</c:when>

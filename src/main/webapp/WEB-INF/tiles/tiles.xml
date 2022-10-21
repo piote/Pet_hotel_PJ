@@ -32,6 +32,12 @@
       <put-attribute name="title" value="로그인" />
       <put-attribute name="body" value="/WEB-INF/views/user/loginForm.jsp" />
   </definition>
+  
+  <!-- 로그인 아이디찾기 -->
+  <definition name="/find_id_form"  extends="baseLayout">
+      <put-attribute name="title" value="아이디찾기" />
+      <put-attribute name="body" value="/WEB-INF/views/user/find_id_form.jsp" />
+  </definition>
 
 <!--  회원가입 -->
  <definition name="/userForm"  extends="baseLayout">

@@ -11,12 +11,12 @@ import lombok.Data;
 @Component("reviewVO")
 public class ReviewVO {
 	private int level;
-	private int num;
+	private int reviewNO;
 	private int parentNO;
 	private String title;
 	private String con;
 	private int star ;
-	private Date date;
+	private String date;
 	private String image;
 	private int rec;
 	private String id;
