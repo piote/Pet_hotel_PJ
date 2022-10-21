@@ -126,4 +126,14 @@ img.ui-datepicker-trigger{
 	margin-left: 141px;
 	margin-top: -220px;
 }
+
+.page {
+    text-align: center;
+    margin: 0px auto;
+    margin-top: 25px;
+}
+
+.page a {
+	font-size: 20px;
+}
  

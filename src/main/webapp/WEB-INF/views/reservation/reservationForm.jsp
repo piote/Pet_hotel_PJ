@@ -300,7 +300,7 @@
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCal.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservation.js"></script>
     <script>
-	   
+    	var loginStateCheck = <c:out value="${user.id}"/>;
     	function reservationSubmit(obj){
     		
 			if($("#checkoutDate").val() != null && $("#checkoutDate").val() != ""){//날짜가 있으면
@@ -321,6 +321,8 @@
 			}
     		
      	}
+    	
+    	
     </script>
 </head>
 
@@ -342,15 +344,10 @@
                      	</div>
                     </li>
                     <li id="checkoutBox" class="reservationBox">
-                        <div id="mypet" class="reservationtext reservationtext1">| CHECK OUT |</div>
+                        <div id="checkout" class="reservationtext reservationtext1">| CHECK OUT |</div>
                         <div id="checkout2" class="reservationtext reservationtext2">
                         	<span id="end_dayBox">0000. 00. 00.</span>
                             <input type="hidden" name="checkoutDate" id="checkoutDate">
-                        </div>
-                    </li>
-                    <li id="mypetBox" class="reservationBox">
-                        <div id="mypet" class="reservationtext reservationtext1">| MY PET |</div>
-                        <div id="mypet2" class="reservationtext reservationtext2"><span id="com_mypet">데려오기</span>
                         </div>
                     </li>
                 </ul>

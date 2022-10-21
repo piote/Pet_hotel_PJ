@@ -3,6 +3,10 @@
 	isELIgnored="false"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set  var="myReserveList"  value="${myReserveMap.myReserveList}" />
+<c:set  var="totReserves"  value="${myReserveMap.totReserves}" />
+<c:set  var="section"  value="${myReserveMap.section}" />
+<c:set  var="pageNum"  value="${myReserveMap.pageNum}" />
 <!DOCTYPE html >
 <html>
 <head>
@@ -30,14 +34,14 @@
 		 	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 		 	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 		 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		 	maxDate: 1,
+// 		 	maxDate: 1,
 		 	onClose: function(selectedDate){
 		 		$("#endDate").datepicker("option", "minDate",selectedDate);
 		 		$("#startDate").datepicker("option", "maxDate",selectedDate);
 		 	}
 		});
 		
-		$('#datepicker').datepicker('setDate', 'today');
+// 		$('#datepicker').datepicker('setDate', 'today');
 		
 		$(function(){
 			$.datepicker.setDefaults({
@@ -58,7 +62,7 @@
 			 	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 			 	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 			 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			 	maxDate: 1,
+// 			 	maxDate: 1,
 			 	onClose: function(selectedDate){
 			 		$("#endDate").datepicker("option", "minDate",selectedDate);
 			 		$("#startDate").datepicker("option", "maxDate",selectedDate);
@@ -66,8 +70,8 @@
 			});
 			$("#startDate").datepicker();
 			$("#endDate").datepicker();
-			$("#startDate").datepicker('setDate', 'today');
-			$("#endDate").datepicker('setDate', '+1D');
+// 			$("#startDate").datepicker('setDate', 'today');
+// 			$("#endDate").datepicker('setDate', '+1D');
 		});
 			
 	$(document).ready(function () {
@@ -221,6 +225,42 @@
 					</c:when>
                </c:choose>
 				</table>
+				
+				<div class="page">
+					<c:if test="${not empty totReserves }" >
+						<c:choose>
+							<c:when test="${totReserves >100 }">  <!-- 글 개수가 100 초과인경우 -->
+								<c:forEach   var="page" begin="1" end="10" step="1" >
+									<c:if test="${section >1 && page==1 }">
+										<a class="no-uline" href="${contextPath }/mypage/checkReserve.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
+									</c:if>
+									<a class="no-uline" href="${contextPath }/mypage/checkReserve.do?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
+									<c:if test="${page ==10 }">
+										<a class="no-uline" href="${contextPath }/mypage/checkReserve.do?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
+									</c:if>
+								</c:forEach>
+							</c:when>
+							<c:when test="${totReserves ==100 }" >  <!--등록된 글 개수가 100개인경우  -->
+								<c:forEach   var="page" begin="1" end="10" step="1" >
+									<a class="no-uline"  href="#">${page } </a>
+								</c:forEach>
+							</c:when>
+							
+							<c:when test="${totReserves<100 }" >   <!--등록된 글 개수가 100개 미만인 경우  -->
+								<c:forEach   var="page" begin="1" end="${totReserves/10 +1}" step="1" >
+									<c:choose>
+										<c:when test="${page==pageNum }">
+											<a class="sel-page"  href="${contextPath }/mypage/checkReserve.do?section=${section}&pageNum=${page}">${page } </a>
+										</c:when>
+										<c:otherwise>
+											<a class="no-uline"  href="${contextPath }/mypage/checkReserve.do?section=${section}&pageNum=${page}">${page } </a>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</c:when>
+						</c:choose>
+					</c:if>
+				</div>    
 			 </div>
 		</div>
 	</div>

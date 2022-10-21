@@ -48,8 +48,6 @@ public class ReviewControllerImpl implements ReviewController {
 
 	@RequestMapping(value = "/review/reviewDetail_1.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView reviewDetail_1(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		
 		
 		String _section = request.getParameter("section");
 		String _pageNum = request.getParameter("pageNum");
