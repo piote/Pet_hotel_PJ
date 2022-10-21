@@ -41,9 +41,20 @@ public  class ReservationControllerImpl implements ReservationController{
 	@RequestMapping(value= "/reservationForm.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView reservationMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView();
+
+		HttpSession session = request.getSession();
 		
+		if(session.getAttribute("user")==null) {
+			request.setAttribute("stmsgcheck", "1");
+			request.setAttribute("stmsg", "비정상적인 접근입니다!");
+			mav.setViewName("forward:/main.do");
+			//mav.setViewName("redirect:/main.do");
+		}else {
+			String  viewName= (String)request.getAttribute("viewName");
+			mav.setViewName(viewName);
+		}
+	
 		return mav;
 		
 	}
@@ -147,7 +158,7 @@ public  class ReservationControllerImpl implements ReservationController{
 		reserVO.setRes_st(checkinDate_format);
 		reserVO.setRes_end(checkoutDate_format);
 		reserVO.setRes_comment(petcomment);
-		reserVO.setId(userVO.getName());
+		reserVO.setId(userVO.getId());
 		reserVO.setTotalCost(costResult);
 		
 		//데이터 베이스

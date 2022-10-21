@@ -17,6 +17,9 @@ public interface UserService {
 // 로그인 아이디 찾기
 	public String find_id(HttpServletResponse response, String email) throws Exception;
 	
+// 로그인 아이디 찾기
+	public String find_pw(HttpServletResponse response, String tel) throws Exception;
+	
 // 비밀번호 한번 더 입력
 	public UserVO password(UserVO  userVO) throws Exception;
 //public UserVO pwUser(String pw) throws DataAccessException;
