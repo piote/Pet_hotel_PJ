@@ -53,17 +53,17 @@ public class ReviewControllerImpl implements ReviewController {
 		String _pageNum = request.getParameter("pageNum");
 		int section = Integer.parseInt(((_section == null) ? "1" : _section));
 		int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
-		Map pagingMap = new HashMap();
+		Map<String, Integer> pagingMap = new HashMap<String, Integer>();
 		pagingMap.put("section", section);
 		pagingMap.put("pageNum", pageNum);
 		Map reviewMap = reviewService.reviewDetail_1(pagingMap);
 
 		reviewMap.put("section", section);
 		reviewMap.put("pageNum", pageNum);
-
+	//	request.setAttribute("reviewMap",reviewMap );
+		
 		String viewName = (String) request.getAttribute("viewName");
-		// List reviewList = reviewService.listReview();
-
+		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("reviewMap", reviewMap);
 		return mav;
