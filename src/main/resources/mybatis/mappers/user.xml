@@ -32,9 +32,9 @@
 		select USER_ID from TB_USER where USER_EMAIL = #{email}
 	</select>
 	
- <!-- 로그인 아이디찾기 -->
+ <!-- 로그인 비밀번호찾기 -->
 	<select id="find_pw" parameterType="String" resultType="String">
-		select USER_PW from TB_USER where USER_TEL =#{tel}
+		select USER_PW from TB_USER where USER_ID =#{id}
 	</select>
 	
    <select id="selectAllUserList" resultMap="userResult">

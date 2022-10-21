@@ -40,9 +40,10 @@ function addRow() {
     Cell3.innerHTML = '<select name="petroom" class="pet_status" id="Pet_Room' + petTableNum + '" onchange="handleOnChange(this)"><option value="Deluxe">Deluxe(소형견)</option><option value="Superior">Superior(중형견)</option><option value="Sweet">Suite(대형견)</option></select>';
     Cell4.innerHTML = '<select name="beauty" class="pet_status" id="pet_Beauty' + petTableNum + '" onchange="handleOnChange(this)"><option value="N">이용안함</option><option value="Clipping">Clipping</option><option value="Scissoring">Scissoring</option></select>';
     Cell5.innerHTML = '<input name="spa" class="pet_status" id="pet_Spa' + petTableNum + '" type="checkbox" value="Y">';
-    Cell5.innerHTML += '<input type="hidden" name="spa"  id="pet_Spa' + petTableNum + '_hidden" value="N"/>'
+    Cell5.innerHTML += '<input type="hidden" name="spa"  id="pet_Spa' + petTableNum + '_hidden" value="N"/>';
     //Cell6.innerHTML = '<input type="button" id="' + petTableNum + '" class="petUsed" value="X" >';
-	
+    Cell6.innerHTML = '<input type="image" id="' + petTableNum + '" class="petUsed" value="예약취소">';
+
     //테이블 이벤트 생성 이름, 성별 방 미용 스파 삭제 이벤트
     pet_table_event(petTableNum);
 

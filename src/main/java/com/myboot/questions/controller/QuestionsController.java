@@ -21,4 +21,6 @@ public interface QuestionsController {
             HttpServletRequest request, HttpServletResponse response) throws Exception;
     public ResponseEntity modQuestionsArticle(MultipartHttpServletRequest multipartRequest,  
 	        HttpServletResponse response) throws Exception;		
+    public ResponseEntity addReplyQuestion(MultipartHttpServletRequest multipartRequest, 
+			HttpServletResponse response) throws Exception;
 }

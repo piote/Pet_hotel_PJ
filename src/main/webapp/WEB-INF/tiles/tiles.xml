@@ -158,6 +158,10 @@
       	  <put-attribute name="title" value="상세창" />
       	  <put-attribute name="body" value="/WEB-INF/views/questions/questionsViewArticle.jsp" />
    </definition>
+      <definition name="/questions/replyForm" extends="baseLayout">
+      	  <put-attribute name="title" value="답글창" />
+      	  <put-attribute name="body" value="/WEB-INF/views/questions/replyForm.jsp" />
+   </definition>
    
    <!-- 관리자 페이지 -->
    	<definition name="/admin/adminUserList" extends="baseLayout">

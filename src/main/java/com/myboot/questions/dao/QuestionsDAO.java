@@ -21,6 +21,7 @@ public interface QuestionsDAO {
 	public QuestionsVO selectQuestions(int q_num) throws DataAccessException;
 	public int selectNewQ_NUM() throws DataAccessException;
 	public void insertNewQuestions(Map questionsMap) throws DataAccessException;
+	public void insertReplyQuestions(Map questionsMap) throws DataAccessException;
 	public void deleteQusetionsArticle(int q_num) throws DataAccessException;
 	public void updateQusetionsArticle(Map articleMap) throws DataAccessException;
 	

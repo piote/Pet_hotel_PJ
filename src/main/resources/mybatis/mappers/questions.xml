@@ -93,6 +93,14 @@
 		]]>      
 	</insert>
 	
+		<!-- 답글 추가 -->
+	<insert id="insertReplyQuestions" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT into TB_QBOARD(Q_NUM, Q_TITLE, Q_CONTENT, IMAGEFILENAME, USER_ID, Q_PARENTNO)
+			VALUES(#{q_Num}, #{title},	#{content}, #{imageFileName},#{id}, #{parentNO} )
+		]]>      
+	</insert>
+	
 	  <!-- 글 수정하기 -->
 	<update id="updateQusetionsArticle"  parameterType="java.util.Map">
          update TB_QBOARD

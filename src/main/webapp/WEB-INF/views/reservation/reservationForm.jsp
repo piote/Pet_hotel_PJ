@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <title>호텔 예약창(예약단계1)</title>
     <style>
-        /* * {
+        /*  {
             margine: 10%
         } */
 
@@ -205,7 +205,8 @@
         #btn_pet1_1,
         #btn_pet2_1,
         #btn_pet2_2,
-        #btn_pet2_3 {
+        #btn_pet2_3,
+        #btn_pet2_4 {
             color: #444444;
             background: #F3F3F3;
             border: 1px #DADADA solid;
@@ -219,7 +220,8 @@
         #btn_pet1_1:hover,
         #btn_pet2_1:hover,
         #btn_pet2_2:hover,
-        #btn_pet2_3:hover {
+        #btn_pet2_3:hover,
+        #btn_pet2_4:hover {
             border: 1px #C6C6C6 solid;
             box-shadow: 1px 1px 1px #EAEAEA;
             color: #333333;
@@ -229,7 +231,8 @@
         #btn_pet1_1:active,
         #btn_pet2_1:active,
         #btn_pet2_2:active,
-        #btn_pet2_3:active {
+        #btn_pet2_3:active,
+        #btn_pet2_4:active {
             box-shadow: inset 1px 1px 1px #DFDFDF;
         }
         /* 여기까지 */
@@ -302,6 +305,15 @@
             top: 10px;
             right: 20px;
         }
+        
+        
+        .petUsed{
+        	content:url("${contextPath}/resources/img/close.png")
+        }
+        
+    	#lay_pop{position:absolute;z-index:500;width:600px;height:400px;overflow-y:scroll;display:none;background-color:#ffffff;border:2px solid #cccccc}
+    	#all_body{position:absolute;z-index:9;display:block;filter:alpha(opacity=50);opacity:0.5;-moz-opacity:0.5;background-color:#000000;left:0;top:0}
+        
     </style>
 
     <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
@@ -333,6 +345,27 @@
 			}
     		
      	}
+    	
+    	function pushLayer(){
+    		var $width=parseInt($("#lay_pop").css("width"));
+    		var $height=parseInt($("#lay_pop").css("height"));
+    		var left=($(window).width()-$width)/2;
+    		var sctop=$(window).scrollTop()*2;
+    		var top=($(window).height()-$height+sctop)/2;
+    		var height=document.getElementsByTagName("body")[0].scrollHeight;
+    		$("#lay_pop").css("left",left);
+    		$("#lay_pop").css("top",top);
+    		$("#lay_pop").css("display","block");
+    		$("#lay_pop").css("z-index","555");
+    		$("#all_body").css("display","block");
+    		$("#all_body").css("width",$(window).width());
+    		$("#all_body").css("height",height);
+
+    	}
+    	function layerClose(lay1,lay2){
+    		$("#"+lay1).css("display","none");
+    		$("#"+lay2).css("display","none");
+    	}
     	
     	
     </script>
@@ -521,6 +554,11 @@
 
             <div class="btn_pet2">
                 <input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />
+                
+                <div id="lay_pop"><a href="javascript:;" onclick="layerClose('lay_pop','all_body')">닫기</a></div>
+                <div id="all_body"></div>
+                <input type="button" id="btn_pet2_4" value="팝업테스트" onclick="pushLayer()">
+                
                 <!--<button type="button" id="btn_pet2_2" onclick="location.href='${contextPath}/reservationComplete.do'">완료</button>-->
                 <button type="button" id="btn_pet2_2" onclick="reservationSubmit(this.form)">완료</button>
             	
@@ -534,10 +572,10 @@
    	 	<div id="petcommentLengh"><span id="petcommentinfo">0</span>/500</div>
         <!-- <input type="text" name="petcomment"> -->
     </div>
-     </form>
+  
+    </form>
     <br></br>
-
+    
 
 </body>
-
 </html>
