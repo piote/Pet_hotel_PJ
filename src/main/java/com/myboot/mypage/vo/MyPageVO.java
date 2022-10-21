@@ -8,7 +8,7 @@ import lombok.Data;
 @Component("mypageVO")
 public class MyPageVO {
     private String user_id;
-    private String beginDate;
+    private String startDate;
     private String endDate;
 
 }
