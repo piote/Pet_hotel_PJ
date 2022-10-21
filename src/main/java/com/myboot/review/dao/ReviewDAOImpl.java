@@ -72,14 +72,15 @@ public class ReviewDAOImpl implements ReviewDAO {
 			return reviewList;
 	  }
 	 
-	
+	  
 	  
 	
 	  
 	@Override
-	public int selectTotReview() {
-
-		return 0;
+	
+	public int selectTotReview() throws DataAccessException {
+		int totReview = sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectTotReview");
+		return totReview;
 	}
 	
 

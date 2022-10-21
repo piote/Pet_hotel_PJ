@@ -10,7 +10,7 @@ import com.myboot.review.vo.ReviewVO;
 @Controller
 public  interface ReviewService {
 
-	public Map reviewDetail_1(Map pagingMap) throws Exception;
+	
 
 	
 
@@ -18,9 +18,8 @@ public  interface ReviewService {
 
 
 
+	public Map reviewDetail_1(Map pagingMap) throws Exception;
 
-
-	
 
 	}
 
