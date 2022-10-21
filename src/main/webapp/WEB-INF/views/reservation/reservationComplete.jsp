@@ -1,13 +1,13 @@
-<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-        <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-        <% request.setCharacterEncoding("UTF-8"); %>
+<% request.setCharacterEncoding("UTF-8"); %>
 
 
-            <html> -->
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -38,7 +38,7 @@
 
         /* 컨텐츠 */
         .success{
-            border: 3px solid black;
+            border: 3px solid gray;
             border-radius: 15px;
             margin: auto;
             width: 69%;

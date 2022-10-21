@@ -235,6 +235,16 @@
         /* section end */
 
     </style>
+    <% String stmsgcheck = (String)request.getAttribute("stmsgcheck"); %>
+    <% String stmsg = (String)request.getAttribute("stmsg"); %>
+    <script>
+    	var stmsgcheck= "${stmsgcheck}";
+    	var stmsg = "<c:out value='${stmsg}'/>";
+	    if(stmsgcheck == '1'){
+	   		alert(stmsg);
+	   		history.pushState(null, null, 'main.do')
+	   	}
+    </script>
 </head>
 <body>
 
