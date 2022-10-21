@@ -16,7 +16,7 @@ public class ReviewVO {
 	private String title;
 	private String con;
 	private int star ;
-	private Date date;
+	private String date;
 	private String image;
 	private int rec;
 	private String id;
