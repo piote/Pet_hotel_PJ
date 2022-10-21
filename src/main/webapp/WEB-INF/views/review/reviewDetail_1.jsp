@@ -162,24 +162,23 @@
         <c:when test="${reviewList !=null }" >
           <c:forEach  var="review" items="${reviewList }" varStatus="reviewNum" >
           <fmt:formatDate var="reviewDate" value="${review.date}" pattern="yyyy.MM.dd"/>
-         
-          <c:set var="reviewNO" value="resources/review/review_image/${review.reviewNO}/null"/>
           
         <tr class="w_tr w_margin1">
           <td class="w_td" width="15%">${review.star}</td>
           <td class="w_td" width="50%" rowspan="2">${review.title}</td>
-         
-          <c:choose>
-          <c:when test="${ reviewNO != review.image}" >                 
-          <td class="w_td" width="20%" rowspan="2"><img src="${contextPath}/${review.image}" width="150" height="150"></td>
-          </c:when>
-          <c:otherwise>
-          <td class="w_td" width="20%" rowspan="2"></td>
-          </c:otherwise>
-          </c:choose>
           
+          <td class="w_td" width="20%" rowspan="2">               
+		         <c:if test="${review.image != null}"> 
+		          	<img src="${contextPath}/${review.image}" width="150" height="150">
+		          </c:if>
+	      </td>
+	
+          
+        
+         
           <td class="w_td w_date"  width="15%" >${reviewDate}</td>
 
+          
         </tr>
       
       <tr class="w_tr" class="w_tr2">
