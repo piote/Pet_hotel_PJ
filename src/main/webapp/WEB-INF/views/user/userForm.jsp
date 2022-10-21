@@ -36,8 +36,6 @@
                 return false;
             }
             
-            	
-            
             if(!document.userInfo.pw.value){
                 alert("비밀번호를 입력하세요.");
                 return false;
@@ -95,10 +93,42 @@
         
         // 취소 버튼 클릭시 로그인 화면으로 이동
         function goLoginForm() {
-            location.href="LoginForm.jsp";
-            
+            location.href="LoginForm.jsp";     
         }
-     
+        
+        function autoHypenPhone(str){
+        	var cellPhone = document.getElementById('cellPhone');
+        	cellPhone.onkeyup = function(event){
+        	        event = event || window.event;
+        	        var _val = this.value.trim();
+        	        this.value = autoHypenPhone(_val) ;
+            str = str.replace(/[^0-9]/g, '');
+            var tmp = '';
+            if( str.length < 4){
+                return str;
+            }else if(str.length < 7){
+                tmp += str.substr(0, 3);
+                tmp += '-';
+                tmp += str.substr(3);
+                return tmp;
+            }else if(str.length < 11){
+                tmp += str.substr(0, 3);
+                tmp += '-';
+                tmp += str.substr(3, 3);
+                tmp += '-';
+                tmp += str.substr(6);
+                return tmp;
+            }else{              
+                tmp += str.substr(0, 3);
+                tmp += '-';
+                tmp += str.substr(3, 4);
+                tmp += '-';
+                tmp += str.substr(7);
+                return tmp;
+            }
+            return str;
+        }
+
     </script>
     
 </head>
@@ -159,13 +189,13 @@
                 </tr>
                    <td id="title">휴대전화</td>
                     <td>
-                        <input type="text" name="tel" />
+                    <input type="text" name="cellPhone" id="cellPhone" placeholder="핸드폰번호 입력" maxlength="13" />
                     </td>
                 </tr>
                  <tr>
                     <td id="title">휴대전화_2</td>
                     <td>
-                        <input type="text" name="tel_sub" />
+                       <input type="text" name="tel_sub" id="tel_sub" placeholder="핸드폰번호 입력" maxlength="13" />
                     </td>
                 </tr>
                 <tr>

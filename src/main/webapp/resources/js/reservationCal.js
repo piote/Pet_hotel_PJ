@@ -1,8 +1,14 @@
 
 window.onload = function () {
-	
+
 	addRow();
 	
+	$("#petcommentBox").on('keyup', function (event) {
+        var currentString = $("#petcommentBox").val()
+        $("#petcommentinfo").html(currentString.length);
+    });
+    
+    
     $("#checkin2").on("click", function () {
         $("#start_dayBox").text("0000. 00. 00.");
         $("#end_dayBox").text("0000. 00. 00.");
@@ -20,7 +26,8 @@ window.onload = function () {
         })();
     });
     $(".custom_calendar_table").remove();
-
+	
+	
 }
 var dayCal;
 
@@ -76,15 +83,15 @@ function calendarMaker(target, date) {
     //년과 달을 입력받아 달력 테이블 생성
     function assembly(year, month) {
         var calendar_html_code =
-            "<table class='custom_calendar_table'>" +
+            "<table class='custom_calendar_table' style='height:400px'>" +
             "<colgroup>" +
-            "<col style='width:75px'/>" +
-            "<col style='width:75px'/>" +
-            "<col style='width:75px'/>" +
-            "<col style='width:75px'/>" +
-            "<col style='width:75px'/>" +
-            "<col style='width:75px'/>" +
-            "<col style='width:75px'/>" +
+            "<col style='width:100px'/>" +
+            "<col style='width:100px'/>" +
+            "<col style='width:100px'/>" +
+            "<col style='width:100px'/>" +
+            "<col style='width:100px'/>" +
+            "<col style='width:100px'/>" +
+            "<col style='width:100px'/>" +
             "</colgroup>" +
             "<thead class='cal_date'>" +
             "<th><button type='button' class='prev'><</button></th>" +

@@ -32,7 +32,14 @@
           <c:when test="${isLogOn == true  && user!= null}">
             
             <p class="login_msg">환영합니다. ${user.name}님!</p>
-            <a id="mypage" href="${contextPath}/mypage/myPage.do">마이페이지</a>
+            <c:choose>
+	            <c:when test="${user.id == 'admin' }">
+	            	<a id="mypage" href="${contextPath}/admin/adminUserList.do">관리페이지</a>
+	            </c:when>
+	            <c:otherwise>
+	            	<a id="mypage" href="${contextPath}/mypage/myPage.do">마이페이지</a>
+	            </c:otherwise>
+            </c:choose> 
       			<a id="logout" href="${contextPath}/logout.do">로그아웃</a> 
           </c:when>
           <c:otherwise>

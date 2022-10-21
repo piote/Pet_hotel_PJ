@@ -45,7 +45,7 @@
          </td>
         <br>
 		   <a href="${contextPath}/find_id_form.do">아이디 찾기</a>  | 
-		   <a href="#">비밀번호 찾기</a> | 
+		   <a href="${contextPath}/find_pw_form.do">비밀번호 찾기</a> | 
 		   <a href="${contextPath}/userForm.do">회원가입</a>  
          
       </tr>
