@@ -38,13 +38,14 @@
 	<result property="user_name" column="user_name" />
 	<result property="user_tel" column="user_tel" />
 	<result property="pet_name" column="pet_name" />
+    <result property="user_id" column="user_id" />
 </resultMap> 
 
 	<select id="selectMyReservesList" resultMap="searchResult"  parameterType="String"  >
 		<![CDATA[
-		select to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, u.user_name, u.user_tel, p.pet_name
+		select to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_num, u.user_name, u.user_tel, p.pet_name
         from tb_reservation r, tb_user u, tb_petservice p
-                 where u.user_id = #{user_id}
+                 where r.reservation_num = p.reservation_num and u.user_id = r.user_id and u.user_id = #{user_id}
 		         order by r.reservation_st desc
 		]]>
 	</select>
@@ -52,7 +53,8 @@
 	<select id="selectMyDetailReservesList" resultMap="searchResult"  parameterType="java.util.HashMap"  >
 		select to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_state, r.reservation_num, u.user_name, u.user_tel, p.pet_name
 		from tb_reservation r, tb_user u, tb_petservice p
-		                 where u.user_id = #{user_id}
+		                 where r.reservation_num between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
+		                 and r.reservation_num = p.reservation_num and u.user_id = r.user_id and u.user_id = #{user_id}
 		<choose>
 			<when test="(startDate == null or endDate == null) and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel') and searchWord != null">
 				 and ${colName} like '%'|| #{searchWord} ||'%'
@@ -66,7 +68,7 @@
 				and to_char(r.reservation_st, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 				and ${colName} like '%'|| #{searchWord} ||'%'
 			</when>
-			<otherwise>
+			<otherwise>	
 			</otherwise>
 		</choose>
 	         order by r.reservation_st desc
@@ -85,5 +87,27 @@
 	 	   set reservation_state='C'
 	    where reservation_num=#{res_num}
 	</update>
+	
+  	<select id="selectTotReserves" parameterType="String" resultType="int">
+         select count(*)
+         from tb_reservation
+			<choose>
+				<when test="(startDate == null or endDate == null) and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel') and searchWord != null">
+					 where ${colName} like '%'|| #{searchWord} ||'%'
+				</when>
+				
+				<when test="(startDate != null and endDate != null) and (colName == null or colName == '')">
+					 where to_char(reservation_st, 'yyyy-mm-dd') between #{startDate} and #{endDate}
+				</when>
+				
+				<when test="(startDate != null and endDate != null) and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
+					where to_char(reservation_st, 'yyyy-mm-dd') between #{startDate} and #{endDate}
+					where ${colName} like '%'|| #{searchWord} ||'%'
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
+	         order by reservation_st desc 
+	</select>
     
 </mapper>

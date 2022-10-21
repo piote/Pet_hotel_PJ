@@ -8,7 +8,7 @@ import com.myboot.reservation.vo.ReservationVO;
 
 public interface MyPageService {
 	public List listMyReserve(String user_id) throws Exception;
-	public List listMyDetailReserve(Map paraMap) throws Exception;
+	public Map listMyDetailReserve(Map paraMap, String colName) throws Exception;
 	public List listMyReview(String user_id) throws Exception;
 	public void cancelReserve(String res_num) throws Exception;
 	
