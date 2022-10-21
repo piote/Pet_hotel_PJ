@@ -17,17 +17,17 @@
 <title>아이디 찾기</title>
 </head>
 <body>
-<form name="frmfind_id" method="post"  action="${contextPath}/find_id.do">
+<form name="frmfind_pw" method="post"  action="${contextPath}/find_pw.do">
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
-			<form action="../member/find_id.do" method="post">
+			<form action="../member/find_pw.do" method="post">
 				<div class="w3-center w3-large w3-margin-top">
-					<h3>아이디 찾기</h3>
+					<h3>비밀번호 찾기</h3>
 				</div>
 				<div>
 					<p>
-						<label>EMAIL</label>
-						<input class="w3-input" type="text" id="email" name="email" required>
+						<label>Tel</label>
+						<input class="w3-input" type="text" id="tel" name="tel" required>
 					</p>
 					<p class="w3-center">
 						<button type="submit" id=findBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">find</button>

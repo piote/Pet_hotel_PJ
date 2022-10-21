@@ -38,7 +38,21 @@
       <put-attribute name="title" value="아이디찾기" />
       <put-attribute name="body" value="/WEB-INF/views/user/find_id_form.jsp" />
   </definition>
-
+  <definition name="/find_id"  extends="baseLayout">
+      <put-attribute name="title" value="아이디찾기" />
+      <put-attribute name="body" value="/WEB-INF/views/user/find_id.jsp" />
+  </definition>
+  
+  <!-- 로그인 비밀번호찾기 -->
+  <definition name="/find_pw_form"  extends="baseLayout">
+      <put-attribute name="title" value="비밀번호찾기" />
+      <put-attribute name="body" value="/WEB-INF/views/user/find_pw_form.jsp" />
+  </definition>
+ <definition name="/find_pw"  extends="baseLayout">
+      <put-attribute name="title" value="비밀번호찾기" />
+      <put-attribute name="body" value="/WEB-INF/views/user/find_pw.jsp" />
+  </definition>
+  
 <!--  회원가입 -->
  <definition name="/userForm"  extends="baseLayout">
       <put-attribute name="title" value="회원가입" />
