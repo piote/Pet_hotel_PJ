@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <title>호텔 예약창(예약단계1)</title>
     <style>
-        /* * {
+        /*  {
             margine: 10%
         } */
 
@@ -302,6 +302,11 @@
             top: 10px;
             right: 20px;
         }
+        
+        
+        .petUsed{
+        	content:url("${contextPath}/resources/img/close.png")
+        }
     </style>
 
     <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
@@ -333,6 +338,8 @@
 			}
     		
      	}
+    	
+    	
     	
     	
     </script>
@@ -539,5 +546,4 @@
 
 
 </body>
-
 </html>
