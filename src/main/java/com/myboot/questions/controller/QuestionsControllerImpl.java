@@ -85,10 +85,19 @@ public class QuestionsControllerImpl implements QuestionsController{
 //	  }
 	
 
-	@RequestMapping(value = "/questions/*Form.do", method =  RequestMethod.GET)
-	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/questions/*Form.do", method = {RequestMethod.GET,RequestMethod.POST })
+	private ModelAndView form(@RequestParam(value = "parentNO", required = false) String parentNO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		String viewName = (String)request.getAttribute("viewName");
+		
+		//수정하기 일때
+		if(viewName.equals("/questions/replyForm")) {
+			if(parentNO != null) {
+				session.setAttribute("parentNO", parentNO);
+			}
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		
@@ -197,13 +206,17 @@ public class QuestionsControllerImpl implements QuestionsController{
 			String value=multipartRequest.getParameter(name);
 			articleMap.put(name,value);
 		}
+		HttpSession session = multipartRequest.getSession();
+		
+		String parentNO = (String) session.getAttribute("parentNO");
 		
 		String imageFileName= upload(multipartRequest);
-		HttpSession session = multipartRequest.getSession();
+		
 		UserVO userVO = (UserVO) session.getAttribute("user");
 		String id = userVO.getId();
 		articleMap.put("id", id);
 		articleMap.put("imageFileName", imageFileName);
+		articleMap.put("parentNO", parentNO);
 		
 		String message;
 		ResponseEntity resEnt=null;
@@ -215,7 +228,7 @@ public class QuestionsControllerImpl implements QuestionsController{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-			int articleNO = questionsService.addNewQuestions(articleMap);
+			int articleNO = questionsService.addReplyQuestions(articleMap);
 			if(imageFileName!=null && imageFileName.length()!=0) {
 				File srcFile = new File(path+ "\\" + "temp"+ "\\" + imageFileName);
 				File destDir = new File(path+"\\"+articleNO);
@@ -239,6 +252,7 @@ public class QuestionsControllerImpl implements QuestionsController{
 		}
 		//다 쓴 경로 삭제
 		session.removeAttribute("realPath");
+		session.removeAttribute("parentNO");
 		return resEnt;
 	}
 	
