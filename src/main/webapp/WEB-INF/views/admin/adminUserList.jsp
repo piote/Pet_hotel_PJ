@@ -195,7 +195,6 @@
 			$.ajax({
 				url: "/returnAllUser.do",
 				type: "GET", 
-				
 				success : function(data){
 					$(data).each(function(){
 						
@@ -203,7 +202,11 @@
 			                html += '<td class="user_id">'+this.id+'</td>';
 			                html += '<td class="user_name">'+this.name+'</td>';
 			                html += '<td class="user_grade">'+this.grade+'</td>';
-			                html += '<td class="user_joinDate">'+this.joinDate+'</td>';
+			                
+			                var joinDate = this.joinDate;
+			                var joinDate_s = joinDate.substring(0, 10);
+			                
+			                html += '<td class="user_joinDate">'+joinDate_s+'</td>';
 			                html += '<td class="user_email">'+this.email+'</td>';
 			                html += '<td class="user_tel">'+this.tel+'</td>';
 			                html += '<td class="user_resState">예약여부</td>';
@@ -211,12 +214,10 @@
 
 							$('.list_tb').html(html);
 						});
-						
 					},
 				error :function(){
 					alert("request error!");
 					}
-				
 			});
 			
 			
