@@ -183,20 +183,41 @@
     </style>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			
+			var html = '<tr class="tb_title">'
+						+'<td class="user_id">아이디</td>'
+						+'<td class="user_name">이름</td>'
+						+'<td class="user_grade">멤버쉽등급</td>'
+						+'<td class="user_joinDate">가입일</td>'
+						+'<td class="user_email">이메일</td>'
+						+'<td class="user_tel">전화번호</td>'
+						+'<td class="user_resState">예약여부</td></tr>'; 
+						
 			$.ajax({
 				url: "/returnAllUser.do",
 				type: "GET", 
-						
 				success : function(data){
 					$(data).each(function(){
-						alert(this.price + " " + this.name + " " + this.introduce);
+						
+							html += '<tr>';
+			                html += '<td class="user_id">'+this.id+'</td>';
+			                html += '<td class="user_name">'+this.name+'</td>';
+			                html += '<td class="user_grade">'+this.grade+'</td>';
+			                
+			                var joinDate = this.joinDate;
+			                var joinDate_s = joinDate.substring(0, 10);
+			                
+			                html += '<td class="user_joinDate">'+joinDate_s+'</td>';
+			                html += '<td class="user_email">'+this.email+'</td>';
+			                html += '<td class="user_tel">'+this.tel+'</td>';
+			                html += '<td class="user_resState">예약여부</td>';
+			                html += '</tr>';
+
+							$('.list_tb').html(html);
 						});
 					},
 				error :function(){
 					alert("request error!");
 					}
-				
 			});
 			
 			
@@ -256,17 +277,17 @@
                         <td class="user_resState">예약여부</td>
                     </tr>
                     <c:choose>
-                        <c:when test="${userList==null }" >
+                        <%-- <c:when test="${userList==null }" >
                             <tr>
                             <td colspan="7">
                                 <p><b>등록된 회원이 없습니다.</b></p>
                             </td>  
                             </tr>
-                        </c:when>
+                        </c:when> --%>
                 
                         <c:when test="${userList !=null }" >
                             <c:forEach  var="user" items="${userList }" varStatus="user_num" >
-                            <tr>
+                            
                                 <td class="user_id" >${user.id}</td>
                                 <td class="user_name">${user.name}</td> 
                                 <td class="user_grade">${user.grade}</td> 
@@ -274,7 +295,7 @@
                                 <td class="user_email">${user.email}</td> 
                                 <td class="user_tel">${user.tel}</td> 
                                 <td class="user_resState">${user.resState}</td> 
-                            </tr>
+                            
                             </c:forEach>
                         </c:when>
                         </c:choose>
