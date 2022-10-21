@@ -1,29 +1,30 @@
 package com.myboot.admin.user.controller;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myboot.admin.user.service.AdminUserService;
 import com.myboot.user.vo.UserVO;
 
-@Controller
-public class adminUserControllerImpl implements adminUserController {
+@Controller("adminUserController")
+public class AdminUserControllerImpl implements AdminUserController {
 	
 	@Autowired
 	private UserVO userVO;
+	
+	@Autowired
+	private AdminUserService adminUserService;
 	
 	@Override
 	@RequestMapping("/admin/adminUserList.do")
@@ -53,5 +54,12 @@ public class adminUserControllerImpl implements adminUserController {
 	    return null;
 		
 	  }
+	
+	@ResponseBody 
+	@RequestMapping(value= "/returnAllUser.do", method = RequestMethod.GET)
+	public List<UserVO> returnAllUser() throws Exception{
+		List<UserVO> allUser =  adminUserService.listUsers();
+		return allUser;
+	}
 	
 }

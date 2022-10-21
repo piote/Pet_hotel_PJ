@@ -181,6 +181,27 @@
             width: 16%;
         }
     </style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$.ajax({
+				url: "/returnAllUser.do",
+				type: "GET", 
+						
+				success : function(data){
+					$(data).each(function(){
+						alert(this.price + " " + this.name + " " + this.introduce);
+						});
+					},
+				error :function(){
+					alert("request error!");
+					}
+				
+			});
+			
+			
+		});
+	</script>
 </head>
 <body>
     <section class="con_wrap">
