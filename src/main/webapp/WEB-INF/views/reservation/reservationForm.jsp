@@ -327,20 +327,14 @@
                      	</div>
                     </li>
                     <li id="checkoutBox" class="reservationBox">
-                        <div id="mypet" class="reservationtext reservationtext1">| CHECK OUT |</div>
+                        <div id="checkout" class="reservationtext reservationtext1">| CHECK OUT |</div>
                         <div id="checkout2" class="reservationtext reservationtext2">
                         	<span id="end_dayBox">0000. 00. 00.</span>
                             <input type="hidden" name="checkoutDate" id="checkoutDate">
                         </div>
                     </li>
-                    <li id="mypetBox" class="reservationBox">
-                        <div id="mypet" class="reservationtext reservationtext1">| MY PET |</div>
-                        <div id="mypet2" class="reservationtext reservationtext2"><span id="com_mypet">데려오기</span>
-                        </div>
-                    </li>
                 </ul>
             </div>
-
             <table id="pet_table" align="center" width="79%">
                 <tr align="center" bgcolor="#e5e4e2" height="40px">
                     <td><b>Pet Name</b></td>
