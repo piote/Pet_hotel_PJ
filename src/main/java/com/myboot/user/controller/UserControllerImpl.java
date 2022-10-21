@@ -145,8 +145,8 @@ public class UserControllerImpl implements UserController{
 	}
 //	로그인 비밀번호 찾기
 	@RequestMapping(value = "/find_pw.do", method = RequestMethod.POST)
-	public String find_pw(HttpServletResponse response, @RequestParam("tel") String tel, Model md) throws Exception{
-		md.addAttribute("id", userService.find_pw(response, tel));
+	public String find_pw(HttpServletResponse response, @RequestParam("id") String id, Model md) throws Exception{
+		md.addAttribute("pw", userService.find_pw(response, id));
 		return "/find_pw";
 	}
 	
@@ -163,6 +163,7 @@ public class UserControllerImpl implements UserController{
 		String pw= request.getParameter("pw");
 		String name= request.getParameter("name");
 		String email=request.getParameter("email");
+		String mail2=request.getParameter("mail2");
 		String tel=request.getParameter("tel");
 		String tel_sub=request.getParameter("tel_sub");
 		String message=request.getParameter("message");
@@ -176,7 +177,7 @@ public class UserControllerImpl implements UserController{
 		userVO.setId(id);
 		userVO.setPw(pw);
 		userVO.setName(name);
-		userVO.setEmail(email);
+		userVO.setEmail(email+"@"+mail2);
 		userVO.setTel(tel);
 		userVO.setTel_sub(tel_sub);
 		userVO.setMessage(message);
