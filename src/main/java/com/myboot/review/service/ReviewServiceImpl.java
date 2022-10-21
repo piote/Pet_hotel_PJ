@@ -32,7 +32,11 @@ public class ReviewServiceImpl  implements ReviewService{
 	public Map reviewDetail_1(Map pagingMap) throws Exception{
 		Map reviewMap = new HashMap();
 		List<ReviewVO> reviewList = reviewDAO. selectAllReviewList(pagingMap);
+		
+		
+		
 		int totReview = reviewDAO.selectTotReview();
+		
 		reviewMap.put("reviewList", reviewList);
 		reviewMap.put("totReview", totReview);
 	//	articlesMap.put("totArticles", 170);

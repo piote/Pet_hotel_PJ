@@ -16,13 +16,19 @@
 </resultMap> 
 
 <resultMap id="reviewResult" type="reviewVO">
-    <result property="num" column="review_num" />
+	<result property="level" column="LVL" />
+    <result property="reviewNO" column="review_num" />
+    <result property="parentNO" column="parentNO" />
     <result property="title" column="review_title" />
     <result property="con" column="review_con" />
     <result property="star" column="review_star" />
     <result property="date" column="review_date" />
-    <result property="image" column="review_image" />
+    <result property="image" column="review_image_url" />
     <result property="rec" column="review_rec" />
+    
+    <result property="res_num" column="RESERVATION_NUM" />
+    <result property="id" column="user_id" />
+    
 </resultMap>
 
 <resultMap id="searchResult" type="java.util.HashMap">
@@ -70,7 +76,7 @@
 	
 	<select id="selectMyReviewList" resultMap="reviewResult">
 		<![CDATA[
-		select review_date, review_num, review_title, review_con from tb_review
+		select review_date, review_num, review_title from tb_review
 			         where user_id=#{user_id}
 			         order by review_date desc	
 		]]>
