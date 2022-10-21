@@ -24,14 +24,19 @@
                 <img src="${contextPath}/resources/img/bonus_icon.png">
                 <h2>멤버쉽 할인</h2>
                 <p>연간 이용횟수에 따라 할인 프로그램을 제공해드립니다.</p>
-            </div><!--
+            </div>
             <div class="count">
-                <p>안녕하세요 ???님!</p>
-                <p>???님은 현재 저희 호텔을 ???번 이용하셨습니다.</p>
-                <div class="count_bar">
-                    <div class="bar"></div>
-                </div>
-            </div>-->
+            <c:choose>
+        		<c:when test="${isLogOn == true  && user!= null}">
+					<p>안녕하세요 ${user.name}님!</p>
+                	<p>${user.name}님은 현재 ${user.grade}등급입니다.</p>
+				</c:when>
+				<c:otherwise>
+						<p>로그인을 하시면 회원님의 등급을 안내해드립니다.</p>
+        		</c:otherwise>
+        	</c:choose>
+        	</div>
+		</div>
             <ul id="m_menu">
                 <li class="m_bronze">
                     <img class="m_icon" src="${contextPath}/resources/img/bronze_medal.png">
