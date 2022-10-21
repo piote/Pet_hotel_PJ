@@ -364,7 +364,6 @@
                     </li>
                 </ul>
             </div>
-
             <table id="pet_table" align="center" width="79%">
                 <tr align="center" bgcolor="#e5e4e2" height="40px">
                     <td><b>Pet Name</b></td>
