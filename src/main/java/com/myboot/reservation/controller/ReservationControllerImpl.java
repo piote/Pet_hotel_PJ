@@ -141,7 +141,7 @@ public  class ReservationControllerImpl implements ReservationController{
 		reserVO.setRes_st(checkinDate_format);
 		reserVO.setRes_end(checkoutDate_format);
 		reserVO.setRes_comment(petcomment);
-		reserVO.setId(userVO.getName());
+		reserVO.setId(userVO.getId());
 		reserVO.setTotalCost(costResult);
 		
 		//데이터 베이스
