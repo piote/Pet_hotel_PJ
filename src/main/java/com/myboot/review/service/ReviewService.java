@@ -14,7 +14,11 @@ public  interface ReviewService {
 
 	
 
-	public int addNewReview(Map reviewMap, String imageFileName)throws Exception;
+	public int addNewReview(Map reviewMap, String fileName)throws Exception;
+
+
+
+
 
 	
 
