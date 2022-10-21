@@ -131,8 +131,6 @@ public class ReviewControllerImpl implements ReviewController {
 			reviewMap.put(name, value);
 		}
 		
-	
-		
 		// 로그인 시 세션에 저장된 회원 정보에서 글쓴이 아이디를 얻어와서 Map에 저장합니다.
 		HttpSession session = multipartRequest.getSession();
 		
@@ -165,9 +163,6 @@ public class ReviewControllerImpl implements ReviewController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-			
-			
-			
 			System.out.println("in "+path);
 			
 			if (imageFileList != null && imageFileList.size() != 0) {
@@ -193,15 +188,6 @@ public class ReviewControllerImpl implements ReviewController {
 //					FileUtils.moveFileToDirectory(srcFile, destDir, true);
 //				}
 //			}
-
-			
-			
-			
-			
-			
-			
-			
-			
 			message = "<script>";
 			message += " alert('새글을 추가했습니다.');";
 			message += " location.href='" + multipartRequest.getContextPath() + "/review/reviewDetail_1.do'; ";
@@ -227,6 +213,9 @@ public class ReviewControllerImpl implements ReviewController {
 		return resEnt;
 	}
 
+	
+	
+	
 	private List<String> upload(MultipartHttpServletRequest multipartRequest, String path) throws Exception {
 		List<String> fileList = new ArrayList<String>();
 		Iterator<String> fileNames = multipartRequest.getFileNames();
