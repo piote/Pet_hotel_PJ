@@ -44,21 +44,18 @@ public class ReviewServiceImpl implements ReviewService {
 	public int addNewReview(Map reviewMap, String fileName) throws Exception {
 		int reviewNO = reviewDAO.selectNewReviewNO();
 		reviewMap.put("reviewNO", reviewNO);
-		String fileUrl = "resources/review/review_image" + "/" + reviewNO + "/" + fileName;
-		reviewMap.put("review_image_url", fileUrl);
-
-		reviewDAO.insertNewReview(reviewMap);
-		reviewMap.put("reviewNO", reviewNO);
-		List<ImageVO> imageFileList = (ArrayList) reviewMap.get("imageFileList");
-
-		if (imageFileList != null && imageFileList.size() != 0) {
-			reviewDAO.insertNewImage(reviewMap);
+		
+		if (fileName != null) {
+			String fileUrl = "resources/review/review_image" + "/" + reviewNO + "/" + fileName;
+			reviewMap.put("review_image_url", fileUrl);
+			reviewDAO.insertNewReview(reviewMap);
+			reviewMap.put("reviewNO", reviewNO);
+		} else {
+			reviewDAO.insertNewReview(reviewMap);
 		}
 
 		return reviewNO;
 	}
-
-
 
 //다중 이미지 추가하기	
 

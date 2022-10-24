@@ -63,9 +63,20 @@ public  class ReservationControllerImpl implements ReservationController{
 	@RequestMapping(value= "/reservationComplete.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView reservationComplete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView();
 
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("user")==null) {
+			request.setAttribute("stmsgcheck", "1");
+			request.setAttribute("stmsg", "비정상적인 접근입니다!");
+			mav.setViewName("forward:/main.do");
+			//mav.setViewName("redirect:/main.do");
+		}else {
+			String  viewName= (String)request.getAttribute("viewName");
+			mav.setViewName(viewName);
+		}
+	
 		return mav;
 		
 	}

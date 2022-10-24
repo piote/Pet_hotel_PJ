@@ -25,11 +25,29 @@
 		  
 		  		element.checked = true;
 		}
+			
+			function deleteUser(url,id) {
+				if(window.confirm("탈퇴하시겠습니까?")){
+
+					var form = document.createElement("form");
+					 form.setAttribute("method", "post");
+					 form.setAttribute("action", url);
+				     var idInput = document.createElement("input");
+				     idInput.setAttribute("type","hidden");
+				     idInput.setAttribute("name","id");
+				     idInput.setAttribute("value", id);
+					 
+				     form.appendChild(idInput);
+				     document.body.appendChild(form);
+					 form.submit();
+					 
+				}
+				
+			}
 	</script>
 	</head>
 	<body>
-		<form method="post" action="${contextPath}/modMember.do?id=${user.id}">
-		<%-- <form method="post" action="${contextPath}/mypage/myPage.do?id=${userInfo.id}"> --%>
+		<form method="post" action="${contextPath}/mypage/myPage.do?id=${userInfo.id}"> 
 		   <div id="wrap">
 		   	<section class="container">
 		      <h3>회원 정보 수정</h3>
@@ -41,7 +59,7 @@
 			         </tr>
 			         <tr>
 				            <td><p align="center">비밀번호</td>
-				            <td><input class="txtBox" type="password" name="pwd"  value="${user.pw }" /></td>
+				            <td><input class="txtBox" type="password" name="pw"  value="${user.pw }" /></td>
 			         </tr>
 			         <tr>
 				            <td><p align="center">이름</P></td>
@@ -62,13 +80,13 @@
 			          <tr>
 			               <td><p align="center">수신여부</P></td>
 			               <td>
-			                 <input type="checkbox" name="emailsts_yn"  value="N" onclick= 'checkOnlyOne(this)'  />Yes
+			                 <input type="checkbox" name="emailsts_yn"  value="Y" onclick= 'checkOnlyOne(this)'  />Yes
 			                 <input type="checkbox" name="emailsts_yn"  value="N" onclick= 'checkOnlyOne(this)' />No	
 			               </td>
 		               </tr>
 			           <tr>
-			               <td><p align="center">생년월일</P></td>
-			               <td><input class="txtBox" type="text" name="birth" ></td>
+			               <td><p align="center">생년월일</P></td> 
+			               <td><input class="txtBox" type="date" name="birth" value="${birth}" ></td>
 		               </tr>
 			         <tr>
 				           <td><p align="center">가입일</td>
@@ -78,13 +96,16 @@
 			     </table>
 			     
 		         <ul>
-		            <li><a href= "${contextPath}mypage/myPage.do"><input class="btn1" type="button" name="mod_1"  value="수정하기" onClick= "mod();"></a></li>
-			        <li><a href= "${contextPath}modMember.do"><input class="btn2" type="button" name="cal_1" value="수정취소" onClick= "cal();"></a></li>
+		            <li><a href= "${contextPath}/mypage/myPage.do"><input class="btn1" type="button" name="mod_1"  value="수정하기" onClick= "mod();"></a></li>
+			        <li><a href= "${contextPath}/modMemberForm.do"><input class="btn2" type="button" name="cal_1" value="수정취소" onClick= "cal();"></a></li>
 			     </ul>
 			     <p>아이디, 이름, 가입일은 수정이 불가능합니다.</p>
-			     <div><a href= "${contextPath}/main.do"><input class="btn3" type="button" name="leave_1"  value="탈퇴하기" onClick="leave();"></a>
-			     </div>
-		        </div>
+			    <%-- <div><a href= "${contextPath}/main.do">탈퇴하기<input class="btn3" type="button" name="leave_1"  value="탈퇴하기" onClick="leave();"></a>
+					</div> --%>
+					<div>
+						<%-- <a href= "${contextPath}/main.do"><input class="btn3" type="button" name="leave_1"  value="탈퇴하기" onClick="leave();"></a> --%>
+						<button type="button" onclick="deleteUser('${contextPath}/retiring.do','${user.id }');"> 탈퇴하기 </button>
+					</div>
 		   	</section>
 		   </div>
 	   </form>
