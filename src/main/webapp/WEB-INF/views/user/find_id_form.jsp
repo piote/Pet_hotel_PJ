@@ -17,6 +17,7 @@
 <title>아이디 찾기</title>
 </head>
 <body>
+<br><br>
 <form name="frmfind_id" method="post"  action="${contextPath}/find_id.do">
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
@@ -40,5 +41,6 @@
 			</form>
 		</div>
 	</div>
+	<br><br><br><br><br>
 </body>
 </html>
