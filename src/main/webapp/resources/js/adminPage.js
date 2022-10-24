@@ -32,6 +32,12 @@ $(document).ready(function(){
             alert("request error!");
             }
     });
+    $("#keyword").keydown(function(key) {
+        //13번은 엔터키
+        if (key.keyCode == 13) {
+            search();
+        }
+    });
 });
 
 
@@ -80,12 +86,18 @@ function clickNO(pageNo){
                 +'<td class="user_tel">전화번호</td>'
                 +'<td class="user_resState">예약여부</td></tr>'; 
     
-    for(i=0;i<dataPerPage;i++){
+    var dataNo;
+    if(dataPerPage>=totalData){
+        dataNo=totalData;
+    }else{
+        dataNo=dataPerPage;
+    }
+
+    for(i=0;i<dataNo;i++){
         //글 번호 지정 (페이지에 맞게)
         var listNO = i + ((pageNo-1)*10);
-
         html += '<tr>';
-        html += '<td class="user_id">'+user_data[listNO].id+'</td>';
+        html += '<td class="user_id">'+ user_data[listNO].id +'</td>';
         html += '<td class="user_name">'+user_data[listNO].name+'</td>';
         html += '<td class="user_grade">'+user_data[listNO].grade+'</td>';
         
@@ -115,4 +127,34 @@ function pageDown(totPageNo){
     --globalCurrentPage;
     page_num_view(totalData);
     
+}
+
+function search(){
+    var search_op = $('#search_op').val();
+    var keyword = $('#keyword').val();
+    console.log(search_op+' '+keyword);
+    $('.list_tb').empty();
+    $('.page_num').empty();
+    $.ajax({
+        url: "/adminSearchUser.do?search_op="+search_op+"&keyword="+keyword,
+        type: "GET", 
+        success : function(data){
+            //총데이터 수 저장
+            totalData = data.length;
+            //페이지 버튼 출력
+            page_num_view(totalData);
+
+            //user_data에 받아온 데이터 저장
+            user_data = [totalData];
+            for(i=0;i<data.length;i++){
+                user_data[i]=data[i];
+            }
+            //첫 화면 출력
+            clickNO(globalCurrentPage);
+
+            },
+        error :function(){
+            alert("request error!");
+            }
+    });
 }
