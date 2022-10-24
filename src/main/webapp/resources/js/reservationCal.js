@@ -103,7 +103,9 @@ function calendarMaker(target, date) {
             "</thead>" +
             "<tbody id='custom_set_date'>" +
             "</tbody>" +
-            "</table>";
+            "</table>" +
+            "<div class='calTip'><span >*원하시는 예약 날짜 두개를 클릭해주세요.</span></div>" +
+            "<br>"
         return calendar_html_code;
     }
 
