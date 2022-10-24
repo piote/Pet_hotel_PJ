@@ -16,6 +16,126 @@
 		#overlappedID {background-color: GhostWhite; width: 30%; height: 20px;}
 		.olmessagef {color: red; font-style: Italic;}
 		.olmessaget {color: blue; font-style: Italic;}
+		.root {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-root {
+  flex-direction: column;
+}
+.mobile-root .inactive {
+  display: none;
+}
+
+.signin-wrapper {
+  flex-grow: 1;
+  background: #d5d5d5;
+  transition: all 0.32s ease-in;
+}
+
+.signup-wrapper {
+  flex-grow: 1;
+  background: #0F3758;
+  transition: all 0.32s ease-in-out;
+}
+
+.active {
+  flex-grow: 6;
+}
+.active.form {
+  z-index: 5;
+}
+
+.inactive {
+  pointer-events: none;
+  filter: blur(2px) grayscale(80%);
+  transform: scale(1.1);
+}
+.inactive .form-wrapper {
+  filter: opacity(55%);
+}
+
+html, body {
+  font-family: "Roboto";
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+h5 {
+  color: #212121;
+  font-size: 20px;
+  margin: 15px 0 30px 0;
+  text-align: center;
+}
+
+.form, .form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-wrapper {
+  background-color: white;
+  width: 300px;
+  height: 500px;
+  padding: 20px 0;
+  margin: 20px auto;
+  border-radius: 15px;
+}
+.form-wrapper button {
+  cursor: pointer;
+  font-weight: bold;
+  width: 230px;
+  margin: 0 35px 20px;
+  height: 45px;
+  padding: 6px 15px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  font-size: 14px;
+}
+.form-wrapper button.primary {
+  color: white;
+  background: #0F3758;
+}
+.form-wrapper button.primary:hover {
+  opacity: 0.9;
+}
+.form-wrapper button.secondary {
+  background: white;
+  color: #0F3758;
+}
+.form-wrapper button.secondary:hover {
+  background: #f5f5f5;
+}
+.form-wrapper .form-field {
+  font-weight: bold;
+  width: 200px;
+  margin: 0 35px 20px;
+  height: 35px;
+  padding: 6px 15px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  background: #f5f5f5;
+  color: #748194;
+  font-size: 14px;
+}
+.form-wrapper p {
+  color: #424242;
+  font-size: 14px;
+  text-align: center;
+}
+.form-wrapper p a {
+  cursor: pointer;
+  color: #0F3758;
+}
+.form-wrapper p a:hover {
+  color: #009688;
+}
 	</style>
     <title>회원가입 화면</title>
   
@@ -111,100 +231,36 @@
         <!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
        
         <form  method="post" action="${contextPath}/addUser.do" name="userInfo" id="userInfo" >
-            <table>
-                <tr>
-					<td id="title">아이디</td>
-					<td>
-						<input type="text" id="user_id" name="id" placeholder="영어로 작성하시오"  maxlength="20" required autofocus required>
+        	<div class="root">
+  				<div class="signin-wrapper form active">
+ 				   <div class="form-wrapper">
+   				   <h5>Welcome Back  👊</h5>
+
+						<input type="text" id="user_id" name="id" placeholder="영어로 작성하시오" class="form-field" maxlength="20" required autofocus required>
 						<input type="hidden" id="idcheck" value="false">
-						<button id="overlappedID" type="button" onclick="lappedID()" >중복확인</button><br>
-						<span id="olmessage"></span>
-					</td>
-                    
-                </tr>
-                        
-                <tr>
-                    <td id="title">비밀번호</td>
-                    <td>
-                        <input type="password" name="pw" maxlength="50">
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td id="title">비밀번호 확인</td>
-                    <td>
-                        <input type="password" name="passwordcheck" maxlength="50">
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td id="title">이름</td>
-                    <td>
-                        <input type="text" name="name" maxlength="20">
-                    </td>
-                </tr>
-                  <tr>
-                    <td id="title">이메일</td>
-                    <td>
-                        <input type="text" name="email" maxlength="30">@
-                        <select name="mail2">
+						<button id="overlappedID" type="button" onclick="lappedID()" class="form-field">중복확인</button><br>
+						<span id="olmessage"class="form-field"></span>
+                        <input type="password" name="pw" maxlength="50" class="form-field">
+                        <input type="password" name="passwordcheck" maxlength="50" class="form-field">
+              
+                        <input type="text" name="name" maxlength="20" class="form-field">
+                        <input type="text" name="email" maxlength="30" class="form-field">@
+                        <select name="mail2" class="form-field">
                             <option>naver.com</option>
                             <option>daum.net</option>
                             <option>gmail.com</option>
                             <option>nate.com</option>                        
                         </select>
-                    </td>
-                </tr>
-                   <td id="title">휴대전화</td>
-                    <td>
-                    <input type="number" name="tel" id="tel" placeholder="핸드폰번호 입력" maxlength="13" />
-                    </td>
-                </tr>
-                 <tr>
-                    <td id="title">휴대전화_2</td>
-                    <td>
-                       <input type="number" name="tel_sub" id="tel_sub" placeholder="핸드폰번호 입력" maxlength="13" />
-                    </td>
-                </tr>
-                <tr>
-                   <td id="title">메세지동의</td>
-                    <td>
-                     	<input type="checkbox" name="message" value="Y"> 이메일 수신 발송에 동의하십니까? 
-                    </td>
-                </tr>
-                 <tr>
-                    
-                <tr>
-                    <td id="title">생일</td>
-                    <td>
-                        <!-- <input type="text" name="birthyy" maxlength="4" placeholder="년(4자)" size="6" >
-                        <select name="birthmm">
-                            <option value="">월</option>
-                            <option value="01" >1</option>
-                            <option value="02" >2</option>
-                            <option value="03" >3</option>
-                            <option value="04" >4</option>
-                            <option value="05" >5</option>
-                            <option value="06" >6</option>
-                            <option value="07" >7</option>
-                            <option value="08" >8</option>
-                            <option value="09" >9</option>
-                            <option value="10" >10</option>
-                            <option value="11" >11</option>
-                            <option value="12" >12</option>
-                        </select>
-                        <input type="text" name="birthdd" maxlength="2" placeholder="일" size="4" > -->
-                        
-                       <input type="date" name="birth" >
-                        
-                    </td>
-                </tr>
-            </table>
-            <br>
-            
-            <input type="button" id="signup" value="가입" onclick="checkValue()" >  
-            <input type="button" value="취소" onclick="goLoginForm()">
+                   
+                   		<input type="number" name="tel" id="tel" placeholder="핸드폰번호 입력" maxlength="13" class="form-field" />               
+                        <input type="number" name="tel_sub" id="tel_sub" placeholder="핸드폰번호 입력" maxlength="13" class="form-field" />                
+                     	<input type="checkbox" name="message" class="form-field" value="Y"> 이메일 수신 발송에 동의하십니까?                 
+                        <input type="date" name="birth" class="form-field" >          
+          			    <input type="button" id="signup" value="가입" onclick="checkValue()" >  
+          			    <input type="button" value="취소" onclick="goLoginForm()">
+            		</div>
+    			</div>
+   			 </div>
         </form>
-    </div>
 </body>
 </html>
