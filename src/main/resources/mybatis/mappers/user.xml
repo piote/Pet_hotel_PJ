@@ -29,13 +29,16 @@
  	 </select>
 <!-- 로그인 아이디찾기 -->
 	<select id="find_id" parameterType="userVO" resultType="String">
+	<![CDATA[
 		select USER_ID from TB_USER where USER_EMAIL = #{email} and USER_NAME=#{name}
+	]]>
 	</select>
 	
  <!-- 로그인 비밀번호찾기 -->
 	<select id="find_pw" parameterType="String" resultType="String">
+	<![CDATA[
 		select USER_PW from TB_USER where USER_ID =#{id} and USER_TEL=#{tel}
-		public String find_pw(@Param("id") String id, @Param("tel") String tel);
+		 ]]>
 	</select>
 	
    <select id="selectAllUserList" resultMap="userResult">
@@ -45,9 +48,9 @@
    </select>
   <!-- 회원가입 아이디 중복검사 -->
    <select id="overlappedID" parameterType="UserVO" resultType="int">
-   <!A[CDTA[
+  <![CDATA[
 		select count(USER_ID) From TB_USER where USER_ID=#{id}
-		 ]]>
+	  ]]>
 	</select>
    
 <!--    <select id="selectName" resultType="String"> -->

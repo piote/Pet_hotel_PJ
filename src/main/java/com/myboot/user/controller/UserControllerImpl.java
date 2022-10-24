@@ -150,8 +150,12 @@ public class UserControllerImpl implements UserController{
 	}
 //	로그인 비밀번호 찾기
 	@RequestMapping(value = "/find_pw.do", method = RequestMethod.POST)
-	public String find_pw(HttpServletResponse response, @RequestParam("id") String id, Model md) throws Exception{
-		md.addAttribute("pw", userService.find_pw(response, id));
+	public String find_pw(HttpServletResponse response, @RequestParam("id") String id, @RequestParam("tel") String tel,Model md) throws Exception{
+		UserVO userVO= new UserVO();
+		userVO.setId(id);
+		userVO.setTel(tel);
+		
+		md.addAttribute("pw", userService.find_pw(response, userVO));
 		return "/find_pw";
 	}
 	
