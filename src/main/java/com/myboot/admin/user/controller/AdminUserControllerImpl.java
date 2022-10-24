@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -60,6 +61,27 @@ public class AdminUserControllerImpl implements AdminUserController {
 	public List<UserVO> returnAllUser() throws Exception{
 		List<UserVO> allUser =  adminUserService.listUsers();
 		return allUser;
+	}
+	@ResponseBody 
+	@RequestMapping(value= "/adminSearchUser.do", method = RequestMethod.GET)
+	public List<UserVO> adminUserListById(
+			@RequestParam(value ="search_op", required = false) String search_op,
+			@RequestParam(value ="keyword", required = false) String keyword,
+			  HttpServletRequest request, HttpServletResponse response) throws Exception{
+		List<UserVO> searchUsers; 
+			if(search_op.equals("search_id")) {
+				searchUsers= adminUserService.searchUsersById(keyword);
+			}else if(search_op.equals("search_name")) {
+				searchUsers= adminUserService.searchUsersByName(keyword);
+			}else if(search_op.equals("search_tel")) {
+				searchUsers= adminUserService.searchUsersByTel(keyword);
+			}else if(search_op.equals("search_email")) {
+				searchUsers= adminUserService.searchUsersByEmail(keyword);
+			}else {
+				return null;
+			}
+		
+		return searchUsers;
 	}
 	
 }

@@ -15,10 +15,10 @@ public interface UserService {
 	public List listUsers() throws Exception;
 
 // 로그인 아이디 찾기
-	public String find_id(HttpServletResponse response, String email) throws Exception;
+	public String find_id(HttpServletResponse response, UserVO userVO) throws Exception;
 	
 // 로그인 비밀번호 찾기
-	public String find_pw(HttpServletResponse response, String id) throws Exception;
+	public String find_pw(HttpServletResponse response, UserVO userVO) throws Exception;
 	
 // 비밀번호 한번 더 입력
 	public UserVO password(UserVO  userVO) throws Exception;
@@ -27,7 +27,7 @@ public interface UserService {
 // 회원 정보 수정
 	public int modMember(UserVO userVO) throws DataAccessException; 
 	
-	public UserVO findUser(String id) throws DataAccessException;
+	public UserVO findUser(UserVO user) throws DataAccessException;
 	
 // 회원 탈퇴	
 	public int retiring(String id) throws DataAccessException;

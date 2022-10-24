@@ -11,23 +11,23 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원정보 수정</title>
-
-    <link rel="stylesheet" href="${contextPath}/resources/css/password.css">
- <c:choose>
-	<c:when test="${result=='passwordFailed' }">
- 		  <script> 
-		    window.onload=function(){
-		      alert("비밀번호가 틀립니다.다시 입력하세요!");
-		    }
-	  </script>
-	</c:when> 
-	</c:choose>
-</head>
+	<head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>회원정보 수정</title>
+	
+	    <link rel="stylesheet" href="${contextPath}/resources/css/password.css">
+	 	<c:choose>
+			<c:when test="${result=='passwordFailed' }">
+		 		  <script> 
+				    window.onload=function(){
+				      alert("비밀번호가 틀립니다.다시 입력하세요!");
+				    }
+			  </script>
+			</c:when> 
+		</c:choose>
+	</head>
 	<body>
 		 <form method="post"  action="${contextPath}/pw_change.do">
 		    <div id="wrap">

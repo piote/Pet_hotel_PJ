@@ -166,10 +166,22 @@
             background-color: #e59f5a;
             color: #fff;
         }
+        #questionscommentLengh{      
+        	margin: auto;
+        	width: 97%;
+        	text-align: right;
+        	}
 
     </style>
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
+    //글자수세기
+        window.onload = function (){
+         $("#questionsCommendBox").on('keyup', function (event) {
+	        var currentString = $("#questionsCommendBox").val()
+	        $("#questionsCommentInfo").html(currentString.length);
+	    });
+        }
         
         //목록보기
         function backToList(obj){
@@ -216,7 +228,9 @@
                     <input type="text" name="title" spellcheck="false" maxlength="50" placeholder="제목을 입력해주세요." />
                 </li>
                 <li class="atc_content">
-                    <textarea name="content" spellcheck="false" maxlength="1000" placeholder="내용을 입력해주세요." onkeydown="resize(this)" onkeyup="resize(this)"></textarea>
+                    <textarea id="questionsCommendBox"name="content" spellcheck="false" maxlength="1000" placeholder="내용을 입력해주세요." onkeydown="resize(this)" onkeyup="resize(this)"></textarea>
+                  
+   	         	<div id="questionscommentLengh"><span id="questionsCommentInfo">0</span>/1000</div>
                 </li>
                 <li class="atc_imageFile">
                 	<div class="imageFile_wrap">

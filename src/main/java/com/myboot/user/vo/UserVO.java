@@ -1,6 +1,7 @@
 package com.myboot.user.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public class UserVO {
 	private Date joinDate;
 	private String grade;
 	
-	
+
 	public UserVO() {
 		System.out.println("userVO 호출");
 	}

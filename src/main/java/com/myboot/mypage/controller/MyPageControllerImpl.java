@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myboot.mypage.service.MyPageService;
-import com.myboot.reservation.vo.ReservationVO;
+import com.myboot.mypage.vo.MyPageVO;
 import com.myboot.user.vo.UserVO;
 
 @Controller("myPageController")
@@ -55,7 +55,7 @@ public class MyPageControllerImpl implements MyPageController {
 		String _pageNum = request.getParameter("pageNum");
 		int section = Integer.parseInt(((_section==null)? "1":_section));
 		int pageNum = Integer.parseInt(((_pageNum==null)? "1":_pageNum));
-        
+        	
         String colName = request.getParameter("colName");
         String searchWord = request.getParameter("searchWord");
         
@@ -63,10 +63,10 @@ public class MyPageControllerImpl implements MyPageController {
         String endDate = request.getParameter("endDate");
 		UserVO userVO=(UserVO)session.getAttribute("user");
 		String user_id = userVO.getId();
-		session.removeAttribute("colName");
+		session.removeAttribute("searchWord");
 		
-		if(colName!=null && colName!="") {
-			session.setAttribute("colName", colName);
+		if(searchWord!=null && searchWord!="") {
+			session.setAttribute("searchWord", searchWord);
 		}
         
         Map paraMap = new HashMap();
@@ -79,7 +79,7 @@ public class MyPageControllerImpl implements MyPageController {
 		paraMap.put("section", section);
 		paraMap.put("pageNum", pageNum);
         
-        Map myReserveMap = myPageService.listMyDetailReserve(paraMap, colName);
+        Map myReserveMap = myPageService.listMyDetailReserve(paraMap, searchWord);
         
 		myReserveMap.put("section", section);
 		myReserveMap.put("pageNum", pageNum);
@@ -91,10 +91,10 @@ public class MyPageControllerImpl implements MyPageController {
         }else {
         	mav.addObject("colName", colName);
         }
-        mav.addObject("myReserveMap", myReserveMap);
         mav.addObject("startDate", startDate);
         mav.addObject("endDate", endDate);
         mav.addObject("searchWord", searchWord);
+        mav.addObject("myReserveMap", myReserveMap);
         return mav;
     }
     

@@ -5,12 +5,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-
-<c:set  var="questionsList"  value="${questionsMap.questionsList}" />
-
-<c:set  var="totUser"  value="${questionsMap.totArticles}" />
-<c:set  var="section"  value="${questionsMap.section}" />
-<c:set  var="pageNum"  value="${questionsMap.pageNum}" />
 <%
   request.setCharacterEncoding("UTF-8");
 %>
@@ -20,53 +14,13 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자페이지_회원조회</title>
+    <script src="${contextPath}/resources/js/adminPage.js"></script>
     <style>
-        .con_wrap{
-            width: 1270px; height: auto;
-            position: relative;
-            margin: 100px auto;
-        }   
-        .adm_title{
-            width: 1000px; height: 65px;
-            margin: 0 auto;
-            border-bottom: 1px solid #ccc;
-        }
-        .adm_title p{
-            font-size: 17px;
-            font-weight: 800;
-            text-align: center;
-        }
-        .y_txt{
-            color: #E59F5A;
-        }
-        .info_wrap{
-            width: 100%; height: auto;
-            position: relative;
-            margin-top: 60px;
-        }
-        .list_left{
-            width: 270px; height: 500px;
-        }
-        .list_nav{
-            width: 100%; height: 155px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            font-size: 14px;
-        }
-        .sideNav{
-            color: #989898;
-        }
-        .sideNav:hover{
-            color: #333;
-        }
-        .current{
-            color: #333;
-        }
+        
         .list_wrap{
             width: 1000px; height: auto;
             position: absolute; 
-            top: 0; right: 0;
+            top: 120px; right: 0;
         }
         .list_option{
             width: 100%;
@@ -180,77 +134,35 @@
         .user_tel{
             width: 16%;
         }
+        .page_num{
+            margin-top: 50px;
+            text-align: center;
+        }
+        .pageNO{
+            display: inline-block;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #999999;
+        }
+        .select_number{
+            color: #030303;
+        }
     </style>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			var html = '<tr class="tb_title">'
-						+'<td class="user_id">아이디</td>'
-						+'<td class="user_name">이름</td>'
-						+'<td class="user_grade">멤버쉽등급</td>'
-						+'<td class="user_joinDate">가입일</td>'
-						+'<td class="user_email">이메일</td>'
-						+'<td class="user_tel">전화번호</td>'
-						+'<td class="user_resState">예약여부</td></tr>'; 
-						
-			$.ajax({
-				url: "/returnAllUser.do",
-				type: "GET", 
-				success : function(data){
-					$(data).each(function(){
-						
-							html += '<tr>';
-			                html += '<td class="user_id">'+this.id+'</td>';
-			                html += '<td class="user_name">'+this.name+'</td>';
-			                html += '<td class="user_grade">'+this.grade+'</td>';
-			                
-			                var joinDate = this.joinDate;
-			                var joinDate_s = joinDate.substring(0, 10);
-			                
-			                html += '<td class="user_joinDate">'+joinDate_s+'</td>';
-			                html += '<td class="user_email">'+this.email+'</td>';
-			                html += '<td class="user_tel">'+this.tel+'</td>';
-			                html += '<td class="user_resState">'+this.resState+'</td>';
-			                html += '</tr>';
-
-							$('.list_tb').html(html);
-						});
-					},
-				error :function(){
-					alert("request error!");
-					}
-			});
-			
-			
-		});
-	</script>
 </head>
 <body>
-    <section class="con_wrap">
-        <div class="adm_title">
-            <p><samp class="y_txt">관리자</samp>님 반갑습니다.</p>
-            
-        </div>
-        <div class="info_wrap">
-            <div class="list_left">
-                <ul class="list_nav">
-                    <li><a class="current" href="#">회원조회</a></li>
-                    <li><a class="sideNav" href="#">예약관리</a></li>
-                    <li><a class="sideNav" href="#">리뷰게시판 관리</a></li>
-                    <li><a class="sideNav" href="#">문의게시판 관리</a></li>
-                </ul>
-            </div>
-            
+    
             <div class="list_wrap">
                 <div class="list_option">
-                    <div class="search_wrap">
+                    <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="search()" >
                         <select name="search_op" id="search_op" aria-label="search">
                             <option value="search_id">아이디</option>
-                            <option value="search_id">이름</option>
+                            <option value="search_name">이름</option>
                             <option value="search_tel">전화번호</option>
                             <option value="search_email">이메일</option>
                         </select>
-                        <input type="text" name="keyword" class="search_txt" placeholder="검색">
-                        <button type="#" class="seh_icon" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
+                        <input type="text" name="keyword" id="keyword" class="search_txt" placeholder="검색">
+                        <button type="button" class="seh_icon" onclick="search()" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
                     </div>
                     <div class="grade_option">
                         멤버쉽 :
@@ -276,68 +188,11 @@
                         <td class="user_tel">전화번호</td>
                         <td class="user_resState">예약여부</td>
                     </tr>
-                    <c:choose>
-                        <%-- <c:when test="${userList==null }" >
-                            <tr>
-                            <td colspan="7">
-                                <p><b>등록된 회원이 없습니다.</b></p>
-                            </td>  
-                            </tr>
-                        </c:when> --%>
-                
-                        <c:when test="${userList !=null }" >
-                            <c:forEach  var="user" items="${userList }" varStatus="user_num" >
-                            
-                                <td class="user_id" >${user.id}</td>
-                                <td class="user_name">${user.name}</td> 
-                                <td class="user_grade">${user.grade}</td> 
-                                <td class="user_joinDate">${user.joinDate}</td> 
-                                <td class="user_email">${user.email}</td> 
-                                <td class="user_tel">${user.tel}</td> 
-                                <td class="user_resState">${user.resState}</td> 
-                            
-                            </c:forEach>
-                        </c:when>
-                        </c:choose>
                 </table>
+                <div class="page_num"></div>
             </div>
-            <div class="page">
-                <c:if test="${totArticles != null }" >
-                        <c:choose>
-                            <c:when test="${totArticles >100 }">  <!-- 글 개수가 100 초과인경우 -->
-                                <c:forEach var="page" begin="1" end="10" step="1" >
-                                <c:if test="${section >1 && page==1 }">
-                                    <a class="no-uline" href="${contextPath }/questions/questionsList.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&keyword=${keyword}">&nbsp; pre </a>
-                                </c:if>
-                                    <a class="no-uline" href="${contextPath }/questions/questionsList.do?section=${section}&pageNum=${page}&keyword=${keyword}">${(section-1)*10 +page } </a>
-                                <c:if test="${page ==10 }">
-                                    <a class="no-uline" href="${contextPath }/questions/questionsList.do?section=${section+1}&pageNum=${section*10+1}&keyword=${keyword}">&nbsp; next</a>
-                                </c:if>
-                                </c:forEach>
-                
-                            </c:when>
-                            <c:when test="${totArticles ==100 }" >  <!--등록된 글 개수가 100개인경우  -->
-                                <c:forEach   var="page" begin="1" end="10" step="1" >
-                                <a class="no-uline"  href="#">${page } </a>
-                                </c:forEach>
-                            </c:when>
-                        
-                            <c:when test="${totArticles<100 }" >   <!--등록된 글 개수가 100개 미만인 경우  -->
-                                <c:forEach   var="page" begin="1" end="${totArticles/10 +1}" step="1" >
-                                <c:choose>
-                                    <c:when test="${page==pageNum }">
-                                        <a class="sel-page"  href="${contextPath }/questions/questionsList.do?section=${section}&pageNum=${page}&keyword=${keyword}">${page } </a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a class="no-uline"  href="${contextPath }/questions/questionsList.do?section=${section}&pageNum=${page}&keyword=${keyword}">${page } </a>
-                                    </c:otherwise>
-                                </c:choose>
-                                </c:forEach>
-                            </c:when>
-                        </c:choose>
-                </c:if>
-            </div>
-        </div>
+            
+        
     </section>
 </body>
 </html>

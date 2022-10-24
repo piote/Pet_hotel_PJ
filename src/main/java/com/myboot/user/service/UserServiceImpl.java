@@ -41,10 +41,11 @@ public class UserServiceImpl implements UserService {
 
 // 로그인 아이디 찾기
 	@Override
-	public String find_id(HttpServletResponse response, String email) throws Exception {
+	public String find_id(HttpServletResponse response, UserVO userVO) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		String id = userDAO.find_id(email);
+		
+		String id = userDAO.find_id(userVO);
 		
 		if (id == null) {
 			out.println("<script>");
@@ -59,10 +60,10 @@ public class UserServiceImpl implements UserService {
 	}
 // 로그인 비밀번호 찾기
 	@Override
-	public String find_pw(HttpServletResponse response, String id) throws Exception {
+	public String find_pw(HttpServletResponse response, UserVO userVO) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		String pw = userDAO.find_pw(id);
+		String pw = userDAO.find_pw(userVO);
 			
 		if (pw == null) {
 			out.println("<script>");
@@ -84,7 +85,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserVO findUser(String id) throws DataAccessException{
+	public UserVO findUser(UserVO id) throws DataAccessException{
 		return userDAO.selectUserById(id);
 	}
   

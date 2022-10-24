@@ -8,19 +8,29 @@
       <put-attribute name="body" value="" />
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
-
+   
+   <!-- 관리자페이지용 레이아웃 -->
+   <definition name="adminLayout"  template="/WEB-INF/views/common/adminLayout.jsp">
+      <put-attribute name="title" value="Anitel" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+      <put-attribute name="adminTitle" value="/WEB-INF/views/common/adminTitle.jsp" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+   
+	<!-- 메인페이지 -->
    <definition name="main" extends="baseLayout">
       <put-attribute name="title" value="Anitel" />
       <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
    </definition>
    
    <!--  예약 페이지 -->
-   
    <definition name="/reservationForm" extends="baseLayout">
       <put-attribute name="title" value="예약하기" />
       <put-attribute name="body" value="/WEB-INF/views/reservation/reservationForm.jsp" />
    </definition> 
-   
+   <!--  예약 페이지 완료 -->
    <definition name="/reservationComplete" extends="baseLayout">
       <put-attribute name="title" value="예약완료" />
       <put-attribute name="body" value="/WEB-INF/views/reservation/reservationComplete.jsp" />
@@ -28,17 +38,17 @@
    
    <!--  예약수정 -->
    
-   <definition name="/reservationChanges" extends="baseLayout">
+   <definition name="/reservationUpdate" extends="baseLayout">
       <put-attribute name="title" value="예약수정" />
-      <put-attribute name="body" value="/WEB-INF/views/reservation/reservationChanges.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/reservation/reservationUpdate.jsp" />
    </definition> 
  
     <!--  예약 수정 -->
     
-    <definition name="/reservationChanges" extends="baseLayout">
+    <!-- <definition name="/reservationChanges" extends="baseLayout">
       <put-attribute name="title" value="예약수정" />
       <put-attribute name="body" value="/WEB-INF/views/reservation/reservationChanges.jsp" />
-   </definition> 
+   </definition>  -->
    
   <!--  로그인 -->
 	
@@ -164,7 +174,7 @@
    </definition>
    
    <!-- 관리자 페이지 -->
-   	<definition name="/admin/adminUserList" extends="baseLayout">
+   	<definition name="/admin/adminUserList" extends="adminLayout">
 	      <put-attribute name="title" value="관리자페이지_회원정보" />
 	      <put-attribute name="body" value="/WEB-INF/views/admin/adminUserList.jsp" />
 	</definition>
