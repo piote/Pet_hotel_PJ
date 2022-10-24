@@ -13,6 +13,6 @@ public interface ReservationController {
 	public ModelAndView reservationMain(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView reservationComplete(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView reservationAdd( HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView reservationChanges(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView reservationUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	public String reservationComplete(Model model);
 }

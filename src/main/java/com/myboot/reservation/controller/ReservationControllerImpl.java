@@ -82,8 +82,8 @@ public  class ReservationControllerImpl implements ReservationController{
 	}
 	
 	@Override
-	@RequestMapping(value= "/reservationChanges.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView reservationChanges(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value= "/reservationUpdate.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView reservationUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
