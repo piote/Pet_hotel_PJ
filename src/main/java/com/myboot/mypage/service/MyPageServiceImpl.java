@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myboot.mypage.dao.MyPageDAO;
-import com.myboot.questions.vo.QuestionsVO;
 
 @Service("myPageService")
 public class MyPageServiceImpl implements MyPageService {
@@ -21,20 +20,19 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public Map listMyDetailReserve(Map paraMap, String colName) throws Exception{
+	public Map listMyDetailReserve(Map paraMap, String searchWord) throws Exception{
 		Map myReserveMap = new HashMap();
 		List myReserveList = null;
 		int totReserves=0;
-		if(colName==null) {
-			myReserveList = myPageDAO.selectMyDetailReservesList(paraMap);
+		if(searchWord==null || searchWord=="") {
+			myReserveList = myPageDAO.selectAllMyReservesList(paraMap);
 			totReserves = myPageDAO.selectTotReserves();
 		} 
 		else {
-			paraMap.put("colName", colName);
+			paraMap.put("searchWord", searchWord);
 			myReserveList = myPageDAO.selectMyDetailReservesList(paraMap);
-			myReserveMap.put("colName", colName);
-			totReserves = myPageDAO.selectTotReserves(colName);
-			
+			myReserveMap.put("searchWord", searchWord);
+			totReserves = myPageDAO.searchTotReserves(searchWord);
 		}
 		myReserveMap.put("myReserveList", myReserveList);
 		myReserveMap.put("totReserves",totReserves );

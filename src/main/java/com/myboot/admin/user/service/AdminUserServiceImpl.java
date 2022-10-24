@@ -19,4 +19,28 @@ public class AdminUserServiceImpl implements AdminUserService {
 		usersList = adminUserDAO.selectAllUserList();
 		return usersList;
 	}
+	@Override
+	public List searchUsersById(String keyword) throws Exception {
+		List usersList = null;
+		usersList = adminUserDAO.searchIdUserList(keyword);
+		return usersList;
+	}
+	@Override
+	public List searchUsersByName(String keyword) throws Exception {
+		List usersList = null;
+		usersList = adminUserDAO.searchNameUserList(keyword);
+		return usersList;
+	}
+	@Override
+	public List searchUsersByTel(String keyword) throws Exception {
+		List usersList = null;
+		usersList = adminUserDAO.searchTelUserList(keyword);
+		return usersList;
+	}
+	@Override
+	public List searchUsersByEmail(String keyword) throws Exception {
+		List usersList = null;
+		usersList = adminUserDAO.searchEmailUserList(keyword);
+		return usersList;
+	}
 }

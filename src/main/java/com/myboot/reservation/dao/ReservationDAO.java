@@ -21,6 +21,10 @@ public interface ReservationDAO {
 	 public int insertPetserviceList(List<PetserviceVO> petserviceList) throws DataAccessException;
 	 // 사용가능한 예약 번호 
 	 public int useReservationNum() throws DataAccessException;
+
+	public ReservationVO SearchReservationNum(String reserNum) throws DataAccessException;
+
+	public List<PetserviceVO> SearchPetServiceByResNum(String reserNum) throws DataAccessException;
 	 
 //	 
 //	 public int updateMember(MemberVO memberVO) throws DataAccessException ;

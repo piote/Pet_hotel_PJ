@@ -59,7 +59,7 @@
     <div class="info_wrap">
         <div class="list_left">
             <ul class="list_nav">
-                <li><a class="current" href="#">회원조회</a></li>
+                <li><a class="current" href="${contextPath}/admin/adminUserList.do">회원조회</a></li>
                 <li><a class="sideNav" href="#">예약관리</a></li>
                 <li><a class="sideNav" href="#">리뷰게시판 관리</a></li>
                 <li><a class="sideNav" href="#">문의게시판 관리</a></li>
