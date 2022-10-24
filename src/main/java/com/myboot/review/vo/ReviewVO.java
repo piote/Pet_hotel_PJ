@@ -15,7 +15,7 @@ public class ReviewVO {
 	private int parentNO;
 	private String title;
 	private String con;
-	private int star ;
+	private String rate ;
 	private Date date;
 	private String image;
 	private int rec;

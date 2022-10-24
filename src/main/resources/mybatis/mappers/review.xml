@@ -10,11 +10,11 @@
 		<result property="parentNO" column="parentNO" />
 		<result property="title" column="review_title" />
 		<result property="con" column="review_con" />
-		<result property="star" column="review_star" />
+		<result property="rate" column="review_star" />
 		<result property="date" column="review_date" />
 		<result property="image" column="review_image_url" />
 		<result property="rec" column="review_rec" />
-
+		<result property="rating" column="rating" />
 		<result property="res_num" column="RESERVATION_NUM" />
 		<result property="id" column="user_id" />
 
@@ -78,7 +78,7 @@
 	<insert id="insertNewReview" parameterType="java.util.Map">
     <![CDATA[
       insert into tb_review(review_num, user_id, review_title, review_star,review_rec, review_date ,RESERVATION_NUM, review_image_url)
-      values(#{reviewNO}, #{id}, #{title}, #{star}, #{rec}, sysdate, #{res_num}, #{review_image_url, jdbcType=VARCHAR})
+      values(#{reviewNO}, #{id}, #{title}, #{rate}, #{rec}, sysdate, #{res_num}, #{review_image_url, jdbcType=VARCHAR})
     ]]>
 	</insert>
 

@@ -11,6 +11,7 @@
  <c:set  var="totReview"  value="${reviewMap.totReview}" />
  <c:set  var="section"  value="${reviewMap.section}" />
  <c:set  var="pageNum"  value="${reviewMap.pageNum}" />
+
  
  <!--
  <%
@@ -20,13 +21,16 @@
  <!DOCTYPE html>
  <html>
  <head>
-   <style>
+
+
+  
+<style>
    .all {
        
        margin-top: 250px;
-       height: 1800px;
+       height: 2000px;
    }
-
+  
  .w_review {
 	  margin-top: -40px;
 	  text-align: left; font-size: 25px;
@@ -80,8 +84,11 @@
     	  }
 
     	  .cls2 {
-    		  text-align:center; font-size:30px;
-    		  height: 1650px;
+    		  
+    		  left: 30%;
+    		  margin-top: 1650px;
+    		  position: absolute;
+    		  font-size: 20px;
     		  }
     	   
     	  .no-uline {text-decoration:none;}
@@ -104,7 +111,7 @@
   .w_tr>.w_td {
    
     font-size: 17px !important ;
-    height: 40px;
+    height: 75px;
     
   }
   .w_date{
@@ -121,8 +128,13 @@
   .w_margin3 {
 	  border-bottom: 50px solid #fff;
   }
- 
-	
+  .w_star {
+	  width:100%;
+	  height: 23px;
+  }
+  .w_td_title{
+	  margin-left: 15px;
+  }
   </style> 
  
  <meta charset="UTF-8">
@@ -168,15 +180,33 @@
           <c:forEach  var="review" items="${reviewList }" varStatus="reviewNum" >
           <fmt:formatDate var="reviewDate" value="${review.date}" pattern="yyyy.MM.dd"/>
           
-        <tr class="w_tr w_margin1">
-          <td class="w_td" width="15%">${review.star}</td>
-          <td class="w_td" width="50%" rowspan="2">${review.title}</td>
+          <tr class="w_tr w_margin1">
+          <td class="w_td" width="15%">
+          	
+          		<c:if test="${review.rate==5}">
+                    <img src="${contextPath}/resources/img/star_5.png" class="w_star">   
+                </c:if> 
+                <c:if test="${review.rate==4}">
+                    <img src="${contextPath}/resources/img/star_4.png" class="w_star" >    
+                </c:if>
+                <c:if test="${review.rate==3}">
+                    <img src="${contextPath}/resources/img/star_3.png" class="w_star">    
+                </c:if>    
+                <c:if test="${review.rate==2}">
+                    <img src="${contextPath}/resources/img/star_2.png" class="w_star">    
+                </c:if>  
+                <c:if test="${review.rate==1}">
+                    <img src="${contextPath}/resources/img/star_1.png" class="w_star">    
+                </c:if>
+                
+          </td>
+          <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td>
           
           <td class="w_td" width="20%" rowspan="2">               
-		         <c:if test="${review.image != null}"> 
-		          	<img src="${contextPath}/${review.image}" width="150" height="150">
-		          </c:if>
-	      </td>
+               <c:if test="${review.image != null}"> 
+                   <img src="${contextPath}/${review.image}" width="150" height="150">
+                </c:if>
+         </td>
 	
           
         
@@ -203,56 +233,51 @@
      
        </div>
 
-       
-       <div class="cls2">
-       <c:if test="${totReview != null }" >
-            <c:choose>
-              <c:when test="${totReview >100 }">  <!-- 글 개수가 100 초과인경우 -->
-      	      <c:forEach   var="page" begin="1" end="10" step="1" >
-      	         <c:if test="${section >1 && page==1 }">
-      	          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
-      	         </c:if>
-      	          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
-      	         <c:if test="${page ==10 }">
-      	          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
-      	         </c:if>
-      	      </c:forEach>
-              </c:when>
-              <c:when test="${totReview ==100 }" >  <!--등록된 글 개수가 100개인경우  -->
-      	      <c:forEach   var="page" begin="1" end="10" step="1" >
-      	        <a class="no-uline"  href="#">${page } </a>
-      	      </c:forEach>
-              </c:when>
-              
-              <c:when test="${totReview< 100 }" >   <!--등록된 글 개수가 100개 미만인 경우  -->
-      	      <c:forEach   var="page" begin="1" end="${totReview/10 +1}" step="1" >
-      	         <c:choose>
-      	           <c:when test="${page==pageNum }">
-      	            <a class="sel-page"  href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}">${page } </a>
-      	          </c:when>
-      	          <c:otherwise>
-      	            <a class="no-uline"  href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}">${page } </a>
-      	          </c:otherwise>
-      	        </c:choose>
-      	      </c:forEach>
-              </c:when>
-            </c:choose>
-          </c:if>
-      </div>    
-       
+    
        
 		<br><br><br><br><br>
+
+		
+
+
+	<div class="cls2">
+	<c:if test="${totReview != null }" >
+	     <c:choose>
+	       <c:when test="${totReview >100 }">  <!-- 글 개수가 100 초과인경우 -->
+		      <c:forEach   var="page" begin="1" end="10" step="1" >
+		         <c:if test="${section >1 && page==1 }">
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
+		         </c:if>
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
+		         <c:if test="${page ==10 }">
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
+		         </c:if>
+		      </c:forEach>
+	       </c:when>
+	       <c:when test="${totReview ==100 }" >  <!--등록된 글 개수가 100개인경우  -->
+		      <c:forEach   var="page" begin="1" end="10" step="1" >
+		        <a class="no-uline"  href="#">${page } </a>
+		      </c:forEach>
+	       </c:when>
+	       
+	       <c:when test="${totReview< 100 }" >   <!--등록된 글 개수가 100개 미만인 경우  -->
+		      <c:forEach   var="page" begin="1" end="${totReview/10 +1}" step="1" >
+		         <c:choose>
+		           <c:when test="${page==pageNum }">
+		            <a class="sel-page"  href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}">${page } </a>
+		          </c:when>
+		          <c:otherwise>
+		            <a class="no-uline"  href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}">${page } </a>
+		          </c:otherwise>
+		        </c:choose>
+		      </c:forEach>
+	       </c:when>
+	     </c:choose>
+	   </c:if>
+	 </div>    
 
 </div>
 
 
-
-
-
 </body>
 </html>
-
-
-
-
-
