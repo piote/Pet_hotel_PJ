@@ -72,3 +72,9 @@
     border-radius: 20px 20px 20px 20px;
     /* color: #fff; */
 }
+
+.calTip{
+	margin: auto;
+    width: 50%;
+    text-align: left;
+}

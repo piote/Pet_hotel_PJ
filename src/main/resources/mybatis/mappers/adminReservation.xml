@@ -4,7 +4,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.myboot.reservation.dao.ReservationDAO">
-
+<!-- 
 <resultMap id="reservationResult" type="reservationVO">
     <result property="res_num" column="RESERVATION_NUM" />
     <result property="res_st" column="RESERVATION_ST" />
@@ -43,17 +43,9 @@
     <result property="service_beauty" column="SERVICE_BEAUTY" />
     <result property="service_spa" column="SERVICE_SPA" />
   </resultMap> 
-	
-	
-   <!-- <select id="selectReservationList" resultMap="reservationResult">
-		<![CDATA[
-		SELECT RESERVATION_NUM, RESERVATION_ST, RESERVATION_END, USER_ID, RS_COMMENT, TOTAL_COST, PAY_TIME, RESERVATION_STATE 
-		FROM TB_RESERVATION
-		ORDER BY RESERVATION_NUM DESC
-		]]>
-	</select> -->
-	
-	<select id="serchReservationNum" resultMap="resfullResult"><!-- 수정중 -->
+	 -->
+	<!-- 
+	<select id="serchReservationNum" resultMap="resfullResult">수정중
 		<![CDATA[
 		SELECT res.reservation_num, tbu.user_id,tbu.user_name, tbu.user_grade, res.reservation_st, res.reservation_end, count(pet.pet_num) as "총 마리수", res.pay_time, res.total_cost ,res.reservation_state
 		FROM tb_reservation res
@@ -66,80 +58,7 @@
 		RDER BY RESERVATION_NUM ASC;
 		]]>
 	</select>
-	
-	<!-- <select id="serchReservationNum" resultType="int">
-		<![CDATA[
-			SELECT * 
-			FROM tb_reservation
-			WHERE RESERVATION_NUM LIKE '%1%'
-			ORDER BY RESERVATION_NUM DESC;
-		]]>
-	</select> -->
-	
-<!-- 	<select id="selectPetList" resultMap="petserviceResult"> -->
-<!-- 		<![CDATA[ -->
-<!-- 		SELECT PET_NUM, RESERVATION_NUM, USER_ID, PET_NAME, PET_GENDER, ROOM_GRADE, SERVICE_BEAUTY, SERVICE_SPA  -->
-<!-- 		FROM TB_PETSERVICE -->
-<!-- 		WHERE USER_ID RESERVATION_NUM  -->
-<!-- 		ORDER BY PET_NUM DESC -->
-<!-- 		]]> -->
-<!-- 	</select> -->
-
-	<insert id="insertReservation"  parameterType="reservationVO">
-		<![CDATA[
-		 INSERT INTO TB_RESERVATION(RESERVATION_NUM,RESERVATION_ST, RESERVATION_END, USER_ID, RS_COMMENT, TOTAL_COST, PAY_TIME, RESERVATION_STATE)
-		 VALUES(#{res_num}, #{res_st}, #{res_end}, #{id}, #{res_comment}, #{totalCost}, SYSDATE, 'N')
-		]]>      
-	</insert>
-	
-	<!--  멀티 이미지 참고해서 적용해야함 foreach를 이용한 다중 insert 문-->
-	<insert id="insertPetserviceList"  parameterType="List">
-	    <foreach item="item"  collection="list"   open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" index="index">
-	      INTO TB_PETSERVICE(PET_NUM, RESERVATION_NUM, USER_ID, PET_NAME, PET_GENDER, ROOM_GRADE, SERVICE_BEAUTY, SERVICE_SPA)
-	      VALUES ((SELECT MAX(PET_NUM) FROM TB_PETSERVICE)+#{index}+1, #{item.res_num},#{item.id},#{item.pet_name}, #{item.pet_gender}, #{item.room_grade}, #{item.service_beauty}, #{item.service_spa})
-	    </foreach>
-  	</insert>
-   
-<!-- 	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="String"  >
-		<![CDATA[
-		select * from tb_reservation , tb_service , tb_user
-		         where user_id=#{user_id}
-		         order by reservation_st desc
-		]]>
-	</select>
-
-	<select id="selectMyReservesList" resultMap="com.myboot.user.vo.UserVO"  parameterType="HashMap"  >
-		<![CDATA[
-		select * from tb_reservation, tb_service , tb_user 
-		         where user_id=#{user_id}
-		         order by reservation_st desc
-		]]>
-		<choose>
-			<when test="(colName == 'name' or colName == 'pet_name' or colName == 'tel) and searchWord != null and(startDate == null or endDate == null) ">
-				where ${colName} like '%'|| #{searchWord} || '%'
-			</when>
-			
-			<when test="(colName == null or colName == '') and (StartDate != null and endDate != null)">
-				where to_char(reservation_st, 'yyyy-mm-dd') between #{startDate} and #{endDate} 
-			</when>
-			
-			<when test="(colName == 'name' or colName == 'pet_name' or colName == 'tel') and searchWord != null and (startDate != null and endDate != null)">
-				where ${colName} like '%'||#{searchWord} || '%'
-				and where to_char(reservation_st, 'yyyy-mm-dd') between #{startDate} and #{endDate}
-			</when>
-			<otherwise>
-			</otherwise>
-		</choose>
-	</select> -->
-	
-
-	
-	
-<!-- 	<update id="updateMyReserveCancel" parameterType="String">
-	    update tb_reservation
-	 	   set reservation_state='C'
-	    where reservation_num=#{reservation_num}
-	</update> -->
+ -->
  
     
 </mapper>

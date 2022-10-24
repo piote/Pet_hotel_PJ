@@ -10,8 +10,8 @@
  	<mapper resource="mybatis/mappers/questions.xml"/>
  	<mapper resource="mybatis/mappers/review.xml"/>
  	<mapper resource="mybatis/mappers/reservation.xml"/>
- 	<mapper resource="mybatis/mappers/petservice.xml"/>
  	<mapper resource="mybatis/mappers/adminUser.xml"/>
+ 	<mapper resource="mybatis/mappers/adminReservation.xml"/>
 
  </mappers>
 </configuration>
