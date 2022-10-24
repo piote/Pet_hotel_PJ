@@ -41,10 +41,11 @@ public class UserServiceImpl implements UserService {
 
 // 로그인 아이디 찾기
 	@Override
-	public String find_id(HttpServletResponse response, String email) throws Exception {
+	public String find_id(HttpServletResponse response, UserVO userVO) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		String id = userDAO.find_id(email);
+		
+		String id = userDAO.find_id(userVO);
 		
 		if (id == null) {
 			out.println("<script>");

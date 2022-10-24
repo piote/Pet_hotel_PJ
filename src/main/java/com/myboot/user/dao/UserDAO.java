@@ -30,7 +30,7 @@ public interface UserDAO {
 //	로그인 기능 구현
 	public UserVO loginById(UserVO userVO) throws DataAccessException;
 //  로그인 아이디 찾기
-	public String find_id(String email) throws DataAccessException;
+	public String find_id(UserVO userVO) throws DataAccessException;
 //  로그인 비밀번호 찾기
 	public String find_pw(String id) throws DataAccessException;
 //	회원가입 회원정보 추가
