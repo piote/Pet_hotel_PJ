@@ -32,6 +32,8 @@ $(document).ready(function(){
             alert("request error!");
             }
     });
+
+    //검색창에 엔터 눌렀을때
     $("#keyword").keydown(function(key) {
         //13번은 엔터키
         if (key.keyCode == 13) {
@@ -130,11 +132,14 @@ function pageDown(totPageNo){
 }
 
 function search(){
+    //input 안 정보 가지고 오기
     var search_op = $('#search_op').val();
     var keyword = $('#keyword').val();
     console.log(search_op+' '+keyword);
+
     $('.list_tb').empty();
     $('.page_num').empty();
+    
     $.ajax({
         url: "/adminSearchUser.do?search_op="+search_op+"&keyword="+keyword,
         type: "GET", 
