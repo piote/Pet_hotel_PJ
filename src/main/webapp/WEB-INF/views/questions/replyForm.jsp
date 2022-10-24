@@ -164,10 +164,27 @@
         	margin: auto;
         	width: 97%;
         	text-align: right;
+<<<<<<< Updated upstream
        }
     </style>
  <script src="//code.jquery.com/jquery-3.3.1.js"></script> 
  <script type="text/javascript">
+=======
+        }
+
+    </style>
+ <script src="//code.jquery.com/jquery-3.3.1.js"></script> 
+<script type="text/javascript">
+   
+    //글자수 세기
+  
+        window.onload = function (){
+         $("#questionsCommendBox").on('keyup', function (event) {
+	        var currentString = $("#questionsCommendBox").val()
+	        $("#questionsCommentInfo").html(currentString.length);
+	    });
+        }
+>>>>>>> Stashed changes
 
  function backToList(obj){
  obj.action="${contextPath}/questions/questionsList/.do";
@@ -214,8 +231,13 @@
                     <input type="text"   name="title" spellcheck="false" maxlength="500" placeholder="제목을 입력해주세요." />
                 </li>
                 <li class="atc_content">
+<<<<<<< Updated upstream
                     <textarea id="questionsCommendBox"name="content" spellcheck="false" maxlength="4000" placeholder="내용을 입력해주세요." onkeydown="resize(this)" onkeyup="resize(this)"></textarea>
                     	<div id="questionscommentLengh"><span id="questionsCommentInfo">0</span>/4000</div>
+=======
+                    <textarea id="questionsCommendBox" name="content" spellcheck="false" maxlength="4000" placeholder="내용을 입력해주세요."></textarea>
+                    <div id="questionscommentLengh"><span id="questionsCommentInfo">0</span>/4000</div>
+>>>>>>> Stashed changes
                 </li>
                 <li class="atc_imageFile">
                 	<div class="imageFile_wrap">
