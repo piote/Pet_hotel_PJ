@@ -277,45 +277,84 @@ public class UserControllerImpl implements UserController{
 	}
 	
 	// 회원 정보 수정
-//	@Override
-//	@RequestMapping(value="/modMember.do" ,method = RequestMethod.POST)
-//	public ModelAndView modMember(@ModelAttribute("user") UserVO user, 
-//		HttpServletRequest request, HttpServletResponse response) throws Exception{
-//		int result = 0;
-//		result = userService.modMember(user);
-//		ModelAndView mav = new ModelAndView("redirect:/mypage/myPage.do");
-//		return mav;
-//	}
-    @Override
-	@RequestMapping(value="/modMember.do" , method = RequestMethod.GET)
-	public ModelAndView modMember(
-            @RequestParam(value= "user", required=false) UserVO user,
-			RedirectAttributes rAttr, 
-				HttpServletRequest request, HttpServletResponse response)  throws Exception {
-  
-//    	//날짜 포맷
-//    		String joinDate = (String) request.getParameter("joinDate");
-//    			
-//    		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
-//    	// String 타입을 Date 타입으로 변환
-//    		Date joinDate_format = newDtFormat.parse(joinDate);
-    	
-    		ModelAndView mav = new ModelAndView();
-			HttpSession session = request.getSession();
-			userVO = (UserVO) session.getAttribute("user");
-			System.out.println(userVO);
-			//userVO = userService.password(userVO);
-			//String userPw =userVO.getPw();
-			
-			if (userVO.equals(user)) {
-				System.out.println("성공");
-				
-				mav.setViewName("redirect:/mypage/myPage.do");
-			}
-				return mav;
-    }
-	
 
+//    @Override
+//	@RequestMapping(value="/modMember.do" , method = RequestMethod.GET)
+//	public ModelAndView modMember(@RequestParam(value= "user", required=false) UserVO user,
+//									RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)  throws Exception {
+//    		ModelAndView mav = new ModelAndView();
+//			HttpSession session = request.getSession();
+//			userVO = (UserVO) session.getAttribute("user");
+//			System.out.println(userVO);
+//			//userVO = userService.password(userVO);
+//			//String userPw =userVO.getPw();
+//			
+//			
+//			if (userVO.equals(user)) {
+//				System.out.println("성공");
+//				
+//				mav.setViewName("redirect:/mypage/myPage.do");
+//			}
+//			
+//				return mav;
+//    }
+				
+    @Override
+	@RequestMapping(value="/modMember.do" ,method = RequestMethod.POST)
+	public ModelAndView modMember(@ModelAttribute("user") UserVO user, 
+		HttpServletRequest request, HttpServletResponse response) throws Exception{
+    		
+    	int result = 0;
+//			request.setCharacterEncoding("utf-8");
+//			
+//			String id= request.getParameter("id");
+//			String pw= request.getParameter("pw");
+//			String name= request.getParameter("name");
+//			String email=request.getParameter("email");
+//			String tel=request.getParameter("tel");
+//			String tel_sub=request.getParameter("tel_sub");
+//			String message=request.getParameter("message");
+//			String birth=request.getParameter("birth");
+//			SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+//			Date formatDate = dtFormat.parse(birth);
+//			System.out.println(birth);
+//		
+//		
+//			UserVO userVO= new UserVO();
+//			userVO.setId(id);
+//			userVO.setPw(pw);
+//			userVO.setName(name);
+//			userVO.setEmail(email);
+//			userVO.setTel(tel);
+//			userVO.setTel_sub(tel_sub);
+//			userVO.setMessage(message);
+//			if(message==null || message==""){
+//				userVO.setMessage("N");
+//				System.out.println("N");
+//			}
+//			userVO.setBirth(formatDate);
+			System.out.println(userVO.getId()+userVO.getPw()+userVO.getName()+userVO.getEmail()+userVO.getTel()+userVO.getTel_sub()+userVO.getMessage()+userVO.getBirth());
+			
+			String birth=request.getParameter("birth_string");
+			SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date formatDate = dtFormat.parse(birth);
+			user.setBirth(formatDate);
+			
+			if(user.getMessage()==null || user.getMessage()==""){
+				user.setMessage("N");
+				System.out.println("N");
+			}
+			
+			result = userService.modMember(user);
+			
+			HttpSession session = request.getSession();
+			session.removeAttribute("user");
+			session.setAttribute("user",user);
+    		ModelAndView mav = new ModelAndView();
+    		mav.setViewName("redirect:/mypage/myPage.do");
+		return mav;
+	}
+	
 	@RequestMapping(value = "/modMemberForm.do", method =  RequestMethod.GET)
 	private ModelAndView modMemberForm(@RequestParam(value= "result", required=false) String result,
 			                  @RequestParam(value= "action", required=false) String action,
@@ -325,7 +364,7 @@ public class UserControllerImpl implements UserController{
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action); 
 		
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav= new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName(viewName);
 		return mav;

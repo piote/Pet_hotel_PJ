@@ -95,19 +95,17 @@
  		<!-- 회원 정보 수정 -->
  	<update id="updateUser" parameterType="userVO">
    		<![CDATA[
-   			update TB_USER(USER_ID, USER_PW, USER_NAME, USER_EMAIL,
-	      	USER_TEL, USER_TEL_SUB, USER_MESSAGE,USER_BIRTH) 
-    		values(#{id},#{pw},#{name},#{email},#{tel},#{tel_sub},#{message},#{birth})
-    		 where
-         	id=#{id}
+   			 update TB_USER
+	     	 set user_pw= #{pw}, user_email=#{email}, user_tel=#{tel}, user_tel_sub=#{tel_sub},
+	     	 user_message=#{message}, USER_BIRTH=#{birth}
+	    	 where user_id=#{id}
    		]]>
    	  </update>
    	  
    	  <select id="selectUserById" resultType="userVO"  parameterType="String" >
       <![CDATA[
          select * from TB_USER
-         where
-         id=#{id}			
+         where user_id=#{id}
       ]]>
 	 </select>	
    	  

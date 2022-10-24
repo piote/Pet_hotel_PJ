@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserVO findUser(String id) throws DataAccessException{
+	public UserVO findUser(UserVO id) throws DataAccessException{
 		return userDAO.selectUserById(id);
 	}
   
