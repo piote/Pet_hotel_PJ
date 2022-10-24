@@ -139,14 +139,23 @@ public class UserControllerImpl implements UserController{
 	}
 //	로그인 아이디 찾기
 	@RequestMapping(value = "/find_id.do", method = RequestMethod.POST)
-	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
-		md.addAttribute("id", userService.find_id(response, email));
+	public String find_id(HttpServletResponse response,@RequestParam("name") String name, @RequestParam("email") String email, Model md) throws Exception{
+		
+		UserVO userVO = new UserVO();
+		userVO.setName(name);
+		userVO.setEmail(email);
+		
+		md.addAttribute("id", userService.find_id(response, userVO));
 		return "/find_id";
 	}
 //	로그인 비밀번호 찾기
 	@RequestMapping(value = "/find_pw.do", method = RequestMethod.POST)
-	public String find_pw(HttpServletResponse response, @RequestParam("id") String id, Model md) throws Exception{
-		md.addAttribute("pw", userService.find_pw(response, id));
+	public String find_pw(HttpServletResponse response, @RequestParam("id") String id, @RequestParam("tel") String tel,Model md) throws Exception{
+		UserVO userVO= new UserVO();
+		userVO.setId(id);
+		userVO.setTel(tel);
+		
+		md.addAttribute("pw", userService.find_pw(response, userVO));
 		return "/find_pw";
 	}
 	

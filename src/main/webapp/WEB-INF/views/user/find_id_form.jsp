@@ -26,6 +26,9 @@
 				</div>
 				<div>
 					<p>
+						<label>NAME</label>
+						<input class="w3-input" type="text" id="name" name="name" required>
+						
 						<label>EMAIL</label>
 						<input class="w3-input" type="text" id="email" name="email" required>
 					</p>
