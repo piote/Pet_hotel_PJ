@@ -154,15 +154,15 @@
     
             <div class="list_wrap">
                 <div class="list_option">
-                    <div class="search_wrap">
+                    <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="search()" >
                         <select name="search_op" id="search_op" aria-label="search">
                             <option value="search_id">아이디</option>
-                            <option value="search_id">이름</option>
+                            <option value="search_name">이름</option>
                             <option value="search_tel">전화번호</option>
                             <option value="search_email">이메일</option>
                         </select>
-                        <input type="text" name="keyword" class="search_txt" placeholder="검색">
-                        <button type="#" class="seh_icon" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
+                        <input type="text" name="keyword" id="keyword" class="search_txt" placeholder="검색">
+                        <button type="button" class="seh_icon" onclick="search()" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
                     </div>
                     <div class="grade_option">
                         멤버쉽 :
