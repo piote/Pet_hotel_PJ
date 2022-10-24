@@ -83,8 +83,8 @@
             <table>
                <tr class="review-center">
                   <td width="8%">NO</td>
-                  <td width="10%">Date</td>
-                  <td width="32%">Subject</td>
+                  <td width="15%">Date</td>
+                  <td width="77%">Subject</td>
                   
               </tr>
 	            <c:choose>
@@ -101,7 +101,6 @@
 								<td>${reviews.reviewNO }</td>
 								<td>${reviews.date }</td>
 								<td>${reviews.title }</td>
-								
 							</tr>
 						</c:forEach>
 					</c:when>

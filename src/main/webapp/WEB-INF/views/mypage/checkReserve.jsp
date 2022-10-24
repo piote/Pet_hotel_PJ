@@ -166,24 +166,26 @@
 			 <div class="detail_reserve">
 				<table>
 				   <tr class="detail-center">
+					  <td width="5%">No</td>
 					  <td width="10%">Date</td>
-					  <td width="20%">Name</td>
-					  <td width="20%">PetName</td>
-					  <td width="20%">Phone Number</td>
+					  <td width="15%">Name</td>
+					  <td width="15%">PetName</td>
+					  <td width="25%">Phone Number</td>
 					  <td width="20%">Status</td>
 					  <td width="10%">Cancel</td>
 				  </tr>
 	            <c:choose>
 	            	<c:when test="${empty myReserveList }">
 		               <tr class="detail-list">
-		                  <td colspan=6>
+		                  <td colspan=7>
 		                  	<strong>예약하신 내역이 없습니다.</strong>
 		                  </td>
 		               </tr>
 					</c:when>
 					<c:when test="${not empty myReserveList}">
-						<c:forEach var="reserves" items="${myReserveList }" varStatus="res_st">
+						<c:forEach var="reserves" items="${myReserveList }" varStatus="res_num">
 							<tr class="detail-list">
+				              	<td class="sf">${res_num.count}</td>
 								<td>
 									<c:choose>
 										<c:when test="${reserves.res_state=='N' }">
@@ -232,11 +234,11 @@
 							<c:when test="${totReserves >100 }">  <!-- 글 개수가 100 초과인경우 -->
 								<c:forEach   var="page" begin="1" end="10" step="1" >
 									<c:if test="${section >1 && page==1 }">
-										<a class="no-uline" href="${contextPath }/mypage/checkReserve.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
+										<a class="no-uline" href="${contextPath }/mypage/checkReserve.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&startDate=${startDate}&endDate=${endDate}&colName=${colName}&searchWord=${searchWord}">&nbsp; pre </a>
 									</c:if>
-									<a class="no-uline" href="${contextPath }/mypage/checkReserve.do?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
+									<a class="no-uline" href="${contextPath }/mypage/checkReserve.do?section=${section}&pageNum=${page}&startDate=${startDate}&endDate=${endDate}&colName=${colName}&searchWord=${searchWord}">${(section-1)*10 +page } </a>
 									<c:if test="${page ==10 }">
-										<a class="no-uline" href="${contextPath }/mypage/checkReserve.do?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
+										<a class="no-uline" href="${contextPath }/mypage/checkReserve.do?section=${section+1}&pageNum=${section*10+1}&startDate=${startDate}&endDate=${endDate}&colName=${colName}&searchWord=${searchWord}">&nbsp; next</a>
 									</c:if>
 								</c:forEach>
 							</c:when>
@@ -250,10 +252,10 @@
 								<c:forEach   var="page" begin="1" end="${totReserves/10 +1}" step="1" >
 									<c:choose>
 										<c:when test="${page==pageNum }">
-											<a class="sel-page"  href="${contextPath }/mypage/checkReserve.do?section=${section}&pageNum=${page}">${page } </a>
+											<a class="sel-page"  href="${contextPath }/mypage/checkReserve.do?section=${section}&pageNum=${page}&startDate=${startDate}&endDate=${endDate}&colName=${colName}&searchWord=${searchWord}">${page } </a>
 										</c:when>
 										<c:otherwise>
-											<a class="no-uline"  href="${contextPath }/mypage/checkReserve.do?section=${section}&pageNum=${page}">${page } </a>
+											<a class="no-uline"  href="${contextPath }/mypage/checkReserve.do?section=${section}&pageNum=${page}&startDate=${startDate}&endDate=${endDate}&colName=${colName}&searchWord=${searchWord}">${page } </a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
