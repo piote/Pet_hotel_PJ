@@ -59,6 +59,25 @@
 		]]>
 	</select>
 	
+	<!--예약 번호로 예약불러오기  -->
+	<select id="SearchReservationNum" resultMap="reservationResult" parameterType="String">
+		<![CDATA[
+		SELECT RESERVATION_NUM, RESERVATION_ST, RESERVATION_END, USER_ID, RS_COMMENT, TOTAL_COST, PAY_TIME, RESERVATION_STATE 
+		FROM TB_RESERVATION
+		WHERE RESERVATION_NUM = ${reserNum}
+		ORDER BY RESERVATION_NUM DESC
+		]]>
+	</select>
+	<!--예약 번호로 펫서비스 불러오기 -->
+	<select id="SearchPetServiceByResNum" resultMap="petserviceResult" parameterType="String">
+		<![CDATA[
+		SELECT * 
+		FROM TB_PETSERVICE
+		WHERE RESERVATION_NUM = ${reserNum}
+		ORDER BY RESERVATION_NUM DESC
+		]]>
+	</select>
+	
 <!-- 	<select id="selectPetList" resultMap="petserviceResult"> -->
 <!-- 		<![CDATA[ -->
 <!-- 		SELECT PET_NUM, RESERVATION_NUM, USER_ID, PET_NAME, PET_GENDER, ROOM_GRADE, SERVICE_BEAUTY, SERVICE_SPA  -->

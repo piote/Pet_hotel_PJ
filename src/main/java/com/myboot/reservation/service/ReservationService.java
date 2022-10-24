@@ -12,6 +12,8 @@ public interface ReservationService {
 	 public int addReservation(ReservationVO reservationVO) throws Exception;
 	 public int addPetService(List<PetserviceVO> petServiceList) throws Exception;
 	 public int useReservationNum() throws Exception;
+	 public ReservationVO SearchReservationNum(String reserNum) throws Exception;
+	 public List<PetserviceVO> SearchPetServiceByResNum(String reserNum) throws Exception;
 //	 
 //	 public int modMember(MemberVO memberVO) throws Exception;
 //	 

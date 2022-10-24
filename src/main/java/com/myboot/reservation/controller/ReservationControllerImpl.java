@@ -3,7 +3,9 @@ package com.myboot.reservation.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,11 +16,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myboot.reservation.service.ReservationService;
+import com.myboot.reservation.service.ReservationServiceImpl;
 import com.myboot.reservation.vo.PetserviceVO;
+import com.myboot.reservation.vo.ResFullVO;
 import com.myboot.reservation.vo.ReservationVO;
 import com.myboot.user.vo.UserVO;
 
@@ -105,6 +110,7 @@ public  class ReservationControllerImpl implements ReservationController{
 			
 		return ResList;
 	}
+	//예약 하기
 	@Override
 	@RequestMapping(value= "/reservationAdd.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView reservationAdd( HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -141,7 +147,7 @@ public  class ReservationControllerImpl implements ReservationController{
 		int resNum = resService.useReservationNum();
 		System.out.println("예약번호============="+resNum);
 			
-		//pet서비스 vo map만들기
+		//pet서비스 vo List만들기
 		List<PetserviceVO> petServiceList = new ArrayList<PetserviceVO>();
 
 		for(int i=0;i<petName.length;i++) {
@@ -178,6 +184,26 @@ public  class ReservationControllerImpl implements ReservationController{
 		ModelAndView mav = new ModelAndView("redirect:/reservationComplete.do");
 		
 		return mav;
+	}
+	//예약 번호로 예약 찾기 
+	@ResponseBody 
+	@RequestMapping(value= "/SearchReservationNum.do", method = RequestMethod.GET)
+	public HashMap SearchReservationNum(
+			@RequestParam(value ="reserNum", required = false) String reserNum,
+			  HttpServletRequest request, HttpServletResponse response) throws Exception{
+			
+		ReservationVO reser; 
+		List<PetserviceVO> reserP; 
+				
+		reser = resService.SearchReservationNum(reserNum);
+		reserP = resService.SearchPetServiceByResNum(reserNum);
+		
+		HashMap reservationMap = new HashMap();
+		
+		reservationMap.put("reservation", reser);//예약 테이블
+		reservationMap.put("petservice", reserP);//펫 서비스 테이블 들
+		
+		return reservationMap;
 	}
 
 	
