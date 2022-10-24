@@ -166,15 +166,15 @@
                     </div>
                     <div class="grade_option">
                         멤버쉽 :
-                        <label><input type="checkbox" name="grade" value="Bronze">Bronze</label>
-                        <label><input type="checkbox" name="grade" value="Silver">Silver</label>
-                        <label><input type="checkbox" name="grade" value="Gold">Gold</label>
+                        <label><input type="checkbox" name="grade" id="Bronze" value="Bronze">Bronze</label>
+                        <label><input type="checkbox" name="grade" id="Silver" value="Silver">Silver</label>
+                        <label><input type="checkbox" name="grade" id="Gold" value="Gold">Gold</label>
                     </div>
                     <div class="hr"></div>
                     <div class="res_option">
                         예약여부 :
-                        <label><input type="checkbox" name="reservation" value="O">O</label>
-                        <label><input type="checkbox" name="reservation" value="X">X</label>
+                        <label><input type="checkbox" name="reservation" id="res_O" value="O">O</label>
+                        <label><input type="checkbox" name="reservation" id="res_X" value="X">X</label>
                     </div>
                 </div>
 

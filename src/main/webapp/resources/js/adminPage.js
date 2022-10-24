@@ -6,6 +6,27 @@ let globalCurrentPage=1; //현재 페이지
 let user_data = []; 
 
 $(document).ready(function(){
+    
+    getAllList();
+
+    //검색창에 엔터 눌렀을때
+    $("#keyword").keydown(function(key) {
+        //13번은 엔터키
+        if (key.keyCode == 13) {
+            search();
+        }
+    });
+    
+    //체크박스 눌렀을때
+    $('input[type=checkbox]').change(function(){
+        getAllList();
+        searchOption();
+    });
+
+});
+
+function getAllList(){
+    $('.list_tb').empty();
     $.ajax({
         url: "/returnAllUser.do",
         type: "GET", 
@@ -14,8 +35,6 @@ $(document).ready(function(){
             totalData = data.length;
             //페이지 버튼 출력
             page_num_view(totalData);
-
-            console.log(totalData)
 
             //user_data에 받아온 데이터 저장
             user_data = [totalData];
@@ -32,22 +51,13 @@ $(document).ready(function(){
             alert("request error!");
             }
     });
-
-    //검색창에 엔터 눌렀을때
-    $("#keyword").keydown(function(key) {
-        //13번은 엔터키
-        if (key.keyCode == 13) {
-            search();
-        }
-    });
-});
-
+}
 
 //페이지 버튼 함수
 function page_num_view(totalData){
-    
+    $('.page_num').empty();
     //총 페이지 수
-    var totPageNo = totalData/dataPerPage;
+    var totPageNo = Math.ceil(totalData/dataPerPage);
 
     //페이지가 10이상일때
     if(totPageNo>pageCount){
@@ -89,10 +99,14 @@ function clickNO(pageNo){
                 +'<td class="user_resState">예약여부</td></tr>'; 
     
     var dataNo;
-    if(dataPerPage>=totalData){
-        dataNo=totalData;
+    if(dataPerPage<=totalData){
+        if(dataPerPage*pageNo<=totalData){
+            dataNo=dataPerPage;
+        }else{
+            dataNo=totalData%dataPerPage;
+        }
     }else{
-        dataNo=dataPerPage;
+        dataNo=totalData;
     }
 
     for(i=0;i<dataNo;i++){
@@ -131,15 +145,14 @@ function pageDown(totPageNo){
     
 }
 
+//검색
 function search(){
     //input 안 정보 가지고 오기
     var search_op = $('#search_op').val();
     var keyword = $('#keyword').val();
     console.log(search_op+' '+keyword);
 
-    $('.list_tb').empty();
-    $('.page_num').empty();
-    
+
     $.ajax({
         url: "/adminSearchUser.do?search_op="+search_op+"&keyword="+keyword,
         type: "GET", 
@@ -162,4 +175,111 @@ function search(){
             alert("request error!");
             }
     });
+}
+
+function searchOption(){
+    var option_data=[];
+    var count=0;
+
+    var bronzeCk= false;
+    var silverCk= false;
+    var goldCk= false;
+
+    var res_OCk= false;
+    var res_XCk= false;
+
+    $('.grade_option input[type=checkbox]').each(function (index) {
+        if($('#Bronze').is(":checked")==true){bronzeCk= true;}
+        else{bronzeCk= false;}
+        if($('#Silver').is(":checked")==true){silverCk= true;}
+        else{silverCk= false;}
+        if($('#Gold').is(":checked")==true){goldCk= true;}
+        else{goldCk= false;}
+        console.log('each')
+    });
+
+    $('.res_option input[type=checkbox]').each(function (index) {
+        if($('#res_O').is(":checked")==true){res_OCk= true;}
+        else{res_OCk= false;}
+        if($('#res_X').is(":checked")==true){res_XCk= true;}
+        else{res_XCk= false;}
+    });
+
+    console.log("bronzeCk : "+bronzeCk);
+    console.log("silverCk : "+silverCk);
+    console.log("goldCk : "+goldCk);
+
+
+    //멤버쉽 등급
+    if((bronzeCk && silverCk && goldCk) || (!bronzeCk && !silverCk && !goldCk)){
+        getAllList();
+        console.log('all');
+    }else if(bronzeCk && silverCk && !goldCk){
+        for(i=0;i<user_data.length;i++){
+            if((user_data[i].grade=='Bronze') || (user_data[i].grade=='Silver')){
+                option_data[count]=user_data[i];
+                count++;console.log('bs');
+            }
+        }
+        
+    }else if(silverCk && goldCk && !bronzeCk){
+        for(i=0;i<user_data.length;i++){
+            if(user_data[i].grade=='Silver' || user_data[i].grade=='Gold'){
+                option_data[count]=user_data[i];
+                count++;console.log('sg');
+            }
+        }
+        
+    }else if(bronzeCk && goldCk && !silverCk){
+        for(i=0;i<user_data.length;i++){
+            if(user_data[i].grade=='Bronze' || user_data[i].grade=='Gold'){
+                option_data[count]=user_data[i];
+                count++;console.log('bg');
+            }
+        }
+        
+    }else if(bronzeCk && !silverCk && !goldCk){
+        for(i=0;i<user_data.length;i++){
+            if(user_data[i].grade=='Bronze'){
+                option_data[count]=user_data[i];
+                count++;
+            }
+        }
+        console.log('b');
+    }else if(silverCk && !bronzeCk && !goldCk){
+        for(i=0;i<user_data.length;i++){
+            if(user_data[i].grade=='Silver'){
+                option_data[count]=user_data[i];
+                count++;
+            }
+        }
+        console.log('s');
+    }else if(goldCk && !bronzeCk && !silverCk){
+        for(i=0;i<user_data.length;i++){
+            if(user_data[i].grade=='Gold'){
+                option_data[count]=user_data[i];
+                count++;
+            }
+        }
+        console.log('g');
+    }else{
+        getAllList();
+    }
+
+    // for(i=0;i<user_data.length;i++){
+    //     if(user_data[i].grade=='Bronze'){
+    //         option_data[count]=user_data[i];
+    //         count++;
+    //     }
+    // }
+
+
+    user_data=[];
+    for(i=0;i<option_data.length;i++){
+        user_data[i]=option_data[i];
+    }
+    
+    totalData=count;
+    clickNO(globalCurrentPage);
+    page_num_view(totalData);
 }
