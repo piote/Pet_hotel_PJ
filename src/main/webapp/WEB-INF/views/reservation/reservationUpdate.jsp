@@ -462,6 +462,7 @@
     					$("#Pet_Sex"+i).val(data.petservice[i].pet_gender);
     					$("#Pet_Room"+i).val(data.petservice[i].room_grade);
     					$("#pet_Beauty"+i).val(data.petservice[i].service_beauty);
+    					//체크박스 스파
     					if(data.petservice[i].service_spa == "N    "){
     						$("#pet_Spa"+i).prop("checked", true);
     				        
@@ -471,7 +472,14 @@
     							$("#pet_Spa"+i+'_hidden').attr("disabled", false);
     						}
     					}
+    					//map
+    					var petservice = [data.petservice[i].pet_name, data.petservice[i].pet_gender, data.petservice[i].room_grade, data.petservice[i].service_beauty, data.petservice[i].service_spa, i];
+    				    console.log(petservice);
+    				    servicemap.set('service' + i, petservice);
+    				    console.log(servicemap);
     				}
+    			
+    			
     			},
     			
     			error:function(){
