@@ -261,11 +261,12 @@ h5 {
 <body>
         <!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
        
-        <form  method="post" action="${contextPath}/addUser.do" name="userInfo" id="userInfo" >
+        <form  method="post" action="${contextPath}/addUser.do" name="userInfo" id="userInfo" onsubmit="return checkValue()">
         	<div class="root">
   				<div class="signin-wrapper form active">
  				   <div class="form-wrapper">
    				   <h5>Anitel 회원가입</h5>
+
 
 						<input type="text" id="user_id" name="id" placeholder="UserID" class="form-field" maxlength="20" required autofocus required>
 						<button id="overlappedID" type="button" onclick="lappedID()">중복확인</button>
@@ -289,8 +290,8 @@ h5 {
                      	<label class="message_label">이메일 수신 발송에 동의하십니까?<input type="checkbox"  name="message"  value="Y"></label>
                         <input type="date" name="birth" class="form-field" placeholder="UserBirth" > 
                                  
-          			    <button  type="submit" id="signup"  class="button primary"  onclick="checkValue()">가입</button>
-          			    <button  class="button secondary" onclick="goLoginForm()">돌아가기</button>
+          			    <button  type="submit" id="signup" value="true" class="button primary"  onclick="checkValue()">가입</button>
+          			    <button  type="button" class="button secondary" onclick="goLoginForm()">돌아가기</button>
             		</div>
     			</div>
    			 </div>
