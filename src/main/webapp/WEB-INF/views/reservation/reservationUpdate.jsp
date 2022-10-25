@@ -419,11 +419,65 @@
     		$("#all_body").css("display","block");
     		$("#all_body").css("width",$(window).width());
     		$("#all_body").css("height",height);
+    		
+    		
 
     	}
+    	function popup(){
+    		pushLayer();
+    		reserView();
+    		
+    	}
+    	
     	function layerClose(lay1,lay2){
     		$("#"+lay1).css("display","none");
     		$("#"+lay2).css("display","none");
+    	}
+    	
+    	function reserView(){
+    		var reserNum = $("#reserNum").val();
+    		$.ajax({
+    			url:'/SearchReservationNum.do',
+    			method:'post',
+    			data:{
+    				"reserNum": reserNum
+    			},
+    			type:'post',
+    			async:true,
+    			dataType:'json',
+    			
+    			success:function(data){
+    				console.log(data);
+    				console.log(data.petservice.length);
+
+    				//html에 적용
+    				var res_st_data = new Date(data.reservation.res_st);
+    				var res_end_data = new Date(data.reservation.res_end);
+    				$("#start_dayBox").text(res_st_data.toLocaleDateString());
+    				$("#end_dayBox").text(res_end_data.toLocaleDateString());
+    				
+    				for(var i = 0; i<data.petservice.length; i++){
+    					addRow();
+    					$("#Pet_Name"+i).val(data.petservice[i].pet_name);
+    					$("#Pet_Sex"+i).val(data.petservice[i].pet_gender);
+    					$("#Pet_Room"+i).val(data.petservice[i].room_grade);
+    					$("#pet_Beauty"+i).val(data.petservice[i].service_beauty);
+    					if(data.petservice[i].service_spa == "N    "){
+    						$("#pet_Spa"+i).prop("checked", true);
+    				        
+    				        if($("#pet_Spa"+i).prop("checked")){
+    							$("#pet_Spa"+i+'_hidden').attr("disabled", true);
+    						}else{
+    							$("#pet_Spa"+i+'_hidden').attr("disabled", false);
+    						}
+    					}
+    				}
+    			},
+    			
+    			error:function(){
+    				console.log("이런");
+    			}
+    		});
     	}
     	    	
     </script>
@@ -624,7 +678,7 @@
 		</div>
 		
 		<div id="all_body"></div>
-			<input type="button" id="btn_pet2_4" value="팝업테스트" onclick="pushLayer()">
-		
+			<input type="button" id="btn_pet2_4" value="팝업테스트" onclick="popup()">
+			<input type="number" id="reserNum">
 		</body>
 </html>

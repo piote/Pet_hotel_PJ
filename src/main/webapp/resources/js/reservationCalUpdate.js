@@ -1,7 +1,5 @@
 
 window.onload = function () {
-
-	addRow();
 	
 	$("#petcommentBox").on('keyup', function (event) {
         var currentString = $("#petcommentBox").val()

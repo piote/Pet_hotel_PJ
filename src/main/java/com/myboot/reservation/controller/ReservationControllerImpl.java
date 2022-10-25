@@ -187,14 +187,14 @@ public  class ReservationControllerImpl implements ReservationController{
 	}
 	//예약 번호로 예약 찾기 
 	@ResponseBody 
-	@RequestMapping(value= "/SearchReservationNum.do", method = RequestMethod.GET)
+	@RequestMapping(value= "/SearchReservationNum.do", method = RequestMethod.POST)
 	public HashMap SearchReservationNum(
 			@RequestParam(value ="reserNum", required = false) String reserNum,
 			  HttpServletRequest request, HttpServletResponse response) throws Exception{
 			
 		ReservationVO reser; 
 		List<PetserviceVO> reserP; 
-				
+		
 		reser = resService.SearchReservationNum(reserNum);
 		reserP = resService.SearchPetServiceByResNum(reserNum);
 		
