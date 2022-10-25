@@ -1,6 +1,7 @@
 package com.myboot.admin.user.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
@@ -12,8 +13,5 @@ import com.myboot.user.vo.UserVO;
 @Repository("adminUserDAO")
 public interface AdminUserDAO {	
 	public List selectAllUserList() throws DataAccessException;
-	public List searchIdUserList(String keyword) throws DataAccessException;
-	public List searchNameUserList(String keyword) throws DataAccessException;
-	public List searchTelUserList(String keyword) throws DataAccessException;
-	public List searchEmailUserList(String keyword) throws DataAccessException;
+	public List searchUsers(Map searchOption) throws DataAccessException;
 }

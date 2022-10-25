@@ -178,5 +178,9 @@
 	      <put-attribute name="title" value="관리자페이지_회원정보" />
 	      <put-attribute name="body" value="/WEB-INF/views/admin/adminUserList.jsp" />
 	</definition>
+   	<definition name="/admin/adminResList" extends="adminLayout">
+	      <put-attribute name="title" value="관리자페이지_예약정보" />
+	      <put-attribute name="body" value="/WEB-INF/views/admin/adminResList.jsp" />
+	</definition>
 	
 </tiles-definitions>

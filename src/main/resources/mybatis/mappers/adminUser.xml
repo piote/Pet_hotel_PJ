@@ -29,49 +29,47 @@
 		order by joinDate desc
       ]]>
    </select>
-   <!-- 아이디로 검색 -->
-	<select id="searchIdUserList" parameterType="String" resultMap="userResult">
+  
+   <select id="searchUsers" parameterType="java.util.Map" resultMap="userResult">
       <![CDATA[
         select U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
 		    from TB_USER U 
 		    LEFT JOIN ( select user_id, RESERVATION_STATE from TB_RESERVATION WHERE RESERVATION_STATE='N' ) R
-		ON U.user_id = R.user_id WHERE U.USER_ID LIKE '%'||#{keyword}||'%'
+		ON U.user_id = R.user_id  ]]>
+		<where>
+			 <choose>
+			 	<when test="search_op=='search_id'">
+			 		U.USER_ID LIKE '%'||#{keyword}||'%'
+			 	</when>
+			 	<when test="search_op=='search_name'">
+			 		USER_NAME LIKE '%'||#{keyword}||'%'
+			 	</when>
+			 	<when test="search_op=='search_tel'">
+			 		USER_TEL LIKE '%'||#{keyword}||'%'
+			 	</when>
+			 	<when test="search_op=='search_email'">
+			 		USER_EMAIL LIKE '%'||#{keyword}||'%'
+			 	</when>
+			 </choose>
+		
+			<choose>
+				<when test="grade!='' and grade!=null and grade2!='' and grade2!=null">
+					AND (USER_GRADE=#{grade} OR USER_GRADE=#{grade2}) 
+				</when>
+				<when test="grade!='' and grade!=null">
+					AND USER_GRADE=#{grade}
+				</when>
+			</choose>
+			<choose>
+				<when test="res_state!='' and res_state!=null">
+					AND REPLACE(NVL(RESERVATION_STATE,'X'),'N','O') = #{res_state}
+				</when>
+			</choose>
+			
+		</where>
 		GROUP BY U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE
 		order by joinDate desc
-      ]]>
    </select>
-   <!-- 이름으로 검색 -->
-	<select id="searchNameUserList" parameterType="String" resultMap="userResult">
-      <![CDATA[
-        select U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
-		    from TB_USER U 
-		    LEFT JOIN ( select user_id, RESERVATION_STATE from TB_RESERVATION WHERE RESERVATION_STATE='N' ) R
-		ON U.user_id = R.user_id WHERE USER_NAME LIKE '%'||#{keyword}||'%'
-		GROUP BY U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE
-		order by joinDate desc
-      ]]>
-   </select>
-   <!-- 전화번호로 검색 -->
-	<select id="searchTelUserList" parameterType="String" resultMap="userResult">
-      <![CDATA[
-        select U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
-		    from TB_USER U 
-		    LEFT JOIN ( select user_id, RESERVATION_STATE from TB_RESERVATION WHERE RESERVATION_STATE='N' ) R
-		ON U.user_id = R.user_id WHERE USER_TEL LIKE '%'||#{keyword}||'%'
-		GROUP BY U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE
-		order by joinDate desc
-      ]]>
-   </select>
-   <!-- 이메일로 검색 -->
-	<select id="searchEmailUserList" parameterType="String" resultMap="userResult">
-      <![CDATA[
-        select U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
-		    from TB_USER U 
-		    LEFT JOIN ( select user_id, RESERVATION_STATE from TB_RESERVATION WHERE RESERVATION_STATE='N' ) R
-		ON U.user_id = R.user_id WHERE USER_EMAIL LIKE '%'||#{keyword}||'%'
-		GROUP BY U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE
-		order by joinDate desc
-      ]]>
-   </select>
+   
 	
 </mapper>
