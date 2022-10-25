@@ -63,10 +63,14 @@ public class MyPageControllerImpl implements MyPageController {
         String endDate = request.getParameter("endDate");
 		UserVO userVO=(UserVO)session.getAttribute("user");
 		String user_id = userVO.getId();
-		session.removeAttribute("searchWord");
+		session.removeAttribute("startDate");
+		session.removeAttribute("endDate");
 		
-		if(searchWord!=null && searchWord!="") {
-			session.setAttribute("searchWord", searchWord);
+		if(startDate!=null && startDate!="") {
+			session.setAttribute("startDate", startDate);
+		}
+		if(endDate!=null && endDate!="") {
+			session.setAttribute("endDate", endDate);
 		}
         
         Map paraMap = new HashMap();
@@ -79,7 +83,7 @@ public class MyPageControllerImpl implements MyPageController {
 		paraMap.put("section", section);
 		paraMap.put("pageNum", pageNum);
         
-        Map myReserveMap = myPageService.listMyDetailReserve(paraMap, searchWord);
+        Map myReserveMap = myPageService.listMyDetailReserve(paraMap, startDate, endDate);
         
 		myReserveMap.put("section", section);
 		myReserveMap.put("pageNum", pageNum);

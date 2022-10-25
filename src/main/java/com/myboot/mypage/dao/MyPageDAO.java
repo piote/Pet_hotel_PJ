@@ -14,8 +14,8 @@ public interface MyPageDAO {
 	 public List selectAllMyReservesList(Map paraMap) throws DataAccessException;
 	 public List selectMyDetailReservesList(Map paraMap) throws DataAccessException;
 	 
-	 public int selectTotReserves() throws DataAccessException;
-	 public int searchTotReserves(String searchWord) throws DataAccessException;
+	 public int selectTotReserves(Map paraMap) throws DataAccessException;
+	 public int searchTotReserves(Map paraMap) throws DataAccessException;
 
 	 public List selectMyReviewList(String user_id) throws DataAccessException;
 	 public void updateMyReserveCancel(String res_num) throws DataAccessException;
