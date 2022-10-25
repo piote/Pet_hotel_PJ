@@ -506,15 +506,23 @@
     				//펫 테이블
     				for(var i = 0; i<data.petservice.length; i++){
     					addRow();
-    				
-    					$("#Pet_Name"+i).val(data.petservice[i].pet_name);
+    					$("#Pet_Name"+i).val(data.petservice[i].pet_name);//html 적용
+    					petmap.set("Pet_Name"+i, data.petservice[i].pet_name);//petmap 값 변동 인식
+    					
     					$("#Pet_Sex"+i).val(data.petservice[i].pet_gender);
+    					petmap.set("Pet_Sex"+i, data.petservice[i].pet_gender);
+    					
     					$("#Pet_Room"+i).val(data.petservice[i].room_grade);
+    					petmap.set("Pet_Room"+i, data.petservice[i].room_grade);
+    					
     					$("#pet_Beauty"+i).val(data.petservice[i].service_beauty);
+    					petmap.set("pet_Beauty"+i, data.petservice[i].service_beauty);
+    					
     					//체크박스 스파
     					var spa = false;
     					if(data.petservice[i].service_spa == "Y    "){
     						$("#pet_Spa"+i).prop("checked", true);
+    						petmap.set("pet_Spa"+i, true);
     						
     						spa = true;
     				        
