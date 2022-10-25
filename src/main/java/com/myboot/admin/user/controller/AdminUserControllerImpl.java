@@ -58,6 +58,35 @@ public class AdminUserControllerImpl implements AdminUserController {
 		
 	  }
 	
+	@Override
+	@RequestMapping("/admin/adminResList.do")
+	public ModelAndView ResList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		userVO = (UserVO) session.getAttribute("user");
+		
+		response.setCharacterEncoding("EUC-KR");
+		if(userVO!=null) {
+			System.out.println(userVO);
+			System.out.println(userVO.getId());
+			
+			if(userVO.getId().equals("admin")) {
+				System.out.println("관리자");
+				mav.setViewName("/admin/adminResList");
+				return mav;
+			}
+		}
+		
+		PrintWriter writer = response.getWriter();
+		writer.println("<script type='text/javascript'>");
+		writer.println("alert('권한이 없습니다.');");
+		writer.println("history.back();");
+		writer.println("</script>");
+		writer.flush();
+		return null;
+		
+	}
+	
 	@ResponseBody 
 	@RequestMapping(value= "/returnAllUser.do", method = RequestMethod.GET)
 	public List<UserVO> returnAllUser() throws Exception{
@@ -108,8 +137,6 @@ public class AdminUserControllerImpl implements AdminUserController {
 		}
 		
 		List<UserVO> searchUsers; 
-		
-		System.out.println(searchOption);
 		searchUsers= adminUserService.searchUsersOption(searchOption);
 		
 		return searchUsers;
