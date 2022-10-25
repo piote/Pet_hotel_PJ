@@ -67,7 +67,7 @@ h5 {
 .form-wrapper {
   background-color: white;
   width: 500px;
-  height: 900px;
+  height: 835px;
   padding: 20px 0;
   margin: 20px auto;
   border-radius: 15px;
@@ -124,16 +124,37 @@ h5 {
 .form-wrapper p a:hover {
   color: #009688;
 }
+#user_id{
+	margin-bottom: 40px
+}
+.mail2{
+	position: absolute;
+    right: -11px;
+    top: 435px;
+}
+.message_label{
+	margin-left: 40px;
+	margin-left: 40px;
+    margin-bottom: 20px;
+}
+.message_label input{
+	margin-left: 20px;	
+}
 #overlappedID {
 		background-color: GhostWhite; width: 30%; height: 35px;
 	    position: absolute;
-	    top: 147px;
+	    top: 130px;
 	    right: 30px;
 	    font-weight: 400;
 }
-		.olmessagef {color: red; position: absolute; top: 184px; right: 300px;}
-		.olmessaget {color: blue; position: absolute; top: 184px; right: 300px;}
-	
+		.olmessagef {color: red; position: absolute; top: 184px; right: 300px; top: 178px; left: 40px; width: 400px;}
+		.olmessaget {color: blue; position: absolute; top: 184px; right: 300px; top: 178px; left: 40px; width: 400px;}
+
+#confirmMsg{
+	position: absolute;
+	top: 332px;
+    left: 40px;
+}
 	</style>
     <title>회원가입 화면</title>
   
@@ -252,12 +273,12 @@ h5 {
 						<span id="olmessage"></span>
 						
                         <input type="password" name="pw" id="pw" maxlength="50" class="form-field" placeholder="UserPw"> 
-                        <input type="password" name="passwordcheck" id="passwordcheck" maxlength="50" class="form-field"placeholder="UserPwCheck">
+                        <input type="password" name="passwordcheck" id="passwordcheck" maxlength="50" class="form-field" placeholder="UserPwCheck" onchange="passConfirm()">
 						<span id="confirmMsg"></span><br>
               
                         <input type="text" name="name" maxlength="20" class="form-field" placeholder="UserName">
                         <input type="text" name="email" maxlength="30" class="form-field"placeholder="UserEmail">
-                        <select name="mail2" class="form-field">
+                        <select name="mail2" class="form-field mail2">
                             <option>@naver.com</option>
                             <option>@daum.net</option>
                             <option>@gmail.com</option>
@@ -265,7 +286,7 @@ h5 {
                         </select>
                    		<input type="number" name="tel" id="tel" placeholder="핸드폰번호 입력" maxlength="13" class="form-field" placeholder="UserCellPhone" >               
                         <input type="number" name="tel_sub" id="tel_sub" placeholder="비상시 핸드폰번호 입력" maxlength="13" class="form-field" placeholder="UserCellPhone" >                
-                     	<input type="checkbox"  name="message"  value="Y"><p>이메일 수신 발송에 동의하십니까?</p>                 
+                     	<label class="message_label">이메일 수신 발송에 동의하십니까?<input type="checkbox"  name="message"  value="Y"></label>
                         <input type="date" name="birth" class="form-field" placeholder="UserBirth" > 
                                  
           			    <button  type="submit" id="signup"  class="button primary"  onclick="checkValue()">가입</button>
