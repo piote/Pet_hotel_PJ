@@ -1,6 +1,5 @@
 package com.myboot.mypage.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,10 +11,11 @@ import org.springframework.stereotype.Repository;
 @Repository("myPageDAO")
 public interface MyPageDAO {
 	 public List selectMyReservesList(String user_id) throws DataAccessException;
+	 public List selectAllMyReservesList(Map paraMap) throws DataAccessException;
 	 public List selectMyDetailReservesList(Map paraMap) throws DataAccessException;
 	 
 	 public int selectTotReserves() throws DataAccessException;
-	 public int selectTotReserves(String colName) throws DataAccessException;
+	 public int searchTotReserves(String searchWord) throws DataAccessException;
 
 	 public List selectMyReviewList(String user_id) throws DataAccessException;
 	 public void updateMyReserveCancel(String res_num) throws DataAccessException;

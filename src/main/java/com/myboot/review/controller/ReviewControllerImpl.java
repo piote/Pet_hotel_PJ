@@ -58,6 +58,7 @@ public class ReviewControllerImpl implements ReviewController {
 		pagingMap.put("pageNum", pageNum);
 		Map reviewMap = reviewService.reviewDetail_1(pagingMap);
 
+	
 		reviewMap.put("section", section);
 		reviewMap.put("pageNum", pageNum);
 	//	request.setAttribute("reviewMap",reviewMap );
@@ -66,6 +67,7 @@ public class ReviewControllerImpl implements ReviewController {
 		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("reviewMap", reviewMap);
+		
 		return mav;
 
 	}
@@ -131,6 +133,15 @@ public class ReviewControllerImpl implements ReviewController {
 			reviewMap.put(name, value);
 		}
 
+		
+		String rate = (String) reviewMap.get("rate");
+		if(rate==null) {
+			reviewMap.put("rate","5" );
+		}
+		
+				
+		
+		
 		// 로그인 시 세션에 저장된 회원 정보에서 글쓴이 아이디를 얻어와서 Map에 저장합니다.
 		HttpSession session = multipartRequest.getSession();
 
@@ -168,9 +179,6 @@ public class ReviewControllerImpl implements ReviewController {
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
 			System.out.println("in " + path);
-			
-		
-			
 			
 			if (imageFileList != null && imageFileList.size() != 0) {
 				ImageVO imageVO = imageFileList.get(0);

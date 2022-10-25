@@ -20,7 +20,7 @@ public interface UserDAO {
 	 // 회원 정보 수정
 	 public int updateUser(UserVO userVO) throws DataAccessException;
 	 
-	 public UserVO selectUserById(String id) throws DataAccessException;
+	 public UserVO selectUserById(UserVO id) throws DataAccessException;
 	 
 	 // 회원 탈퇴
 	 public int deleteUser(String id) throws DataAccessException;

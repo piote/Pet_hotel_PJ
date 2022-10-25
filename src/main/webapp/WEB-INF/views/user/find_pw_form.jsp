@@ -17,6 +17,7 @@
 <title>아이디 찾기</title>
 </head>
 <body>
+<br><br>
 <form name="frmfind_pw" method="post"  action="${contextPath}/find_pw.do">
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
@@ -32,12 +33,13 @@
 						<input class="w3-input" type="text" id="tel" name="tel" required>
 					</p>
 					<p class="w3-center">
-						<button type="submit" id=findBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">find</button>
-						<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
+						<button style="background-color:#0F3758; color:white;" type="submit" id=findBtn class="w3-button w3-block  w3-ripple w3-margin-top w3-round">find</button>
+						<button type="button" onclick="history.go(-1);" class="w3-button w3-block  w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
 					</p>
 				</div>
 			</form>
 		</div>
 	</div>
+	<br><br><br><br><br>
 </body>
 </html>

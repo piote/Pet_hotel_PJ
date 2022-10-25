@@ -41,6 +41,17 @@ public class ReservationServiceImpl implements ReservationService {
 		return reservationDAO.useReservationNum();
 	}
 	
+	@Override
+	public ReservationVO SearchReservationNum(String reserNum) {
+	
+		return reservationDAO.SearchReservationNum(reserNum);
+	}
+	@Override
+	public List<PetserviceVO> SearchPetServiceByResNum(String reserNum) {
+	
+		return reservationDAO.SearchPetServiceByResNum(reserNum);
+	}
+	
 	
 //	@Override
 //	public int modMember(MemberVO member) throws Exception {

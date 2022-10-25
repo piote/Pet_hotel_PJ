@@ -1,7 +1,5 @@
 
 window.onload = function () {
-
-	addRow();
 	
 	$("#petcommentBox").on('keyup', function (event) {
         var currentString = $("#petcommentBox").val()
@@ -103,9 +101,7 @@ function calendarMaker(target, date) {
             "</thead>" +
             "<tbody id='custom_set_date'>" +
             "</tbody>" +
-            "</table>" +
-            "<div class='calTip'><span >*원하시는 예약 날짜 두개를 클릭해주세요.</span></div>" +
-            "<br>"
+            "</table>";
         return calendar_html_code;
     }
 
