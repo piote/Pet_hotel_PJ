@@ -6,10 +6,10 @@
  -->
 
  <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
- <c:set  var="articlesList"  value="${articlesMap.articlesList}" />
- <c:set  var="totArticles"  value="${articlesMap.totArticles}" />
- <c:set  var="section"  value="${articlesMap.section}" />
- <c:set  var="pageNum"  value="${articlesMap.pageNum}" />
+ <c:set  var="reviewList"  value="${reviewMap.reviewList}" />
+ <c:set  var="totReview"  value="${reviewMap.totReview}" />
+ <c:set  var="section"  value="${reviewMap.section}" />
+ <c:set  var="pageNum"  value="${reviewMap.pageNum}" />
  
  <!--
  <%
@@ -20,12 +20,12 @@
  <html>
  <head>
    <style>
-   .all {
+ .all {
        
        margin-top: 250px;
-       height: 1200px;
+       height: 2200px;
    }
-
+  
  .w_review {
 	  margin-top: -40px;
 	  text-align: left; font-size: 25px;
@@ -78,141 +78,234 @@
 
     	  }
 
-
+    	  .cls2 {
+    		  
+    		  left: 30%;
+    		  margin-top: 1900px;
+    		  position: absolute;
+    		  font-size: 20px;
+    		  }
+    	   
+    	  .no-uline {text-decoration:none;}
 
   .w_review2 {
-    width: 90%;
-   margin-bottom: 30px !important;
-  
+	  width:90%;
+	    border:1px;
+	    font-size: 17px;
+	    border-collapse: collapse;
+	    padding: 5px;
   }
 
   .w_tr {
             width: 100% !important;  
+            height: 40px;
+     
+            border-collapse: collapse;
         } 
 
   .w_tr>.w_td {
-    border: 0px solid rgba(107, 107, 107, 0.3) !important;
+   
     font-size: 17px !important ;
+    height: 75px;
     
   }
-
-	
+  .w_date{
+	  text-align: right;
+	  
+  }
+  
+  .w_margin1 {
+	  border-top: 0px solid #ddd;
+  }
+ 
+  .w_margin3 {
+	  border-bottom: 50px solid #fff;
+  }
+  .w_star {
+	  width:100%;
+	  height: 23px;
+  }
+  .w_td_title{
+	  margin-left: 15px;
+  }
+  
+  
+  
+  .w_tdz1 {
+	  height: 25px;
+	  border-bottom: 1px solid #ddd;
+  }
+  .w_tdz2 {
+	  height: 25px;
+	  
+  }
   </style> 
  
  <meta charset="UTF-8">
  
  <title>리뷰</title>
+ 
+ <script type="text/javascript">
+ 
+ function fn_remove_review(url,reviewNO){
+	 var form = document.createElement("form");
+	 form.setAttribute("method", "post");
+	 form.setAttribute("action", url);
+     var reviewNOInput = document.createElement("input");
+     reviewNOInput.setAttribute("type","hidden");
+     reviewNOInput.setAttribute("name","reviewNO");
+     reviewNOInput.setAttribute("value", reviewNO);
+	 
+     form.appendChild(reviewNOInput);
+     document.body.appendChild(form);
+     form.submit();
+ 
+ }
+ 
+ </script>
  </head>
- 
+
  <body>
- 
+
 
 <div class="all">
 		
 	<br><br><br><br>
 	
 	<h2 class="w_review"><a class="w_a" href="${contextPath}/reviewBoard.do" >대형견 Review</a></h2>
-	<p id="under"></p>
-	<br><br><br>
+		<p id="under"></p>
+		<br><br><br>
+	
+		 <div class="w_contents_1">
+            <img class="re_room1" src="${contextPath}/resources/img/pet_room_2.PNG" alt="대형견 룸">
+            <p class="re_p1">대형견</p>
 
-	 <div class="w_contents_1">
-        <img class="re_room1" src="${contextPath}/resources/img/pet_room_3.jpg" alt="대형견 룸">
-        <p class="re_p1">대형견</p>
-
-	 </div>
+		 </div>
 		 
 		 <div class="w_contents_2">
          <br>
 
          <div>
-         <table align="right" class="w_review2">
-           <tr class="w_tr">
-             <td class="w_td" width="15%">별점</td>
-             <td class="w_td" width="50%" rowspan="2">컨텐츠</td>
-             <td class="w_td" width="20%" rowspan="2">이미지</td>
-             <td class="w_td" width="15%" >작성일</td>
-         </tr>
-         <tr class="w_tr">
-             <td class="w_td">유저ID</td>
-             <td class="w_td">좋아요</td>
-         </tr>    
-        </table>
-
-       <table align="right" class="w_review2">
-         <tr class="w_tr">
-             <td class="w_td" width="15%" >별점</td>
-             <td class="w_td" width="50%" rowspan="2">컨텐츠</td>
-             <td class="w_td" width="20%" rowspan="2">이미지</td>
-             <td class="w_td" width="15%" >작성일</td>
-         </tr>
-         <tr class="w_tr">
-             <td class="w_td">유저ID</td>
-             <td class="w_td">좋아요</td>
-         </tr>    
-        </table>
-          
-         </div>
-     
-         <div>
-         <table align="right" class="w_review2">
-           <tr class="w_tr">
-               <td class="w_td" width="15%">별점</td>
-               <td class="w_td" width="50%" rowspan="2">컨텐츠</td>
-               <td class="w_td" width="20%" rowspan="2">이미지</td>
-               <td class="w_td" width="15%" >작성일</td>
-           </tr>
-           <tr class="w_tr">
-               <td class="w_td">유저ID</td>
-               <td class="w_td">좋아요</td>
-           </tr>    
-         </table>
+   
+<form name="frmReview" method="post"  action="${contextPath}"  enctype="multipart/form-data">
+        <table align="right" class="w_review2">
+      
+        <c:choose>
+        <c:when test="${reviewList ==null }" >
+          <tr  height="10">
+            <td colspan="4">
+               <p align="center">
+                  <b><span style="font-size:15pt;">등록된 글이 없습니다.</span></b>
+              </p>
+            </td>  
+          </tr>
+        </c:when>
+        <c:when test="${reviewList !=null }" >
+          <c:forEach  var="review" items="${reviewList }" varStatus="reviewNum" >
+          <fmt:formatDate var="reviewDate" value="${review.date}" pattern="yyyy.MM.dd"/>
          
+          	
+          	  <tr class="w_tr w_margin1">
+	          <td class="w_td" width="15%">  	
+	          		<c:if test="${review.rate==5}">
+	                    <img src="${contextPath}/resources/img/star_5.png" class="w_star">   
+	                </c:if> 
+	                <c:if test="${review.rate==4}">
+	                    <img src="${contextPath}/resources/img/star_4.png" class="w_star" >    
+	                </c:if>
+	                <c:if test="${review.rate==3}">
+	                    <img src="${contextPath}/resources/img/star_3.png" class="w_star">    
+	                </c:if>    
+	                <c:if test="${review.rate==2}">
+	                    <img src="${contextPath}/resources/img/star_2.png" class="w_star">    
+	                </c:if>  
+	                <c:if test="${review.rate==1}">
+	                    <img src="${contextPath}/resources/img/star_1.png" class="w_star">    
+	                </c:if>   
+	          </td>
+	          
+	          <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td>
+	          
+	          <td class="w_td" width="20%" rowspan="2">               
+	               <c:if test="${review.image != null}"> 
+	                   <img src="${contextPath}/${review.image}" width="150" height="150">
+	                </c:if>
+	         </td>
+	         
+	          
+	        
+	         
+	          <td class="w_td w_date"  width="15%" >${reviewDate}</td>
+	       
+          
+	          </tr>
+	      
+	      <tr class="w_tr" class="w_tr2">
+	          <td class="w_td">${review.id}</td>	
+	          <td class="w_td" align=center >${review.rec}</td>
+	      </tr>  
+	      <tr>
+	      <td class="w_tdz1" colspan="4"> <input type=button value="삭제하기" onClick="fn_remove_review('${contextPath}/review/removeReview.do', ${review.reviewNO})"> </td>
+	      </tr>
+	      <tr>
+	      <td class="w_tdz2" colspan="4"></td>
+	      </tr>
+    
+    </c:forEach>
+  </c:when>
+ </c:choose>    
+     </table>
+     </form>       
+     
+     
+     
        </div>
-        
 
-       <div>
-       <table align="right" class="w_review2">
-         <tr class="w_tr">
-             <td class="w_td" width="15%">별점</td>
-             <td class="w_td" width="50%" rowspan="2">컨텐츠</td>
-             <td class="w_td" width="20%" rowspan="2">이미지</td>
-             <td class="w_td" width="15%" >작성일</td>
-         </tr>
-         <tr class="w_tr">
-             <td class="w_td">유저ID</td>
-             <td class="w_td">좋아요</td>
-         </tr>    
-       </table>
-     </div> 
+    
        
-         <table align="right" class="w_review2">
-           <tr class="w_tr">
-               <td class="w_td" width="15%">별점</td>
-               <td class="w_td" width="50%" rowspan="2">컨텐츠</td>
-               <td class="w_td" width="20%" rowspan="2">이미지</td>
-               <td class="w_td" width="15%" >작성일</td>
-           </tr>
-           <tr class="w_tr">
-               <td class="w_td">유저ID</td>
-               <td class="w_td">좋아요</td>
-           </tr>    
-          </table>
-            
-
-       </div>
-
 		<br><br><br><br><br>
+
+		
+
+
+	<div class="cls2">
+	<c:if test="${totReview != null }" >
+	     <c:choose>
+	       <c:when test="${totReview >100 }">  <!-- 글 개수가 100 초과인경우 -->
+		      <c:forEach   var="page" begin="1" end="10" step="1" >
+		         <c:if test="${section >1 && page==1 }">
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_3.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
+		         </c:if>
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_3.do?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
+		         <c:if test="${page ==10 }">
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_3.do?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
+		         </c:if>
+		      </c:forEach>
+	       </c:when>
+	       <c:when test="${totReview ==100 }" >  <!--등록된 글 개수가 100개인경우  -->
+		      <c:forEach   var="page" begin="1" end="10" step="1" >
+		        <a class="no-uline"  href="#">${page } </a>
+		      </c:forEach>
+	       </c:when>
+	       
+	       <c:when test="${totReview< 100 }" >   <!--등록된 글 개수가 100개 미만인 경우  -->
+		      <c:forEach   var="page" begin="1" end="${totReview/10 +1}" step="1" >
+		         <c:choose>
+		           <c:when test="${page==pageNum }">
+		            <a class="sel-page"  href="${contextPath }/review/reviewDetail_3.do?section=${section}&pageNum=${page}">${page } </a>
+		          </c:when>
+		          <c:otherwise>
+		            <a class="no-uline"  href="${contextPath }/review/reviewDetail_3.do?section=${section}&pageNum=${page}">${page } </a>
+		          </c:otherwise>
+		        </c:choose>
+		      </c:forEach>
+	       </c:when>
+	     </c:choose>
+	   </c:if>
+	 </div>    
 
 </div>
 
 
-
-
-
 </body>
 </html>
-
-
-
-
-

@@ -17,7 +17,8 @@
 		<result property="rating" column="rating" />
 		<result property="res_num" column="RESERVATION_NUM" />
 		<result property="id" column="user_id" />
-
+		<result property="ROOM_GRADE" column="ROOM_GRADE" />
+	
 	</resultMap>
 
 
@@ -77,8 +78,8 @@
 
 	<insert id="insertNewReview" parameterType="java.util.Map">
     <![CDATA[
-      insert into tb_review(review_num, user_id, review_title, review_star,review_rec, review_date ,RESERVATION_NUM, review_image_url)
-      values(#{reviewNO}, #{id}, #{title}, #{rate}, #{rec}, sysdate, #{res_num}, #{review_image_url, jdbcType=VARCHAR})
+      insert into tb_review(review_num, user_id, review_title, review_star,review_rec, review_date ,RESERVATION_NUM, review_image_url ,ROOM_GRADE)
+      values(#{reviewNO}, #{id}, #{title}, #{rate}, #{rec}, sysdate, #{res_num}, #{review_image_url, jdbcType=VARCHAR}, #{ROOM_GRADE, jdbcType=VARCHAR})
     ]]>
 	</insert>
 
@@ -92,16 +93,56 @@
 		resultMap="reviewResult">  
 <![CDATA[
 	SELECT * FROM ( 
-			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url
-				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image_url
+			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url, ROOM_GRADE  
+				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image_url, ROOM_GRADE 
 						from TB_REVIEW
+						where ROOM_GRADE = 'Deluxe' 
+	                    START WITH  parentNO is null
+						CONNECT BY PRIOR review_num = parentNO
+						ORDER SIBLINGS BY review_num DESC)
+						)                         
+					    where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
+							
+						]]>
+	</select>
+	
+		<select id="selectAllReviewList2" parameterType="java.util.Map"
+		resultMap="reviewResult">  
+<![CDATA[
+	SELECT * FROM ( 
+			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url,ROOM_GRADE
+				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image_url,ROOM_GRADE
+						from TB_REVIEW
+						where ROOM_GRADE = 'Superior'
+	                    START WITH  parentNO is null
+						CONNECT BY PRIOR review_num = parentNO
+						ORDER SIBLINGS BY review_num DESC)
+						)                         
+					    where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
+							
+						]]>
+	</select>
+	
+		<select id="selectAllReviewList3" parameterType="java.util.Map"
+		resultMap="reviewResult">  
+<![CDATA[
+	SELECT * FROM ( 
+			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url,ROOM_GRADE
+				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image_url,ROOM_GRADE
+						from TB_REVIEW
+						where ROOM_GRADE = 'Sweet'
 	                    START WITH  parentNO is null
 						CONNECT BY PRIOR review_num = parentNO
 						ORDER SIBLINGS BY review_num DESC)
 						)                         
 					    	where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
+							
 						]]>
 	</select>
+	
+	
+	
+	
 
 	<select id="selectTotReview" resultType="int">
   <![CDATA[
