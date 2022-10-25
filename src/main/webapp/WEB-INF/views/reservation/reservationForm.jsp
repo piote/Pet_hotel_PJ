@@ -11,7 +11,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>호텔 예약창(예약단계1)</title>
+    <title>호텔 예약</title>
     <style>
         /*  {
             margine: 10%
