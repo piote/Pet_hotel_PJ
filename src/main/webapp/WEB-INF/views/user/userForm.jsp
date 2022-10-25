@@ -220,7 +220,9 @@ h5 {
     			$("#olmessage").addClass("olmessagef");
     			$("#olmessage").removeClass("olmessaget");
     			$("#idcheck").attr("value","false");
-    			}else {
+    			}if(!document.userInfo.id.value){
+                    alert("아이디를 입력하세요.");
+                    return false;}else {
     			$("#olmessage").text("사용 가능한 ID 입니다.");
     			$("#olmessage").addClass("olmessaget");
     			$("#olmessage").removeClass("olmessagef");
