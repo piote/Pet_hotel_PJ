@@ -1,6 +1,7 @@
 package com.myboot.admin.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,28 +20,11 @@ public class AdminUserServiceImpl implements AdminUserService {
 		usersList = adminUserDAO.selectAllUserList();
 		return usersList;
 	}
+	//검색했을때
 	@Override
-	public List searchUsersById(String keyword) throws Exception {
+	public List searchUsersOption (Map searchOption) throws Exception{
 		List usersList = null;
-		usersList = adminUserDAO.searchIdUserList(keyword);
-		return usersList;
-	}
-	@Override
-	public List searchUsersByName(String keyword) throws Exception {
-		List usersList = null;
-		usersList = adminUserDAO.searchNameUserList(keyword);
-		return usersList;
-	}
-	@Override
-	public List searchUsersByTel(String keyword) throws Exception {
-		List usersList = null;
-		usersList = adminUserDAO.searchTelUserList(keyword);
-		return usersList;
-	}
-	@Override
-	public List searchUsersByEmail(String keyword) throws Exception {
-		List usersList = null;
-		usersList = adminUserDAO.searchEmailUserList(keyword);
+		usersList = adminUserDAO.searchUsers(searchOption);
 		return usersList;
 	}
 }

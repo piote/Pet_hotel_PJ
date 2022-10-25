@@ -5,6 +5,9 @@ let pageCount = 10; //페이징에 나타낼 페이지 수
 let globalCurrentPage=1; //현재 페이지
 let user_data = []; 
 
+var grade_ck={'Bronze':null, 'Silver':null, 'Gold':null};
+var res_ck={'O':null,'X':null};
+
 $(document).ready(function(){
     
     getAllList();
@@ -19,7 +22,6 @@ $(document).ready(function(){
     
     //체크박스 눌렀을때
     $('input[type=checkbox]').change(function(){
-        getAllList();
         searchOption();
     });
 
@@ -150,12 +152,14 @@ function search(){
     //input 안 정보 가지고 오기
     var search_op = $('#search_op').val();
     var keyword = $('#keyword').val();
-    console.log(search_op+' '+keyword);
-
 
     $.ajax({
-        url: "/adminSearchUser.do?search_op="+search_op+"&keyword="+keyword,
+        url: "/adminSearchUser.do",
         type: "GET", 
+        data:{"search_op":search_op,"keyword":keyword,
+            "Bronze":grade_ck.Bronze,"Silver":grade_ck.Silver,"Gold":grade_ck.Gold,
+            "res_O":res_ck.O,"res_X":res_ck.X
+        },
         success : function(data){
             //총데이터 수 저장
             totalData = data.length;
@@ -177,109 +181,29 @@ function search(){
     });
 }
 
+//체크박스 옵션
 function searchOption(){
-    var option_data=[];
-    var count=0;
 
-    var bronzeCk= false;
-    var silverCk= false;
-    var goldCk= false;
-
-    var res_OCk= false;
-    var res_XCk= false;
-
+    //체크된 값 받아오기
     $('.grade_option input[type=checkbox]').each(function (index) {
-        if($('#Bronze').is(":checked")==true){bronzeCk= true;}
-        else{bronzeCk= false;}
-        if($('#Silver').is(":checked")==true){silverCk= true;}
-        else{silverCk= false;}
-        if($('#Gold').is(":checked")==true){goldCk= true;}
-        else{goldCk= false;}
-        console.log('each')
+        if($('#Bronze').is(":checked")==true){
+            grade_ck.Bronze='Bronze';
+        }else{grade_ck.Bronze=null;}
+        if($('#Silver').is(":checked")==true){
+            grade_ck.Silver='Silver';
+        }else{grade_ck.Silver=null;}
+        if($('#Gold').is(":checked")==true){
+            grade_ck.Gold='Gold';
+        }else{grade_ck.Gold=null;}
     });
-
     $('.res_option input[type=checkbox]').each(function (index) {
-        if($('#res_O').is(":checked")==true){res_OCk= true;}
-        else{res_OCk= false;}
-        if($('#res_X').is(":checked")==true){res_XCk= true;}
-        else{res_XCk= false;}
+        if($('#res_O').is(":checked")==true){res_ck.O= "O";}
+        else{res_ck.O= null;}
+        if($('#res_X').is(":checked")==true){res_ck.X= "X";}
+        else{res_ck.X= null;}
     });
 
-    console.log("bronzeCk : "+bronzeCk);
-    console.log("silverCk : "+silverCk);
-    console.log("goldCk : "+goldCk);
+    //체크박스 클릭 시 검색
+    search();
 
-
-    //멤버쉽 등급
-    if((bronzeCk && silverCk && goldCk) || (!bronzeCk && !silverCk && !goldCk)){
-        getAllList();
-        console.log('all');
-    }else if(bronzeCk && silverCk && !goldCk){
-        for(i=0;i<user_data.length;i++){
-            if((user_data[i].grade=='Bronze') || (user_data[i].grade=='Silver')){
-                option_data[count]=user_data[i];
-                count++;console.log('bs');
-            }
-        }
-        
-    }else if(silverCk && goldCk && !bronzeCk){
-        for(i=0;i<user_data.length;i++){
-            if(user_data[i].grade=='Silver' || user_data[i].grade=='Gold'){
-                option_data[count]=user_data[i];
-                count++;console.log('sg');
-            }
-        }
-        
-    }else if(bronzeCk && goldCk && !silverCk){
-        for(i=0;i<user_data.length;i++){
-            if(user_data[i].grade=='Bronze' || user_data[i].grade=='Gold'){
-                option_data[count]=user_data[i];
-                count++;console.log('bg');
-            }
-        }
-        
-    }else if(bronzeCk && !silverCk && !goldCk){
-        for(i=0;i<user_data.length;i++){
-            if(user_data[i].grade=='Bronze'){
-                option_data[count]=user_data[i];
-                count++;
-            }
-        }
-        console.log('b');
-    }else if(silverCk && !bronzeCk && !goldCk){
-        for(i=0;i<user_data.length;i++){
-            if(user_data[i].grade=='Silver'){
-                option_data[count]=user_data[i];
-                count++;
-            }
-        }
-        console.log('s');
-    }else if(goldCk && !bronzeCk && !silverCk){
-        for(i=0;i<user_data.length;i++){
-            if(user_data[i].grade=='Gold'){
-                option_data[count]=user_data[i];
-                count++;
-            }
-        }
-        console.log('g');
-    }else{
-        getAllList();
-    }
-
-    // for(i=0;i<user_data.length;i++){
-    //     if(user_data[i].grade=='Bronze'){
-    //         option_data[count]=user_data[i];
-    //         count++;
-    //     }
-    // }
-
-
-    user_data=[];
-    for(i=0;i<option_data.length;i++){
-        user_data[i]=option_data[i];
-    }
-    
-    totalData=count;
-    clickNO(globalCurrentPage);
-    page_num_view(totalData);
 }

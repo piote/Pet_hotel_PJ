@@ -1,7 +1,9 @@
 package com.myboot.admin.user.controller;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,19 +69,48 @@ public class AdminUserControllerImpl implements AdminUserController {
 	public List<UserVO> adminUserListById(
 			@RequestParam(value ="search_op", required = false) String search_op,
 			@RequestParam(value ="keyword", required = false) String keyword,
+			@RequestParam(value ="Bronze", required = false) String bronze,
+			@RequestParam(value ="Silver", required = false) String silver,
+			@RequestParam(value ="Gold", required = false) String gold,
+			@RequestParam(value ="res_O", required = false) String res_O,
+			@RequestParam(value ="res_X", required = false) String res_X,
 			  HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		Map<String, String> searchOption = new HashMap<String, String>();
+		
+		searchOption.put("search_op", search_op);
+		searchOption.put("keyword", keyword);
+		if(bronze!=null && bronze!="" && silver!=null && silver!="" && gold!=null && gold!="") {
+			
+		}else if(bronze!=null && bronze!="" && silver!=null && silver!="") {
+			searchOption.put("grade", bronze);
+			searchOption.put("grade2", silver);
+		}else if(bronze!=null && bronze!="" && gold!=null && gold!="") {
+			searchOption.put("grade", bronze);
+			searchOption.put("grade2", gold);
+		}else if(silver!=null && silver!="" && gold!=null && gold!="") {
+			searchOption.put("grade", silver);
+			searchOption.put("grade2", gold);
+		}else if(bronze!=null && bronze!="") {
+			searchOption.put("grade", bronze);
+		}else if(silver!=null && silver!="") {
+			searchOption.put("grade", silver);
+		}else if(gold!=null && gold!="") {
+			searchOption.put("grade", gold);
+		}
+		
+		if(res_O!=null && res_O!="" && res_X!=null && res_X!="") {
+			
+		}else if(res_O!=null && res_O!="") {
+			searchOption.put("res_state", res_O);
+		}else if(res_X!=null && res_X!="") {
+			searchOption.put("res_state", res_X);
+		}
+		
 		List<UserVO> searchUsers; 
-			if(search_op.equals("search_id")) {
-				searchUsers= adminUserService.searchUsersById(keyword);
-			}else if(search_op.equals("search_name")) {
-				searchUsers= adminUserService.searchUsersByName(keyword);
-			}else if(search_op.equals("search_tel")) {
-				searchUsers= adminUserService.searchUsersByTel(keyword);
-			}else if(search_op.equals("search_email")) {
-				searchUsers= adminUserService.searchUsersByEmail(keyword);
-			}else {
-				return null;
-			}
+		
+		System.out.println(searchOption);
+		searchUsers= adminUserService.searchUsersOption(searchOption);
 		
 		return searchUsers;
 	}
