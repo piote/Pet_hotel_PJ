@@ -13,6 +13,11 @@ function handleOnChange(e) {
     const value = e.value;
 }
 
+//테이블 초기화
+function resetRow(){
+	var petTableNum = 0;
+}
+
 function addRow() {
 
     // table element 찾기
