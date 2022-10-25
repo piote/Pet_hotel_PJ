@@ -13,7 +13,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="shortcut icon" href="${contextPath}/resources/img/anitel.ico">
     <title>Anitel</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -73,7 +72,7 @@
         /* section */
         section{
             width: 1270px; height: 650px;
-            margin: 250px auto;
+            margin: 150px auto;
             position: relative;
         }
         .bar{
@@ -303,6 +302,10 @@
         <p class="sec_p">반려동물을 위한 특별하고 깔끔한 룸,<br>주요 시설들을 소개드립니다.</p>
         <a class="more" href="${contextPath}/facilities.do">더보기 +</a>
     </div>
+</section>
+
+<section class="review">
+	<div></div>
 </section>
 
 <section class="experience">
