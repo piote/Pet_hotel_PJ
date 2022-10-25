@@ -13,9 +13,9 @@
 	   <link rel="stylesheet" href="${contextPath}/resources/css/member.css">
 	   <meta charset="UTF-8">
 	   <title>회원 수정창</title>
-	   <script>
-			function checkOnlyOne(element) {
-		  
+	 <script>
+		function checkOnlyOne(element) {
+			  
 			  const checkboxes 
 			      = document.getElementsByName("emailsts_yn");
 			  
@@ -42,21 +42,12 @@
 					 form.submit();
 					 
 				}
-				
 			}
-			
-		</script>
-		
-			
-		 		<!--  <script> 
-		 		 
-		 		function updateUser(id)
-		 		
-				    window.onload=function(){
-				      alert("정보 수정이 완료 됐습니다.!");
-				    }
-			  </script> -->
-
+			function mod() {
+				alert("정보수정이 완료 됐습니다.")
+			}
+	 </script>
+	 
 	</head>
 	<body>
 		<form method="post" action="${contextPath}/modMember.do"> 
@@ -96,13 +87,13 @@
 				                 <input type="checkbox" name="emailsts_yn"  value="N" onclick= 'checkOnlyOne(this)' />No	
 				               </td>
 			               </tr>
-				           <tr>
+				          <tr>
 				               <td><p align="center">생년월일</P></td> 
 				               
 				               <%-- <td><input class="txtBox" type="text" name="birth" value="${user.birth }" ></td> --%>
 				               <td>
 				               <input class="txtBox"  type="date" name="birth_string" value="${birth}" ></td>
-			               </tr>
+			              </tr>
 				         <tr>
 					           <td><p align="center">가입일</td>
 					           <td><input class="txtBox" type="text" name="joinDate" size="20" value="${user.joinDate}"  disabled/></td>
@@ -110,18 +101,14 @@
 				         
 				     </table>
 				     
-			         <ul>
-			            <%-- <li><a href= "${contextPath}/mypage/myPage.do"><input class="btn1" type="button" name="mod_1"  value="수정하기" onClick= "mod();"></a></li> --%>
-<%-- 			           <button type="button" onclick="updateUser('${contextPath}/modMember.do','${user.id }');"> 수정하기 </button> --%>
-						<input type="submit" name= 'mod' value="수정하기" >
-				        <li><a href= "${contextPath}/modMemberForm.do"><input class="btn2" type="button" name="cal_1" value="수정취소" onClick= "cal();"></a></li>
+			         <ul>			    
+							<input type="submit" class="btn1" name="modbtn" value="수정하기" onClick= "mod()" >
+					        <li><a href= "${contextPath}/modMemberForm.do"><input class="btn2" type="button" name="cal_1" value="수정취소" onClick= "cal();"></a></li>
 				     </ul>
 				     	<p>아이디, 이름, 가입일은 수정이 불가능합니다.</p>
-				    <%-- <div><a href= "${contextPath}/main.do">탈퇴하기<input class="btn3" type="button" name="leave_1"  value="탈퇴하기" onClick="leave();"></a>
-						</div> --%>
 						<div>
 							<%-- <a href= "${contextPath}/main.do"><input class="btn3" type="button" name="leave_1"  value="탈퇴하기" onClick="leave();"></a> --%>
-							<button type="button" onclick="deleteUser('${contextPath}/retiring.do','${user.id }');"> 탈퇴하기 </button>
+							<button type="button" class="btn3" onclick="deleteUser('${contextPath}/retiring.do','${user.id }');"> 탈퇴하기 </button>
 						</div>
 			   	</section>
 		   </div>

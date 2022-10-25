@@ -355,7 +355,6 @@ public class UserControllerImpl implements UserController{
 			}
 			
 			result = userService.modMember(user);
-			
 			HttpSession session = request.getSession();
 			session.removeAttribute("user");
 			session.setAttribute("user",user);
