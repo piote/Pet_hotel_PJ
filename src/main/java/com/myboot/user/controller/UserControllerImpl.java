@@ -186,7 +186,7 @@ public class UserControllerImpl implements UserController{
 		userVO.setId(id);
 		userVO.setPw(pw);
 		userVO.setName(name);
-		userVO.setEmail(email+"@"+mail2);
+		userVO.setEmail(email+mail2);
 		userVO.setTel(tel);
 		userVO.setTel_sub(tel_sub);
 		userVO.setMessage(message);
