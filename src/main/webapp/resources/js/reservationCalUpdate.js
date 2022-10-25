@@ -1,7 +1,5 @@
 
 window.onload = function () {
-
-	addRow();
 	
 	$("#petcommentBox").on('keyup', function (event) {
         var currentString = $("#petcommentBox").val()
@@ -260,38 +258,6 @@ function calendarMaker(target, date) {
                 alert("이후의 날짜를 선택하여 주세요");
             }
 
-            //숙박일수 계산
-            function dateCal(indate, outdate) {
-
-                var date = new Date(indate);
-
-                var year = date.getFullYear();
-                var month = date.getMonth();
-                var day = date.getDate();
-
-                var stDate = new Date(year, month, day);
-
-
-                var date = new Date(outdate);
-
-                var year = date.getFullYear();
-                var month = date.getMonth();
-                var day = date.getDate();
-
-                var endDate = new Date(year, month, day);
-
-                var btMs = endDate.getTime() - stDate.getTime();
-                var btDay = btMs / (1000 * 60 * 60 * 24);
-                console.log(start_day.toLocaleDateString()+'-'+end_day.toLocaleDateString());
-                $("#dateResult").text(' || '+start_day.toLocaleDateString() + ' - ' + end_day.toLocaleDateString() + '  ||  ' + btDay + '박');
-                $("#dateResult").val(btDay);
-
-                if(servicemap !=null){
-                    costTB(servicemap, true)
-                }
-            }
-
-
         });
     }
 
@@ -299,3 +265,33 @@ function calendarMaker(target, date) {
     $("#CalDate" + nowDate.getDate()).addClass("to_day");
 
 }
+
+//숙박일수 계산
+        function dateCal(indate, outdate) {
+
+            var date = new Date(indate);
+
+            var year = date.getFullYear();
+            var month = date.getMonth();
+            var day = date.getDate();
+
+            var stDate = new Date(year, month, day);
+
+
+            var date = new Date(outdate);
+
+            var year = date.getFullYear();
+            var month = date.getMonth();
+            var day = date.getDate();
+
+            var endDate = new Date(year, month, day);
+
+            var btMs = endDate.getTime() - stDate.getTime();
+            var btDay = btMs / (1000 * 60 * 60 * 24);
+            $("#dateResult").text(' || '+stDate.toLocaleDateString() + ' - ' + endDate.toLocaleDateString() + '  ||  ' + btDay + '박');
+            $("#dateResult").val(btDay);
+
+            if(servicemap !=null){
+                costTB(servicemap, true)
+            }
+        }

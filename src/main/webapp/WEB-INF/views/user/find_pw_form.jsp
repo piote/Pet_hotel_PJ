@@ -37,9 +37,9 @@
 						<button type="button" onclick="history.go(-1);" class="w3-button w3-block  w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
 					</p>
 				</div>
-			</form>
-		</div>
+			</div>
 	</div>
 	<br><br><br><br><br>
+			</form>
 </body>
 </html>

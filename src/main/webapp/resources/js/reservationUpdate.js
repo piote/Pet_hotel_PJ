@@ -5,12 +5,18 @@ var petTableNum = 0;
 //존재하는 테이블 갯수
 var totalTableNum = 0;
     		
+//칼럼 값
 var petmap = new Map();
-
+//계산용 값
 var servicemap = new Map();
 
 function handleOnChange(e) {
     const value = e.value;
+}
+
+//테이블 초기화
+function resetRow(){
+	petTableNum = 0;
 }
 
 function addRow() {
@@ -23,6 +29,7 @@ function addRow() {
 
     //row에 id 추가
     newRow.id = 'tbnum' + petTableNum;
+    newRow.className = 'tbnum';
 
     // 새 행(Row)에 Cell 추가
     var Cell1 = newRow.insertCell();

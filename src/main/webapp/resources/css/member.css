@@ -58,9 +58,9 @@
     margin-top: 10px;
     border:none;    
 }
-.bnt3 > a:hover{background: #ccc;}
+/* .bnt3 > a:hover{background: #ccc;}
 
-.modCon > ul{margin-top: 30px;}
+.modCon > ul{margin-top: 30px;} */
 .modCon > p{
 	margin:50px 0;
 	text-align: center;

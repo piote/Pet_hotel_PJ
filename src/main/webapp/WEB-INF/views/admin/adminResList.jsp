@@ -13,10 +13,10 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>관리자페이지_회원조회</title>
-    <script src="${contextPath}/resources/js/adminPage.js"></script>
+    <title>관리자페이지_예약조회</title>
+    <!-- <script src="${contextPath}/resources/js/adminPage.js"></script> -->
     <style>
-        #adm_user{
+        #adm_res{
         	color: #333;
         }
         .list_wrap{
@@ -75,18 +75,20 @@
             border: none;
             cursor: pointer;
         }
-        .grade_option,.res_option{
+        .sort_option,.res_option{
             font-size: 14px;
             color: #606060;
             line-height: 30px;
+            display: flex;
+            flex-direction: row;
         }
-        .grade_option{
-            margin-left: 50px;
+        .sort_option{
+            margin-left: 0;
         }
         .res_option{
-            margin-left: 35px;
+            margin-left: 25px;
         }
-        .grade_option input[type=checkbox], .res_option input[type=checkbox]{
+        .sort_option input[type=radio], .res_option input[type=checkbox]{
             accent-color: #ffa245;
             color: #ffa245;
             transform: scale(0.9);
@@ -98,9 +100,9 @@
             height: 100%; width: 1px;
             background-color: #ccc;
             transform: scaleY(0.6);
-            margin-left: 30px;
+            margin-left: 15px;
         }
-        .grade_option label,.res_option label{
+        .sort_option label,.res_option label{
             margin: 0 10px;
         }
         .list_tb{
@@ -124,17 +126,30 @@
             font-weight: bold;
             color: #030303;
         }
-        .user_id,.user_name,.user_grade,.user_resState{
+        .res_num,.res_name,.res_petCount,.resState{
+            width: 12%;
+        }
+        .res_cost{
             width: 13%;
         }
-        .user_joinDate{
-            width: 14%;
+        .res_Date{
+            width: 17%;
         }
-        .user_email{
-            width: 18%;
+        .res_payTime{
+            width: 15%;
         }
-        .user_tel{
-            width: 16%;
+        .modRes{
+            width: 56px;
+            height: 20px;
+            font-size: 10px;
+            border: 1px solid #bbb;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        .modRes:hover{
+            background-color: #ddd;
+        }.modRes:active{
+            background-color: #ccc;
         }
         .page_num{
             margin-top: 50px;
@@ -158,39 +173,53 @@
                 <div class="list_option">
                     <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="search()" >
                         <select name="search_op" id="search_op" aria-label="search">
-                            <option value="search_id">아이디</option>
-                            <option value="search_name">이름</option>
-                            <option value="search_tel">전화번호</option>
-                            <option value="search_email">이메일</option>
+                            <option value="search_id">예약자</option>
+                            <option value="search_name">예약번호</option>
                         </select>
                         <input type="text" name="keyword" id="keyword" class="search_txt" placeholder="검색">
                         <button type="button" class="seh_icon" onclick="search()" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
                     </div>
-                    <div class="grade_option">
-                        멤버쉽 :
-                        <label><input type="checkbox" name="grade" id="Bronze" value="Bronze">Bronze</label>
-                        <label><input type="checkbox" name="grade" id="Silver" value="Silver">Silver</label>
-                        <label><input type="checkbox" name="grade" id="Gold" value="Gold">Gold</label>
+                    <div class="sort_option">
+                        <label><input type="radio" name="sort" id="sort_num" value="sort_num" checked="checked">예약번호 순</label>
+                        <label><input type="radio" name="sort" id="sort_res" value="sort_res">예약일 순</label>
+                        <label><input type="radio" name="sort" id="sort_pay" value="sort_pay">주문일 순</label>
                     </div>
                     <div class="hr"></div>
                     <div class="res_option">
-                        예약여부 :
-                        <label><input type="checkbox" name="reservation" id="res_O" value="O">O</label>
-                        <label><input type="checkbox" name="reservation" id="res_X" value="X">X</label>
+                        예약상태 :
+                        <label><input type="checkbox" name="State" id="res_complete" value="complete">이용완료</label>
+                        <label><input type="checkbox" name="State" id="res_before" value="before">이용전</label>
+                        <label><input type="checkbox" name="State" id="res_cancel" value="cancel">취소</label>
                     </div>
                 </div>
-
+	
+				<!-- 테이블 -->
                 <table class="list_tb">
                     <tr class="tb_title">
-                        <td class="user_id">아이디</td>
-                        <td class="user_name">이름</td>
-                        <td class="user_grade">멤버쉽등급</td>
-                        <td class="user_joinDate">가입일</td>
-                        <td class="user_email">이메일</td>
-                        <td class="user_tel">전화번호</td>
-                        <td class="user_resState">예약여부</td>
+                        <td class="res_num">예약번호</td>
+                        <td class="res_name">예약자</td>
+                        <td class="res_Date">예약일</td>
+                        <td class="res_petCount">총 마리수</td>
+                        <td class="res_payTime">주문일</td>
+                        <td class="res_cost">총 가격</td>
+                        <td class="resState">예약상태</td>
+                        <td class="res_modBt"></td>
+                    </tr>
+                    <tr>
+                        <td class="res_num">1</td>
+                        <td class="res_name">aaa</td>
+                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
+                        <td class="res_petCount">3마리</td>
+                        <td class="res_payTime">2010.10.10</td>
+                        <td class="res_cost">200,000원</td>
+                        <td class="resState">이용완료</td>
+                        <td class="res_modBt">
+                            <button type="button" class="modRes">예약변경</button>
+                        </td>
                     </tr>
                 </table>
+                
+                <!-- 페이지기능 -->
                 <div class="page_num"></div>
             </div>
             
