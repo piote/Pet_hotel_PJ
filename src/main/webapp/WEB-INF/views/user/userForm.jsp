@@ -152,7 +152,7 @@ h5 {
 
 #confirmMsg{
 	position: absolute;
-	top: 332px;
+	top: 325px;
     left: 40px;
 }
 	</style>
@@ -273,7 +273,7 @@ h5 {
 						<span id="olmessage"></span>
 						
                         <input type="password" name="pw" id="pw" maxlength="50" class="form-field" placeholder="UserPw"> 
-                        <input type="password" name="passwordcheck" id="passwordcheck" maxlength="50" class="form-field" placeholder="UserPwCheck" onchange="passConfirm()">
+                        <input type="password" name="passwordcheck" id="passwordcheck" maxlength="50" class="form-field" placeholder="UserPwCheck" onkeyup="passConfirm()">
 						<span id="confirmMsg"></span><br>
               
                         <input type="text" name="name" maxlength="20" class="form-field" placeholder="UserName">
