@@ -21,6 +21,10 @@ public  interface ReviewController {
 
 
 	public ModelAndView reviewDetail_1(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+
+	ResponseEntity removeReview(int reviewNO, MultipartHttpServletRequest multipartRequest,
+			HttpServletResponse response) throws Exception;
 	
 	
 	
