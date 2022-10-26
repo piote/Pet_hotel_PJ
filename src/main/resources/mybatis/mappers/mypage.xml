@@ -25,10 +25,8 @@
     <result property="date" column="review_date" />
     <result property="image" column="review_image_url" />
     <result property="rec" column="review_rec" />
-    
     <result property="res_num" column="RESERVATION_NUM" />
     <result property="id" column="user_id" />
-    
 </resultMap>
 
 <resultMap id="searchResult" type="java.util.HashMap">
@@ -44,7 +42,7 @@
 </resultMap> 
 
 
-	<select id="selectMyReservesList" resultMap="searchResult"  parameterType="String"  >
+	<select id="selectMyReservesList" resultMap="searchResult"  parameterType="String" >
 		<![CDATA[
 		select to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_num, u.user_name, u.user_tel, p.pet_name
         from tb_reservation r, tb_user u, tb_petservice p
@@ -53,13 +51,13 @@
 		]]>
 	</select>
 	
-	<select id="selectAllMyReservesList" resultMap="searchResult"  parameterType="java.util.Map"  >
+	<select id="selectAllMyReservesList" resultMap="searchResult"  parameterType="java.util.Map" >
 		    SELECT * FROM ( 
 			SELECT ROWNUM as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
 					from tb_reservation r, tb_user u, tb_petservice p
 					where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
 				<choose>
-					<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
+					<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'user_name' or colName == 'pet_name')">
 						 and ${colName} like '%'|| #{searchWord} ||'%'
 					</when>
 					<otherwise>	
@@ -70,19 +68,16 @@
 	        order by pay_time
 	</select>
 
-	<select id="selectMyDetailReservesList" resultMap="searchResult"  parameterType="java.util.Map"  >
+	<select id="selectMyDetailReservesList" resultMap="searchResult"  parameterType="java.util.Map" >
 		    SELECT * FROM ( 
 			SELECT ROWNUM as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
 					from tb_reservation r, tb_user u, tb_petservice p
 					where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
 			<choose>
-				<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
-					 and ${colName} like '%'|| #{searchWord} ||'%'
-				</when>
 				<when test="(startDate != null and endDate != null) and (colName == null or colName == '')">
 					 and to_char(r.pay_time, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 				</when>
-				<when test="(startDate != null and endDate != null) and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
+				<when test="(startDate != null and endDate != null) and searchWord != null and (colName == 'user_name' or colName == 'pet_name')">
 					and to_char(r.pay_time, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 					and ${colName} like '%'|| #{searchWord} ||'%'
 				</when>
@@ -109,11 +104,15 @@
 	</update>
 	
 	<select id="selectTotReserves" parameterType="String" resultType="int">
-         select count(p.reservation_num)
-         from tb_reservation r, tb_user u , tb_petservice p
-				where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
+	         select count(p.reservation_num)
+		         from tb_reservation r
+		         left join (select user_id, user_name, user_tel from tb_user) u
+	         on u.user_id = r.user_id
+		         left join (select reservation_num, pet_name from tb_petservice) p
+	         on r.reservation_num = p.reservation_num
+	         where r.user_id = #{user_id}
 			<choose>
-				<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
+				<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'user_name' or colName == 'pet_name')">
 					 and ${colName} like '%'|| #{searchWord} ||'%'
 				</when>
 				<otherwise>
@@ -122,17 +121,18 @@
 	</select>
 	
   	<select id="searchTotReserves" parameterType="String" resultType="int">
-         select count(p.reservation_num)
-         from tb_reservation r, tb_user u , tb_petservice p
-				where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
+	         select count(p.reservation_num)
+		         from tb_reservation r
+		         left join (select user_id, user_name, user_tel from tb_user) u
+	         on u.user_id = r.user_id
+		         left join (select reservation_num, pet_name from tb_petservice) p
+	         on r.reservation_num = p.reservation_num
+	         where r.user_id = #{user_id}
 			<choose>
-				<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
-					 and ${colName} like '%'|| #{searchWord} ||'%'
-				</when>
 				<when test="(startDate != null and endDate != null) and (colName == null or colName == '')">
 					 and to_char(r.pay_time, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 				</when>
-				<when test="(startDate != null and endDate != null) and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
+				<when test="(startDate != null and endDate != null) and searchWord != null and (colName == 'user_name' or colName == 'pet_name')">
 					and to_char(r.pay_time, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 					and ${colName} like '%'|| #{searchWord} ||'%'
 				</when>
