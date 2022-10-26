@@ -43,9 +43,9 @@
 					 
 				}
 			}
-			function mod() {
+			/* function mod() {
 				alert("정보수정이 완료 됐습니다.")
-			}
+			} */
 	 </script>
 	 
 	</head>
