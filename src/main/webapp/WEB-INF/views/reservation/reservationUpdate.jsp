@@ -648,12 +648,10 @@
                     <td>대형견</td>
                     <td id="L_BS">0 원</td>
                 </tr>
-                <tr align="center" bgcolor="white" height="40px">
-                    <td colspan="10" bgcolor="#e5e4e2">
-           
-                   		<img id="resMembershipImg" src="${contextPath}" width="30px" height="30px" id="bronzeimg">
+                <tr align="center" bgcolor="white" height="40px">                  
+                    <td colspan="10" bgcolor="#e5e4e2">        
+                   		<img src="${contextPath}" width="30px" height="30px" id="bronzeimg">
                    		<b class="membership"></b>
-        
                         <input id="membership" type="hidden" value="">
                         <b class="totalpayment"> Total Payment : </b>
                         <b class="totalcost">0 원</b>

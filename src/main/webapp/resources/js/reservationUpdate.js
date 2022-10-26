@@ -308,16 +308,16 @@ function costTB(petserviceMap, datecheck) {
         
         	if(dis == 2){
 				$("#membership").val("Bronze");
-				console.log($("#resMembershipImg").attr('src', '/resources/img/bronze_medal.png'));
+				console.log($("#bronzeimg").attr('src', '/resources/img/bronze_medal.png'));
 				$(".membership").text("Bronze Membership : Discount 2%");
 				
 			}else if(dis == 5){
 				$("#membership").val("Silver");
-				console.log($("#resMembershipImg").attr('src', '/resources/img/silver_medal.png'));
+				console.log($("#bronzeimg").attr('src', '/resources/img/silver_medal.png'));
 				$(".membership").text("Silver Membership : Discount 5%");
 			}else if(dis == 10){
 				$("#membership").val("Gold");
-				console.log($("#resMembershipImg").attr('src', '/resources/img/gold_medal.png'));
+				console.log($("#bronzeimg").attr('src', '/resources/img/gold_medal.png'));
 				$(".membership").text("Gold Membership : Discount 10%");
 			}
 			
