@@ -186,7 +186,97 @@
             margin-top: 70px;
         }
         /* facilities end */
-
+		
+		/* review */
+		.review{
+            height: 700px;
+        }
+        .txt_review{
+            width: 400px; height: 150px;
+            position: relative;
+            top: 100px; left: 100px;
+        }
+        .txt_review .sec_title{
+            margin-left: 80px;
+        }
+        .txt_review .sec_p{
+            margin-left: 120px;
+        }
+        .review_box{
+            width: 850px; height: 100%;
+            position: absolute;
+            top: 0; right: 0;
+        }
+        .preview{
+            width: 400px; height: 400px;
+            position: absolute;
+            bottom: 50%; left: 0;
+            margin-bottom: -200px;
+            text-align: right;
+        }
+        .review_id{
+            margin-top: 200px;
+            font-size: 15px;
+            color: #909090;
+        }
+        .review_scope{
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ffc041;
+        }
+        .review_content{
+            font-size: 17px;
+        }
+        .review_box .more{
+            position: absolute;
+            bottom: 20px;
+            right: 0;
+        }
+        .gallery{
+            width: 400px; height: 100%;
+            position: absolute;
+            top: 0; right: 0;
+        }
+        .pic{
+            width: 400px; height: 400px;
+            position: absolute;
+            background-color: #fff;
+            transition: all .3s;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+        }
+        .sub{
+            transform: scale(0.8);
+            opacity: .2;
+            z-index: 1;
+            background-color:gray;
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        }
+        .sub:hover{
+            transform: scale(0.85);
+            opacity: 0.3;
+            filter: blur(3px);
+            -webkit-filter: blur(3px);
+        }
+        #main_pic{
+            top: 50%; margin-top: -200px;
+            z-index: 5;
+            box-shadow: 0 0 50px #FFF;
+            background-color:gray;
+        }
+        #main_pic:hover{
+            transform: scale(1.03);
+        }
+        #sub_pic_top{
+            top: 0;
+        }
+        #sub_pic_bottom{
+            top: 300px;
+        }
+        /* review end */
+        
         /* experience */
         .experience{
             margin-bottom: 150px;
@@ -305,7 +395,30 @@
 </section>
 
 <section class="review">
-	<div></div>
+    <div class="txt_review">
+        <div class="bar"></div>
+        <p class="sec_title">Review</p>
+        <p class="sec_p">소중한 고객님들이 직접 작성해주신<br>애니텔에서의 하루가 담긴 리뷰게시글 입니다.</p>
+    </div>
+    <div class="review_box">
+        <div class="preview">
+            <div id="review_info">
+                <!-- 리뷰정보 -->
+                <p class="review_id">aaa님</p>
+                <p class="review_scope">★★★★★</p>
+                <p class="review_content">
+                    시설이 깨끗하고 서비스가 좋아요.
+                </p>
+            </div>
+            <a class="more" href="${contextPath}/introduce.do">더보기 +</a>
+        </div>
+        <div class="gallery">
+            <div id="sub_pic_top" class="pic sub"></div>
+            <div id="main_pic" class="pic"></div>
+            <div id="sub_pic_bottom" class="pic sub"></div>
+            <!-- <div id="ex_pic" class="pic"></div> -->
+        </div>
+    </div>
 </section>
 
 <section class="experience">
