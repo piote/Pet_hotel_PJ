@@ -20,7 +20,7 @@ public class ReviewVO {
 	private String image;
 	private int rec;
 	private String id;
-	
+	private String ROOM_GRADE;
 	
 	public ReviewVO() {
 		System.out.println("reviewVO 호출");

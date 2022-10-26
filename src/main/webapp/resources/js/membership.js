@@ -1,3 +1,4 @@
+/* Q&A */
 var q_btnAll = document.querySelectorAll('.q_btn');
 var answerAll = document.querySelectorAll('.answer');
 console.log(q_btnAll);
@@ -14,48 +15,49 @@ for(var i=0; i<q_btnAll.length; i++){
 function showHideToggle(index) {
     answerAll[index].classList.toggle('active');
 };
-/*
-const bmiBtn = document.getElementById('button2');
-            bmiBtn.onclick = function(){
-                const kg = document.getElementById('kg').value;
-                const meter = document.getElementById('cm').value * 0.01;
-                const judgement2 = document.getElementById('judgement2');
-                const sensor = document.getElementById('chart').querySelector('.sensor');
-                const clacBmi = kg/(meter*meter);
-                const result = clacBmi.toFixed(1);
-                let resultPos = 0;
 
-                if(result >0 && result <= 18.5){
-                    judgement2.innerHTML = '나의 신체질량지수(BMI) : '+result+'입니다. 따라서 저체중입니다.';
-                    resultPos = Math.round((result/18.5)*100);
-                    sensor.style.left = resultPos + 'px';
-                }
-                if(result >18.5 && result <= 23){
-                    judgement2.innerHTML = '나의 신체질량지수(BMI) : '+result+'입니다. 따라서 정상체중입니다.';
-                    judgement2.style.color = 'blue';
-                    resultPos = Math.round(((result-18.5)/4.5)*100)+100;
-                    sensor.style.left = resultPos + 'px';
-                }
-                if(result >23 && result <= 25){
-                    judgement2.innerHTML = '나의 신체질량지수(BMI) : '+result+'입니다. 따라서 과체중입니다.';
-                    judgement2.style.color = 'navy';
-                    resultPos = Math.round(((result-23)/2)*100)+200;
-                    sensor.style.left = resultPos + 'px';
-                }
-                if(result >25 && result <= 30){
-                    judgement2.innerHTML = '나의 신체질량지수(BMI) : '+result+'입니다. 따라서 비만입니다.';
-                    judgement2.style.color = 'violet';
-                    resultPos = Math.round(((result-25)/5)*100)+300;
-                    sensor.style.left = resultPos + 'px';
-                }
-                if(result >30){
-                    judgement2.innerHTML = '나의 신체질량지수(BMI) : '+result+'입니다. 따라서 고도비만입니다.';
-                    judgement2.style.color = 'red';
-                    resultPos = Math.round(((result-30)/10)*100)+400;
-                    sensor.style.left = resultPos + 'px';
-                }
-                console.log(result);
-                console.log(resultPos);
-            };
-
-            */
+/* 이용횟수 카운터 그래프 */
+const use = document.getElementById("use").value;
+const grade = document.getElementById("grade").value;
+const counterNormal = document.getElementById("counterNormal");
+const counterBronze = document.getElementById("counterBronze");
+const counterSilver = document.getElementById("counterSilver")
+const countOnOff = document.querySelectorAll(".countOnOff");
+const useTxt = document.getElementById("useTxt");
+console.log(use);
+console.log(grade);
+console.log(countOnOff);
+counterBronze.style.visibility = "hidden";
+counterSilver.style.visibility = "hidden";
+if(grade=="Bronze") {
+	counterNormal.style.visibility = "hidden";
+	counterBronze.style.visibility = "visible";
+	counterSilver.style.visibility = "hidden";
+	countOnOff[use].style.background = "orange";
+	countOnOff[use].style.visibility = "visible";
+} else if(grade=="Silver") {
+	counterNormal.style.visibility = "hidden";
+	counterBronze.style.visibility = "hidden";
+	counterSilver.style.visibility = "visible";
+	countOnOff[use].style.background = "silver";
+	countOnOff[use].style.visibility = "visible";
+} else if(grade=="Gold") {
+	counterNormal.style.visibility = "hidden";
+	counterBronze.style.visibility = "hidden";
+	counterSilver.style.visibility = "visible";
+	countOnOff[20].style.background = "Gold";
+	countOnOff[20].style.visibility = "visible";
+} else if(grade=="Normal") {
+	counterNormal.style.visibility = "visible";
+	counterBronze.style.visibility = "hidden";
+	counterSilver.style.visibility = "hidden";
+	countOnOff[use].style.background = "gray";
+	countOnOff[use].style.visibility = "visible";
+} else {
+	counterNormal.style.visibility = "visible";
+	counterBronze.style.visibility = "hidden";
+	counterSilver.style.visibility = "hidden";
+	countOnOff[0].style.background = "gray";
+	countOnOff[0].style.visibility = "visible";
+}
+useTxt.textContent = use+"회 이용";
