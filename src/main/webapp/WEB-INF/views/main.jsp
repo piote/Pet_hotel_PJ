@@ -205,7 +205,7 @@
         .review_box{
             width: 850px; height: 100%;
             position: absolute;
-            top: 0; right: 0;
+            top: 0; right: 20px;
         }
         .preview{
             width: 400px; height: 400px;
@@ -333,7 +333,60 @@
 	   		alert(stmsg);
 	   		history.pushState(null, null, 'main.do')
 	   	}
+        
+
+
+        
+
+        // 리뷰js
+        
+        var totalReviewData;
+        var review_data=[];
+
+        $(function(){
+
+            $('#review_info').empty();
+
+            $.ajax({
+                url: "/returnReview.do",
+                type: "GET", 
+                success : function(data){
+                    //총데이터 수 저장
+                    totalReviewData = data.length;
+
+                    //user_data에 받아온 데이터 저장
+                    review_data = [totalReviewData];
+                    for(i=0;i<data.length;i++){
+                        review_data[i]=data[i];
+                    }
+                    console.log(review_data);
+                    inputReviewData();
+
+                    $(data).each(function(){});
+                    },
+                error :function(){
+                    alert("request error!");
+                    }
+            });
+            
+        });
+        function inputReviewData(){
+            var star = parseInt(review_data[0].REVIEW_STAR);
+            var starString='';
+            for(i=0;i<star;i++){
+                starString+='★';
+            }
+
+            var html = '<p class="review_id">'+review_data[0].USER_ID+'님의 리뷰</p>'+
+                        '<p class="review_scope">'+starString+'</p>'+
+                        '<p class="review_content">'+review_data[0].REVIEW_TITLE+'</p>';
+
+            $('#review_info').append(html);
+
+            $('#main_pic').css('background-image','url("${contextPath}/'+review_data[0].REVIEW_IMAGE_URL+'")');
+        }   
     </script>
+
 </head>
 <body>
 

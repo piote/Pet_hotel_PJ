@@ -173,8 +173,8 @@
 	<!-- 메인페이지 리뷰조회 -->
 	<select id="selectMainReview" resultType="java.util.Map">
 		<![CDATA[
-			SELECT USER_ID, REVIEW_STAR, REVIEW_TITLE FROM tb_review
-			    WHERE REVIEW_STAR IS NOT null
+			SELECT USER_ID, REVIEW_STAR, REVIEW_TITLE, REVIEW_IMAGE_URL FROM tb_review
+   		 		WHERE REVIEW_STAR IS NOT null AND REVIEW_IMAGE_URL IS NOT null
 			order by REVIEW_DATE desc
 		]]>
 	</select>
