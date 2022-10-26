@@ -28,7 +28,7 @@
    .all {
        
        margin-top: 250px;
-       height: 2000px;
+       height: 2200px;
    }
   
  .w_review {
@@ -86,7 +86,7 @@
     	  .cls2 {
     		  
     		  left: 30%;
-    		  margin-top: 1650px;
+    		  margin-top: 1900px;
     		  position: absolute;
     		  font-size: 20px;
     		  }
@@ -122,9 +122,7 @@
   .w_margin1 {
 	  border-top: 0px solid #ddd;
   }
-  .w_margin2 {
-	  border-bottom: 1px solid #ddd;
-  }
+ 
   .w_margin3 {
 	  border-bottom: 50px solid #fff;
   }
@@ -135,11 +133,41 @@
   .w_td_title{
 	  margin-left: 15px;
   }
+  
+  
+  
+  .w_tdz1 {
+	  height: 25px;
+	  border-bottom: 1px solid #ddd;
+  }
+  .w_tdz2 {
+	  height: 25px;
+	  
+  }
   </style> 
  
  <meta charset="UTF-8">
  
  <title>리뷰</title>
+ 
+ <script type="text/javascript">
+ 
+ function fn_remove_review(url,reviewNO){
+	 var form = document.createElement("form");
+	 form.setAttribute("method", "post");
+	 form.setAttribute("action", url);
+     var reviewNOInput = document.createElement("input");
+     reviewNOInput.setAttribute("type","hidden");
+     reviewNOInput.setAttribute("name","reviewNO");
+     reviewNOInput.setAttribute("value", reviewNO);
+	 
+     form.appendChild(reviewNOInput);
+     document.body.appendChild(form);
+     form.submit();
+ 
+ }
+ 
+ </script>
  </head>
 
  <body>
@@ -164,8 +192,9 @@
 
          <div>
    
-
+<form name="frmReview" method="post"  action="${contextPath}"  enctype="multipart/form-data">
         <table align="right" class="w_review2">
+      
         <c:choose>
         <c:when test="${reviewList ==null }" >
           <tr  height="10">
@@ -179,55 +208,59 @@
         <c:when test="${reviewList !=null }" >
           <c:forEach  var="review" items="${reviewList }" varStatus="reviewNum" >
           <fmt:formatDate var="reviewDate" value="${review.date}" pattern="yyyy.MM.dd"/>
-          
-          <tr class="w_tr w_margin1">
-          <td class="w_td" width="15%">
-          	
-          		<c:if test="${review.rate==5}">
-                    <img src="${contextPath}/resources/img/star_5.png" class="w_star">   
-                </c:if> 
-                <c:if test="${review.rate==4}">
-                    <img src="${contextPath}/resources/img/star_4.png" class="w_star" >    
-                </c:if>
-                <c:if test="${review.rate==3}">
-                    <img src="${contextPath}/resources/img/star_3.png" class="w_star">    
-                </c:if>    
-                <c:if test="${review.rate==2}">
-                    <img src="${contextPath}/resources/img/star_2.png" class="w_star">    
-                </c:if>  
-                <c:if test="${review.rate==1}">
-                    <img src="${contextPath}/resources/img/star_1.png" class="w_star">    
-                </c:if>
-                
-          </td>
-          <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td>
-          
-          <td class="w_td" width="20%" rowspan="2">               
-               <c:if test="${review.image != null}"> 
-                   <img src="${contextPath}/${review.image}" width="150" height="150">
-                </c:if>
-         </td>
-	
-          
-        
          
-          <td class="w_td w_date"  width="15%" >${reviewDate}</td>
-
+          	
+          	  <tr class="w_tr w_margin1">
+	          <td class="w_td" width="15%">  	
+	          		<c:if test="${review.rate==5}">
+	                    <img src="${contextPath}/resources/img/star_5.png" class="w_star">   
+	                </c:if> 
+	                <c:if test="${review.rate==4}">
+	                    <img src="${contextPath}/resources/img/star_4.png" class="w_star" >    
+	                </c:if>
+	                <c:if test="${review.rate==3}">
+	                    <img src="${contextPath}/resources/img/star_3.png" class="w_star">    
+	                </c:if>    
+	                <c:if test="${review.rate==2}">
+	                    <img src="${contextPath}/resources/img/star_2.png" class="w_star">    
+	                </c:if>  
+	                <c:if test="${review.rate==1}">
+	                    <img src="${contextPath}/resources/img/star_1.png" class="w_star">    
+	                </c:if>   
+	          </td>
+	          
+	          <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td>
+	          
+	          <td class="w_td" width="20%" rowspan="2">               
+	               <c:if test="${review.image != null}"> 
+	                   <img src="${contextPath}/${review.image}" width="150" height="150">
+	                </c:if>
+	         </td>
+	         
+	          
+	        
+	         
+	          <td class="w_td w_date"  width="15%" >${reviewDate}</td>
+	       
           
-        </tr>
-      
-      <tr class="w_tr" class="w_tr2">
-          <td class="w_td">${review.id}</td>	
-          <td class="w_td" align=center >${review.rec}</td>
-      </tr>  
-      <tr class="w_margin2"></tr>
-      <tr class="w_margin3"></tr>
-      
+	          </tr>
+	      
+	      <tr class="w_tr" class="w_tr2">
+	          <td class="w_td">${review.id}</td>	
+	          <td class="w_td" align=center >${review.rec}</td>
+	      </tr>  
+	      <tr>
+	      	<td class="w_tdz1" colspan="4"> <input type=button value="삭제하기" onClick="fn_remove_review('${contextPath}/review/removeReview.do', ${review.reviewNO})"> </td>
+	      </tr>
+	      <tr>
+	      <td class="w_tdz2" colspan="4"></td>
+	      </tr>
+    
     </c:forEach>
   </c:when>
  </c:choose>    
      </table>
-            
+     </form>       
      
      
      

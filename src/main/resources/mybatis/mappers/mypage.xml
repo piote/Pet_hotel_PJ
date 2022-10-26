@@ -39,44 +39,51 @@
 	<result property="user_tel" column="user_tel" />
 	<result property="pet_name" column="pet_name" />
     <result property="user_id" column="user_id" />
+   	<result property="payTime" column="PAY_TIME" />
+ 	<result property="pet_num" column="PET_NUM" />
 </resultMap> 
 
 
 	<select id="selectMyReservesList" resultMap="searchResult"  parameterType="String"  >
 		<![CDATA[
-		select to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_num, u.user_name, u.user_tel, p.pet_name
+		select to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_num, u.user_name, u.user_tel, p.pet_name
         from tb_reservation r, tb_user u, tb_petservice p
                  where r.reservation_num = p.reservation_num and u.user_id = r.user_id and u.user_id = #{user_id}
-		         order by r.reservation_num desc
+		         order by r.pay_time desc
 		]]>
 	</select>
 	
 	<select id="selectAllMyReservesList" resultMap="searchResult"  parameterType="java.util.Map"  >
-		<![CDATA[
 		    SELECT * FROM ( 
-			SELECT ROWNUM as recNum, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
+			SELECT ROWNUM as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
 					from tb_reservation r, tb_user u, tb_petservice p
 					where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
+				<choose>
+					<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
+						 and ${colName} like '%'|| #{searchWord} ||'%'
+					</when>
+					<otherwise>	
+					</otherwise>
+				</choose>
 			)
 			where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
-         	order by reservation_num desc
-		]]>
+	        order by pay_time
 	</select>
 
 	<select id="selectMyDetailReservesList" resultMap="searchResult"  parameterType="java.util.Map"  >
 		    SELECT * FROM ( 
-			SELECT ROWNUM as recNum, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
+			SELECT ROWNUM as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
 					from tb_reservation r, tb_user u, tb_petservice p
 					where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
 			<choose>
 				<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
 					 and ${colName} like '%'|| #{searchWord} ||'%'
 				</when>
-				<when test="(startDate != null and endDate != null) and (searchWord == null or searchWord == '') and (colName == null or colName == '')">
-					 and to_char(r.reservation_st, 'yyyy-mm-dd') between #{startDate} and #{endDate}
+				<when test="(startDate != null and endDate != null) and (colName == null or colName == '')">
+					 and to_char(r.pay_time, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 				</when>
 				<when test="(startDate != null and endDate != null) and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
-					and to_char(r.reservation_st, 'yyyy-mm-dd') between #{startDate} and #{endDate}
+					and to_char(r.pay_time, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 					and ${colName} like '%'|| #{searchWord} ||'%'
 				</when>
 				<otherwise>	
@@ -84,7 +91,7 @@
 			</choose>
 			)
              	where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
-		        order by reservation_st desc
+		        order by pay_time
 	</select>
 	
 	<select id="selectMyReviewList" resultMap="reviewResult">
@@ -102,10 +109,16 @@
 	</update>
 	
 	<select id="selectTotReserves" parameterType="String" resultType="int">
-	  	<![CDATA[
-         select count(reservation_num)
-         from tb_petservice
-		]]>
+         select count(p.reservation_num)
+         from tb_reservation r, tb_user u , tb_petservice p
+				where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
+			<choose>
+				<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
+					 and ${colName} like '%'|| #{searchWord} ||'%'
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
 	</select>
 	
   	<select id="searchTotReserves" parameterType="String" resultType="int">
@@ -116,11 +129,11 @@
 				<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
 					 and ${colName} like '%'|| #{searchWord} ||'%'
 				</when>
-				<when test="(startDate != null and endDate != null) and (searchWord == null or searchWord == '') and (colName == null or colName == '')">
-					 and to_char(r.reservation_st, 'yyyy-mm-dd') between #{startDate} and #{endDate}
+				<when test="(startDate != null and endDate != null) and (colName == null or colName == '')">
+					 and to_char(r.pay_time, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 				</when>
 				<when test="(startDate != null and endDate != null) and searchWord != null and (colName == 'user_name' or colName == 'pet_name' or colName == 'user_tel')">
-					and to_char(r.reservation_st, 'yyyy-mm-dd') between #{startDate} and #{endDate}
+					and to_char(r.pay_time, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 					and ${colName} like '%'|| #{searchWord} ||'%'
 				</when>
 				<otherwise>

@@ -18,7 +18,7 @@ public class UserVO {
 	private String tel_sub;
 	private String message;
 	private Date birth;
-	private Date joinDate;
+	private String joinDate;
 	private String grade;
 	
 

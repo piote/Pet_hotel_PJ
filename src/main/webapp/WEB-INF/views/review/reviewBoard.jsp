@@ -114,11 +114,11 @@
          background-image: url(${contextPath}/resources/img/pet_room_1.jpg);
      }
      .w_wrap:nth-child(2)>.img_wrap>a {
-         background-image: url(${contextPath}/resources/img/pet_room_2.PNG);
+         background-image: url(${contextPath}/resources/img/pet_room_3.jpg);
          
      }
      .w_wrap:nth-child(3)>.img_wrap>a {
-         background-image: url(${contextPath}/resources/img/pet_room_3.jpg);
+         background-image: url(${contextPath}/resources/img/pet_room_2.PNG);
      }
    
      .gnb_w {
@@ -179,15 +179,15 @@
         	</div>
         	<div class="w_wrap">
 	           	<div class="img_wrap">
-	           		<a href="${contextPath}/reviewDetail_2.do"></a>
+	           		<a href="${contextPath}/review/reviewDetail_2.do"></a>
 	           	</div>
-	           	<a href="${contextPath}/reviewDetail_2.do" class="room_name">중형견(임시)</a>
+	           	<a href="${contextPath}/review/reviewDetail_2.do" class="room_name">중형견(임시)</a>
            	</div>
            	<div class="w_wrap">
 	           	<div class="img_wrap">
-	           		<a href="${contextPath}/reviewDetail_3.do"></a>
+	           		<a href="${contextPath}/review/reviewDetail_3.do"></a>
 	           	</div> 
-	           	<a href="${contextPath}/reviewDetail_3.do" class="room_name">대형견(임시)</a>
+	           	<a href="${contextPath}/review/reviewDetail_3.do" class="room_name">대형견(임시)</a>
 	        </div>   
           </div>
           

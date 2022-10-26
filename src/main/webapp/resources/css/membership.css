@@ -50,6 +50,7 @@
             padding-top: 2%;
             text-align: center;
         }
+        
         .main_title {
             margin: 0 auto 3% auto;
             width: 55vw;
@@ -57,8 +58,9 @@
         }
 
         .main_title>img {
-            float: left;
-            width: 90px; height: 90px;
+			float: left;
+            width: 135px;
+            height: 135px;
         }
 
         .main_title>h2 {
@@ -72,37 +74,7 @@
             font-size: 30px;
             text-align: left;
         }
-
-        .count {
-            margin: 0 auto 3% auto;
-            width: 55vw;
-            text-align: center;
-        }
-
-
-        .count>p {
-            margin-top: 5px;
-            font-size: 30px;
-            text-align: left;
-        }
-
-        .count_bar {
-            width: 100%;
-            height: 30px;
-            background-color: #dedede;
-            font-weight: 600;
-            font-size: .8rem;
-        }
         
-        .count_bar .bar {
-            width: 33%;
-            height: 30px;
-            padding: 0;
-            text-align: center;
-            background-color: #4F98FF;
-            color: #111;
-        }
-
         #m_menu {
             list-style: none;
             text-align: center;

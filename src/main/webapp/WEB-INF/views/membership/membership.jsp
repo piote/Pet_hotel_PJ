@@ -10,6 +10,109 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>멤버쉽 안내</title>
+    <style>        
+    
+		#counter {
+            position: relative;
+        }
+        
+        #counterNormal {
+            margin: 0 auto;
+            width: 1000px;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        #counterBronze {
+            margin: 0 auto;
+            width: 1000px;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #counterSilver {
+            margin: 0 auto;
+            width: 1000px;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .centerBar {
+            position: absolute;
+            width: 100%;
+            height: 15px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid lightgray;
+            background-color: lightgray;
+            border-radius: 5px;
+        }
+
+        .countDot {
+            position: relative;
+            background-color: gray;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 1px solid gray;
+            opacity: 1;
+            z-index: 100;
+        }
+
+        .countOnOff {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid white;
+            width: 400%;
+            height: 400%;
+            margin: auto;
+            box-shadow: 0px 0px 6px 1px gray;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            visibility: hidden;
+            z-index: 1000;
+        }
+        #useTxt {
+            margin: 3% auto;
+            width: 1000px;
+			text-align: right;
+			font-size: 15px;      
+        }
+        
+        .scaling{
+			-webkit-animation:scale 2s ease-in-out infinite alternate;
+			-moz-animation:scale 2s ease-in-out infinite alternate;
+			animation:scale 2s ease-in-out infinite alternate;
+		}
+		
+		@-webkit-keyframes scale{
+			0% {transform: scale(1, 1) translate(-50%, -50%);}
+			100% {transform: scale(1.1, 1.1) translate(-50%, -50%);}
+		}
+
+		@-moz-keyframes scale{
+			0% {transform: scale(1, 1) translate(-50%, -50%);}
+			100% {transform: scale(1.1, 1.1) translate(-50%, -50%);}
+		}
+
+		@keyframes scale{
+			0% {transform: scale(1, 1) translate(-50%, -50%);}
+			100% {transform: scale(1.1, 1.1) translate(-50%, -50%);}
+		}
+    </style>
 </head>
 <body>
     <section class="m_section">
@@ -24,18 +127,57 @@
                 <img src="${contextPath}/resources/img/bonus_icon.png">
                 <h2>멤버쉽 할인</h2>
                 <p>연간 이용횟수에 따라 할인 프로그램을 제공해드립니다.</p>
+                <input id=grade type="hidden" value="${user.grade}">
+                <input id=use type="hidden" value="7">
+	            <c:choose>
+	        		<c:when test="${isLogOn == true  && user!= null}">
+						<p>${user.name}의 등급은 현재 ${user.grade}입니다.</p>
+					</c:when>
+					<c:otherwise>
+							<p>로그인을 하시면 회원님의 등급을 안내해드립니다.</p>
+	        		</c:otherwise>
+	        	</c:choose>
             </div>
-            <div class="count">
             <c:choose>
-        		<c:when test="${isLogOn == true  && user!= null}">
-					<p>안녕하세요 ${user.name}님!</p>
-                	<p>${user.name}님은 현재 ${user.grade}등급입니다.</p>
-				</c:when>
-				<c:otherwise>
-						<p>로그인을 하시면 회원님의 등급을 안내해드립니다.</p>
-        		</c:otherwise>
-        	</c:choose>
-        	</div>
+	        <c:when test="${isLogOn == true  && user!= null}">
+            <div id="counter">
+		        <div id="counterNormal">
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="centerBar"> </div>
+		        </div>
+		        <div id=counterBronze>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="centerBar"> </div>
+		        </div>
+		        <div id=counterSilver>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="countDot"><div class="countOnOff scaling"></div></div>
+		            <div class="centerBar"> </div>
+		        </div>
+		        <p id=useTxt></p>
+    		</div>
+    		
+    		</c:when>
+			<c:otherwise>
+			</c:otherwise>
+	        </c:choose>
 		</div>
             <ul id="m_menu">
                 <li class="m_bronze">
@@ -52,7 +194,7 @@
                     <div class="box">
                         <p>연간 이용횟수 10회 이상</p>
                         <p>1회 이용금액의 5% 할인</p>
-                        <p>체크아웃 연장 1시간 무료</p>
+                        <p>미용서비스 1회 제공</p>
                     </div>
                 </li>
                 <li class="m_gold">
@@ -61,8 +203,7 @@
                     <div class="box">
                         <p>연간 이용횟수 20회 이상</p>
                         <p>1회 이용금액의 10% 할인</p>
-                        <p>목욕서비스 1회 제공</p>
-                        <p>체크아웃 연장 2시간 무료</p>
+                        <p>미용 및 목욕서비스 1회 제공</p>
                     </div>
                 </li>
             </ul>
@@ -100,6 +241,6 @@
         </div>
     </section>
 </body>
-<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/membership.css">
 <script src="${contextPath}/resources/js/membership.js"></script>
+<link rel="stylesheet" href="${contextPath}/resources/css/membership.css">
 </html>

@@ -43,10 +43,8 @@
     #reviewForm input[type=radio]:checked ~ label{
         text-shadow: 0 0 0 rgba(255, 211, 0, 0.66);
     }
-   
+  
 	
-	
-
 </style>
 <meta charset="UTF-8">
 
@@ -75,7 +73,7 @@
 	  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
 	  cnt++;
   }  
-
+  var Cell3 = newRow.insertCell();
   
 </script>
 <!--  <title>글쓰기창</title> -->
@@ -85,10 +83,10 @@
   <form name="reviewForm" id="reviewForm" method="post"   action="${contextPath}/review/addNewReview.do"   enctype="multipart/form-data">
     <table border="0" align="center">
 
-      <tr>
+      	 <tr>
 					<td align="right"> 작성자</td>
 					<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${user.id }" readonly/> </td>
-			</tr>
+		 </tr>
 	     <tr>
 			   <td align="right">글제목: </td>
 			   <td colspan="2"><input type="text" size="67"  maxlength="500" name="title" /></td>
@@ -102,7 +100,7 @@
 					
 						<fieldset>
 							
-							<input type="radio" name="rate" class="rate" value="5" id="rate1"><label
+							<input type="radio" name="rate" class="rate" value="5" checked="checked" id="rate1"><label
 								for="rate1">★</label>
 							<input type="radio" name="rate" class="rate" value="4" id="rate2"><label
 								for="rate2">★</label>
@@ -122,6 +120,10 @@
 	<td align="right" valign="top"><br>추천: </td>
 	<td colspan=2><textarea name="rec" rows="10" cols="65" maxlength="50"></textarea> </td>
 </tr>
+	
+		<select name="ROOM_GRADE" ><option value="Deluxe">Deluxe(소형견)</option><option value="Superior">Superior(중형견)</option><option value="Sweet">Suite(대형견)</option></select>
+	
+
      <tr>
 		<!--  <td align="right">이미지파일 첨부:  </td>
 			  <td><input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
@@ -145,5 +147,7 @@
      </tr>
     </table>
   </form>
+  
+
 </body>
 </html>

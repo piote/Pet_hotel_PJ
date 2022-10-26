@@ -12,7 +12,9 @@ import com.myboot.review.vo.ReviewVO;
 public interface ReviewDAO {
 
 	public List<ReviewVO> selectAllReviewList(Map pagingMap)throws DataAccessException;
-
+	public List<ReviewVO> selectAllReviewList2(Map pagingMap)throws DataAccessException;
+	public List<ReviewVO> selectAllReviewList3(Map pagingMap)throws DataAccessException;
+	
 	public int selectTotReview();
 	
 	public int selectNewReviewNO() throws DataAccessException;
@@ -20,6 +22,8 @@ public interface ReviewDAO {
 	public void insertNewImage(Map reviewMap) throws DataAccessException;
 
 	List selectImageFileList(int reviewNO) throws DataAccessException;
+
+	public void deleteReview(int reviewNO)throws DataAccessException;
 	
 	public List selectMainReview() throws DataAccessException;
 }

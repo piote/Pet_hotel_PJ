@@ -31,7 +31,32 @@ public class ReviewServiceImpl implements ReviewService {
 	public Map reviewDetail_1(Map pagingMap) throws Exception {
 		Map reviewMap = new HashMap();
 		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList(pagingMap);
+		
+		int totReview = reviewDAO.selectTotReview();
 
+		reviewMap.put("reviewList", reviewList);
+		reviewMap.put("totReview", totReview);
+		// articlesMap.put("totArticles", 170);
+		return reviewMap;
+	}
+	
+	@Override
+	public Map reviewDetail_2(Map pagingMap) throws Exception {
+		Map reviewMap = new HashMap();
+		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList2(pagingMap);
+		
+		int totReview = reviewDAO.selectTotReview();
+
+		reviewMap.put("reviewList", reviewList);
+		reviewMap.put("totReview", totReview);
+		// articlesMap.put("totArticles", 170);
+		return reviewMap;
+	}
+	@Override
+	public Map reviewDetail_3(Map pagingMap) throws Exception {
+		Map reviewMap = new HashMap();
+		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList3(pagingMap);
+		
 		int totReview = reviewDAO.selectTotReview();
 
 		reviewMap.put("reviewList", reviewList);
@@ -59,10 +84,18 @@ public class ReviewServiceImpl implements ReviewService {
 
 //다중 이미지 추가하기	
 
-//	메인페이지 리뷰조회
+
+	@Override
+	public void removeReview(int reviewNO) throws Exception {
+		reviewDAO.deleteReview(reviewNO);
+	}
+	
+	
+	//	메인페이지 리뷰조회
 	@Override
 	public List returnReviewFormain() throws Exception {
 		List reviewList = reviewDAO.selectMainReview();
 		return reviewList;
 	}
+	
 }
