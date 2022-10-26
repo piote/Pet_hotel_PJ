@@ -129,4 +129,12 @@
 
 
 
+	<!-- 메인페이지 리뷰조회 -->
+	<select id="selectMainReview" resultType="java.util.Map">
+		<![CDATA[
+			SELECT USER_ID, REVIEW_STAR, REVIEW_TITLE FROM tb_review
+			    WHERE REVIEW_STAR IS NOT null
+			order by REVIEW_DATE desc
+		]]>
+	</select>
 </mapper>

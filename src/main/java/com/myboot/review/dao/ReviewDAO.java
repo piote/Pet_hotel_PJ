@@ -21,4 +21,5 @@ public interface ReviewDAO {
 
 	List selectImageFileList(int reviewNO) throws DataAccessException;
 	
+	public List selectMainReview() throws DataAccessException;
 }

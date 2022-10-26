@@ -21,6 +21,8 @@ public  interface ReviewService {
 	public Map reviewDetail_1(Map pagingMap) throws Exception;
 
 
+//	메인페이지 리뷰조회
+	public List returnReviewFormain() throws Exception ;
 	}
 
 	

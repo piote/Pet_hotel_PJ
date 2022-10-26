@@ -84,4 +84,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 	
 
+//	메인페이지 리뷰조회
+	@Override
+	public List selectMainReview() throws DataAccessException{
+		return sqlSession.selectList("com.myboot.review.dao.ReviewDAO.selectMainReview");
+	}
 }
