@@ -17,6 +17,9 @@ function handleOnChange(e) {
 //테이블 초기화
 function resetRow(){
 	petTableNum = 0;
+	totalTableNum = 0
+	petmap.clear();
+	servicemap.clear();
 }
 
 function addRow() {
@@ -296,9 +299,30 @@ function costTB(petserviceMap, datecheck) {
         total += sbc * 35000 + mbc * 45000 + lbc * 60000 + sbs * 70000 + mbs * 80000 + lbs * 100000;
         total += ss * 50000 + ms * 80000 + ls * 120000;
         $(".totalcost").text(total.toLocaleString()  + ' 원');
-        console.log($("#membership").val());
-
         
+        //맴버쉽 없는 초기상태 계산
+		if($(".membership").val()==""|| $(".membership").val()==null){
+       		var disTotal = $("#totalcost").val();
+       	 	dis = (total-disTotal)/(total/100)//할인율 자릿수 높아서 대강 계산해도 ok
+        	console.log(dis);
+        
+        	if(dis == 2){
+				$("#membership").val("Bronze");
+				console.log($("#resMembershipImg").attr('src', '/resources/img/bronze_medal.png'));
+				$(".membership").text("Bronze Membership : Discount 2%");
+				
+			}else if(dis == 5){
+				$("#membership").val("Silver");
+				console.log($("#resMembershipImg").attr('src', '/resources/img/silver_medal.png'));
+				$(".membership").text("Silver Membership : Discount 5%");
+			}else if(dis == 10){
+				$("#membership").val("Gold");
+				console.log($("#resMembershipImg").attr('src', '/resources/img/gold_medal.png'));
+				$(".membership").text("Gold Membership : Discount 10%");
+			}
+			
+		}
+              
         if($("#membership").val()=='Gold' && total != 0){
 			var disTotal = total * (1 - 10 / 100);//10퍼 할인
 			$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
