@@ -250,7 +250,7 @@
 	          <td class="w_td" align=center >${review.rec}</td>
 	      </tr>  
 	      <tr>
-	      <td class="w_tdz1" colspan="4"> <input type=button value="삭제하기" onClick="fn_remove_review('${contextPath}/review/removeReview.do', ${review.reviewNO})"> </td>
+	      	<td class="w_tdz1" colspan="4"> <input type=button value="삭제하기" onClick="fn_remove_review('${contextPath}/review/removeReview.do', ${review.reviewNO})"> </td>
 	      </tr>
 	      <tr>
 	      <td class="w_tdz2" colspan="4"></td>

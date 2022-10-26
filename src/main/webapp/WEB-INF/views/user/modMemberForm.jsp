@@ -58,7 +58,7 @@
 				      <table>
 				         <tr>
 					            <td><p align="center">아이디</td>
-					            <td><input class="txtBox" type="text" name="id" value="${user.id }" readonly/> </td>
+					            <td><input class="txtBox" type="text" id="readonly" name="id" value="${user.id }" readonly/> </td>
 				         </tr>
 				         <tr>
 					            <td><p align="center">비밀번호</td>
@@ -66,7 +66,7 @@
 				         </tr>
 				         <tr>
 					            <td><p align="center">이름</P></td>
-					            <td><input class="txtBox" type="text" name="name"  value="${user.name }" readonly/></td>
+					            <td><input class="txtBox"  type="text" id="readonly" name="name"  value="${user.name }" readonly/></td>
 				         </tr>
 				 		 <tr>
 					            <td><p align="center">이메일</P></td>
@@ -96,7 +96,7 @@
 			              </tr>
 				         <tr>
 					           <td><p align="center">가입일</td>
-					           <td><input class="txtBox" type="text" name="joinDate" size="20" value="${user.joinDate}"  disabled/></td>
+					           <td><input class="txtBox" id="readonly" "type="text" name="joinDate" size="20" value="${user.joinDate}"  readonly/></td>
 				         </tr>
 				         
 				     </table>
