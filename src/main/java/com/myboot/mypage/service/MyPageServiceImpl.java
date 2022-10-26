@@ -20,19 +20,17 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public Map listMyDetailReserve(Map paraMap, String searchWord) throws Exception{
+	public Map listMyDetailReserve(Map paraMap, String startDate, String endDate) throws Exception{
 		Map myReserveMap = new HashMap();
 		List myReserveList = null;
 		int totReserves=0;
-		if(searchWord==null || searchWord=="") {
+		if((startDate==null || startDate=="") && (endDate==null || endDate=="")) {
 			myReserveList = myPageDAO.selectAllMyReservesList(paraMap);
-			totReserves = myPageDAO.selectTotReserves();
+			totReserves = myPageDAO.selectTotReserves(paraMap);
 		} 
 		else {
-			paraMap.put("searchWord", searchWord);
 			myReserveList = myPageDAO.selectMyDetailReservesList(paraMap);
-			myReserveMap.put("searchWord", searchWord);
-			totReserves = myPageDAO.searchTotReserves(searchWord);
+			totReserves = myPageDAO.searchTotReserves(paraMap);
 		}
 		myReserveMap.put("myReserveList", myReserveList);
 		myReserveMap.put("totReserves",totReserves );

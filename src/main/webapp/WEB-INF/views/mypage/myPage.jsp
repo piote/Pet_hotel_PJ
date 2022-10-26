@@ -49,7 +49,7 @@
          <div class="mypage_reserve">
             <table>
 				<tr class="reserve-center">
-				    <td width="10%">Date</td>
+				    <td width="10%">PayMent Date</td>
 				    <td width="20%">Name</td>
 				    <td width="20%">PetName</td>
 				    <td width="40%">Phone Number</td>
@@ -65,7 +65,7 @@
 					<c:when test="${not empty myReserveList }">
 						<c:forEach var="reserves" items="${myReserveList }" begin="0" end="2" step="1" varStatus="res_st">
 							<tr class="reserve-list">
-								<td>${reserves.res_st }</td>
+								<td>${reserves.payTime }</td>
 								<td>${reserves.user_name }</td>
 								<td>${reserves.pet_name }</td>
 								<td>${reserves.user_tel }</td>
