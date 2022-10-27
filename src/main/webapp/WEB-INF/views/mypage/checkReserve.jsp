@@ -20,7 +20,7 @@
 		 	dateFormat: "yy-mm-dd",
 		 	showOtherMonths: true,
 		 	showMonthAfterYear: true,
-			showButtonPanel: true,
+			showButtonPanel: false,
 			changeMonth: true,
 			changeYear: true,
 			showOn: "both",
@@ -48,7 +48,7 @@
 				dateFormat: "yy-mm-dd",
 			 	showOtherMonths: true,
 			 	showMonthAfterYear: true,
-				showButtonPanel: true,
+				showButtonPanel: false,
 				changeMonth: true,
 				changeYear: true,
 				showOn: "both",
@@ -143,16 +143,15 @@
 			<h2>예약 조회</h2>
 			<div id="searchFrm">
 				<form name="searchFrm">
-					<div id="calendar">
-						<input type="text" name="startDate" id="startDate">
-						<input type="text" name="endDate" id="endDate">
+					<div id="calendar"> 결제일 :
+						<input class="datepicker" type="text" name="startDate" id="startDate">
+						<input class="datepicker" type="text" name="endDate" id="endDate">
 					</div>
 					<div id="search_text">
 						<select name="colName" id="colName">
 							<option value="">검색</option>
 							<option value="user_name">예약명</option>
 							<option value="pet_name">펫이름</option>
-							<option value="user_tel">전화번호</option>
 						</select>
 						<input type="text" id="searchWord" name="searchWord"/> <br/><br/>
 						<input type="text" style="display: none;" />
@@ -167,10 +166,10 @@
 				<table>
 				   <tr class="detail-center">
 					  <td width="5%">No</td>
-					  <td width="10%">PayMent Date</td>
+					  <td width="10%">Date</td>
 					  <td width="15%">Name</td>
 					  <td width="15%">PetName</td>
-					  <td width="25%">Phone Number</td>
+					  <td width="25%">Reserved Date</td>
 					  <td width="20%">Status</td>
 					  <td width="10%">Cancel</td>
 				  </tr>
@@ -189,16 +188,16 @@
 								<td>
 									<c:choose>
 										<c:when test="${reserves.res_state=='N' }">
-											<a href="${contextPath}/mypage/myRserveDetail.do?pay_time=${reserves.res_st}">${reserves.payTime}</a>
+											<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.res_st }</a>
 										</c:when>
 										<c:otherwise>
-											<a href="${contextPath}/mypage/myRserveDetail.do?pay_time=${reserves.res_st }">${reserves.payTime }</a>
+											<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.res_st }</a>
 										</c:otherwise>
 									</c:choose>
 								</td>
 								<td>${reserves.user_name }</td>
 								<td>${reserves.pet_name }</td>
-								<td>${reserves.user_tel }</td>
+								<td>${reserves.res_st }</td>
 								<td>
 									<c:choose>
 										<c:when test="${reserves.res_state=='N'}">
@@ -218,11 +217,11 @@
 											<input type="image" src="${contextPath}/resources/img/close.png" onClick="fn_cancel_reserve('${reserves.res_num}')" value="예약취소"  />
 										</c:when>
 										<c:otherwise>
-											<input type="image" src="${contextPath}/resources/img/close.png" onClick="fn_cancel_reserve('${reserves.res_num}')" value="예약취소" disabled />
+<%-- 											<input type="image" src="${contextPath}/resources/img/close.png" onClick="fn_cancel_reserve('${reserves.res_num}')" value="예약취소" disabled /> --%>
 										</c:otherwise>
 									</c:choose>
 							    </td>	
-							</tr>	
+							</tr>
 						</c:forEach>
 					</c:when>
                </c:choose>

@@ -226,8 +226,116 @@
                     <tr>
                         <td class="res_num">1</td>
                         <td class="res_name">aaa</td>
+                        <td class="res_Date">2010.12.10 ~ 2010.12.13</td>
+                        <td class="res_petCount">2마리</td>
+                        <td class="res_payTime">2010.10.10</td>
+                        <td class="res_cost">200,000원</td>
+                        <td class="resState">이용완료</td>
+                        <td class="res_modBt">
+                            <button type="button" class="modRes">예약변경</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="res_num">2</td>
+                        <td class="res_name">다롬</td>
+                        <td class="res_Date">2011.10.10 ~ 2012.02.10</td>
+                        <td class="res_petCount">2마리</td>
+                        <td class="res_payTime">2011.10.02</td>
+                        <td class="res_cost">100,000원</td>
+                        <td class="resState">이용전</td>
+                        <td class="res_modBt">
+                            <button type="button" class="modRes">예약변경</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="res_num">3</td>
+                        <td class="res_name">ccc</td>
+                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
+                        <td class="res_petCount">2마리</td>
+                        <td class="res_payTime">2010.10.10</td>
+                        <td class="res_cost">200,000원</td>
+                        <td class="resState">이용완료</td>
+                        <td class="res_modBt">
+                            <button type="button" class="modRes">예약변경</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="res_num">4</td>
+                        <td class="res_name">ddd</td>
+                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
+                        <td class="res_petCount">1마리</td>
+                        <td class="res_payTime">2010.10.10</td>
+                        <td class="res_cost">200,000원</td>
+                        <td class="resState">이용완료</td>
+                        <td class="res_modBt">
+                            <button type="button" class="modRes">예약변경</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="res_num">5</td>
+                        <td class="res_name">태양</td>
+                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
+                        <td class="res_petCount">1마리</td>
+                        <td class="res_payTime">2010.10.10</td>
+                        <td class="res_cost">200,000원</td>
+                        <td class="resState">이용완료</td>
+                        <td class="res_modBt">
+                            <button type="button" class="modRes">예약변경</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="res_num">6</td>
+                        <td class="res_name">aaa</td>
+                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
+                        <td class="res_petCount">2마리</td>
+                        <td class="res_payTime">2010.10.10</td>
+                        <td class="res_cost">200,000원</td>
+                        <td class="resState">이용완료</td>
+                        <td class="res_modBt">
+                            <button type="button" class="modRes">예약변경</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="res_num">7</td>
+                        <td class="res_name">성수</td>
+                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
+                        <td class="res_petCount">12마리</td>
+                        <td class="res_payTime">2010.10.10</td>
+                        <td class="res_cost">200,000원</td>
+                        <td class="resState">이용완료</td>
+                        <td class="res_modBt">
+                            <button type="button" class="modRes">예약변경</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="res_num">8</td>
+                        <td class="res_name">bbb</td>
+                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
+                        <td class="res_petCount">1마리</td>
+                        <td class="res_payTime">2010.10.10</td>
+                        <td class="res_cost">200,000원</td>
+                        <td class="resState">이용완료</td>
+                        <td class="res_modBt">
+                            <button type="button" class="modRes">예약변경</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="res_num">9</td>
+                        <td class="res_name">aaa</td>
                         <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
                         <td class="res_petCount">3마리</td>
+                        <td class="res_payTime">2010.10.10</td>
+                        <td class="res_cost">200,000원</td>
+                        <td class="resState">이용완료</td>
+                        <td class="res_modBt">
+                            <button type="button" class="modRes">예약변경</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="res_num">10</td>
+                        <td class="res_name">bbb</td>
+                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
+                        <td class="res_petCount">1마리</td>
                         <td class="res_payTime">2010.10.10</td>
                         <td class="res_cost">200,000원</td>
                         <td class="resState">이용완료</td>
