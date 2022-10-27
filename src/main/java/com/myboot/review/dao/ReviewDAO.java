@@ -25,4 +25,5 @@ public interface ReviewDAO {
 
 	public void deleteReview(int reviewNO)throws DataAccessException;
 	
+	public List selectMainReview() throws DataAccessException;
 }

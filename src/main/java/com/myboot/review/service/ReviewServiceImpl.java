@@ -84,12 +84,18 @@ public class ReviewServiceImpl implements ReviewService {
 
 //다중 이미지 추가하기	
 
+
 	@Override
 	public void removeReview(int reviewNO) throws Exception {
 		reviewDAO.deleteReview(reviewNO);
 	}
 	
 	
-	
+	//	메인페이지 리뷰조회
+	@Override
+	public List returnReviewFormain() throws Exception {
+		List reviewList = reviewDAO.selectMainReview();
+		return reviewList;
+	}
 	
 }

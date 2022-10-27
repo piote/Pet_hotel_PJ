@@ -336,5 +336,12 @@ public class ReviewControllerImpl implements ReviewController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+//	메인페이지 리뷰조회
+	@ResponseBody 
+	@RequestMapping(value= "/returnReview.do", method = RequestMethod.GET)
+	public List<UserVO> returnReview() throws Exception{
+		List<UserVO> reviewList =  reviewService.returnReviewFormain();
+		return reviewList;
+	}
 }
