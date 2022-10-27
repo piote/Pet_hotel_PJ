@@ -19,12 +19,7 @@
   height: 100%;
 }
 
-.mobile-root {
-  flex-direction: column;
-}
-.mobile-root .inactive {
-  display: none;
-}
+
 
 .signin-wrapper {
   flex-grow: 1;
@@ -155,6 +150,16 @@ h5 {
 	top: 325px;
     left: 40px;
 }
+input[type='date']::before {
+  content: attr(data-placeholder);
+  width: 100%;
+}
+
+input[type='date']:focus::before,
+input[type='date']:valid::before {
+  display: none;
+}
+
 	</style>
     <title>회원가입 화면</title>
   
@@ -290,7 +295,7 @@ h5 {
                    		<input type="number" name="tel" id="tel" placeholder="핸드폰번호 입력" maxlength="13" class="form-field" placeholder="UserCellPhone" >               
                         <input type="number" name="tel_sub" id="tel_sub" placeholder="비상시 핸드폰번호 입력" maxlength="13" class="form-field" placeholder="UserCellPhone" >                
                      	<label class="message_label">이메일 수신 발송에 동의하십니까?<input type="checkbox"  name="message"  value="Y"></label>
-                        <input type="date" name="birth" class="form-field" placeholder="UserBirth" > 
+                        <input type="date" name="birth" class="form-field" data-placeholder="UserBirth" required aria-required="true" value={startDateValue} className={styles.selectDay} onchange={startDateValueHandler} > 
                                  
           			    <button  type="submit" id="signup" value="true" class="button primary"  onclick="checkValue()">가입</button>
           			    <button  type="button" class="button secondary" onclick="goLoginForm()">돌아가기</button>
