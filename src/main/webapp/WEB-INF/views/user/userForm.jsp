@@ -269,30 +269,30 @@ input[type="number"]::-webkit-inner-spin-button {
         
         $(document).ready(function() {
         	  
-            $(".phone").focus(focused($(this))); //input에 focus일 때
-            $(".phone").blur(blured($(this)));   //focus out일 때
-          });
+            $(".phone").focus(focused); //input에 focus일 때
+            $(".phone").blur(blured);   //focus out일 때
+          })
 
-        function focused(obj){
-        	console.log(obj)
-          var input = $(obj).val();
+        function focused(){
+          var input = $(this).val();
+          
           //input안에서 하이픈(-) 제거
           var phone = input.replace( /-/gi, '');
           //number 타입으로 변경(숫자만 입력)
-          $(obj).prop('type', 'number');
+          $(this).prop('type', 'number');
           
-          $(obj).val(phone);
+          $(this).val(phone);
         }
 
-        function blured(obj){
-          var input = $(obj).val();
-          console.log(obj)
+        function blured(){
+          var input = $(this).val();
+          
           //숫자에 하이픈(-) 추가
           var phone = chkItemPhone(input);
           //text 타입으로 변경
-          $(obj).prop('type', 'text');
+          $(this).prop('type', 'text');
           
-          $(obj).val(phone);
+          $(this).val(phone);
         }
 
 
