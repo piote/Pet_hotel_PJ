@@ -159,6 +159,11 @@ input[type='date']:focus::before,
 input[type='date']:valid::before {
   display: none;
 }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 	</style>
     <title>회원가입 화면</title>
@@ -261,6 +266,65 @@ input[type='date']:valid::before {
         function goLoginForm() {
             location.href="loginForm.do";     
         }
+        
+        $(document).ready(function() {
+        	  
+            $("#phone").focus(focused); //input에 focus일 때
+            $("#phone").blur(blured);   //focus out일 때
+          })
+
+        function focused(){
+          var input = $("#phone").val();
+          
+          //input안에서 하이픈(-) 제거
+          var phone = input.replace( /-/gi, '');
+          //number 타입으로 변경(숫자만 입력)
+          $("#phone").prop('type', 'number');
+          
+          $("#phone").val(phone);
+        }
+
+        function blured(){
+          var input = $("#phone").val();
+          
+          //숫자에 하이픈(-) 추가
+          var phone = chkItemPhone(input);
+          //text 타입으로 변경
+          $("#phone").prop('type', 'text');
+          
+          $("#phone").val(phone);
+        }
+
+
+        //전화번호 문자(-)
+        function chkItemPhone(temp) {
+          var number = temp.replace(/[^0-9]/g, "");
+          var phone = "";
+
+          if (number.length < 9) {
+            return number;
+          } else if (number.length < 10) {
+            phone += number.substr(0, 2);
+                phone += "-";
+                phone += number.substr(2, 3);
+            phone += "-";
+            phone += number.substr(5);
+          } else if (number.length < 11) {
+            phone += number.substr(0, 3);
+            phone += "-";
+            phone += number.substr(3, 3);
+            phone += "-";
+            phone += number.substr(6);
+          } else {
+            phone += number.substr(0, 3);
+            phone += "-";
+            phone += number.substr(3, 4);
+            phone += "-";
+            phone += number.substr(7);
+          }
+
+          return phone;
+        }
 
     </script>
     
@@ -292,8 +356,8 @@ input[type='date']:valid::before {
                             <option>@gmail.com</option>
                             <option>@nate.com</option>                        
                         </select>
-                   		<input type="number" name="tel" id="tel" placeholder="핸드폰번호 입력" maxlength="13" class="form-field" placeholder="UserCellPhone" >               
-                        <input type="number" name="tel_sub" id="tel_sub" placeholder="비상시 핸드폰번호 입력" maxlength="13" class="form-field" placeholder="UserCellPhone" >                
+                   		<input type="number" name="tel" id="phone" placeholder="핸드폰번호 입력" maxlength="13" class="form-field" placeholder="UserCellPhone" >               
+                        <input type="number" name="tel_sub" id="phone" placeholder="비상시 핸드폰번호 입력" maxlength="13" class="form-field" placeholder="UserCellPhone" >                
                      	<label class="message_label">이메일 수신 발송에 동의하십니까?<input type="checkbox"  name="message"  value="Y"></label>
                         <input type="date" name="birth" class="form-field" data-placeholder="UserBirth" required aria-required="true" value={startDateValue} className={styles.selectDay} onchange={startDateValueHandler} > 
                                  
