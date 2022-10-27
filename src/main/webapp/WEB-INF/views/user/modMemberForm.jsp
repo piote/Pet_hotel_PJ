@@ -11,6 +11,7 @@
 <html>
 	<head>
 	   <link rel="stylesheet" href="${contextPath}/resources/css/member.css">
+	   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	   <meta charset="UTF-8">
 	   <title>회원 수정창</title>
 	 <script>
@@ -26,7 +27,7 @@
 		  		element.checked = true;
 			}
 			
-			function deleteUser(url,id) {
+			/* function deleteUser(url,id) {
 				if(window.confirm("탈퇴하시겠습니까?")){
 
 					var form = document.createElement("form");
@@ -42,6 +43,24 @@
 					 form.submit();
 					 
 				}
+			} */
+			function deleteUser(url,id){
+				Swal.fire({
+					  title: '확실합니까?',
+					  text: "다시는 되돌릴 수 없습니다.",
+					  icon: 'warning',
+					  showCancelButton: true,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: 'Yes!'
+					}).then((result) => {
+					  if (result.isConfirmed) {
+					    Swal.fire(
+					      '탈퇴되었습니다!',
+					      '확인'
+					    )
+					  }
+					})
 			}
 			/* function mod() {
 				alert("정보수정이 완료 됐습니다.")
