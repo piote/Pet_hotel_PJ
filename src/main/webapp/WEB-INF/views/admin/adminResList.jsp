@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="item_res"  value="24"  /><!--총 데이터베이스 아이템 수  -->
 <%
   request.setCharacterEncoding("UTF-8");
 %>
@@ -165,7 +166,14 @@
         .select_number{
             color: #030303;
         }
+        .notResItem{
+        	text-align: center;
+        }
+        
     </style>
+    <script>
+    	
+    </script>
 </head>
 <body>
     
@@ -205,133 +213,67 @@
                         <td class="resState">예약상태</td>
                         <td class="res_modBt"></td>
                     </tr>
-                    <tr>
-                        <td class="res_num">1</td>
-                        <td class="res_name">aaa</td>
-                        <td class="res_Date">2010.12.10 ~ 2010.12.13</td>
-                        <td class="res_petCount">2마리</td>
-                        <td class="res_payTime">2010.10.10</td>
-                        <td class="res_cost">200,000원</td>
-                        <td class="resState">이용완료</td>
-                        <td class="res_modBt">
-                            <button type="button" class="modRes">예약변경</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="res_num">2</td>
-                        <td class="res_name">다롬</td>
-                        <td class="res_Date">2011.10.10 ~ 2012.02.10</td>
-                        <td class="res_petCount">2마리</td>
-                        <td class="res_payTime">2011.10.02</td>
-                        <td class="res_cost">100,000원</td>
-                        <td class="resState">이용전</td>
-                        <td class="res_modBt">
-                            <button type="button" class="modRes">예약변경</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="res_num">3</td>
-                        <td class="res_name">ccc</td>
-                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
-                        <td class="res_petCount">2마리</td>
-                        <td class="res_payTime">2010.10.10</td>
-                        <td class="res_cost">200,000원</td>
-                        <td class="resState">이용완료</td>
-                        <td class="res_modBt">
-                            <button type="button" class="modRes">예약변경</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="res_num">4</td>
-                        <td class="res_name">ddd</td>
-                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
-                        <td class="res_petCount">1마리</td>
-                        <td class="res_payTime">2010.10.10</td>
-                        <td class="res_cost">200,000원</td>
-                        <td class="resState">이용완료</td>
-                        <td class="res_modBt">
-                            <button type="button" class="modRes">예약변경</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="res_num">5</td>
-                        <td class="res_name">태양</td>
-                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
-                        <td class="res_petCount">1마리</td>
-                        <td class="res_payTime">2010.10.10</td>
-                        <td class="res_cost">200,000원</td>
-                        <td class="resState">이용완료</td>
-                        <td class="res_modBt">
-                            <button type="button" class="modRes">예약변경</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="res_num">6</td>
-                        <td class="res_name">aaa</td>
-                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
-                        <td class="res_petCount">2마리</td>
-                        <td class="res_payTime">2010.10.10</td>
-                        <td class="res_cost">200,000원</td>
-                        <td class="resState">이용완료</td>
-                        <td class="res_modBt">
-                            <button type="button" class="modRes">예약변경</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="res_num">7</td>
-                        <td class="res_name">성수</td>
-                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
-                        <td class="res_petCount">12마리</td>
-                        <td class="res_payTime">2010.10.10</td>
-                        <td class="res_cost">200,000원</td>
-                        <td class="resState">이용완료</td>
-                        <td class="res_modBt">
-                            <button type="button" class="modRes">예약변경</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="res_num">8</td>
-                        <td class="res_name">bbb</td>
-                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
-                        <td class="res_petCount">1마리</td>
-                        <td class="res_payTime">2010.10.10</td>
-                        <td class="res_cost">200,000원</td>
-                        <td class="resState">이용완료</td>
-                        <td class="res_modBt">
-                            <button type="button" class="modRes">예약변경</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="res_num">9</td>
-                        <td class="res_name">aaa</td>
-                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
-                        <td class="res_petCount">3마리</td>
-                        <td class="res_payTime">2010.10.10</td>
-                        <td class="res_cost">200,000원</td>
-                        <td class="resState">이용완료</td>
-                        <td class="res_modBt">
-                            <button type="button" class="modRes">예약변경</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="res_num">10</td>
-                        <td class="res_name">bbb</td>
-                        <td class="res_Date">2010.10.10 ~ 2010.10.10</td>
-                        <td class="res_petCount">1마리</td>
-                        <td class="res_payTime">2010.10.10</td>
-                        <td class="res_cost">200,000원</td>
-                        <td class="resState">이용완료</td>
-                        <td class="res_modBt">
-                            <button type="button" class="modRes">예약변경</button>
-                        </td>
-                    </tr>
+                    <c:choose>
+                    	<c:when test="${resList != null}">
+	                    	<c:forEach var="reservation" items="${resList}" varStatus="status">
+	                    		<tr>
+			                        <td class="res_num">${reservation.res_num}</td>
+			                        <td class="res_name">${reservation.res_name}</td>
+			                        <td class="res_Date">${reservation.res_Date_st} ~ ${reservation.res_Date_end}</td>
+			                        <td class="res_petCount">${reservation.res_petCount}마리</td>
+			                        <td class="res_payTime">${reservation.res_payTime}</td>
+			                        <td class="res_cost">${reservation.res_cost}</td>
+			                        <td class="resState">${reservation.resState}</td>
+			                        <td class="res_modBt">
+			                            <button type="button" class="modRes">예약변경</button>
+			                        </td>
+                    			</tr>
+                    		</c:forEach>
+                    	</c:when>
+                    	<c:otherwise>
+                   		
+	                 		<tr>
+	                       		<td colspan="8" class="res_contents">
+	                       			예약이 존재하지 않습니다.
+	                       		</td>
+   							</tr>
+                   					
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    
                 </table>
                 
                 <!-- 페이지기능 -->
-                <div class="page_num"></div>
+                
+                <!-- 페이지당 10개의 예약을 출력한다. -->
+                                
+           	 	<!-- 페이지 만큼 나누어떨어지지만 그대로 계산하면 1페이지 더 생성되므로 주의 -->
+                <c:if test="${item_res % 10 != 0 and item_res > 10}">
+					<c:set var="PI" value="${item_res / 10}" scope="request"/>
+									</c:if>
+				
+				 <!-- 페이지 만큼 나누어떨어지지만 그대로 계산하면 1페이지 더 생성되므로 주의 -->
+				<c:if test="${item_res % 10 == 0 and item_res > 10}">
+					<c:set var="PI" value="${item_res / 10-1}" scope="request"/>
+				</c:if>
+		
+				<!-- 아이템이 적어 페이지를 만들 이유가 없음 -->
+				<c:if test="${item_res <= 10}">
+					<c:set var="PI" value="${0}" scope="request"/>
+					3
+				</c:if>
+				
+				
+                <div class="page_num">
+	                <li class="pageNO" onClick="pageDown()">pre</li>
+		            <c:forEach varStatus="i" begin="0" end="${PI}">
+					<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
+						<li class="pageNO" onClick="clickNO(${i.count-1})">${i.count}</li>
+					</c:forEach>
+	                <li class="pageNO" onClick="pageUP()">next</li>
+                </div>
             </div>
             
-        
-    </section>
 </body>
 </html>
