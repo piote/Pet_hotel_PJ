@@ -133,13 +133,29 @@ public class ReviewControllerImpl implements ReviewController {
 	 * 
 	 * }
 	 */
-
+/*
 	@Override
 	@RequestMapping("/review/reviewForm.do")
 	public String reviewForm(Model model) {
 		return "reviewForm";
 	}
+*/
+	@RequestMapping(value = "/review/reviewForm.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView reviewForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		String res_num = request.getParameter("res_num");
+	
+		String viewName = (String) request.getAttribute("viewName");
+
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("res_num", res_num);
+
+		return mav;
+
+	}
+
+	
+	
 	@RequestMapping("/reviewBoard.do")
 	public String review(Model model) {
 		System.out.println("리뷰");
@@ -187,7 +203,7 @@ public class ReviewControllerImpl implements ReviewController {
 		reviewMap.put("id", id);
 		String parentNO = (String) session.getAttribute("parentNO");
 		reviewMap.put("parentNO", parentNO);
-		reviewMap.put("res_num", 1);
+		//reviewMap.put("res_num", 1);
 
 		String path = (String) session.getAttribute("realPath") + "resources\\review\\review_image";
 
@@ -315,6 +331,11 @@ public class ReviewControllerImpl implements ReviewController {
 		return fileList;
 	}
 
+	@Override
+	public String reviewForm(Model model) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 //	메인페이지 리뷰조회
 	@ResponseBody 

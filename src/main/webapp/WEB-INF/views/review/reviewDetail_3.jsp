@@ -139,6 +139,9 @@
 	  height: 25px;
 	  
   }
+  .re_image {
+	  border-radius: 5%;
+  }
   </style> 
  
  <meta charset="UTF-8">
@@ -228,7 +231,7 @@
 	          
 	          <td class="w_td" width="20%" rowspan="2">               
 	               <c:if test="${review.image != null}"> 
-	                   <img src="${contextPath}/${review.image}" width="150" height="150">
+	                   <img class="re_image" src="${contextPath}/${review.image}" width="150" height="150">
 	                </c:if>
 	         </td>
 	         
