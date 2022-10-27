@@ -68,7 +68,7 @@
       where review_num in (
          SELECT review_num FROM  tb_review
          START WITH review_num = #{review_num}
-       	 CONNECT BY PRIOR  review_num = review_parentNO)
+       	 CONNECT BY PRIOR  review_num = parentNO)
      
     ]]>
 	</delete>

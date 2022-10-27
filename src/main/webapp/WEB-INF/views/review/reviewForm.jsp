@@ -83,10 +83,10 @@
   <form name="reviewForm" id="reviewForm" method="post"   action="${contextPath}/review/addNewReview.do"   enctype="multipart/form-data">
     <table border="0" align="center">
 
-      <tr>
+      	 <tr>
 					<td align="right"> 작성자</td>
 					<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${user.id }" readonly/> </td>
-			</tr>
+		 </tr>
 	     <tr>
 			   <td align="right">글제목: </td>
 			   <td colspan="2"><input type="text" size="67"  maxlength="500" name="title" /></td>
