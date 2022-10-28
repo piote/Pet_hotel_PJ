@@ -15,17 +15,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="${contextPath}/resources/img/anitel.ico">
     <title>Anitel</title>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js'></script>
-    <script src="${contextPath}/resources/js/script.js"> </script>
+    <script src="${contextPath}/resources/js/scrollscript.js"> </script>
     <link rel="stylesheet" href="${contextPath}/resources/css/reset.css">
-    <!-- <link rel="stylesheet" href="${contextPath}/resources/css/tiles.css"> -->
     <style>
         /* slider */
         .slider_wrap{
             width: auto; height: 100vh;
-            background-color: azure;
             position: relative;
             margin-top: -200px;
         }
