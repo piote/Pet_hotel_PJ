@@ -219,7 +219,7 @@
 			<h2>예약 조회</h2>
 			<div id="searchFrm">
 				<form name="searchFrm">
-                	<td>
+					<div>
                         <ul class="searchDate">
                             <li>
                                 <span class="chkbox2">
@@ -263,7 +263,7 @@
 								</span>
                             </li>
                         </ul>
-                    </td>
+                    </div>
 					<div id="calendar"> 결제일 :
 						<input class="datepicker" type="text" name="startDate" id="startDate">
 						<input class="datepicker" type="text" name="endDate" id="endDate">
@@ -309,10 +309,10 @@
 								<td>
 									<c:choose>
 										<c:when test="${reserves.res_state=='N' }">
-											<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.payTime }</a>
+											<a href="${contextPath}/reservationUpdate.do?pay_time=${reserves.payTime }">${reserves.payTime }</a>
 										</c:when>
 										<c:otherwise>
-											<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.payTime }</a>
+											<a href="${contextPath}/reservationUpdate.do?pay_time=${reserves.payTime }">${reserves.payTime }</a>
 										</c:otherwise>
 									</c:choose>
 								</td>
