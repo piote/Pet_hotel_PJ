@@ -480,7 +480,7 @@
                     <tr align="center" bgcolor="white">
                         <td rowspan="6" align="center" bgcolor="white"><b>Room</b></td>
                         <td rowspan="2" align="center" bgcolor="white">Deluxe(소형견)</td>
-                        <td rowspan="2" align="center" bgcolor="white">100,000 원</td>
+                        <td rowspan="2" align="center" bgcolor="white">35,000 원</td>
                         <td rowspan="6" align="center" bgcolor="white"><b>Beauty</b></td>
                         <td rowspan="3" align="center" bgcolor="white">Clipping</td>
                         <td>소형견</td>
@@ -498,7 +498,7 @@
                     <tr align="center" bgcolor="white">
 
                         <td rowspan="2" align="center" bgcolor="white">Superior(중형견)</td>
-                        <td rowspan="2" align="center" bgcolor="white">150,000 원</td>
+                        <td rowspan="2" align="center" bgcolor="white">45,000 원</td>
                         <td>대형견</td>
                         <td>60,000 원</td>
                         <td rowspan="2" align="center" bgcolor="white">중형견</td>
@@ -513,7 +513,7 @@
                     <tr align="center" bgcolor="white">
 
                         <td rowspan="2" align="center" bgcolor="white">Suite(대형견)</td>
-                        <td rowspan="2" align="center" bgcolor="white">200,000 원</td>
+                        <td rowspan="2" align="center" bgcolor="white">55,000 원</td>
                         <td>중형견</td>
                         <td>80,000 원</td>
                         <td rowspan="2" align="center" bgcolor="white">대형견</td>
