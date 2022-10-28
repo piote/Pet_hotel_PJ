@@ -81,7 +81,7 @@
             line-height: 30px;
         }
         .grade_option{
-            margin-left: 50px;
+            margin-left: 40px;
         }
         .res_option{
             margin-left: 35px;
@@ -168,6 +168,7 @@
                     </div>
                     <div class="grade_option">
                         멤버쉽 :
+                        <label><input type="checkbox" name="grade" id="Normal" value="Normal">Normal</label>
                         <label><input type="checkbox" name="grade" id="Bronze" value="Bronze">Bronze</label>
                         <label><input type="checkbox" name="grade" id="Silver" value="Silver">Silver</label>
                         <label><input type="checkbox" name="grade" id="Gold" value="Gold">Gold</label>

@@ -377,7 +377,6 @@
                     for(i=0;i<data.length;i++){
                         review_data[i]=data[i];
                     }
-                    console.log(review_data);
                     inputReviewData();
 
                     $(data).each(function(){});
@@ -426,7 +425,6 @@
                 $('.pic[data-num="3"]').css('background-image','url("${contextPath}/'+review_data[now_reviewNum+2].REVIEW_IMAGE_URL+'")');
                 $('.pic[data-num="4"]').css('background-image','url("${contextPath}/'+review_data[now_reviewNum+3].REVIEW_IMAGE_URL+'")');
             }
-        	console.log(now_reviewNum)
         }   
     </script>
 
