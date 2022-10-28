@@ -278,9 +278,9 @@ function costTB(petserviceMap, datecheck) {
         }
     
         //room
-        $("#S_R").text((dayCal * sr * 100000).toLocaleString() + ' 원');
-        $("#M_R").text((dayCal * mr * 150000).toLocaleString() + ' 원');
-        $("#L_R").text((dayCal * lr * 200000).toLocaleString() + ' 원');
+        $("#S_R").text((dayCal * sr * 35000).toLocaleString() + ' 원');
+        $("#M_R").text((dayCal * mr * 45000).toLocaleString() + ' 원');
+        $("#L_R").text((dayCal * lr * 55000).toLocaleString() + ' 원');
         //Clipping
         $("#S_BC").text((sbc * 35000).toLocaleString() + ' 원');
         $("#M_BC").text((mbc * 45000).toLocaleString() + ' 원');
@@ -294,7 +294,7 @@ function costTB(petserviceMap, datecheck) {
         $("#M_S").text((ms * 80000).toLocaleString() + ' 원');
         $("#L_S").text((ls * 120000).toLocaleString() + ' 원');
         //총합계
-        var total = sr * 100000 + mr * 150000 + lr * 200000 ;
+        var total = sr * 35000 + mr * 45000 + lr * 55000 ;
         total *= dayCal;
         total += sbc * 35000 + mbc * 45000 + lbc * 60000 + sbs * 70000 + mbs * 80000 + lbs * 100000;
         total += ss * 50000 + ms * 80000 + ls * 120000;

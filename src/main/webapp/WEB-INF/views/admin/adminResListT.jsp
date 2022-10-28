@@ -166,6 +166,8 @@
         .select_number{
             color: #030303;
         }
+        
+        /*템 없을 때  출력 데이터  */
         .notResItem{
         	text-align: center;
         }
@@ -187,7 +189,7 @@
         	font-size: 12px;
         }
         
-        /* 화살표 아이콘  */
+        /* 화살표 아이콘 뒤집기  */
         .res_arrow_bt {
         	position: relative;
 		    left: 23%;
@@ -204,15 +206,16 @@
 		    transform: rotate(-90deg);
            
         }
-        
+          /* 화살표 아이콘 뒤집기 end */
 
-        /*  */
+      
         
     </style>
     <script>
+    	
+    	//상세보기 열고 닫기
     	function closeResContentBox(obj){
     		
-	
     		if($(obj).attr('class') == 'res_R_arrow_bt'){
     			//박스 안보임
     			$(".res_content_box").css('display', 'none');
