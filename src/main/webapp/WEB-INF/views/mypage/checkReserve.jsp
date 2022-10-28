@@ -166,7 +166,7 @@
 				<table>
 				   <tr class="detail-center">
 					  <td width="5%">No</td>
-					  <td width="10%">PayMent Date</td>
+					  <td width="10%">Date</td>
 					  <td width="15%">Name</td>
 					  <td width="15%">PetName</td>
 					  <td width="25%">Reserved Date</td>
@@ -188,10 +188,10 @@
 								<td>
 									<c:choose>
 										<c:when test="${reserves.res_state=='N' }">
-											<a href="${contextPath}/mypage/myRserveDetail.do?pay_time=${reserves.res_st}">${reserves.payTime}</a>
+											<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.res_st }</a>
 										</c:when>
 										<c:otherwise>
-											<a href="${contextPath}/mypage/myRserveDetail.do?pay_time=${reserves.res_st }">${reserves.payTime }</a>
+											<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.res_st }</a>
 										</c:otherwise>
 									</c:choose>
 								</td>
@@ -221,7 +221,7 @@
 										</c:otherwise>
 									</c:choose>
 							    </td>	
-							</tr>	
+							</tr>
 						</c:forEach>
 					</c:when>
                </c:choose>

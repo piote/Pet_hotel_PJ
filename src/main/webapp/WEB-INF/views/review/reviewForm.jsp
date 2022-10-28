@@ -8,6 +8,7 @@
 <c:set  var="totArticles"  value="${reviewMap.totArticles}" />
 <c:set  var="section"  value="${reviewMap.section}" />
 <c:set  var="pageNum"  value="${reviewMap.pageNum}" />
+<c:set  var="res_num"  value="${res_num}" />
 
 
 <%
@@ -22,17 +23,21 @@
     direction: rtl;
     border:0;
     }
+
     #reviewForm fieldset legend{
         text-align: right;
     }
+    
     #reviewForm input[type=radio]{
         display: none;
     }
+    
     #reviewForm label{
         font-size: 2em;
         color: transparent;
         text-shadow: 0 0 0 #f0f0f0;
         text-shadow: 0 0 0 rgba(211, 211, 211, 0.8);
+        
     }
     #reviewForm label:hover{
         text-shadow: 0 0 0 rgba(255, 211, 0, 0.66);
@@ -83,10 +88,15 @@
   <form name="reviewForm" id="reviewForm" method="post"   action="${contextPath}/review/addNewReview.do"   enctype="multipart/form-data">
     <table border="0" align="center">
 
-      	 <tr>
+      	 <tr>		
 					<td align="right"> 작성자</td>
-					<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${user.id }" readonly/> </td>
+					<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${user.id }" readonly/> 
+					<input type="hidden" name="res_num" value="${res_num}"/> 
+					</td>
 		 </tr>
+		 
+		 
+		 
 	     <tr>
 			   <td align="right">글제목: </td>
 			   <td colspan="2"><input type="text" size="67"  maxlength="500" name="title" /></td>

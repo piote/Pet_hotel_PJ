@@ -188,9 +188,6 @@
         /* facilities end */
 		
 		/* review */
-		.review{
-            height: 700px;
-        }
         .txt_review{
             width: 400px; height: 150px;
             position: relative;
@@ -205,7 +202,7 @@
         .review_box{
             width: 850px; height: 100%;
             position: absolute;
-            top: 0; right: 0;
+            top: 0; right: 20px;
         }
         .preview{
             width: 400px; height: 400px;
@@ -245,35 +242,41 @@
             background-size: cover;
             background-position: center;
             cursor: pointer;
-        }
-        .sub{
-            transform: scale(0.8);
-            opacity: .2;
-            z-index: 1;
             background-color:gray;
+            bottom: 130px;
+        }
+        .pic[data-num="1"]{
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            filter: blur(0px);
+            -webkit-filter: blur(0px);
+        }
+        .pic[data-num="2"]{
+            transform: scale(.9) translateY(-100px);
+            opacity: .5;
             filter: blur(5px);
             -webkit-filter: blur(5px);
         }
-        .sub:hover{
-            transform: scale(0.85);
-            opacity: 0.3;
-            filter: blur(3px);
-            -webkit-filter: blur(3px);
+        .pic[data-num="3"]{
+            transform: scale(.8) translateY(-200px);
+            opacity: .2;
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
         }
-        #main_pic{
-            top: 50%; margin-top: -200px;
-            z-index: 5;
-            box-shadow: 0 0 50px #FFF;
-            background-color:gray;
+        .pic[data-num="4"]{
+            transform: scale(.7) translateY(-300px);
+            opacity: .1;
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
         }
-        #main_pic:hover{
-            transform: scale(1.03);
-        }
-        #sub_pic_top{
-            top: 0;
-        }
-        #sub_pic_bottom{
-            top: 300px;
+        .pic[data-num="1"]:hover{
+            transform: scale(1.03) translateY(0);
+        }.pic[data-num="2"]:hover{
+            transform: scale(.93) translateY(-100px);
+        }.pic[data-num="3"]:hover{
+            transform: scale(.83) translateY(-200px);
+        }.pic[data-num="4"]:hover{
+            transform: scale(.73) translateY(-300px);
         }
         /* review end */
         
@@ -333,7 +336,100 @@
 	   		alert(stmsg);
 	   		history.pushState(null, null, 'main.do')
 	   	}
+        
+		//갤러리 이동기능
+        function click_pic(obj){
+            var num = $(obj).data('num');
+
+            if(num==1){
+                location.href='${contextPath}/reviewBoard.do';
+            }else{
+                $('.pic[data-num="1"]').remove();
+                $('.pic[data-num="2"]').attr('data-num',1);
+                $('.pic[data-num="3"]').attr('data-num',2);
+                $('.pic[data-num="4"]').attr('data-num',3);
+                $('.gallery').prepend('<div class="pic" data-num="4" onclick="click_pic(this)"></div>')
+                now_reviewNum++;
+                inputReviewData();
+
+            }
+        }
+
+        // 리뷰js
+        
+        var totalReviewData;
+        var review_data=[];
+        var now_reviewNum=0;
+
+        $(function(){
+
+            $('#review_info').empty();
+
+            $.ajax({
+                url: "/returnReview.do",
+                type: "GET", 
+                success : function(data){
+                    //총데이터 수 저장
+                    totalReviewData = data.length;
+
+                    //user_data에 받아온 데이터 저장
+                    review_data = [totalReviewData];
+                    for(i=0;i<data.length;i++){
+                        review_data[i]=data[i];
+                    }
+                    console.log(review_data);
+                    inputReviewData();
+
+                    $(data).each(function(){});
+                    },
+                error :function(){
+                    alert("request error!");
+                    }
+            });
+            
+        });
+        function inputReviewData(){
+        	 $('#review_info').empty();
+        	 
+             if(now_reviewNum>totalReviewData-1){
+                now_reviewNum=0;
+            }
+
+            var star = parseInt(review_data[now_reviewNum].REVIEW_STAR);
+            var starString='';
+            for(i=0;i<star;i++){
+                starString+='★';
+            }
+
+            var html = '<p class="review_id">'+review_data[now_reviewNum].USER_ID+'님의 리뷰</p>'+
+                        '<p class="review_scope">'+starString+'</p>'+
+                        '<p class="review_content">'+review_data[now_reviewNum].REVIEW_TITLE+'</p>';
+
+            $('#review_info').append(html);
+            $('.pic[data-num="1"]').css('background-image','url("${contextPath}/'+review_data[now_reviewNum].REVIEW_IMAGE_URL+'")');
+            
+            // 갤러리 이미지
+            if(now_reviewNum+3>totalReviewData-1){
+                $('.pic[data-num="2"]').css('background-image','url("${contextPath}/'+review_data[now_reviewNum+1].REVIEW_IMAGE_URL+'")');
+                $('.pic[data-num="3"]').css('background-image','url("${contextPath}/'+review_data[now_reviewNum+2].REVIEW_IMAGE_URL+'")');
+                $('.pic[data-num="4"]').css('background-image','url("${contextPath}/'+review_data[0].REVIEW_IMAGE_URL+'")');
+            }else if(now_reviewNum+2>totalReviewData-1){
+                $('.pic[data-num="2"]').css('background-image','url("${contextPath}/'+review_data[now_reviewNum+1].REVIEW_IMAGE_URL+'")');
+                $('.pic[data-num="3"]').css('background-image','url("${contextPath}/'+review_data[0].REVIEW_IMAGE_URL+'")');
+                $('.pic[data-num="4"]').css('background-image','url("${contextPath}/'+review_data[1].REVIEW_IMAGE_URL+'")');
+            }else if(now_reviewNum+1>totalReviewData-1){
+                $('.pic[data-num="2"]').css('background-image','url("${contextPath}/'+review_data[0].REVIEW_IMAGE_URL+'")');
+                $('.pic[data-num="3"]').css('background-image','url("${contextPath}/'+review_data[1].REVIEW_IMAGE_URL+'")');
+                $('.pic[data-num="4"]').css('background-image','url("${contextPath}/'+review_data[2].REVIEW_IMAGE_URL+'")');
+            }else{
+                $('.pic[data-num="2"]').css('background-image','url("${contextPath}/'+review_data[now_reviewNum+1].REVIEW_IMAGE_URL+'")');
+                $('.pic[data-num="3"]').css('background-image','url("${contextPath}/'+review_data[now_reviewNum+2].REVIEW_IMAGE_URL+'")');
+                $('.pic[data-num="4"]').css('background-image','url("${contextPath}/'+review_data[now_reviewNum+3].REVIEW_IMAGE_URL+'")');
+            }
+        	console.log(now_reviewNum)
+        }   
     </script>
+
 </head>
 <body>
 
@@ -410,12 +506,13 @@
                     시설이 깨끗하고 서비스가 좋아요.
                 </p>
             </div>
-            <a class="more" href="${contextPath}/introduce.do">더보기 +</a>
+            <a class="more" href="${contextPath}/reviewBoard.do">더보기 +</a>
         </div>
         <div class="gallery">
-            <div id="sub_pic_top" class="pic sub"></div>
-            <div id="main_pic" class="pic"></div>
-            <div id="sub_pic_bottom" class="pic sub"></div>
+            <div class="pic" data-num="4" onclick="click_pic(this)"></div>
+            <div class="pic" data-num="3" onclick="click_pic(this)"></div>
+            <div class="pic" data-num="2" onclick="click_pic(this)"></div>
+            <div class="pic" data-num="1" onclick="click_pic(this)"></div>
             <!-- <div id="ex_pic" class="pic"></div> -->
         </div>
     </div>

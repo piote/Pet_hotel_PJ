@@ -23,7 +23,8 @@ public  interface ReviewController {
 	public ModelAndView reviewDetail_1(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView reviewDetail_2(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView reviewDetail_3(HttpServletRequest request, HttpServletResponse response) throws Exception;
-
+	
+	public ModelAndView reviewForm(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 
 
