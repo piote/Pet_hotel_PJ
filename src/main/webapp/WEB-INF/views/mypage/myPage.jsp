@@ -49,10 +49,11 @@
          <div class="mypage_reserve">
             <table>
 				<tr class="reserve-center">
-				    <td width="10%">PayMent Date</td>
-				    <td width="20%">Name</td>
-				    <td width="20%">PetName</td>
-				    <td width="40%">Phone Number</td>
+				    <td width="10%">No</td>
+				    <td width="25%">PayMent Date</td>
+				    <td width="15%">PetName</td>
+				    <td width="25%">Reserved Date</td>
+				  	<td width="25%">End Date</td>
 				</tr>
 	            <c:choose>
 	            	<c:when test="${empty myReserveList }">
@@ -63,12 +64,13 @@
 		               </tr>
 					</c:when>
 					<c:when test="${not empty myReserveList }">
-						<c:forEach var="reserves" items="${myReserveList }" begin="0" end="2" step="1" varStatus="res_st">
+						<c:forEach var="reserves" items="${myReserveList }" begin="0" end="2" step="1" varStatus="res_num">
 							<tr class="reserve-list">
+				              	<td>${res_num.count}</td>
 								<td>${reserves.payTime }</td>
-								<td>${reserves.user_name }</td>
 								<td>${reserves.pet_name }</td>
-								<td>${reserves.user_tel }</td>
+								<td>${reserves.res_st }</td>
+								<td>${reserves.res_end }</td>
 							</tr>
 						</c:forEach>
 					</c:when>
