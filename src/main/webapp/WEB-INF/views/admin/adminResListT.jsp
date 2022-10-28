@@ -171,12 +171,17 @@
         .notResItem{
         	text-align: center;
         }
-        .res_content_box{
+        .list_tb .res_content_box{
+        	height: 150px;
         	width: 100%;
         	display:none;
         	overflow:hidden;
         	background-color: #bbb;
         	
+        }
+        
+        .petService_TB_Box{
+        	height: 100%;
         }
         
         .res_Date_Veiw_Box li{
@@ -185,8 +190,24 @@
         	text-align: center;
         }
         
-        .res_Date_Veiw_Box ul li{
+        .res_Date_Veiw_Box ul li span{
         	font-size: 12px;
+        }
+        
+        .res_Content_Textbox{
+        resize: none;
+        }
+        
+        /* 펫 테이블  */
+        .petService_TB_Box>li{
+        	display: inline-block;
+        }
+        
+        
+        .petService_TB_Item{
+        	height: 150%;
+        	width: 25%;
+        	background-color: white;
         }
         
         /* 화살표 아이콘 뒤집기  */
@@ -325,16 +346,50 @@
 				            				</ul>
 				            				<ul>
 				            					<li>
-				            						<textarea></textarea>
+				            						<span id="res_Content_Text">요청사항</span>
+				            					</li>
+				            					<li>
+				            						<textarea class="res_Content_Textbox"></textarea>
 				            					</li>
 				            				</ul>
 				            			<li>
 				            		</ul>
-				            		<ul>
-				            			<li><li>
-				            		</ul>
+				            		
 				            	</td>
 				            	<td colspan="5">
+				            	<ul class="petService_TB_Box">
+				            			<li class="petService_TB_Item">
+				            				<ul>
+				            					<li><input type="text" value="이름"></li>
+				            					<li><select><option></option>></select></li>
+				            					<li>방</li>
+				            					<li>미용</li>
+				            					<li>스파</li>
+				            					<li>X</li>
+				            				</ul>
+				            			</li>
+				            			<li class="petService_TB_Item">
+				            				<ul>
+				            					<li>이름</li>
+				            					<li>성별</li>
+				            					<li>방</li>
+				            					<li>미용</li>
+				            					<li>스파</li>
+				            					<li>X</li>
+				            				</ul>
+				            			</li>
+				            			<li class="petService_TB_Item">
+				            				<ul>
+				            					<li>이름</li>
+				            					<li>성별</li>
+				            					<li>방</li>
+				            					<li>미용</li>
+				            					<li>스파</li>
+				            					<li>X</li>
+				            				</ul>
+				            			</li>
+				            			
+				            		</ul>
 				            	</td>
 				            </tr>
 				            
