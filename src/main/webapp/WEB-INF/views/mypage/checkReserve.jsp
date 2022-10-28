@@ -271,7 +271,6 @@
 					<div id="search_text">
 						<select name="colName" id="colName">
 							<option value="">검색</option>
-							<option value="user_name">예약명</option>
 							<option value="pet_name">펫이름</option>
 						</select>
 						<input type="text" id="searchWord" name="searchWord"/> <br/><br/>
@@ -287,11 +286,12 @@
 				<table>
 				   <tr class="detail-center">
 					  <td width="5%">No</td>
-					  <td width="10%">PayMent Date</td>
-					  <td width="15%">Name</td>
-					  <td width="15%">PetName</td>
-					  <td width="25%">Reserved Date</td>
-					  <td width="20%">Status</td>
+					  <td width="15%">PayMent Date</td>
+					  <td width="10%">PetName</td>
+					  <td width="15%">Reserved Date</td>
+					  <td width="15%">End Date</td>
+					  <td width="15%">Status</td>
+					  <td width="10%">Update</td>
 					  <td width="10%">Cancel</td>
 				  </tr>
 	            <c:choose>
@@ -305,20 +305,11 @@
 					<c:when test="${not empty myReserveList}">
 						<c:forEach var="reserves" items="${myReserveList }" varStatus="res_num">
 							<tr class="detail-list">
-				              	<td class="sf">${res_num.count}</td>
-								<td>
-									<c:choose>
-										<c:when test="${reserves.res_state=='N' }">
-											<a href="${contextPath}/reservationUpdate.do?pay_time=${reserves.payTime }">${reserves.payTime }</a>
-										</c:when>
-										<c:otherwise>
-											<a href="${contextPath}/reservationUpdate.do?pay_time=${reserves.payTime }">${reserves.payTime }</a>
-										</c:otherwise>
-									</c:choose>
-								</td>
-								<td>${reserves.user_name }</td>
+				              	<td>${res_num.count}</td>
+								<td>${reserves.payTime }</td>
 								<td>${reserves.pet_name }</td>
 								<td>${reserves.res_st }</td>
+								<td>${reserves.res_end }</td>
 								<td>
 									<c:choose>
 										<c:when test="${reserves.res_state=='N'}">
@@ -329,6 +320,13 @@
 										</c:when>
 										<c:when test="${reserves.res_state=='C'}">
 											예약 취소
+										</c:when>
+									</c:choose>
+								</td>
+								<td>
+									<c:choose>
+										<c:when test="${reserves.res_state == 'N'}">
+											<a href="${contextPath}/reservationUpdate.do?reservation_num=${reserves.res_num }">수정</a>
 										</c:when>
 									</c:choose>
 								</td>

@@ -73,7 +73,7 @@
 }
 
 .searchDate li .chkbox2.on label{
-	background:rgb(231, 226, 219);
+	background:gray;
 }
 
 .searchDate li .reset  {
@@ -157,9 +157,9 @@
     top: 10px;
 }
 .detail-list td a {
-	text-decoration: underline;
-	transition: all 0.5s;
+	transition: all 0.3s;
 }
+
 .detail-list td:nth-child(1) a:hover {
 	color:gray;
 	text-decoration: none;
