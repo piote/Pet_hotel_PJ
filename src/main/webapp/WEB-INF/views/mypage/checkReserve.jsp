@@ -113,8 +113,8 @@
            $obj.click(function(){
                $(this).parent().find("input").focus();
            });
+           
        }    
-
        
        function setSearchDate(start){
 
@@ -147,7 +147,7 @@
            
            // 시작일은 종료일 이후 날짜 선택하지 못하도록 비활성화
            $("#startDate").datepicker( "option", "maxDate", endDate );
-
+			goSearch();
        }
 			
 	$(document).ready(function () {
