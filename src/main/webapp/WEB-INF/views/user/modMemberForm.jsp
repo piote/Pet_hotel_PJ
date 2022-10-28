@@ -26,11 +26,11 @@
 		  
 		  		element.checked = true;
 			}
-			
+	
 			/* function deleteUser(url,id) {
 				if(window.confirm("탈퇴하시겠습니까?")){
 
-					var form = document.createElement("form");
+					 var form = document.createElement("form");
 					 form.setAttribute("method", "post");
 					 form.setAttribute("action", url);
 				     var idInput = document.createElement("input");
@@ -43,25 +43,37 @@
 					 form.submit();
 					 
 				}
-			} */
-			function deleteUser(url,id){
-				Swal.fire({
-					  title: '확실합니까?',
-					  text: "다시는 되돌릴 수 없습니다.",
-					  icon: 'warning',
-					  showCancelButton: true,
-					  confirmButtonColor: '#3085d6',
-					  cancelButtonColor: '#d33',
-					  confirmButtonText: 'Yes!'
-					}).then((result) => {
-					  if (result.isConfirmed) {
-					    Swal.fire(
-					      '탈퇴되었습니다!',
-					      '확인'
-					    )
-					  }
-					})
-			}
+			} 
+			 */
+				function deleteUser(url,id){
+					Swal.fire({
+						  title: '확실합니까?',
+						  text: "다시는 되돌릴 수 없습니다.",
+						  icon: 'warning',
+						  showCancelButton: true,
+						  confirmButtonColor: '#3085d6',
+						  cancelButtonColor: '#d33',
+						  confirmButtonText: 'Yes!'
+						}).then((result) => {
+						  if (result.isConfirmed) {
+						    Swal.fire(
+						      '애니텔 탈퇴가 완료되었습니다!',
+						      '애니텔을 이용해 주셔서 감사합니다.',
+						    )
+						    var form = document.createElement("form");
+							 form.setAttribute("method", "post");
+							 form.setAttribute("action", url);
+						     var idInput = document.createElement("input");
+						     idInput.setAttribute("type","hidden");
+						     idInput.setAttribute("name","id");
+						     idInput.setAttribute("value", id);
+						     form.appendChild(idInput);
+						     document.body.appendChild(form);
+						     setTimeout(() => form.submit(), 2000);
+							 //form.submit();
+						  }
+						})
+				}
 			/* function mod() {
 				alert("정보수정이 완료 됐습니다.")
 			} */
@@ -128,6 +140,7 @@
 						<div>
 							<%-- <a href= "${contextPath}/main.do"><input class="btn3" type="button" name="leave_1"  value="탈퇴하기" onClick="leave();"></a> --%>
 							<button type="button" class="btn3" onclick="deleteUser('${contextPath}/retiring.do','${user.id }');"> 탈퇴하기 </button>
+							
 						</div>
 			   	</section>
 		   </div>
