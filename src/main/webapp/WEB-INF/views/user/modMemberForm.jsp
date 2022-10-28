@@ -74,6 +74,11 @@
 						  }
 						})
 				}
+			 const autoHyphen2 = (target) => {
+				 target.value = target.value
+				   .replace(/[^0-9]/g, '')
+				  .replace(/^(\d{0,3})(\d{3,4})(\d{4,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+				}
 			/* function mod() {
 				alert("정보수정이 완료 됐습니다.")
 			} */
@@ -99,17 +104,24 @@
 					            <td><p align="center">이름</P></td>
 					            <td><input class="txtBox"  type="text" id="readonly" name="name"  value="${user.name }" readonly/></td>
 				         </tr>
+				          <tr>
+				               <td><p align="center">생년월일</P></td> 
+				               
+				               <%-- <td><input class="txtBox" type="text" name="birth" value="${user.birth }" ></td> --%>
+				               <td>
+				               <input class="txtBox"  type="date" name="birth_string" value="${birth}" ></td>
+			              </tr>
 				 		 <tr>
 					            <td><p align="center">이메일</P></td>
 					            <td><input class="txtBox" type="text" name="email"  value="${user.email }"></td>
 				         </tr>
 				          <tr>
 				                <td><p align="center">휴대전화</P></td>
-				                <td><input class="txtBox" type="text" name="tel"  value="${user.tel }"></td>
+				                <td><input class="txtBox" type="text" name="tel" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13"  placeholder="전화번호를 입력해보세요!" value="${user.tel }" required></td>
 				         </tr>
 				          <tr>
 				                <td><p align="center">비상전화</P></td>
-				                <td><input class="txtBox" type="text" name="tel_sub" value="${user.tel_sub}"></td>
+				                <td><input class="txtBox" type="text" name="tel_sub" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13" placeholder="전화번호를 입력해보세요!" value="${user.tel_sub}" required></td>
 				          </tr>
 				          <tr>
 				               <td><p align="center">수신여부</P></td>
@@ -118,18 +130,10 @@
 				                 <input type="checkbox" name="emailsts_yn"  value="N" onclick= 'checkOnlyOne(this)' />No	
 				               </td>
 			               </tr>
-				          <tr>
-				               <td><p align="center">생년월일</P></td> 
-				               
-				               <%-- <td><input class="txtBox" type="text" name="birth" value="${user.birth }" ></td> --%>
-				               <td>
-				               <input class="txtBox"  type="date" name="birth_string" value="${birth}" ></td>
-			              </tr>
 				         <tr>
 					           <td><p align="center">가입일</td>
 					           <td><input class="txtBox" id="readonly" "type="text" name="joinDate" size="20" value="${user.joinDate}"  readonly/></td>
 				         </tr>
-				         
 				     </table>
 				     
 			         <ul>			    
@@ -140,7 +144,6 @@
 						<div>
 							<%-- <a href= "${contextPath}/main.do"><input class="btn3" type="button" name="leave_1"  value="탈퇴하기" onClick="leave();"></a> --%>
 							<button type="button" class="btn3" onclick="deleteUser('${contextPath}/retiring.do','${user.id }');"> 탈퇴하기 </button>
-							
 						</div>
 			   	</section>
 		   </div>
