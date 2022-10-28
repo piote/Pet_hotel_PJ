@@ -11,6 +11,12 @@
 <html lang="ko">
 <head>
 
+<script type="text/javascript">
+	//side bt _ up
+	function moveTopBtn(){
+		window.scrollTo({ top: 0, behavior: "smooth" });  
+	}
+</script>
 
 </head>
 <body>

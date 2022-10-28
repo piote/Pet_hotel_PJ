@@ -166,6 +166,7 @@ footer{
     width: 100%; height: 450px;
     color: #ccc; font-weight: 100;
     font-size: 13px;
+    background-color: #696969;
 }
 .footer_wrap{
     width: 1270px; height:100%;

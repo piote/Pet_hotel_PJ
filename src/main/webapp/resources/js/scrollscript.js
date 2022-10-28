@@ -1,24 +1,4 @@
 $(function(){
-    // header scroll
-    var $header = $('header');
-    var $nav = $('nav');
-
-    var $window = $(window);
-    var pageOffsetTop = 30;
-    
-    $window.on('scroll', function(){ //스크롤시
-        var scrolled = $window.scrollTop() >= pageOffsetTop;
-        $header.toggleClass('down', scrolled);
-        $nav.toggleClass('nav_down', scrolled);
-    });
-	
-	//up 버튼
-	$(".moveTopBtn").onclick = () => {
-  		window.scrollTo({ top: 0, behavior: "smooth" });  
-	}
-	
-
-
     //roll banner
     var scrollBarMax = 160;
     var scrollMax = 510;
@@ -84,8 +64,3 @@ $(function(){
     });
 
 });
-
-//side bt _ up
-function moveTopBtn(){
-	window.scrollTo({ top: 0, behavior: "smooth" });  
-}

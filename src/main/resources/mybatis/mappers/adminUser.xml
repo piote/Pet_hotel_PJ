@@ -39,7 +39,7 @@
 		<where>
 			 <choose>
 			 	<when test="search_op=='search_id'">
-			 		U.USER_ID LIKE '%'||#{keyword}||'%'
+			 		U.USER_ID LIKE '%'||#{keyword}||'%' 
 			 	</when>
 			 	<when test="search_op=='search_name'">
 			 		USER_NAME LIKE '%'||#{keyword}||'%'
@@ -51,20 +51,25 @@
 			 		USER_EMAIL LIKE '%'||#{keyword}||'%'
 			 	</when>
 			 </choose>
-		
 			<choose>
-				<when test="grade!='' and grade!=null and grade2!='' and grade2!=null">
-					AND (USER_GRADE=#{grade} OR USER_GRADE=#{grade2}) 
-				</when>
-				<when test="grade!='' and grade!=null">
-					AND USER_GRADE=#{grade}
+				<when test="(grade1!='' and grade1!=null) or (grade2!='' and grade2!=null) or (grade3!='' and grade3!=null)">
+					AND(
+					<if test="grade1!='' and grade1!=null">
+						USER_GRADE=#{grade1}
+					</if>
+					<if test="grade2!='' and grade2!=null">
+						OR USER_GRADE=#{grade2}
+					</if>
+					<if test="grade3!='' and grade3!=null">
+						OR USER_GRADE=#{grade3}
+					</if>
+					)
 				</when>
 			</choose>
-			<choose>
-				<when test="res_state!='' and res_state!=null">
-					AND REPLACE(NVL(RESERVATION_STATE,'X'),'N','O') = #{res_state}
-				</when>
-			</choose>
+			
+			<if test="res_state!='' and res_state!=null">
+				AND REPLACE(NVL(RESERVATION_STATE,'X'),'N','O') = #{res_state}
+			</if>
 			
 		</where>
 		GROUP BY U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE

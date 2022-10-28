@@ -4,9 +4,8 @@ let dataPerPage=10; // 한 페이지에 나타날 데이터 수
 let pageCount = 10; //페이징에 나타낼 페이지 수
 let globalCurrentPage=1; //현재 페이지
 let user_data = []; 
-
-var grade_ck={'Bronze':null, 'Silver':null, 'Gold':null};
-var res_ck={'O':null,'X':null};
+var grade_ck={};
+var res_ck;
 
 $(document).ready(function(){
     
@@ -149,17 +148,25 @@ function pageDown(totPageNo){
 
 //검색
 function search(){
+    var searchMap = new Object();
     //input 안 정보 가지고 오기
     var search_op = $('#search_op').val();
     var keyword = $('#keyword').val();
 
+    searchMap.search_op = search_op;
+    searchMap.keyword = keyword;
+    searchMap.grade_ck=grade_ck;
+    if(res_ck=="X" || res_ck=="O"){
+        searchMap.res_ck=res_ck;
+    }
+
     $.ajax({
         url: "/adminSearchUser.do",
-        type: "GET", 
-        data:{"search_op":search_op,"keyword":keyword,
-            "Bronze":grade_ck.Bronze,"Silver":grade_ck.Silver,"Gold":grade_ck.Gold,
-            "res_O":res_ck.O,"res_X":res_ck.X
-        },
+        type: "POST",
+        dataType: "json",
+        processData: true,
+        contentType: "application/json; charset=UTF-8",
+        data: JSON.stringify(searchMap),
         success : function(data){
             //총데이터 수 저장
             totalData = data.length;
@@ -186,21 +193,30 @@ function searchOption(){
 
     //체크된 값 받아오기
     $('.grade_option input[type=checkbox]').each(function (index) {
+        if($('#Normal').is(":checked")==true){
+            grade_ck.Normal='Normal';
+        }else{delete grade_ck.Normal;}
         if($('#Bronze').is(":checked")==true){
             grade_ck.Bronze='Bronze';
-        }else{grade_ck.Bronze=null;}
+        }else{delete grade_ck.Bronze;}
         if($('#Silver').is(":checked")==true){
             grade_ck.Silver='Silver';
-        }else{grade_ck.Silver=null;}
+        }else{delete grade_ck.Silver;}
         if($('#Gold').is(":checked")==true){
             grade_ck.Gold='Gold';
-        }else{grade_ck.Gold=null;}
+        }else{delete grade_ck.Gold;}
     });
     $('.res_option input[type=checkbox]').each(function (index) {
-        if($('#res_O').is(":checked")==true){res_ck.O= "O";}
-        else{res_ck.O= null;}
-        if($('#res_X').is(":checked")==true){res_ck.X= "X";}
-        else{res_ck.X= null;}
+        if(($('#res_O').is(":checked") && $('#res_X').is(":checked")) || (!$('#res_O').is(":checked") && !$('#res_X').is(":checked"))){
+            res_ck= null;
+        }else if($('#res_X').is(":checked")==true){
+            res_ck= "X";
+        }else if($('#res_O').is(":checked")==true){
+            res_ck= "O";
+        }else{
+            res_ck= null;
+        }
+        
     });
 
     //체크박스 클릭 시 검색

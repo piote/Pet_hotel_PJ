@@ -225,14 +225,16 @@ input[type="number"]::-webkit-inner-spin-button {
     		url: "http://localhost:8090/idCheck",
     		data: {id: id},
     		success: function (data) {
+    			 if(!document.userInfo.id.value){
+    	                alert("아이디를 입력하세요.");
+    	                return false;
+    	            }
     		if(data == 1) {
     			$("#olmessage").text("이미 사용중인 ID 입니다.");
     			$("#olmessage").addClass("olmessagef");
     			$("#olmessage").removeClass("olmessaget");
     			$("#idcheck").attr("value","false");
-    			}if(!document.userInfo.id.value){
-                    alert("아이디를 입력하세요.");
-                    return false;}else {
+    			}else {
     			$("#olmessage").text("사용 가능한 ID 입니다.");
     			$("#olmessage").addClass("olmessaget");
     			$("#olmessage").removeClass("olmessagef");
@@ -269,30 +271,30 @@ input[type="number"]::-webkit-inner-spin-button {
         
         $(document).ready(function() {
         	  
-            $("#phone").focus(focused); //input에 focus일 때
-            $("#phone").blur(blured);   //focus out일 때
+            $(".phone").focus(focused); //input에 focus일 때
+            $(".phone").blur(blured);   //focus out일 때
           })
 
         function focused(){
-          var input = $("#phone").val();
+          var input = $(this).val();
           
           //input안에서 하이픈(-) 제거
           var phone = input.replace( /-/gi, '');
           //number 타입으로 변경(숫자만 입력)
-          $("#phone").prop('type', 'number');
+          $(this).prop('type', 'number');
           
-          $("#phone").val(phone);
+          $(this).val(phone);
         }
 
         function blured(){
-          var input = $("#phone").val();
+          var input = $(this).val();
           
           //숫자에 하이픈(-) 추가
           var phone = chkItemPhone(input);
           //text 타입으로 변경
-          $("#phone").prop('type', 'text');
+          $(this).prop('type', 'text');
           
-          $("#phone").val(phone);
+          $(this).val(phone);
         }
 
 
@@ -320,7 +322,7 @@ input[type="number"]::-webkit-inner-spin-button {
             phone += "-";
             phone += number.substr(3, 4);
             phone += "-";
-            phone += number.substr(7);
+            phone += number.substr(7,4);
           }
 
           return phone;
@@ -356,8 +358,8 @@ input[type="number"]::-webkit-inner-spin-button {
                             <option>@gmail.com</option>
                             <option>@nate.com</option>                        
                         </select>
-                   		<input type="number" name="tel" id="phone" placeholder="핸드폰번호 입력" maxlength="13" class="form-field" placeholder="UserCellPhone" >               
-                        <input type="number" name="tel_sub" id="phone" placeholder="비상시 핸드폰번호 입력" maxlength="13" class="form-field" placeholder="UserCellPhone" >                
+                   		<input type="number" name="tel" id="tel" placeholder="핸드폰번호 입력" maxlength="13" class="form-field phone"  ng-focus="chkPhoneType('focus')" ng-blur="chkPhoneType('blur');" min="0" required >               
+                        <input type="number" name="tel_sub" id="tel_sub" placeholder="비상시 핸드폰번호 입력" maxlength="13" class="form-field phone"  ng-focus="chkPhoneType('focus')" ng-blur="chkPhoneType('blur');" min="0" required >                
                      	<label class="message_label">이메일 수신 발송에 동의하십니까?<input type="checkbox"  name="message"  value="Y"></label>
                         <input type="date" name="birth" class="form-field" data-placeholder="UserBirth" required aria-required="true" value={startDateValue} className={styles.selectDay} onchange={startDateValueHandler} > 
                                  

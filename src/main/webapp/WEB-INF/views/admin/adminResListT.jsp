@@ -166,13 +166,72 @@
         .select_number{
             color: #030303;
         }
+        
+        /*템 없을 때  출력 데이터  */
         .notResItem{
         	text-align: center;
         }
+        .res_content_box{
+        	width: 100%;
+        	display:none;
+        	overflow:hidden;
+        	background-color: #bbb;
+        	
+        }
+        
+        .res_Date_Veiw_Box li{
+        	display: inline-block;
+        	width: 40%;
+        	text-align: center;
+        }
+        
+        .res_Date_Veiw_Box ul li{
+        	font-size: 12px;
+        }
+        
+        /* 화살표 아이콘 뒤집기  */
+        .res_arrow_bt {
+        	position: relative;
+		    left: 23%;
+		    height: 40px;
+		    width: 40px;
+		    transform: rotate(90deg);
+           
+        }
+        .res_R_arrow_bt {
+        	position: relative;
+		    left: 23%;
+		    height: 40px;
+		    width: 40px;
+		    transform: rotate(-90deg);
+           
+        }
+          /* 화살표 아이콘 뒤집기 end */
+
+      
         
     </style>
     <script>
     	
+    	//상세보기 열고 닫기
+    	function closeResContentBox(obj){
+    		
+    		if($(obj).attr('class') == 'res_R_arrow_bt'){
+    			//박스 안보임
+    			$(".res_content_box").css('display', 'none');
+    			$(obj).removeClass('res_R_arrow_bt');
+    			$(obj).addClass('res_arrow_bt');
+    		}else{
+    			//박스 보임
+    			$(".res_content_box").css('display', 'table-row');
+    			$(obj).removeClass('res_arrow_bt');
+        		$(obj).addClass('res_R_arrow_bt');
+    		}
+    		
+    		
+    		
+    	}
+    	 
     </script>
 </head>
 <body>
@@ -225,7 +284,8 @@
 			                        <td class="res_cost">${reservation.res_cost}</td>
 			                        <td class="resState">${reservation.resState}</td>
 			                        <td class="res_modBt">
-			                            <button type="button" class="modRes">예약변경</button>
+			                        	<div class="arrow"></div>
+			                           <!--  <button type="button" class="modRes">예약변경</button> -->
 			                        </td>
                     			</tr>
                     		</c:forEach>
@@ -233,10 +293,52 @@
                     	<c:otherwise>
                    		
 	                 		<tr>
-	                       		<td colspan="8" class="res_contents">
-	                       			예약이 존재하지 않습니다.
-	                       		</td>
-   							</tr>
+	                 			<td class="res_num">1</td>
+				                <td class="res_name">aaa</td>
+				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
+				                <td class="res_petCount">2마리</td>
+				                <td class="res_payTime">2022-10-19</td>
+				                <td class="res_cost">2,000,000원</td>
+				                <td class="resState">이용전</td>
+				                <td class="res_modBt res_modBt_bt" onclick="">
+				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
+				                </td>					  
+				            </tr>
+				            
+				            <tr class="res_content_box">
+				            	<td colspan="3">
+				            		<ul>
+				            			<li class="res_Date_Veiw_Box">
+				            				<ul>
+				            					<li>Check In</li>
+				            					<li>Check Out</li>
+				            				</ul>
+				            				<ul>
+				            					<li><input type="date"></li>
+				            					<li><input type="date"></li>
+				            				</ul>
+				            			<li>
+				            			<li>
+				            				<ul>
+				            					<li><span id="res_TotalCost">2,000,000원</span></li>
+				            			
+				            				</ul>
+				            				<ul>
+				            					<li>
+				            						<textarea></textarea>
+				            					</li>
+				            				</ul>
+				            			<li>
+				            		</ul>
+				            		<ul>
+				            			<li><li>
+				            		</ul>
+				            	</td>
+				            	<td colspan="5">
+				            	</td>
+				            </tr>
+				            
+				          
                    					
                     	</c:otherwise>
                     </c:choose>

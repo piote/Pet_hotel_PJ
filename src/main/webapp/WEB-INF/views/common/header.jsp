@@ -20,6 +20,23 @@
 		    	location.href=loginForm+'?action=/reservationForm.do';
 		  	}
 		}
+		
+		$(function(){
+			// header scroll
+		    var $header = $('header');
+		    var $nav = $('nav');
+
+		    var $window = $(window);
+		    var pageOffsetTop = 30;
+		    
+		    $window.on('scroll', function(){ //스크롤시
+		        var scrolled = $window.scrollTop() >= pageOffsetTop;
+		        $header.toggleClass('down', scrolled);
+		        $nav.toggleClass('nav_down', scrolled);
+		    });
+		})
+	    
+		
 	</script>
 
 </head>
