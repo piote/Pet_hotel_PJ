@@ -72,7 +72,7 @@
                 <a href="${contextPath}/introduce.do" class="menu">호텔소개</a>
                 <a href="${contextPath}/facilities.do" class="menu">시설소개</a>
                 <a href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservationForm.do','${contextPath}/loginForm.do')" class="menu">호텔예약</a>
-                <a href="${contextPath}/reviewBoard.do" class="menu">리뷰게시판</a>
+                <a href="${contextPath}/review/reviewBoard.do" class="menu">리뷰게시판</a>
             </div>
             <div class="l_menu menu_wrap">
                 <a href="${contextPath}/membership.do" class="menu">멤버쉽</a>

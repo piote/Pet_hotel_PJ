@@ -21,6 +21,24 @@ public class ReviewVO {
 	private int rec;
 	private String id;
 	private String ROOM_GRADE;
+
+    //예약
+	private int res_num;
+	private Date res_st;
+	private Date res_end;
+	private String res_comment;
+	private String totalCost;
+	private String payTime;
+	private String res_state;
+	
+    private String user_id;
+    private Date startDate;
+    private Date endDate;
+    private String searchWord;
+    private String colName;
+	
+    private String pet_name;
+	
 	
 	public ReviewVO() {
 		System.out.println("reviewVO 호출");

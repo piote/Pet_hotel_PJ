@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myboot.mypage.service.MyPageService;
 import com.myboot.review.service.ReviewService;
 import com.myboot.review.vo.ImageVO;
 import com.myboot.review.vo.ReviewVO;
@@ -38,7 +39,7 @@ public class ReviewControllerImpl implements ReviewController {
 	private static final String ARTICLE_IMAGE_REPO = "C:\\review\\article_image";
 	@Autowired
 	private ReviewService reviewService;
-
+	private MyPageService myPageService;
 	@Autowired
 	private ReviewVO reviewVO;
 
@@ -55,11 +56,11 @@ public class ReviewControllerImpl implements ReviewController {
 		pagingMap.put("section", section);
 		pagingMap.put("pageNum", pageNum);
 		Map reviewMap = reviewService.reviewDetail_1(pagingMap);
-
+		
 		reviewMap.put("section", section);
 		reviewMap.put("pageNum", pageNum);
 		// request.setAttribute("reviewMap",reviewMap );
-
+			
 		String viewName = (String) request.getAttribute("viewName");
 
 		ModelAndView mav = new ModelAndView(viewName);
@@ -133,20 +134,20 @@ public class ReviewControllerImpl implements ReviewController {
 	 * 
 	 * }
 	 */
-/*
-	@Override
-	@RequestMapping("/review/reviewForm.do")
-	public String reviewForm(Model model) {
-		return "reviewForm";
-	}
-*/
+	/*
+	 * @Override
+	 * 
+	 * @RequestMapping("/review/reviewForm.do") public String reviewForm(Model
+	 * model) { return "reviewForm"; }
+	 */
 	@RequestMapping(value = "/review/reviewForm.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView reviewForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String res_num = request.getParameter("res_num");
-	
+
 		String viewName = (String) request.getAttribute("viewName");
 
+		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("res_num", res_num);
 
@@ -155,13 +156,65 @@ public class ReviewControllerImpl implements ReviewController {
 	}
 
 	
+	/*
+	   @RequestMapping("/review/reviewBoard.do")
+	   public String review(Model model) {
+	      System.out.println("리뷰");
+	      return "/review/reviewBoard";
+	   }
+	*/
+	/*
+	@RequestMapping(value = "/review/reviewBoard.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView reviewBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		Map<String, Integer> resMap = new HashMap<String, Integer>();
 	
-	@RequestMapping("/reviewBoard.do")
-	public String review(Model model) {
-		System.out.println("리뷰");
-		return "reviewBoard";
-	}
+		Map myReserveMap = reviewService.listMyDetailReserve(resMap);
 
+		UserVO userVO = (UserVO) session.getAttribute("user");	
+		String user_id = userVO.getId();
+		myReserveMap.put("user_id", user_id);
+		
+		String viewName = (String) request.getAttribute("viewName");
+		
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("myReserveMap", myReserveMap);
+
+		return mav;
+	}
+*/
+	
+	@RequestMapping(value = "/review/reviewBoard.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView reviewBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		HttpSession session=request.getSession();
+		session=request.getSession();
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		if(session.getAttribute("user") != null) {
+			UserVO userVO = (UserVO) session.getAttribute("user");
+			String id = userVO.getId();
+			
+			String _section = request.getParameter("section");
+			String _pageNum = request.getParameter("pageNum");
+			int section = Integer.parseInt(((_section == null) ? "1" : _section));
+			int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+			Map<String, Integer> pagingMap = new HashMap<String, Integer>();
+			pagingMap.put("section", section);
+			pagingMap.put("pageNum", pageNum);
+			Map myReserveMap = reviewService.listMyDetailReserve(pagingMap);
+			
+			myReserveMap.put("section", section);
+			myReserveMap.put("pageNum", pageNum);
+			myReserveMap.put("id", id);		
+			mav.addObject("myReserveMap", myReserveMap);
+		}
+		return mav;
+	}
+	
+	
 	/*
 	 * @RequestMapping("/reviewDetail_1.do") public String detail_1(Model model){
 	 * System.out.println("리뷰"); return "reviewDetail_1"; }
@@ -203,7 +256,7 @@ public class ReviewControllerImpl implements ReviewController {
 		reviewMap.put("id", id);
 		String parentNO = (String) session.getAttribute("parentNO");
 		reviewMap.put("parentNO", parentNO);
-		//reviewMap.put("res_num", 1);
+		// reviewMap.put("res_num", 1);
 
 		String path = (String) session.getAttribute("realPath") + "resources\\review\\review_image";
 
@@ -336,12 +389,12 @@ public class ReviewControllerImpl implements ReviewController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 //	메인페이지 리뷰조회
-	@ResponseBody 
-	@RequestMapping(value= "/returnReview.do", method = RequestMethod.GET)
-	public List<UserVO> returnReview() throws Exception{
-		List<UserVO> reviewList =  reviewService.returnReviewFormain();
+	@ResponseBody
+	@RequestMapping(value = "/returnReview.do", method = RequestMethod.GET)
+	public List<UserVO> returnReview() throws Exception {
+		List<UserVO> reviewList = reviewService.returnReviewFormain();
 		return reviewList;
 	}
 }
