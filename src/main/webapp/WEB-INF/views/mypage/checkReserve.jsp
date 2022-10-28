@@ -36,8 +36,19 @@
 		 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 // 		 	maxDate: 1,
 		 	onClose: function(selectedDate){
-		 		$("#endDate").datepicker("option", "minDate",selectedDate);
-		 		$("#startDate").datepicker("option", "maxDate",selectedDate);
+                var eleId = $(this).attr("id");
+                var optionName = "";
+
+                if(eleId.indexOf("StartDate") > 0) {
+                    eleId = eleId.replace("StartDate", "EndDate");
+                    optionName = "minDate";
+                } else {
+                    eleId = eleId.replace("EndDate", "StartDate");
+                    optionName = "maxDate";
+                }
+
+                $("#"+eleId).datepicker( "option", optionName, selectedDate );        
+                $(".searchDate").find(".chkbox2").removeClass("on"); 
 		 	}
 		});
 		
@@ -64,15 +75,80 @@
 			 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 // 			 	maxDate: 1,
 			 	onClose: function(selectedDate){
-			 		$("#endDate").datepicker("option", "minDate",selectedDate);
-			 		$("#startDate").datepicker("option", "maxDate",selectedDate);
+                    var eleId = $(this).attr("id");
+                    var optionName = "";
+
+                    if(eleId.indexOf("StartDate") > 0) {
+                        eleId = eleId.replace("StartDate", "EndDate");
+                        optionName = "minDate";
+                    } else {
+                        eleId = eleId.replace("EndDate", "StartDate");
+                        optionName = "maxDate";
+                    }
+
+                    $("#"+eleId).datepicker( "option", optionName, selectedDate );        
+                    $(".searchDate").find(".chkbox2").removeClass("on"); 
 			 	}
 			});
 			$("#startDate").datepicker();
 			$("#endDate").datepicker();
+            $(".dateclick").dateclick();
+            $(".searchDate").schDate(); 
 // 			$("#startDate").datepicker('setDate', 'today');
 // 			$("#endDate").datepicker('setDate', '+1D');
 		});
+		
+		jQuery.fn.schDate = function(){
+           var $obj = $(this);
+           var $chk = $obj.find("input[type=radio]");
+           $chk.click(function(){                
+               $('input:not(:checked)').parent(".chkbox2").removeClass("on");
+               $('input:checked').parent(".chkbox2").addClass("on");                    
+           });
+       };
+
+       // DateClick
+       jQuery.fn.dateclick = function(){
+           var $obj = $(this);
+           $obj.click(function(){
+               $(this).parent().find("input").focus();
+           });
+       }    
+
+       
+       function setSearchDate(start){
+
+           var num = start.substring(0,1);
+           var str = start.substring(1,2);
+
+           var today = new Date();
+
+           //var year = today.getFullYear();
+           //var month = today.getMonth() + 1;
+           //var day = today.getDate();
+           
+           var endDate = $.datepicker.formatDate('yy-mm-dd', today);
+           $('#endDate').val(endDate);
+           
+           if(str == 'd'){
+               today.setDate(today.getDate() - num);
+           }else if (str == 'w'){
+               today.setDate(today.getDate() - (num*7));
+           }else if (str == 'm'){
+               today.setMonth(today.getMonth() - num);
+               today.setDate(today.getDate() + 1);
+           }
+
+           var startDate = $.datepicker.formatDate('yy-mm-dd', today);
+           $('#startDate').val(startDate);
+                   
+           // 종료일은 시작일 이전 날짜 선택하지 못하도록 비활성화
+           $("#endDate").datepicker( "option", "minDate", startDate );
+           
+           // 시작일은 종료일 이후 날짜 선택하지 못하도록 비활성화
+           $("#startDate").datepicker( "option", "maxDate", endDate );
+
+       }
 			
 	$(document).ready(function () {
 		
@@ -143,6 +219,51 @@
 			<h2>예약 조회</h2>
 			<div id="searchFrm">
 				<form name="searchFrm">
+                	<td>
+                        <ul class="searchDate">
+                            <li>
+                                <span class="chkbox2">
+                                    <input type="radio" name="dateType" id="dateType1" onclick="setSearchDate('0d')"/>
+                                    <label for="dateType1">당일</label>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="chkbox2">
+                                    <input type="radio" name="dateType" id="dateType2" onclick="setSearchDate('3d')"/>
+                                    <label for="dateType2">3일</label>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="chkbox2">
+                                    <input type="radio" name="dateType" id="dateType3" onclick="setSearchDate('1w')"/>
+                                    <label for="dateType3">1주</label>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="chkbox2">
+                                    <input type="radio" name="dateType" id="dateType5" onclick="setSearchDate('1m')"/>
+                                    <label for="dateType5">1개월</label>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="chkbox2">
+                                    <input type="radio" name="dateType" id="dateType6" onclick="setSearchDate('3m')"/>
+                                    <label for="dateType6">3개월</label>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="chkbox2">
+                                    <input type="radio" name="dateType" id="dateType7" onclick="setSearchDate('6m')"/>
+                                    <label for="dateType7">6개월</label>
+                                </span>
+                            </li>
+                            <li>
+								<span>
+									<input type="reset" class="reset"/>
+								</span>
+                            </li>
+                        </ul>
+                    </td>
 					<div id="calendar"> 결제일 :
 						<input class="datepicker" type="text" name="startDate" id="startDate">
 						<input class="datepicker" type="text" name="endDate" id="endDate">
@@ -166,7 +287,7 @@
 				<table>
 				   <tr class="detail-center">
 					  <td width="5%">No</td>
-					  <td width="10%">Date</td>
+					  <td width="10%">PayMent Date</td>
 					  <td width="15%">Name</td>
 					  <td width="15%">PetName</td>
 					  <td width="25%">Reserved Date</td>
@@ -188,10 +309,10 @@
 								<td>
 									<c:choose>
 										<c:when test="${reserves.res_state=='N' }">
-											<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.res_st }</a>
+											<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.payTime }</a>
 										</c:when>
 										<c:otherwise>
-											<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.res_st }</a>
+											<a href="${contextPath}/mypage/myRserveDetail.do?reservation_st=${reserves.res_st }">${reserves.payTime }</a>
 										</c:otherwise>
 									</c:choose>
 								</td>
