@@ -21,8 +21,7 @@
         }
         .list_wrap{
             width: 1000px; height: auto;
-            position: absolute; 
-            top: 120px; right: 0;
+            margin-left: 250px;
         }
         .list_option{
             width: 100%;
@@ -175,25 +174,24 @@
         }
         .addTr button{
             width: 60px; height: 25px;
-            border: 1px solid #333;
             border-radius: 20px;
-            background-color: #fff;
+            background-color: #eee;
             color: #333;
+            border: 0;
         }
         .addTr button:last-child{
             margin-left: 10px;
         }
         .addTr button:hover{
-            background-color: #eee;
+            background-color: #ccc;
         }
         .addTr td{
             padding-left: 30px;
-            padding-right: 30px;
             box-sizing: border-box;
         }
         .addTr td:nth-child(3){
             padding-left: 70px;
-            padding-right: 70px;
+            padding-right: 35px;
         }
         .info_box{
             width: 100%; height: auto;
@@ -203,7 +201,7 @@
             margin-bottom: 10px;
             position: relative;
         }
-        .info_box input{
+        .info_box input[type=text], .info_box input[type=date]{
             width: 60%;
             height: 30px;
             border:0;
@@ -211,6 +209,7 @@
             position: absolute;
             right: 0;
             background-color: #eee;
+            padding-left: 5px;
         }
         .info_box input[type=radio]{
             width: 15px;
@@ -263,7 +262,6 @@
                 <td class="user_email">이메일</td>
                 <td class="user_tel">전화번호</td>
                 <td class="user_resState">예약여부</td>
-
             </tr>
         </table>
         <div class="page_num"></div>

@@ -27,7 +27,6 @@ $(document).ready(function(){
     $('html').click(function(e){
     	if($(e.target).parents('.list_tb').length < 1){
         	$('.addTr').remove();
-            $('#content').css('height','0');
             $('.modBT').css('transform','scale(1) rotate(0deg)');
         }
     });
@@ -253,7 +252,6 @@ function addModRow(obj){
             
         }
         $('.addTr').remove();
-        $('#content').css('height','0');
         $(obj).removeClass('modBT_push');
         $(obj).css('transform','scale(1) rotate(0deg)');
         
@@ -296,13 +294,12 @@ function addModRow(obj){
                 '<span class="info_box info_name">비상전화 : <input type="text" name="tel_sub" id="tel_sub"'+user_data[num].sub_tel+'"></span>'+
                 '<span class="info_box info_name">메세지 수신여부 : '+message_s+
             '</td>'+
-            '<td colspan="3">'+
+            '<td colspan="2">'+
                 '<span class="info_box info_grand">멤버쉽 등급 :&nbsp;<svg class="crown" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:'+crown_color+'"><path d="M3 16l-3-10 7.104 4 4.896-8 4.896 8 7.104-4-3 10h-18zm0 2v4h18v-4h-18z"/></svg>&nbsp; '+user_data[num].grade+'</span>'+
                 '<input type="hidden" name="">'+
                 '<button type="button" id="">수정</button>'+
                 '<button type="button" id="">탈퇴</button>'+
             '</td></form></tr>';
         $(obj).parent().parent().after(html);
-        $('#content').css('height','300px');
     }
 }
