@@ -24,6 +24,13 @@ $(document).ready(function(){
         searchOption();
     });
 
+    $('html').click(function(e){
+    	if($(e.target).parents('.list_tb').length < 1){
+        	$('.addTr').remove();
+            $('#content').css('height','0');
+            $('.modBT').css('transform','scale(1) rotate(0deg)');
+        }
+    });
 });
 
 function getAllList(){
@@ -84,6 +91,10 @@ function page_num_view(totalData){
 
 //페이지 버튼 누를때 호출
 function clickNO(pageNo){
+    if ($('.addTr').length) {
+        $('.addTr').remove();
+        $('#content').css('height','0');
+    }
     //버튼 선택 효과
     $('.pageNO').removeClass('select_number');
     $('.num'+pageNo).toggleClass('select_number');
@@ -97,7 +108,8 @@ function clickNO(pageNo){
                 +'<td class="user_joinDate">가입일</td>'
                 +'<td class="user_email">이메일</td>'
                 +'<td class="user_tel">전화번호</td>'
-                +'<td class="user_resState">예약여부</td></tr>'; 
+                +'<td class="user_resState">예약여부</td>'
+                +'<td class="user_mod"></td></tr>'; 
     
     var dataNo;
     if(dataPerPage<=totalData){
@@ -133,7 +145,7 @@ function clickNO(pageNo){
         html += '<td class="user_email">'+user_data[listNO].email+'</td>';
         html += '<td class="user_tel">'+user_data[listNO].tel+'</td>';
         html += '<td class="user_resState">'+user_data[listNO].resState+'</td>';
-
+		html += '<td class="user_mod"><svg class="modBT" onclick="addModRow(this)" data-num='+listNO+' width="12" height="12" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M23.245 4l-11.245 14.374-11.219-14.374-.781.619 12 15.381 12-15.391-.755-.609z"/></svg></td>'
         html += '</tr>';  
     }
     $('.list_tb').append(html);
@@ -231,4 +243,66 @@ function searchOption(){
     //체크박스 클릭 시 검색
     search();
 
+}
+
+
+function addModRow(obj){
+    if ($('.addTr').length) {
+        if($(obj).data('num')!=$('.addTr').data('num')){
+            $('.addTr').remove();
+            
+        }
+        $('.addTr').remove();
+        $('#content').css('height','0');
+        $(obj).removeClass('modBT_push');
+        $(obj).css('transform','scale(1) rotate(0deg)');
+        
+    }else{
+        $(obj).css('transform','scale(1) rotate(180deg)');
+        var num = $(obj).data('num');
+        console.log(num)
+
+        var birth = user_data[num].birth;
+        var birth_s = birth.substring(0, 10);
+
+        var message = user_data[num].message;
+        if(message=='Y'){
+            var message_s = '&nbsp;&nbsp;&nbsp;<input type="radio" name="message" value="Y" checked="checked" >&nbsp;Y &nbsp;&nbsp;<input type="radio" name="message" value="N">&nbsp;N</span>'
+        }else{
+            var message_s = '&nbsp;&nbsp;&nbsp;<input type="radio" name="message" value="Y" >&nbsp;Y &nbsp;&nbsp;<input type="radio" name="message" value="N" checked="checked">&nbsp;N</span>'
+        }
+        grade=user_data[num].grade;
+        if(grade=='Normal'){
+            var crown_color='#c2dcff'
+        }else if(grade=='Bronze'){
+            var crown_color='#ed9d5d'
+        }else if(grade=='Silver'){
+            var crown_color='#ddd'
+        }else if(grade=='Gold'){
+            var crown_color='#efc75e'
+        }
+
+        var html = '<tr class="addTr" data-num='+num+'>'+
+        '<form action="#">'+
+            '<td colspan="2">'+
+                '<span class="info_box info_id">아이디 : <input type="text" name="id" id="id" value= "'+user_data[num].id+'"></span>'+
+                '<span class="info_box info_pw">비밀번호 : <input type="text" name="pw" id="pw" value= "'+user_data[num].pw+'"></span>'+
+                '<span class="info_box info_name">이름 : <input type="text" name="name" id="name" value= "'+user_data[num].name+'"></span>'+
+                '<span class="info_box info_id">생년월일 : <input type="date" name="birth" id="birth" value= "'+birth_s+'"></span>'+
+            '</td>'+
+            '<td colspan="3">'+
+                '<span class="info_box info_pw">이메일 : <input type="text" name="email" id="email" value="'+user_data[num].email+'"></span>'+
+                '<span class="info_box info_name">휴대전화 : <input type="text" name="tel" id="tel" value="'+user_data[num].tel+'"></span>'+
+                '<span class="info_box info_name">비상전화 : <input type="text" name="tel_sub" id="tel_sub"'+user_data[num].sub_tel+'"></span>'+
+                '<span class="info_box info_name">메세지 수신여부 : '+message_s+
+            '</td>'+
+            '<td colspan="3">'+
+                '<span class="info_box info_grand">멤버쉽 등급 :&nbsp;<svg class="crown" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:'+crown_color+'"><path d="M3 16l-3-10 7.104 4 4.896-8 4.896 8 7.104-4-3 10h-18zm0 2v4h18v-4h-18z"/></svg>&nbsp; '+user_data[num].grade+'</span>'+
+                '<input type="hidden" name="">'+
+                '<button type="button" id="">수정</button>'+
+                '<button type="button" id="">탈퇴</button>'+
+            '</td></form></tr>';
+        $(obj).parent().parent().after(html);
+        $('#content').css('height','300px');
+    }
 }
