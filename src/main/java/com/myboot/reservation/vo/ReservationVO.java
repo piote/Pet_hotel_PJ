@@ -21,4 +21,5 @@ public class ReservationVO {
 	private String payTime;
 	private String res_state;
 	private String pet_name;
+	private String user_id;
 }

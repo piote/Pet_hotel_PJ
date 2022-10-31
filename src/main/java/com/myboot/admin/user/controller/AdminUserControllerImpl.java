@@ -95,6 +95,7 @@ public class AdminUserControllerImpl implements AdminUserController {
 		return mav;
 		
 	}
+	
 	@ResponseBody 
 	@RequestMapping(value= "/returnAllUser.do", method = RequestMethod.GET)
 	public List<UserVO> returnAllUser() throws Exception{

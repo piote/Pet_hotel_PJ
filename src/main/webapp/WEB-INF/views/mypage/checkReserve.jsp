@@ -326,7 +326,9 @@
 								<td>
 									<c:choose>
 										<c:when test="${reserves.res_state == 'N'}">
-											<a href="${contextPath}/reservationUpdate.do?reservation_num=${reserves.res_num }">수정</a>
+											<a href="${contextPath}/reservationUpdate.do?reservation_num=${reserves.res_num }">
+												<img src="${contextPath}/resources/img/revision.png"/>
+											</a>
 										</c:when>
 									</c:choose>
 								</td>
