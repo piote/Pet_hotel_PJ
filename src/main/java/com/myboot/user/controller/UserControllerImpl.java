@@ -263,10 +263,16 @@ public class UserControllerImpl implements UserController{
 			String userPw =userVO.getPw();
 			//날짜 포맷    			
     		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
+			/* SimpleDateFormat newDtFormat1 = new SimpleDateFormat("yyyy-MM-dd"); */
+    		
     		// String 타입을 Date 타입으로 변환
 			/* Date joinDate_format = newDtFormat.parse(userVO.getBirth()); */
     		String strNowDate = newDtFormat.format(userVO.getBirth());
+			/* String strNowDate1 = newDtFormat1.format(userVO.getJoinDate()) */;
     		session.setAttribute("birth", strNowDate);
+			/* session.setAttribute("joinDate", strNowDate1); */
+    	
+    		
 			
 			if (userPw.equals(password)) {
 				System.out.println("성공");
@@ -348,6 +354,11 @@ public class UserControllerImpl implements UserController{
 			SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date formatDate = dtFormat.parse(birth);
 			user.setBirth(formatDate);
+
+//			String joinDate=request.getParameter("joinDate_string");
+//			SimpleDateFormat dtFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+//			Date formatDate1 = dtFormat1.parse(birth);
+//			user.setBirth(formatDate1);
 			
 			if(user.getMessage()==null || user.getMessage()==""){
 				user.setMessage("N");

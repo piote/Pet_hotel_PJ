@@ -1,6 +1,5 @@
 package com.myboot.review.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myboot.mypage.dao.MyPageDAO;
 import com.myboot.review.dao.ReviewDAO;
-import com.myboot.review.vo.ImageVO;
 import com.myboot.review.vo.ReviewVO;
 
 @Service("reviewService")
@@ -20,13 +19,33 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Autowired
 	ReviewDAO reviewDAO;
-
+	MyPageDAO myPageDAO;
+	
 	/*
 	 * @Override public List<ReviewVO> reviewDetail_1() throws Exception{
 	 * List<ReviewVO> reviewList = reviewDAO.selectAllReviewList(); return
 	 * reviewList; }
 	 */
+	
+	@Override
+	public List listMyReserve(String user_id) throws Exception{
+		return myPageDAO.selectMyReservesList(user_id);
+	}
+	
+	
+	@Override
+	public Map listMyDetailReserve(Map pagingMap) throws Exception {
+		Map myReserveMap = new HashMap();
+		List<ReviewVO> myReserveList = reviewDAO.selectAllMyReservesList(pagingMap);
+		
+		int totReview = reviewDAO.selectTotReview();
 
+		myReserveMap.put("myReserveList", myReserveList);
+		myReserveMap.put("totReview", totReview);
+		// articlesMap.put("totArticles", 170);
+		return myReserveMap;
+	}
+	
 	@Override
 	public Map reviewDetail_1(Map pagingMap) throws Exception {
 		Map reviewMap = new HashMap();
@@ -84,9 +103,18 @@ public class ReviewServiceImpl implements ReviewService {
 
 //다중 이미지 추가하기	
 
+
 	@Override
 	public void removeReview(int reviewNO) throws Exception {
 		reviewDAO.deleteReview(reviewNO);
+	}
+	
+	
+	//	메인페이지 리뷰조회
+	@Override
+	public List returnReviewFormain() throws Exception {
+		List reviewList = reviewDAO.selectMainReview();
+		return reviewList;
 	}
 	
 	

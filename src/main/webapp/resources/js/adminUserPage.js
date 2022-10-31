@@ -4,9 +4,8 @@ let dataPerPage=10; // 한 페이지에 나타날 데이터 수
 let pageCount = 10; //페이징에 나타낼 페이지 수
 let globalCurrentPage=1; //현재 페이지
 let user_data = []; 
-
-var grade_ck={'Bronze':null, 'Silver':null, 'Gold':null};
-var res_ck={'O':null,'X':null};
+var grade_ck={};
+var res_ck;
 
 $(document).ready(function(){
     
@@ -114,9 +113,17 @@ function clickNO(pageNo){
     for(i=0;i<dataNo;i++){
         //글 번호 지정 (페이지에 맞게)
         var listNO = i + ((pageNo-1)*10);
-        html += '<tr>';
-        html += '<td class="user_id">'+ user_data[listNO].id +'</td>';
-        html += '<td class="user_name">'+user_data[listNO].name+'</td>';
+
+        var active = user_data[listNO].active;
+        if(active=='N'){
+            var activeState= '<span class="red_color">(탈퇴)</span>';
+            html += '<tr style="background:#eee">';
+        }else{
+            var activeState=''
+            html += '<tr d-data='+listNO+'>';
+        }
+        html += '<td class="user_id">'+user_data[listNO].id +'</td>';
+        html += '<td class="user_name">'+activeState+' '+user_data[listNO].name+'</td>';
         html += '<td class="user_grade">'+user_data[listNO].grade+'</td>';
         
         var joinDate = user_data[listNO].joinDate;
@@ -126,6 +133,7 @@ function clickNO(pageNo){
         html += '<td class="user_email">'+user_data[listNO].email+'</td>';
         html += '<td class="user_tel">'+user_data[listNO].tel+'</td>';
         html += '<td class="user_resState">'+user_data[listNO].resState+'</td>';
+
         html += '</tr>';  
     }
     $('.list_tb').append(html);
@@ -149,17 +157,25 @@ function pageDown(totPageNo){
 
 //검색
 function search(){
+    var searchMap = new Object();
     //input 안 정보 가지고 오기
     var search_op = $('#search_op').val();
     var keyword = $('#keyword').val();
 
+    searchMap.search_op = search_op;
+    searchMap.keyword = keyword;
+    searchMap.grade_ck=grade_ck;
+    if(res_ck=="X" || res_ck=="O"){
+        searchMap.res_ck=res_ck;
+    }
+
     $.ajax({
         url: "/adminSearchUser.do",
-        type: "GET", 
-        data:{"search_op":search_op,"keyword":keyword,
-            "Bronze":grade_ck.Bronze,"Silver":grade_ck.Silver,"Gold":grade_ck.Gold,
-            "res_O":res_ck.O,"res_X":res_ck.X
-        },
+        type: "POST",
+        dataType: "json",
+        processData: true,
+        contentType: "application/json; charset=UTF-8",
+        data: JSON.stringify(searchMap),
         success : function(data){
             //총데이터 수 저장
             totalData = data.length;
@@ -186,21 +202,30 @@ function searchOption(){
 
     //체크된 값 받아오기
     $('.grade_option input[type=checkbox]').each(function (index) {
+        if($('#Normal').is(":checked")==true){
+            grade_ck.Normal='Normal';
+        }else{delete grade_ck.Normal;}
         if($('#Bronze').is(":checked")==true){
             grade_ck.Bronze='Bronze';
-        }else{grade_ck.Bronze=null;}
+        }else{delete grade_ck.Bronze;}
         if($('#Silver').is(":checked")==true){
             grade_ck.Silver='Silver';
-        }else{grade_ck.Silver=null;}
+        }else{delete grade_ck.Silver;}
         if($('#Gold').is(":checked")==true){
             grade_ck.Gold='Gold';
-        }else{grade_ck.Gold=null;}
+        }else{delete grade_ck.Gold;}
     });
     $('.res_option input[type=checkbox]').each(function (index) {
-        if($('#res_O').is(":checked")==true){res_ck.O= "O";}
-        else{res_ck.O= null;}
-        if($('#res_X').is(":checked")==true){res_ck.X= "X";}
-        else{res_ck.X= null;}
+        if(($('#res_O').is(":checked") && $('#res_X').is(":checked")) || (!$('#res_O').is(":checked") && !$('#res_X').is(":checked"))){
+            res_ck= null;
+        }else if($('#res_X').is(":checked")==true){
+            res_ck= "X";
+        }else if($('#res_O').is(":checked")==true){
+            res_ck= "O";
+        }else{
+            res_ck= null;
+        }
+        
     });
 
     //체크박스 클릭 시 검색

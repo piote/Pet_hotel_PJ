@@ -18,15 +18,38 @@
 		<result property="res_num" column="RESERVATION_NUM" />
 		<result property="id" column="user_id" />
 		<result property="ROOM_GRADE" column="ROOM_GRADE" />
-	
 	</resultMap>
 
+
+<resultMap id="reserveResult" type="reservationVO">
+	<result property="res_num" column="RESERVATION_NUM" />
+	<result property="res_st" column="RESERVATION_ST" />
+	<result property="res_end" column="RESERVATION_END" />
+	<result property="id" column="USER_ID" />
+	<result property="res_comment" column="RS_COMMENT" />
+	<result property="totalCost" column="TOTAL_COST" />
+	<result property="payTime" column="PAY_TIME" />
+	<result property="res_state" column="RESERVATION_STATE" />
+	<result property="pet_name" column="pet_name" />
+</resultMap> 
 
 	<resultMap id="imgResult" type="imageVO">
 		<result property="imageFileNO" column="imageFileNO" />
 		<result property="articleNO" column="articleNO" />
 		<result property="imageFileName" column="imageFileName" />
 	</resultMap>
+
+<resultMap id="searchResult" type="java.util.HashMap">
+	<result property="res_st" column="reservation_st" />
+	<result property="res_state" column="reservation_state" />
+	<result property="res_num" column="reservation_num" />
+	<result property="user_name" column="user_name" />
+	<result property="user_tel" column="user_tel" />
+	<result property="pet_name" column="pet_name" />
+    <result property="user_id" column="user_id" />
+   	<result property="payTime" column="PAY_TIME" />
+ 	<result property="pet_num" column="PET_NUM" />
+</resultMap> 
 
 
 
@@ -68,10 +91,27 @@
       where review_num in (
          SELECT review_num FROM  tb_review
          START WITH review_num = #{review_num}
-       	 CONNECT BY PRIOR  review_num = review_parentNO)
+       	 CONNECT BY PRIOR  review_num = parentNO)
      
     ]]>
 	</delete>
+	
+	<select id="selectAllMyReservesList" parameterType="java.util.Map"
+		resultMap="reserveResult">  
+<![CDATA[
+SELECT		    res.RESERVATION_NUM,  res.RESERVATION_ST, res.USER_ID, res.RESERVATION_STATE , MAX(pet.PET_NAME)
+				FROM tb_reservation res
+				left join tb_petservice pet
+                on res.RESERVATION_NUM = pet.RESERVATION_NUM
+                GROUP BY res.RESERVATION_NUM, res.RESERVATION_ST, res.USER_ID, res.RESERVATION_STATE
+				order by RESERVATION_NUM desc
+							
+						]]>
+
+
+	</select>
+	
+
 
 
 	<!--다중 이미지 추가 SQL문 -->
@@ -170,4 +210,46 @@
 
 
 
+	<!-- 메인페이지 리뷰조회 -->
+	<select id="selectMainReview" resultType="java.util.Map">
+		<![CDATA[
+			SELECT USER_ID, REVIEW_STAR, REVIEW_TITLE, REVIEW_IMAGE_URL FROM tb_review
+   		 		WHERE REVIEW_STAR IS NOT null AND REVIEW_IMAGE_URL IS NOT null
+			order by REVIEW_DATE desc
+		]]>
+	</select>
+	
+	
+	
+	<!-- 좋아요 기능 구현 -->
+	
+	 <select id="ltlikecount" resultType="Integer" parameterType="java.util.Map">
+		select count(ltlike) from liketable where ltmid=#{ltmid} and ltbid=#{ltbid}
+	</select>
+	
+	<insert id="likeinsert" parameterType="java.util.Map">
+		insert into liketable(ltmid,ltbid)
+		values (#{ltmid},#{ltbid})
+	</insert>
+	
+	<select id="ltlikegetinfo" resultType="Integer" parameterType="java.util.Map">
+		select ltlike from liketable where ltmid=#{ltmid} and ltbid=#{ltbid}
+	</select>
+	
+	<update id="likeupdate" parameterType="java.util.Map">
+		update liketable
+		set <include refid="cal"></include>
+		where ltmid=#{ltmid} and ltbid=#{ltbid}
+	</update>
+	
+	<sql id="cal">
+		<if test="count == 1">
+			ltlike = 0
+		</if> 
+		
+		<if test="count == 0">
+			ltlike = ltlike + 1 
+		</if>
+	</sql>
+	
 </mapper>

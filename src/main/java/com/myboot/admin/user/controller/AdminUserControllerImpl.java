@@ -11,9 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -87,6 +87,14 @@ public class AdminUserControllerImpl implements AdminUserController {
 		
 	}
 	
+	@RequestMapping("/admin/adminResListT.do")
+	public ModelAndView ResListT(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		System.out.println("관리자");
+		mav.setViewName("/admin/adminResListT");
+		return mav;
+		
+	}
 	@ResponseBody 
 	@RequestMapping(value= "/returnAllUser.do", method = RequestMethod.GET)
 	public List<UserVO> returnAllUser() throws Exception{
@@ -94,48 +102,32 @@ public class AdminUserControllerImpl implements AdminUserController {
 		return allUser;
 	}
 	@ResponseBody 
-	@RequestMapping(value= "/adminSearchUser.do", method = RequestMethod.GET)
-	public List<UserVO> adminUserListById(
-			@RequestParam(value ="search_op", required = false) String search_op,
-			@RequestParam(value ="keyword", required = false) String keyword,
-			@RequestParam(value ="Bronze", required = false) String bronze,
-			@RequestParam(value ="Silver", required = false) String silver,
-			@RequestParam(value ="Gold", required = false) String gold,
-			@RequestParam(value ="res_O", required = false) String res_O,
-			@RequestParam(value ="res_X", required = false) String res_X,
+	@RequestMapping(value= "/adminSearchUser.do", method = RequestMethod.POST)
+	public List<UserVO> adminUserListById(@RequestBody Map<String,Object> searchMap,
 			  HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		System.out.println(searchMap);
+		
+		Map<String,String> grade_ck = (Map<String, String>) searchMap.get("grade_ck");
 		
 		Map<String, String> searchOption = new HashMap<String, String>();
 		
-		searchOption.put("search_op", search_op);
-		searchOption.put("keyword", keyword);
-		if(bronze!=null && bronze!="" && silver!=null && silver!="" && gold!=null && gold!="") {
-			
-		}else if(bronze!=null && bronze!="" && silver!=null && silver!="") {
-			searchOption.put("grade", bronze);
-			searchOption.put("grade2", silver);
-		}else if(bronze!=null && bronze!="" && gold!=null && gold!="") {
-			searchOption.put("grade", bronze);
-			searchOption.put("grade2", gold);
-		}else if(silver!=null && silver!="" && gold!=null && gold!="") {
-			searchOption.put("grade", silver);
-			searchOption.put("grade2", gold);
-		}else if(bronze!=null && bronze!="") {
-			searchOption.put("grade", bronze);
-		}else if(silver!=null && silver!="") {
-			searchOption.put("grade", silver);
-		}else if(gold!=null && gold!="") {
-			searchOption.put("grade", gold);
+		searchOption.put("search_op", (String) searchMap.get("search_op"));
+		searchOption.put("keyword", (String) searchMap.get("keyword"));
+		if(searchMap.get("res_ck")!=null) {
+			searchOption.put("res_state", (String) searchMap.get("res_ck"));
 		}
 		
-		if(res_O!=null && res_O!="" && res_X!=null && res_X!="") {
-			
-		}else if(res_O!=null && res_O!="") {
-			searchOption.put("res_state", res_O);
-		}else if(res_X!=null && res_X!="") {
-			searchOption.put("res_state", res_X);
+		if(grade_ck.size()<4 || grade_ck.size()>0) {
+			int i=1;
+			for(String key : grade_ck.keySet()) {
+				searchOption.put("grade"+i,grade_ck.get(key));
+				i++;
+			}
 		}
 		
+		System.out.println(searchOption);
+
 		List<UserVO> searchUsers; 
 		searchUsers= adminUserService.searchUsersOption(searchOption);
 		

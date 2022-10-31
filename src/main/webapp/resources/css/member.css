@@ -7,12 +7,14 @@
 }
 
 #wrap{
-	width: 1920px;
+	/* width: 1920px; */
+	width: 100%;
     margin: 0 auto;
 }
 
 .container{
- 	width: 1200px;
+ 	/* width: 1200px; */
+ 	width: 100%;
     margin: 0 auto;
 }
 .container h3{
@@ -65,4 +67,9 @@
 	margin:50px 0;
 	text-align: center;
 	}
+
+#readonly {
+	background: #ddd;
+	border: none;
+}
 

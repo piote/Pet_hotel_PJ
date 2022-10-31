@@ -11,6 +11,7 @@
 <html>
 	<head>
 	   <link rel="stylesheet" href="${contextPath}/resources/css/member.css">
+	   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	   <meta charset="UTF-8">
 	   <title>회원 수정창</title>
 	 <script>
@@ -25,11 +26,11 @@
 		  
 		  		element.checked = true;
 			}
-			
-			function deleteUser(url,id) {
+	
+			/* function deleteUser(url,id) {
 				if(window.confirm("탈퇴하시겠습니까?")){
 
-					var form = document.createElement("form");
+					 var form = document.createElement("form");
 					 form.setAttribute("method", "post");
 					 form.setAttribute("action", url);
 				     var idInput = document.createElement("input");
@@ -42,10 +43,45 @@
 					 form.submit();
 					 
 				}
-			}
-			function mod() {
+			} 
+			 */
+				function deleteUser(url,id){
+					Swal.fire({
+						  title: '확실합니까?',
+						  text: "다시는 되돌릴 수 없습니다.",
+						  icon: 'warning',
+						  showCancelButton: true,
+						  confirmButtonColor: '#3085d6',
+						  cancelButtonColor: '#d33',
+						  confirmButtonText: 'Yes!'
+						}).then((result) => {
+						  if (result.isConfirmed) {
+						    Swal.fire(
+						      '애니텔 탈퇴가 완료되었습니다!',
+						      '애니텔을 이용해 주셔서 감사합니다.',
+						    )
+						    var form = document.createElement("form");
+							 form.setAttribute("method", "post");
+							 form.setAttribute("action", url);
+						     var idInput = document.createElement("input");
+						     idInput.setAttribute("type","hidden");
+						     idInput.setAttribute("name","id");
+						     idInput.setAttribute("value", id);
+						     form.appendChild(idInput);
+						     document.body.appendChild(form);
+						     setTimeout(() => form.submit(), 2000);
+							 //form.submit();
+						  }
+						})
+				}
+			 const autoHyphen2 = (target) => {
+				 target.value = target.value
+				   .replace(/[^0-9]/g, '')
+				  .replace(/^(\d{0,3})(\d{3,4})(\d{4,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+				}
+			/* function mod() {
 				alert("정보수정이 완료 됐습니다.")
-			}
+			} */
 	 </script>
 	 
 	</head>
@@ -58,7 +94,7 @@
 				      <table>
 				         <tr>
 					            <td><p align="center">아이디</td>
-					            <td><input class="txtBox" type="text" name="id" value="${user.id }" readonly/> </td>
+					            <td><input class="txtBox" type="text" id="readonly" name="id" value="${user.id }" readonly/> </td>
 				         </tr>
 				         <tr>
 					            <td><p align="center">비밀번호</td>
@@ -66,19 +102,26 @@
 				         </tr>
 				         <tr>
 					            <td><p align="center">이름</P></td>
-					            <td><input class="txtBox" type="text" name="name"  value="${user.name }" readonly/></td>
+					            <td><input class="txtBox"  type="text" id="readonly" name="name"  value="${user.name }" readonly/></td>
 				         </tr>
+				          <tr>
+				               <td><p align="center">생년월일</P></td> 
+				               
+				               <%-- <td><input class="txtBox" type="text" name="birth" value="${user.birth }" ></td> --%>
+				               <td>
+				               <input class="txtBox"  type="date" name="birth_string" value="${birth}" ></td>
+			              </tr>
 				 		 <tr>
 					            <td><p align="center">이메일</P></td>
 					            <td><input class="txtBox" type="text" name="email"  value="${user.email }"></td>
 				         </tr>
 				          <tr>
 				                <td><p align="center">휴대전화</P></td>
-				                <td><input class="txtBox" type="text" name="tel"  value="${user.tel }"></td>
+				                <td><input class="txtBox" type="text" name="tel" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13"  placeholder="전화번호를 입력해보세요!" value="${user.tel }" required></td>
 				         </tr>
 				          <tr>
 				                <td><p align="center">비상전화</P></td>
-				                <td><input class="txtBox" type="text" name="tel_sub" value="${user.tel_sub}"></td>
+				                <td><input class="txtBox" type="text" name="tel_sub" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13" placeholder="전화번호를 입력해보세요!" value="${user.tel_sub}" required></td>
 				          </tr>
 				          <tr>
 				               <td><p align="center">수신여부</P></td>
@@ -87,18 +130,10 @@
 				                 <input type="checkbox" name="emailsts_yn"  value="N" onclick= 'checkOnlyOne(this)' />No	
 				               </td>
 			               </tr>
-				          <tr>
-				               <td><p align="center">생년월일</P></td> 
-				               
-				               <%-- <td><input class="txtBox" type="text" name="birth" value="${user.birth }" ></td> --%>
-				               <td>
-				               <input class="txtBox"  type="date" name="birth_string" value="${birth}" ></td>
-			              </tr>
 				         <tr>
 					           <td><p align="center">가입일</td>
-					           <td><input class="txtBox" type="text" name="joinDate" size="20" value="${user.joinDate}"  disabled/></td>
+					           <td><input class="txtBox" id="readonly" "type="text" name="joinDate" size="20" value="${user.joinDate}"  readonly/></td>
 				         </tr>
-				         
 				     </table>
 				     
 			         <ul>			    

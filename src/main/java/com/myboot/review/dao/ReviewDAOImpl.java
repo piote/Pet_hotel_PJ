@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -22,10 +22,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Override
-	
-	
 	public void insertNewImage(Map reviewMap) throws DataAccessException {
 		List<ImageVO> imageFileList = (ArrayList)reviewMap.get("imageFileList");
 	
@@ -62,6 +60,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 		
 	}
 
+	public List selectAllMyReservesList(Map pagingMap){
+		List<ReviewVO> myReserveList = sqlSession.selectList("com.myboot.review.dao.ReviewDAO.selectAllMyReservesList", pagingMap);
+		return myReserveList;
+	}	
+	
 	public int selectNewReviewNO() {
 		return sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectNewReviewNO");
 	}							 //("mapper.review.selectNewReviewNO");
@@ -97,4 +100,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 	
 
+//	메인페이지 리뷰조회
+	@Override
+	public List selectMainReview() throws DataAccessException{
+		return sqlSession.selectList("com.myboot.review.dao.ReviewDAO.selectMainReview");
+	}
 }

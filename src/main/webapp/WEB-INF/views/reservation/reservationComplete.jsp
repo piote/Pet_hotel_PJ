@@ -142,7 +142,7 @@
                     </tr>
                     <br><br><br>
                     <tr align="center">
-                        <td align="center"><b><span id="star">${user.id}</span></b> 님의 예약이 완료되었습니다.</td>
+                        <td align="center"><b><span id="star">${user.name}</span></b> 님의 예약이 완료되었습니다.</td>
                     </tr>
                     <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
                     <tr align="center">

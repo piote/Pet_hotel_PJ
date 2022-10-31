@@ -480,7 +480,9 @@
     				console.log(data);
     				console.log(data.petservice.length);
 					//초기화
-    				$(".tbnum").remove()
+    				$(".tbnum").remove()//html 삭제
+    				resetRow();
+    				
     				//html에 적용
     				//체크인
     				var res_st_data = new Date(data.reservation.res_st);
@@ -497,6 +499,9 @@
     				
     				//숙박일 계산
     				dateCal(res_st_data,res_end_data);
+    				
+    				//가격
+    				$("#totalcost").val(data.reservation.totalCost);
     				
     				//추가사항 
     				addtext();
@@ -643,23 +648,11 @@
                     <td>대형견</td>
                     <td id="L_BS">0 원</td>
                 </tr>
-                <tr align="center" bgcolor="white" height="40px">
-                    <td colspan="10" bgcolor="#e5e4e2">
-                        <c:choose>
-                        	<c:when test="${user.grade eq 'Bronze'}">
-                        		<img src="${contextPath}/resources/img/bronze_medal.png" width="30px" height="30px" id="bronzeimg">
-                        		<b class="membership">Bronze Membership : Discount 2%</b>
-                        	</c:when>
-                        	<c:when test="${user.grade eq 'Silver'}">
-                        		<img src="${contextPath}/resources/img/silver_medal.png" width="30px" height="30px" id="bronzeimg">
-                        		<b class="membership">Silver Membership : Discount 5%</b>
-                        	</c:when>
-                        	<c:when test="${user.grade eq 'Gold'}">
-                        		<img src="${contextPath}/resources/img/gold_medal.png" width="30px" height="30px" id="bronzeimg">
-                        		<b class="membership">Gold Membership : Discount 10%</b>
-                        	</c:when>
-                        </c:choose>
-                        <input id="membership" type="hidden" value="${user.grade}">
+                <tr align="center" bgcolor="white" height="40px">                  
+                    <td colspan="10" bgcolor="#e5e4e2">        
+                   		<img src="${contextPath}" width="30px" height="30px" id="bronzeimg">
+                   		<b class="membership"></b>
+                        <input id="membership" type="hidden" value="">
                         <b class="totalpayment"> Total Payment : </b>
                         <b class="totalcost">0 원</b>
                         <input type="hidden" name="totalcost" id="totalcost" />
@@ -687,7 +680,7 @@
 	            <tr align="center" bgcolor="white">
 	                <td rowspan="6" align="center" bgcolor="white"><b>Room</b></td>
 	                <td rowspan="2" align="center" bgcolor="white">Deluxe<br><div class="dogname">(소형견)</div></td>
-	                <td rowspan="2" align="center" bgcolor="white">100,000 원</td>
+	                <td rowspan="2" align="center" bgcolor="white">35,000 원</td>
 	                <td rowspan="6" align="center" bgcolor="white"><b>Beauty</b></td>
 	                <td rowspan="3" align="center" bgcolor="white">Clipping</td>
 	                <td>소형견</td>
@@ -705,7 +698,7 @@
 	            <tr align="center" bgcolor="white">
 	
 	                <td rowspan="2" align="center" bgcolor="white">Superior<br><div class="dogname">(중형견)</div></td>
-	                <td rowspan="2" align="center" bgcolor="white">150,000 원</td>
+	                <td rowspan="2" align="center" bgcolor="white">45,000 원</td>
 	                <td>대형견</td>
 	                <td>60,000 원</td>
 	                <td rowspan="2" align="center" bgcolor="white">중형견</td>
@@ -720,7 +713,7 @@
 	            <tr align="center" bgcolor="white">
 	
 	                <td rowspan="2" align="center" bgcolor="white">Suite<br><div class="dogname">(대형견)</div></td>
-	                <td rowspan="2" align="center" bgcolor="white">200,000 원</td>
+	                <td rowspan="2" align="center" bgcolor="white">55,000 원</td>
 	                <td>중형견</td>
 	                <td>80,000 원</td>
 	                <td rowspan="2" align="center" bgcolor="white">대형견</td>

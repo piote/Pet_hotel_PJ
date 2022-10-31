@@ -19,12 +19,7 @@
   height: 100%;
 }
 
-.mobile-root {
-  flex-direction: column;
-}
-.mobile-root .inactive {
-  display: none;
-}
+
 
 .signin-wrapper {
   flex-grow: 1;
@@ -155,6 +150,21 @@ h5 {
 	top: 325px;
     left: 40px;
 }
+input[type='date']::before {
+  content: attr(data-placeholder);
+  width: 100%;
+}
+
+input[type='date']:focus::before,
+input[type='date']:valid::before {
+  display: none;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 	</style>
     <title>회원가입 화면</title>
   
@@ -215,14 +225,16 @@ h5 {
     		url: "http://localhost:8090/idCheck",
     		data: {id: id},
     		success: function (data) {
+    			 if(!document.userInfo.id.value){
+    	                alert("아이디를 입력하세요.");
+    	                return false;
+    	            }
     		if(data == 1) {
     			$("#olmessage").text("이미 사용중인 ID 입니다.");
     			$("#olmessage").addClass("olmessagef");
     			$("#olmessage").removeClass("olmessaget");
     			$("#idcheck").attr("value","false");
-    			}if(!document.userInfo.id.value){
-                    alert("아이디를 입력하세요.");
-                    return false;}else {
+    			}else {
     			$("#olmessage").text("사용 가능한 ID 입니다.");
     			$("#olmessage").addClass("olmessaget");
     			$("#olmessage").removeClass("olmessagef");
@@ -256,6 +268,65 @@ h5 {
         function goLoginForm() {
             location.href="loginForm.do";     
         }
+        
+        $(document).ready(function() {
+        	  
+            $(".phone").focus(focused); //input에 focus일 때
+            $(".phone").blur(blured);   //focus out일 때
+          })
+
+        function focused(){
+          var input = $(this).val();
+          
+          //input안에서 하이픈(-) 제거
+          var phone = input.replace( /-/gi, '');
+          //number 타입으로 변경(숫자만 입력)
+          $(this).prop('type', 'number');
+          
+          $(this).val(phone);
+        }
+
+        function blured(){
+          var input = $(this).val();
+          
+          //숫자에 하이픈(-) 추가
+          var phone = chkItemPhone(input);
+          //text 타입으로 변경
+          $(this).prop('type', 'text');
+          
+          $(this).val(phone);
+        }
+
+
+        //전화번호 문자(-)
+        function chkItemPhone(temp) {
+          var number = temp.replace(/[^0-9]/g, "");
+          var phone = "";
+
+          if (number.length < 9) {
+            return number;
+          } else if (number.length < 10) {
+            phone += number.substr(0, 2);
+                phone += "-";
+                phone += number.substr(2, 3);
+            phone += "-";
+            phone += number.substr(5);
+          } else if (number.length < 11) {
+            phone += number.substr(0, 3);
+            phone += "-";
+            phone += number.substr(3, 3);
+            phone += "-";
+            phone += number.substr(6);
+          } else {
+            phone += number.substr(0, 3);
+            phone += "-";
+            phone += number.substr(3, 4);
+            phone += "-";
+            phone += number.substr(7,4);
+          }
+
+          return phone;
+        }
 
     </script>
     
@@ -287,10 +358,10 @@ h5 {
                             <option>@gmail.com</option>
                             <option>@nate.com</option>                        
                         </select>
-                   		<input type="number" name="tel" id="tel" placeholder="핸드폰번호 입력" maxlength="13" class="form-field" placeholder="UserCellPhone" >               
-                        <input type="number" name="tel_sub" id="tel_sub" placeholder="비상시 핸드폰번호 입력" maxlength="13" class="form-field" placeholder="UserCellPhone" >                
+                   		<input type="number" name="tel" id="tel" placeholder="핸드폰번호 입력" maxlength="13" class="form-field phone"  ng-focus="chkPhoneType('focus')" ng-blur="chkPhoneType('blur');" min="0" required >               
+                        <input type="number" name="tel_sub" id="tel_sub" placeholder="비상시 핸드폰번호 입력" maxlength="13" class="form-field phone"  ng-focus="chkPhoneType('focus')" ng-blur="chkPhoneType('blur');" min="0" required >                
                      	<label class="message_label">이메일 수신 발송에 동의하십니까?<input type="checkbox"  name="message"  value="Y"></label>
-                        <input type="date" name="birth" class="form-field" placeholder="UserBirth" > 
+                        <input type="date" name="birth" class="form-field" data-placeholder="UserBirth" required aria-required="true" value={startDateValue} className={styles.selectDay} onchange={startDateValueHandler} > 
                                  
           			    <button  type="submit" id="signup" value="true" class="button primary"  onclick="checkValue()">가입</button>
           			    <button  type="button" class="button secondary" onclick="goLoginForm()">돌아가기</button>

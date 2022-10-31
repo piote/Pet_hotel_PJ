@@ -72,7 +72,7 @@ public  class ReservationControllerImpl implements ReservationController{
 
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("user")==null) {
+		if(session.getAttribute("user")==null || request.getHeader("REFERER") == null) {
 			request.setAttribute("stmsgcheck", "1");
 			request.setAttribute("stmsg", "비정상적인 접근입니다!");
 			mav.setViewName("forward:/main.do");
@@ -115,9 +115,27 @@ public  class ReservationControllerImpl implements ReservationController{
 	@Override
 	@RequestMapping(value= "/reservationAdd.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView reservationAdd( HttpServletRequest request, HttpServletResponse response) throws Exception{
+		//유저 정보
+		HttpSession session=request.getSession();
+		UserVO userVO = (UserVO) session.getAttribute("user");
+				
 		//날짜 포맷
 		String checkinDate = (String) request.getParameter("checkinDate");//스트링 데이터로 변환하기 포멧
 		String checkoutDate = (String) request.getParameter("checkoutDate");//
+		
+		//로그인 x 거나 이전 페이지 값 없으면 되돌려보네기 
+		if(session.getAttribute("user")==null || checkinDate == null) {
+			ModelAndView mav = new ModelAndView();
+			request.setAttribute("stmsgcheck", "1");
+			request.setAttribute("stmsg", "비정상적인 접근입니다!");
+			mav.setViewName("forward:/main.do");
+			//mav.setViewName("redirect:/main.do");
+			return mav;
+		}
+		
+		
+		
+
 		
 		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy. MM. dd");
 		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -129,9 +147,7 @@ public  class ReservationControllerImpl implements ReservationController{
 		//String checkoutDate_format_new = newDtFormat.format(checkoutDate_format);
 		//https://junghn.tistory.com/entry/JAVA-자바-날짜-포맷-변경-방법SimpleDateFormat-yyyyMMdd
 		
-		//유저 정보
-		HttpSession session=request.getSession();
-		UserVO userVO = (UserVO) session.getAttribute("user");
+		
 		// 예약 정보
 		
 		String petcomment = (String) request.getParameter("petcomment");

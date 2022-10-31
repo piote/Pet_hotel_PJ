@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자페이지_회원조회</title>
-    <script src="${contextPath}/resources/js/adminPage.js"></script>
+    <script src="${contextPath}/resources/js/adminUserPage.js"></script>
     <style>
         #adm_user{
         	color: #333;
@@ -81,7 +81,7 @@
             line-height: 30px;
         }
         .grade_option{
-            margin-left: 50px;
+            margin-left: 40px;
         }
         .res_option{
             margin-left: 35px;
@@ -150,51 +150,51 @@
         .select_number{
             color: #030303;
         }
+        .red_color{
+            color: red;
+        }
     </style>
 </head>
 <body>
-    
-            <div class="list_wrap">
-                <div class="list_option">
-                    <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="search()" >
-                        <select name="search_op" id="search_op" aria-label="search">
-                            <option value="search_id">아이디</option>
-                            <option value="search_name">이름</option>
-                            <option value="search_tel">전화번호</option>
-                            <option value="search_email">이메일</option>
-                        </select>
-                        <input type="text" name="keyword" id="keyword" class="search_txt" placeholder="검색">
-                        <button type="button" class="seh_icon" onclick="search()" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
-                    </div>
-                    <div class="grade_option">
-                        멤버쉽 :
-                        <label><input type="checkbox" name="grade" id="Bronze" value="Bronze">Bronze</label>
-                        <label><input type="checkbox" name="grade" id="Silver" value="Silver">Silver</label>
-                        <label><input type="checkbox" name="grade" id="Gold" value="Gold">Gold</label>
-                    </div>
-                    <div class="hr"></div>
-                    <div class="res_option">
-                        예약여부 :
-                        <label><input type="checkbox" name="reservation" id="res_O" value="O">O</label>
-                        <label><input type="checkbox" name="reservation" id="res_X" value="X">X</label>
-                    </div>
-                </div>
-
-                <table class="list_tb">
-                    <tr class="tb_title">
-                        <td class="user_id">아이디</td>
-                        <td class="user_name">이름</td>
-                        <td class="user_grade">멤버쉽등급</td>
-                        <td class="user_joinDate">가입일</td>
-                        <td class="user_email">이메일</td>
-                        <td class="user_tel">전화번호</td>
-                        <td class="user_resState">예약여부</td>
-                    </tr>
-                </table>
-                <div class="page_num"></div>
+    <div class="list_wrap">
+        <div class="list_option">
+            <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="search()" >
+                <select name="search_op" id="search_op" aria-label="search">
+                    <option value="search_id">아이디</option>
+                    <option value="search_name">이름</option>
+                    <option value="search_tel">전화번호</option>
+                    <option value="search_email">이메일</option>
+                </select>
+                <input type="text" name="keyword" id="keyword" class="search_txt" placeholder="검색">
+                <button type="button" class="seh_icon" onclick="search()" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
             </div>
-            
-        
-    </section>
+            <div class="grade_option">
+                멤버쉽 :
+                <label><input type="checkbox" name="grade" id="Normal" value="Normal">Normal</label>
+                <label><input type="checkbox" name="grade" id="Bronze" value="Bronze">Bronze</label>
+                <label><input type="checkbox" name="grade" id="Silver" value="Silver">Silver</label>
+                <label><input type="checkbox" name="grade" id="Gold" value="Gold">Gold</label>
+            </div>
+            <div class="hr"></div>
+            <div class="res_option">
+                예약여부 :
+                <label><input type="checkbox" name="reservation" id="res_O" value="O">O</label>
+                <label><input type="checkbox" name="reservation" id="res_X" value="X">X</label>
+            </div>
+        </div>
+
+        <table class="list_tb">
+            <tr class="tb_title">
+                <td class="user_id">아이디</td>
+                <td class="user_name">이름</td>
+                <td class="user_grade">멤버쉽등급</td>
+                <td class="user_joinDate">가입일</td>
+                <td class="user_email">이메일</td>
+                <td class="user_tel">전화번호</td>
+                <td class="user_resState">예약여부</td>
+            </tr>
+        </table>
+        <div class="page_num"></div>
+    </div>
 </body>
 </html>

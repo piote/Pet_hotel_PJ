@@ -144,6 +144,9 @@
 	  height: 25px;
 	  
   }
+  .re_image {
+	  border-radius: 5%;
+  }
   </style> 
  
  <meta charset="UTF-8">
@@ -208,10 +211,8 @@
         <c:when test="${reviewList !=null }" >
           <c:forEach  var="review" items="${reviewList }" varStatus="reviewNum" >
           <fmt:formatDate var="reviewDate" value="${review.date}" pattern="yyyy.MM.dd"/>
-         
-          	
-          	  <tr class="w_tr w_margin1">
-	          <td class="w_td" width="15%">  	
+          	 <tr class="w_tr w_margin1">
+	         <td class="w_td" width="15%">  	
 	          		<c:if test="${review.rate==5}">
 	                    <img src="${contextPath}/resources/img/star_5.png" class="w_star">   
 	                </c:if> 
@@ -227,30 +228,24 @@
 	                <c:if test="${review.rate==1}">
 	                    <img src="${contextPath}/resources/img/star_1.png" class="w_star">    
 	                </c:if>   
-	          </td>
-	          
-	          <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td>
-	          
-	          <td class="w_td" width="20%" rowspan="2">               
-	               <c:if test="${review.image != null}"> 
-	                   <img src="${contextPath}/${review.image}" width="150" height="150">
-	                </c:if>
 	         </td>
 	         
-	          
-	        
-	         
+	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td> 
+	         <td class="w_td" width="20%" rowspan="2">               
+	               <c:if test="${review.image != null}"> 
+	                   <img class="re_image" src="${contextPath}/${review.image}" width="150" height="150">
+	                </c:if>
+	         </td>
 	          <td class="w_td w_date"  width="15%" >${reviewDate}</td>
-	       
-          
-	          </tr>
-	      
+	          </tr>      
 	      <tr class="w_tr" class="w_tr2">
 	          <td class="w_td">${review.id}</td>	
-	          <td class="w_td" align=center >${review.rec}</td>
+	          <td class="w_td" align=center >
+	       						${review.rec}
+	          </td>
 	      </tr>  
 	      <tr>
-	      <td class="w_tdz1" colspan="4"> <input type=button value="삭제하기" onClick="fn_remove_review('${contextPath}/review/removeReview.do', ${review.reviewNO})"> </td>
+	      	<td class="w_tdz1" colspan="4"> <input type=button value="삭제하기" onClick="fn_remove_review('${contextPath}/review/removeReview.do', ${review.reviewNO})"> </td>
 	      </tr>
 	      <tr>
 	      <td class="w_tdz2" colspan="4"></td>
@@ -310,6 +305,39 @@
 	 </div>    
 
 </div>
+
+<script>
+		$(function(){
+			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+			$("#rec_update").click(function(){
+				$.ajax({
+					url: "/expro/RecUpdate.do",
+		            type: "POST",
+		            data: {
+		                no: ${content.board_no},
+		                id: '${id}'
+		            },
+		            success: function () {
+				        recCount();
+		            },
+				})
+			})
+			
+			// 게시글 추천수
+		    function recCount() {
+				$.ajax({
+					url: "/expro/RecCount.do",
+		            type: "POST",
+		            data: {
+		                no: ${content.board_no}
+		            },
+		            success: function (count) {
+		            	$(".rec_count").html(count);
+		            },
+				})
+		    };
+		    recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+</script>
 
 
 </body>

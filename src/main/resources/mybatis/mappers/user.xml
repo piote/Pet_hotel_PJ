@@ -24,7 +24,7 @@
 	      USER_TEL as tel, USER_TEL_SUB as tel_sub, USER_MESSAGE as message,
 	      USER_BIRTH as birth, JOINDATE, USER_GRADE as grade
 	      from tb_user
-	      where USER_ID=#{id} AND USER_PW=#{pw}
+	      where USER_ID=#{id} AND USER_PW=#{pw} AND ACTIVE='Y'
 	]]>
  	 </select>
 <!-- 로그인 아이디찾기 -->
@@ -115,12 +115,17 @@
    	  
    	  
    	<!-- 회원 탈퇴 -->
-	<delete id="deleteUser" parameterType="String">
+<!-- 	<delete id="deleteUser" parameterType="String"> -->
+<!--    		<![CDATA[ -->
+<!--    			delete from TB_USER -->
+<!--    			where user_id=#{id} -->
+<!--    		]]> -->
+<!--    	</delete> -->
+<delete id="deleteUser" parameterType="String">
    		<![CDATA[
-   			delete from TB_USER
-   			where user_id=#{id}
+   			update TB_USER
+   			set ACTIVE='N' where USER_ID=#{id}
    		]]>
    	</delete>
-
 
 </mapper>

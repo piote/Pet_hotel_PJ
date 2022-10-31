@@ -17,29 +17,30 @@
       <result property="joinDate" column="JOINDATE" />
       <result property="grade" column="USER_GRADE" />
       <result property="resState" column="RES_STATE" />
+      <result property="active" column="ACTIVE" />
    </resultMap> 
 	
 	<select id="selectAllUserList" resultMap="userResult">
       <![CDATA[
-        select U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
+        select U.USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_TEL, USER_TEL_SUB, USER_BIRTH ,JOINDATE, USER_GRADE, ACTIVE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
 		    from TB_USER U 
 		    LEFT JOIN ( select user_id, RESERVATION_STATE from TB_RESERVATION WHERE RESERVATION_STATE='N' ) R
 		ON U.user_id = R.user_id 
-		GROUP BY U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE
+		GROUP BY U.USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_TEL, USER_TEL_SUB, USER_BIRTH ,JOINDATE, USER_GRADE, ACTIVE
 		order by joinDate desc
       ]]>
    </select>
   
    <select id="searchUsers" parameterType="java.util.Map" resultMap="userResult">
       <![CDATA[
-        select U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
+        select U.USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_TEL, USER_TEL_SUB, USER_BIRTH ,JOINDATE, USER_GRADE, ACTIVE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
 		    from TB_USER U 
 		    LEFT JOIN ( select user_id, RESERVATION_STATE from TB_RESERVATION WHERE RESERVATION_STATE='N' ) R
 		ON U.user_id = R.user_id  ]]>
 		<where>
 			 <choose>
 			 	<when test="search_op=='search_id'">
-			 		U.USER_ID LIKE '%'||#{keyword}||'%'
+			 		U.USER_ID LIKE '%'||#{keyword}||'%' 
 			 	</when>
 			 	<when test="search_op=='search_name'">
 			 		USER_NAME LIKE '%'||#{keyword}||'%'
@@ -51,23 +52,28 @@
 			 		USER_EMAIL LIKE '%'||#{keyword}||'%'
 			 	</when>
 			 </choose>
-		
 			<choose>
-				<when test="grade!='' and grade!=null and grade2!='' and grade2!=null">
-					AND (USER_GRADE=#{grade} OR USER_GRADE=#{grade2}) 
-				</when>
-				<when test="grade!='' and grade!=null">
-					AND USER_GRADE=#{grade}
-				</when>
-			</choose>
-			<choose>
-				<when test="res_state!='' and res_state!=null">
-					AND REPLACE(NVL(RESERVATION_STATE,'X'),'N','O') = #{res_state}
+				<when test="(grade1!='' and grade1!=null) or (grade2!='' and grade2!=null) or (grade3!='' and grade3!=null)">
+					AND(
+					<if test="grade1!='' and grade1!=null">
+						USER_GRADE=#{grade1}
+					</if>
+					<if test="grade2!='' and grade2!=null">
+						OR USER_GRADE=#{grade2}
+					</if>
+					<if test="grade3!='' and grade3!=null">
+						OR USER_GRADE=#{grade3}
+					</if>
+					)
 				</when>
 			</choose>
 			
+			<if test="res_state!='' and res_state!=null">
+				AND REPLACE(NVL(RESERVATION_STATE,'X'),'N','O') = #{res_state}
+			</if>
+			
 		</where>
-		GROUP BY U.USER_ID, USER_NAME, USER_EMAIL, USER_TEL, JOINDATE, USER_GRADE
+		GROUP BY U.USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_TEL, USER_TEL_SUB, USER_BIRTH ,JOINDATE, USER_GRADE, ACTIVE
 		order by joinDate desc
    </select>
    

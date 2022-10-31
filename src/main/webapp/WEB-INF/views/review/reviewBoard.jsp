@@ -6,10 +6,11 @@
  -->
 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<c:set  var="articlesList"  value="${articlesMap.articlesList}" />
-<c:set  var="totArticles"  value="${articlesMap.totArticles}" />
-<c:set  var="section"  value="${articlesMap.section}" />
-<c:set  var="pageNum"  value="${articlesMap.pageNum}" />
+<c:set  var="reviewList"  value="${reviewMap.reviewList}" />
+<c:set  var="myReserveList"  value="${myReserveMap.myReserveList}" />
+<c:set  var="totReserves"  value="${myReserveMap.totReserves}" />
+<c:set  var="section"  value="${myReserveMap.section}" />
+<c:set  var="pageNum"  value="${myReserveMap.pageNum}" />
 
 <!--
 <%
@@ -142,6 +143,79 @@
     	margin-left: 50%;
      }
      
+     .btn-open {
+    	    width: 110px; height: 30px;
+    	    border: 1px solid #999;
+    	    border-radius: 20px;
+    	    background-color: #fff;
+    	    font-size:14px;
+    	    text-align: center;
+    	    line-height: 30px;
+    	    position: absolute; right: 20%; top: 35%;
+    	  }
+     
+    	  .btn-open:hover{
+    	    border-color: #e59f5a;
+    	    background-color: #e59f5a;
+    	    color: #fff;
+    	  }
+
+    	        .btn-open {
+    	          text-decoration: none;
+    	        }
+    	       
+
+    	        .btn-box .btn-open span {
+    	            color: #000;
+    	            
+    	        }
+    	        
+    	        /* 팝업 스타일 */
+    	        .modal-bg {
+    	          display:none;
+    	          width:100%;
+    	          height:100%;
+    	          position:fixed;
+    	          top:0;left:0;right:0;
+    	          background: rgba(0, 0, 0, 0.6);
+    	          z-index:999;
+    	        
+    	        }
+    	       
+    	       
+    	        .modal-wrap {
+    	          display:none;
+    	          position:absolute;
+    	          top:50%;
+    	          left:50%;
+    	          transform:translate(-50%,-50%);
+    	          width:600px;
+    	          height:800px;
+    	          background:#fff;
+    	          z-index:1000;
+    	          border-radius:15px;
+    	          padding: 5px;
+    	        
+    	          }
+
+		       .detail_reserve{
+		    	   margin: 0 auto;
+		    	   width: 80%;
+		    	   height: 35px;
+		    	   line-height: 30px;
+		    	   border-top: 1px solid black;
+		    	   border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+		    	   position: relative;
+		    	   top: 110px;
+		    	   background-color: rgb(231, 226, 219);
+		    	}
+		
+		    	.w_table {
+		    	  width: 100%;
+		    	}
+		    	.detail-list {
+		    		  text-align: center;
+		    	}
       
  </style> 
 
@@ -161,12 +235,96 @@
       <p id="under"></p>
       
       <div class="w_review">
-      <a href="${contextPath}/review/reviewForm.do">글쓰기(임시)</a>
-      </div>
-  					
-      
+      <input type="button" id="btn_pet2_4" value="리뷰 쓰기" onclick="popup()">
+      <a href="${contextPath}/review/reviewForm.do?res_num=${res_num}">글쓰기(임시)</a> 
+     	 
+     </div>
       
       <br><br><br>
+      <!-- 전체 레이아웃 -->
+      <div id="wrap">
+       <!-- Content -->
+       <section class="content">
+           <div class="container">
+               <!-- 팝업용 임시 버튼입니다. -->
+               <div class="btn-box">
+                   <a href="#" class="btn-open" onClick="javascript:popOpen();">
+                       <span>리뷰 쓰기</span>
+                   </a>
+               </div>
+               <!-- //팝업용 임시 버튼입니다. -->
+           </div>
+       </section>
+       <!-- //Content -->       
+     </div>
+     <!-- //전체 레이아웃 -->
+
+     <!-- modal 영역 -->
+     <div class="modal-bg" onClick="javascript:popClose();"></div>
+     <div class="modal-wrap">
+       <div class="detail_reserve">
+         <table class="w_table">
+	           <tr class="detail-center">
+	             <td width="15%">No</td>
+	             <td width="15%">Date</td>   
+	             <td width="25%">PetName</td>
+	             <td width="25%">Status</td>
+	             <td width="20%">Review</td>
+	           </tr>
+		           <c:choose>
+			           
+			           <c:when test="${empty isLogOn}">
+			       			<tr class="detail-list">
+			       				<td colspan=5>
+			       					<strong>로그인을 하셔야합니다.</strong>
+			       				</td>
+			       		    </tr>
+		       		    </c:when>		
+			           
+			           <c:when test="${empty myReserveList }">
+	          				<tr class="detail-list">
+	          					<td colspan=5>
+	          						<strong>예약하신 내역이 없습니다.</strong>
+	          					</td>
+	          				</tr>
+	          		    </c:when>
+
+					 <c:when test="${not empty myReserveList}" >
+					    <c:forEach  var="reserves" items="${myReserveList }" varStatus="res_num" >
+				         <fmt:formatDate var="resDate" value="${reserves.res_st}" pattern="yyyy.MM.dd"/>
+				
+				         <tr class="w_reserves">
+				         		<td class="w_res" width="15%">${res_num.count}</td>
+				         		<td class="w_resdate" width="15%">${resDate}</td>
+				         		<td width="25%">${reserves.pet_name}</td>
+				         		<td width="25%">
+									<c:choose>
+										<c:when test="${reserves.res_state=='N'}">
+											이용 전
+										</c:when>
+										<c:when test="${reserves.res_state=='Y'}">
+											이용 완료
+										</c:when>
+										<c:when test="${reserves.res_state=='C'}">
+											예약 취소
+										</c:when>
+									</c:choose>
+								</td>
+								<td width="20%"><a href="${contextPath}/review/reviewForm.do?res_num=${res_num}">글쓰기(임시)</a></td>
+							
+								</c:forEach>
+				         
+			         </c:when>
+	  				</c:choose>    
+         </table>
+         
+         
+       </div>  
+     <button class="modal-close" onClick="javascript:popClose();">닫기</button>
+     </div>
+     <!-- //modal 영역 -->
+
+      
       <!--방에 맞는 이미지 사용-->
        <div class="img_c">
          
@@ -190,13 +348,6 @@
 	           	<a href="${contextPath}/review/reviewDetail_3.do" class="room_name">대형견(임시)</a>
 	        </div>   
           </div>
-          
-          
-
-          
-             
-            
-         
        
        </div>
  
@@ -204,7 +355,26 @@
 
 </div>
 
+<script>
+function popOpen() {
 
+var modalPop = $('.modal-wrap');
+var modalBg = $('.modal-bg'); 
+
+$(modalPop).show();
+$(modalBg).show();
+
+}
+
+function popClose() {
+var modalPop = $('.modal-wrap');
+var modalBg = $('.modal-bg');
+
+$(modalPop).hide();
+$(modalBg).hide();
+
+}
+    </script>
 
 </body>
 </html>
