@@ -6,10 +6,11 @@
  -->
 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<c:set  var="articlesList"  value="${articlesMap.articlesList}" />
-<c:set  var="totArticles"  value="${articlesMap.totArticles}" />
-<c:set  var="section"  value="${articlesMap.section}" />
-<c:set  var="pageNum"  value="${articlesMap.pageNum}" />
+<c:set  var="reviewList"  value="${reviewMap.reviewList}" />
+<c:set  var="myReserveList"  value="${myReserveMap.myReserveList}" />
+<c:set  var="totReserves"  value="${myReserveMap.totReserves}" />
+<c:set  var="section"  value="${myReserveMap.section}" />
+<c:set  var="pageNum"  value="${myReserveMap.pageNum}" />
 
 <!--
 <%
@@ -152,6 +153,7 @@
     	    line-height: 30px;
     	    position: absolute; right: 20%; top: 35%;
     	  }
+     
     	  .btn-open:hover{
     	    border-color: #e59f5a;
     	    background-color: #e59f5a;
@@ -211,7 +213,9 @@
 		    	.w_table {
 		    	  width: 100%;
 		    	}
-    	
+		    	.detail-list {
+		    		  text-align: center;
+		    	}
       
  </style> 
 
@@ -232,8 +236,9 @@
       
       <div class="w_review">
       <input type="button" id="btn_pet2_4" value="리뷰 쓰기" onclick="popup()">
-   // <a href="${contextPath}/review/reviewForm.do?res_num=${res_num}">글쓰기(임시)</a>
-      </div>
+      <a href="${contextPath}/review/reviewForm.do?res_num=${res_num}">글쓰기(임시)</a> 
+     	 
+     </div>
       
       <br><br><br>
       <!-- 전체 레이아웃 -->
@@ -259,14 +264,61 @@
      <div class="modal-wrap">
        <div class="detail_reserve">
          <table class="w_table">
-           <tr class="detail-center">
-             <td width="15%">No</td>
-             <td width="15%">Date</td>   
-             <td width="25%">PetName</td>
-             <td width="25%">Status</td>
-             <td width="20%">Review</td>
-           </tr>
+	           <tr class="detail-center">
+	             <td width="15%">No</td>
+	             <td width="15%">Date</td>   
+	             <td width="25%">PetName</td>
+	             <td width="25%">Status</td>
+	             <td width="20%">Review</td>
+	           </tr>
+		           <c:choose>
+			           
+			           <c:when test="${empty isLogOn}">
+			       			<tr class="detail-list">
+			       				<td colspan=5>
+			       					<strong>로그인을 하셔야합니다.</strong>
+			       				</td>
+			       		    </tr>
+		       		    </c:when>		
+			           
+			           <c:when test="${empty myReserveList }">
+	          				<tr class="detail-list">
+	          					<td colspan=5>
+	          						<strong>예약하신 내역이 없습니다.</strong>
+	          					</td>
+	          				</tr>
+	          		    </c:when>
+
+					 <c:when test="${not empty myReserveList}" >
+					    <c:forEach  var="reserves" items="${myReserveList }" varStatus="res_num" >
+				         <fmt:formatDate var="resDate" value="${reserves.res_st}" pattern="yyyy.MM.dd"/>
+				
+				         <tr class="w_reserves">
+				         		<td class="w_res" width="15%">${res_num.count}</td>
+				         		<td class="w_resdate" width="15%">${resDate}</td>
+				         		<td width="25%">${reserves.pet_name}</td>
+				         		<td width="25%">
+									<c:choose>
+										<c:when test="${reserves.res_state=='N'}">
+											이용 전
+										</c:when>
+										<c:when test="${reserves.res_state=='Y'}">
+											이용 완료
+										</c:when>
+										<c:when test="${reserves.res_state=='C'}">
+											예약 취소
+										</c:when>
+									</c:choose>
+								</td>
+								<td width="20%"><a href="${contextPath}/review/reviewForm.do?res_num=${res_num}">글쓰기(임시)</a></td>
+							
+								</c:forEach>
+				         
+			         </c:when>
+	  				</c:choose>    
          </table>
+         
+         
        </div>  
      <button class="modal-close" onClick="javascript:popClose();">닫기</button>
      </div>
