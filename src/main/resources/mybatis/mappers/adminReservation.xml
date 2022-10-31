@@ -5,7 +5,7 @@
 
 <mapper namespace="com.myboot.admin.reservation.dao.AdminResDAO">
 
-  <resultMap id="adminreservationResult" type="reservationVO">
+<!--   <resultMap id="adminreservationResult" type="reservationVO">
     <result property="res_num" column="RESERVATION_NUM" />
     <result property="res_st" column="RESERVATION_ST" />
     <result property="res_end" column="RESERVATION_END" />
@@ -38,7 +38,7 @@
     <result property="birth" column="USER_BIRTH" />
     <result property="joinDate" column="JOINDATE" />
     <result property="grade" column="USER_GRADE" />
-  </resultMap> 
+  </resultMap>  -->
 	
   <resultMap id="adminresfullResult" type="adminresfullVO">
     <result property="res_num" column="RESERVATION_NUM" />
@@ -49,6 +49,7 @@
     <result property="totalCost" column="TOTAL_COST" />
     <result property="payTime" column="PAY_TIME" />
     <result property="res_state" column="RESERVATION_STATE" />
+    <result property="total_pet" column="total_pet" />
     <result property="pet_num" column="PET_NUM" />
     <result property="pet_name" column="PET_NAME" />
     <result property="pet_gender" column="PET_GENDER" />
@@ -70,7 +71,7 @@
   <!-- 관리자 예약관리 예약조회 -->
   <select id="adminResList" resultMap="adminresfullResult">
   	<![CDATA[
-		SELECT res.reservation_num, tb_user.user_name, res.reservation_st, res.reservation_end, count(pet.pet_num) as "총 마리수", res.pay_time, res.total_cost ,res.reservation_state
+		SELECT res.reservation_num, tb_user.user_name, res.reservation_st, res.reservation_end, count(pet.pet_num) as "total_pet", res.pay_time, res.total_cost ,res.reservation_state
 	    FROM tb_reservation res 
 	    left JOIN tb_petservice pet 
 	    ON res.reservation_num = pet.reservation_num

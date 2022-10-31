@@ -18,6 +18,9 @@ public class AdminResFullVO {
 	private String payTime;
 	private String res_state;
 	
+	
+	//
+	private int total_pet;
 	//pet
 	private int pet_num;
 	private String pet_name;
