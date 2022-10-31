@@ -54,7 +54,7 @@
 	
 	<select id="selectAllMyReservesList" resultMap="searchResult"  parameterType="java.util.Map" >
 		    SELECT * FROM ( 
-			SELECT ROWNUM as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
+			SELECT ROW_NUMBER() OVER(ORDER BY r.pay_time desc) as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
 					from tb_reservation r, tb_user u, tb_petservice p
 					where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
 				<choose>
@@ -66,12 +66,11 @@
 				</choose>
 			)
 			where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
-	        order by pay_time
 	</select>
 
 	<select id="selectMyDetailReservesList" resultMap="searchResult"  parameterType="java.util.Map" >
 		    SELECT * FROM ( 
-			SELECT ROWNUM as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
+			SELECT ROW_NUMBER() OVER(ORDER BY r.pay_time desc) as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
 					from tb_reservation r, tb_user u, tb_petservice p
 					where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
 			<choose>
@@ -87,7 +86,7 @@
 			</choose>
 			)
              	where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
-		        order by pay_time
+
 	</select>
 	
 	<select id="selectMyReviewList" resultMap="reviewResult">

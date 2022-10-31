@@ -113,9 +113,17 @@ function clickNO(pageNo){
     for(i=0;i<dataNo;i++){
         //글 번호 지정 (페이지에 맞게)
         var listNO = i + ((pageNo-1)*10);
-        html += '<tr>';
-        html += '<td class="user_id">'+ user_data[listNO].id +'</td>';
-        html += '<td class="user_name">'+user_data[listNO].name+'</td>';
+
+        var active = user_data[listNO].active;
+        if(active=='N'){
+            var activeState= '<span class="red_color">(탈퇴)</span>';
+            html += '<tr style="background:#eee">';
+        }else{
+            var activeState=''
+            html += '<tr d-data='+listNO+'>';
+        }
+        html += '<td class="user_id">'+user_data[listNO].id +'</td>';
+        html += '<td class="user_name">'+activeState+' '+user_data[listNO].name+'</td>';
         html += '<td class="user_grade">'+user_data[listNO].grade+'</td>';
         
         var joinDate = user_data[listNO].joinDate;
@@ -125,6 +133,7 @@ function clickNO(pageNo){
         html += '<td class="user_email">'+user_data[listNO].email+'</td>';
         html += '<td class="user_tel">'+user_data[listNO].tel+'</td>';
         html += '<td class="user_resState">'+user_data[listNO].resState+'</td>';
+
         html += '</tr>';  
     }
     $('.list_tb').append(html);
