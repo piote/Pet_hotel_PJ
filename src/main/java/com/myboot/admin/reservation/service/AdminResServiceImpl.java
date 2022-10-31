@@ -41,13 +41,13 @@ public class AdminResServiceImpl implements AdminResService{
 	
 	
 	@Override
-	public void updateResList(String reserNum) throws Exception{
-		adminresDAO.updateAdminReservation(reserNum);
+	public void updateResList(Map reservationMap) throws Exception{
+		adminresDAO.updateAdminReservation(reservationMap);
 	}
 	
 	@Override
-	public void updatePetList() throws Exception{
-		adminresDAO.updateAdminPetservice();
+	public void updatePetList(Map petserviceMap) throws Exception{
+		adminresDAO.updateAdminPetservice(petserviceMap);
 	}
 	
 	@Override

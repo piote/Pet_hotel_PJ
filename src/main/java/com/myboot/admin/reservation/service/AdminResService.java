@@ -12,9 +12,9 @@ public interface AdminResService {
 	public List adminPetList() throws Exception;
 	
 	
-	public void updateResList(String reserNum) throws Exception;
+	public void updateResList(Map reservationMap) throws Exception;
 	
-	public void updatePetList() throws Exception;
+	public void updatePetList(Map petserviceMap) throws Exception;
 	
 	public void deletePetList(String petNum) throws Exception;
 	
