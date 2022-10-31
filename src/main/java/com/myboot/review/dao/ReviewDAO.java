@@ -27,5 +27,6 @@ public interface ReviewDAO {
 	
 	public List selectMainReview() throws DataAccessException;
 	public List<ReviewVO> selectAllMyReservesList(Map pagingMap)throws DataAccessException;
+	public int selectTotReserves();
 
 }
