@@ -179,6 +179,9 @@
         	background-color: #bbb;
         	
         }
+        .res_content_box>td{
+        	padding: 10px;
+        }
         
         .petService_TB_Box{
         	height: 100%;
@@ -192,6 +195,89 @@
         
         .res_Date_Veiw_Box ul li span{
         	font-size: 12px;
+        }
+        .pet_Comment_Box{
+        	text-align: right;
+        }
+        
+        #pet_Comment{
+        	resize: none;
+        	width: 90%;
+        	
+        }
+        
+       
+                
+        .petTB_List_Box{
+        	overflow: hidden;
+        	border: 1px solid black;
+        	background-color: gainsboro;
+        	
+        }
+        
+        .petTB_List{
+        	overflow:scroll;
+		    width: 588px;
+		    white-space: nowrap;
+		    margin-right: -1000px;
+		    padding-top: 5px;
+		    
+        }
+        
+        .petTB_List>li{
+        	display: inline-block;
+        	margin: 3px;
+        	
+        }
+        
+        .petTB_Item_Box{
+        	border: 1px solid black;
+		    border-radius: 10%;
+		    padding: 10px;
+		    background-color: lightgrey;
+		    overflow: hidden;
+        }
+        
+        .petTB_Item_Box>li{
+        	height: 25px;
+        	text-align: center;
+        }
+        .spaT+input{
+        	width: 20%;
+        }
+        
+        .petTB_Item_Box_Add{
+        	height: 150px;
+		    width: 119px;
+		    border: 1px solid black;
+		    border-radius: 10%;
+		    padding: 10px;
+		    background-color: lightgrey;
+		    overflow: hidden;
+        }
+        .petTB_Item_Box_Add li{
+        	line-height: 225px;
+        	
+        }
+        
+        .petTB_Item{
+        	width: 115px;
+        }
+        
+         /* 펫 아이템 삭제 이미지 아이콘*/
+
+      	.petUsed{
+        	content:url("${contextPath}/resources/img/close.png")
+        }
+        
+        .petTB_Bt_Box{
+        	display:flex;
+        	direction: rtl; 
+        }
+        .petTB_Bt_Box button{
+        	width: 70px;
+		    height: 25px;
+		    margin-top: 5px;
         }
         
         .res_Content_Textbox{
@@ -229,28 +315,74 @@
         }
           /* 화살표 아이콘 뒤집기 end */
 
-      
+      	.petUsed{
+        	content:url("${contextPath}/resources/img/close.png")
+        }
+        
+        .petAdd_Bt{
+        	content:url("${contextPath}/resources/img/add-button.png");
+        	height: 90px;
+    		width: 90px;
+        	
+        }
         
     </style>
     <script>
-    	
+    	var petItemSum = 0;
     	//상세보기 열고 닫기
+    	
+    	//펫 요청사항 텍스트 범위 세기
+    	function petcommentTextLength(obj){
+
+    	        $('#pet_Comment_Info').html($('#pet_Comment').val().length);
+    	}
+    	
     	function closeResContentBox(obj){
     		
-    		if($(obj).attr('class') == 'res_R_arrow_bt'){
-    			//박스 안보임
-    			$(".res_content_box").css('display', 'none');
-    			$(obj).removeClass('res_R_arrow_bt');
-    			$(obj).addClass('res_arrow_bt');
-    		}else{
-    			//박스 보임
-    			$(".res_content_box").css('display', 'table-row');
-    			$(obj).removeClass('res_arrow_bt');
-        		$(obj).addClass('res_R_arrow_bt');
-    		}
+    		//이미 열려있다면
+    		if($('.res_content_box').css('display') == 'table-row'){
+    			$('.res_content_box').css('display', 'none');
+    			//열려있는데 선택한 리스트가 아닐경우
+    			if($(obj).attr('class') != 'res_R_arrow_bt'){
+    				$('.res_R_arrow_bt').addClass('res_arrow_bt');
+        			$('.res_R_arrow_bt').removeClass('res_R_arrow_bt');
+    			}
+    		}	
+    			
     		
+    			if($(obj).attr('class') == 'res_R_arrow_bt'){
+        			//박스 안보임
+        			$('.res_content_box').css('display', 'none');
+        			$(obj).addClass('res_arrow_bt');
+        			$(obj).removeClass('res_R_arrow_bt');
+        		}else{
+        			//박스 보임
+        			$('.res_content_box').insertAfter($(obj).parent().parent());//선택한 위치에 밑으로 res_content_box 이동
+        			$('.res_content_box').css('display', 'table-row');
+            		$(obj).addClass('res_R_arrow_bt');
+        			$(obj).removeClass('res_arrow_bt');
+        		}	
+    	}
+    	
+    	//펫 아이템 추가
+		function pet_Add(obj){
     		
-    		
+    		//이미 있는 갯수를 세서 갯수를 이용해 id 생성
+			petItemSum = $('.petTB_Item_Box').length;
+			
+			var petTB_Item_Box = '<li>'
+				+'<ul class="petTB_Item_Box">'
+				+'<li><input name="petname" class="petTB_Item" type="text" placeholder="이름"></li>'
+				+'<li><select name="petsex" class="petTB_Item"><option>male</option><option>female</option></select></li>'
+				+'<li><select name="petroom" class="petTB_Item" onchange=""><option value="Deluxe">Deluxe(소형견)</option><option value="Sweet">Suite(중형견)</option><option value="Superior">Superior(대형견)</option></select></li>'
+				+'<li><select name="beauty" class="petTB_Item" onchange=""><option value="N">이용안함</option><option value="Clipping">Clipping</option><option value="Scissoring">Scissoring</option></select></li>'
+				+'<li><span class="spaT">SPA</span><input name="spa" class="petTB_Item" type="checkbox" value="Y"><input type="hidden" name="spa"  id="" value="N"/></li>'
+				+'<li><input type="image" id="petTB_Item" class="petUsed" value="예약취소"></li>'
+				+'</ul>'
+				+'</li>'
+			$(petTB_Item_Box).insertBefore($('.petTB_Item_Box_Add').parent());
+			//let $box1 = $('.box1').clone();
+			//$('.box_wrapper').append($box1);
     	}
     	 
     </script>
@@ -326,6 +458,83 @@
 				                </td>					  
 				            </tr>
 				            
+				            <tr>
+	                 			<td class="res_num">1</td>
+				                <td class="res_name">aaa</td>
+				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
+				                <td class="res_petCount">2마리</td>
+				                <td class="res_payTime">2022-10-19</td>
+				                <td class="res_cost">2,000,000원</td>
+				                <td class="resState">이용전</td>
+				                <td class="res_modBt res_modBt_bt" onclick="">
+				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
+				                </td>					  
+				            </tr>
+				            
+				            <tr>
+	                 			<td class="res_num">1</td>
+				                <td class="res_name">aaa</td>
+				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
+				                <td class="res_petCount">2마리</td>
+				                <td class="res_payTime">2022-10-19</td>
+				                <td class="res_cost">2,000,000원</td>
+				                <td class="resState">이용전</td>
+				                <td class="res_modBt res_modBt_bt" onclick="">
+				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
+				                </td>					  
+				            </tr>
+				            
+				            <tr>
+	                 			<td class="res_num">1</td>
+				                <td class="res_name">aaa</td>
+				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
+				                <td class="res_petCount">2마리</td>
+				                <td class="res_payTime">2022-10-19</td>
+				                <td class="res_cost">2,000,000원</td>
+				                <td class="resState">이용전</td>
+				                <td class="res_modBt res_modBt_bt" onclick="">
+				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
+				                </td>					  
+				            </tr>
+				            
+				            <tr>
+	                 			<td class="res_num">1</td>
+				                <td class="res_name">aaa</td>
+				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
+				                <td class="res_petCount">2마리</td>
+				                <td class="res_payTime">2022-10-19</td>
+				                <td class="res_cost">2,000,000원</td>
+				                <td class="resState">이용전</td>
+				                <td class="res_modBt res_modBt_bt" onclick="">
+				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
+				                </td>					  
+				            </tr>
+				            <tr>
+	                 			<td class="res_num">1</td>
+				                <td class="res_name">aaa</td>
+				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
+				                <td class="res_petCount">2마리</td>
+				                <td class="res_payTime">2022-10-19</td>
+				                <td class="res_cost">2,000,000원</td>
+				                <td class="resState">이용전</td>
+				                <td class="res_modBt res_modBt_bt" onclick="">
+				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
+				                </td>					  
+				            </tr>
+				            
+				            <tr>
+	                 			<td class="res_num">1</td>
+				                <td class="res_name">aaa</td>
+				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
+				                <td class="res_petCount">2마리</td>
+				                <td class="res_payTime">2022-10-19</td>
+				                <td class="res_cost">2,000,000원</td>
+				                <td class="resState">이용전</td>
+				                <td class="res_modBt res_modBt_bt" onclick="">
+				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
+				                </td>					  
+				            </tr>
+				            
 				            <tr class="res_content_box">
 				            	<td colspan="3">
 				            		<ul>
@@ -345,11 +554,9 @@
 				            			
 				            				</ul>
 				            				<ul>
-				            					<li>
-				            						<span id="res_Content_Text">요청사항</span>
-				            					</li>
-				            					<li>
-				            						<textarea class="res_Content_Textbox"></textarea>
+				            					<li class="pet_Comment_Box">
+				            						<textarea id="pet_Comment" name="petcomment" spellcheck="false" maxlength="500" placeholder="요청사항을 적어주세요." onkeyup="petcommentTextLength(this);" rows="7"></textarea>
+				            						<span id="pet_Comment_Info">0</span>/500
 				            					</li>
 				            				</ul>
 				            			<li>
@@ -357,38 +564,24 @@
 				            		
 				            	</td>
 				            	<td colspan="5">
-				            	<ul class="petService_TB_Box">
-				            			<li class="petService_TB_Item">
-				            				<ul>
-				            					<li><input type="text" value="이름"></li>
-				            					<li><select><option></option>></select></li>
-				            					<li>방</li>
-				            					<li>미용</li>
-				            					<li>스파</li>
-				            					<li>X</li>
+				            		<ul>
+				            			<li class="petTB_List_Box">
+				            				<ul  class="petTB_List">
+				            						            					
+				            					<li>
+				            						<ul class="petTB_Item_Box_Add">
+				            							<li onclick="pet_Add(this);">
+				            								<input type="image" id="petTB_Item_Add" class="petAdd_Bt" value="펫 추가" >
+				            							</li>
+				            						</ul>
+				            					</li>
 				            				</ul>
 				            			</li>
-				            			<li class="petService_TB_Item">
-				            				<ul>
-				            					<li>이름</li>
-				            					<li>성별</li>
-				            					<li>방</li>
-				            					<li>미용</li>
-				            					<li>스파</li>
-				            					<li>X</li>
-				            				</ul>
+				            			<li class="petTB_Bt_Box">
+				            				<button>예약 수정</button>
+				            				<button>예약 취소</button>
+				            				<button>예약 확인</button>
 				            			</li>
-				            			<li class="petService_TB_Item">
-				            				<ul>
-				            					<li>이름</li>
-				            					<li>성별</li>
-				            					<li>방</li>
-				            					<li>미용</li>
-				            					<li>스파</li>
-				            					<li>X</li>
-				            				</ul>
-				            			</li>
-				            			
 				            		</ul>
 				            	</td>
 				            </tr>

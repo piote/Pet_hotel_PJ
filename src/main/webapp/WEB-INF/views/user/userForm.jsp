@@ -225,14 +225,16 @@ input[type="number"]::-webkit-inner-spin-button {
     		url: "http://localhost:8090/idCheck",
     		data: {id: id},
     		success: function (data) {
+    			 if(!document.userInfo.id.value){
+    	                alert("아이디를 입력하세요.");
+    	                return false;
+    	            }
     		if(data == 1) {
     			$("#olmessage").text("이미 사용중인 ID 입니다.");
     			$("#olmessage").addClass("olmessagef");
     			$("#olmessage").removeClass("olmessaget");
     			$("#idcheck").attr("value","false");
-    			}if(!document.userInfo.id.value){
-                    alert("아이디를 입력하세요.");
-                    return false;}else {
+    			}else {
     			$("#olmessage").text("사용 가능한 ID 입니다.");
     			$("#olmessage").addClass("olmessaget");
     			$("#olmessage").removeClass("olmessagef");

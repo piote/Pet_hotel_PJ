@@ -30,6 +30,8 @@ public  interface ReviewController {
 
 	ResponseEntity removeReview(int reviewNO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception;
+
+	public ModelAndView reviewBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	
 	

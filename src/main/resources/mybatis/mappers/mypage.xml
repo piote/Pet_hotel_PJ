@@ -31,6 +31,7 @@
 
 <resultMap id="searchResult" type="java.util.HashMap">
 	<result property="res_st" column="reservation_st" />
+	<result property="res_end" column="reservation_end" />
 	<result property="res_state" column="reservation_state" />
 	<result property="res_num" column="reservation_num" />
 	<result property="user_name" column="user_name" />
@@ -44,7 +45,7 @@
 
 	<select id="selectMyReservesList" resultMap="searchResult"  parameterType="String" >
 		<![CDATA[
-		select to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_num, u.user_name, u.user_tel, p.pet_name
+		select to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, r.reservation_num, u.user_name, u.user_tel, p.pet_name
         from tb_reservation r, tb_user u, tb_petservice p
                  where r.reservation_num = p.reservation_num and u.user_id = r.user_id and u.user_id = #{user_id}
 		         order by r.pay_time desc
@@ -53,11 +54,11 @@
 	
 	<select id="selectAllMyReservesList" resultMap="searchResult"  parameterType="java.util.Map" >
 		    SELECT * FROM ( 
-			SELECT ROWNUM as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
+			SELECT ROW_NUMBER() OVER(ORDER BY r.pay_time desc) as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
 					from tb_reservation r, tb_user u, tb_petservice p
 					where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
 				<choose>
-					<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'user_name' or colName == 'pet_name')">
+					<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'pet_name')">
 						 and ${colName} like '%'|| #{searchWord} ||'%'
 					</when>
 					<otherwise>	
@@ -65,19 +66,18 @@
 				</choose>
 			)
 			where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
-	        order by pay_time
 	</select>
 
 	<select id="selectMyDetailReservesList" resultMap="searchResult"  parameterType="java.util.Map" >
 		    SELECT * FROM ( 
-			SELECT ROWNUM as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
+			SELECT ROW_NUMBER() OVER(ORDER BY r.pay_time desc) as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
 					from tb_reservation r, tb_user u, tb_petservice p
 					where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
 			<choose>
 				<when test="(startDate != null and endDate != null) and (colName == null or colName == '')">
 					 and to_char(r.pay_time, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 				</when>
-				<when test="(startDate != null and endDate != null) and searchWord != null and (colName == 'user_name' or colName == 'pet_name')">
+				<when test="(startDate != null and endDate != null) and searchWord != null and (colName == 'pet_name')">
 					and to_char(r.pay_time, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 					and ${colName} like '%'|| #{searchWord} ||'%'
 				</when>
@@ -86,7 +86,7 @@
 			</choose>
 			)
              	where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
-		        order by pay_time
+
 	</select>
 	
 	<select id="selectMyReviewList" resultMap="reviewResult">
@@ -112,7 +112,7 @@
 	         on r.reservation_num = p.reservation_num
 	         where r.user_id = #{user_id}
 			<choose>
-				<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'user_name' or colName == 'pet_name')">
+				<when test="(startDate == null or startDate =='') and (endDate == null or endDate == '') and searchWord != null and (colName == 'pet_name')">
 					 and ${colName} like '%'|| #{searchWord} ||'%'
 				</when>
 				<otherwise>
@@ -132,7 +132,7 @@
 				<when test="(startDate != null and endDate != null) and (colName == null or colName == '')">
 					 and to_char(r.pay_time, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 				</when>
-				<when test="(startDate != null and endDate != null) and searchWord != null and (colName == 'user_name' or colName == 'pet_name')">
+				<when test="(startDate != null and endDate != null) and searchWord != null and (colName == 'pet_name')">
 					and to_char(r.pay_time, 'yyyy-mm-dd') between #{startDate} and #{endDate}
 					and ${colName} like '%'|| #{searchWord} ||'%'
 				</when>
