@@ -17,7 +17,7 @@
         .info_wrap{
             width: 100%; height: auto;
             position: relative;
-            margin-top: 60px;
+            margin-top: 80px;
         }
         .list_left{
             width: 270px; height: 500px;
