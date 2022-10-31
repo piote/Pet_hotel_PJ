@@ -3,9 +3,9 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.myboot.reservation.dao.ReservationDAO">
-<!-- 
-<resultMap id="reservationResult" type="reservationVO">
+<mapper namespace="com.myboot.admin.reservation.dao.AdminResDAO">
+
+  <resultMap id="adminreservationResult" type="reservationVO">
     <result property="res_num" column="RESERVATION_NUM" />
     <result property="res_st" column="RESERVATION_ST" />
     <result property="res_end" column="RESERVATION_END" />
@@ -16,7 +16,7 @@
     <result property="res_state" column="RESERVATION_STATE" />
   </resultMap> 
   
-  <resultMap id="petserviceResult" type="petserviceVO">
+  <resultMap id="adminpetserviceResult" type="petserviceVO">
     <result property="pet_num" column="PET_NUM" />
     <result property="res_num" column="RESERVATION_NUM" />
     <result property="id" column="USER_ID" />
@@ -26,8 +26,21 @@
     <result property="service_beauty" column="SERVICE_BEAUTY" />
     <result property="service_spa" column="SERVICE_SPA" />
   </resultMap> 
+  
+  <resultMap id="adminuserResult" type="userVO">
+    <result property="id" column="USER_ID" />
+    <result property="pw" column="USER_PW" />
+    <result property="name" column="USER_NAME" />
+    <result property="email" column="USER_EMAIL" />
+    <result property="tel" column="USER_TEL" />
+    <result property="tel_sub" column="USER_TEL_SUB" />
+    <result property="message" column="USER_MESSAGE" />
+    <result property="birth" column="USER_BIRTH" />
+    <result property="joinDate" column="JOINDATE" />
+    <result property="grade" column="USER_GRADE" />
+  </resultMap> 
 	
-	<resultMap id="resfullResult" type="resfullVO">
+  <resultMap id="adminresfullResult" type="adminresfullVO">
     <result property="res_num" column="RESERVATION_NUM" />
     <result property="res_st" column="RESERVATION_ST" />
     <result property="res_end" column="RESERVATION_END" />
@@ -42,8 +55,106 @@
     <result property="room_grade" column="ROOM_GRADE" />
     <result property="service_beauty" column="SERVICE_BEAUTY" />
     <result property="service_spa" column="SERVICE_SPA" />
+    <result property="pw" column="USER_PW" />
+    <result property="name" column="USER_NAME" />
+    <result property="email" column="USER_EMAIL" />
+    <result property="tel" column="USER_TEL" />
+    <result property="tel_sub" column="USER_TEL_SUB" />
+    <result property="message" column="USER_MESSAGE" />
+    <result property="birth" column="USER_BIRTH" />
+    <result property="joinDate" column="JOINDATE" />
+    <result property="grade" column="USER_GRADE" />
   </resultMap> 
-	 -->
+  
+  
+  <!-- 관리자 예약관리 예약조회 -->
+  <select id="adminResList" resultMap="adminresfullResult">
+  	<![CDATA[
+		SELECT res.reservation_num, tb_user.user_name, res.reservation_st, res.reservation_end, count(pet.pet_num) as "총 마리수", res.pay_time, res.total_cost ,res.reservation_state
+	    FROM tb_reservation res 
+	    left JOIN tb_petservice pet 
+	    ON res.reservation_num = pet.reservation_num
+	    left join tb_user  
+	    ON res.user_id = tb_user.user_id
+	    GROUP BY res.reservation_num,res.reservation_st, res.reservation_end, res.pay_time, res.total_cost, res.reservation_state, tb_user.user_name
+	    ORDER BY RESERVATION_NUM ASC
+	]]>
+  </select>
+  
+  <!-- 관리자 예약관리 예약검색 -->
+  <select id="searchadminResList" resultMap="adminresfullResult" parameterType="java.util.Map">
+  	<![CDATA[
+		SELECT res.reservation_num, tb_user.user_name, res.reservation_st, res.reservation_end, count(pet.pet_num) as "총 마리수", res.pay_time, res.total_cost ,res.reservation_state
+	    FROM tb_reservation res 
+	    left JOIN tb_petservice pet 
+	    ON res.reservation_num = pet.reservation_num
+	    left join tb_user  
+	    ON res.user_id = tb_user.user_id	]]>
+	    <where>
+	    	<choose>
+	    		<when test="search_op=='search_res_num'">
+	    			res.reservation_num like '%'||#{index}||'%'
+	    		</when>
+	    		<when test="search_op=='search_id'">
+	    			res.user_id like '%'||#{index}||'%'
+	    		</when>
+	    	</choose>
+	    </where>
+	    GROUP BY res.reservation_num,res.reservation_st, res.reservation_end, res.pay_time, res.total_cost, res.reservation_state, tb_user.user_name
+	    ORDER BY RESERVATION_NUM ASC
+  </select>
+  
+  <!-- 관리자 예약관리 예약불러오기 -->
+  <select id="adminPetList" resultMap="adminresfullResult">
+  	<![CDATA[
+		SELECT * FROM tb_petservice
+	]]>
+  </select>
+	
+	
+	
+  <!-- 관리자 예약관리 예약변경(예약 수정) -->
+  <update id="updateAdminReservation" parameterType="java.util.Map">  
+	update tb_reservation
+	set RESERVATION_ST = #{RESERVATION_ST},
+	RESERVATION_END = #{RESERVATION_END},
+	RS_COMMENT = #{RS_COMMENT},
+	TOTAL_COST = #{TOTAL_COST},
+	RESERVATION_STATE = #{RESERVATION_STATE}
+	where RESERVATION_NUM = #{RESERVATION_NUM}
+  </update>
+  
+  <!-- 관리자 예약관리 예약변경(펫 수정) -->
+  <update id="updateAdminPetservice" parameterType="java.util.Map">
+	update tb_petservice
+	PET_NUM = #{PET_NUM},
+	set PET_NAME = #{PET_NAME},
+	PET_GENDER = #{PET_GENDER},
+	ROOM_GRADE = #{ROOM_GRADE},
+	SERVICE_BEAUTY = #{SERVICE_BEAUTY},
+	SERVICE_SPA = #{SERVICE_SPA}
+	where PET_NUM = #{PET_NUM}
+  </update>
+  
+  <!-- 관리자 예약관리 예약변경(펫 삭제) -->
+  <delete id="deleteAdminPetList" parameterType="String">
+    <![CDATA[
+      delete from tb_petservice
+	  where PET_NUM in (
+	  	SELECT PET_NUM tb_petservice
+	  	START WITH PET_NUM = #{PET_NUM}
+    ]]>      
+  </delete>
+  
+  <!-- 관리자 예약관리 예약변경(예약상태 수정) -->
+  <update id="updateAdminResState" parameterType="String">
+	 update tb_reservation
+	 set reservation_state='C'
+	 where reservation_num=#{RESERVATION_NUM}
+  </update>	
+  
+
+  
 	<!-- 
 	<select id="serchReservationNum" resultMap="resfullResult">수정중
 		<![CDATA[
@@ -58,7 +169,7 @@
 		RDER BY RESERVATION_NUM ASC;
 		]]>
 	</select>
- -->
+ 	 -->
  
     
 </mapper>
