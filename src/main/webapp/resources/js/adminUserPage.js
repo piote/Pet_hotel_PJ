@@ -249,14 +249,19 @@ function addModRow(obj){
     if ($('.addTr').length) {
         if($(obj).data('num')!=$('.addTr').data('num')){
             $('.addTr').remove();
-            
+            modHtml(obj);
+        }else{
+            $('.addTr').remove();
+            $(obj).removeClass('modBT_push');
+            $(obj).css('transform','scale(1) rotate(0deg)');
         }
-        $('.addTr').remove();
-        $(obj).removeClass('modBT_push');
-        $(obj).css('transform','scale(1) rotate(0deg)');
-        
     }else{
-        $(obj).css('transform','scale(1) rotate(180deg)');
+        modHtml(obj);
+    }
+}
+
+function modHtml(obj){
+    $(obj).css('transform','scale(1) rotate(180deg)');
         var num = $(obj).data('num');
         console.log(num)
 
@@ -281,7 +286,7 @@ function addModRow(obj){
         }
 
         var html = '<tr class="addTr" data-num='+num+'>'+
-        '<form action="#">'+
+        '<form action="/modMember.do" method="post">'+
             '<td colspan="2">'+
                 '<span class="info_box info_id">아이디 : <input type="text" name="id" id="id" value= "'+user_data[num].id+'"></span>'+
                 '<span class="info_box info_pw">비밀번호 : <input type="text" name="pw" id="pw" value= "'+user_data[num].pw+'"></span>'+
@@ -297,9 +302,8 @@ function addModRow(obj){
             '<td colspan="2">'+
                 '<span class="info_box info_grand">멤버쉽 등급 :&nbsp;<svg class="crown" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:'+crown_color+'"><path d="M3 16l-3-10 7.104 4 4.896-8 4.896 8 7.104-4-3 10h-18zm0 2v4h18v-4h-18z"/></svg>&nbsp; '+user_data[num].grade+'</span>'+
                 '<input type="hidden" name="">'+
-                '<button type="button" id="">수정</button>'+
+                '<button type="submit" id="">수정</button>'+
                 '<button type="button" id="">탈퇴</button>'+
             '</td></form></tr>';
         $(obj).parent().parent().after(html);
-    }
 }

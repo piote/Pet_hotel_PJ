@@ -211,6 +211,9 @@
             background-color: #eee;
             padding-left: 5px;
         }
+        .info_box input[type=text]:focus, .info_box input[type=date]:focus{
+            border: 1px solid #ccc;
+        }
         .info_box input[type=radio]{
             width: 15px;
             height: 15px;
