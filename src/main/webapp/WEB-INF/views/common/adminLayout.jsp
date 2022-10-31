@@ -24,19 +24,24 @@
     <link rel="stylesheet" href="${contextPath}/resources/css/tiles.css">
 
     <style>
-      #header{
-        border: 1px solid rgba(255, 255, 255, 0);
-        z-index: 100;
-      }
-      #content{
-    	height: auto;
-      }
+      	#header{
+	        border: 1px solid rgba(255, 255, 255, 0);
+	        z-index: 100;
+      	}
+      	#content{
+    		height: auto;
+    		margin-top: 50px;
+      	}
 		.con_wrap{
-            width: 1270px; height: auto;
-            position: relative;
-            margin: 200px auto;
-            margin-bottom: 120px;
-        }
+           width: 1270px; height: auto;
+           position: relative;
+           margin: 200px auto;
+           margin-bottom: 120px;
+       }
+       #adminSide{
+	       	position: absolute;
+	       	top: 50px; left: 0;
+       }
 
     </style>
 
@@ -52,6 +57,9 @@
       <section class="con_wrap">
 	      <div id="adminTitle">
 	          <tiles:insertAttribute name="adminTitle"/> 
+	      </div>
+	      <div id="adminSide">
+	          <tiles:insertAttribute name="adminSide"/> 
 	      </div>
 	      <div id="content">
 	          <tiles:insertAttribute name="body"/>

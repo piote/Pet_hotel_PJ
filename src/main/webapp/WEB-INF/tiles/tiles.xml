@@ -15,6 +15,7 @@
       <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
       <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
       <put-attribute name="adminTitle" value="/WEB-INF/views/common/adminTitle.jsp" />
+      <put-attribute name="adminSide" value="/WEB-INF/views/common/adminSide.jsp" />
       <put-attribute name="body" value="" />
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
