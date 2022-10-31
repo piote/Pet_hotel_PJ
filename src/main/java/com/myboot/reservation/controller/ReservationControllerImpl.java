@@ -110,6 +110,7 @@ public  class ReservationControllerImpl implements ReservationController{
 			
 		return ResList;
 	}
+	
 	//예약 하기
 	@Override
 	@RequestMapping(value= "/reservationAdd.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -201,6 +202,7 @@ public  class ReservationControllerImpl implements ReservationController{
 		
 		return mav;
 	}
+	
 	//예약 번호로 예약 찾기 
 	@ResponseBody 
 	@RequestMapping(value= "/SearchReservationNum.do", method = RequestMethod.POST)
