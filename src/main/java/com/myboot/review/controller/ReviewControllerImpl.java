@@ -195,25 +195,26 @@ public class ReviewControllerImpl implements ReviewController {
 		
 		if(session.getAttribute("user") != null) {
 			UserVO userVO = (UserVO) session.getAttribute("user");
-			String id = userVO.getId();
+			String user_id = userVO.getId();
+			
 			
 			String _section = request.getParameter("section");
 			String _pageNum = request.getParameter("pageNum");
 			int section = Integer.parseInt(((_section == null) ? "1" : _section));
 			int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
-			Map<String, Integer> pagingMap = new HashMap<String, Integer>();
+			 Map pagingMap = new HashMap();
 			pagingMap.put("section", section);
 			pagingMap.put("pageNum", pageNum);
+			pagingMap.put("user_id", user_id);
 			Map myReserveMap = reviewService.listMyDetailReserve(pagingMap);
 			
 			myReserveMap.put("section", section);
 			myReserveMap.put("pageNum", pageNum);
-			myReserveMap.put("id", id);		
+			myReserveMap.put("user_id", user_id);		
 			mav.addObject("myReserveMap", myReserveMap);
 		}
 		return mav;
 	}
-	
 	
 	/*
 	 * @RequestMapping("/reviewDetail_1.do") public String detail_1(Model model){

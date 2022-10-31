@@ -25,7 +25,7 @@
 	<result property="res_num" column="RESERVATION_NUM" />
 	<result property="res_st" column="RESERVATION_ST" />
 	<result property="res_end" column="RESERVATION_END" />
-	<result property="id" column="USER_ID" />
+	<result property="user_id" column="user_id" />
 	<result property="res_comment" column="RS_COMMENT" />
 	<result property="totalCost" column="TOTAL_COST" />
 	<result property="payTime" column="PAY_TIME" />
@@ -99,12 +99,15 @@
 	<select id="selectAllMyReservesList" parameterType="java.util.Map"
 		resultMap="reserveResult">  
 <![CDATA[
-SELECT		    res.RESERVATION_NUM,  res.RESERVATION_ST, res.USER_ID, res.RESERVATION_STATE , MAX(pet.PET_NAME)
+   SELECT * FROM (
+    SELECT ROWNUM AS recNum,  res.RESERVATION_NUM,  res.RESERVATION_ST, res.user_id, res.RESERVATION_STATE , Max（pet_name）as pet_name
 				FROM tb_reservation res
 				left join tb_petservice pet
                 on res.RESERVATION_NUM = pet.RESERVATION_NUM
-                GROUP BY res.RESERVATION_NUM, res.RESERVATION_ST, res.USER_ID, res.RESERVATION_STATE
-				order by RESERVATION_NUM desc
+               
+                GROUP BY ROWNUM, res.RESERVATION_NUM, res.RESERVATION_ST, res.USER_ID, res.RESERVATION_STATE
+				order by RESERVATION_ST asc)        
+                    where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
 							
 						]]>
 
@@ -187,6 +190,12 @@ SELECT		    res.RESERVATION_NUM,  res.RESERVATION_ST, res.USER_ID, res.RESERVATI
 	<select id="selectTotReview" resultType="int">
   <![CDATA[
   	select count(review_num) from tb_review
+  ]]>
+	</select>
+
+		<select id="selectTotReserves" resultType="int">
+  <![CDATA[
+  	select count(RESERVATION_NUM) from tb_reservation
   ]]>
 	</select>
 
