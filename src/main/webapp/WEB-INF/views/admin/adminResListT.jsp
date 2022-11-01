@@ -373,7 +373,7 @@
     		petTableInfo = $('.res_content_box').children();
     		$('.res_content_box').empty()
     	}
-    	var petTableInfo = $('.res_content_box').children();
+    	var petTableInfo;
     	var petItemSum = 0;
     	//상세보기 열고 닫기
     	
@@ -388,7 +388,6 @@
    			if($(obj).attr('class') == 'res_R_arrow_bt'){
        			//박스 안보임
        			//$('.res_content_box').css('display', 'none');
-       			petTableInfo = $('.res_content_box').children();
     			$('.res_content_box').empty()
        			$('.res_content_box').css('height', '0px');
     			//회살표
@@ -396,10 +395,9 @@
        			$(obj).removeClass('res_R_arrow_bt');
        		}else{
        			
-       			//이미 열려있다면
+       			//이미 열려있다면 이전거 닫기
         		if($('.res_content_box').css('height') != '0px'){
         			//$('.res_content_box').css('display', 'none');
-        			petTableInfo = $('.res_content_box').children();
     				$('.res_content_box').empty()
         			$('.res_content_box').css('height', '0px');
     				//화살표
@@ -415,7 +413,7 @@
        			$('.res_content_box').css('height', '278px');
        			console.log(petTableInfo);
        			//시간후 테이블 표시
-       			tableView();
+       			tableView(obj);
        			//화살표
            		$(obj).addClass('res_R_arrow_bt');
        			$(obj).removeClass('res_arrow_bt');
@@ -449,11 +447,17 @@
 		}
 		
 		//테이블안에 요소 추가.
-		function tableView(){
+		function tableView(obj){
 			setTimeout(function() {
-				$('.res_content_box').append(petTableInfo);
-				}, 500);
+				//조건문 빨리 두번 눌러서 뜨면 안되는 경우
+				if($(obj).attr('class')!='res_arrow_bt'){
+					$('.res_content_box').append(petTableInfo);
+				}
+					
+			}, 500);
 		}
+				
+				
     </script>
 </head>
 <body>
