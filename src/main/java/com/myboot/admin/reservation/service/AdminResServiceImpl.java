@@ -38,7 +38,12 @@ public class AdminResServiceImpl implements AdminResService{
 		return AdminPetList;
 	}
 	
-	
+	@Override
+	public int adminTotalResNum() throws Exception{
+		int adminTotalResNum = 0;
+		adminTotalResNum = adminresDAO.adminTotalResNum();
+		return adminTotalResNum;
+	}
 	
 	@Override
 	public void updateResList(Map reservationMap) throws Exception{
