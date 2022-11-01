@@ -86,5 +86,18 @@
 	    	 where USER_ID=#{id}
    		]]>
    	  </update>
-	
+   	  
+   	  <!-- 회원탈퇴/활성화  -->
+   	<update id="removeUser" parameterType="String">
+   		<![CDATA[
+   			update TB_USER
+   			set ACTIVE='N'
+   			where USER_ID=#{id}]]>
+   	</update>
+   	<update id="activeUser" parameterType="String">
+   		<![CDATA[
+   			update TB_USER
+   			set ACTIVE='Y'
+   			where USER_ID=#{id}]]>
+   	</update>
 </mapper>

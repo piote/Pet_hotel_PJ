@@ -313,10 +313,10 @@ function modHtml(obj){
             var active = user_data[num].active;
             if(active=='Y'){
                 html +='<button type="button" onclick="modUser()">수정</button>'+
-                '<button type="button" class="red_color" onclick="removeUser()">탈퇴</button>'+
+                '<button type="button" class="red_color" onclick="userActive('+num+')">탈퇴</button>'+
                 '</td></tr>';
             }else{
-                html += '<button type="button" class="blue_color" onclick="removeUser()">활성화</button>'+
+                html += '<button type="button" class="blue_color" onclick="userActive('+num+')">활성화</button>'+
                 '</td></tr>';
             }
                 
@@ -354,15 +354,22 @@ function modUser(){
     }
 }
 
-function removeUser(){
-    var result = confirm("정말 탈퇴처리 하시겠습니까?");
+function userActive(num){
+    var id = user_data[num].id;
+    var active = user_data[num].active;
+
+    if(active=='Y'){
+        var result = confirm("정말 탈퇴처리 하시겠습니까?");
+    }else{
+        var result = confirm("회원 활성화처리 하시겠습니까?");
+    }
+    
     if(result){
-        var id = $("input[name=id]").val() ;
             console.log(id)
             $.ajax({
                 type : 'post',
-                url : '/adminRemoveUser.do',
-                data : {"id":id},
+                url : '/adminActiveUser.do',
+                data : {"id":id, "active":active},
                 dataType : 'json',
                 success : function(data){
                 //총데이터 수 저장
