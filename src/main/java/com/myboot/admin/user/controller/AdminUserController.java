@@ -7,5 +7,5 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface AdminUserController {
 	public ModelAndView UserList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView ResList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	//public ModelAndView ResList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
