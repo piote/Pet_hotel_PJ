@@ -170,15 +170,14 @@
         .notResItem{
         	text-align: center;
         }
-        .res_content_box{
+        
+        #res_content_box{
+        	height: 0px;
         	width: 100%;
-        	display:none;
         	overflow:hidden;
         	background-color: #bbb;
         	
-        }
-        .res_content_box>td{
-        	padding: 10px;
+        	transition: height 0.6s;
         }
         
         .res_Date_Veiw_Box li{
@@ -187,8 +186,49 @@
         	text-align: center;
         }
         
-        .res_Date_Veiw_Box ul li{
-        	font-size: 12px;
+        .res_Date_Veiw_Box ul li .check_Date{
+        	font-size: 16px;
+        }
+        
+        .res_Date_Veiw_Box .date_Cal_Text{
+        	width: 8%;
+        }
+        
+        .pet_Cost_Box{
+        	text-align: left;
+        	margin-left: 40px;
+        }
+        
+        .pet_Cost_table{
+        	border:2px solid black;
+        	border-collapse:collapse;
+        	height: 85px;
+   	 		width: 230px;
+    		text-align: center;
+    		margin: 0 auto;
+        	
+        }
+        
+        .list_tb .pet_Cost_table tr{
+        	height: 25px;   	
+        }
+        
+        .pet_Cost_table tr th,.pet_Cost_table tr tb {
+        	border:1px solid black;
+        	width: 20%;
+        	
+        }
+        
+        .pet_Cost_Box li:nth-child(2){
+        	text-align: right;
+        	
+        }
+        
+        .membershipImg{
+        	display: inline;
+		    vertical-align: middle;
+		    width: 15px;
+		    height: 15px;
         }
         .pet_Comment_Box{
         	text-align: right;
@@ -206,15 +246,23 @@
         	overflow: hidden;
         	border: 1px solid black;
         	background-color: gainsboro;
+        	height:220px;
+        	width: 96%;
+		    margin: 0 auto;
+		    margin-top: 10px;
+		    margin-bottom: 10px;
         	
         }
         
         .petTB_List{
-        	overflow:scroll;
-		    width: 588px;
+        	overflow: scroll;
+        	height:215px;
+		    width: 568px;
 		    white-space: nowrap;
 		    margin-right: -1000px;
 		    padding-top: 5px;
+		    padding-right: 8px;
+		    padding-left: 8px;
 		    
         }
         
@@ -225,9 +273,11 @@
         }
         
         .petTB_Item_Box{
-        	border: 1px solid black;
-		    border-radius: 10%;
-		    padding: 10px;
+        	height: 150px;
+		    width: 125px;
+		    border: 2px solid black;
+		    border-radius: 15%;
+		    padding: 15px;
 		    background-color: lightgrey;
 		    overflow: hidden;
         }
@@ -236,42 +286,55 @@
         	height: 25px;
         	text-align: center;
         }
+        
+        /*동물 아이템 삭제  */
+        .petTB_Item_Box>li:nth-child(6){
+        
+        	text-align: right;
+        }
+        
         .spaT+input{
         	width: 20%;
         }
         
         .petTB_Item_Box_Add{
         	height: 150px;
-		    width: 119px;
-		    border: 1px solid black;
-		    border-radius: 10%;
-		    padding: 10px;
+    		width: 125px;
+		    border: 2px solid black;
+    		border-radius: 15%;
+    		padding: 15px;
 		    background-color: lightgrey;
 		    overflow: hidden;
+
         }
         .petTB_Item_Box_Add li{
         	line-height: 225px;
-        	
+        	height: 100%;
+    		width: 100%;
         }
         
         .petTB_Item{
         	width: 115px;
         }
         
+       
+        
          /* 펫 아이템 삭제 이미지 아이콘*/
 
       	.petUsed{
-        	content:url("${contextPath}/resources/img/close.png")
+        	content:url("${contextPath}/resources/img/close.png");
         }
         
         .petTB_Bt_Box{
         	display:flex;
         	direction: rtl; 
+        	width: 98%;
         }
         .petTB_Bt_Box button{
         	width: 70px;
 		    height: 25px;
-		    margin-top: 5px;
+		    margin-bottom: 10px;
+		    margin-left: 3px;
         }
         
         /* 화살표 아이콘 뒤집기  */
@@ -281,7 +344,8 @@
 		    height: 40px;
 		    width: 40px;
 		    transform: rotate(90deg);
-           
+		    transition: transform 0.6s;
+           	
         }
         .res_R_arrow_bt {
         	position: relative;
@@ -289,13 +353,12 @@
 		    height: 40px;
 		    width: 40px;
 		    transform: rotate(-90deg);
+		    transition: transform 0.6s;
            
         }
           /* 화살표 아이콘 뒤집기 end */
 
-      	.petUsed{
-        	content:url("${contextPath}/resources/img/close.png")
-        }
+   
         
         .petAdd_Bt{
         	content:url("${contextPath}/resources/img/add-button.png");
@@ -306,6 +369,11 @@
         
     </style>
     <script>
+    	window.onload = function () {
+    		petTableInfo = $('.res_content_box').children();
+    		$('.res_content_box').empty()
+    	}
+    	var petTableInfo = $('.res_content_box').children();
     	var petItemSum = 0;
     	//상세보기 열고 닫기
     	
@@ -316,30 +384,42 @@
     	}
     	
     	function closeResContentBox(obj){
-    		
-    		//이미 열려있다면
-    		if($('.res_content_box').css('display') == 'table-row'){
-    			$('.res_content_box').css('display', 'none');
-    			//열려있는데 선택한 리스트가 아닐경우
-    			if($(obj).attr('class') != 'res_R_arrow_bt'){
+
+   			if($(obj).attr('class') == 'res_R_arrow_bt'){
+       			//박스 안보임
+       			//$('.res_content_box').css('display', 'none');
+       			petTableInfo = $('.res_content_box').children();
+    			$('.res_content_box').empty()
+       			$('.res_content_box').css('height', '0px');
+    			//회살표
+       			$(obj).addClass('res_arrow_bt');
+       			$(obj).removeClass('res_R_arrow_bt');
+       		}else{
+       			
+       			//이미 열려있다면
+        		if($('.res_content_box').css('height') != '0px'){
+        			//$('.res_content_box').css('display', 'none');
+        			petTableInfo = $('.res_content_box').children();
+    				$('.res_content_box').empty()
+        			$('.res_content_box').css('height', '0px');
+    				//화살표
     				$('.res_R_arrow_bt').addClass('res_arrow_bt');
-        			$('.res_R_arrow_bt').removeClass('res_R_arrow_bt');
-    			}
-    		}	
-    			
-    		
-    			if($(obj).attr('class') == 'res_R_arrow_bt'){
-        			//박스 안보임
-        			$('.res_content_box').css('display', 'none');
-        			$(obj).addClass('res_arrow_bt');
-        			$(obj).removeClass('res_R_arrow_bt');
-        		}else{
-        			//박스 보임
-        			$('.res_content_box').insertAfter($(obj).parent().parent());//선택한 위치에 밑으로 res_content_box 이동
-        			$('.res_content_box').css('display', 'table-row');
-            		$(obj).addClass('res_R_arrow_bt');
-        			$(obj).removeClass('res_arrow_bt');
+        			$('.res_R_arrow_bt').removeClass('res_R_arrow_bt');			
         		}	
+       			//박스 보임
+       			$('.res_content_box').insertAfter($(obj).parent().parent());//선택한 위치에 밑으로 res_content_box 이동
+       			//non이면 테이블보이기
+       			if($('.res_content_box').css('display') != 'table-row'){
+       				$('.res_content_box').css('display', 'table-row');
+       			}
+       			$('.res_content_box').css('height', '278px');
+       			console.log(petTableInfo);
+       			//시간후 테이블 표시
+       			tableView();
+       			//화살표
+           		$(obj).addClass('res_R_arrow_bt');
+       			$(obj).removeClass('res_arrow_bt');
+       		}	
     	}
     	
     	//펫 아이템 추가
@@ -355,14 +435,25 @@
 				+'<li><select name="petroom" class="petTB_Item" onchange=""><option value="Deluxe">Deluxe(소형견)</option><option value="Sweet">Suite(중형견)</option><option value="Superior">Superior(대형견)</option></select></li>'
 				+'<li><select name="beauty" class="petTB_Item" onchange=""><option value="N">이용안함</option><option value="Clipping">Clipping</option><option value="Scissoring">Scissoring</option></select></li>'
 				+'<li><span class="spaT">SPA</span><input name="spa" class="petTB_Item" type="checkbox" value="Y"><input type="hidden" name="spa"  id="" value="N"/></li>'
-				+'<li><input type="image" id="petTB_Item" class="petUsed" value="예약취소"></li>'
+				+'<li><input type="image" id="petTB_Item_Delete" class="petUsed" onclick="petItemDelet(this)" value="예약취소"></li>'
 				+'</ul>'
 				+'</li>'
 			$(petTB_Item_Box).insertBefore($('.petTB_Item_Box_Add').parent());
 			//let $box1 = $('.box1').clone();
 			//$('.box_wrapper').append($box1);
     	}
-    	 
+    	
+    	//펫 테이블 삭제
+		function petItemDelet(obj){
+			$(obj).parent().parent().parent().remove();
+		}
+		
+		//테이블안에 요소 추가.
+		function tableView(){
+			setTimeout(function() {
+				$('.res_content_box').append(petTableInfo);
+				}, 500);
+		}
     </script>
 </head>
 <body>
@@ -513,27 +604,62 @@
 				                </td>					  
 				            </tr>
 				            
-				            <tr class="res_content_box">
+				            <tr id="res_content_box" class="res_content_box">
 				            	<td colspan="3">
 				            		<ul>
 				            			<li class="res_Date_Veiw_Box">
 				            				<ul>
-				            					<li>Check In</li>
-				            					<li>Check Out</li>
+				            					<li><span class="check_Date">Check In</span></li>
+				            					<li class="date_Cal_Text"></li>
+				            					<li><span class="check_Date">Check Out</span></li>
 				            				</ul>
 				            				<ul>
 				            					<li><input type="date"></li>
+				            					<li class="date_Cal_Text"><span id="dateCalText">2박</span></li>
 				            					<li><input type="date"></li>
-				            				</ul>
+				            				</ul>	
 				            			<li>
+				            			<br>
 				            			<li>
-				            				<ul>
-				            					<li><span id="res_TotalCost">2,000,000원</span></li>
-				            			
+				            				<ul class="pet_Cost_Box">
+				            					<li>
+					            					<table class="pet_Cost_table">
+													  <tr>
+													    <th>*</th>
+													    <th>R</th>
+													    <th>C</th>
+													    <th>S</th>
+													    <th>SP</th>
+													  </tr>
+													  <tr>
+													    <th>소</td>
+													    <td clss="sr">0</td>
+													    <td clss="sc">0</td>
+													    <td clss="ss">0</td>
+													    <td clss="ssp">0</td>
+													  </tr>
+													  <tr>
+													    <th>중</td>
+													    <td clss="mr">0</td>
+													    <td clss="mc">0</td>
+													    <td clss="ms">0</td>
+													    <td clss="msp">0</td>
+													  </tr>
+													  <tr>
+													    <th>대</td>
+													    <td clss="lr">0</td>
+													    <td clss="lc">0</td>
+													    <td clss="ls">0</td>
+													    <td clss="lsp">0</td>
+													  </tr>
+													</table>
+												</li>
+				            					<li><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">2,000,000원</span></li>
 				            				</ul>
+				            				<br>
 				            				<ul>
 				            					<li class="pet_Comment_Box">
-				            						<textarea id="pet_Comment" name="petcomment" spellcheck="false" maxlength="500" placeholder="요청사항을 적어주세요." onkeyup="petcommentTextLength(this);" rows="7"></textarea>
+				            						<textarea id="pet_Comment" name="petcomment" spellcheck="false" maxlength="500" placeholder="요청사항을 적어주세요." onkeyup="petcommentTextLength(this);" rows="3"></textarea>
 				            						<span id="pet_Comment_Info">0</span>/500
 				            					</li>
 				            				</ul>
@@ -549,7 +675,7 @@
 				            				<ul  class="petTB_List">
 				            						            					
 				            					<li>
-				            						<ul class="petTB_Item_Box_Add">
+				            						<ul class="petTB_Item_Box petTB_Item_Box_Add">
 				            							<li onclick="pet_Add(this);">
 				            								<input type="image" id="petTB_Item_Add" class="petAdd_Bt" value="펫 추가" >
 				            							</li>
