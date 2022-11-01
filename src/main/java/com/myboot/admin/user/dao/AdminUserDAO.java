@@ -14,4 +14,5 @@ import com.myboot.user.vo.UserVO;
 public interface AdminUserDAO {	
 	public List selectAllUserList() throws DataAccessException;
 	public List searchUsers(Map searchOption) throws DataAccessException;
+	public int adminUpdateUser(UserVO userVO) throws DataAccessException;
 }

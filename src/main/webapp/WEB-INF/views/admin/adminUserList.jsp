@@ -165,7 +165,10 @@
             color: #030303;
         }
         .red_color{
-            color: red;
+            color: red !important;
+        }
+        .blue_color{
+            color: blue !important;
         }
         .addTr{
             height: 300px !important;
@@ -178,6 +181,7 @@
             background-color: #eee;
             color: #333;
             border: 0;
+            cursor: pointer;
         }
         .addTr button:last-child{
             margin-left: 10px;
@@ -212,7 +216,7 @@
             padding-left: 5px;
         }
         .info_box input[type=text]:focus, .info_box input[type=date]:focus{
-            border: 1px solid #ccc;
+            outline: 1px solid #ccc;
         }
         .info_box input[type=radio]{
             width: 15px;
@@ -255,18 +259,19 @@
                 <label><input type="checkbox" name="reservation" id="res_X" value="X">X</label>
             </div>
         </div>
-
-        <table class="list_tb">
-            <tr class="tb_title">
-                <td class="user_id">아이디</td>
-                <td class="user_name">이름</td>
-                <td class="user_grade">멤버쉽등급</td>
-                <td class="user_joinDate">가입일</td>
-                <td class="user_email">이메일</td>
-                <td class="user_tel">전화번호</td>
-                <td class="user_resState">예약여부</td>
-            </tr>
-        </table>
+        <form name="modUserForm" action="${contextPath}/modMember.do" method="post">
+            <table class="list_tb">
+                <tr class="tb_title">
+                    <td class="user_id">아이디</td>
+                    <td class="user_name">이름</td>
+                    <td class="user_grade">멤버쉽등급</td>
+                    <td class="user_joinDate">가입일</td>
+                    <td class="user_email">이메일</td>
+                    <td class="user_tel">전화번호</td>
+                    <td class="user_resState">예약여부</td>
+                </tr>
+            </table>
+         </form>
         <div class="page_num"></div>
     </div>
 </body>
