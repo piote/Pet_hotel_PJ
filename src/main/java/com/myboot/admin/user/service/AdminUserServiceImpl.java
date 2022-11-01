@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myboot.admin.user.dao.AdminUserDAO;
+import com.myboot.user.vo.UserVO;
 
 @Service("adminUserService")
 public class AdminUserServiceImpl implements AdminUserService {
@@ -26,5 +27,11 @@ public class AdminUserServiceImpl implements AdminUserService {
 		List usersList = null;
 		usersList = adminUserDAO.searchUsers(searchOption);
 		return usersList;
+	}
+	
+	//유저수정
+	@Override
+	public int UpdateUser(UserVO userVO) throws Exception{
+		return adminUserDAO.adminUpdateUser(userVO);
 	}
 }

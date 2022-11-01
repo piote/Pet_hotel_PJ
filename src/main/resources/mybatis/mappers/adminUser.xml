@@ -22,18 +22,18 @@
 	
 	<select id="selectAllUserList" resultMap="userResult">
       <![CDATA[
-        select U.USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_TEL, USER_TEL_SUB, USER_BIRTH ,JOINDATE, USER_GRADE, ACTIVE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
+        select U.USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_TEL, USER_TEL_SUB, USER_BIRTH ,JOINDATE, USER_MESSAGE, USER_GRADE, ACTIVE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
 		    from TB_USER U 
 		    LEFT JOIN ( select user_id, RESERVATION_STATE from TB_RESERVATION WHERE RESERVATION_STATE='N' ) R
 		ON U.user_id = R.user_id 
-		GROUP BY U.USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_TEL, USER_TEL_SUB, USER_BIRTH ,JOINDATE, USER_GRADE, ACTIVE
+		GROUP BY U.USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_TEL, USER_TEL_SUB, USER_BIRTH ,JOINDATE, USER_MESSAGE, USER_GRADE, ACTIVE
 		order by joinDate desc
       ]]>
    </select>
   
    <select id="searchUsers" parameterType="java.util.Map" resultMap="userResult">
       <![CDATA[
-        select U.USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_TEL, USER_TEL_SUB, USER_BIRTH ,JOINDATE, USER_GRADE, ACTIVE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
+        select U.USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_TEL, USER_TEL_SUB, USER_BIRTH ,JOINDATE, USER_MESSAGE, USER_GRADE, ACTIVE, REPLACE(NVL(max(RESERVATION_STATE),'X'),'N','O') RES_STATE
 		    from TB_USER U 
 		    LEFT JOIN ( select user_id, RESERVATION_STATE from TB_RESERVATION WHERE RESERVATION_STATE='N' ) R
 		ON U.user_id = R.user_id  ]]>
@@ -73,9 +73,18 @@
 			</if>
 			
 		</where>
-		GROUP BY U.USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_TEL, USER_TEL_SUB, USER_BIRTH ,JOINDATE, USER_GRADE, ACTIVE
+		GROUP BY U.USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_TEL, USER_TEL_SUB, USER_BIRTH ,JOINDATE, USER_MESSAGE, USER_GRADE, ACTIVE
 		order by joinDate desc
    </select>
    
+    <!-- 회원 정보 수정 -->
+ 	<update id="adminUpdateUser" parameterType="userVO">
+   		<![CDATA[
+   			 update TB_USER
+	     	 set USER_PW= #{pw}, USER_NAME= #{name}, USER_EMAIL=#{email}, USER_TEL=#{tel}, USER_TEL_SUB=#{tel_sub},
+	     	 USER_MESSAGE=#{message}, USER_BIRTH=#{birth}
+	    	 where USER_ID=#{id}
+   		]]>
+   	  </update>
 	
 </mapper>
