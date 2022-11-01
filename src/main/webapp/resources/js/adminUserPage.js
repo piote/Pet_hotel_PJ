@@ -248,7 +248,10 @@ function addModRow(obj){
         // 다른 화살표 클릭했을때
         if($(obj).data('num')!=$('#addTr').data('num')){
             $('#addTr').remove();
-            addTr(obj);
+            setTimeout(function(){
+                addTr(obj);
+            },100)
+            
         }else{
             deleteTr();
         }
