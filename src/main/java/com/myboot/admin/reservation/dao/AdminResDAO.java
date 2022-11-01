@@ -20,7 +20,8 @@ public interface AdminResDAO {
 	 //관리자 예약관리 예약불러오기
 	 public List adminPetList() throws DataAccessException;
 	
-	 
+	 //관리자 예약관리 예약갯수
+	 public int adminTotalResNum() throws DataAccessException;
 	 
 	 //관리자 예약관리 예약변경(예약 수정)
 	 public void updateAdminReservation(Map reservationMap) throws DataAccessException;
@@ -34,5 +35,5 @@ public interface AdminResDAO {
 	 //관리자 예약관리 예약변경(예약상태 수정)
 	 public void updateAdminResState(String reserNum) throws DataAccessException;
 
-	 
+	
 }
