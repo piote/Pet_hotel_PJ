@@ -174,16 +174,20 @@ public class AdminUserControllerImpl implements AdminUserController {
 	}
 	
 	@ResponseBody 
-	@RequestMapping(value="/adminRemoveUser.do" ,method = RequestMethod.POST)
-	public List<UserVO> adminRemoveUser(@RequestParam("id") String id, 
+	@RequestMapping(value="/adminActiveUser.do" ,method = RequestMethod.POST)
+	public List<UserVO> adminActiveUser(@RequestParam("id") String id, 
+			@RequestParam("active") String active,
 			HttpServletRequest request, HttpServletResponse response) throws Exception{
     		
 		int result = 0;
-		result = userService.retiring(id);
+			
+		if(active.equals("Y")) {
+			result = adminUserService.removeUserState(id);
+		}else {
+			result = adminUserService.activeUserState(id);
+		}
 		
-		System.out.println(result);
-		
-		List<UserVO> allUser =  adminUserService.listUsers();
+		List<UserVO> allUser = adminUserService.listUsers();
 		return allUser;
 	}
 	

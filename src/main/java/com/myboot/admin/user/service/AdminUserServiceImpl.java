@@ -34,4 +34,16 @@ public class AdminUserServiceImpl implements AdminUserService {
 	public int UpdateUser(UserVO userVO) throws Exception{
 		return adminUserDAO.adminUpdateUser(userVO);
 	}
+	
+	//탈퇴/활성화
+	@Override
+	public int activeUserState(String id) throws Exception{
+		return adminUserDAO.activeUser(id);
+	}
+	//탈퇴/활성화
+	@Override
+	public int removeUserState(String id) throws Exception{
+		return adminUserDAO.removeUser(id);
+	}
+	
 }
