@@ -358,10 +358,10 @@ input[type="number"]::-webkit-inner-spin-button {
                             <option>@gmail.com</option>
                             <option>@nate.com</option>                        
                         </select>
+                        <input type="date" name="birth" class="form-field" data-placeholder="UserBirth" required aria-required="true" value={startDateValue} className={styles.selectDay} onchange={startDateValueHandler} > 
                    		<input type="number" name="tel" id="tel" placeholder="핸드폰번호 입력" maxlength="13" class="form-field phone"  ng-focus="chkPhoneType('focus')" ng-blur="chkPhoneType('blur');" min="0" required >               
                         <input type="number" name="tel_sub" id="tel_sub" placeholder="비상시 핸드폰번호 입력" maxlength="13" class="form-field phone"  ng-focus="chkPhoneType('focus')" ng-blur="chkPhoneType('blur');" min="0" required >                
                      	<label class="message_label">이메일 수신 발송에 동의하십니까?<input type="checkbox"  name="message"  value="Y"></label>
-                        <input type="date" name="birth" class="form-field" data-placeholder="UserBirth" required aria-required="true" value={startDateValue} className={styles.selectDay} onchange={startDateValueHandler} > 
                                  
           			    <button  type="submit" id="signup" value="true" class="button primary"  onclick="checkValue()">가입</button>
           			    <button  type="button" class="button secondary" onclick="goLoginForm()">돌아가기</button>
