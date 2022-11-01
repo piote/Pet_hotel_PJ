@@ -1,4 +1,4 @@
-package com.myboot.user.controller;
+ package com.myboot.user.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
