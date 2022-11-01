@@ -22,8 +22,7 @@
         }
         .list_wrap{
             width: 1000px; height: auto;
-            position: absolute; 
-            top: 120px; right: 0;
+           margin-left: 250px;
         }
         .list_option{
             width: 100%;
@@ -171,29 +170,15 @@
         .notResItem{
         	text-align: center;
         }
-        
-        .list_tb{
-        	
-        }
-        
-        .list_tb .res_content_box{
-        	height: 150px;
+        .res_content_box{
         	width: 100%;
         	display:none;
         	overflow:hidden;
-        	background-color: #bbb;	
+        	background-color: #bbb;
+        	
         }
-
-		
-        
-        
-        
         .res_content_box>td{
         	padding: 10px;
-        }
-        
-        .petService_TB_Box{
-        	height: 100%;
         }
         
         .res_Date_Veiw_Box li{
@@ -202,24 +187,9 @@
         	text-align: center;
         }
         
-        .res_Date_Veiw_Box ul li .check_Date{
-        	font-size: 16px;
+        .res_Date_Veiw_Box ul li{
+        	font-size: 12px;
         }
-        
-        .res_Date_Veiw_Box .date_Cal_Text{
-        	width: 8%;
-        }
-        
-        .pet_Cost_Box{
-        	text-align: left;
-        	margin-left: 40px;
-        }
-        
-        .pet_Cost_Box li:nth-child(5){
-        	text-align: right;
-        	
-        }
-        
         .pet_Comment_Box{
         	text-align: right;
         }
@@ -302,22 +272,6 @@
         	width: 70px;
 		    height: 25px;
 		    margin-top: 5px;
-        }
-        
-        .res_Content_Textbox{
-        resize: none;
-        }
-        
-        /* 펫 테이블  */
-        .petService_TB_Box>li{
-        	display: inline-block;
-        }
-        
-        
-        .petService_TB_Item{
-        	height: 150%;
-        	width: 25%;
-        	background-color: white;
         }
         
         /* 화살표 아이콘 뒤집기  */
@@ -564,36 +518,30 @@
 				            		<ul>
 				            			<li class="res_Date_Veiw_Box">
 				            				<ul>
-				            					<li><span class="check_Date">Check In</span></li>
-				            					<li class="date_Cal_Text"></li>
-				            					<li><span class="check_Date">Check Out</span></li>
+				            					<li>Check In</li>
+				            					<li>Check Out</li>
 				            				</ul>
 				            				<ul>
 				            					<li><input type="date"></li>
-				            					<li class="date_Cal_Text"><span id="dateCalText">2박</span></li>
 				            					<li><input type="date"></li>
 				            				</ul>
 				            			<li>
-				            			<br>
 				            			<li>
-				            				<ul class="pet_Cost_Box">
-				            					
-				            					<li><span id="">견종 - || (대)-3 || (중)-3 || (소)-3 ||</span></li>
-				            					<li><span id="">미용(C)|| (대)-1 || (중)-1 || (소)-1 ||</span></li>
-				            					<li><span id="">미용(S)|| (대)-1 || (중)-1 || (소)-1 ||</span></li>
-				            					<li><span id="">스파 - || (대)-1 || (중)-1 || (소)-1 ||</span></li>
-				            					<li>TotalCost = <span id="res_TotalCost">2,000,000원</span></li>
+				            				<ul>
+				            					<li><span id="res_TotalCost">2,000,000원</span></li>
+				            			
 				            				</ul>
-				            				<br>
 				            				<ul>
 				            					<li class="pet_Comment_Box">
-				            						<textarea id="pet_Comment" name="petcomment" spellcheck="false" maxlength="500" placeholder="요청사항을 적어주세요." onkeyup="petcommentTextLength(this);" rows="5"></textarea>
+				            						<textarea id="pet_Comment" name="petcomment" spellcheck="false" maxlength="500" placeholder="요청사항을 적어주세요." onkeyup="petcommentTextLength(this);" rows="7"></textarea>
 				            						<span id="pet_Comment_Info">0</span>/500
 				            					</li>
 				            				</ul>
 				            			<li>
 				            		</ul>
-				            		
+				            		<ul>
+				            			<li><li>
+				            		</ul>
 				            	</td>
 				            	<td colspan="5">
 				            		<ul>
