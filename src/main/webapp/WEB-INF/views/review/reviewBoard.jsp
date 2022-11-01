@@ -9,6 +9,7 @@
 <c:set  var="reviewList"  value="${reviewMap.reviewList}" />
 <c:set  var="myReserveList"  value="${myReserveMap.myReserveList}" />
 <c:set  var="totReserves"  value="${myReserveMap.totReserves}" />
+
 <c:set  var="section"  value="${myReserveMap.section}" />
 <c:set  var="pageNum"  value="${myReserveMap.pageNum}" />
 
@@ -169,6 +170,7 @@
     	            color: #000;
     	            
     	        }
+    	   
     	        
     	        /* 팝업 스타일 */
     	        .modal-bg {
@@ -197,7 +199,22 @@
     	          padding: 5px;
     	        
     	          }
-
+    	        .if {
+    	    
+    	    	          
+    	    	          position:absolute;
+    	    	          top:50%;
+    	    	          left:50%;
+    	    	          transform:translate(-50%,-50%);
+    	    	          width:600px;
+    	    	          height:800px;
+    	    	          background:#fff;
+    	    	          z-index:1000;
+    	    	          border-radius:15px;
+    	    	          padding: 5px;
+    	    	        
+    	    	          
+    	        }
 		       .detail_reserve{
 		    	   margin: 0 auto;
 		    	   width: 80%;
@@ -212,10 +229,9 @@
 		
 		    	.w_table {
 		    	  width: 100%;
+		    	  text-align: center !import;
 		    	}
-		    	.detail-list {
-		    		  text-align: center;
-		    	}
+		  
       
  </style> 
 
@@ -251,7 +267,9 @@
                    <a href="#" class="btn-open" onClick="javascript:popOpen();">
                        <span>리뷰 쓰기</span>
                    </a>
+               
                </div>
+               
                <!-- //팝업용 임시 버튼입니다. -->
            </div>
        </section>
@@ -265,11 +283,11 @@
        <div class="detail_reserve">
          <table class="w_table">
 	           <tr class="detail-center">
-	             <td width="15%">No</td>
-	             <td width="15%">Date</td>   
-	             <td width="25%">PetName</td>
+	             <td width="5%">No</td>
+	             <td width="20%">Date</td>   
+	             <td width="20%">PetName</td>
 	             <td width="25%">Status</td>
-	             <td width="20%">Review</td>
+	             <td width="30%">Review</td>
 	           </tr>
 		           <c:choose>
 			           
@@ -310,7 +328,15 @@
 										</c:when>
 									</c:choose>
 								</td>
-								<td width="20%"><a href="${contextPath}/review/reviewForm.do?res_num=${res_num}">글쓰기(임시)</a></td>
+								<td width="20%">
+									<c:choose>
+										<c:when test="${reserves.res_state=='Y'}">
+											<a href="${contextPath}/review/reviewForm.do?res_num=${res_num}">리뷰 쓰기</a>
+										</c:when>
+										<c:otherwise>
+										</c:otherwise>
+									</c:choose>
+								</td>
 							
 								</c:forEach>
 				         
@@ -320,7 +346,44 @@
          
          
        </div>  
+       
      <button class="modal-close" onClick="javascript:popClose();">닫기</button>
+ 	
+     <div class="cls2">
+ 	<c:if test="${totReserves != null }" >
+ 	     <c:choose>
+ 	       <c:when test="${totReserves >100 }">  <!-- 글 개수가 100 초과인경우 -->
+ 		      <c:forEach   var="page" begin="1" end="10" step="1" >
+ 		         <c:if test="${section >1 && page==1 }">
+ 		          <a class="no-uline" href="${contextPath }/review/reviewBoard.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
+ 		         </c:if>
+ 		          <a class="no-uline" href="${contextPath }/review/reviewBoard.do?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
+ 		         <c:if test="${page ==10 }">
+ 		          <a class="no-uline" href="${contextPath }/review/reviewBoard.do?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
+ 		         </c:if>
+ 		      </c:forEach>
+ 	       </c:when>
+ 	       <c:when test="${totReserves ==100 }" >  <!--등록된 글 개수가 100개인경우  -->
+ 		      <c:forEach   var="page" begin="1" end="10" step="1" >
+ 		        <a class="no-uline"  href="#">${page } </a>
+ 		      </c:forEach>
+ 	       </c:when>
+ 	       
+ 	       <c:when test="${totReserves< 100 }" >   <!--등록된 글 개수가 100개 미만인 경우  -->
+ 		      <c:forEach   var="page" begin="1" end="${totReserves/10 +1}" step="1" >
+ 		         <c:choose>
+ 		           <c:when test="${page==pageNum }">
+ 		            <a class="sel-page"  href="${contextPath }/review/reviewBoard.do?section=${section}&pageNum=${page}" onClick="javascript:popPage();">${page } </a>
+ 		          </c:when>
+ 		          <c:otherwise>
+ 		            <a class="no-uline"  href="${contextPath }/review/reviewBoard.do?section=${section}&pageNum=${page}" onClick="javascript:popPage();">${page } </a>
+ 		          </c:otherwise>
+ 		        </c:choose>
+ 		      </c:forEach>
+ 	       </c:when>
+ 	     </c:choose>
+ 	   </c:if>
+ 	 </div> 
      </div>
      <!-- //modal 영역 -->
 
@@ -355,11 +418,21 @@
 
 </div>
 
+<c:if test="${myReserveMap.pageNum>=2}">
+	<script>
+		$(document).ready(function(){
+			popOpen();
+		})
+	</script>
+</c:if>
+
+
 <script>
 function popOpen() {
 
 var modalPop = $('.modal-wrap');
 var modalBg = $('.modal-bg'); 
+
 
 $(modalPop).show();
 $(modalBg).show();
@@ -374,6 +447,15 @@ $(modalPop).hide();
 $(modalBg).hide();
 
 }
+
+function popPage() {
+	var modalPop = $('.modal-wrap');
+	var modalBg = $('.modal-bg');
+	
+	$(modalPop).show();
+	$(modalBg).show();
+}
+
     </script>
 
 </body>

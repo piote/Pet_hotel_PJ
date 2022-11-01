@@ -21,8 +21,7 @@
         }
         .list_wrap{
             width: 1000px; height: auto;
-            position: absolute; 
-            top: 120px; right: 0;
+            margin-left: 250px;
         }
         .list_option{
             width: 100%;
@@ -119,22 +118,37 @@
         .tb_title{
             background-color: #f1f1f1;
         }
+        .modBT{
+            transform: scale(1) rotate(0deg);
+            transition: all 0.2s;
+            fill: #909090;
+        }
+        .modBT:hover{
+            transform: scale(1.2) rotate(0deg);
+            fill: #606060;
+        }
+        .modBT_push{
+            transform: scale(1) rotate(180deg);
+        }
         .tb_title td{
             font-size: 14px;
             font-weight: bold;
             color: #030303;
         }
         .user_id,.user_name,.user_grade,.user_resState{
-            width: 13%;
+            width: 12%;
         }
         .user_joinDate{
-            width: 14%;
+            width: 13%;
         }
         .user_email{
-            width: 18%;
+            width: 17%;
         }
         .user_tel{
-            width: 16%;
+            width: 17%;
+        }
+        .user_updata{
+            width: 5%;
         }
         .page_num{
             margin-top: 50px;
@@ -152,6 +166,65 @@
         }
         .red_color{
             color: red;
+        }
+        .addTr{
+            height: 300px !important;
+            transition: height 0.5s;
+            overflow: hidden;
+        }
+        .addTr button{
+            width: 60px; height: 25px;
+            border-radius: 20px;
+            background-color: #eee;
+            color: #333;
+            border: 0;
+        }
+        .addTr button:last-child{
+            margin-left: 10px;
+        }
+        .addTr button:hover{
+            background-color: #ccc;
+        }
+        .addTr td{
+            padding-left: 30px;
+            box-sizing: border-box;
+        }
+        .addTr td:nth-child(3){
+            padding-left: 70px;
+            padding-right: 35px;
+        }
+        .info_box{
+            width: 100%; height: auto;
+            /* background-color: #eee; */
+            display: flex;
+            line-height: 30px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .info_box input[type=text], .info_box input[type=date]{
+            width: 60%;
+            height: 30px;
+            border:0;
+            resize: none;
+            position: absolute;
+            right: 0;
+            background-color: #eee;
+            padding-left: 5px;
+        }
+        .info_box input[type=text]:focus, .info_box input[type=date]:focus{
+            border: 1px solid #ccc;
+        }
+        .info_box input[type=radio]{
+            width: 15px;
+            height: 15px;
+            position: inherit;
+            margin-top: 7px;
+        }
+        .info_grand{
+            justify-content: center;
+        }
+        .crown{
+            fill: #ffa245;
         }
     </style>
 </head>
