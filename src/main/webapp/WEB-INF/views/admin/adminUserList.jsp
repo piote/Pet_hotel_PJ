@@ -170,12 +170,12 @@
         .blue_color{
             color: blue !important;
         }
-        .addTr{
-            height: 300px !important;
-            transition: height 0.5s;
+        #addTr{
+            height: 0;
+            transition: height 0.3s;
             overflow: hidden;
         }
-        .addTr button{
+        #addTr button{
             width: 60px; height: 25px;
             border-radius: 20px;
             background-color: #eee;
@@ -183,17 +183,18 @@
             border: 0;
             cursor: pointer;
         }
-        .addTr button:last-child{
+        #addTr button:last-child{
             margin-left: 10px;
         }
-        .addTr button:hover{
+        #addTr button:hover{
             background-color: #ccc;
         }
-        .addTr td{
+        #addTr td{
             padding-left: 30px;
             box-sizing: border-box;
+            opacity: 0;
         }
-        .addTr td:nth-child(3){
+        #addTr td:nth-child(3){
             padding-left: 70px;
             padding-right: 35px;
         }
