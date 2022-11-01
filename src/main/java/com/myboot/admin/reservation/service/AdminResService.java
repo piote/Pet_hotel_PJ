@@ -11,6 +11,7 @@ public interface AdminResService {
 	
 	public List adminPetList() throws Exception;
 	
+	public int adminTotalResNum() throws Exception;
 	
 	public void updateResList(Map reservationMap) throws Exception;
 	

@@ -92,7 +92,6 @@ function page_num_view(totalData){
 function clickNO(pageNo){
     if ($('.addTr').length) {
         $('.addTr').remove();
-        $('#content').css('height','0');
     }
     //버튼 선택 효과
     $('.pageNO').removeClass('select_number');
@@ -249,6 +248,7 @@ function addModRow(obj){
     if ($('.addTr').length) {
         if($(obj).data('num')!=$('.addTr').data('num')){
             $('.addTr').remove();
+            $('.modBT').css('transform','scale(1) rotate(0deg)');
             modHtml(obj);
         }else{
             $('.addTr').remove();
@@ -269,11 +269,20 @@ function modHtml(obj){
         var birth_s = birth.substring(0, 10);
 
         var message = user_data[num].message;
-        if(message=='Y'){
+        if(message.substring(0, 1)=='Y'){
             var message_s = '&nbsp;&nbsp;&nbsp;<input type="radio" name="message" value="Y" checked="checked" >&nbsp;Y &nbsp;&nbsp;<input type="radio" name="message" value="N">&nbsp;N</span>'
         }else{
             var message_s = '&nbsp;&nbsp;&nbsp;<input type="radio" name="message" value="Y" >&nbsp;Y &nbsp;&nbsp;<input type="radio" name="message" value="N" checked="checked">&nbsp;N</span>'
         }
+
+        if (user_data[num].tel_sub==null){
+            var tel_sub_s = '';
+        }else{
+            var tel_sub_s =user_data[num].tel_sub;
+        }
+
+        console.log(message + ' ' + message.substring(0, 1))
+
         grade=user_data[num].grade;
         if(grade=='Normal'){
             var crown_color='#c2dcff'
@@ -286,24 +295,113 @@ function modHtml(obj){
         }
 
         var html = '<tr class="addTr" data-num='+num+'>'+
-        '<form action="/modMember.do" method="post">'+
             '<td colspan="2">'+
-                '<span class="info_box info_id">아이디 : <input type="text" name="id" id="id" value= "'+user_data[num].id+'"></span>'+
+                '<span class="info_box info_id">아이디 : <input type="text" name="id" id="id" value= "'+user_data[num].id+'" readonly></span>'+
                 '<span class="info_box info_pw">비밀번호 : <input type="text" name="pw" id="pw" value= "'+user_data[num].pw+'"></span>'+
                 '<span class="info_box info_name">이름 : <input type="text" name="name" id="name" value= "'+user_data[num].name+'"></span>'+
-                '<span class="info_box info_id">생년월일 : <input type="date" name="birth" id="birth" value= "'+birth_s+'"></span>'+
+                '<span class="info_box info_birth">생년월일 : <input type="date" name="birth_string" id="birth" value= "'+birth_s+'"></span>'+
             '</td>'+
             '<td colspan="3">'+
-                '<span class="info_box info_pw">이메일 : <input type="text" name="email" id="email" value="'+user_data[num].email+'"></span>'+
-                '<span class="info_box info_name">휴대전화 : <input type="text" name="tel" id="tel" value="'+user_data[num].tel+'"></span>'+
-                '<span class="info_box info_name">비상전화 : <input type="text" name="tel_sub" id="tel_sub"'+user_data[num].sub_tel+'"></span>'+
-                '<span class="info_box info_name">메세지 수신여부 : '+message_s+
+                '<span class="info_box info_email">이메일 : <input type="text" name="email" id="email" value="'+user_data[num].email+'"></span>'+
+                '<span class="info_box info_tel">휴대전화 : <input type="text" name="tel" id="tel" value="'+user_data[num].tel+'"></span>'+
+                '<span class="info_box info_tel_sub">비상전화 : <input type="text" name="tel_sub" id="tel_sub" value="'+tel_sub_s+'"></span>'+
+                '<span class="info_box info_message">메세지 수신여부 : '+message_s+
             '</td>'+
             '<td colspan="2">'+
-                '<span class="info_box info_grand">멤버쉽 등급 :&nbsp;<svg class="crown" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:'+crown_color+'"><path d="M3 16l-3-10 7.104 4 4.896-8 4.896 8 7.104-4-3 10h-18zm0 2v4h18v-4h-18z"/></svg>&nbsp; '+user_data[num].grade+'</span>'+
-                '<input type="hidden" name="">'+
-                '<button type="submit" id="">수정</button>'+
-                '<button type="button" id="">탈퇴</button>'+
-            '</td></form></tr>';
+                '<span class="info_box info_grand">멤버쉽 등급 :&nbsp;<svg class="crown" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:'+crown_color+'"><path d="M3 16l-3-10 7.104 4 4.896-8 4.896 8 7.104-4-3 10h-18zm0 2v4h18v-4h-18z"/></svg>&nbsp; '+user_data[num].grade+'</span>';
+                
+            var active = user_data[num].active;
+            if(active=='Y'){
+                html +='<button type="button" onclick="modUser()">수정</button>'+
+                '<button type="button" class="red_color" onclick="userActive('+num+')">탈퇴</button>'+
+                '</td></tr>';
+            }else{
+                html += '<button type="button" class="blue_color" onclick="userActive('+num+')">활성화</button>'+
+                '</td></tr>';
+            }
+                
         $(obj).parent().parent().after(html);
 }
+
+function modUser(){
+    var result = confirm("수정하시겠습니까?");
+    if(result){
+            var queryString = $("form[name=modUserForm]").serialize() ;
+            console.log(queryString +' '+ $('form[name=modUserForm]'))
+            $.ajax({
+                type : 'post',
+                url : '/adminModUser.do',
+                data : queryString,
+                dataType : 'json',
+                success : function(data){
+                //총데이터 수 저장
+                totalData = data.length;
+                //페이지 버튼 출력
+                page_num_view(totalData);
+
+                //user_data에 받아온 데이터 저장
+                user_data = [totalData];
+                for(i=0;i<data.length;i++){
+                    user_data[i]=data[i];
+                }
+                clickNO(globalCurrentPage);
+
+                },
+            error :function(){
+                alert("request error!");
+                }
+        });
+    }
+}
+
+function userActive(num){
+    var id = user_data[num].id;
+    var active = user_data[num].active;
+
+    if(active=='Y'){
+        var result = confirm("정말 탈퇴처리 하시겠습니까?");
+    }else{
+        var result = confirm("회원 활성화처리 하시겠습니까?");
+    }
+    
+    if(result){
+            console.log(id)
+            $.ajax({
+                type : 'post',
+                url : '/adminActiveUser.do',
+                data : {"id":id, "active":active},
+                dataType : 'json',
+                success : function(data){
+                //총데이터 수 저장
+                totalData = data.length;
+                //페이지 버튼 출력
+                page_num_view(totalData);
+
+                //user_data에 받아온 데이터 저장
+                user_data = [totalData];
+                for(i=0;i<data.length;i++){
+                    user_data[i]=data[i];
+                }
+                clickNO(globalCurrentPage);
+
+                },
+            error :function(){
+                alert("request error!");
+                }
+            });
+    }
+}
+
+// function fn_reply_form(url, parentNO){
+//     var form = document.createElement("form");
+//     form.setAttribute("method", "post");
+//     form.setAttribute("action", url);
+//     var parentNOInput = document.createElement("input");
+//     parentNOInput.setAttribute("type","hidden");
+//     parentNOInput.setAttribute("name","parentNO");
+//     parentNOInput.setAttribute("value", parentNO);
+    
+//     form.appendChild(parentNOInput);
+//     document.body.appendChild(form);
+//     form.submit();
+// }

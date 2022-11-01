@@ -108,7 +108,7 @@
                                 </th>
 					            <td>
 					            	<div class="col-cell"><input class="txtBox" placeholder="비밀번호를 입력하세요.!" type="password" name="pw"  value="${user.pw }" />
-					            	<span class="idpw-info">&nbsp;&nbsp;* 영문 대소문자/숫자/특수문자를 혼용하여 2종류 10~16자 또는 3종류 8~16자</span></div>
+					            	<span class="idpw-info"><!-- &nbsp;&nbsp;* 영문 대소문자/숫자/특수문자를 혼용하여 2종류 10~16자 또는 3종류 8~16자 --></span></div>
 					            </td>
 				         </tr>
 				         <tr>

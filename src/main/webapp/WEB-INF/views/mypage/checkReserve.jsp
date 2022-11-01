@@ -323,7 +323,7 @@
 	            <c:choose>
 	            	<c:when test="${empty myReserveList }">
 		               <tr class="detail-list">
-		                  <td colspan=7>
+		                  <td colspan=8>
 		                  	<strong>예약하신 내역이 없습니다.</strong>
 		                  </td>
 		               </tr>
