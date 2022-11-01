@@ -4,17 +4,6 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.myboot.mypage.dao.MyPageDAO">
-<resultMap id="reserveResult" type="reservationVO">
-	<result property="res_num" column="RESERVATION_NUM" />
-	<result property="res_st" column="RESERVATION_ST" />
-	<result property="res_end" column="RESERVATION_END" />
-	<result property="id" column="USER_ID" />
-	<result property="res_comment" column="RS_COMMENT" />
-	<result property="totalCost" column="TOTAL_COST" />
-	<result property="payTime" column="PAY_TIME" />
-	<result property="res_state" column="RESERVATION_STATE" />
-</resultMap> 
-
 <resultMap id="reviewResult" type="reviewVO">
 	<result property="level" column="LVL" />
     <result property="reviewNO" column="review_num" />
@@ -45,7 +34,7 @@
 
 	<select id="selectMyReservesList" resultMap="searchResult"  parameterType="String" >
 		<![CDATA[
-		select to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, r.reservation_num, u.user_name, u.user_tel, p.pet_name
+		select to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, r.reservation_num, p.pet_name
         from tb_reservation r, tb_user u, tb_petservice p
                  where r.reservation_num = p.reservation_num and u.user_id = r.user_id and u.user_id = #{user_id}
 		         order by r.pay_time desc
@@ -54,7 +43,11 @@
 	
 	<select id="selectAllMyReservesList" resultMap="searchResult"  parameterType="java.util.Map" >
 		    SELECT * FROM ( 
-			SELECT ROW_NUMBER() OVER(ORDER BY r.pay_time desc) as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
+					SELECT ROW_NUMBER() OVER(ORDER BY r.pay_time desc) as recNum, 
+							to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, 
+							to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, 
+							to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, 
+							r.reservation_state,r.reservation_num, p.pet_name
 					from tb_reservation r, tb_user u, tb_petservice p
 					where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
 				<choose>
@@ -70,7 +63,11 @@
 
 	<select id="selectMyDetailReservesList" resultMap="searchResult"  parameterType="java.util.Map" >
 		    SELECT * FROM ( 
-			SELECT ROW_NUMBER() OVER(ORDER BY r.pay_time desc) as recNum, to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, r.reservation_state,r.reservation_num, u.user_name, u.user_tel, p.pet_name
+					SELECT ROW_NUMBER() OVER(ORDER BY r.pay_time desc) as recNum, 
+							to_char(r.pay_time, 'yyyy-mm-dd') as pay_time, 
+							to_char(r.reservation_st, 'yyyy-mm-dd') as reservation_st, 
+							to_char(r.reservation_end, 'yyyy-mm-dd') as reservation_end, 
+							r.reservation_state,r.reservation_num, p.pet_name
 					from tb_reservation r, tb_user u, tb_petservice p
 					where r.reservation_num = p.reservation_num and u.user_id = r.user_id and r.user_id = #{user_id}
 			<choose>
@@ -106,7 +103,7 @@
 	<select id="selectTotReserves" parameterType="String" resultType="int">
 	         select count(p.reservation_num)
 		         from tb_reservation r
-		         left join (select user_id, user_name, user_tel from tb_user) u
+		         left join (select user_id from tb_user) u
 	         on u.user_id = r.user_id
 		         left join (select reservation_num, pet_name from tb_petservice) p
 	         on r.reservation_num = p.reservation_num
@@ -123,7 +120,7 @@
   	<select id="searchTotReserves" parameterType="String" resultType="int">
 	         select count(p.reservation_num)
 		         from tb_reservation r
-		         left join (select user_id, user_name, user_tel from tb_user) u
+		         left join (select user_id from tb_user) u
 	         on u.user_id = r.user_id
 		         left join (select reservation_num, pet_name from tb_petservice) p
 	         on r.reservation_num = p.reservation_num
