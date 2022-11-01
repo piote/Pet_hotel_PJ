@@ -15,6 +15,9 @@
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="${contextPath}/resources/css/checkReserve.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.min.js"></script>
+	<link rel="stylesheet" href="sweetalert2.min.css">
 	<script type="text/javascript">
 		$( "#datepicker" ).datepicker({
 		 	dateFormat: "yy-mm-dd",
@@ -196,20 +199,30 @@
 		
 	}
     function fn_cancel_reserve(res_num){
-    	var answer=confirm("예약을 취소하시겠습니까?");
-    	if(answer==true){	
-    		var formObj=document.createElement("form");
-    		var i_reserve_num = document.createElement("input"); 
-    	    
-    	    i_reserve_num.name = "res_num";
-    	    i_reserve_num.value = res_num;
-    		
-    	    formObj.appendChild(i_reserve_num);
-    	    document.body.appendChild(formObj); 
-    	    formObj.method = "post";
-    	    formObj.action ="${contextPath}/mypage/cancelMyReserve.do";
-    	    formObj.submit();	
-    	}
+    	Swal.fire({
+            title: '정말로 예약을 취소 하시겠습니까?',
+            text: "예약을 취소하시면 다시 되돌릴 수 없습니다.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: 'black',
+            cancelButtonColor: 'lightgray',
+            confirmButtonText: 'Yes'
+            }).then((result) => {
+            if (result.isConfirmed) {
+        		var formObj=document.createElement("form");
+        		var i_reserve_num = document.createElement("input"); 
+        	    
+        	    i_reserve_num.name = "res_num";
+        	    i_reserve_num.value = res_num;
+        		
+        	    formObj.appendChild(i_reserve_num);
+        	    document.body.appendChild(formObj); 
+                Swal.fire('예약 취소 완료.',)
+        	    formObj.method = "post";
+        	    formObj.action ="${contextPath}/mypage/cancelMyReserve.do";
+			    setTimeout(() => formObj.submit(), 1000);
+            }
+        })
     }
 	</script>
 </head>

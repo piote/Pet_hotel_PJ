@@ -99,6 +99,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return totReview;
 	}
 	
+	
+	public int selectTotReserves() throws DataAccessException {
+		int totReserves = sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectTotReserves");
+		return totReserves;
+	}
 
 //	메인페이지 리뷰조회
 	@Override

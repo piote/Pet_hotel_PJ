@@ -15,61 +15,172 @@
 .container{
  	/* width: 1200px; */
  	width: 100%;
-    margin: 0 auto;
+    margin: 50px auto;
 }
 .container h3{
-	text-align: center;
-	font-size:28px;
+	/* text-align: center; */
+	display: block;
+	font-size:23px;
+	padding: 14px 0;
+    border-bottom: 1px solid #000;
+    width: 1050px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.petitle img{
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	margin: -4px auto;
 }
 
 .modCon{
-    width: 500px;
-    margin: 50px auto;
+    width: 1050px;
+    margin: 30px auto;
+    border-top: 1px solid #e9e9e9;
 }
+
 .modCon table{width:100%;}
+
+.modCon table th {
+    padding: 13px 50px 13px 34px;
+    background-color: #f8f8f8;
+    vertical-align: top;
+    color: #000;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.modCon .head-cell .empha {
+    position: absolute;
+    top: 6px;
+    left: -10px;
+    font-size: 14px;
+    color: #f8574f;
+}
+
+.modCon .head-cell {
+    position: relative;
+    padding-top: 6px;
+ }
+ 
+.modCon th, .modCon td {
+    height: 33px;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.modCon td {
+    padding: 13px;
+    vertical-align: middle;
+}
+/* .modCon td .idpw-info {
+    vertical-align: middle;
+} */
+
+
 .modCon tr p{
 	margin:5px 0;
 	width: 150px;
 }
+
 .modCon tr input{margin:5px 0;}
 .modCon tr .txtBox{width:300px;}
 .btn1{
-	background: #ddd;
-    border-radius: 3px;
+	display: inline-block;
+    width: 200px;
+    height: 45px;
+    line-height: 45px;
     text-align: center;
-    width: 100%;
-    height:45px;
-    margin-top: 10px;
-    border:none;    
+    font-size: 15px;
+    color: #fff;
+    background-color: #31363d;
+    border-radius: 5px; 
 }
 .btn2{
-	background: #ddd;
-    border-radius: 3px;
+	display: inline-block;
+    width: 200px;
+    height: 45px;
+    line-height: 45px;
     text-align: center;
-    width: 100%;
-    height:45px;
-    margin-top: 10px;
-    border:none;    
+    font-size: 15px;
+    border-radius: 5px;  
 }
 .btn3{
-	background: #ddd;
-    border-radius: 3px;
+	display: inline-block;
+    width: 150px;
+    height: 45px;
+    line-height: 45px;
     text-align: center;
-    width: 100%;
-    height:45px;
-    margin-top: 10px;
-    border:none;    
+    font-size: 15px;
+    color: #fff;
+    background-color: #31363d;
+    border-radius: 5px;    
+    
 }
 /* .bnt3 > a:hover{background: #ccc;}
 
 .modCon > ul{margin-top: 30px;} */
-.modCon > p{
-	margin:50px 0;
-	text-align: center;
+p{
+	color: #030303;
+    margin: 0 auto;
+    font-size: 17px;
+    width: 1025px;
 	}
-
+p .symbol{
+	position: relative;
+    left: -10px;
+	font-size: 14px;
+    color: #f8574f;
+}
 #readonly {
 	background: #ddd;
 	border: none;
 }
 
+.btn_footer {
+    padding-top: 30px;
+    text-align: center;
+    padding-bottom: 30px;
+
+}
+.btn_footer1 {
+	padding-top: 30px;
+    text-align: center;
+    padding-bottom: 30px;
+	margin-left: 900px;
+}
+.btn1:hover {
+    background-color: #fff;
+    color: #000;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.btn2:hover {
+    background-color: #000;
+    color: #fff;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.btn3:hover {
+    background-color: #fff;
+    color: #000;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.swal2-popup {
+    display: none;
+    position: relative;
+    box-sizing: border-box;
+    grid-template-columns: minmax(0, 100%);
+    width: 32em;
+    max-width: 100%;
+    padding: 0 0 1.25em;
+    border: none;
+    border-radius: 5px;
+    background: #fff;
+    color: #545454;
+    font-family: inherit;
+    font-size: 1re;
+    }

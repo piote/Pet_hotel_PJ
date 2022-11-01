@@ -36,7 +36,7 @@
     position: relative;
     top: 80px;
  }
- 
+ /* 기간 별 조회 기능 */
 .searchDate {
     width: 1200px;
     height: 50px;
@@ -91,6 +91,7 @@
 	background: rgb(231, 226, 219);
 }
 
+/* 검색 및 날짜 창 */
  #search_text{
     position: relative;
     top: -10px;
@@ -133,6 +134,8 @@
     margin: 0 auto;
     
 }
+
+/* 예약 기능*/
 .detail_reserve{
    margin: 0 auto;
    width: 1200px;
@@ -168,6 +171,7 @@
    text-align: center;
 }
 
+/* 검색 달력 기능 */
 img.ui-datepicker-trigger{
 	display: inline-block;
 	cursor: pointer;
@@ -181,6 +185,7 @@ img.ui-datepicker-trigger{
 	margin-top: -220px;
 }
 
+/* page 기능 */
 .page {
     text-align: center;
     margin: 0px auto;
@@ -191,6 +196,23 @@ img.ui-datepicker-trigger{
 	font-size: 20px;
 }
 
+/* alert */
+.swal2-title {
+	top: -30px;
+    padding-top: 50px;
+    font-size: 18px;
+}
+.swal2-styled.swal2-confirm{
+	background-color: black;
+}
 
+.swal2-popup .swal2-styled:focus { 
+	box-shadow: none !important; 
+}
 
- 
+.swal2-container.swal2-center>.swal2-popup {
+    width: 310px;
+}
+.swal2-html-container {
+	font-size: 13px;
+}
