@@ -69,7 +69,7 @@
 						     idInput.setAttribute("value", id);
 						     form.appendChild(idInput);
 						     document.body.appendChild(form);
-						     setTimeout(() => form.submit(), 2000);
+						     setTimeout(() => form.submit(), 20000);
 							 //form.submit();
 						  }
 						})
@@ -89,10 +89,8 @@
 		<form method="post" action="${contextPath}/modMember.do"> 
 		   <div id="wrap">
 			   	<section class="container">
-			   	<div class="petitle">
-			   	<h3>회원 정보 수정</h3>
-			   	<img src="${contextPath}/resources/img/petel.png" alt="정보수정">
-			   	</div>
+				   	<div class="petitle">
+				   	<h3><img src="${contextPath}/resources/img/petel.png" alt="정보수정">&nbsp;회원 정보 수정</h3></div>
 			      <div class="modCon">
 				     <!-- <table border="1" width="50%" height="80%"> -->
 				     <table>
@@ -109,8 +107,8 @@
                                     <div class="head-cell"><span class="empha">*</span>비밀번호</div>
                                 </th>
 					            <td>
-					            	<div class="col-cell"><input class="txtBox" type="password" name="pw"  value="${user.pw }" />
-					            	<span class="idpw-info"> * 영문 대소문자/숫자/특수문자를 혼용하여 2종류 10~16자 또는 3종류 8~16자</span></div>
+					            	<div class="col-cell"><input class="txtBox" placeholder="비밀번호를 입력하세요.!" type="password" name="pw"  value="${user.pw }" />
+					            	<span class="idpw-info">&nbsp;&nbsp;* 영문 대소문자/숫자/특수문자를 혼용하여 2종류 10~16자 또는 3종류 8~16자</span></div>
 					            </td>
 				         </tr>
 				         <tr>
@@ -135,7 +133,7 @@
                                     <div class="head-cell"><span class="empha">*</span>이메일</div>
                                 </th>
 					            <td>
-					            	<div class="col-cell"><input class="txtBox" type="text" name="email"  value="${user.email }"></div>
+					            	<div class="col-cell"><input class="txtBox" type="text" name="email" placeholder="이메일을 입력하세요.!"  value="${user.email }"></div>
 					            </td>
 				         </tr>
 				          <tr>
@@ -143,7 +141,7 @@
                                     <div class="head-cell"><span class="empha">*</span>휴대전화</div>
                                 </th>
 				                <td>
-				                	<div class="col-cell"><input class="txtBox" type="text" name="tel" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13"  placeholder="전화번호를 입력해보세요!" value="${user.tel }" required></div>
+				                	<div class="col-cell"><input class="txtBox" type="text" name="tel" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13"  placeholder="전화번호를 입력하세요!" value="${user.tel }" required></div>
 				                </td>
 				         </tr>
 				          <tr>
@@ -151,7 +149,7 @@
                                     <div class="head-cell"><span class="empha">*</span>비상전화</div>
                                 </th>
 				                <td>
-				                	<div class="col-cell"><input class="txtBox" type="text" name="tel_sub" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13" placeholder="전화번호를 입력해보세요!" value="${user.tel_sub}" required></div>
+				                	<div class="col-cell"><input class="txtBox" type="text" name="tel_sub" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13" placeholder="전화번호를 입력하세요!" value="${user.tel_sub}" required></div>
 				                </td>
 				          </tr>
 				          <tr>
@@ -173,16 +171,14 @@
 				         </tr>
 				     </table>  
 				     </div>
+				     		<p><span class="symbol">*</span>아이디, 이름, 가입일은 수정이 불가능합니다.</p>
 			         <div class= "btn_footer">		    
 							<input type="submit" class="btn1" name="modbtn" value="수정하기" onClick= "mod()">
 					        <a href= "${contextPath}/modMemberForm.do"><input class="btn2" type="button" name="cal_1" value="수정취소" onClick= "cal();"></a>
-				     
-				     	<p>아이디, 이름, 가입일은 수정이 불가능합니다.</p>
-				     
-					
 							<%-- <a href= "${contextPath}/main.do"><input class="btn3" type="button" name="leave_1"  value="탈퇴하기" onClick="leave();"></a> --%>
-							<button type="button" class="btn3" onclick="deleteUser('${contextPath}/retiring.do','${user.id }');"> 탈퇴하기 </button>
 					</div>
+					<div class="btn_footer1"><button type="button" class="btn3" onclick="deleteUser('${contextPath}/retiring.do','${user.id }');"> 탈퇴하기 </button></div>
+							
 				</section>
 			</div>
 	   </form>
