@@ -17,7 +17,6 @@
 	    <link rel="stylesheet" href="${contextPath}/resources/css/password.css">
 	    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	    <title>회원정보 수정</title>
-
 	 	<%-- <c:choose>
 			<c:when test="${result=='passwordFailed' }">
 		 		  <script> 
@@ -52,7 +51,7 @@
 		            	</div>
 			            <div class="pw_change">
 			                <label for="">비밀번호</label><br>
-			                <input type="password" name="password" size="10">
+			                <input type="password" placeholder="Password" name="password" size="10">
 			            </div>
 			            <div class="pw_btn">
 			                <!-- <input type="submit" id= "box" value= "정보 수정하기"> -->
