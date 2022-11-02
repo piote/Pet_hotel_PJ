@@ -47,7 +47,7 @@ function addRow() {
 
     Cell1.innerHTML = '<input name="petname" class="pet_status" id="Pet_Name' + petTableNum + '" type="textbox" style="text-align:center; width:80%;">';
     Cell2.innerHTML = '<select name="petsex" class="pet_status" id="Pet_Sex' + petTableNum + '" onchange="handleOnChange(this)"><option>male</option><option>female</option></select>';
-    Cell3.innerHTML = '<select name="petroom" class="pet_status" id="Pet_Room' + petTableNum + '" onchange="handleOnChange(this)"><option value="Deluxe">Deluxe(소형견)</option><option value="Superior">Superior(중형견)</option><option value="Sweet">Suite(대형견)</option></select>';
+    Cell3.innerHTML = '<select name="petroom" class="pet_status" id="Pet_Room' + petTableNum + '" onchange="handleOnChange(this)"><option value="Deluxe">Deluxe(소형견)</option><option value="Sweet">Suite(중형견)</option><option value="Superior">Superior(대형견)</option></select>';
     Cell4.innerHTML = '<select name="beauty" class="pet_status" id="pet_Beauty' + petTableNum + '" onchange="handleOnChange(this)"><option value="N">이용안함</option><option value="Clipping">Clipping</option><option value="Scissoring">Scissoring</option></select>';
     Cell5.innerHTML = '<input name="spa" class="pet_status" id="pet_Spa' + petTableNum + '" type="checkbox" value="Y">';
     Cell5.innerHTML += '<input type="hidden" name="spa"  id="pet_Spa' + petTableNum + '_hidden" value="N"/>';
@@ -221,7 +221,7 @@ function costTB(petserviceMap, datecheck) {
                 ss++;
             }
 
-        } else if (list[2] == 'Superior') {//중형     // 12:20 수정
+        } else if (list[2] == 'Sweet') {//중형     // 12:20 수정
             mr++;
 
             if (list[3] == null) {//미용       // 12:20 수정
@@ -235,7 +235,7 @@ function costTB(petserviceMap, datecheck) {
             if (list[4] == true) {//스파       // 12:20 수정
                 ms++;
             }
-        } else if (list[2] == 'Sweet') {//대형     // 12:20 수정
+        } else if (list[2] == 'Superior') {//대형     // 12:20 수정
             lr++;
 
             if (list[3] == null) {//미용

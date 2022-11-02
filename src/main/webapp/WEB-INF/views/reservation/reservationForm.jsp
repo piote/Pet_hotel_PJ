@@ -412,7 +412,7 @@
                         <td id="M_BC">0 원</td>
                     </tr>
                     <tr align="center" bgcolor="white">
-                        <td rowspan="2" align="center" bgcolor="white">Superior(중형견)</td>
+                        <td rowspan="2" align="center" bgcolor="white">Suite(중형견)</td>
                         <td id="M_R" rowspan="2" align="center" bgcolor="white">0 원</td>
                         <td>대형견</td>
                         <td id="L_BC">0 원</td>
@@ -425,7 +425,7 @@
                         <td id="S_BS">0 원</td>
                     </tr>
                     <tr align="center" bgcolor="white">
-                        <td rowspan="2" align="center" bgcolor="white">Suite(대형견)</td>
+                        <td rowspan="2" align="center" bgcolor="white">Superior(대형견)</td>
                         <td id="L_R" rowspan="2" align="center" bgcolor="white">0 원</td>
                         <td>중형견</td>
                         <td id="M_BS">0 원</td>
@@ -497,7 +497,7 @@
                     </tr>
                     <tr align="center" bgcolor="white">
 
-                        <td rowspan="2" align="center" bgcolor="white">Superior(중형견)</td>
+                        <td rowspan="2" align="center" bgcolor="white">Suite(중형견)</td>
                         <td rowspan="2" align="center" bgcolor="white">45,000 원</td>
                         <td>대형견</td>
                         <td>60,000 원</td>
@@ -512,7 +512,7 @@
                     </tr>
                     <tr align="center" bgcolor="white">
 
-                        <td rowspan="2" align="center" bgcolor="white">Suite(대형견)</td>
+                        <td rowspan="2" align="center" bgcolor="white">Superior(대형견)</td>
                         <td rowspan="2" align="center" bgcolor="white">55,000 원</td>
                         <td>중형견</td>
                         <td>80,000 원</td>
