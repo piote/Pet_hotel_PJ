@@ -26,8 +26,7 @@ $(document).ready(function(){
 
     $('html').click(function(e){
     	if($(e.target).parents('.list_tb').length < 1){
-        	$('.addTr').remove();
-            $('.modBT').css('transform','scale(1) rotate(0deg)');
+            deleteTr();
         }
     });
 });
@@ -90,8 +89,8 @@ function page_num_view(totalData){
 
 //페이지 버튼 누를때 호출
 function clickNO(pageNo){
-    if ($('.addTr').length) {
-        $('.addTr').remove();
+    if ($('#addTr').length) {
+        $('#addTr').remove();
     }
     //버튼 선택 효과
     $('.pageNO').removeClass('select_number');
@@ -237,33 +236,60 @@ function searchOption(){
         }
         
     });
-
     //체크박스 클릭 시 검색
     search();
 
 }
 
-
+// 상세보기 row 추가
 function addModRow(obj){
-    if ($('.addTr').length) {
-        if($(obj).data('num')!=$('.addTr').data('num')){
-            $('.addTr').remove();
-            $('.modBT').css('transform','scale(1) rotate(0deg)');
-            modHtml(obj);
+    // $('#addTr').length로 #addTr의 유무확인
+    if ($('#addTr').length) {
+        // 다른 화살표 클릭했을때
+        if($(obj).data('num')!=$('#addTr').data('num')){
+            $('#addTr').remove();
+            setTimeout(function(){
+                addTr(obj);
+            },100)
+            
         }else{
-            $('.addTr').remove();
-            $(obj).removeClass('modBT_push');
-            $(obj).css('transform','scale(1) rotate(0deg)');
+            deleteTr();
         }
     }else{
-        modHtml(obj);
+        addTr(obj);
     }
 }
 
-function modHtml(obj){
+
+function addTr(obj){
     $(obj).css('transform','scale(1) rotate(180deg)');
+    var num = $(obj).data('num');
+    var html = '<tr id="addTr" data-num='+num+'></tr>'
+    $(obj).parent().parent().after(html);
+    $('#addTr').height(300);
+    setTimeout(function(){ 
+        modHtml(obj);
+        $('#addTr td').animate({opacity: "1"}, 200);
+    },100)
+}
+function deleteTr(){
+    $('#addTr').height(0);
+    $('#addTr td').animate({opacity: "0"}, 200);
+    $('.modBT').css('transform','scale(1) rotate(0deg)');
+    setTimeout(function(){ 
+        $('#addTr').empty();
+    },100)
+    setTimeout(function(){
+        $('#addTr').remove();
+    },400)
+    
+}
+
+
+// 한줄 생성 함수
+function modHtml(obj){
+        // 눌러진 화살표의 번호 받아오기
         var num = $(obj).data('num');
-        console.log(num)
 
         var birth = user_data[num].birth;
         var birth_s = birth.substring(0, 10);
@@ -281,8 +307,6 @@ function modHtml(obj){
             var tel_sub_s =user_data[num].tel_sub;
         }
 
-        console.log(message + ' ' + message.substring(0, 1))
-
         grade=user_data[num].grade;
         if(grade=='Normal'){
             var crown_color='#c2dcff'
@@ -293,8 +317,7 @@ function modHtml(obj){
         }else if(grade=='Gold'){
             var crown_color='#efc75e'
         }
-
-        var html = '<tr class="addTr" data-num='+num+'>'+
+        var html =
             '<td colspan="2">'+
                 '<span class="info_box info_id">아이디 : <input type="text" name="id" id="id" value= "'+user_data[num].id+'" readonly></span>'+
                 '<span class="info_box info_pw">비밀번호 : <input type="text" name="pw" id="pw" value= "'+user_data[num].pw+'"></span>'+
@@ -314,13 +337,14 @@ function modHtml(obj){
             if(active=='Y'){
                 html +='<button type="button" onclick="modUser()">수정</button>'+
                 '<button type="button" class="red_color" onclick="userActive('+num+')">탈퇴</button>'+
-                '</td></tr>';
+                '</td>';
             }else{
                 html += '<button type="button" class="blue_color" onclick="userActive('+num+')">활성화</button>'+
-                '</td></tr>';
+                '</td>';
             }
-                
-        $(obj).parent().parent().after(html);
+           
+            $('#addTr').append(html);
+        // $(obj).parent().parent().after(html);
 }
 
 function modUser(){
@@ -391,17 +415,3 @@ function userActive(num){
             });
     }
 }
-
-// function fn_reply_form(url, parentNO){
-//     var form = document.createElement("form");
-//     form.setAttribute("method", "post");
-//     form.setAttribute("action", url);
-//     var parentNOInput = document.createElement("input");
-//     parentNOInput.setAttribute("type","hidden");
-//     parentNOInput.setAttribute("name","parentNO");
-//     parentNOInput.setAttribute("value", parentNO);
-    
-//     form.appendChild(parentNOInput);
-//     document.body.appendChild(form);
-//     form.submit();
-// }
