@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myboot.facilities.dao.FacilitiesDAO">
+
+	<resultMap id="facilitiesResult" type="facilitiesVO">
+		<result property="fac_num" column="FAC_NUM" />
+		<result property="fac_idx1" column="FAC_IDX1" />
+		<result property="fac_idx2" column="FAC_IDX2" />
+		<result property="fac_idx3" column="FAC_IDX3" />
+		<result property="fac_idx4" column="FAC_IDX4" />
+		<result property="fac_inimg1" column="FAC_INIMG1" />
+		<result property="fac_inimg2" column="FAC_INIMG2" />
+		<result property="fac_inimg3" column="FAC_INIMG3" />
+		<result property="fac_inimg4" column="FAC_INIMG4" />
+		<result property="fac_intitle" column="FAC_INTITLE" />
+		<result property="fac_incontents" column="FAC_INCONTENTS" />	
+		<result property="fac_outimg1" column="FAC_OUTIMG1" />
+		<result property="fac_outimg2" column="FAC_OUTIMG2" />
+		<result property="fac_outimg3" column="FAC_OUTIMG3" />
+		<result property="fac_outtitle" column="FAC_OUTTITLE" />
+		<result property="fac_outcontents" column="FAC_OUTCONTENTS" />
+		<result property="fac_rmimg1" column="FAC_RMIMG1" />												
+		<result property="fac_rmtitle1" column="FAC_RMTITLE1" />
+		<result property="fac_rmcontents1" column="FAC_RMCONTENTS1" />
+		<result property="fac_rmimg2" column="FAC_RMIMG2" />
+		<result property="fac_rmtitle2" column="FAC_RMTITLE2" />
+		<result property="fac_rmcontents2" column="FAC_RMCONTENTS2" />
+		<result property="fac_rmimg3" column="FAC_RMIMG3" />
+		<result property="fac_rmtitle3" column="FAC_RMTITLE3" />
+		<result property="fac_rmcontents3" column="FAC_RMCONTENTS3" />
+		<result property="fac_rmcau" column="FAC_RMCAU" />
+		<result property="fac_cutimg1" column="FAC_CUTIMG1" />
+		<result property="fac_cutimg2" column="FAC_CUTIMG2" />
+		<result property="fac_cuttitle" column="FAC_CUTTITLE" />
+		<result property="fac_cutcontents" column="FAC_CUTCONTENTS" />
+		<result property="fac_spaimg1" column="FAC_SPAIMG1" />
+		<result property="fac_spaimg2" column="FAC_SPAIMG2" />
+		<result property="fac_spatitle" column="FAC_SPATITLE" />
+		<result property="fac_spacontents" column="FAC_SPACONTENTS" />
+		<result property="fac_spacau" column="FAC_SPACAU" />			   	    
+   	</resultMap> 
+	  
+	<select id="selectAllfacilitiesList" resultType="facilitiesVO">
+		<![CDATA[
+			SELECT * FROM TB_FACILITIES
+					 WHERE FAC_NUM = (SELECT MAX(FAC_NUM) FROM TB_FACILITIES)
+		]]>
+	</select>
+	
+	<insert id="insertFacilities" parameterType="java.util.Map">
+		<![CDATA[
+	INSERT INTO TB_FACILITIES (FAC_NUM,FAC_IDX1,FAC_IDX2,FAC_IDX3,FAC_IDX4,
+							   FAC_INIMG1,FAC_INIMG2,FAC_INIMG3,FAC_INIMG4,FAC_INTITLE,FAC_INCONTENTS,
+							   FAC_OUTIMG1,FAC_OUTIMG2,FAC_OUTIMG3,FAC_OUTTITLE,FAC_OUTCONTENTS,
+							   FAC_RMIMG1,FAC_RMTITLE1,FAC_RMCONTENTS1,
+							   FAC_RMIMG2,FAC_RMTITLE2,FAC_RMCONTENTS2,
+							   FAC_RMIMG3,FAC_RMTITLE3,FAC_RMCONTENTS3,
+							   FAC_RMCAU,FAC_CUTIMG1,FAC_CUTIMG2,FAC_CUTTITLE,FAC_CUTCONTENTS,
+							   FAC_SPAIMG1,FAC_SPAIMG2,FAC_SPATITLE,FAC_SPACONTENTS,FAC_SPACAU)
+    VALUES (#{fac_num},#{fac_idx1},#{fac_idx2},#{fac_idx3},#{fac_idx4},
+		    #{fac_inimg1},#{fac_inimg2},#{fac_inimg3},#{fac_inimg4},#{fac_intitle},#{fac_incontents},
+		    #{fac_outimg1},#{fac_outimg2},#{fac_outimg3},#{fac_outtitle},#{fac_outcontents},
+            #{fac_rmimg1},#{fac_rmtitle1},#{fac_rmcontents1},
+            #{fac_rmimg2},#{fac_rmtitle2},#{fac_rmcontents2},
+            #{fac_rmimg3},#{fac_rmtitle3},#{fac_rmcontents3},
+            #{fac_rmcau},#{fac_cutimg1},#{fac_cutimg2},#{fac_cuttitle},#{fac_cutcontents},
+            #{fac_spaimg1},#{fac_spaimg2},#{fac_spatitle},#{fac_spacontents},#{fac_spacau})
+		]]>
+	</insert>
+	
+	<select id="selectNewFAC_NUM" resultType="int" >
+		<![CDATA[
+			SELECT  nvl(max(FAC_NUM), 0) + 1 from TB_FACILITIES		
+		]]>
+	</select>
+	
+</mapper>

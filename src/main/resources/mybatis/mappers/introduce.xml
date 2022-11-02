@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myboot.introduce.dao.IntroduceDAO">
+
+	<resultMap id="introduceResult" type="introduceVO">
+		<result property="intro_num" column="INTRO_NUM" />
+	    <result property="intro_title1" column="INTRO_TITLE1" />
+	    <result property="intro_contents1" column="INTRO_CONTENTS1" />
+	    <result property="intro_image1" column="INTRO_IMAGE1" />
+	    <result property="intro_title2" column="INTRO_TITLE2" />
+	    <result property="intro_contents2" column="INTRO_CONTENTS2" />
+	    <result property="intro_image2" column="INTRO_IMAGE2" />
+	    <result property="intro_title3" column="INTRO_TITLE3" />
+	    <result property="intro_contents3" column="INTRO_CONTENTS3" />
+	    <result property="intro_image3" column="INTRO_IMAGE3" />
+	    <result property="intro_title4" column="INTRO_TITLE4" />
+	    <result property="intro_contents4" column="INTRO_CONTENTS4" />
+	    <result property="intro_image4" column="INTRO_IMAGE4" />
+	    <result property="intro_title5" column="INTRO_TITLE5" />
+	    <result property="intro_contents5" column="INTRO_CONTENTS5" />
+	    <result property="intro_image5" column="INTRO_IMAGE5" />
+	    <result property="intro_title6" column="INTRO_TITLE6" />
+	    <result property="intro_contents6" column="INTRO_CONTENTS6" />
+	    <result property="intro_image6" column="INTRO_IMAGE6" />	    	    
+   	</resultMap> 
+	  
+	<select id="selectAllintroduceList" resultType="introduceVO">
+		<![CDATA[
+			SELECT * FROM TB_INTRODUCE
+    				 WHERE INTRO_NUM = ( SELECT MAX(INTRO_NUM) FROM TB_INTRODUCE)
+		]]>
+	</select>
+	
+	<insert id="insertIntroduce" parameterType="java.util.Map">
+		<![CDATA[
+	INSERT INTO TB_INTRODUCE(INTRO_NUM,INTRO_TITLE1,INTRO_CONTENTS1,INTRO_IMAGE1,INTRO_TITLE2,INTRO_CONTENTS2,INTRO_IMAGE2
+							          ,INTRO_TITLE3,INTRO_CONTENTS3,INTRO_IMAGE3,INTRO_TITLE4,INTRO_CONTENTS4,INTRO_IMAGE4
+							          ,INTRO_TITLE5,INTRO_CONTENTS5,INTRO_IMAGE5,INTRO_TITLE6,INTRO_CONTENTS6,INTRO_IMAGE6)
+    VALUES(#{intro_num},#{intro_title1},#{intro_contents1},#{intro_image1},#{intro_title2},#{intro_contents2},#{intro_image2},
+		 		        #{intro_title3},#{intro_contents3},#{intro_image3},#{intro_title4},#{intro_contents4},#{intro_image4},
+		 		        #{intro_title5},#{intro_contents5},#{intro_image5},#{intro_title6},#{intro_contents6},#{intro_image6})
+		]]>
+	</insert>
+	
+	<!-- 위에 내용과 세트이며, 기존의 글을 수정이 아닌 새로 만들기위해 기존의 글 번호에 1을 더해서 불러온다 생각 -->
+	<select id="selectNewINTRO_NUM" resultType="int"  >
+		<![CDATA[
+			SELECT  nvl(max(INTRO_NUM), 0) + 1 from TB_INTRODUCE		
+		]]>
+	</select>
+	
+</mapper>
