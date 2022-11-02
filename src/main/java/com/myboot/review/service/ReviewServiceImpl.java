@@ -32,6 +32,15 @@ public class ReviewServiceImpl implements ReviewService {
 		return myPageDAO.selectMyReservesList(user_id);
 	}
 	
+	//전체 리스트
+		@Override
+		public List listRes(String userId) throws Exception {
+			List resList = null;
+			resList = reviewDAO.selectAllResList(userId);
+			return resList;
+		}
+	
+	
 	
 	@Override
 	public Map listMyDetailReserve(Map pagingMap) throws Exception {
