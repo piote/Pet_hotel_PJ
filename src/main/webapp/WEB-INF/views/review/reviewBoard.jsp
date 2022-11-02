@@ -278,8 +278,9 @@
           cursor: pointer;
           font-size: 18px;
           color: #999999;
-          
-          
+      }
+      .alert {
+    	  color: #999999;
       }
  </style> 
 
@@ -310,7 +311,8 @@
        <section class="content">
            <div class="container">
            <input id="user_id" type="hidden" value="${user_id}">
-           		
+           <div> 
+           
                <!-- 팝업용 임시 버튼입니다. -->
                <c:choose>
                <c:when test="${false == isLogOn}">
@@ -439,6 +441,10 @@ $(modalPop).hide();
 $(modalBg).hide();
 
 }
+function callFunction(){
+alert("이미 작성한 리뷰입니다.");
+}
+
 
 
     </script>
