@@ -1,7 +1,9 @@
 package com.myboot.user.controller;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -403,6 +407,28 @@ public class UserControllerImpl implements UserController{
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
-	
+	//한개 이미지 업로드하기
+		private String upload(MultipartHttpServletRequest multipartRequest) throws Exception{
+			String imageFileName= null;
+			Iterator<String> fileNames = multipartRequest.getFileNames();
+			
+			//세션에 있는 경로를 받아온다
+			HttpSession session = multipartRequest.getSession();
+			String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
+			
+			while(fileNames.hasNext()){
+				String fileName = fileNames.next();
+				MultipartFile mFile = multipartRequest.getFile(fileName);
+				imageFileName=mFile.getOriginalFilename();
+				File file = new File(path +"\\"+"temp"+"\\" + fileName);
+				if(mFile.getSize()!=0){ //File Null Check
+					if(!file.exists()){ //경로상에 파일이 존재하지 않을 경우
+						file.getParentFile().mkdirs();  //경로에 해당하는 디렉토리들을 생성
+						mFile.transferTo(new File(path +"\\"+"temp"+ "\\"+imageFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
+					}
+				}
+			}
+			return imageFileName;
+		}
 }
 
