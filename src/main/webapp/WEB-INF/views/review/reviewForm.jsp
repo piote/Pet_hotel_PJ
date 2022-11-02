@@ -131,7 +131,7 @@
 	<td colspan=2><textarea name="rec" rows="10" cols="65" maxlength="50"></textarea> </td>
 </tr>
 	
-		<select name="ROOM_GRADE" ><option value="Deluxe">Deluxe(소형견)</option><option value="Superior">Superior(중형견)</option><option value="Sweet">Suite(대형견)</option></select>
+		<select name="ROOM_GRADE" ><option value="Deluxe">Deluxe(소형견)</option><option value="Suite">Suite(중형견)</option><option value="Superior">Superior(대형견)</option></select>
 	
 
      <tr>

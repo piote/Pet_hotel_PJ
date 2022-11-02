@@ -10,6 +10,7 @@ import javax.swing.Action;
 import org.springframework.stereotype.Controller;
 
 import com.myboot.review.vo.ReviewVO;
+import com.myboot.user.vo.UserVO;
 
 @Controller
 public  interface ReviewService {
@@ -23,6 +24,8 @@ public  interface ReviewService {
 	public List returnReviewFormain() throws Exception ;
 	public Map listMyDetailReserve(Map pagingMap) throws Exception;
 	public List listMyReserve(String user_id) throws Exception;
+	public List listRes(String userId) throws Exception;
+	
 	
  
 	}

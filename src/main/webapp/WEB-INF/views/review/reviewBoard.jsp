@@ -1,6 +1,6 @@
 <!--<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    isELIgnored="false" %>
+    isELIgnored="false" 	%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  -->
@@ -9,9 +9,10 @@
 <c:set  var="reviewList"  value="${reviewMap.reviewList}" />
 <c:set  var="myReserveList"  value="${myReserveMap.myReserveList}" />
 <c:set  var="totReserves"  value="${myReserveMap.totReserves}" />
-
+<c:set var="item_res"  value="24"  />
 <c:set  var="section"  value="${myReserveMap.section}" />
 <c:set  var="pageNum"  value="${myReserveMap.pageNum}" />
+<c:set var="user_id"  value="${myReserveMap.user_id}" />
 
 <!--
 <%
@@ -215,32 +216,84 @@
     	    	        
     	    	          
     	        }
-		       .detail_reserve{
-		    	   margin: 0 auto;
-		    	   width: 80%;
-		    	   height: 35px;
-		    	   line-height: 30px;
-		    	   border-top: 1px solid black;
-		    	   border-bottom: 1px solid rgba(200, 200, 200, 0.5);
-		    	   position: relative;
-		    	   top: 110px;
-		    	   background-color: rgb(231, 226, 219);
-		    	}
+		       
+		       .tb_title{
+		    	   font-size: 14px;
+		            background-color: rgb(231, 226, 219);
+		        }
+		        .tb_title td{
+		            font-size: 25px;
+		            font-weight: bold;
+		            color: rgb(231, 226, 219);
+		        }
 		
 		    	.w_table {
 		    	  width: 100%;
 		    	  text-align: center !import;
 		    	}
+		    	
+		    	 .res_num { width: 10%;}
+	             .res_date { width: 20%;}
+	             .pet_name { width: 20%;}
+	             .res_st { width: 25%;}
+	             .re_review { width: 25%;}
 		  
-      
+	             .list_tb{
+	                 border-collapse: collapse;
+	                 width: 80%;
+	                 height: 40px;
+	                 text-align: center;
+	                 margin-left: 10%;
+	                 margin-top: 50px;
+	                 font
+	             }
+	             .list_tb tr{
+	            	 font-size: 35px;
+	            	 height: 40px;
+	                 border-bottom: 1px solid #d6d6d6;
+	             }
+	             .list_tb td{
+	                 font-size: 17px;
+	                 color: #606060;
+	             }	
+      .welcome {
+    	  font-size: 20px;
+      }
+      .w_col {
+    	  color: #ff7f00;
+      }
+      .welcome {
+    	  text-align: center;
+    	  margin-left : -4%;
+    	  margin-top: 50px;
+      }
+      .page_num{
+          margin-top: 10px;
+          text-align: center;
+          
+      }
+      .pageNO{
+          display: inline-block;
+          margin: 0 5px;
+          cursor: pointer;
+          font-size: 18px;
+          color: #999999;
+          
+          
+      }
  </style> 
 
 <meta charset="UTF-8">
 
 <title>리뷰 게시판</title>
+<script src="${contextPath}/resources/js/reviewPage.js"></script>
 </head>
 
 <body>
+<script>
+
+
+</script>
 
 
 <div class="all">
@@ -249,26 +302,43 @@
    
       <h2 class="review"> Customer Review</h2>
       <p id="under"></p>
-      
-      <div class="w_review">
-      <input type="button" id="btn_pet2_4" value="리뷰 쓰기" onclick="popup()">
-      <a href="${contextPath}/review/reviewForm.do?res_num=${res_num}">글쓰기(임시)</a> 
-     	 
-     </div>
-      
+   
       <br><br><br>
       <!-- 전체 레이아웃 -->
       <div id="wrap">
        <!-- Content -->
        <section class="content">
            <div class="container">
+           <input id="user_id" type="hidden" value="${user_id}">
+           		
                <!-- 팝업용 임시 버튼입니다. -->
-               <div class="btn-box">
-                   <a href="#" class="btn-open" onClick="javascript:popOpen();">
-                       <span>리뷰 쓰기</span>
-                   </a>
+               <c:choose>
+               <c:when test="${false == isLogOn}">
                
-               </div>
+                <div class="btn-box">
+               		<a href="#" class="btn-open" onClick="javascript:notlog();">
+	    		<span>리뷰 쓰기</span>
+	    		</a>
+	    		</div>
+         		</c:when>
+         		<c:when test="${null == isLogOn}">
+
+                <div class="btn-box">
+               		<a href="#" class="btn-open" onClick="javascript:notlog();">
+	    		<span>리뷰 쓰기</span>
+	    		</a>
+	    		</div>
+         		</c:when>
+
+         	    <c:otherwise>
+         	    	<div class="btn-box">
+         	    		<a href="#" class="btn-open" onClick="javascript:popOpen();">
+         	    		<span>리뷰 쓰기</span>
+                   </a>
+                    </div>
+         		</c:otherwise>
+         		</c:choose>
+              
                
                <!-- //팝업용 임시 버튼입니다. -->
            </div>
@@ -280,111 +350,35 @@
      <!-- modal 영역 -->
      <div class="modal-bg" onClick="javascript:popClose();"></div>
      <div class="modal-wrap">
-       <div class="detail_reserve">
-         <table class="w_table">
-	           <tr class="detail-center">
-	             <td width="5%">No</td>
-	             <td width="20%">Date</td>   
-	             <td width="20%">PetName</td>
-	             <td width="25%">Status</td>
-	             <td width="30%">Review</td>
-	           </tr>
-		           <c:choose>
-			           
-			           <c:when test="${empty isLogOn}">
-			       			<tr class="detail-list">
-			       				<td colspan=5>
-			       					<strong>로그인을 하셔야합니다.</strong>
-			       				</td>
-			       		    </tr>
-		       		    </c:when>		
-			           
-			           <c:when test="${empty myReserveList }">
-	          				<tr class="detail-list">
-	          					<td colspan=5>
-	          						<strong>예약하신 내역이 없습니다.</strong>
-	          					</td>
-	          				</tr>
-	          		    </c:when>
+     <div class="list_wrap">
+     <div class="list_option">
+     <div class="welcome"> <span class="w_col"> ${user_id}</span>님 반갑습니다.</div>
 
-					 <c:when test="${not empty myReserveList}" >
-					    <c:forEach  var="reserves" items="${myReserveList }" varStatus="res_num" >
-				         <fmt:formatDate var="resDate" value="${reserves.res_st}" pattern="yyyy.MM.dd"/>
+		<!-- 테이블 -->
+     <table class="list_tb">
+         <tr class="tb_title">
+             <td class="res_num">No</td>
+             <td class="res_date">Date</td>
+             <td class="pet_name">PetName</td>
+             <td class="res_sta">Status</td>
+             <td class="re_review">Review</td>
+         </tr>
+     </table>
+     
+
 				
-				         <tr class="w_reserves">
-				         		<td class="w_res" width="15%">${res_num.count}</td>
-				         		<td class="w_resdate" width="15%">${resDate}</td>
-				         		<td width="25%">${reserves.pet_name}</td>
-				         		<td width="25%">
-									<c:choose>
-										<c:when test="${reserves.res_state=='N'}">
-											이용 전
-										</c:when>
-										<c:when test="${reserves.res_state=='Y'}">
-											이용 완료
-										</c:when>
-										<c:when test="${reserves.res_state=='C'}">
-											예약 취소
-										</c:when>
-									</c:choose>
-								</td>
-								<td width="20%">
-									<c:choose>
-										<c:when test="${reserves.res_state=='Y'}">
-											<a href="${contextPath}/review/reviewForm.do?res_num=${res_num}">리뷰 쓰기</a>
-										</c:when>
-										<c:otherwise>
-										</c:otherwise>
-									</c:choose>
-								</td>
-							
-								</c:forEach>
-				         
-			         </c:when>
-	  				</c:choose>    
-         </table>
-         
-         
-       </div>  
-       
+             <div class="page_num">
+             <li class="pageNO" onClick="pageDown()">pre</li>
+	            <c:forEach varStatus="i" begin="0" end="${PI}">
+				<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
+					<li class="pageNO" onClick="clickNO(${i.count-1})">${i.count}</li>
+				</c:forEach>
+             <li class="pageNO" onClick="pageUP()">next</li></div>
+        
      <button class="modal-close" onClick="javascript:popClose();">닫기</button>
- 	
-     <div class="cls2">
- 	<c:if test="${totReserves != null }" >
- 	     <c:choose>
- 	       <c:when test="${totReserves >100 }">  <!-- 글 개수가 100 초과인경우 -->
- 		      <c:forEach   var="page" begin="1" end="10" step="1" >
- 		         <c:if test="${section >1 && page==1 }">
- 		          <a class="no-uline" href="${contextPath }/review/reviewBoard.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
- 		         </c:if>
- 		          <a class="no-uline" href="${contextPath }/review/reviewBoard.do?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
- 		         <c:if test="${page ==10 }">
- 		          <a class="no-uline" href="${contextPath }/review/reviewBoard.do?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
- 		         </c:if>
- 		      </c:forEach>
- 	       </c:when>
- 	       <c:when test="${totReserves ==100 }" >  <!--등록된 글 개수가 100개인경우  -->
- 		      <c:forEach   var="page" begin="1" end="10" step="1" >
- 		        <a class="no-uline"  href="#">${page } </a>
- 		      </c:forEach>
- 	       </c:when>
- 	       
- 	       <c:when test="${totReserves< 100 }" >   <!--등록된 글 개수가 100개 미만인 경우  -->
- 		      <c:forEach   var="page" begin="1" end="${totReserves/10 +1}" step="1" >
- 		         <c:choose>
- 		           <c:when test="${page==pageNum }">
- 		            <a class="sel-page"  href="${contextPath }/review/reviewBoard.do?section=${section}&pageNum=${page}" onClick="javascript:popPage();">${page } </a>
- 		          </c:when>
- 		          <c:otherwise>
- 		            <a class="no-uline"  href="${contextPath }/review/reviewBoard.do?section=${section}&pageNum=${page}" onClick="javascript:popPage();">${page } </a>
- 		          </c:otherwise>
- 		        </c:choose>
- 		      </c:forEach>
- 	       </c:when>
- 	     </c:choose>
- 	   </c:if>
- 	 </div> 
-     </div>
+ </div>
+ </div>	
+ </div>
      <!-- //modal 영역 -->
 
       
@@ -396,19 +390,19 @@
 	        	<div class="img_wrap">
 	           	<a href="${contextPath}/review/reviewDetail_1.do"></a>
 	           	</div>
-	           	<a href="${contextPath}/review/reviewDetail_1.do" class="room_name">소형견(임시)</a>
+	           	<a href="${contextPath}/review/reviewDetail_1.do" class="room_name">Deluxe</a>
         	</div>
         	<div class="w_wrap">
 	           	<div class="img_wrap">
 	           		<a href="${contextPath}/review/reviewDetail_2.do"></a>
 	           	</div>
-	           	<a href="${contextPath}/review/reviewDetail_2.do" class="room_name">중형견(임시)</a>
+	           	<a href="${contextPath}/review/reviewDetail_2.do" class="room_name">Suite</a>
            	</div>
            	<div class="w_wrap">
 	           	<div class="img_wrap">
 	           		<a href="${contextPath}/review/reviewDetail_3.do"></a>
 	           	</div> 
-	           	<a href="${contextPath}/review/reviewDetail_3.do" class="room_name">대형견(임시)</a>
+	           	<a href="${contextPath}/review/reviewDetail_3.do" class="room_name">Superior</a>
 	        </div>   
           </div>
        
@@ -417,17 +411,15 @@
       <br><br><br><br><br>
 
 </div>
-
-<c:if test="${myReserveMap.pageNum>=2}">
-	<script>
-		$(document).ready(function(){
-			popOpen();
-		})
-	</script>
-</c:if>
-
-
 <script>
+
+function notlog() {
+	alert("로그인을 해주세요");
+}
+
+
+
+
 function popOpen() {
 
 var modalPop = $('.modal-wrap');
@@ -448,16 +440,8 @@ $(modalBg).hide();
 
 }
 
-function popPage() {
-	var modalPop = $('.modal-wrap');
-	var modalBg = $('.modal-bg');
-	
-	$(modalPop).show();
-	$(modalBg).show();
-}
 
     </script>
 
 </body>
 </html>
-

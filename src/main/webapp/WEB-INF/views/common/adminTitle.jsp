@@ -23,7 +23,7 @@
             text-align: center;
         }
         .y_txt{
-            color: #E59F5A;
+            color: #FF862F;
         }
     </style>
 </head>

@@ -114,6 +114,24 @@
 
 	</select>
 	
+	<select id="selectAllResList" parameterType="String"
+		resultMap="reserveResult">  
+<![CDATA[
+
+    SELECT ROWNUM AS recNum,  res.RESERVATION_NUM,  res.RESERVATION_ST, res.user_id, res.RESERVATION_STATE , Max（pet_name）as pet_name
+				FROM tb_reservation res
+				left join tb_petservice pet
+                on res.RESERVATION_NUM = pet.RESERVATION_NUM
+                where res.user_id = #{userId}
+                GROUP BY ROWNUM, res.RESERVATION_NUM, res.RESERVATION_ST, res.USER_ID, res.RESERVATION_STATE
+				order by recNum asc
+							 
+						 
+						]]>
+
+
+	</select>
+	
 
 
 
