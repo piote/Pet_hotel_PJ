@@ -194,6 +194,12 @@
             box-sizing: border-box;
             opacity: 0;
         }
+        #addTr td:nth-child(2){
+            padding-left: 100px;
+        }
+        #addTr td:nth-child(2) .info_box input[type=text]{
+            width: 70%;
+        }
         #addTr td:nth-child(3){
             padding-left: 70px;
             padding-right: 35px;
