@@ -344,7 +344,7 @@
         	width: 70px;
 		    height: 25px;
 		    margin-bottom: 10px;
-		    margin-left: 3px;
+		    margin-left: 0px;
         }
         
         /* 화살표 아이콘 뒤집기  */
