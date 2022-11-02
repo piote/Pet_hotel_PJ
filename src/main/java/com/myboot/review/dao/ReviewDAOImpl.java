@@ -68,7 +68,12 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public int selectNewReviewNO() {
 		return sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectNewReviewNO");
 	}							 //("mapper.review.selectNewReviewNO");
-
+	
+	
+	@Override public List selectAllResList(String userId) {
+		List resList = sqlSession.selectList("com.myboot.review.dao.ReviewDAO.selectAllResList", userId);
+		return resList;
+  }
 	
 	  @Override public List<ReviewVO> selectAllReviewList(Map pagingMap) {
 			List<ReviewVO> reviewList = sqlSession.selectList("com.myboot.review.dao.ReviewDAO.selectAllReviewList", pagingMap);
@@ -83,7 +88,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 			return reviewList;
 	  }
 	  
-	 
+
+	  
 	  @Override
 		public void deleteReview(int reviewNO) throws DataAccessException {
 			sqlSession.delete("com.myboot.review.dao.ReviewDAO.deleteReview", reviewNO);

@@ -120,26 +120,7 @@ public class ReviewControllerImpl implements ReviewController {
 
 	}
 
-	/*
-	 * @Override
-	 * 
-	 * @RequestMapping(value= "/review/reviewDetail_1.do", method =
-	 * {RequestMethod.GET, RequestMethod.POST}) public ModelAndView
-	 * reviewDetail_1(HttpServletRequest request, HttpServletResponse response)
-	 * throws Exception {
-	 * 
-	 * String viewName = (String)request.getAttribute("viewName"); List reviewList =
-	 * reviewService.reviewDetail_1(Map pagingMap); ModelAndView mav = new
-	 * ModelAndView(viewName); mav.addObject("reviewList", reviewList); return mav;
-	 * 
-	 * }
-	 */
-	/*
-	 * @Override
-	 * 
-	 * @RequestMapping("/review/reviewForm.do") public String reviewForm(Model
-	 * model) { return "reviewForm"; }
-	 */
+	
 	@RequestMapping(value = "/review/reviewForm.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView reviewForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -155,6 +136,8 @@ public class ReviewControllerImpl implements ReviewController {
 
 	}
 
+
+	
 	
 	/*
 	   @RequestMapping("/review/reviewBoard.do")
@@ -210,11 +193,23 @@ public class ReviewControllerImpl implements ReviewController {
 			
 			myReserveMap.put("section", section);
 			myReserveMap.put("pageNum", pageNum);
-			myReserveMap.put("user_id", user_id);		
+			myReserveMap.put("user_id", user_id);	
+			
+	
 			mav.addObject("myReserveMap", myReserveMap);
 		}
 		return mav;
 	}
+	
+	@ResponseBody 
+	@RequestMapping(value= "/returnAllRes.do", method = RequestMethod.GET)
+	public List returnAllReview(@RequestParam(value ="userId", required = false) String userId,
+			  HttpServletRequest request, HttpServletResponse response) throws Exception{
+		List allRes =  reviewService.listRes(userId);
+		return allRes;
+	}
+	
+	
 	
 	/*
 	 * @RequestMapping("/reviewDetail_1.do") public String detail_1(Model model){

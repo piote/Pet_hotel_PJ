@@ -175,13 +175,13 @@
 		
 	<br><br><br><br>
 	
-	<h2 class="w_review"><a class="w_a" href="${contextPath}/reviewBoard.do" >중형견 Review</a></h2>
+	<h2 class="w_review"><a class="w_a" href="${contextPath}/reviewBoard.do" >Suite Review</a></h2>
 		<p id="under"></p>
 		<br><br><br>
 	
 		 <div class="w_contents_1">
             <img class="re_room1" src="${contextPath}/resources/img/pet_room_3.jpg" alt="중형견 룸">
-            <p class="re_p1">중형견</p>
+            <p class="re_p1">Suite</p>
 
 		 </div>
 		 
