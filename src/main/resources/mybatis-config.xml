@@ -12,6 +12,8 @@
  	<mapper resource="mybatis/mappers/reservation.xml"/>
  	<mapper resource="mybatis/mappers/adminUser.xml"/>
  	<mapper resource="mybatis/mappers/adminReservation.xml"/>
+ 	<mapper resource="mybatis/mappers/introduce.xml"/>
+ 	<mapper resource="mybatis/mappers/facilities.xml"/>
 
  </mappers>
 </configuration>
