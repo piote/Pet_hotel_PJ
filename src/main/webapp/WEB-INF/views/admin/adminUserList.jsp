@@ -14,15 +14,14 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자페이지_회원조회</title>
-    <script src="${contextPath}/resources/js/adminPage.js"></script>
+    <script src="${contextPath}/resources/js/adminUserPage.js"></script>
     <style>
         #adm_user{
         	color: #333;
         }
         .list_wrap{
             width: 1000px; height: auto;
-            position: absolute; 
-            top: 120px; right: 0;
+            margin-left: 250px;
         }
         .list_option{
             width: 100%;
@@ -119,22 +118,37 @@
         .tb_title{
             background-color: #f1f1f1;
         }
+        .modBT{
+            transform: scale(1) rotate(0deg);
+            transition: all 0.2s;
+            fill: #909090;
+        }
+        .modBT:hover{
+            transform: scale(1.2) rotate(0deg);
+            fill: #606060;
+        }
+        .modBT_push{
+            transform: scale(1) rotate(180deg);
+        }
         .tb_title td{
             font-size: 14px;
             font-weight: bold;
             color: #030303;
         }
         .user_id,.user_name,.user_grade,.user_resState{
-            width: 13%;
+            width: 12%;
         }
         .user_joinDate{
-            width: 14%;
+            width: 13%;
         }
         .user_email{
-            width: 18%;
+            width: 17%;
         }
         .user_tel{
-            width: 16%;
+            width: 17%;
+        }
+        .user_updata{
+            width: 5%;
         }
         .page_num{
             margin-top: 50px;
@@ -150,52 +164,116 @@
         .select_number{
             color: #030303;
         }
+        .red_color{
+            color: red !important;
+        }
+        .blue_color{
+            color: blue !important;
+        }
+        #addTr{
+            height: 0;
+            transition: height 0.3s;
+            overflow: hidden;
+        }
+        #addTr button{
+            width: 60px; height: 25px;
+            border-radius: 20px;
+            background-color: #eee;
+            color: #333;
+            border: 0;
+            cursor: pointer;
+        }
+        #addTr button:last-child{
+            margin-left: 10px;
+        }
+        #addTr button:hover{
+            background-color: #ccc;
+        }
+        #addTr td{
+            padding-left: 30px;
+            box-sizing: border-box;
+            opacity: 0;
+        }
+        #addTr td:nth-child(3){
+            padding-left: 70px;
+            padding-right: 35px;
+        }
+        .info_box{
+            width: 100%; height: auto;
+            /* background-color: #eee; */
+            display: flex;
+            line-height: 30px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .info_box input[type=text], .info_box input[type=date]{
+            width: 60%;
+            height: 30px;
+            border:0;
+            resize: none;
+            position: absolute;
+            right: 0;
+            background-color: #eee;
+            padding-left: 5px;
+        }
+        .info_box input[type=text]:focus, .info_box input[type=date]:focus{
+            outline: 1px solid #ccc;
+        }
+        .info_box input[type=radio]{
+            width: 15px;
+            height: 15px;
+            position: inherit;
+            margin-top: 7px;
+        }
+        .info_grand{
+            justify-content: center;
+        }
+        .crown{
+            fill: #ffa245;
+        }
     </style>
 </head>
 <body>
-    
-            <div class="list_wrap">
-                <div class="list_option">
-                    <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="search()" >
-                        <select name="search_op" id="search_op" aria-label="search">
-                            <option value="search_id">아이디</option>
-                            <option value="search_name">이름</option>
-                            <option value="search_tel">전화번호</option>
-                            <option value="search_email">이메일</option>
-                        </select>
-                        <input type="text" name="keyword" id="keyword" class="search_txt" placeholder="검색">
-                        <button type="button" class="seh_icon" onclick="search()" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
-                    </div>
-                    <div class="grade_option">
-                        멤버쉽 :
-                        <label><input type="checkbox" name="grade" id="Normal" value="Normal">Normal</label>
-                        <label><input type="checkbox" name="grade" id="Bronze" value="Bronze">Bronze</label>
-                        <label><input type="checkbox" name="grade" id="Silver" value="Silver">Silver</label>
-                        <label><input type="checkbox" name="grade" id="Gold" value="Gold">Gold</label>
-                    </div>
-                    <div class="hr"></div>
-                    <div class="res_option">
-                        예약여부 :
-                        <label><input type="checkbox" name="reservation" id="res_O" value="O">O</label>
-                        <label><input type="checkbox" name="reservation" id="res_X" value="X">X</label>
-                    </div>
-                </div>
-
-                <table class="list_tb">
-                    <tr class="tb_title">
-                        <td class="user_id">아이디</td>
-                        <td class="user_name">이름</td>
-                        <td class="user_grade">멤버쉽등급</td>
-                        <td class="user_joinDate">가입일</td>
-                        <td class="user_email">이메일</td>
-                        <td class="user_tel">전화번호</td>
-                        <td class="user_resState">예약여부</td>
-                    </tr>
-                </table>
-                <div class="page_num"></div>
+    <div class="list_wrap">
+        <div class="list_option">
+            <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="search()" >
+                <select name="search_op" id="search_op" aria-label="search">
+                    <option value="search_id">아이디</option>
+                    <option value="search_name">이름</option>
+                    <option value="search_tel">전화번호</option>
+                    <option value="search_email">이메일</option>
+                </select>
+                <input type="text" name="keyword" id="keyword" class="search_txt" placeholder="검색">
+                <button type="button" class="seh_icon" onclick="search()" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
             </div>
-            
-        
-    </section>
+            <div class="grade_option">
+                멤버쉽 :
+                <label><input type="checkbox" name="grade" id="Normal" value="Normal">Normal</label>
+                <label><input type="checkbox" name="grade" id="Bronze" value="Bronze">Bronze</label>
+                <label><input type="checkbox" name="grade" id="Silver" value="Silver">Silver</label>
+                <label><input type="checkbox" name="grade" id="Gold" value="Gold">Gold</label>
+            </div>
+            <div class="hr"></div>
+            <div class="res_option">
+                예약여부 :
+                <label><input type="checkbox" name="reservation" id="res_O" value="O">O</label>
+                <label><input type="checkbox" name="reservation" id="res_X" value="X">X</label>
+            </div>
+        </div>
+        <form name="modUserForm" action="${contextPath}/modMember.do" method="post">
+            <table class="list_tb">
+                <tr class="tb_title">
+                    <td class="user_id">아이디</td>
+                    <td class="user_name">이름</td>
+                    <td class="user_grade">멤버쉽등급</td>
+                    <td class="user_joinDate">가입일</td>
+                    <td class="user_email">이메일</td>
+                    <td class="user_tel">전화번호</td>
+                    <td class="user_resState">예약여부</td>
+                </tr>
+            </table>
+         </form>
+        <div class="page_num"></div>
+    </div>
 </body>
 </html>

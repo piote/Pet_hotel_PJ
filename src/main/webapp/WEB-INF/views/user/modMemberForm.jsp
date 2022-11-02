@@ -69,7 +69,7 @@
 						     idInput.setAttribute("value", id);
 						     form.appendChild(idInput);
 						     document.body.appendChild(form);
-						     setTimeout(() => form.submit(), 2000);
+						     setTimeout(() => form.submit(), 20000);
 							 //form.submit();
 						  }
 						})
@@ -89,64 +89,98 @@
 		<form method="post" action="${contextPath}/modMember.do"> 
 		   <div id="wrap">
 			   	<section class="container">
-			      <h3>회원 정보 수정</h3>
+				   	<div class="petitle">
+				   	<h3><img src="${contextPath}/resources/img/petel.png" alt="정보수정">&nbsp;회원 정보 수정</h3></div>
 			      <div class="modCon">
-				      <table>
+				     <!-- <table border="1" width="50%" height="80%"> -->
+				     <table>
 				         <tr>
-					            <td><p align="center">아이디</td>
-					            <td><input class="txtBox" type="text" id="readonly" name="id" value="${user.id }" readonly/> </td>
+					            <th>
+                                    <div class="head-cell"><span class="empha">*</span>아이디</div>
+                                </th>
+					            <td>
+					            	<div class="col-cell"><input class="txtBox" type="text" id="readonly" name="id" value="${user.id }" readonly/></div>
+					            </td>
 				         </tr>
 				         <tr>
-					            <td><p align="center">비밀번호</td>
-					            <td><input class="txtBox" type="password" name="pw"  value="${user.pw }" /></td>
+					            <th>
+                                    <div class="head-cell"><span class="empha">*</span>비밀번호</div>
+                                </th>
+					            <td>
+					            	<div class="col-cell"><input class="txtBox" placeholder="비밀번호를 입력하세요.!" type="password" name="pw"  value="${user.pw }" />
+					            	<span class="idpw-info"><!-- &nbsp;&nbsp;* 영문 대소문자/숫자/특수문자를 혼용하여 2종류 10~16자 또는 3종류 8~16자 --></span></div>
+					            </td>
 				         </tr>
 				         <tr>
-					            <td><p align="center">이름</P></td>
-					            <td><input class="txtBox"  type="text" id="readonly" name="name"  value="${user.name }" readonly/></td>
+					            <th>
+                                    <div class="head-cell"><span class="empha">*</span>이름</div>
+                                </th>
+					            <td>
+					            	<div class="col-cell"><input class="txtBox"  type="text" id="readonly" name="name"  value="${user.name }" readonly/></div>
+					            </td>
 				         </tr>
 				          <tr>
-				               <td><p align="center">생년월일</P></td> 
-				               
+				              	<th>
+                                    <div class="head-cell"><span class="empha">*</span>생년월일</div>
+                                </th> 
 				               <%-- <td><input class="txtBox" type="text" name="birth" value="${user.birth }" ></td> --%>
 				               <td>
-				               <input class="txtBox"  type="date" name="birth_string" value="${birth}" ></td>
+				               		<div class="col-cell"><input class="txtBox"  type="date" name="birth_string" value="${birth}" ></div>
+				               </td>
 			              </tr>
 				 		 <tr>
-					            <td><p align="center">이메일</P></td>
-					            <td><input class="txtBox" type="text" name="email"  value="${user.email }"></td>
+					            <th>
+                                    <div class="head-cell"><span class="empha">*</span>이메일</div>
+                                </th>
+					            <td>
+					            	<div class="col-cell"><input class="txtBox" type="text" name="email" placeholder="이메일을 입력하세요.!"  value="${user.email }"></div>
+					            </td>
 				         </tr>
 				          <tr>
-				                <td><p align="center">휴대전화</P></td>
-				                <td><input class="txtBox" type="text" name="tel" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13"  placeholder="전화번호를 입력해보세요!" value="${user.tel }" required></td>
+				                <th>
+                                    <div class="head-cell"><span class="empha">*</span>휴대전화</div>
+                                </th>
+				                <td>
+				                	<div class="col-cell"><input class="txtBox" type="text" name="tel" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13"  placeholder="전화번호를 입력하세요!" value="${user.tel }" required></div>
+				                </td>
 				         </tr>
 				          <tr>
-				                <td><p align="center">비상전화</P></td>
-				                <td><input class="txtBox" type="text" name="tel_sub" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13" placeholder="전화번호를 입력해보세요!" value="${user.tel_sub}" required></td>
+				                <th>
+                                    <div class="head-cell"><span class="empha">*</span>비상전화</div>
+                                </th>
+				                <td>
+				                	<div class="col-cell"><input class="txtBox" type="text" name="tel_sub" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13" placeholder="전화번호를 입력하세요!" value="${user.tel_sub}" required></div>
+				                </td>
 				          </tr>
 				          <tr>
-				               <td><p align="center">수신여부</P></td>
+				               <th>
+                                    <div class="head-cell"><span class="empha">*</span>수신여부</div>
+                                </th>
 				               <td>
-				                 <input type="checkbox" name="emailsts_yn"  value="Y" onclick= 'checkOnlyOne(this)'  />Yes
-				                 <input type="checkbox" name="emailsts_yn"  value="N" onclick= 'checkOnlyOne(this)' />No	
+				                 <div class="col-cell"><input type="checkbox" name="emailsts_yn"  value="Y" onclick= 'checkOnlyOne(this)'  />Yes
+				                 <input type="checkbox" name="emailsts_yn"  value="N" onclick= 'checkOnlyOne(this)' />No</div>
 				               </td>
 			               </tr>
 				         <tr>
-					           <td><p align="center">가입일</td>
-					           <td><input class="txtBox" id="readonly" "type="text" name="joinDate" size="20" value="${user.joinDate}"  readonly/></td>
+					           <th>
+                                    <div class="head-cell"><span class="empha">*</span>가입일</div>
+                                </th>
+					           <td>
+					           		<div class="col-cell"><input class="txtBox" id="readonly" type="text" name="joinDate" size="20" value="${user.joinDate}"  readonly/></div>
+					           </td>
 				         </tr>
-				     </table>
-				     
-			         <ul>			    
-							<input type="submit" class="btn1" name="modbtn" value="수정하기" onClick= "mod()" >
-					        <li><a href= "${contextPath}/modMemberForm.do"><input class="btn2" type="button" name="cal_1" value="수정취소" onClick= "cal();"></a></li>
-				     </ul>
-				     	<p>아이디, 이름, 가입일은 수정이 불가능합니다.</p>
-						<div>
+				     </table>  
+				     </div>
+				     		<p><span class="symbol">*</span>아이디, 이름, 가입일은 수정이 불가능합니다.</p>
+			         <div class= "btn_footer">		    
+							<input type="submit" class="btn1" name="modbtn" value="수정하기" onClick= "mod()">
+					        <a href= "${contextPath}/modMemberForm.do"><input class="btn2" type="button" name="cal_1" value="수정취소" onClick= "cal();"></a>
 							<%-- <a href= "${contextPath}/main.do"><input class="btn3" type="button" name="leave_1"  value="탈퇴하기" onClick="leave();"></a> --%>
-							<button type="button" class="btn3" onclick="deleteUser('${contextPath}/retiring.do','${user.id }');"> 탈퇴하기 </button>
-						</div>
-			   	</section>
-		   </div>
+					</div>
+					<div class="btn_footer1"><button type="button" class="btn3" onclick="deleteUser('${contextPath}/retiring.do','${user.id }');"> 탈퇴하기 </button></div>
+							
+				</section>
+			</div>
 	   </form>
 	</body>
 </html>

@@ -15,9 +15,9 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link rel="stylesheet" href="${contextPath}/resources/css/password.css">
+	    <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	    <title>회원정보 수정</title>
-
 	 	<%-- <c:choose>
 			<c:when test="${result=='passwordFailed' }">
 		 		  <script> 
@@ -40,6 +40,22 @@
 					  	  </script>
 					</c:when>
 				</c:choose>
+				<!-- <script>
+				$(function(){
+					  // 눈표시 클릭 시 패스워드 보이기
+					  $('.eyes').on('click',function(){
+					    $('.pw_change').toggleClass('active');
+
+					    if( $('.pw_change').hasClass('active') == true ){
+					    	$(this).find('.fa-eye').attr('class',"fa fa-eye-slash fa-lg").parents('.pw_change').find('#password').attr('type',"text");
+					    				// i 클래스                // 텍스트 보이기 i 클래스
+					    }
+					    else{
+					    	$(this).find('.fa-eye-slash').attr('class',"fa fa-eye fa-lg").parents('.pw_change').find('#password').attr('type','password');
+					    }
+					  });
+					});
+				</script> -->
 	</head>
 		<body>
 			 <form method="post"  action="${contextPath}/pw_change.do">
@@ -52,7 +68,10 @@
 		            	</div>
 			            <div class="pw_change">
 			                <label for="">비밀번호</label><br>
-			                <input type="password" name="password" size="10">
+			                <input type="password" placeholder="Password" name="password" size="10">
+			                 <!-- <div class="eyes">
+  								<i class="fa fa-eye fa-lg"></i>
+  							</div> -->
 			            </div>
 			            <div class="pw_btn">
 			                <!-- <input type="submit" id= "box" value= "정보 수정하기"> -->
