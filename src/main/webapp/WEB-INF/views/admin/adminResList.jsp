@@ -5,7 +5,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<c:set var="item_res"  value="24"  /><!--총 데이터베이스 아이템 수  -->
+<c:set var="item_res"  value="${totalresnum}" /><!--총 데이터베이스 아이템 수  -->
+<c:set var="resList"  value="${adminResReed}" /><!--가져온 예약 리스트 -->
+<c:set var="P"  value="0" /><!--페이지 현재 -->
 <%
   request.setCharacterEncoding("UTF-8");
 %>
@@ -15,7 +17,6 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자페이지_예약조회</title>
-    <!-- <script src="${contextPath}/resources/js/adminPage.js"></script> -->
     <style>
         #adm_res{
         	color: #333;
@@ -105,6 +106,14 @@
         .sort_option label,.res_option label{
             margin: 0 10px;
         }
+        
+        
+        .res_Item_Num{
+        	font-size: 13px;
+            color: #606060;
+        }
+        
+        
         .list_tb{
             border-collapse: collapse;
             width: 1000px;
@@ -169,6 +178,7 @@
         /*템 없을 때  출력 데이터  */
         .notResItem{
         	text-align: center;
+        	height: 100px;
         }
         
         #res_content_box{
@@ -334,7 +344,7 @@
         	width: 70px;
 		    height: 25px;
 		    margin-bottom: 10px;
-		    margin-left: 3px;
+		    margin-left: 0px;
         }
         
         /* 화살표 아이콘 뒤집기  */
@@ -370,12 +380,18 @@
     </style>
     <script>
     	window.onload = function () {
-    		petTableInfo = $('.res_content_box').children();
-    		$('.res_content_box').empty()
+    		petTClose()
     	}
     	var petTableInfo;
     	var petItemSum = 0;
-    	//상세보기 열고 닫기
+    
+    	
+    	//상세보기 저장하고 닫기
+    	function petTClose(){
+    		petTableInfo = $('.res_content_box').children();
+    		$('.res_content_box').empty()
+    	}
+    	
     	
     	//펫 요청사항 텍스트 범위 세기
     	function petcommentTextLength(obj){
@@ -456,6 +472,36 @@
 					
 			}, 500);
 		}
+		
+		//페이징 ajax
+		function reslistPage(P){ 
+			console.log(P);
+			$.ajax({
+				url : "/ResPageAjax.do",
+				type : "post",
+				dataType : "text",
+				data : {"P" : P},
+				cache : false
+		    }).done(function(result) {
+				//임시 html생성 임시로 만든 div태그안에 넣어서 보관
+	     		var html = $('<div>').html(result);
+				
+				//page/ResPageAjax.jsp에 요소인 테이블의 ID indexListAjax를 불러온다.
+				var contents = html.find("#indexListAjax").html();
+				console.log(contents);
+				//테이블에 html로 만든 것들 넣기
+				$("#res_List_Tb").html(contents);
+				
+				//새로생긴 html 부분에 상세보기 저장하고 닫기
+				petTClose();
+				
+			}).fail(function (jqXHR, textStatus, errorThrown) {
+				console.log("에러");
+				console.log(jqXHR);
+				console.log(textStatus);
+				console.log(errorThrown);
+			});
+		}
 				
 				
     </script>
@@ -485,9 +531,10 @@
                         <label><input type="checkbox" name="State" id="res_cancel" value="cancel">취소</label>
                     </div>
                 </div>
-	
+				<span class="res_Item_Num">총 ${item_res}개의 예약</span>
+				
 				<!-- 테이블 -->
-                <table class="list_tb">
+                <table id="res_List_Tb" class="list_tb">
                     <tr class="tb_title">
                         <td class="res_num">예약번호</td>
                         <td class="res_name">예약자</td>
@@ -500,116 +547,35 @@
                     </tr>
                     <c:choose>
                     	<c:when test="${resList != null}">
-	                    	<c:forEach var="reservation" items="${resList}" varStatus="status">
-	                    		<tr>
-			                        <td class="res_num">${reservation.res_num}</td>
-			                        <td class="res_name">${reservation.res_name}</td>
-			                        <td class="res_Date">${reservation.res_Date_st} ~ ${reservation.res_Date_end}</td>
-			                        <td class="res_petCount">${reservation.res_petCount}마리</td>
-			                        <td class="res_payTime">${reservation.res_payTime}</td>
-			                        <td class="res_cost">${reservation.res_cost}</td>
-			                        <td class="resState">${reservation.resState}</td>
-			                        <td class="res_modBt">
-			                        	<div class="arrow"></div>
-			                           <!--  <button type="button" class="modRes">예약변경</button> -->
-			                        </td>
-                    			</tr>
+
+	                    	<c:forEach var="reservation" items="${resList}" varStatus="status" begin="${P*10}" end="${P*10+9}">
+                    			<tr>
+		                 			<td class="res_num">${reservation.res_num}</td>
+					                <td class="res_name">${reservation.name}</td>
+					                <td class="res_Date">${reservation.res_st} ~ ${reservation.res_end}</td>
+					                <td class="res_petCount">${reservation.total_pet}마리</td>
+					                <td class="res_payTime">${reservation.payTime}</td>
+					                <td class="res_cost">${reservation.totalCost}</td>
+					                <td class="resState">${reservation.res_state}</td>
+					                <td class="res_modBt res_modBt_bt" onclick="">
+					                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
+					                </td>					  
+				            	</tr>
                     			
                     		</c:forEach>
                     	</c:when>
                     	<c:otherwise>
-                   		
-	                 		<tr>
-	                 			<td class="res_num">1</td>
-				                <td class="res_name">aaa</td>
-				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
-				                <td class="res_petCount">2마리</td>
-				                <td class="res_payTime">2022-10-19</td>
-				                <td class="res_cost">2,000,000원</td>
-				                <td class="resState">이용전</td>
-				                <td class="res_modBt res_modBt_bt" onclick="">
-				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
-				                </td>					  
-				            </tr>
-				            
-				            <tr>
-	                 			<td class="res_num">1</td>
-				                <td class="res_name">aaa</td>
-				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
-				                <td class="res_petCount">2마리</td>
-				                <td class="res_payTime">2022-10-19</td>
-				                <td class="res_cost">2,000,000원</td>
-				                <td class="resState">이용전</td>
-				                <td class="res_modBt res_modBt_bt" onclick="">
-				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
-				                </td>					  
-				            </tr>
-				            
-				            <tr>
-	                 			<td class="res_num">1</td>
-				                <td class="res_name">aaa</td>
-				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
-				                <td class="res_petCount">2마리</td>
-				                <td class="res_payTime">2022-10-19</td>
-				                <td class="res_cost">2,000,000원</td>
-				                <td class="resState">이용전</td>
-				                <td class="res_modBt res_modBt_bt" onclick="">
-				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
-				                </td>					  
-				            </tr>
-				            
-				            <tr>
-	                 			<td class="res_num">1</td>
-				                <td class="res_name">aaa</td>
-				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
-				                <td class="res_petCount">2마리</td>
-				                <td class="res_payTime">2022-10-19</td>
-				                <td class="res_cost">2,000,000원</td>
-				                <td class="resState">이용전</td>
-				                <td class="res_modBt res_modBt_bt" onclick="">
-				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
-				                </td>					  
-				            </tr>
-				            
-				            <tr>
-	                 			<td class="res_num">1</td>
-				                <td class="res_name">aaa</td>
-				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
-				                <td class="res_petCount">2마리</td>
-				                <td class="res_payTime">2022-10-19</td>
-				                <td class="res_cost">2,000,000원</td>
-				                <td class="resState">이용전</td>
-				                <td class="res_modBt res_modBt_bt" onclick="">
-				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
-				                </td>					  
-				            </tr>
-				            <tr>
-	                 			<td class="res_num">1</td>
-				                <td class="res_name">aaa</td>
-				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
-				                <td class="res_petCount">2마리</td>
-				                <td class="res_payTime">2022-10-19</td>
-				                <td class="res_cost">2,000,000원</td>
-				                <td class="resState">이용전</td>
-				                <td class="res_modBt res_modBt_bt" onclick="">
-				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
-				                </td>					  
-				            </tr>
-				            
-				            <tr>
-	                 			<td class="res_num">1</td>
-				                <td class="res_name">aaa</td>
-				                <td class="res_Date">2022-10-12 ~ 2022-10-17</td>
-				                <td class="res_petCount">2마리</td>
-				                <td class="res_payTime">2022-10-19</td>
-				                <td class="res_cost">2,000,000원</td>
-				                <td class="resState">이용전</td>
-				                <td class="res_modBt res_modBt_bt" onclick="">
-				                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
-				                </td>					  
-				            </tr>
-				            
-				            <tr id="res_content_box" class="res_content_box">
+                 
+                 			<tr>
+                 			
+                 				<td class="notResItem" colspan="8">예약기록이 존재하지 않습니다!</td>
+                 				
+                 			</tr>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    <!--상세보기용  -->
+                    <tr id="res_content_box" class="res_content_box">
 				            	<td colspan="3">
 				            		<ul>
 				            			<li class="res_Date_Veiw_Box">
@@ -696,11 +662,6 @@
 				            		</ul>
 				            	</td>
 				            </tr>
-				            
-				          
-                   					
-                    	</c:otherwise>
-                    </c:choose>
                     
                     
                 </table>
@@ -722,7 +683,6 @@
 				<!-- 아이템이 적어 페이지를 만들 이유가 없음 -->
 				<c:if test="${item_res <= 10}">
 					<c:set var="PI" value="${0}" scope="request"/>
-					3
 				</c:if>
 				
 				
@@ -730,7 +690,7 @@
 	                <li class="pageNO" onClick="pageDown()">pre</li>
 		            <c:forEach varStatus="i" begin="0" end="${PI}">
 					<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
-						<li class="pageNO" onClick="clickNO(${i.count-1})">${i.count}</li>
+						<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
 					</c:forEach>
 	                <li class="pageNO" onClick="pageUP()">next</li>
                 </div>
