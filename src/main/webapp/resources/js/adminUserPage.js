@@ -328,8 +328,8 @@ function modHtml(obj){
             '</td>'+
             '<td colspan="3">'+
                 '<span class="info_box info_email">이메일 : <input type="text" name="email" id="email" value="'+user_data[num].email+'"></span>'+
-                '<span class="info_box info_tel">휴대전화 : <input type="text" name="tel" id="tel" value="'+user_data[num].tel+'"></span>'+
-                '<span class="info_box info_tel_sub">비상전화 : <input type="text" name="tel_sub" id="tel_sub" value="'+tel_sub_s+'"></span>'+
+                '<span class="info_box info_tel">휴대전화 : <input type="text" name="tel" id="tel" value="'+user_data[num].tel+'" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13" ></span>'+
+                '<span class="info_box info_tel_sub">비상전화 : <input type="text" name="tel_sub" id="tel_sub" value="'+tel_sub_s+'" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13" ></span>'+
                 '<span class="info_box info_message">메세지 수신여부 : '+message_s+
             '</td>'+
             '<td colspan="2">'+
@@ -416,3 +416,9 @@ function userActive(num){
             });
     }
 }
+
+const autoHyphen2 = (target) => {
+    target.value = target.value
+      .replace(/[^0-9]/g, '')
+     .replace(/^(\d{0,3})(\d{3,4})(\d{4,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+   }
