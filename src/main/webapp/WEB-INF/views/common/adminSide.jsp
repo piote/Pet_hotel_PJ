@@ -11,9 +11,6 @@
 <html lang="ko">
 <head>
     <style>
-        .y_txt{
-            color: #E59F5A;
-        }
         .info_wrap{
             width: 100%; height: auto;
             position: relative;

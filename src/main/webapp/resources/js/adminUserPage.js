@@ -260,11 +260,13 @@ function addModRow(obj){
     }
 }
 
+// tr을 addTr로 먼저 생성 후 modHtml로 내용추가
 
 function addTr(obj){
     $(obj).css('transform','scale(1) rotate(180deg)');
     var num = $(obj).data('num');
     var html = '<tr id="addTr" data-num='+num+'></tr>'
+    // 버튼(svg)기준 부모의 부모는 소속된 tr > tr 다음에 추가
     $(obj).parent().parent().after(html);
     $('#addTr').height(300);
     setTimeout(function(){ 
@@ -344,7 +346,6 @@ function modHtml(obj){
             }
            
             $('#addTr').append(html);
-        // $(obj).parent().parent().after(html);
 }
 
 function modUser(){
