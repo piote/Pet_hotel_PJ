@@ -208,6 +208,8 @@ img {
 	position: absolute;
 	top: 215px;
 	right: 80px;
+	border: 1px solid #000;
+	border-radius: 50%;
 }
 
 input.upload-name {
