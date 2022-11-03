@@ -403,8 +403,8 @@ input#imageFileName {
 <body>
 	<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
 
-	<form method="post" action="${contextPath}/addUser.do" name="userInfo"
-		id="userInfo" onsubmit="return checkValue()">
+	<form method="post" action="${contextPath}/adduserprofil_pic.do" name="userInfo"
+		id="userInfo" onsubmit="return checkValue()" enctype="multipart/form-data">
 		<div class="root">
 			<div class="signin-wrapper form active">
 				<div class="form-wrapper">
