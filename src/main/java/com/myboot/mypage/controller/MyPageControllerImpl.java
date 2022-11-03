@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myboot.mypage.service.MyPageService;
 import com.myboot.mypage.vo.MyPageVO;
+import com.myboot.reservation.vo.ReservationVO;
+import com.myboot.review.vo.ReviewVO;
 import com.myboot.user.vo.UserVO;
 
 @Controller("myPageController")
@@ -29,7 +31,6 @@ public class MyPageControllerImpl implements MyPageController {
 	@RequestMapping(value="/myPage.do" ,method = RequestMethod.GET)
 	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		HttpSession session=request.getSession();
-		session=request.getSession();
 		
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -37,8 +38,8 @@ public class MyPageControllerImpl implements MyPageController {
 		UserVO userVO=(UserVO)session.getAttribute("user");
 		String user_id = userVO.getId();	
 		
-		List myReserveList = myPageService.listMyReserve(user_id);
-		List myReviewList = myPageService.listMyReview(user_id);
+		List<ReservationVO> myReserveList = myPageService.listMyReserve(user_id);
+		List<ReviewVO> myReviewList = myPageService.listMyReview(user_id);
 		
 		mav.addObject("myReserveList", myReserveList);
 		mav.addObject("myReviewList", myReviewList);
@@ -49,7 +50,6 @@ public class MyPageControllerImpl implements MyPageController {
     @RequestMapping(value="/checkReserve.do" ,method = RequestMethod.GET)
     public ModelAndView checkReserve(HttpServletRequest request, HttpServletResponse response)  throws Exception {
         HttpSession session = request.getSession();
-        session=request.getSession();
         
 		String _section = request.getParameter("section");
 		String _pageNum = request.getParameter("pageNum");
