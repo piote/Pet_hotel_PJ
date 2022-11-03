@@ -223,17 +223,19 @@
             }).then((result) => {
             if (result.isConfirmed) {
         		var formObj=document.createElement("form");
-        		var i_reserve_num = document.createElement("input"); 
+        		var i_reserve_num = document.createElement("input"); ;
+
+        		Swal.fire('예약 취소 완료.',)
         	    
+        	    i_reserve_num.type = "hidden";
         	    i_reserve_num.name = "res_num";
         	    i_reserve_num.value = res_num;
         		
         	    formObj.appendChild(i_reserve_num);
         	    document.body.appendChild(formObj); 
-                Swal.fire('예약 취소 완료.',)
         	    formObj.method = "post";
         	    formObj.action ="${contextPath}/mypage/cancelMyReserve.do";
-			    setTimeout(() => formObj.submit(), 1000);
+			    setTimeout(() => formObj.submit(), 800);
             }
         })
     }

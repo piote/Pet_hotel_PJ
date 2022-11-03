@@ -146,14 +146,14 @@
      }
      
      .btn-open {
-    	    width: 110px; height: 30px;
+    	   
     	    border: 1px solid #999;
     	    border-radius: 20px;
     	    background-color: #fff;
-    	    font-size:14px;
+    	  
     	    text-align: center;
-    	    line-height: 30px;
-    	    position: absolute; right: 20%; top: 35%;
+    	   
+    	
     	  }
      
     	  .btn-open:hover{
@@ -277,10 +277,62 @@
           margin: 0 5px;
           cursor: pointer;
           font-size: 18px;
-          color: #999999;
-          
-          
+         
       }
+      .alert {
+    	  color: #999999;
+      }
+      .modal_div{
+    	  display: block;
+    	  height: 30px;
+    	  margin-right: 10%;
+      }
+      .modal-close {
+    	background-color:  white;
+  	    border: 2px solid #adb5bd;
+  	    width: 70px; height: 25px;
+  	    
+  	    color: black; 
+  	    text-align: center;
+  	    text-decoration: none;
+  	    display: inline-block;
+  	    font-size: 16px;
+  	    margin: 4px 2px;
+  	    transition-duration: 0.4s;
+  	    cursor: pointer;
+  	    border-radius: 5%;
+  	    float: right;
+  	
+      }
+      
+      .modal-close2 {
+      	background-color:  white;
+    	    border: 2px solid #adb5bd;
+    	    width: 90px; height: 30px;
+    	    line-height: 30px;
+    	    color: black; 
+    	    text-align: center;
+    	    text-decoration: none;
+    	    display: inline-block;
+    	    font-size:14px;
+    	    margin: 4px 2px;
+    	    transition-duration: 0.4s;
+    	    cursor: pointer;
+    	    border-radius: 5%;
+    	    position: absolute; right: 20%; top: 35%;
+    	
+        }
+     
+      .modal-close:hover {
+	    	background-color: #adb5bd;
+	  	    color: white;
+      }
+      .modal-close2:hover {
+	    	background-color: #adb5bd;
+	  	    color: white;
+    }
+      
+      
  </style> 
 
 <meta charset="UTF-8">
@@ -310,13 +362,14 @@
        <section class="content">
            <div class="container">
            <input id="user_id" type="hidden" value="${user_id}">
-           		
+           <div> 
+           
                <!-- 팝업용 임시 버튼입니다. -->
                <c:choose>
                <c:when test="${false == isLogOn}">
                
                 <div class="btn-box">
-               		<a href="#" class="btn-open" onClick="javascript:notlog();">
+               		<a href="#" class="modal-close2" onClick="javascript:notlog();">
 	    		<span>리뷰 쓰기</span>
 	    		</a>
 	    		</div>
@@ -324,7 +377,7 @@
          		<c:when test="${null == isLogOn}">
 
                 <div class="btn-box">
-               		<a href="#" class="btn-open" onClick="javascript:notlog();">
+               		<a href="#" class="modal-close2" onClick="javascript:notlog();">
 	    		<span>리뷰 쓰기</span>
 	    		</a>
 	    		</div>
@@ -332,7 +385,7 @@
 
          	    <c:otherwise>
          	    	<div class="btn-box">
-         	    		<a href="#" class="btn-open" onClick="javascript:popOpen();">
+         	    		<a href="#" class="modal-close2" onClick="javascript:popOpen();">
          	    		<span>리뷰 쓰기</span>
                    </a>
                     </div>
@@ -375,7 +428,7 @@
 				</c:forEach>
              <li class="pageNO" onClick="pageUP()">next</li></div>
         
-     <button class="modal-close" onClick="javascript:popClose();">닫기</button>
+  <div class="modal_div">   <button class="modal-close" onClick="javascript:popClose();">닫기</button></div>
  </div>
  </div>	
  </div>
@@ -439,6 +492,10 @@ $(modalPop).hide();
 $(modalBg).hide();
 
 }
+function callFunction(){
+alert("이미 작성한 리뷰입니다.");
+}
+
 
 
     </script>

@@ -1,246 +1,394 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false"  %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<% request.setCharacterEncoding("UTF-8"); %>   
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+     pageEncoding="UTF-8"
+    isELIgnored="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  /> 
+<%
+  request.setCharacterEncoding("UTF-8");
+%>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>멤버쉽 안내</title>
-    <style>        
-    
-		#counter {
+    <title>문의하기</title>
+    <link rel="stylesheet" href="reset.css">
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <style>
+        .membership{
+            width: 1000px; height: auto;
+            margin: 0 auto;
+            overflow: hidden;
+            letter-spacing :-0.5px;
+        }
+        .smallfont{
+            font-size: 13px;
+            color: #666;
+        }
+        .orange{
+            color: #FF862F;
+            font-weight: 800;
+        }
+        .title{
+            margin-top: 50px; margin-bottom: 80px;
             position: relative;
         }
-        
-        #counterNormal {
-            margin: 0 auto;
-            width: 1000px;
-            height: 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
+        .title h2{
+            font-size: 20px;
+            font-weight: 800;
         }
-
-        #counterBronze {
-            margin: 0 auto;
-            width: 1000px;
-            height: 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .title div{
+            width: 200px; height: 1px;
+            background-color: #333;
             position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
+            top: 15px; left: 200px;
         }
-
-        #counterSilver {
-            margin: 0 auto;
-            width: 1000px;
-            height: 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
+        .title p{
+            font-size: 13px;
+            color: #666;
+            margin-top: 20px;
         }
-        
-        .centerBar {
+        .title img{
+            width: 100px;
             position: absolute;
+            top: -20px; right: 10px;
+        }
+        .borderbox{
             width: 100%;
-            height: 15px;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            border: 1px solid lightgray;
-            background-color: lightgray;
-            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .membership_box{
+            height: 210px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .membership_box img{
+            width: 75px; height: 75px;
+            margin-top: 65px;
+        }
+        .txt1, .txt2{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .txt1{
+            width: 150px;
+        }
+        .txt1 p:nth-child(1){
+            font-size: 15px;
+            color: #666;
+        }
+        .txt1 p:nth-child(2){
+            margin-top: 10px;
+            font-size: 25px;
+            font-weight: 800;
+        }
+        .txt2{
+            width: 170px;
+        }
+        .txt2 p:nth-child(2){
+            font-size: 15px;
+        }
+        .membership_box button{
+            width: 200px; height: 30px;
+            margin-top: 90px;
+            border: 1px solid #666;
+            background-color: #fff;
+            font-size: 13px;
+            line-height: 29px;
+            transition: background-color 0.2s;
+        }
+        .membership_box button:hover{
+            background-color: #eee;
+        }
+        .grade_wrap{
+            margin: 180px 0;
+        }
+        .grade_wrap>p{
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        .grade_box{
+            height: 120px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .normal_medal{
+            width: 20px; height: 3px;
+            background-color: #D9D9D9;
+            margin-top: 60px;
+        }
+        .grade_box img{
+            width: 60px; height: 60px;
+            margin-top: 30px;
+        }
+        .grade_box p{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .grade_box p:nth-child(2){
+            font-size: 15px;
+            font-weight: 800;
+        }
+        .grade_box p:nth-child(4){
+            display: block;
+            font-size: 15px;
+            width: 200px;
+        }
+        #normal{
+            padding-left: 90px;
+            padding-right: 415px;
+            justify-content: space-between;
+        }
+        #normal p:nth-child(2){
+            margin-left: 20px;
+        }
+        #bronze p:nth-child(4){
+            margin-top: 48px;
+        }
+        #silver p:nth-child(4), #gold p:nth-child(4){
+            margin-top: 38px;
+        }
+        .my_grade{
+            border: 2px solid #FF862F !important;
         }
 
-        .countDot {
-            position: relative;
-            background-color: gray;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            border: 1px solid gray;
-            opacity: 1;
-            z-index: 100;
+        .borderbox:hover img{
+            transform: scale(1.02) scaleZ(1deg);
         }
 
-        .countOnOff {
+        /* modal */
+        .modal-bg{
+            position: fixed;
+            width: 100vw; height: 100%;
+            background-color: #00000070;
+            z-index: 50;
+            top: 0;
+            display: none;
+        }
+        .modal-wrap{
             position: absolute;
-            border-radius: 50%;
-            border: 2px solid white;
-            width: 400%;
-            height: 400%;
-            margin: auto;
-            box-shadow: 0px 0px 6px 1px gray;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            visibility: hidden;
-            z-index: 1000;
+            width: 900px; height: 900px;
+            background-color: #fff;
+            top: 200px; left: calc(50% - 450px);
+            z-index: 51;
+            display: none;
         }
-        #useTxt {
-            margin: 3% auto;
-            width: 1000px;
-			text-align: right;
-			font-size: 15px;      
+        #close_BT{
+            position: absolute;
+            top: 40px; right: 45px;
         }
-        
-        .scaling{
-			-webkit-animation:scale 2s ease-in-out infinite alternate;
-			-moz-animation:scale 2s ease-in-out infinite alternate;
-			animation:scale 2s ease-in-out infinite alternate;
-		}
-		
-		@-webkit-keyframes scale{
-			0% {transform: scale(1, 1) translate(-50%, -50%);}
-			100% {transform: scale(1.1, 1.1) translate(-50%, -50%);}
-		}
-
-		@-moz-keyframes scale{
-			0% {transform: scale(1, 1) translate(-50%, -50%);}
-			100% {transform: scale(1.1, 1.1) translate(-50%, -50%);}
-		}
-
-		@keyframes scale{
-			0% {transform: scale(1, 1) translate(-50%, -50%);}
-			100% {transform: scale(1.1, 1.1) translate(-50%, -50%);}
-		}
+        .modal-wrap_in{
+            width: 700px;
+            margin: 0 auto;
+            padding-top: 110px;
+        }
+        .modal_title p:nth-child(1){
+            font-size: 15px;
+            color: #666;
+        }
+        .modal_title p:nth-child(2){
+            margin-top: 5px;
+            font-size: 25px;
+            font-weight: 800;
+        }
+        .modal_mygrade{
+            margin-top: 20px;
+            height: 120px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .modal_mygrade p:nth-child(2){
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .graph_wrap{
+            margin-top: 50px;
+        }
+        .graph_wrap>p{
+            font-size: 15px;
+            font-weight: 800;
+        }
+        .graph_box{
+            width: 100%; height: 10px;
+            background-color: #D9D9D9;
+            margin-top: 10px;
+            position: relative;
+        }
+        #graph{
+            width: calc(100% / 10 * 7);
+            height: 100%;
+            background-color: #FFA96A;
+            position: absolute;
+            left: 0;
+        }
+        .graph_txt{
+            margin-top: 10px;
+            width: 100%; height: 13px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .grade_count{
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 110px;
+        }
+        #count{
+            font-weight: 800;
+        }
+        .info_box{
+            height: 55px;
+            margin-bottom: 20px;
+            display: flex;
+            position: relative;
+            justify-content: space-between;
+            padding-left: 25px;
+            padding-right: 300px;
+        }
+        .info_box img{
+            width: 30px; height: 30px;
+            margin-top: 12px;
+        }
+        .info_box p{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .info_box p:nth-child(2){
+            font-size: 15px;
+            font-weight: 800;
+        }
+        .grade_count_info{
+            display: inline-block !important;
+            position: absolute;
+            right: 55px; top: 15px;
+            font-size: 15px;
+        }
+        .b{
+            font-weight: 800;
+        }
     </style>
+
+    <script>
+        function popUp(){
+            $('.modal-bg').show();
+            $('.modal-wrap').show();
+        }
+        function popClose(){
+            $('.modal-bg').hide();
+            $('.modal-wrap').hide();
+        }
+    </script>
+
 </head>
 <body>
-    <section class="m_section">
-        <div class="m_title">
-            <p>Anitel</p>
-            <p>멤버쉽 안내</p>
+    <div class="membership">
+        <div class="title">
+            <h2>Anitel 멤버쉽 안내</h2>
+            <div></div>
+            <p class="smallfont">고객님께 더 만족스러운 서비스를 제공하기 위해<br>
+                연간 이용횟수에 따라 할인 프로그램을 제공하고 있습니다.</p>
+            <img src="bonus_icon.png" alt="bonus_icon">
         </div>
-    </section>
-    <section class="m_main">
-        <div class="m_list">
-            <div class="main_title">
-                <img src="${contextPath}/resources/img/bonus_icon.png">
-                <h2>멤버쉽 할인</h2>
-                <p>연간 이용횟수에 따라 할인 프로그램을 제공해드립니다.</p>
-                <input id=grade type="hidden" value="${user.grade}">
-                <input id=use type="hidden" value="7">
-	            <c:choose>
-	        		<c:when test="${isLogOn == true  && user!= null}">
-						<p>${user.name}의 등급은 현재 ${user.grade}입니다.</p>
-					</c:when>
-					<c:otherwise>
-							<p>로그인을 하시면 회원님의 등급을 안내해드립니다.</p>
-	        		</c:otherwise>
-	        	</c:choose>
+        <div class="membership_box borderbox">
+            <img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
+            <div class="txt1">
+                <p>님의 멤버쉽 등급은</p>
+                <p>Bronze</p>
             </div>
-            <c:choose>
-	        <c:when test="${isLogOn == true  && user!= null}">
-            <div id="counter">
-		        <div id="counterNormal">
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="centerBar"> </div>
-		        </div>
-		        <div id=counterBronze>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="centerBar"> </div>
-		        </div>
-		        <div id=counterSilver>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="countDot"><div class="countOnOff scaling"></div></div>
-		            <div class="centerBar"> </div>
-		        </div>
-		        <p id=useTxt></p>
-    		</div>
-    		
-    		</c:when>
-			<c:otherwise>
-			</c:otherwise>
-	        </c:choose>
-		</div>
-            <ul id="m_menu">
-                <li class="m_bronze">
-                    <img class="m_icon" src="${contextPath}/resources/img/bronze_medal.png">
-                    <h3>브론즈</h3>
-                    <div class="box">
-                        <p>연간 이용횟수 5회 이상</p>
-                        <p>1회 이용금액의 2% 할인</p>
-                    </div>
-                </li>
-                <li class="m_silver">
-                    <img class="m_icon" src="${contextPath}/resources/img/silver_medal.png">
-                    <h3>실버</h3>
-                    <div class="box">
-                        <p>연간 이용횟수 10회 이상</p>
-                        <p>1회 이용금액의 5% 할인</p>
-                        <p>미용서비스 1회 제공</p>
-                    </div>
-                </li>
-                <li class="m_gold">
-                    <img class="m_icon" src="${contextPath}/resources/img/gold_medal.png">
-                    <h3>골드</h3>
-                    <div class="box">
-                        <p>연간 이용횟수 20회 이상</p>
-                        <p>1회 이용금액의 10% 할인</p>
-                        <p>미용 및 목욕서비스 1회 제공</p>
-                    </div>
-                </li>
-            </ul>
+            <div class="txt2">
+                <p class="smallfont">연간 이용횟수 5회 이상</p>
+                <p>1회 이용금액의 <span class="orange">2%</span>할인</p>
+            </div>
+            <button type="button" onclick="popUp()">멤버쉽 더 알아보기 ></button>
         </div>
-        <div class="m_qna">
-            <h2>Anitel 멤버쉽 QnA</h2>
-            <div class="qna">
-                <button class="q_btn" data-num="0">Q1 질문1입니다.</button>
-                <div class="answer">답변 1입니다.</div>
+        <div class="grade_wrap">
+            <p>등급별 혜택</p>
+            <div id="normal" class="grade_box borderbox">
+                <div class="normal_medal"></div>
+                <p>Normal</p>
+                <p class="smallfont">연간 이용횟수 5회 미만</p>
             </div>
-            <div class="qna">
-                <button class="q_btn" data-num="1">Q2 질문2입니다.</button>
-                <div class="answer">답변 2입니다.</div>
+            <div id="bronze" class="grade_box borderbox my_grade">
+                <img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
+                <p>Bronze</p>
+                <p class="smallfont">연간 이용횟수 5회 이상</p>
+                <p>1회 이용금액의 <span class="orange">2%</span> 할인</p>
             </div>
-            <div class="qna">
-                <button class="q_btn" data-num="2">Q3 질문3입니다.</button>
-                <div class="answer">답변 3입니다.</div>
+            <div id="silver" class="grade_box borderbox">
+                <img src="${contextPath}/resources/img/silver_medal.png" alt="silver_medal">
+                <p>Silver</p>
+                <p class="smallfont">연간 이용횟수 10회 이상</p>
+                <p>
+                    1회 이용금액의 <span class="orange">5%</span> 할인<br>
+                    미용서비스 <span class="orange">1회</span> 제공
+                </p>
             </div>
-            <div class="qna">
-                <button class="q_btn" data-num="3">Q4 질문4입니다.</button>
-                <div class="answer">답변 4입니다.</div>
-            </div>
-            <div class="qna">
-                <button class="q_btn" data-num="4">Q5 질문5입니다.</button>
-                <div class="answer">답변 5입니다.</div>
-            </div>
-            <div class="qna">
-                <button class="q_btn" data-num="5">Q6 질문6입니다.</button>
-                <div class="answer">답변 6입니다.</div>
-            </div>
-            <div class="qna">
-                <button class="q_btn" data-num="6">Q7 질문7입니다.</button>
-                <div class="answer">답변 7입니다.</div>
+            <div id="gold" class="grade_box borderbox">
+                <img src="${contextPath}/resources/img/gold_medal.png" alt="gold_medal">
+                <p>Gold</p>
+                <p class="smallfont">연간 이용횟수 20회 이상</p>
+                <p>
+                    1회 이용금액의 <span class="orange">10%</span> 할인<br>
+                    미용 및 목욕서비스 <span class="orange">각 1회</span> 제공
+                </p>
             </div>
         </div>
-    </section>
+    </div>
+    <div class="modal-bg"></div>
+    <div class="modal-wrap">
+        <div id="close_BT" onclick="popClose()">
+            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z"/></svg>
+        </div>
+        <div class="modal-wrap_in">
+            <div class="modal_title">
+                <p>000님의 멤버쉽 등급은</p>
+                <p>Bronze</p>
+            </div>
+            <div class="modal_mygrade borderbox">
+                <p class="smallfont">연관 이용횟수 5회 이상</p>
+                <p>1회 이용금액의 <span class="orange">2%</span> 할인</p>
+            </div>
+            <div class="graph_wrap">
+                <p>총 7회 이용</p>
+                <div class="graph_box">
+                    <div id="graph"></div>
+                </div>
+                <div class="graph_txt">
+                    <p class="smallfont">Bronze</p>
+                    <p class="smallfont">Silver</p>
+                </div>
+            </div>
+            <p class="grade_count">다음 단계까지 <span id="count">3회</span> 남았습니다.</p>
+            <div class="modal_mygrade_info">
+                <div class="info_box borderbox">
+                    <img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
+                    <p>Bronze</p>
+                    <p class="smallfont">연간 이용횟수 5회 이상</p>
+                    <p class="grade_count_info">앞으로 <span id="count_bronze" class="b">3회</span></p>
+                </div>
+                <div class="info_box borderbox">
+                    <img src="${contextPath}/resources/img/silver_medal.png" alt="bronze_medal">
+                    <p>Silver</p>
+                    <p class="smallfont">연간 이용횟수 10회 이상</p>
+                    <p class="grade_count_info">앞으로 <span id="count_silver" class="b">3회</span></p>
+                </div>
+                <div class="info_box borderbox">
+                    <img src="${contextPath}/resources/img/gold_medal.png" alt="bronze_medal">
+                    <p>Gold</p>
+                    <p class="smallfont">연간 이용횟수 20회 이상</p>
+                    <p class="grade_count_info">앞으로 <span id="count_gold" class="b">3회</span></p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
 </body>
-<script src="${contextPath}/resources/js/membership.js"></script>
-<link rel="stylesheet" href="${contextPath}/resources/css/membership.css">
 </html>
