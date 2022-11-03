@@ -158,7 +158,7 @@ public class QuestionsControllerImpl implements QuestionsController{
 		String message;
 		ResponseEntity resEnt=null;
 		
-		//세션에 저장된 경로를 받아온다
+		//세션에 저장된 경로를 받아온다 << 안씀
 //		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
 //		System.out.println("in "+path);
 		
@@ -166,7 +166,6 @@ public class QuestionsControllerImpl implements QuestionsController{
 		//============================================realPath 받아오기
 		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
 		String path = realPath+"resources\\questions\\questions_image";
-		System.out.println("in "+path);
 		
 		
 		
@@ -229,9 +228,9 @@ public class QuestionsControllerImpl implements QuestionsController{
 		String message;
 		ResponseEntity resEnt=null;
 		
-		//세션에 저장된 경로를 받아온다
-		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
-		System.out.println("in "+path);
+		//============================================realPath 받아오기
+		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
+		String path = realPath+"resources\\questions\\questions_image";
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
@@ -275,6 +274,7 @@ public class QuestionsControllerImpl implements QuestionsController{
 //		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
 		
 		
+		//============================================realPath 받아오기
 		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
 		String path = realPath+"resources\\questions\\questions_image";
 
@@ -307,10 +307,9 @@ public class QuestionsControllerImpl implements QuestionsController{
 	   HttpHeaders responseHeaders = new HttpHeaders();
 	   responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 	   
-		 //세션에 저장된 경로를 받아온다
-	   	HttpSession session = request.getSession();
-		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
-		System.out.println("in "+path);
+		//============================================realPath 받아오기
+		String realPath = request.getSession().getServletContext().getRealPath("");
+		String path = realPath+"resources\\questions\\questions_image";
 	   
 	   try {
 		  questionsService.removeQuestionsArticle(q_num);
@@ -357,10 +356,9 @@ public class QuestionsControllerImpl implements QuestionsController{
 	   HttpHeaders responseHeaders = new HttpHeaders();
 	   responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 	   
-	   //세션에 저장된 경로를 받아온다
-	   	HttpSession session = multipartRequest.getSession();
-		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
-		System.out.println("in "+path);
+		//============================================realPath 받아오기
+		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
+		String path = realPath+"resources\\questions\\questions_image";
 	   
 	    try {
 	    	questionsService.modQuestionsArticle(articleMap);
