@@ -434,6 +434,8 @@
            		$(obj).addClass('res_R_arrow_bt');
        			$(obj).removeClass('res_arrow_bt');
        		}	
+			   $(obj).parent().parent().css('background-color','red !important');
+
     	}
     	
     	//펫 아이템 추가
@@ -503,7 +505,25 @@
 			});
 		}
 				
-				
+		// 상세 tr 에 데이터 출력
+		function searchResInfo(reserNum){
+			$.ajax({
+    			url:'/SearchReservationNum.do',
+    			method:'post',
+    			data:{
+    				"reserNum": reserNum
+    			},
+    			type:'post',
+    			async:true,
+    			dataType:'json',
+    			success:function(data){
+					console.log(data);
+					console.log(data.petservice.length);
+					console.log(data.petservice[0].id);
+					console.log(data.reservation.res_state);
+				}
+			});
+		}
     </script>
 </head>
 <body>
