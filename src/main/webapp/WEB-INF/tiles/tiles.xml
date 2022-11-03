@@ -8,7 +8,6 @@
       <put-attribute name="body" value="" />
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
-   
    <!-- 관리자페이지용 레이아웃 -->
    <definition name="adminLayout"  template="/WEB-INF/views/common/adminLayout.jsp">
       <put-attribute name="title" value="Anitel" />
@@ -190,5 +189,8 @@
 	      <put-attribute name="title" value="관리자페이지_예약정보TTT" />
 	      <put-attribute name="body" value="/WEB-INF/views/admin/adminResListT.jsp" />
 	</definition>
-	
+	<!-- 페이징용 페이지 -->
+	<definition name="/page/ResPageAjax" template="/WEB-INF/views/admin/page/ResPageAjax.jsp"/>
+
+
 </tiles-definitions>
