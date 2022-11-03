@@ -16,8 +16,6 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="${contextPath}/resources/css/checkReserve.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.min.js"></script>
-	<link rel="stylesheet" href="sweetalert2.min.css">
 	
 	<!-- 예약 수정 -->
 	<link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
