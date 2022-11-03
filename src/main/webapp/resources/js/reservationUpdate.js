@@ -319,6 +319,10 @@ function costTB(petserviceMap, datecheck) {
 				$("#membership").val("Gold");
 				console.log($("#bronzeimg").attr('src', '/resources/img/gold_medal.png'));
 				$(".membership").text("Gold Membership : Discount 10%");
+			}else{
+				$("#membership").val("");
+				console.log($("#bronzeimg").remove());
+				$(".membership").text("");
 			}
 			
 		}
