@@ -15,9 +15,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -106,18 +108,29 @@ public  class AdminResControllerImpl implements AdminResController{
 		//예약데이터
 		List<AdminResFullVO> adminResReed = adminresService.adminAllResList();   //
 		
-		System.out.println(adminResReed);
-		
 		mav.addObject("adminResReed",adminResReed);  //
 		
-		String  viewName= (String)request.getAttribute("viewName");   //
+		
+		String  viewName= (String)request.getAttribute("viewName");   //페이지 이동
 		mav.setViewName(viewName);
 		
 		return mav;   //
 		
 		
 	}
-	
+		
+	@RequestMapping(value= "/ResPageAjax.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String ResPageAjax(@RequestParam(value ="P", required = false) String Page, Model model) throws Exception {
+		//@ModelAttribute("P") String Page
+		//List<AdminResFullVO> adminResReed = adminresService.adminAllResList();
+		
+		List list = adminresService.adminAllResList();  
+	    model.addAttribute("list", list);
+	    model.addAttribute("P", Integer.parseInt(Page));
+	   
+	      
+	    return "/page/ResPageAjax";
+	  }
 	
 	
 	@ResponseBody

@@ -58,7 +58,7 @@
 	            <c:choose>
 	            	<c:when test="${empty myReserveList }">
 		               <tr class="reserve-list">
-		                  <td colspan=4>
+		                  <td colspan=5>
 		                  	<strong>예약하신 내역이 없습니다.</strong>
 		                  </td>
 		               </tr>
@@ -92,7 +92,7 @@
 	            <c:choose>
 	            	<c:when test="${empty myReviewList }">
 		               <tr class="review-list">
-		                  <td colspan=4>
+		                  <td colspan=3>
 		                  	<strong>등록하신 리뷰가 없습니다.</strong>
 		                  </td>
 		               </tr>

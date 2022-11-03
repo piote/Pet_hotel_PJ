@@ -10,12 +10,12 @@ import lombok.Data;
 @Component("adminresfullVO")
 public class AdminResFullVO {
 	private int res_num;
-	private String res_st;
-	private String res_end;
+	private java.sql.Date res_st;
+	private java.sql.Date res_end;
 	private String id;
 	private String res_comment;
 	private String totalCost;
-	private String payTime;
+	private java.sql.Date payTime;
 	private String res_state;
 	
 	
