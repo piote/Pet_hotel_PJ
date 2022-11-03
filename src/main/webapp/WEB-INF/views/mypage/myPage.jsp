@@ -37,7 +37,7 @@
                   </td>
                   <td>
                      <a href="${contextPath}/mypage/checkReserve.do">예약 내역</a>
-                     <a href="${contextPath}/questionsList.do">고객센터</a>
+                     <a href="${contextPath}/questions/questionsList.do">고객센터</a>
                   </td>
                </tr>
             </table>
