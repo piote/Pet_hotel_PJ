@@ -31,6 +31,7 @@
 	<result property="payTime" column="PAY_TIME" />
 	<result property="res_state" column="RESERVATION_STATE" />
 	<result property="pet_name" column="pet_name" />
+	<result property="re_num" column="re_num" />
 </resultMap> 
 
 	<resultMap id="imgResult" type="imageVO">
@@ -113,19 +114,21 @@
 
 
 	</select>
-	
+	   	 
 	<select id="selectAllResList" parameterType="String"
 		resultMap="reserveResult">  
 <![CDATA[
 
-    SELECT ROWNUM AS recNum,  res.RESERVATION_NUM,  res.RESERVATION_ST, res.user_id, res.RESERVATION_STATE , Max（pet_name）as pet_name
+				
+	    SELECT res.RESERVATION_NUM, res.RESERVATION_ST, res.user_id, res.RESERVATION_STATE , max(pet.pet_name）as pet_name , MAX(re.RESERVATION_NUM) as re_num
 				FROM tb_reservation res
 				left join tb_petservice pet
                 on res.RESERVATION_NUM = pet.RESERVATION_NUM
-                where res.user_id = #{userId}
-                GROUP BY ROWNUM, res.RESERVATION_NUM, res.RESERVATION_ST, res.USER_ID, res.RESERVATION_STATE
-				order by recNum asc
-							 
+                left join tb_review re
+               	on res.RESERVATION_NUM = re.RESERVATION_NUM
+				where res.user_id = #{userId} 
+                GROUP BY res.RESERVATION_NUM,res.RESERVATION_ST, res.USER_ID, res.RESERVATION_STATE, re.RESERVATION_NUM
+				order by res.RESERVATION_ST DESC					 
 						 
 						]]>
 
