@@ -25,7 +25,8 @@ public interface ReservationDAO {
 	public ReservationVO SearchReservationNum(String reserNum) throws DataAccessException;
 
 	public List<PetserviceVO> SearchPetServiceByResNum(String reserNum) throws DataAccessException;
-	 
+	// 이용 횟수 불려오기
+	public int membershipCount(String id) throws DataAccessException;
 //	 
 //	 public int updateMember(MemberVO memberVO) throws DataAccessException ;
 //	 
