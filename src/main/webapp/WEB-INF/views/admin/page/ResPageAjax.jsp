@@ -48,9 +48,9 @@
          					<li><span class="check_Date">Check Out</span></li>
          				</ul>
          				<ul>
-         					<li><input type="date"></li>
+         					<li><input type="date" name="res_st" id="res_st"></li>
          					<li class="date_Cal_Text"><span id="dateCalText">2박</span></li>
-         					<li><input type="date"></li>
+         					<li><input type="date" name="res_end" id="res_end"></li>
          				</ul>	
          			<li>
          			<br>

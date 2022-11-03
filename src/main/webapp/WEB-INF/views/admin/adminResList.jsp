@@ -376,6 +376,7 @@
     		width: 90px;
         	
         }
+
         
     </style>
     <script>
@@ -434,7 +435,15 @@
            		$(obj).addClass('res_R_arrow_bt');
        			$(obj).removeClass('res_arrow_bt');
        		}	
-			   $(obj).parent().parent().css('background-color','red !important');
+			
+			// 클릭한 요소 예약번호 받아오기
+			var reserNum =  $(obj).parent().parent().children('.res_num').text();
+
+			// 요소추가 시간때문에, 셋타임아웃 설정
+			setTimeout(function(){
+				searchResInfo(reserNum);
+			},300)
+			
 
     	}
     	
@@ -471,8 +480,7 @@
 				if($(obj).attr('class')!='res_arrow_bt'){
 					$('.res_content_box').append(petTableInfo);
 				}
-					
-			}, 500);
+			}, 300);
 		}
 		
 		//페이징 ajax
@@ -507,6 +515,8 @@
 				
 		// 상세 tr 에 데이터 출력
 		function searchResInfo(reserNum){
+
+			var st;
 			$.ajax({
     			url:'/SearchReservationNum.do',
     			method:'post',
@@ -520,7 +530,13 @@
 					console.log(data);
 					console.log(data.petservice.length);
 					console.log(data.petservice[0].id);
-					console.log(data.reservation.res_state);
+					console.log(data.reservation.res_st);
+					st= data.reservation.res_st.substring(0, 10);
+					ed= data.reservation.res_end.substring(0, 10);
+					console.log(st);
+					$('#res_st').val(st);
+					$('#res_end').val(ed);
+					
 				}
 			});
 		}
@@ -605,9 +621,9 @@
 				            					<li><span class="check_Date">Check Out</span></li>
 				            				</ul>
 				            				<ul>
-				            					<li><input type="date"></li>
+				            					<li><input type="date" name="res_st" id="res_st"></li>
 				            					<li class="date_Cal_Text"><span id="dateCalText">2박</span></li>
-				            					<li><input type="date"></li>
+				            					<li><input type="date" name="res_end" id="res_end"></li>
 				            				</ul>	
 				            			<li>
 				            			<br>
