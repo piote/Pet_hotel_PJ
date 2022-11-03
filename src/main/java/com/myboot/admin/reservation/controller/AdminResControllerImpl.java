@@ -103,7 +103,6 @@ public  class AdminResControllerImpl implements AdminResController{
 		mav.addObject("totalresnum",totalresnum);
 		
 		
-		
 		//예약데이터
 		List<AdminResFullVO> adminResReed = adminresService.adminAllResList();   //
 		
@@ -118,11 +117,6 @@ public  class AdminResControllerImpl implements AdminResController{
 		
 		
 	}
-	
-	
-	
-	
-	
 	
 	
 	

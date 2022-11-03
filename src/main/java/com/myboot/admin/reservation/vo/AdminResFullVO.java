@@ -10,8 +10,8 @@ import lombok.Data;
 @Component("adminresfullVO")
 public class AdminResFullVO {
 	private int res_num;
-	private Date res_st;
-	private Date res_end;
+	private String res_st;
+	private String res_end;
 	private String id;
 	private String res_comment;
 	private String totalCost;

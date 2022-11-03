@@ -203,6 +203,7 @@ public  class ReservationControllerImpl implements ReservationController{
 		return mav;
 	}
 	
+	
 	//예약 번호로 예약 찾기 
 	@ResponseBody 
 	@RequestMapping(value= "/SearchReservationNum.do", method = RequestMethod.POST)

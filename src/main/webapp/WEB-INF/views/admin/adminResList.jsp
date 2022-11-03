@@ -5,7 +5,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<c:set var="item_res"  value="24"  /><!--총 데이터베이스 아이템 수  -->
+<c:set var="item_res"  value="${totalresnum}"  /><!--총 데이터베이스 아이템 수  -->
+<c:set var="resList"  value="${adminResReed}"  />
 <%
   request.setCharacterEncoding("UTF-8");
 %>
@@ -499,12 +500,12 @@
 	                    	<c:forEach var="reservation" items="${resList}" varStatus="status">
 	                    		<tr>
 			                        <td class="res_num">${reservation.res_num}</td>
-			                        <td class="res_name">${reservation.res_name}</td>
-			                        <td class="res_Date">${reservation.res_Date_st} ~ ${reservation.res_Date_end}</td>
-			                        <td class="res_petCount">${reservation.res_petCount}마리</td>
-			                        <td class="res_payTime">${reservation.res_payTime}</td>
-			                        <td class="res_cost">${reservation.res_cost}</td>
-			                        <td class="resState">${reservation.resState}</td>
+			                        <td class="res_name">${reservation.name}</td>
+			                        <td class="res_Date">${reservation.res_st} ~ ${reservation.res_end}</td>
+			                        <td class="res_petCount">${reservation.total_pet}마리</td>
+			                        <td class="res_payTime">${reservation.payTime}</td>
+			                        <td class="res_cost">${reservation.totalCost}</td>
+			                        <td class="resState">${reservation.res_state}</td>
 			                        <td class="res_modBt">
 			                        	<div class="arrow"></div>
 			                           <!--  <button type="button" class="modRes">예약변경</button> -->
