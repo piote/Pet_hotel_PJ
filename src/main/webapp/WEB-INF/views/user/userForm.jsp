@@ -206,8 +206,8 @@ img {
 	width: 100px;
 	height: 100px;
 	position: absolute;
-	top: 215px;
-	right: 80px;
+	top: 205px;
+	right: 100px;
 	border: 1px solid #000;
 	border-radius: 50%;
 }
@@ -215,13 +215,13 @@ img {
 input.upload-name {
 	position: absolute;
 	top: 321px;
-	right: 30px;
+	right: 72px;
 }
 
 input#imageFileName {
 	position: absolute;
 	top: 350px;
-	right: -90px;
+	right: -50px;
 }
 </style>
 <title>회원가입 화면</title>
@@ -403,8 +403,8 @@ input#imageFileName {
 <body>
 	<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
 
-	<form method="post" action="${contextPath}/addUser.do" name="userInfo"
-		id="userInfo" onsubmit="return checkValue()">
+	<form method="post" action="${contextPath}/adduserprofil_pic.do" name="userInfo"
+		id="userInfo" onsubmit="return checkValue()" enctype="multipart/form-data">
 		<div class="root">
 			<div class="signin-wrapper form active">
 				<div class="form-wrapper">

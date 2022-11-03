@@ -106,12 +106,12 @@
    		]]>
    	  </update>
    	  
-   	  <select id="selectUserById" resultType="userVO"  parameterType="String" >
+<!--    	  <select id="selectUserById" resultType="userVO"  parameterType="String" >
       <![CDATA[
          select * from TB_USER
          where user_id=#{id}
       ]]>
-	 </select>	
+	 </select>	 -->
    	  
    	  
    	<!-- 회원 탈퇴 -->
