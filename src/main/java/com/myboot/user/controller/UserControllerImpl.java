@@ -424,18 +424,49 @@ public class UserControllerImpl implements UserController{
 	HttpServletResponse response) throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		
-		Map<String,Object> userMap = new HashMap<String, Object>();
-		Enumeration enu=multipartRequest.getParameterNames();
-		while(enu.hasMoreElements()){
-			String name=(String)enu.nextElement();
-			String value=multipartRequest.getParameter(name);
-			userMap.put(name,value);
-		}
-		String id = (String) userMap.get("id");
-		String imageFileName= upload(multipartRequest, id);
+//		Map<String,Object> userMap = new HashMap<String, Object>();
+//		Enumeration enu=multipartRequest.getParameterNames();
+//		while(enu.hasMoreElements()){
+//			String name=(String)enu.nextElement();
+//			String value=multipartRequest.getParameter(name);
+//			userMap.put(name,value);
+//		}
+//		String id_ = (String) userMap.get("id");
 		
 		String message;
 		ResponseEntity resEnt=null;
+		
+		int result = 0;
+		String id= multipartRequest.getParameter("id");
+		String pw= multipartRequest.getParameter("pw");
+		String name= multipartRequest.getParameter("name");
+		String email=multipartRequest.getParameter("email");
+		String mail2=multipartRequest.getParameter("mail2");
+		String tel=multipartRequest.getParameter("tel");
+		String tel_sub=multipartRequest.getParameter("tel_sub");
+		String message_=multipartRequest.getParameter("message");
+		String birth=multipartRequest.getParameter("birth");
+		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date formatDate = dtFormat.parse(birth);
+		System.out.println(birth);
+		
+		UserVO userVO= new UserVO();
+		userVO.setId(id);
+		userVO.setPw(pw);
+		userVO.setName(name);
+		userVO.setEmail(email+mail2);
+		userVO.setTel(tel);
+		userVO.setTel_sub(tel_sub);
+		userVO.setMessage(message_);
+		if(message_==null || message_==""){
+			userVO.setMessage("N");
+			System.out.println("N");
+		}
+		userVO.setBirth(formatDate);
+		System.out.println(userVO.getId()+userVO.getPw()+userVO.getName()+userVO.getEmail()+userVO.getTel()+userVO.getTel_sub()+userVO.getMessage()+userVO.getBirth());
+		
+		String imageFileName= upload(multipartRequest, id);
+		
 		
 		//============================================realPath 받아오기
 		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
@@ -444,7 +475,7 @@ public class UserControllerImpl implements UserController{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-//			int articleNO = questionsService.addNewQuestions(articleMap);
+			result = userService.addUser(userVO);
 			if(imageFileName!=null && imageFileName.length()!=0) {
 				File srcFile = new File(path+ "\\" + "temp"+ "\\" + imageFileName);
 				File destDir = new File(path);
@@ -452,8 +483,8 @@ public class UserControllerImpl implements UserController{
 			}
 	
 			message = "<script>";
-			message += " alert('새글을 추가했습니다.');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/questions/questionsList.do'; ";
+			message += " alert('회원가입을 축하합니다');";
+			message += " location.href='"+multipartRequest.getContextPath()+"/main.do'; ";
 			message +=" </script>";
 		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		}catch(Exception e) {
@@ -461,7 +492,7 @@ public class UserControllerImpl implements UserController{
 			srcFile.delete();
 			message = " <script>";
 			message +=" alert('오류가 발생했습니다. 다시 시도해 주세요');');";
-			message +=" location.href='"+multipartRequest.getContextPath()+"/questions/questionsList.do'; ";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/userForm.do'; ";
 			message +=" </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
