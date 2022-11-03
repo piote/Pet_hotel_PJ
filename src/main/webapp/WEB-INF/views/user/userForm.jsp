@@ -206,8 +206,8 @@ img {
 	width: 100px;
 	height: 100px;
 	position: absolute;
-	top: 215px;
-	right: 80px;
+	top: 205px;
+	right: 100px;
 	border: 1px solid #000;
 	border-radius: 50%;
 }
@@ -215,13 +215,13 @@ img {
 input.upload-name {
 	position: absolute;
 	top: 321px;
-	right: 30px;
+	right: 72px;
 }
 
 input#imageFileName {
 	position: absolute;
 	top: 350px;
-	right: -90px;
+	right: -50px;
 }
 </style>
 <title>회원가입 화면</title>

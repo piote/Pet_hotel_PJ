@@ -188,6 +188,7 @@ public class UserControllerImpl implements UserController{
 		String tel_sub=request.getParameter("tel_sub");
 		String message=request.getParameter("message");
 		String birth=request.getParameter("birth");
+		
 		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date formatDate = dtFormat.parse(birth);
 		System.out.println(birth);
