@@ -154,7 +154,7 @@
 	    <select id="membershipCount" resultType="int" parameterType="String" >
 		  	<![CDATA[
 				SELECT COUNT(RESERVATION_NUM) FROM tb_reservation
-				where user_id=#{id}
+				where user_id=#{id} AND RESERVATION_STATE='Y'
 			]]>
 		</select>
 	

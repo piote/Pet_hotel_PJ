@@ -121,7 +121,7 @@
 <!--    			where user_id=#{id} -->
 <!--    		]]> -->
 <!--    	</delete> -->
-<delete id="deleteUser" parameterType="String">
+	<delete id="deleteUser" parameterType="String">
    		<![CDATA[
    			update TB_USER
    			set ACTIVE='N' where USER_ID=#{id}

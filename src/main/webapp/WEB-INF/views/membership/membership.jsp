@@ -240,7 +240,7 @@
             margin-top: 30px;
             margin-bottom: 110px;
         }
-        #count{
+        #count_{
             font-weight: 800;
         }
         .info_box{
@@ -277,16 +277,66 @@
     </style>
 
     <script>
-        function popUp(){
+        function popUp(id){
             $('.modal-bg').show();
             $('.modal-wrap').show();
+            $('#count').empty();
+            $('#count_').empty();
+            var count ;
+            
+            $.ajax({
+                url: "/memberShipMod.do",
+                type: "GET", 
+                data : {"id":id},
+                dataType : 'json',
+                success : function(data){
+
+                	console.log(data);
+                	
+                	count=data.count;
+                	console.log(data.count);
+                	$('#count').append(count);
+                	
+                	if(count<5){
+                		var next = 5 - count;
+                	}else if(count<10){
+                		var next = 10 - count;
+                	}else {
+                		var next = 20 - count;
+                	}
+                	
+                	
+                	
+                	$('#count_').append(next);
+                	
+                    },
+                error :function(){
+                    alert("request error!");
+                    }
+            });
+            
         }
+        
+
         function popClose(){
             $('.modal-bg').hide();
             $('.modal-wrap').hide();
         }
     </script>
 
+<%-- 	<c:choose>
+					<c:when test="${result=='passwordFailed' }">
+				 		  <script> 
+						    window.onload=function SweetAlert(){
+						    	Swal.fire({
+							    	  icon: 'error',
+							    	  title: '',
+							    	  text: '비밀번호가 틀립니다.다시 입력하세요!!',
+							    	})
+						    }
+					  	  </script>
+					</c:when>
+				</c:choose> --%>
 </head>
 <body>
     <div class="membership">
@@ -300,14 +350,14 @@
         <div class="membership_box borderbox">
             <img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
             <div class="txt1">
-                <p>님의 멤버쉽 등급은</p>
-                <p>Bronze</p>
+                <p>${user.name} 님의 멤버쉽 등급은</p>
+                <p>"${user.grade}"</p>
             </div>
             <div class="txt2">
-                <p class="smallfont">연간 이용횟수 5회 이상</p>
+                <p class="smallfont" >연간 이용횟수 5회 이상</p>
                 <p>1회 이용금액의 <span class="orange">2%</span>할인</p>
             </div>
-            <button type="button" onclick="popUp()">멤버쉽 더 알아보기 ></button>
+            <button type="button" onclick="popUp('${user.id}')">멤버쉽 더 알아보기 ></button>
         </div>
         <div class="grade_wrap">
             <p>등급별 혜택</p>
@@ -349,15 +399,15 @@
         </div>
         <div class="modal-wrap_in">
             <div class="modal_title">
-                <p>000님의 멤버쉽 등급은</p>
-                <p>Bronze</p>
+                <p>${user.name}님의 멤버쉽 등급은</p>
+                <p>"${user.grade}"</p>
             </div>
-            <div class="modal_mygrade borderbox">
+            <div class="modal_mygrade borderbox" >
                 <p class="smallfont">연관 이용횟수 5회 이상</p>
                 <p>1회 이용금액의 <span class="orange">2%</span> 할인</p>
             </div>
             <div class="graph_wrap">
-                <p>총 7회 이용</p>
+                <p>총 <span id="count">7</span>회 이용</p>
                 <div class="graph_box">
                     <div id="graph"></div>
                 </div>
@@ -366,7 +416,7 @@
                     <p class="smallfont">Silver</p>
                 </div>
             </div>
-            <p class="grade_count">다음 단계까지 <span id="count">3회</span> 남았습니다.</p>
+            <p class="grade_count">다음 단계까지 <span id="count_">3</span>회 남았습니다.</p>
             <div class="modal_mygrade_info">
                 <div class="info_box borderbox">
                     <img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
