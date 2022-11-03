@@ -102,11 +102,11 @@ public class QuestionsControllerImpl implements QuestionsController{
 		mav.setViewName(viewName);
 		
 		//서블릿에서 경로를 받아와서 세션에 저장하는 코드 
-		session.removeAttribute("realPath");
-		ServletContext context = request.getSession().getServletContext();
-		String realPath = context.getRealPath("");
-		session.setAttribute("realPath", realPath);
-		
+//		session.removeAttribute("realPath");
+//		ServletContext context = request.getSession().getServletContext();
+//		String realPath = context.getRealPath("");
+//		session.setAttribute("realPath", realPath);
+
 		return mav;
 	}
 	
@@ -123,11 +123,11 @@ public class QuestionsControllerImpl implements QuestionsController{
 		mav.addObject("article", questionsVO);
 		
 		//서블릿에서 경로를 받아와서 세션에 저장하는 코드 
-		HttpSession session = request.getSession();
-		session.removeAttribute("realPath");
-		ServletContext context = request.getSession().getServletContext();
-		String realPath = context.getRealPath("");
-		session.setAttribute("realPath", realPath);
+//		HttpSession session = request.getSession();
+//		session.removeAttribute("realPath");
+//		ServletContext context = request.getSession().getServletContext();
+//		String realPath = context.getRealPath("");
+//		session.setAttribute("realPath", realPath);
 		
 		return mav;
 		}
@@ -159,8 +159,16 @@ public class QuestionsControllerImpl implements QuestionsController{
 		ResponseEntity resEnt=null;
 		
 		//세션에 저장된 경로를 받아온다
-		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
+//		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
+//		System.out.println("in "+path);
+		
+		
+		//============================================realPath 받아오기
+		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
+		String path = realPath+"resources\\questions\\questions_image";
 		System.out.println("in "+path);
+		
+		
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
@@ -263,8 +271,14 @@ public class QuestionsControllerImpl implements QuestionsController{
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 		
 		//세션에 있는 경로를 받아온다
-		HttpSession session = multipartRequest.getSession();
-		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
+//		HttpSession session = multipartRequest.getSession();
+//		String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
+		
+		
+		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
+		String path = realPath+"resources\\questions\\questions_image";
+
+		System.out.println(path);
 		
 		while(fileNames.hasNext()){
 			String fileName = fileNames.next();
