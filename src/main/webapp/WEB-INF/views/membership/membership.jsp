@@ -13,7 +13,7 @@
 <html lang="ko">
 <head>
     <title>문의하기</title>
-    <link rel="stylesheet" href="reset.css">
+
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <style>
         .membership{
@@ -295,7 +295,7 @@
             <div></div>
             <p class="smallfont">고객님께 더 만족스러운 서비스를 제공하기 위해<br>
                 연간 이용횟수에 따라 할인 프로그램을 제공하고 있습니다.</p>
-            <img src="bonus_icon.png" alt="bonus_icon">
+            <img src="${contextPath}/resources/img/bonus_icon.png" alt="bonus_icon">
         </div>
         <div class="membership_box borderbox">
             <img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
