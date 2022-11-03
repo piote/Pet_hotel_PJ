@@ -346,10 +346,7 @@
             height: 30px;
         }
         
-        .petUsed{
-        	content:url("${contextPath}/resources/img/close.png")
-        }
-        
+                
         .dogname{
         	font-size:14px;
         }
