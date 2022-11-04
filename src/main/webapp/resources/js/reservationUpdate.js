@@ -301,7 +301,7 @@ function costTB(petserviceMap, datecheck) {
         $(".totalcost").text(total.toLocaleString()  + ' 원');
         
         //맴버쉽 없는 초기상태 계산
-		if($(".membership").val()==""|| $(".membership").val()==null){
+		if($("#membership").val()==""|| $("#membership").val()==null){
        		var disTotal = $("#totalcost").val();
        	 	dis = (total-disTotal)/(total/100)//할인율 자릿수 높아서 대강 계산해도 ok
         	console.log(dis);
@@ -319,6 +319,10 @@ function costTB(petserviceMap, datecheck) {
 				$("#membership").val("Gold");
 				console.log($("#bronzeimg").attr('src', '/resources/img/gold_medal.png'));
 				$(".membership").text("Gold Membership : Discount 10%");
+			}else{
+				$("#membership").val("");
+				console.log($("#bronzeimg").attr('src', '/resources/img/none.png'));
+				$(".membership").text("");
 			}
 			
 		}

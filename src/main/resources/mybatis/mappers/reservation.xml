@@ -108,6 +108,20 @@
 	      VALUES ((SELECT MAX(PET_NUM) FROM TB_PETSERVICE)+#{index}+1, #{item.res_num},#{item.id},#{item.pet_name}, #{item.pet_gender}, #{item.room_grade}, #{item.service_beauty}, #{item.service_spa})
 	    </foreach>
   	</insert>
+  	
+  	<!--  예약 번호의 해당하는 펫 테이블 삭제-->
+  	<delete id="deletePetserviceList" parameterType="String">
+
+		 DELETE FROM tb_petservice WHERE reservation_num = #{res_Num}
+  
+  	</delete>
+  	
+  	<!-- 예약 업데이트 변경 -->
+	<update id="updateReservation" parameterType="reservationVO">
+    	update tb_reservation
+ 	   	set RESERVATION_ST = #{res_st}, RESERVATION_END = #{res_end},TOTAL_COST = #{totalCost}, RS_COMMENT = #{res_comment}
+    	where reservation_num= #{res_num}
+	</update>
    
 <!-- 	<select id="selectMyReservesList" resultMap="reserveResult"  parameterType="String"  >
 		<![CDATA[
@@ -154,7 +168,7 @@
 	    <select id="membershipCount" resultType="int" parameterType="String" >
 		  	<![CDATA[
 				SELECT COUNT(RESERVATION_NUM) FROM tb_reservation
-				where user_id=#{id}
+				where user_id=#{id} AND RESERVATION_STATE='Y'
 			]]>
 		</select>
 	

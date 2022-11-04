@@ -161,6 +161,7 @@
 }
 .detail-list td a {
 	transition: all 0.3s;
+    cursor: pointer;
 }
 
 .detail-list td:nth-child(1) a:hover {

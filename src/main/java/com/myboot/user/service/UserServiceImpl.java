@@ -84,10 +84,10 @@ public class UserServiceImpl implements UserService {
 	    return userDAO.updateUser(userVO);
 	}
 	
-	@Override
-	public UserVO findUser(UserVO id) throws DataAccessException{
-		return userDAO.selectUserById(id);
-	}
+//	@Override
+//	public UserVO findUser(UserVO id) throws DataAccessException{
+//		return userDAO.selectUserById(id);
+//	}
   
   // 회원 탈퇴
 	@Override

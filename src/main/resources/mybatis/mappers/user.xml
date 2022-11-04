@@ -106,12 +106,12 @@
    		]]>
    	  </update>
    	  
-   	  <select id="selectUserById" resultType="userVO"  parameterType="String" >
+<!--    	  <select id="selectUserById" resultType="userVO"  parameterType="String" >
       <![CDATA[
          select * from TB_USER
          where user_id=#{id}
       ]]>
-	 </select>	
+	 </select>	 -->
    	  
    	  
    	<!-- 회원 탈퇴 -->
@@ -121,7 +121,7 @@
 <!--    			where user_id=#{id} -->
 <!--    		]]> -->
 <!--    	</delete> -->
-<delete id="deleteUser" parameterType="String">
+	<delete id="deleteUser" parameterType="String">
    		<![CDATA[
    			update TB_USER
    			set ACTIVE='N' where USER_ID=#{id}

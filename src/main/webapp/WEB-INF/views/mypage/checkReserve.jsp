@@ -16,8 +16,6 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="${contextPath}/resources/css/checkReserve.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.min.js"></script>
-	<link rel="stylesheet" href="sweetalert2.min.css">
 	
 	<!-- 예약 수정 -->
 	<link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
@@ -26,10 +24,61 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     
+    <style>
+    	.petUsed{
+        	content:url("${contextPath}/resources/img/close.png");
+        }
+    </style>
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCalUpdate.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservationUpdate.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservationUpdateAjaxP.js"></script>
     <!-- 예약 수정 end-->
+    
+    
+    <style>
+    
+	#lay_pop{
+		position:absolute;
+		z-index:500;
+		width:69%;
+		height:800px;
+		overflow-y:scroll;
+		display:none;
+		background-color:#ffffff;
+		border:2px solid #cccccc; 
+		text-align: center;
+		}
+	
+	#pop_content {
+		text-align: center;
+		margin-top:60px;
+        display: inline-block;
+		}
+	
+	#pop_content ul li{
+		text-align: center;
+        display: inline-block;
+		}
+		
+	#all_body{
+		position:absolute;
+	    /* pointer-events: none; */
+		z-index:100;
+		display:none;
+		filter:alpha(opacity=50);
+		opacity:0.5;
+	 	-moz-opacity:0.5;
+		background-color:#000000;
+		left:0;
+		top:0;
+	}
+	
+	.search_form{
+		overflow: hidden;
+	}
+
+    </style>
+	
     
 	<script type="text/javascript">
 		$( "#datepicker" ).datepicker({
@@ -239,14 +288,32 @@
             }
         })
     }
+    
+    $(document).on("click",function(e){
+    	console.log($("#all_body").is(e.target));
+    	console.log(!$("#lay_pop").is(e.target));
+    	console.log($("#lay_pop").css('display')!='none'  && !$("#lay_pop").is(e.target));
+    	console.log($("#lay_pop").css('display'))
+    	
+    	if($("#all_body").is(e.target)) {
+	    		$("#all_body").css({opacity:0});
+	    		$("#all_body").css({display:"none"});
+	    		$("#lay_pop").css({display:"none"});
+	    		console.log($("#lay_pop").css("display"));
+    		}
+    	
+    });
+    
+    
 	</script>
 </head>
 <body>
+<div id="all_body"></div>
 	<div id="wrap">
 		 <div id="container">
 			<h2>예약 조회</h2>
 			<div id="searchFrm">
-				<form name="searchFrm">
+				<form name="searchFrm" class="search_form">
 					<div>
                         <ul class="searchDate">
                             <li>
@@ -415,9 +482,11 @@
 		</div>
 	</div>
 	<!--예약 업뎃  -->
-	<div id="lay_pop">
+	<div id="lay_pop" class="lay_pop">
+		<form id="reservationUpdateForm" action="${contextPath}/reservationUpdate.do" method="post">
 			<div id="pop_content">
 			<h1 id="asd">예약 변경</h1>
+			<input type="hidden" name="resNum" id="resNum">
 			<br>
 				<ul>
 		        	<li id="checkinBox" class="reservationBox">
@@ -582,7 +651,9 @@
 	    </div>
 	    
 	    <div class="btn_pet2">
-	    	<input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />	                               		
+	    
+	    	<input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />	              
+	    	<a href="javascript:;" id="pop_end1" onclick="reservationSubmit()">수정</a>                 		
 	    	<a href="javascript:;" id="pop_end1" onclick="layerClose('lay_pop','all_body')">완료</a>
 	    </div>
 
@@ -593,7 +664,10 @@
 	        <!-- <input type="text" name="petcomment"> -->
         </div>
 		<br><br>
+		</form>
 		</div>
+		
+
 		<!--예약 업뎃  -->
 </body>
 </html>

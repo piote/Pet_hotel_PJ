@@ -17,7 +17,7 @@ public interface ReservationDAO {
 	 public List selectReservationList() throws DataAccessException;
 	 
 	 // 예약, 펫 서비스 등록
-	 public int insertReservation(ReservationVO petserviceMap) throws DataAccessException;
+	 public int insertReservation(ReservationVO ReservationVO) throws DataAccessException;
 	 public int insertPetserviceList(List<PetserviceVO> petserviceList) throws DataAccessException;
 	 // 사용가능한 예약 번호 
 	 public int useReservationNum() throws DataAccessException;
@@ -27,6 +27,10 @@ public interface ReservationDAO {
 	public List<PetserviceVO> SearchPetServiceByResNum(String reserNum) throws DataAccessException;
 	// 이용 횟수 불려오기
 	public int membershipCount(String id) throws DataAccessException;
+	
+	public int deletePetserviceList(String res_Num) throws DataAccessException;
+	
+	public int updateReservation(ReservationVO resVO) throws DataAccessException;
 //	 
 //	 public int updateMember(MemberVO memberVO) throws DataAccessException ;
 //	 

@@ -33,7 +33,7 @@ function reservationSubmit(obj){
     		$("#all_body").css("display","block");
     		$("#all_body").css("width",$(window).width());
     		$("#all_body").css("height",height);
-    		
+    		$("#all_body").css("opacity","0.5");
     		
 
     	}
@@ -47,7 +47,35 @@ function reservationSubmit(obj){
     		$("#"+lay1).css("display","none");
     		$("#"+lay2).css("display","none");
     		resetRow();
+    		
     	}
+    	
+    	
+    	
+    	
+    	function reservationSubmit(){
+    		var form = $("#reservationUpdateForm");
+			if($("#checkoutDate").val() != null && $("#checkoutDate").val() != ""){//날짜가 있으면
+				
+				if(totalTableNum != 0){//테이블이 존재하면
+						
+					if($("#totalcost").val()!="0" && $("#totalcost").val()!=null){//가격이 있으면
+						
+						form.submit();
+					}else{
+						alert("맡기실 아이를 선택해주세요.");	
+						return false;
+					}
+				}else{
+					alert("맡기실 아이를 추가해주세요.");
+					return false;
+				}
+			}else{
+				alert("날짜를 선택해주세요.");
+				return false;
+			}
+    		
+     	}
     	
     	//조회했을때 날짜가 수정가능한지 체크
     	//체크인 날짜가 현재보다 미래일경우 수정가능하게, 아닐경우  달력 수정 금지
@@ -97,7 +125,10 @@ function reservationSubmit(obj){
     				$(".tbnum").remove()//html 삭제
     				resetRow();
     				
+    				
     				//html에 적용
+    				//예약번호
+    				$("#resNum").val(reserNum);
     				//체크인
     				var res_st_data = new Date(data.reservation.res_st);
     				$("#start_dayBox").text(res_st_data.toLocaleDateString());
