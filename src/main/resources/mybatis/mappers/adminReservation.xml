@@ -68,7 +68,7 @@
   </resultMap> 
   
   
-  <!-- 관리자 예약관리 예약조회 -->
+  <!-- 관리자 예약관리 보이는 예약조회 -->
   <select id="adminResList" resultMap="adminresfullResult">
   	<![CDATA[
 		SELECT res.reservation_num, tb_user.user_name, res.reservation_st, res.reservation_end, count(pet.pet_num) as "total_pet", res.pay_time, res.total_cost ,res.reservation_state
@@ -119,23 +119,40 @@
 	    ORDER BY RESERVATION_NUM ASC
   </select>
   
-  <!-- 관리자 예약관리 예약불러오기 -->
-  <select id="adminPetList" resultMap="adminresfullResult">
+  
+  
+  
+  
+  <!-- 관리자 예약수정 예약불러오기 -->
+  <select id="adminSelectRes" resultMap="adminresfullResult" parameterType="String">
   	<![CDATA[
-		SELECT * FROM tb_petservice
+		SELECT res.reservation_st, res.reservation_end, res.total_cost, res.rs_comment 
+	    FROM tb_reservation res 
+	    left JOIN tb_petservice pet
+	    ON res.reservation_num = pet.reservation_num
+	    ORDER BY res.RESERVATION_NUM desc
+	    where RESERVATION_NUM = #{RESERVATION_NUM}
 	]]>
   </select>
-	
-  <!-- 관리자 예약관리 예약갯수 -->
-  <select id="adminTotalResNum" resultType="int">
+  
+  <!-- 관리자 예약수정 펫 테이블 추가 -->
+  <select id="adminSelectPet" resultMap="adminresfullResult" parameterType="String">
   	<![CDATA[
-		SELECT COUNT(reservation_num)
-		FROM tb_reservation
+		SELECT pet.PET_NUM, pet.PET_NAME, pet.PET_GENDER, pet.ROOM_GRADE, pet.SERVICE_BEAUTY, pet.SERVICE_SPA
+	    FROM tb_petservice pet
+        ORDER BY pet.reservation_num desc
+        where RESERVATION_NUM = #{RESERVATION_NUM}
 	]]>
   </select>
-	
-  <!-- 관리자 예약관리 예약변경(예약 수정) -->
-  <update id="updateAdminReservation" parameterType="java.util.Map">  
+  
+  
+  
+  
+  
+  
+  
+  <!-- 관리자 예약수정 예약불러오기(변경) -->
+  <update id="adminUpdateRes" parameterType="java.util.Map">  
 	update tb_reservation
 	set RESERVATION_ST = #{RESERVATION_ST},
 	RESERVATION_END = #{RESERVATION_END},
@@ -145,8 +162,8 @@
 	where RESERVATION_NUM = #{RESERVATION_NUM}
   </update>
   
-  <!-- 관리자 예약관리 예약변경(펫 수정) -->
-  <update id="updateAdminPetservice" parameterType="java.util.Map">
+  <!-- 관리자 예약수정 펫테이블 추가(변경) -->
+  <update id="adminUpdatePet" parameterType="java.util.Map">
 	update tb_petservice
 	PET_NUM = #{PET_NUM},
 	set PET_NAME = #{PET_NAME},
@@ -158,7 +175,7 @@
   </update>
   
   <!-- 관리자 예약관리 예약변경(펫 삭제) -->
-  <delete id="deleteAdminPetList" parameterType="String">
+  <delete id="adminDeletePet" parameterType="String">
     <![CDATA[
       delete from tb_petservice
 	  where PET_NUM in (
@@ -167,14 +184,27 @@
     ]]>      
   </delete>
   
-  <!-- 관리자 예약관리 예약변경(예약상태 수정) -->
-  <update id="updateAdminResState" parameterType="String">
+  <!-- 관리자 예약관리 예약갯수 -->
+  <select id="adminTotalResNum" resultType="int">
+  	<![CDATA[
+		SELECT COUNT(reservation_num)
+		FROM tb_reservation
+	]]>
+  </select>
+  
+  <!-- 관리자 예약취소 상태변경 -->
+  <update id="adminUpdateSTC" parameterType="String">
 	 update tb_reservation
 	 set reservation_state='C'
 	 where reservation_num=#{RESERVATION_NUM}
   </update>	
   
-
+  <!-- 관리자 예약확인 멤버쉽카운팅 -->
+  <update id="adminUpdateSTY" parameterType="String">
+	 update tb_reservation
+	 set reservation_state='Y'
+	 where reservation_num=#{RESERVATION_NUM}
+  </update>	
   
 	<!-- 
 	<select id="serchReservationNum" resultMap="resfullResult">수정중

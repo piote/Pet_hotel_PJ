@@ -11,29 +11,35 @@ import org.springframework.stereotype.Repository;
 @Repository("adminresDAO")
 public interface AdminResDAO {
 	
-	 //관리자 예약관리 예약조회
+	 //관리자 예약관리 보이는 예약조회
 	 public List adminResList() throws DataAccessException;
 	 
 	 //관리자 예약관리 예약검색
 	 public List searchadminResList(Map searchOption) throws DataAccessException;
 	
-	 //관리자 예약관리 예약불러오기
-	 public List adminPetList() throws DataAccessException;
+	 //관리자 예약수정 예약불러오기
+	 public List adminSelectRes(String reserNum) throws DataAccessException;
 	
-	 //관리자 예약관리 예약갯수
-	 public int adminTotalResNum() throws DataAccessException;
+	 //관리자 예약수정 펫 테이블 추가
+	 public List adminSelectPet(String reserNum) throws DataAccessException;
 	 
-	 //관리자 예약관리 예약변경(예약 수정)
-	 public void updateAdminReservation(Map reservationMap) throws DataAccessException;
+	 //관리자 예약수정 예약불러오기(변경)
+	 public void adminUpdateRes(Map reservationMap) throws DataAccessException;
 	 
-	 //관리자 예약관리 예약변경(펫 수정)
-	 public void updateAdminPetservice(Map petserviceMap) throws DataAccessException;
+	 //관리자 예약수정 펫테이블 추가(변경)
+	 public void adminUpdatePet(Map petserviceMap) throws DataAccessException;
 	 
 	 //관리자 예약관리 예약변경(펫 삭제)
-	 public void deleteAdminPetList(String petNum) throws DataAccessException;
+	 public void adminDeletePet(String petNum) throws DataAccessException;
 	 
-	 //관리자 예약관리 예약변경(예약상태 수정)
-	 public void updateAdminResState(String reserNum) throws DataAccessException;
+	 //관리자 예약관리 예약갯수
+	 public int adminTotalResNum(int reserNum) throws DataAccessException;
+	 
+	 //관리자 예약취소 상태변경
+	 public void adminUpdateSTC(String reserNum) throws DataAccessException;
+	 
+	 //관리자 예약확인 멤버쉽카운팅
+	 public void adminUpdateSTY(String reserNum) throws DataAccessException;
 
 	
 }

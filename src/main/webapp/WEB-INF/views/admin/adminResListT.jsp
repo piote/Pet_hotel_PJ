@@ -467,6 +467,7 @@
 			}, 500);
 		}
 		
+		
 		function reslistPage(P){ 
 			$.ajax({
 				url : "/list",
@@ -492,7 +493,7 @@
 			});
 		}
 				
-				
+		
     </script>
 </head>
 <body>
