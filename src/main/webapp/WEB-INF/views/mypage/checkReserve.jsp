@@ -16,8 +16,6 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="${contextPath}/resources/css/checkReserve.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.min.js"></script>
-	<link rel="stylesheet" href="sweetalert2.min.css">
 	
 	<!-- 예약 수정 -->
 	<link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
@@ -26,6 +24,11 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     
+    <style>
+    	.petUsed{
+        	content:url("${contextPath}/resources/img/close.png");
+        }
+    </style>
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCalUpdate.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservationUpdate.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservationUpdateAjaxP.js"></script>
@@ -59,7 +62,7 @@
 		
 	#all_body{
 		position:absolute;
-//	    pointer-events: none;
+	    /* pointer-events: none; */
 		z-index:100;
 		display:none;
 		filter:alpha(opacity=50);
@@ -269,17 +272,19 @@
             }).then((result) => {
             if (result.isConfirmed) {
         		var formObj=document.createElement("form");
-        		var i_reserve_num = document.createElement("input"); 
+        		var i_reserve_num = document.createElement("input"); ;
+
+        		Swal.fire('예약 취소 완료.',)
         	    
+        	    i_reserve_num.type = "hidden";
         	    i_reserve_num.name = "res_num";
         	    i_reserve_num.value = res_num;
         		
         	    formObj.appendChild(i_reserve_num);
         	    document.body.appendChild(formObj); 
-                Swal.fire('예약 취소 완료.',)
         	    formObj.method = "post";
         	    formObj.action ="${contextPath}/mypage/cancelMyReserve.do";
-			    setTimeout(() => formObj.submit(), 1000);
+			    setTimeout(() => formObj.submit(), 800);
             }
         })
     }
@@ -477,9 +482,11 @@
 		</div>
 	</div>
 	<!--예약 업뎃  -->
-	<div class="lay_pop" id="lay_pop">
+	<div id="lay_pop" class="lay_pop">
+		<form id="reservationUpdateForm" action="${contextPath}/reservationUpdate.do" method="post">
 			<div id="pop_content">
 			<h1 id="asd">예약 변경</h1>
+			<input type="hidden" name="resNum" id="resNum">
 			<br>
 				<ul>
 		        	<li id="checkinBox" class="reservationBox">
@@ -644,7 +651,9 @@
 	    </div>
 	    
 	    <div class="btn_pet2">
-	    	<input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />	                               		
+	    
+	    	<input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />	              
+	    	<a href="javascript:;" id="pop_end1" onclick="reservationSubmit()">수정</a>                 		
 	    	<a href="javascript:;" id="pop_end1" onclick="layerClose('lay_pop','all_body')">완료</a>
 	    </div>
 
@@ -655,6 +664,7 @@
 	        <!-- <input type="text" name="petcomment"> -->
         </div>
 		<br><br>
+		</form>
 		</div>
 		
 

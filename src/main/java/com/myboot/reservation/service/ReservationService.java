@@ -21,4 +21,9 @@ public interface ReservationService {
 //	 
 //	 public int removeMember(String id) throws Exception;
 //	 public MemberVO login(MemberVO memberVO) throws Exception;
+	 public int deletePetserviceList(String reserNum)throws Exception;
+	 
+	 public int updateReservation(ReservationVO resVO)throws Exception;
+	 
+	 
 }

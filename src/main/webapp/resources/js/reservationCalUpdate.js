@@ -10,6 +10,8 @@ window.onload = function () {
     $("#checkin2").on("click", function () {
         $("#start_dayBox").text("0000. 00. 00.");
         $("#end_dayBox").text("0000. 00. 00.");
+        $("#checkinDate").val("");
+        $("#checkoutDate").val("");
 
         (function () {
             calendarMaker($("#calendarForm"), new Date());
@@ -18,6 +20,8 @@ window.onload = function () {
     $("#checkout2").on("click", function () {
         $("#start_dayBox").text("0000. 00. 00.");
         $("#end_dayBox").text("0000. 00. 00.");
+        $("#checkinDate").val("");
+        $("#checkoutDate").val("");
 
         (function () {
             calendarMaker($("#calendarForm"), new Date());
