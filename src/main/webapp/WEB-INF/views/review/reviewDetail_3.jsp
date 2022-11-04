@@ -175,7 +175,7 @@
 		
 	<br><br><br><br>
 	
-	<h2 class="w_review"><a class="w_a" href="${contextPath}/reviewBoard.do" >Superior Review</a></h2>
+	<h2 class="w_review"><a class="w_a" href="${contextPath}/review/reviewBoard.do" >Superior Review</a></h2>
 		<p id="under"></p>
 		<br><br><br>
 	
