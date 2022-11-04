@@ -3,8 +3,6 @@ package com.myboot.user.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +32,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myboot.user.dto.UserDTO;
 import com.myboot.user.service.UserService;
 import com.myboot.user.vo.UserVO;
 
@@ -215,6 +217,34 @@ public class UserControllerImpl implements UserController{
 		return mav;
 		
 	}
+	 @GetMapping("/user/signup")
+	    public String dispSignup(UserDTO userDto) {
+	        return "/signup";
+	    }
+
+	    @PostMapping("/user/signup")
+	    public String execSignup(@Valid UserDTO userDto, Errors errors, Model model) {
+	        if (errors.hasErrors()) {
+	            // 회원가입 실패시, 입력 데이터를 유지
+	            model.addAttribute("userDto", userDto);
+
+	            // 유효성 통과 못한 필드와 메시지를 핸들링
+	            Map<String, String> validatorResult = userService.validateHandling(errors);
+	            for (String key : validatorResult.keySet()) {
+	                model.addAttribute(key, validatorResult.get(key));
+	            }
+
+	            return "/signup";
+	        }
+
+	        userService.signUp(userDto);
+	        return "redirect:/user/login";
+	    }
+
+	    @GetMapping("/user/login")
+	    public String displogin() {
+	        return "/login";
+	    }
 
 //	회원가입 id 중복 확인 기능
 	 @ResponseBody // 값 변환을 위해 꼭 필요함
@@ -537,5 +567,6 @@ public class UserControllerImpl implements UserController{
 			}
 			return picFileName;
 		}
+		
 }
 

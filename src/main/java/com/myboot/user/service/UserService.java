@@ -1,11 +1,14 @@
 package com.myboot.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.validation.Errors;
 
+import com.myboot.user.dto.UserDTO;
 import com.myboot.user.vo.UserVO;
 
 public interface UserService {
@@ -36,6 +39,7 @@ public interface UserService {
 	public int addUser(UserVO userVO) throws Exception;
 //	회원가입 아이디중복 검사 기능
 	 public int overlappedID(UserVO userVO) throws Exception;
-	
+	 public Map<String, String> validateHandling(Errors errors);
+	 public void signUp(UserDTO userDto);
 }
 	
