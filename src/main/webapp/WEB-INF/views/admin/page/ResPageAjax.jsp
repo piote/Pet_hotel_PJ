@@ -3,16 +3,18 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!-- 리스트함수용 -->
 
 <c:set var="resList"  value="${list}" /><!--가져온 예약 리스트 -->
-
+<c:set var="item_res"  value="${fn:length(list) }" /><!--총 데이터베이스 아이템 수  -->
 <c:set var="P"  value="${P}" />
 
 
 
 
+
 <table id="indexListAjax">
+	
 	<tr class="tb_title">
           <td class="res_num">예약번호</td>
           <td class="res_name">예약자</td>
@@ -21,7 +23,7 @@
           <td class="res_payTime">주문일</td>
           <td class="res_cost">총 가격</td>
           <td class="resState">예약상태</td>
-          <td class="res_modBt"></td>
+          <td class="res_modBt"><input id="PNum" type="hidden" ></td>
       </tr>
       <c:forEach var="reservation" items="${resList}" varStatus="status" begin="${P*10}" end="${P*10+9}">
 		<tr>
@@ -126,3 +128,107 @@
          	</td>
          </tr>
 </table>
+
+
+
+
+
+
+
+ <!-- 페이지기능 -->
+                
+<!-- 페이지당 10개의 예약을 출력한다. -->
+               
+<!-- 페이지 만큼 나누어떨어지지만 그대로 계산하면 1페이지 더 생성되므로 주의 -->
+<c:if test="${item_res % 10 != 0 and item_res > 10}">
+	<c:set var="PI" value="${item_res / 10}" scope="request"/>
+</c:if>
+
+<!-- 페이지 만큼 나누어떨어지지만 그대로 계산하면 1페이지 더 생성되므로 주의 -->
+<c:if test="${item_res % 10 == 0 and item_res > 10}">
+	<c:set var="PI" value="${item_res / 10-1}" scope="request"/>
+</c:if>
+
+<!-- 아이템이 적어 페이지를 만들 이유가 없음 -->
+<c:if test="${item_res <= 10}">
+	<c:set var="PI" value="${0}" scope="request"/>
+</c:if>
+
+<c:choose>
+
+	<c:when test="${P < 3 && PI > 4}">
+	<!-- 현재페이지가 3페이지 이하이지만 마지막페이지가 다음페이지가 필요할 정도로 많다. -->
+		<div id="PageAjax" class="PageAjax">
+			<c:forEach varStatus="i" begin="0" end="4">
+				<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
+				<c:choose>
+				 	<c:when test="${i.count-1 == P}">
+				 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count-1})">${i.count}</li>
+				 	</c:when>
+				 	<c:otherwise>
+				 		<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
+				 	</c:otherwise>
+				</c:choose>			
+			</c:forEach>
+			<li class="pageNO pageUp" onClick="pageUP()">next</li>
+		</div>
+	</c:when>
+
+	<c:when test="${P >= 3 && PI > P + 1}">
+	<!-- 현재페이지가 4이상 이고 마직막페이지 2 이하다. -->
+		<div id="PageAjax" class="PageAjax">
+			<li class="pageNO pageDown" onClick="pageDown()">pre</li>
+			<c:forEach varStatus="i" begin="${P-2}" end="${P+2}">
+				<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
+				<c:choose>
+				 	<c:when test="${P + i.count - 3 == P}">
+				 		<li class="pageNO pageNOW" onClick="reslistPage(${P + i.count - 3})">${P + i.count - 2}</li>
+				 	</c:when>
+				 	<c:otherwise>
+				 		<li class="pageNO" onClick="reslistPage(${P + i.count - 3})">${P + i.count - 2}</li>
+				 	</c:otherwise>
+				</c:choose>		
+			</c:forEach>
+			<li class="pageNO pageUp" onClick="pageUP()">next</li>
+		</div>
+	</c:when>
+
+	<c:when test="${P >= 3 && (PI-1) <= P && (PI+1) > P}"><!-- 현재페이지가 4이상이고 최대페이지랑 가까울때  -->
+		
+		<div id="PageAjax" class="PageAjax">
+			<li class="pageNO pageDown" onClick="pageDown()">pre</li>
+			<c:forEach varStatus="i" begin="${PI-4}" end="${PI}">
+				<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. 현재페이지는 색 표시-->
+				<c:choose>
+				 	<c:when test="${i.count + P - 3 == P}">
+				 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count + P - 5})">${i.count + P - 4}</li>
+				 	</c:when>
+				 	<c:otherwise>
+				 		<li class="pageNO" onClick="reslistPage(${i.count + P - 5}">${i.count + P - 4}</li>
+				 	</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		</div>
+		
+	</c:when>
+	<c:otherwise>
+		<div id="PageAjax" class="PageAjax">
+			<li class="pageNO pageDown" onClick="pageDown()">pre</li>
+			<c:forEach varStatus="i" begin="0" end="${PI}">
+				<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
+				<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}${P}</li>
+			</c:forEach>
+			<li class="pageNO pageUp" onClick="pageUP()">next</li>
+		</div>
+	</c:otherwise>
+	
+</c:choose>
+<%-- <div id="PageAjax" class="PageAjax">
+	<li class="pageNO pageDown" onClick="pageDown()">pre</li>
+	<c:forEach varStatus="i" begin="0" end="${PI}">
+		<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
+		<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}${P}</li>
+	</c:forEach>
+	<li class="pageNO pageUp" onClick="pageUP()">next</li>
+</div> --%>
+

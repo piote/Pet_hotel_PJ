@@ -171,6 +171,9 @@
             font-size: 14px;
             color: #999999;
         }
+        .pageNOW{
+            color: red;
+        }
         .select_number{
             color: #030303;
         }
@@ -488,12 +491,20 @@
 				
 				//page/ResPageAjax.jsp에 요소인 테이블의 ID indexListAjax를 불러온다.
 				var contents = html.find("#indexListAjax").html();
+				$("#res_List_Tb").html(contents);
 				console.log(contents);
 				//테이블에 html로 만든 것들 넣기
-				$("#res_List_Tb").html(contents);
+				
 				
 				//새로생긴 html 부분에 상세보기 저장하고 닫기
 				petTClose();
+				
+				//페이징
+				var pageNumber = html.find("#PageAjax").html();
+				$("#page_num").html(pageNumber);
+				
+				
+				
 				
 			}).fail(function (jqXHR, textStatus, errorThrown) {
 				console.log("에러");
@@ -686,13 +697,13 @@
 				</c:if>
 				
 				
-                <div class="page_num">
-	                <li class="pageNO" onClick="pageDown()">pre</li>
+                <div id="page_num" class="page_num">
+	                <li class="pageNO pageDown" onClick="pageDown()">pre</li>
 		            <c:forEach varStatus="i" begin="0" end="${PI}">
 					<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
 						<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
 					</c:forEach>
-	                <li class="pageNO" onClick="pageUP()">next</li>
+	                <li class="pageNO pageUp" onClick="pageUP()">next</li>
                 </div>
             </div>
             
