@@ -146,12 +146,12 @@
 
 <!-- 페이지 만큼 나누어떨어지지만 그대로 계산하면 1페이지 더 생성되므로 주의 -->
 <c:if test="${item_res % 10 == 0 and item_res > 10}">
-	<c:set var="PI" value="${item_res / 10-1}" scope="request"/>
+	<c:set var="PI" value="${item_res / 10 - 1}" scope="request" />
 </c:if>
 
 <!-- 아이템이 적어 페이지를 만들 이유가 없음 -->
 <c:if test="${item_res <= 10}">
-	<c:set var="PI" value="${0}" scope="request"/>
+	<c:set var="PI" value="${0}" scope="request" />
 </c:if>
 
 <c:choose>
@@ -163,7 +163,7 @@
 				<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
 				<c:choose>
 				 	<c:when test="${i.count-1 == P}">
-				 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count-1})">${i.count}</li>
+				 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count-1})">${i.count} - ${PI}</li>
 				 	</c:when>
 				 	<c:otherwise>
 				 		<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
@@ -174,7 +174,7 @@
 		</div>
 	</c:when>
 
-	<c:when test="${P >= 3 && PI > P + 1}">
+	<c:when test="${P >= 3 && PI > P + 3}">
 	<!-- 현재페이지가 4이상 이고 마직막페이지 2 이하다. -->
 		<div id="PageAjax" class="PageAjax">
 			<li class="pageNO pageDown" onClick="pageDown()">pre</li>
@@ -193,18 +193,18 @@
 		</div>
 	</c:when>
 
-	<c:when test="${P >= 3 && (PI-1) <= P && (PI+1) > P}"><!-- 현재페이지가 4이상이고 최대페이지랑 가까울때  -->
+	<c:when test="${P >= 3 && PI-2 <= P+1 && PI > P}"><!-- 현재페이지가 4이상이고 최대페이지 또는 최대페이지랑 가까울때  -->
 		
 		<div id="PageAjax" class="PageAjax">
 			<li class="pageNO pageDown" onClick="pageDown()">pre</li>
 			<c:forEach varStatus="i" begin="${PI-4}" end="${PI}">
 				<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. 현재페이지는 색 표시-->
 				<c:choose>
-				 	<c:when test="${i.count + P - 3 == P}">
-				 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count + P - 5})">${i.count + P - 4}</li>
+				 	<c:when test="${PI - 5 + i.count == P}">
+				 		<li class="pageNO pageNOW" onClick="reslistPage(${PI - 5 + i.count})">${PI - 4 + i.count}-${PI}</li>
 				 	</c:when>
 				 	<c:otherwise>
-				 		<li class="pageNO" onClick="reslistPage(${i.count + P - 5}">${i.count + P - 4}</li>
+				 		<li class="pageNO" onClick="reslistPage(${PI - 5 + i.count}">${PI - 4 + i.count}-${PI}</li>
 				 	</c:otherwise>
 				</c:choose>
 			</c:forEach>
