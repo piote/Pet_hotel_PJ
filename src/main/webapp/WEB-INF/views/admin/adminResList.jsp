@@ -189,6 +189,10 @@
         	
         	transition: height 0.6s;
         }
+		#res_content_box>td{
+			opacity: 0;
+		}
+
         
         .res_Date_Veiw_Box li{
         	display: inline-block;
@@ -247,7 +251,6 @@
         #pet_Comment{
         	resize: none;
         	width: 90%;
-        	
         }
         
        
@@ -376,12 +379,15 @@
     		width: 90px;
         	
         }
+
         
     </style>
     <script>
     	window.onload = function () {
     		petTClose()
+
     	}
+		
     	var petTableInfo;
     	var petItemSum = 0;
     
@@ -404,6 +410,7 @@
    			if($(obj).attr('class') == 'res_R_arrow_bt'){
        			//박스 안보임
        			//$('.res_content_box').css('display', 'none');
+       			$('.res_content_box').children('td').css('opacity', '0');
     			$('.res_content_box').empty()
        			$('.res_content_box').css('height', '0px');
     			//회살표
@@ -414,6 +421,7 @@
        			//이미 열려있다면 이전거 닫기
         		if($('.res_content_box').css('height') != '0px'){
         			//$('.res_content_box').css('display', 'none');
+					$('.res_content_box').children('td').css('opacity', '0');
     				$('.res_content_box').empty()
         			$('.res_content_box').css('height', '0px');
     				//화살표
@@ -434,6 +442,16 @@
            		$(obj).addClass('res_R_arrow_bt');
        			$(obj).removeClass('res_arrow_bt');
        		}	
+			
+			// 클릭한 요소 예약번호 받아오기
+			var reserNum =  $(obj).parent().parent().children('.res_num').text();
+
+			// 요소추가 시간때문에, 셋타임아웃 설정
+			setTimeout(function(){
+				searchResInfo(reserNum,obj);
+			},200)
+			
+
     	}
     	
     	//펫 아이템 추가
@@ -442,17 +460,21 @@
     		//이미 있는 갯수를 세서 갯수를 이용해 id 생성
 			petItemSum = $('.petTB_Item_Box').length;
 			
-			var petTB_Item_Box = '<li>'
-				+'<ul class="petTB_Item_Box">'
+			var petTB_Item_Box = '<li class="pet_item_li">'
+				+'<ul class="petTB_Item_Box" id="petTB_Item_'+petItemSum+'">'
 				+'<li><input name="petname" class="petTB_Item" type="text" placeholder="이름"></li>'
-				+'<li><select name="petsex" class="petTB_Item"><option>male</option><option>female</option></select></li>'
-				+'<li><select name="petroom" class="petTB_Item" onchange=""><option value="Deluxe">Deluxe(소형견)</option><option value="Sweet">Suite(중형견)</option><option value="Superior">Superior(대형견)</option></select></li>'
-				+'<li><select name="beauty" class="petTB_Item" onchange=""><option value="N">이용안함</option><option value="Clipping">Clipping</option><option value="Scissoring">Scissoring</option></select></li>'
-				+'<li><span class="spaT">SPA</span><input name="spa" class="petTB_Item" type="checkbox" value="Y"><input type="hidden" name="spa"  id="" value="N"/></li>'
+				+'<li><select name="petsex" class="petTB_Item"><option value="male" >male</option><option value="female">female</option></select></li>'
+				+'<li><select name="petroom" class="petTB_Item" onchange="change_form()"><option value="Deluxe">Deluxe(소형견)</option><option value="Sweet">Sweet(중형견)</option><option value="Superior">Superior(대형견)</option></select></li>'
+				+'<li><select name="beauty" class="petTB_Item" onchange="change_form()"><option value="N">이용안함</option><option value="Clipping">Clipping</option><option value="Scissoring">Scissoring</option></select></li>'
+				+'<li><span class="spaT">SPA</span><input name="spa" class="petTB_Item spaCK" type="checkbox" value="Y" onchange="change_form()"><input type="hidden" name="spa"  id="" value="N"/></li>'
 				+'<li><input type="image" id="petTB_Item_Delete" class="petUsed" onclick="petItemDelet(this)" value="예약취소"></li>'
 				+'</ul>'
 				+'</li>'
 			$(petTB_Item_Box).insertBefore($('.petTB_Item_Box_Add').parent());
+
+			//표함수
+			change_form()
+
 			//let $box1 = $('.box1').clone();
 			//$('.box_wrapper').append($box1);
     	}
@@ -460,6 +482,8 @@
     	//펫 테이블 삭제
 		function petItemDelet(obj){
 			$(obj).parent().parent().parent().remove();
+			//표함수
+			change_form()
 		}
 		
 		//테이블안에 요소 추가.
@@ -468,9 +492,9 @@
 				//조건문 빨리 두번 눌러서 뜨면 안되는 경우
 				if($(obj).attr('class')!='res_arrow_bt'){
 					$('.res_content_box').append(petTableInfo);
+					$('.res_content_box').children('td').animate({opacity: "1"}, 500);
 				}
-					
-			}, 500);
+			}, 200);
 		}
 		
 		//페이징 ajax
@@ -503,7 +527,85 @@
 			});
 		}
 				
+		// 상세 tr 에 데이터 출력
+		function searchResInfo(reserNum,obj){
+			$('.pet_item_li').remove();
+
+			$.ajax({
+    			url:'/SearchReservationNum.do',
+    			method:'post',
+    			data:{ "reserNum": reserNum },
+    			type:'post',
+    			async:true,
+    			dataType:'json',
+    			success:function(data){
+					//console.log(data);
+
+					//CheckIn, CheckOut
+					var st= data.reservation.res_st.substring(0, 10);
+					var ed= data.reservation.res_end.substring(0, 10);
+					$('#res_st').val(st);
+					$('#res_end').val(ed);
+
+					//요청사항
+					$('#pet_Comment').val(data.reservation.res_comment)
+
+
+					// //펫테이블
+					for(i=0;i<data.petservice.length;i++){
+						pet_Add(obj);
+						$("#petTB_Item_"+(i+1)+" input[name='petname']").val(data.petservice[i].pet_name)
+						$("#petTB_Item_"+(i+1)+" select[name='petsex']").val(data.petservice[i].pet_gender).prop("selected", true);
+						$("#petTB_Item_"+(i+1)+" select[name='petroom']").val(data.petservice[i].room_grade).prop("selected", true);
+						$("#petTB_Item_"+(i+1)+" select[name='beauty']").val(data.petservice[i].service_beauty).prop("selected", true);
+						if(data.petservice[i].service_spa.startsWith('Y')){
+							$("#petTB_Item_"+(i+1)+" .spaCK").prop('checked',true);
+						}
+					}
+					//표 함수
+					change_form()
+				}
+			});
+		}
+
+		//표 함수
+		function change_form(){
+			
+			var sr =0, mr =0, lr =0;
+			var sc =0, mc =0, lc =0;
+			var ss =0, ms =0, ls =0;
+			var ssp =0, msp =0, lsp =0;
+
+			$('.pet_Cost_table').find('td').empty(); //이전 표 안 데이터 지우기
+
+			$(".pet_item_li").each(function(){
 				
+				//소형견
+				if($(this).find("select[name='petroom']").val() == "Deluxe"){
+					sr++;
+					if($(this).find("select[name='beauty']").val()=='Clipping'){ sc++; }
+					else if($(this).find("select[name='beauty']").val()=='Scissoring'){ ss++; }
+					if($(this).find(".spaCK").is(':checked')){ ssp++; }
+				}//중형견
+				else if($(this).find("select[name='petroom']").val() == "Sweet"){
+					mr++;
+					if($(this).find("select[name='beauty']").val()=='Clipping'){ mc++; }
+					else if($(this).find("select[name='beauty']").val()=='Scissoring'){ ms++; }
+					if($(this).find(".spaCK").is(':checked')){ msp++; }
+				}//대형견
+				else if($(this).find("select[name='petroom']").val() == "Superior"){
+					lr++;
+					if($(this).find("select[name='beauty']").val()=='Clipping'){ lc++; }
+					else if($(this).find("select[name='beauty']").val()=='Scissoring'){ ls++; }
+					if($(this).find(".spaCK").is(':checked')){ lsp++; }
+				}
+			})
+
+			$('.sr').append(sr); $('.sc').append(sc); $('.ss').append(ss); $('.ssp').append(ssp);
+			$('.mr').append(mr); $('.mc').append(mc); $('.ms').append(ms); $('.msp').append(msp);
+			$('.lr').append(lr); $('.lc').append(lc); $('.ls').append(ls); $('.lsp').append(lsp);
+		}
+
     </script>
 </head>
 <body>
@@ -585,9 +687,9 @@
 				            					<li><span class="check_Date">Check Out</span></li>
 				            				</ul>
 				            				<ul>
-				            					<li><input type="date"></li>
+				            					<li><input type="date" name="res_st" id="res_st"></li>
 				            					<li class="date_Cal_Text"><span id="dateCalText">2박</span></li>
-				            					<li><input type="date"></li>
+				            					<li><input type="date" name="res_end" id="res_end"></li>
 				            				</ul>	
 				            			<li>
 				            			<br>
@@ -603,25 +705,25 @@
 													    <th>SP</th>
 													  </tr>
 													  <tr>
-													    <th>소</td>
-													    <td clss="sr">0</td>
-													    <td clss="sc">0</td>
-													    <td clss="ss">0</td>
-													    <td clss="ssp">0</td>
+													    <th>소</th>
+													    <td class="sr">0</td>
+													    <td class="sc">0</td>
+													    <td class="ss">0</td>
+													    <td class="ssp">0</td>
 													  </tr>
 													  <tr>
-													    <th>중</td>
-													    <td clss="mr">0</td>
-													    <td clss="mc">0</td>
-													    <td clss="ms">0</td>
-													    <td clss="msp">0</td>
+													    <th>중</th>
+													    <td class="mr">0</td>
+													    <td class="mc">0</td>
+													    <td class="ms">0</td>
+													    <td class="msp">0</td>
 													  </tr>
 													  <tr>
-													    <th>대</td>
-													    <td clss="lr">0</td>
-													    <td clss="lc">0</td>
-													    <td clss="ls">0</td>
-													    <td clss="lsp">0</td>
+													    <th>대</th>
+													    <td class="lr">0</td>
+													    <td class="lc">0</td>
+													    <td class="ls">0</td>
+													    <td class="lsp">0</td>
 													  </tr>
 													</table>
 												</li>
