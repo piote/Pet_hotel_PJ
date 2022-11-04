@@ -32,37 +32,49 @@ public class AdminResServiceImpl implements AdminResService{
 	}
 	
 	@Override
-	public List adminPetList() throws Exception{
+	public List adminPetList(String reserNum) throws Exception{
 		List AdminPetList = null;
-		AdminPetList = adminresDAO.adminPetList();
+		AdminPetList = adminresDAO.adminSelectRes(reserNum);
 		return AdminPetList;
+	}
+	
+	@Override
+	public List adminSelectPet(String reserNum) throws Exception{
+		List adminSelectPet = null;
+		adminSelectPet = adminresDAO.adminSelectPet(reserNum);
+		return adminSelectPet;
+	}
+	
+	@Override
+	public void updateResList(Map reservationMap) throws Exception{
+		adminresDAO.adminUpdateRes(reservationMap);
+	}
+	
+	@Override
+	public void updatePetList(Map petserviceMap) throws Exception{
+		adminresDAO.adminUpdatePet(petserviceMap);
+	}
+	
+	@Override
+	public void deletePetList(String petNum) throws Exception{
+		adminresDAO.adminDeletePet(petNum);
 	}
 	
 	@Override
 	public int adminTotalResNum() throws Exception{
 		int adminTotalResNum = 0;
-		adminTotalResNum = adminresDAO.adminTotalResNum();
+		adminTotalResNum = adminresDAO.adminTotalResNum(adminTotalResNum);
 		return adminTotalResNum;
 	}
 	
 	@Override
-	public void updateResList(Map reservationMap) throws Exception{
-		adminresDAO.updateAdminReservation(reservationMap);
+	public void updateResStateC(String reserNum) throws Exception{
+		adminresDAO.adminUpdateSTC(reserNum);
 	}
 	
 	@Override
-	public void updatePetList(Map petserviceMap) throws Exception{
-		adminresDAO.updateAdminPetservice(petserviceMap);
-	}
-	
-	@Override
-	public void deletePetList(String petNum) throws Exception{
-		adminresDAO.deleteAdminPetList(petNum);
-	}
-	
-	@Override
-	public void updateResState(String reserNum) throws Exception{
-		adminresDAO.updateAdminResState(reserNum);
+	public void updateResStateY(String reserNum) throws Exception{
+		adminresDAO.adminUpdateSTY(reserNum);
 	}
 
 	
