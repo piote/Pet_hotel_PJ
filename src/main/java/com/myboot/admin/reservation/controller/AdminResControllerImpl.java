@@ -2,7 +2,6 @@ package com.myboot.admin.reservation.controller;
 
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +30,7 @@ import com.myboot.user.vo.UserVO;
 @Controller("adminresController")
 public  class AdminResControllerImpl implements AdminResController{
 
+	private static final String String = null;
 	@Autowired
 	private AdminResService adminresService;
 	@Autowired
@@ -91,7 +90,7 @@ public  class AdminResControllerImpl implements AdminResController{
 	}
 		
 	
-	//예약 불러오기       //dao list > 배열로 만드는데 필요한 값만 들고오기
+	//예약 불러오기       
 	@ResponseBody
 	@RequestMapping(value= "/admin/adminResList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView ResReed(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -110,13 +109,11 @@ public  class AdminResControllerImpl implements AdminResController{
 		
 		mav.addObject("adminResReed",adminResReed);  //
 		
-		
 		String  viewName= (String)request.getAttribute("viewName");   //페이지 이동
 		mav.setViewName(viewName);
 		
 		return mav;   //
-		
-		
+
 	}
 		
 	@RequestMapping(value= "/ResPageAjax.do", method = {RequestMethod.GET, RequestMethod.POST})

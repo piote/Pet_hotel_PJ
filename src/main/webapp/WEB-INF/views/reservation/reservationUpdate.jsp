@@ -335,10 +335,11 @@
     		display:block;
     		filter:alpha(opacity=50);
     		opacity:0.5;
-    		-moz-opacity:0.5;
+    	 	-moz-opacity:0.5;
     		background-color:#000000;
     		left:0;
-    		top:0;}
+    		top:0;
+    	}
     	
     	#pop_end{
             margin-left: auto;
@@ -372,6 +373,7 @@
         .dogname{
         	font-size:14px;
         }
+        
         
     </style>
 
@@ -741,8 +743,10 @@
 		<br><br>
 		</div>
 		
+
 		<div id="all_body"></div>
 			<input type="button" id="btn_pet2_4" value="팝업테스트" onclick="popup()">
 			<input type="number" id="reserNum">
-		</body>
+
+	</body>
 </html>

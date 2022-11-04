@@ -33,7 +33,7 @@ function reservationSubmit(obj){
     		$("#all_body").css("display","block");
     		$("#all_body").css("width",$(window).width());
     		$("#all_body").css("height",height);
-    		
+    		$("#all_body").css("opacity","0.5");
     		
 
     	}
