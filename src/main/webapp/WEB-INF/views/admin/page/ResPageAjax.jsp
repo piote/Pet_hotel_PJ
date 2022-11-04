@@ -48,9 +48,9 @@
          					<li><span class="check_Date">Check Out</span></li>
          				</ul>
          				<ul>
-         					<li><input type="date"></li>
+         					<li><input type="date" name="res_st" id="res_st"></li>
          					<li class="date_Cal_Text"><span id="dateCalText">2박</span></li>
-         					<li><input type="date"></li>
+         					<li><input type="date" name="res_end" id="res_end"></li>
          				</ul>	
          			<li>
          			<br>
@@ -66,25 +66,25 @@
 						    <th>SP</th>
 						  </tr>
 						  <tr>
-						    <th>소</td>
-						    <td clss="sr">0</td>
-						    <td clss="sc">0</td>
-						    <td clss="ss">0</td>
-						    <td clss="ssp">0</td>
+						    <th>소</th>
+						    <td class="sr">0</td>
+						    <td class="sc">0</td>
+						    <td class="ss">0</td>
+						    <td class="ssp">0</td>
 						  </tr>
 						  <tr>
-						    <th>중</td>
-						    <td clss="mr">0</td>
-						    <td clss="mc">0</td>
-						    <td clss="ms">0</td>
-						    <td clss="msp">0</td>
+						    <th>중</th>
+						    <td class="mr">0</td>
+						    <td class="mc">0</td>
+						    <td class="ms">0</td>
+						    <td class="msp">0</td>
 						  </tr>
 						  <tr>
-						    <th>대</td>
-						    <td clss="lr">0</td>
-						    <td clss="lc">0</td>
-						    <td clss="ls">0</td>
-						    <td clss="lsp">0</td>
+						    <th>대</th>
+						    <td class="lr">0</td>
+						    <td class="lc">0</td>
+						    <td class="ls">0</td>
+						    <td class="lsp">0</td>
 						  </tr>
 						</table>
 					</li>
