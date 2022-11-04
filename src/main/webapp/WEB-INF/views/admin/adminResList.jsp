@@ -378,7 +378,12 @@
         }
         
     </style>
-    <script>
+    
+    <script>	
+    	
+    	var state_ck = {};
+    	var sort_ck = null;
+    
     	window.onload = function () {
     		petTClose()
     	}
@@ -502,8 +507,101 @@
 				console.log(errorThrown);
 			});
 		}
-				
-				
+
+		
+		//검색
+		function search(){
+		    var searchMap = new Object();
+		    //input 안 정보 가지고 오기
+		    var search_op = $('#search_op').val();
+		    var keyword = $('#keyword').val();
+
+		    searchMap.search_op = search_op;
+		    searchMap.keyword = keyword;
+		    searchMap.state_ck=state_ck;
+		    searchMap.sort_ck=sort_ck;
+		    
+		    $.ajax({
+		        url: "/adminSearchUser.do",
+		        type: "POST",
+		        dataType: "json",
+		        processData: true,
+		        contentType: "application/json; charset=UTF-8",
+		        data: JSON.stringify(searchMap),
+		        success : function(data){
+		            //총데이터 수 저장
+		            totalData = data.length;
+		            //페이지 버튼 출력
+		            page_num_view(totalData);
+
+		            //user_data에 받아온 데이터 저장
+		            user_data = [totalData];
+		            for(i=0;i<data.length;i++){
+		                user_data[i]=data[i];
+		            }
+		            //첫 화면 출력
+		            clickNO(globalCurrentPage);
+
+		            },
+		        error :function(){
+		            alert("request error!");
+		            }
+		    });
+		}
+
+		$(document).ready(function(){
+		    
+		    //getAllList();
+
+		    //검색창에 엔터 눌렀을때
+		    $("#keyword").keydown(function(key) {
+		        //13번은 엔터키
+		        if (key.keyCode == 13) {
+		            search();
+		        }
+		    });
+		    
+		    //체크박스 눌렀을때
+		    $('input[type=checkbox]').change(function(){
+		        searchOption();
+		    });
+		    $('input[type=radio]').change(function(){
+		    	searchOption();
+		    });
+
+//		    $('html').click(function(e){
+//		    	if($(e.target).parents('.list_tb').length < 1){
+//		            deleteTr();
+//		        }
+//		    });
+		});
+		
+		//체크박스 옵션
+		function searchOption(){
+
+		    //체크된 값 받아오기
+		    $('.res_option input[type=checkbox]').each(function (index) {
+		        if($('#Complete').is(":checked")==true){
+		            state_ck.Complete='Complete';
+		        }else{delete state_ck.Complete;}
+		        if($('#Before').is(":checked")==true){
+		        	state_ck.Before='Before';
+		        }else{delete state_ck.Before;}
+		        if($('#Cancel').is(":checked")==true){
+		        	state_ck.Cancel='Cancel';
+		        }else{delete state_ck.Cancel;}
+		    });
+		    
+		    sort_ck=$('.sort_option input[name="sort"]:checked').val();
+		    
+		    console.log(state_ck)
+		    console.log(sort_ck)
+
+		    //체크박스 클릭 시 검색
+		   // search();
+
+		}
+		
     </script>
 </head>
 <body>
@@ -512,8 +610,8 @@
                 <div class="list_option">
                     <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="search()" >
                         <select name="search_op" id="search_op" aria-label="search">
-                            <option value="search_id">예약자</option>
-                            <option value="search_name">예약번호</option>
+                            <option value="search_name">예약자</option>
+                            <option value="search_res_num">예약번호</option>
                         </select>
                         <input type="text" name="keyword" id="keyword" class="search_txt" placeholder="검색">
                         <button type="button" class="seh_icon" onclick="search()" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
@@ -526,9 +624,9 @@
                     <div class="hr"></div>
                     <div class="res_option">
                         예약상태 :
-                        <label><input type="checkbox" name="State" id="res_complete" value="complete">이용완료</label>
-                        <label><input type="checkbox" name="State" id="res_before" value="before">이용전</label>
-                        <label><input type="checkbox" name="State" id="res_cancel" value="cancel">취소</label>
+                        <label><input type="checkbox" name="state" id="Complete" value="Complete">이용완료</label>
+                        <label><input type="checkbox" name="state" id="Before" value="Before">이용전</label>
+                        <label><input type="checkbox" name="state" id="Cancel" value="Cancel">취소</label>
                     </div>
                 </div>
 				<span class="res_Item_Num">총 ${item_res}개의 예약</span>

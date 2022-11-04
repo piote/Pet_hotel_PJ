@@ -19,8 +19,8 @@ public interface AdminResController {
 	
 	public ModelAndView ResReed(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public List<AdminResFullVO> adminResListById(@RequestBody Map<String,Object> searchMap,
-			  HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	public List<AdminResFullVO> adminResListById(@RequestBody Map<String,Object> searchMap,
+//			  HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	
 	//
