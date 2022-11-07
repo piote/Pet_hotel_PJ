@@ -21,21 +21,53 @@
     <style>
         /* slider */
         .slider_wrap{
-            width: auto; height: 100vh;
+            width: 100%; height: 100vh;
             position: relative;
             margin-top: -200px;
             min-width: 1270px;
             overflow: hidden;
         }
+        .slider_con{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: -5;
+            left: 0;
+        }
+        .slider_arrow{
+            transform: scale(1.5);
+            position: absolute;
+            top: 55vh;
+            fill: #000;
+            opacity: 0.2;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+        .slider_arrow:hover{
+            opacity: 0.5;
+        }
+        #left_arrow{
+            left: 50px;
+        }
+        #right_arrow{
+            right: 50px;
+        }
         .slider{
-            width: 100vw; height: 100%;
+            width: 100%; height: 100%;
             display: block;
             background-size: cover;
+            position: absolute;
+            top: 0; left: 0;
+            opacity: 0;
+            transition: opacity 0.5s;
         }
-        .slider_wrap .first_slider{
+        .able_slider{
+            opacity: 1 !important;
+        }
+        .slider[s_num-data="1"]{
             background-image: url('${contextPath}/resources/img/slidermain_1.png');
         }
-        .slider_wrap .second_slider{
+        .slider[s_num-data="2"]{
             background-image: url('${contextPath}/resources/img/slidermain_2.png');
         }
         .txt_wrap{
@@ -45,12 +77,12 @@
             margin-left: 50%; left: -500px;
             bottom: 100px;
         }
-        .slider p:nth-child(1){
+        .txt_wrap p:nth-child(1){
             font-size: 75px;
             font-weight: 800;
             text-align: right;
         }
-        .slider p:nth-child(2){
+        .txt_wrap p:nth-child(2){
             font-size: 45px;
             font-weight: 100;
             margin-top: -10px;
@@ -429,27 +461,36 @@
                 $('.pic[data-num="4"]').css('background-image','url("${contextPath}/'+review_data[now_reviewNum+3].REVIEW_IMAGE_URL+'")');
             }
         }   
+
+        var slider_num = 1;
+        var slider_count = 3;
+        
+        function slider_left(){
+            --i;
+            if(i<=0){
+                i=3;
+            }
+            $('[s_num-data="'+(i+1)+'"]').removeClass('able_slider');
+            $('[s_num-data="'+i+'"]').addClass('able_slider');
+        }
+
     </script>
 
 </head>
 <body>
 
   <div class="slider_wrap">
+    <svg id="left_arrow" class="slider_arrow" onclick="slider_left()" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M20 .755l-14.374 11.245 14.374 11.219-.619.781-15.381-12 15.391-12 .609.755z"/></svg>
+    <svg id="right_arrow" class="slider_arrow" onclick="slider_wrap()" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z"/></svg>
+    <div class="txt_wrap">
+        <p>Anitel</p>
+        <p>펫 호텔 서비스</p>
+        <a class="slider_bt" href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservationForm.do','${contextPath}/loginForm.do')" >예약하기 ></a>
+    </div>
     <div class="slider_con">
-        <div class="first_slider slider">
-            <div class="txt_wrap">
-                <p>Anitel</p>
-                <p>펫 호텔 서비스</p>
-                <a class="slider_bt" href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservationForm.do','${contextPath}/loginForm.do')" >예약하기 ></a>
-            </div>
-        </div>
-        <div class="second_slider slider">
-            <div class="txt_wrap">
-                <p>Anitel</p>
-                <p>펫 호텔 서비스</p>
-                <a class="slider_bt" href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservationForm.do','${contextPath}/loginForm.do')" >예약하기 ></a>
-            </div>
-        </div>
+        <div class="slider able_slider" s_num-data="1"></div>
+        <div class="slider" s_num-data="2"></div>
+        <div class="slider" s_num-data="3"></div>
     </div>
   </div>
 
