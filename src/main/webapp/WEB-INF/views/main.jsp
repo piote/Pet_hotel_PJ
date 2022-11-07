@@ -25,12 +25,18 @@
             position: relative;
             margin-top: -200px;
             min-width: 1270px;
+            overflow: hidden;
+        }
+        .slider{
+            width: 100vw; height: 100%;
+            display: block;
+            background-size: cover;
         }
         .slider_wrap .first_slider{
-            background-image: url(${contextPath}/resources/img/main_1.png);
-            background-size: cover;
-            width: 100%; height: 100%;
-            display: block;
+            background-image: url('${contextPath}/resources/img/slidermain_1.png');
+        }
+        .slider_wrap .second_slider{
+            background-image: url('${contextPath}/resources/img/slidermain_2.png');
         }
         .txt_wrap{
             width: 1000px;
@@ -39,12 +45,12 @@
             margin-left: 50%; left: -500px;
             bottom: 100px;
         }
-        .first_slider p:nth-child(1){
+        .slider p:nth-child(1){
             font-size: 75px;
             font-weight: 800;
             text-align: right;
         }
-        .first_slider p:nth-child(2){
+        .slider p:nth-child(2){
             font-size: 45px;
             font-weight: 100;
             margin-top: -10px;
@@ -429,11 +435,20 @@
 <body>
 
   <div class="slider_wrap">
-    <div class="first_slider">
-        <div class="txt_wrap">
-            <p>Anitel</p>
-            <p>펫 호텔 서비스</p>
-            <a class="slider_bt" href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservationForm.do','${contextPath}/loginForm.do')" >예약하기 ></a>
+    <div class="slider_con">
+        <div class="first_slider slider">
+            <div class="txt_wrap">
+                <p>Anitel</p>
+                <p>펫 호텔 서비스</p>
+                <a class="slider_bt" href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservationForm.do','${contextPath}/loginForm.do')" >예약하기 ></a>
+            </div>
+        </div>
+        <div class="second_slider slider">
+            <div class="txt_wrap">
+                <p>Anitel</p>
+                <p>펫 호텔 서비스</p>
+                <a class="slider_bt" href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservationForm.do','${contextPath}/loginForm.do')" >예약하기 ></a>
+            </div>
         </div>
     </div>
   </div>

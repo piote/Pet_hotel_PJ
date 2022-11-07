@@ -21,7 +21,14 @@
  <!DOCTYPE html>
  <html>
  <head>
+ 
+ <script src="${contextPath}/resources/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+ <link rel="stylesheet" href="${contextPath}/resources/css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
+ <script src="${contextPath}/resources/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 
+
+   
+   
 
   
 <style>
@@ -110,12 +117,12 @@
 
   .w_tr>.w_td {
    
-    font-size: 17px !important ;
+    font-size: 15px ;
     height: 75px;
     
   }
   .w_date{
-	  text-align: right;
+	  text-align: center;
 	  
   }
   
@@ -131,22 +138,25 @@
 	  height: 23px;
   }
   .w_td_title{
-	  margin-left: 15px;
+	  margin-left: 50px;
   }
   
   
   
   .w_tdz1 {
-	  height: 25px;
+	  height: 15px;
 	  border-bottom: 1px solid #ddd;
   }
   .w_tdz2 {
-	  height: 25px;
+	  height: 15px;
 	  
   }
   .re_image {
 	  border-radius: 5%;
   }
+  
+
+  
   </style> 
  
  <meta charset="UTF-8">
@@ -170,6 +180,10 @@
  
  }
  
+ $(document).ready(function(){
+     $("a[rel^='prettyPhoto']").prettyPhoto();
+   });
+ 
  </script>
  </head>
 
@@ -177,7 +191,9 @@
 
 
 <div class="all">
-		
+	
+
+
 	<br><br><br><br>
 	
 	<h2 class="w_review"><a class="w_a" href="${contextPath}/review/reviewBoard.do" >Deluxe Review</a></h2>
@@ -233,20 +249,22 @@
 	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td> 
 	         <td class="w_td" width="20%" rowspan="2">               
 	               <c:if test="${review.image != null}"> 
-	                   <img class="re_image" src="${contextPath}/${review.image}" width="150" height="150">
+	       
+	                   <a href="${contextPath}/${review.image}" rel="prettyPhoto" title="This is the description"><img class="re_image" src="${contextPath}/${review.image}" width="150" height="150" alt="This is the title" />
+	                   
 	                </c:if>
 	         </td>
 	          <td class="w_td w_date"  width="15%" >${reviewDate}</td>
 	          </tr>      
 	      <tr class="w_tr" class="w_tr2">
-	          <td class="w_td">${review.id}</td>	
+	          <td class="w_td" align=center >${review.id}</td>	
 	          <td class="w_td" align=center >
 	       						${review.rec}
 	          </td>
 	      </tr>  
 	      <tr>
-	      	<td class="w_tdz1" colspan="2"> <input type=button value="삭제하기" onClick="fn_remove_review('${contextPath}/review/removeReview.do', ${review.reviewNO})"> </td>
-	      	<td><a class='cls1' href="${contextPath}/review/viewReview.do?reviewNO=${review.reviewNO}">수정하기</a> </td>
+	      	<td class="w_tdz1" colspan="4">  </td>
+	      
 	      </tr>
 	      <tr>
 	      <td class="w_tdz2" colspan="4"></td>

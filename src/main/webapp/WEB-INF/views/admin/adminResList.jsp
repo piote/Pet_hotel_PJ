@@ -627,13 +627,10 @@
 					//console.log(data);
 
 					//CheckIn, CheckOut
-					var st= data.reservation.res_st.substring(0, 10);
-					var ed= data.reservation.res_end.substring(0, 10);
-					$('#res_st').val(st);
-					$('#res_end').val(ed);
-					
-					console.log(data.reservation.res_st);
-					console.log(st);
+					// var st= data.reservation.res_st.substring(0, 10);
+					// var ed= data.reservation.res_end.substring(0, 10);
+					$('#res_st').val(data.reservation.res_st);
+					$('#res_end').val(data.reservation.res_end);
 
 					//요청사항
 					$('#pet_Comment').val(data.reservation.res_comment)

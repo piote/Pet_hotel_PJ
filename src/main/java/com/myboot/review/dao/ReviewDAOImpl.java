@@ -100,7 +100,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 	  
 	  @Override
 		public void  updateReview(Map reviewMap) throws DataAccessException {
-		  sqlSession.delete("com.myboot.review.dao.ReviewDAO.updateReview", reviewMap);
+		  System.out.println(reviewMap.get("imageFileName"));
+		  sqlSession.update("com.myboot.review.dao.ReviewDAO.updateReview", reviewMap);
 		}
 
 	  
