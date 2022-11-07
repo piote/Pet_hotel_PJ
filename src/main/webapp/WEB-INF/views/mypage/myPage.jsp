@@ -8,7 +8,7 @@
 <head>
    <link rel="stylesheet" href="${contextPath}/resources/css/mypage.css">
    <meta charset="utf-8"  />
-   <title>My Page</title>
+   <title>마이페이지</title>
 </head>
 <body>
    <div id="wrap">
@@ -20,24 +20,33 @@
                   <td>
                      <img class="img_info" src="${contextPath}/resources/img/user.png" alt="회원이미지">
                   </td>
-                  <td></td>
                   <td>
-                     <img class="img_membership" src="${contextPath}/resources/img/crown.png" alt="My 혜택">
-                     <p class="membership">${user.grade}</p>
-                     <h4>${user.name }님</h4>
-                     <br>
-                     <p>전화: ${user.tel}</p>
-                     <br>
-                     <p>이메일: ${user.email} </p>
+	      	          <c:choose>
+		                  <c:when test="${user.grade eq 'Bronze'}">
+                 		  		<img src="${contextPath}/resources/img/bronze_medal.png" width="60px" height="60px" class="benefit">
+		                  </c:when>
+		                  <c:when test="${user.grade eq 'Silver'}">
+		                  		<img src="${contextPath}/resources/img/silver_medal.png" width="60px" height="60px" class="benefit">
+		                  </c:when>
+		                  <c:when test="${user.grade eq 'Gold'}">
+		                  		<img src="${contextPath}/resources/img/gold_medal.png" width="60px" height="60px" class="benefit">
+		                  </c:when>
+		                  <c:otherwise>
+		                  </c:otherwise>
+	                  </c:choose>
+                  </td>
+                  <td>
+                     <h3 class="user_info">${user.name }님</h3>
+                     <p class="user_info">멤버쉽 등급은 <b>${user.grade}</b>입니다.</p>
                   </td>
                   <td></td>
                   <td>
-                     <a href="${contextPath}/pw_changeForm.do">내정보수정</a>
-                     <a href="${contextPath}/membership.do">멤버쉽</a>
+                     <a href="${contextPath}/pw_changeForm.do"><img src="${contextPath}/resources/img/identification-card.png" alt="정보수정">정보 수정</a>
+                     <a href="${contextPath}/membership.do"><img src="${contextPath}/resources/img/crown.png" alt="멤버쉽">멤버쉽</a>
                   </td>
                   <td>
-                     <a href="${contextPath}/mypage/checkReserve.do">예약 내역</a>
-                     <a href="${contextPath}/questions/questionsList.do">고객센터</a>
+                     <a href="${contextPath}/mypage/checkReserve.do"><img src="${contextPath}/resources/img/checklist.png" alt="예약 내역">예약 내역</a>
+                     <a href="${contextPath}/questions/questionsList.do"><img src="${contextPath}/resources/img/faq.png" alt="고객센터">고객센터</a>
                   </td>
                </tr>
             </table>
@@ -79,7 +88,7 @@
          </div>
          <div id="review">  
             <h3>최근 나의 후기</h3>
-            <a href="#"><img src="${contextPath}/resources/img/plus.png" alt="더보기">more</a>
+            <a href="${contextPath}/mypage/checkReview.do"><img src="${contextPath}/resources/img/plus.png" alt="더보기">more</a>
          </div>
          <div class="mypage_review">
             <table>
