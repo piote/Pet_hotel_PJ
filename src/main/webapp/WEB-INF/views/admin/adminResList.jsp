@@ -385,7 +385,12 @@
 
         
     </style>
-    <script>
+    
+    <script>	
+    	
+    	var state_ck = {};
+    	var sort_ck = null;
+    
     	window.onload = function () {
     		petTClose()
 
@@ -502,12 +507,26 @@
 		
 		//페이징 ajax
 		function reslistPage(P){ 
-			console.log(P);
+			
+			var searchMap = new Object();
+		    //input 안 정보 가지고 오기
+		    var search_op = $('#search_op').val();
+		    var keyword = $('#keyword').val();
+
+		    
+			searchMap.P=P;
+		    searchMap.search_op = search_op;
+		    searchMap.keyword = keyword;
+		    searchMap.state_ck=state_ck;
+		    searchMap.sort_ck=sort_ck;
+			
 			$.ajax({
 				url : "/ResPageAjax.do",
 				type : "post",
-				dataType : "text",
-				data : {"P" : P},
+				dataType: "text",
+		        processData: true,
+		        contentType: "application/json; charset=UTF-8",
+		        data: JSON.stringify(searchMap),
 				cache : false
 		    }).done(function(result) {
 				//임시 html생성 임시로 만든 div태그안에 넣어서 보관
@@ -537,7 +556,62 @@
 				console.log(errorThrown);
 			});
 		}
-				
+
+		
+
+		$(document).ready(function(){
+		    
+		    //getAllList();
+
+		    //검색창에 엔터 눌렀을때
+		    $("#keyword").keydown(function(key) {
+		        //13번은 엔터키
+		        if (key.keyCode == 13) {
+		        	reslistPage(0);
+		        }
+		    });
+		    
+		    //체크박스 눌렀을때
+		    $('input[type=checkbox]').change(function(){
+		        searchOption();
+		    });
+		    $('input[type=radio]').change(function(){
+		    	searchOption();
+		    });
+
+//		    $('html').click(function(e){
+//		    	if($(e.target).parents('.list_tb').length < 1){
+//		            deleteTr();
+//		        }
+//		    });
+		});
+		
+		//체크박스 옵션
+		function searchOption(){
+
+		    //체크된 값 받아오기
+		    $('.res_option input[type=checkbox]').each(function (index) {
+		        if($('#Complete').is(":checked")==true){
+		            state_ck.Complete='Y';
+		        }else{delete state_ck.Complete;}
+		        if($('#Before').is(":checked")==true){
+		        	state_ck.Before='N';
+		        }else{delete state_ck.Before;}
+		        if($('#Cancel').is(":checked")==true){
+		        	state_ck.Cancel='C';
+		        }else{delete state_ck.Cancel;}
+		    });
+		    
+		    sort_ck=$('.sort_option input[name="sort"]:checked').val();
+		    
+		    console.log(state_ck)
+		    console.log(sort_ck)
+
+		    //체크박스 클릭 시 검색
+		    reslistPage(0);
+
+		}
+		
 		// 상세 tr 에 데이터 출력
 		function searchResInfo(reserNum,obj){
 			$('.pet_item_li').remove();
@@ -557,6 +631,9 @@
 					var ed= data.reservation.res_end.substring(0, 10);
 					$('#res_st').val(st);
 					$('#res_end').val(ed);
+					
+					console.log(data.reservation.res_st);
+					console.log(st);
 
 					//요청사항
 					$('#pet_Comment').val(data.reservation.res_comment)
@@ -623,13 +700,13 @@
     
             <div class="list_wrap">
                 <div class="list_option">
-                    <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="search()" >
+                    <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="reslistPage(0)" >
                         <select name="search_op" id="search_op" aria-label="search">
-                            <option value="search_id">예약자</option>
-                            <option value="search_name">예약번호</option>
+                            <option value="search_name">예약자</option>
+                            <option value="search_res_num">예약번호</option>
                         </select>
                         <input type="text" name="keyword" id="keyword" class="search_txt" placeholder="검색">
-                        <button type="button" class="seh_icon" onclick="search()" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
+                        <button type="button" class="seh_icon" onclick="reslistPage(0)" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
                     </div>
                     <div class="sort_option">
                         <label><input type="radio" name="sort" id="sort_num" value="sort_num" checked="checked">예약번호 순</label>
@@ -639,9 +716,9 @@
                     <div class="hr"></div>
                     <div class="res_option">
                         예약상태 :
-                        <label><input type="checkbox" name="State" id="res_complete" value="complete">이용완료</label>
-                        <label><input type="checkbox" name="State" id="res_before" value="before">이용전</label>
-                        <label><input type="checkbox" name="State" id="res_cancel" value="cancel">취소</label>
+                        <label><input type="checkbox" name="state" id="Complete" value="Complete">이용완료</label>
+                        <label><input type="checkbox" name="state" id="Before" value="Before">이용전</label>
+                        <label><input type="checkbox" name="state" id="Cancel" value="Cancel">취소</label>
                     </div>
                 </div>
 				<span class="res_Item_Num">총 ${item_res}개의 예약</span>
