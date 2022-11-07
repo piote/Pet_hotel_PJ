@@ -85,7 +85,7 @@
   <!-- 관리자 예약관리 예약검색 -->
   <select id="searchadminResList" resultMap="adminresfullResult" parameterType="java.util.Map">
   	<![CDATA[
-		SELECT res.reservation_num, tb_user.user_name, res.reservation_st, res.reservation_end, count(pet.pet_num) as "총 마리수", res.pay_time, res.total_cost ,res.reservation_state
+		SELECT res.reservation_num, tb_user.user_name, res.reservation_st, res.reservation_end, count(pet.pet_num) as "total_pet", res.pay_time, res.total_cost ,res.reservation_state
 	    FROM tb_reservation res 
 	    left JOIN tb_petservice pet 
 	    ON res.reservation_num = pet.reservation_num

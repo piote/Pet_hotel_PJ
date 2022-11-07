@@ -117,15 +117,38 @@ public  class AdminResControllerImpl implements AdminResController{
 	}
 		
 	@RequestMapping(value= "/ResPageAjax.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String ResPageAjax(@RequestParam(value ="P", required = false) String Page, Model model) throws Exception {
+	public String ResPageAjax(@RequestBody Map<String,Object> searchMap, Model model) throws Exception {
 		//@ModelAttribute("P") String Page
 		//List<AdminResFullVO> adminResReed = adminresService.adminAllResList();
 		
-		List list = adminresService.adminAllResList();  
-	    model.addAttribute("list", list);
-	    model.addAttribute("P", Integer.parseInt(Page));
+		System.out.println(searchMap); 
+		
+		int Page = (int) searchMap.get("P");
+		
+		Map<String,String> state_ck = (Map<String, String>) searchMap.get("state_ck");
+		
+		Map<String, String> searchOption = new HashMap<String, String>();
+		
+		searchOption.put("search_op", (String) searchMap.get("search_op"));
+		searchOption.put("keyword", (String) searchMap.get("keyword"));
+		
+		if(state_ck.size()<4 || state_ck.size()>0) {
+			int i=1;
+			for(String key : state_ck.keySet()) {
+				searchOption.put("state"+i,state_ck.get(key));
+				i++;
+			}
+		}
+		System.out.println(searchOption);
+		
+		
+		//List list = adminresService.adminAllResList();  
+		List<AdminResFullVO> searchadminResList; 
+		searchadminResList= adminresService.searchResList(searchOption);
+		
+	    model.addAttribute("list", searchadminResList);
+	    model.addAttribute("P", Page);
 	   
-	      
 	    return "/page/ResPageAjax";
 	  }
 	
