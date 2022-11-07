@@ -707,8 +707,8 @@
                     </div>
                     <div class="sort_option">
                         <label><input type="radio" name="sort" id="sort_num" value="sort_num" checked="checked">예약번호 순</label>
-                        <label><input type="radio" name="sort" id="sort_res" value="sort_res">예약일 순</label>
-                        <label><input type="radio" name="sort" id="sort_pay" value="sort_pay">주문일 순</label>
+                        <label><input type="radio" name="sort" id="sort_res" value="sort_res" checked="checked">예약일 순</label>
+                        <label><input type="radio" name="sort" id="sort_pay" value="sort_pay" checked="checked">주문일 순</label>
                     </div>
                     <div class="hr"></div>
                     <div class="res_option">
