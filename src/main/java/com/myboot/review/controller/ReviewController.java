@@ -16,9 +16,12 @@ public  interface ReviewController {
 	
 	
 	public ResponseEntity addNewReview(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;
+	public ResponseEntity modReview(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response) throws Exception;
 	
 	String reviewForm(Model model);
 
+	public ModelAndView checkReview(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 
 	public ModelAndView reviewDetail_1(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView reviewDetail_2(HttpServletRequest request, HttpServletResponse response) throws Exception;
@@ -32,6 +35,7 @@ public  interface ReviewController {
 			throws Exception;
 
 	public ModelAndView reviewBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	
 	
 	

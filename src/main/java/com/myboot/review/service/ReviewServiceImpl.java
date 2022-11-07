@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myboot.mypage.dao.MyPageDAO;
 import com.myboot.review.dao.ReviewDAO;
+import com.myboot.review.vo.ImageVO;
 import com.myboot.review.vo.ReviewVO;
 
 @Service("reviewService")
@@ -40,7 +41,36 @@ public class ReviewServiceImpl implements ReviewService {
 			return resList;
 		}
 	
-	
+		@Override
+		public Map listMyDetailReview(Map pagingMap) throws Exception {
+			Map myReviewMap = new HashMap();
+			List<ReviewVO> myReviewList = reviewDAO.selectAllMyReviewList(pagingMap);
+			
+			int totReserves = reviewDAO.selectTotReserves();
+
+			myReviewMap.put("myReviewList", myReviewList);
+			myReviewMap.put("totReserves", totReserves);
+			// articlesMap.put("totArticles", 170);
+			return myReviewMap;
+		}
+		
+		
+		@Override
+		public Map viewReview(int reviewNO) throws Exception {
+			Map reviewMap = new HashMap();
+			ReviewVO reviewVO = reviewDAO.selectReview(reviewNO);
+			
+			System.out.println(reviewVO+"=======================리뷰");//=====================================================
+			List<ImageVO> imageFileList = reviewDAO.selectImageFileList(reviewNO);
+			
+			
+			System.out.println(imageFileList.get(0).getImageFileName()+"=======================리뷰");
+			reviewMap.put("review", reviewVO);
+			
+			reviewMap.put("imageFileList", imageFileList);
+			return reviewMap;
+		}	
+		
 	
 	@Override
 	public Map listMyDetailReserve(Map pagingMap) throws Exception {
@@ -92,6 +122,20 @@ public class ReviewServiceImpl implements ReviewService {
 		// articlesMap.put("totArticles", 170);
 		return reviewMap;
 	}
+	@Override
+	public Map checkReview(Map pagingMap) throws Exception {
+		Map reviewMap = new HashMap();
+		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList(pagingMap);
+		
+		int totReview = reviewDAO.selectTotReview();
+
+		reviewMap.put("reviewList", reviewList);
+		reviewMap.put("totReview", totReview);
+		// articlesMap.put("totArticles", 170);
+		return reviewMap;
+	}
+	
+	
 
 	@Override
 	public int addNewReview(Map reviewMap, String fileName) throws Exception {
@@ -124,6 +168,11 @@ public class ReviewServiceImpl implements ReviewService {
 	public List returnReviewFormain() throws Exception {
 		List reviewList = reviewDAO.selectMainReview();
 		return reviewList;
+	}
+
+	@Override
+	public void modReview(Map reviewMap) throws Exception {
+		reviewDAO.updateReview(reviewMap);
 	}
 	
 	
