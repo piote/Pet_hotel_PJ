@@ -16,7 +16,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
 import com.myboot.user.dao.UserDAO;
-import com.myboot.user.dto.UserDTO;
+
 import com.myboot.user.vo.UserVO;
 
 @Service("userService")
@@ -118,20 +118,7 @@ public class UserServiceImpl implements UserService {
 	public int addUser(UserVO user) throws Exception {
 		return userDAO.insertNewUser(user);
 	}
-	   // 회원가입 시, 유효성 체크
-    public Map<String, String> validateHandling(Errors errors) {
-        Map<String, String> validatorResult = new HashMap<>();
 
-        for (FieldError error : errors.getFieldErrors()) {
-            String validKeyName = String.format("valid_%s", error.getField());
-            validatorResult.put(validKeyName, error.getDefaultMessage());
-        }
 
-        return validatorResult;
-    }
-
-    // 회원가입
-    public void signUp(UserDTO userDto) {
-        // 회원 가입 비즈니스 로직 구현
-    }
+   
 }

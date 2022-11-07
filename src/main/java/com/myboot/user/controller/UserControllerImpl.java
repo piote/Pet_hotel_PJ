@@ -32,7 +32,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.myboot.user.dto.UserDTO;
+
 import com.myboot.user.service.UserService;
 import com.myboot.user.vo.UserVO;
 
@@ -217,34 +217,8 @@ public class UserControllerImpl implements UserController{
 		return mav;
 		
 	}
-	 @GetMapping("/user/signup")
-	    public String dispSignup(UserDTO userDto) {
-	        return "/signup";
-	    }
+	
 
-	    @PostMapping("/user/signup")
-	    public String execSignup(@Valid UserDTO userDto, Errors errors, Model model) {
-	        if (errors.hasErrors()) {
-	            // 회원가입 실패시, 입력 데이터를 유지
-	            model.addAttribute("userDto", userDto);
-
-	            // 유효성 통과 못한 필드와 메시지를 핸들링
-	            Map<String, String> validatorResult = userService.validateHandling(errors);
-	            for (String key : validatorResult.keySet()) {
-	                model.addAttribute(key, validatorResult.get(key));
-	            }
-
-	            return "/signup";
-	        }
-
-	        userService.signUp(userDto);
-	        return "redirect:/user/login";
-	    }
-
-	    @GetMapping("/user/login")
-	    public String displogin() {
-	        return "/login";
-	    }
 
 //	회원가입 id 중복 확인 기능
 	 @ResponseBody // 값 변환을 위해 꼭 필요함
