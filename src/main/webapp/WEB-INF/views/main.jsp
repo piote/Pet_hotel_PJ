@@ -24,6 +24,7 @@
             width: auto; height: 100vh;
             position: relative;
             margin-top: -200px;
+            min-width: 1270px;
         }
         .slider_wrap .first_slider{
             background-image: url(${contextPath}/resources/img/main_1.png);

@@ -91,17 +91,17 @@
 	</definition>
 			  	
 	<definition name="/review/reviewDetail_1" extends="baseLayout">
-	      <put-attribute name="title" value="리뷰" />
+	      <put-attribute name="title" value="소형견 리뷰" />
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail_1.jsp" />
 	</definition>	
 	
 	<definition name="/review/reviewDetail_2" extends="baseLayout">
-	      <put-attribute name="title" value="리뷰" />
+	      <put-attribute name="title" value="중형견 리뷰" />
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail_2.jsp" />
 	</definition>
 	
 	<definition name="/review/reviewDetail_3" extends="baseLayout">
-	      <put-attribute name="title" value="리뷰" />
+	      <put-attribute name="title" value="대형견 리뷰" />
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail_3.jsp" />
 	</definition>		
 	 
@@ -110,6 +110,16 @@
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewForm.jsp" />
 	</definition>	
 	
+	
+	 <definition name="/review/checkReview" extends="baseLayout">
+	      <put-attribute name="title" value="리뷰 수정" />
+	      <put-attribute name="body" value="/WEB-INF/views/review/checkReview.jsp" />
+	</definition>	
+	
+	<definition name="/review/viewReview" extends="baseLayout">
+	      <put-attribute name="title" value="리뷰 수정" />
+	      <put-attribute name="body" value="/WEB-INF/views/review/viewReview.jsp" />
+	</definition>	
 	
 	 
 	 <!-- 회원수정 -->
