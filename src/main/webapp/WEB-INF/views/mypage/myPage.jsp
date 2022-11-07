@@ -8,7 +8,7 @@
 <head>
    <link rel="stylesheet" href="${contextPath}/resources/css/mypage.css">
    <meta charset="utf-8"  />
-   <title>My Page</title>
+   <title>마이페이지</title>
 </head>
 <body>
    <div id="wrap">
@@ -41,7 +41,7 @@
                   </td>
                   <td></td>
                   <td>
-                     <a href="${contextPath}/pw_changeForm.do"><img src="${contextPath}/resources/img/identification-card.png" alt="정보수정">내정보수정</a>
+                     <a href="${contextPath}/pw_changeForm.do"><img src="${contextPath}/resources/img/identification-card.png" alt="정보수정">정보 수정</a>
                      <a href="${contextPath}/membership.do"><img src="${contextPath}/resources/img/crown.png" alt="멤버쉽">멤버쉽</a>
                   </td>
                   <td>

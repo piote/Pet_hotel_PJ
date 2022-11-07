@@ -1,3 +1,4 @@
+//달력
 		$( "#datepicker" ).datepicker({
 		 	dateFormat: "yy-mm-dd",
 		 	showOtherMonths: true,
@@ -80,6 +81,7 @@
 // 			$("#endDate").datepicker('setDate', '+1D');
 		});
 		
+// 기간 별 조회		
 		jQuery.fn.schDate = function(){
            var $obj = $(this);
            var $chk = $obj.find("input[type=radio]");
@@ -131,7 +133,8 @@
            $("#startDate").datepicker( "option", "maxDate", endDate );
 			goSearch();
        }
-			
+       
+//서치 기능			
     function goSearch(){
 /* 		var searchWord = $("input[user_name=searchWord]").val().trim();
 		var colName = $("#colName").val();
@@ -152,6 +155,8 @@
 		frm.submit();
 		
 	}
+	
+// 취소 기능
     function fn_cancel_reserve(res_num){
     	Swal.fire({
             title: '정말로 예약을 취소 하시겠습니까?',
