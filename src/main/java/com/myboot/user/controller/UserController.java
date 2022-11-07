@@ -52,8 +52,7 @@ public interface UserController {
 	// 로그인 비밀번호 찾기
 	public String find_pw(HttpServletResponse response, @RequestParam("id") String id, @RequestParam("tel") String tel, Model md) throws Exception;
 	
-	public ResponseEntity addUserProfilPicture(MultipartHttpServletRequest multipartRequest, 
-			HttpServletResponse response) throws Exception;
+	
 	
 	public String userMain(Model model);
 	
