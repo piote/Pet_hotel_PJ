@@ -227,11 +227,6 @@
 		            color: rgb(231, 226, 219);
 		        }
 		
-		    	.w_table {
-		    	  width: 100%;
-		    	  text-align: center !import;
-		    	}
-		    	
 		    	 .res_num { width: 10%;}
 	             .res_date { width: 20%;}
 	             .pet_name { width: 20%;}
@@ -390,8 +385,7 @@
                    </a>
                    
                     </div>
-                    <div >   <a href="${contextPath}/review/checkReview.do">리뷰 보기</a>
-                    </div>
+                 
          		</c:otherwise>
          		</c:choose>
               

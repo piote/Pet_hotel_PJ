@@ -46,10 +46,10 @@ public class ReviewServiceImpl implements ReviewService {
 			Map myReviewMap = new HashMap();
 			List<ReviewVO> myReviewList = reviewDAO.selectAllMyReviewList(pagingMap);
 			
-			int totReserves = reviewDAO.selectTotReserves();
+			int totReview = reviewDAO.selectTotReview();
 
 			myReviewMap.put("myReviewList", myReviewList);
-			myReviewMap.put("totReserves", totReserves);
+			myReviewMap.put("totReview", totReview);
 			// articlesMap.put("totArticles", 170);
 			return myReviewMap;
 		}

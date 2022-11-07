@@ -120,10 +120,10 @@ function clickNO(pageNo){
 		html += '</tr>';
 	}
     if(dataPerPage<=totalData){
-        if(dataPerPage*pageNo<=totalData){
+        if(dataPerPage*pageNo<=totalData){ㅍㄷ
             dataNo=dataPerPage;
         }else{
-            dataNo=totalData%dataPerPage;
+            dataNo=totalData%dataPerPage;ㅈ
         }
     }else{
         dataNo=totalData;
