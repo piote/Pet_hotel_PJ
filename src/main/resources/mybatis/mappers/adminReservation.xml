@@ -85,7 +85,7 @@
   <!-- 관리자 예약관리 예약검색 -->
   <select id="searchadminResList" resultMap="adminresfullResult" parameterType="java.util.Map">
   	<![CDATA[
-		SELECT res.reservation_num, tb_user.user_name, res.reservation_st, res.reservation_end, count(pet.pet_num) as "총 마리수", res.pay_time, res.total_cost ,res.reservation_state
+		SELECT res.reservation_num, tb_user.user_name, res.reservation_st, res.reservation_end, count(pet.pet_num) as "total_pet", res.pay_time, res.total_cost ,res.reservation_state
 	    FROM tb_reservation res 
 	    left JOIN tb_petservice pet 
 	    ON res.reservation_num = pet.reservation_num
@@ -93,30 +93,33 @@
 	    ON res.user_id = tb_user.user_id	]]>
 	    <where>
 	    	<choose>
-	    		<when test="search_op=='search_res_num'">
-	    			res.reservation_num like '%'||#{index}||'%'
+	    		<when test="search_op=='search_name'">
+	    			tb_user.USER_NAME like '%'||#{keyword}||'%'
 	    		</when>
-	    		<when test="search_op=='search_id'">
-	    			res.user_id like '%'||#{index}||'%'
+	    		<when test="search_op=='search_res_num'">
+	    			res.reservation_num like '%'||#{keyword}||'%'
 	    		</when>
 	    	</choose>
 	    	<choose>
-				<when test="(State1!='' and State1!=null) or (State2!='' and State2!=null) or (State3!='' and State3!=null)">
+<!-- 				<when test="(state1!='' and state1!=null) or (state2!='' and state2!=null) or (state3!='' and state3!=null)"> -->
+			    <when test="(state1!='' and state1!=null) or (state2!='' and state2!=null)">
 					AND(
-					<if test="State1!='' and State1!=null">
-						USER_GRADE=#{State1}
+					<if test="state1!='' and state1!=null">
+						res.reservation_state=#{state1}
 					</if>
-					<if test="State2!='' and State2!=null">
-						OR USER_GRADE=#{State2}
+					<if test="state2!='' and state2!=null">
+						OR res.reservation_state=#{state2}
 					</if>
-<!-- 					<if test="State3!='' and State3!=null"> -->
-<!-- 						OR USER_GRADE=#{State3} -->
+<!-- 					<if test="state3!='' and state3!=null"> -->
+<!-- 						OR res.reservation_state=#{state3} -->
 <!-- 					</if> -->
+					)
 				</when>
 			</choose>
 	    </where>
 	    GROUP BY res.reservation_num,res.reservation_st, res.reservation_end, res.pay_time, res.total_cost, res.reservation_state, tb_user.user_name
 	    ORDER BY RESERVATION_NUM ASC
+	    
   </select>
   
   
