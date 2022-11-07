@@ -132,6 +132,7 @@ public  class AdminResControllerImpl implements AdminResController{
 		Map<String, String> searchOption = new HashMap<String, String>();
 		
 		searchOption.put("search_op", (String) searchMap.get("search_op"));
+		searchOption.put("sort_ck", (String) searchMap.get("sort_ck"));
 		searchOption.put("keyword", (String) searchMap.get("keyword"));
 		
 		if(state_ck.size()<4 || state_ck.size()>0) {
