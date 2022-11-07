@@ -388,6 +388,9 @@
          	    		<a href="#" class="modal-close2" onClick="javascript:popOpen();">
          	    		<span>리뷰 쓰기</span>
                    </a>
+                   
+                    </div>
+                    <div >   <a href="${contextPath}/review/checkReview.do">리뷰 보기</a>
                     </div>
          		</c:otherwise>
          		</c:choose>

@@ -21,7 +21,9 @@ public class ReviewVO {
 	private int rec;
 	private String id;
 	private String ROOM_GRADE;
-
+	private int rating;
+	private String imageFileName;
+	
     //예약
 	private int res_num;
 	private Date res_st;

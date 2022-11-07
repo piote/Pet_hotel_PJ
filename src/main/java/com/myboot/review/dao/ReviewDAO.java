@@ -23,7 +23,7 @@ public interface ReviewDAO {
 	public void insertNewReview(Map reviewMap) throws DataAccessException;
 	public void insertNewImage(Map reviewMap) throws DataAccessException;
 
-	List selectImageFileList(int reviewNO) throws DataAccessException;
+	public List selectImageFileList(int reviewNO) throws DataAccessException;
 
 	public void deleteReview(int reviewNO)throws DataAccessException;
 	
@@ -31,5 +31,11 @@ public interface ReviewDAO {
 	public List<ReviewVO> selectAllMyReservesList(Map pagingMap)throws DataAccessException;
 	public int selectTotReserves();
 	public List selectAllResList(String userId) throws DataAccessException;
+	
+	public void updateReview(Map reviewMap) throws DataAccessException;
+	public List<ReviewVO> selectAllMyReviewList(Map pagingMap);
+	
+	public ReviewVO selectReview(int reviewNO) throws DataAccessException;
+
 
 }
