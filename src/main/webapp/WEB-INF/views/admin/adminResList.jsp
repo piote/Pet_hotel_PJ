@@ -779,33 +779,59 @@
                     
                 </table>
                 
-                <!-- 페이지기능 -->
-                
-                <!-- 페이지당 10개의 예약을 출력한다. -->
-                                
-           	 	<!-- 페이지 만큼 나누어떨어지지만 그대로 계산하면 1페이지 더 생성되므로 주의 -->
-                <c:if test="${item_res % 10 != 0 and item_res > 10}">
-					<c:set var="PI" value="${item_res / 10}" scope="request"/>
-									</c:if>
+                <!-- 페이지수 구하기 -->
+				<c:if test="${item_res % 10 != 0 and item_res > 10}"><!-- 나머지가 있을경우 1페이지가 더 필요하다. ex)68, 62 개 아이템은 7페이지 -->
 				
-				 <!-- 페이지 만큼 나누어떨어지지만 그대로 계산하면 1페이지 더 생성되므로 주의 -->
-				<c:if test="${item_res % 10 == 0 and item_res > 10}">
-					<c:set var="PI" value="${item_res / 10-1}" scope="request"/>
+					<c:set var="Float" value="${item_res / 10}"/> <!-- 페이지수 구하기. 소수점으로 나누기 때문에 정수로 바꿔야함 -->
+					<fmt:parseNumber var="PI" value="${Float+(1-(Float%1))%1}" integerOnly="true" scope="request"/> <!-- 소수점올림 -->
+					
 				</c:if>
-		
+				
+				<!-- 10으로 나누어떨어짐 70개 = 7페이지-->
+				<c:if test="${item_res % 10 == 0 and item_res > 10}">
+					<fmt:parseNumber var="PI" value="${item_res/10}" integerOnly="true" scope="request"/>
+				</c:if>
+				
 				<!-- 아이템이 적어 페이지를 만들 이유가 없음 -->
 				<c:if test="${item_res <= 10}">
-					<c:set var="PI" value="${0}" scope="request"/>
+					<c:set var="PI" value="${0}" scope="request" />
 				</c:if>
 				
 				
                 <div id="page_num" class="page_num">
-	                <li class="pageNO pageDown" onClick="pageDown()">pre</li>
-		            <c:forEach varStatus="i" begin="0" end="${PI}">
-					<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
-						<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
-					</c:forEach>
-	                <li class="pageNO pageUp" onClick="pageUP()">next</li>
+	                <c:choose>
+					 	<c:when test="${PI > 5}">
+					 		<c:forEach varStatus="i" begin="1" end="5">
+							<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
+								<c:choose>
+								 	<c:when test="${P == i.count-1}">
+								 		<!-- 현재페이지 색표시 총페이지 -->
+								 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count-1})">${i.count}</li>
+								 	</c:when>
+								 	<c:otherwise>
+								 		<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
+								 	</c:otherwise>
+								</c:choose>
+							</c:forEach>
+								<li class="pageNO pageUp" onClick="pageUP()">next</li>
+					 	</c:when>
+					 	<c:otherwise>
+					 		<c:forEach varStatus="i" begin="1" end="${PI}">
+							<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
+								<c:choose>
+								 	<c:when test="${P == i.count-1}">
+								 		<!-- 현재페이지 색표시 총페이지 -->
+								 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count-1})">${i.count}</li>
+								 	</c:when>
+								 	<c:otherwise>
+								 		<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
+								 	</c:otherwise>
+								</c:choose>
+							</c:forEach>
+					 	</c:otherwise>
+					</c:choose>
+
+	                
                 </div>
             </div>
             
