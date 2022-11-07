@@ -84,12 +84,11 @@
 
 	<update id="updateReview" parameterType="java.util.Map">
 		update tb_review
-		set review_title=#{review_title},
-		review_con=#{review_con}
-		<if test="imageFileName!='' and imageFileName!=null">
-			, imageFileName=#{imageFileName}
+		set review_title=#{title}
+		<if test="review_image_url !='resources/review/review_image/'+reviewNO+'/'">
+			, review_image_url=#{review_image_url}
 		</if>
-		where review_num=#{review_num}
+		where review_num=#{reviewNO}
 	</update>
 	
 	

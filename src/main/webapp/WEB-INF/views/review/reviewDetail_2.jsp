@@ -19,6 +19,11 @@
  <!DOCTYPE html>
  <html>
  <head>
+ <script src="${contextPath}/resources/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+ <link rel="stylesheet" href="${contextPath}/resources/css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
+ <script src="${contextPath}/resources/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+ 
+ 
    <style>
   .all {
        
@@ -231,7 +236,7 @@
 	          
 	          <td class="w_td" width="20%" rowspan="2">               
 	               <c:if test="${review.image != null}"> 
-	                   <img class="re_image" src="${contextPath}/${review.image}" width="150" height="150">
+	               <a href="${contextPath}/${review.image}" rel="prettyPhoto" title="This is the description"><img class="re_image" src="${contextPath}/${review.image}" width="150" height="150" alt="This is the title" />
 	                </c:if>
 	         </td>
 	         
