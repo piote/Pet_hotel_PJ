@@ -37,6 +37,7 @@ import com.myboot.user.vo.UserVO;
 @Controller("reivewController")
 public class ReviewControllerImpl implements ReviewController {
 	private static final String ARTICLE_IMAGE_REPO = "C:\\review\\article_image";
+	
 	@Autowired
 	private ReviewService reviewService;
 	private MyPageService myPageService;
@@ -136,8 +137,63 @@ public class ReviewControllerImpl implements ReviewController {
 
 	}
 
-
 	
+	   
+	@RequestMapping(value = "/review/checkReview.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView checkReview(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		HttpSession session=request.getSession();
+		session=request.getSession();
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		if(session.getAttribute("user") != null) {
+			UserVO userVO = (UserVO) session.getAttribute("user");
+			String user_id = userVO.getId();
+			
+			
+			String _section = request.getParameter("section");
+			String _pageNum = request.getParameter("pageNum");
+			int section = Integer.parseInt(((_section == null) ? "1" : _section));
+			int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+			 Map pagingMap = new HashMap();
+			pagingMap.put("section", section);
+			pagingMap.put("pageNum", pageNum);
+			pagingMap.put("user_id", user_id);
+			Map myReviewMap = reviewService.listMyDetailReview(pagingMap);
+			
+			myReviewMap.put("section", section);     
+			myReviewMap.put("pageNum", pageNum);     
+			myReviewMap.put("user_id", user_id);	
+			
+			
+			mav.addObject("myReviewMap", myReviewMap);
+		}
+		return mav;
+	}
+	
+	
+	@RequestMapping(value="/review/viewReview.do" ,method = RequestMethod.GET)
+	public ModelAndView viewReview(@RequestParam("reviewNO") int reviewNO,
+			  HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		System.out.println(reviewNO);
+		
+		Map reviewMap=reviewService.viewReview(reviewNO);
+		
+		System.out.println(reviewMap);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("reviewMap", reviewMap);
+		
+		
+		return mav;
+		
+		
+	}
+	   
+
 	
 	/*
 	   @RequestMapping("/review/reviewBoard.do")
@@ -200,7 +256,7 @@ public class ReviewControllerImpl implements ReviewController {
 		}
 		return mav;
 	}
-	
+	//
 	@ResponseBody 
 	@RequestMapping(value= "/returnAllRes.do", method = RequestMethod.GET)
 	public List returnAllReview(@RequestParam(value ="userId", required = false) String userId,
@@ -258,12 +314,10 @@ public class ReviewControllerImpl implements ReviewController {
 
 		List<String> fileList = upload(multipartRequest, path);
 
-		List<ImageVO> imageFileList = new ArrayList<ImageVO>();
+		List<String> imageFileList = new ArrayList<String>();
 		if (fileList != null && fileList.size() != 0) {
 			for (String fileName : fileList) {
-				ImageVO imageVO = new ImageVO();
-				imageVO.setImageFileName(fileName);
-				imageFileList.add(imageVO);
+				imageFileList.add(fileName);
 			}
 			reviewMap.put("imageFileList", imageFileList);
 		}
@@ -276,8 +330,7 @@ public class ReviewControllerImpl implements ReviewController {
 			System.out.println("in " + path);
 
 			if (imageFileList != null && imageFileList.size() != 0) {
-				ImageVO imageVO = imageFileList.get(0);
-				imageFileName = imageVO.getImageFileName();
+				imageFileName = imageFileList.get(0);
 				int reviewNO = reviewService.addNewReview(reviewMap, imageFileName);
 				File srcFile = new File(path + "\\" + "temp" + "\\" + imageFileName);
 				File destDir = new File(path + "\\" + reviewNO);
@@ -296,8 +349,8 @@ public class ReviewControllerImpl implements ReviewController {
 
 		} catch (Exception e) {
 			if (imageFileList != null && imageFileList.size() != 0) {
-				for (ImageVO imageVO : imageFileList) {
-					imageFileName = imageVO.getImageFileName();
+				for (String imageName : imageFileList) {
+					imageFileName = imageName;
 					File srcFile = new File(path + "\\" + "temp" + "\\" + imageFileName);
 					srcFile.delete();
 				}
@@ -312,7 +365,19 @@ public class ReviewControllerImpl implements ReviewController {
 		}
 		return resEnt;
 	}
+	
+	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	@RequestMapping(value = "/review/removeReview.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -325,6 +390,10 @@ public class ReviewControllerImpl implements ReviewController {
 		session.removeAttribute("realPath");
 		ServletContext context = request.getSession().getServletContext();
 		String realPath = context.getRealPath("");
+		session.setAttribute("realPath", realPath);
+		
+		//String realPath = request.getSession().getServletContext().getRealPath("");
+
 		session.setAttribute("realPath", realPath);
 
 		String path = (String) session.getAttribute("realPath") + "resources\\review\\review_image";
@@ -342,14 +411,14 @@ public class ReviewControllerImpl implements ReviewController {
 
 			message = "<script>";
 			message += " alert('글을 삭제했습니다.');";
-			message += " location.href='" + request.getContextPath() + "/reviewBoard.do';";
+			message += " location.href='" + request.getContextPath() + "/review/reviewBoard.do';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 
 		} catch (Exception e) {
 			message = "<script>";
 			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
-			message += " location.href='" + request.getContextPath() + "/reviewBoard.do';";
+			message += " location.href='" + request.getContextPath() + "/review/reviewBoard.do';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -357,8 +426,76 @@ public class ReviewControllerImpl implements ReviewController {
 		return resEnt;
 	}
 
+	
+	@RequestMapping(value="/review/modReview.do" ,method = RequestMethod.POST)
+	  @ResponseBody
+	  public ResponseEntity modReview(MultipartHttpServletRequest multipartRequest,  
+	    HttpServletResponse response) throws Exception{
+	    multipartRequest.setCharacterEncoding("utf-8");
+	    HttpSession session = multipartRequest.getSession();
+		Map<String,Object> reviewMap = new HashMap<String, Object>();
+		Enumeration enu=multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=multipartRequest.getParameter(name);
+			reviewMap.put(name,value);
+		}
+		
+		String path = (String) session.getAttribute("realPath") + "resources\\review\\review_image";
+		
+		
+		List imageFileName= upload(multipartRequest, path);
+		
+
+		
+		reviewMap.put("imageFileName", imageFileName);
+		
+		String reviewNO=(String)reviewMap.get("reviewNO");//리뷰 no
+		
+		String message;
+		ResponseEntity resEnt=null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	    try {
+	       reviewService.modReview(reviewMap);
+	       if(imageFileName!=null && imageFileName.size()!=0) {
+	         File srcFile = new File(path + "\\" + "temp" + "\\" + imageFileName);
+	         File destDir = new File(path + "\\" + reviewNO);
+	         FileUtils.moveFileToDirectory(srcFile, destDir, true);
+	         
+	         String originalFileName = (String)reviewMap.get("originalFileName");
+	         File oldFile = new File(path+"\\"+reviewNO+"\\"+originalFileName);
+	         oldFile.delete();
+	       }	
+	       message = "<script>";
+		   message += " alert('글을 수정했습니다.');";
+		   message += " location.href='"+multipartRequest.getContextPath()+"/review/viewReview.do?reviewNO="+reviewNO+"';";
+		   message +=" </script>";
+	       resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	    }catch(Exception e) {
+	      File srcFile = new File(path+"\\"+"temp"+"\\"+imageFileName);
+	      srcFile.delete();
+	      message = "<script>";
+		  message += " alert('오류가 발생했습니다.다시 수정해주세요');";
+		  message += " location.href='"+multipartRequest.getContextPath()+"/review/viewReview.do?reviewNO="+reviewNO+"';";
+		  message +=" </script>";
+	      resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	    }
+	    return resEnt;
+	  }
+	
+	
+	
+	
+	
+	
 	private List<String> upload(MultipartHttpServletRequest multipartRequest, String path) throws Exception {
-		List<String> fileList = new ArrayList<String>();
+		HttpSession session = multipartRequest.getSession();
+		path = (String) session.getAttribute("realPath") + "resources\\review\\review_image";
+		
+		List<String> fileList= new ArrayList<String>();
+		System.out.println(fileList);
+		
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 		while (fileNames.hasNext()) {
 			String fileName = fileNames.next();
@@ -386,6 +523,12 @@ public class ReviewControllerImpl implements ReviewController {
 		return null;
 	}
 
+	
+	
+	
+	
+	
+	
 //	메인페이지 리뷰조회
 	@ResponseBody
 	@RequestMapping(value = "/returnReview.do", method = RequestMethod.GET)
@@ -394,3 +537,4 @@ public class ReviewControllerImpl implements ReviewController {
 		return reviewList;
 	}
 }
+

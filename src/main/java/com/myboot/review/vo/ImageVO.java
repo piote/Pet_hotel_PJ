@@ -12,10 +12,16 @@ public class ImageVO {
 	private int reviewNO;
 	
 	
-	public void setImageFileName(String fileName) {
-		this.imageFileName = fileName;
-		
+	public void setImageFileName(String imageFileName) {
+		try {
+			if(imageFileName!= null && imageFileName.length()!=0) {
+				this.imageFileName = URLEncoder.encode(imageFileName,"UTF-8");
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 	}
+	
 	public String getImageFileName() {
 		return imageFileName;
 		
@@ -28,6 +34,7 @@ public class ImageVO {
 		this.reviewNO = reviewNO;
 		
 	}
+
 	
 
 }

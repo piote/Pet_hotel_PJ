@@ -180,7 +180,7 @@
 		
 	<br><br><br><br>
 	
-	<h2 class="w_review"><a class="w_a" href="${contextPath}/reviewBoard.do" >Deluxe Review</a></h2>
+	<h2 class="w_review"><a class="w_a" href="${contextPath}/review/reviewBoard.do" >Deluxe Review</a></h2>
 		<p id="under"></p>
 		<br><br><br>
 	
@@ -245,7 +245,8 @@
 	          </td>
 	      </tr>  
 	      <tr>
-	      	<td class="w_tdz1" colspan="4"> <input type=button value="삭제하기" onClick="fn_remove_review('${contextPath}/review/removeReview.do', ${review.reviewNO})"> </td>
+	      	<td class="w_tdz1" colspan="2"> <input type=button value="삭제하기" onClick="fn_remove_review('${contextPath}/review/removeReview.do', ${review.reviewNO})"> </td>
+	      	<td><a class='cls1' href="${contextPath}/review/viewReview.do?reviewNO=${review.reviewNO}">수정하기</a> </td>
 	      </tr>
 	      <tr>
 	      <td class="w_tdz2" colspan="4"></td>
@@ -257,7 +258,7 @@
      </table>
      </form>       
      
-     
+	
      
        </div>
 
@@ -307,6 +308,11 @@
 </div>
 
 <script>
+function fn_modify_article(obj){
+	 obj.action="${contextPath}/board/modArticle.do";
+	 obj.submit();
+}
+
 		$(function(){
 			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 			$("#rec_update").click(function(){
