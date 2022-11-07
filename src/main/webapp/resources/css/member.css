@@ -122,13 +122,13 @@
 /* .bnt3 > a:hover{background: #ccc;}
 
 .modCon > ul{margin-top: 30px;} */
-p{
+.letter{
 	color: #030303;
     margin: 0 auto;
     font-size: 17px;
     width: 1025px;
 	}
-p .symbol{
+.letter .symbol{
 	position: relative;
     left: -10px;
 	font-size: 14px;
