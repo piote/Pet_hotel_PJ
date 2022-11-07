@@ -25,6 +25,8 @@ import com.myboot.admin.reservation.service.AdminResService;
 import com.myboot.admin.reservation.vo.AdminPetserviceVO;
 import com.myboot.admin.reservation.vo.AdminResFullVO;
 import com.myboot.admin.reservation.vo.AdminReservationVO;
+import com.myboot.reservation.vo.PetserviceVO;
+import com.myboot.reservation.vo.ReservationVO;
 import com.myboot.user.vo.UserVO;
 
 @Controller("adminresController")
@@ -230,6 +232,27 @@ public  class AdminResControllerImpl implements AdminResController{
 		searchadminResList= adminresService.searchResList(searchOption);
 		
 		return searchadminResList;
+	}
+	
+	//예약 번호로 예약 찾기 
+	@ResponseBody 
+	@RequestMapping(value= "/SearchReservationNum.do", method = RequestMethod.POST)
+	public HashMap SearchReservationNum(
+			@RequestParam(value ="reserNum", required = false) String reserNum,
+			  HttpServletRequest request, HttpServletResponse response) throws Exception{
+			
+		AdminResFullVO reser; 
+		List<AdminResFullVO> reserP; 
+		
+		reser =  adminresService.SearchReservationNum(reserNum);
+		reserP = adminresService.SearchPetServiceByResNum(reserNum);
+		
+		HashMap reservationMap = new HashMap();
+		
+		reservationMap.put("reservation", reser);//예약 테이블
+		reservationMap.put("petservice", reserP);//펫 서비스 테이블 들
+		
+		return reservationMap;
 	}
 	
 }

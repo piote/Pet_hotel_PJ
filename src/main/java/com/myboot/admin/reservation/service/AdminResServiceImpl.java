@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myboot.admin.reservation.dao.AdminResDAO;
+import com.myboot.admin.reservation.vo.AdminResFullVO;
 
 
 @Service("adminresService")
@@ -77,5 +78,13 @@ public class AdminResServiceImpl implements AdminResService{
 		adminresDAO.adminUpdateSTY(reserNum);
 	}
 
+	@Override
+	public AdminResFullVO SearchReservationNum(String reserNum) {
+		return adminresDAO.SearchReservationNum(reserNum);
+	}
+	@Override
+	public List<AdminResFullVO> SearchPetServiceByResNum(String reserNum) {
+		return adminresDAO.SearchPetServiceByResNum(reserNum);
+	}
 	
 }

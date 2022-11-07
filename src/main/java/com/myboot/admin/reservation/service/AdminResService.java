@@ -3,6 +3,8 @@ package com.myboot.admin.reservation.service;
 import java.util.List;
 import java.util.Map;
 
+import com.myboot.admin.reservation.vo.AdminResFullVO;
+
 public interface AdminResService {
 	
 	public List adminAllResList() throws Exception;
@@ -25,5 +27,8 @@ public interface AdminResService {
 	
 	public void updateResStateY(String reserNum) throws Exception;
 	
+	
+	public AdminResFullVO SearchReservationNum(String reserNum);
+	public List<AdminResFullVO> SearchPetServiceByResNum(String reserNum);
 	
 }

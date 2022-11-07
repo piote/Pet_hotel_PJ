@@ -48,7 +48,6 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	@Override
 	public List<PetserviceVO> SearchPetServiceByResNum(String reserNum) {
-	
 		return reservationDAO.SearchPetServiceByResNum(reserNum);
 	}
 	@Override
