@@ -466,12 +466,13 @@
         var slider_count = 3;
         
         function slider_left(){
-            --i;
-            if(i<=0){
-                i=3;
+            --slider_num;
+            if(slider_num<=0){
+                slider_num=3;
             }
-            $('[s_num-data="'+(i+1)+'"]').removeClass('able_slider');
-            $('[s_num-data="'+i+'"]').addClass('able_slider');
+            $('[s_num-data="'+(slider_num+1)+'"]').removeClass('able_slider');
+            $('[s_num-data="'+slider_num+'"]').addClass('able_slider');
+            console.log(slider_num)
         }
 
     </script>
@@ -490,7 +491,7 @@
     <div class="slider_con">
         <div class="slider able_slider" s_num-data="1"></div>
         <div class="slider" s_num-data="2"></div>
-        <div class="slider" s_num-data="3"></div>
+        <!-- <div class="slider" s_num-data="3" ></div> -->
     </div>
   </div>
 
