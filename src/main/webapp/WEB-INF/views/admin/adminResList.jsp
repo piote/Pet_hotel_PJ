@@ -171,6 +171,9 @@
             font-size: 14px;
             color: #999999;
         }
+        .pageNOW{
+            color: red;
+        }
         .select_number{
             color: #030303;
         }
@@ -189,6 +192,10 @@
         	
         	transition: height 0.6s;
         }
+		#res_content_box>td{
+			opacity: 0;
+		}
+
         
         .res_Date_Veiw_Box li{
         	display: inline-block;
@@ -247,7 +254,6 @@
         #pet_Comment{
         	resize: none;
         	width: 90%;
-        	
         }
         
        
@@ -376,12 +382,20 @@
     		width: 90px;
         	
         }
+
         
     </style>
-    <script>
+    
+    <script>	
+    	
+    	var state_ck = {};
+    	var sort_ck = null;
+    
     	window.onload = function () {
     		petTClose()
+
     	}
+		
     	var petTableInfo;
     	var petItemSum = 0;
     
@@ -404,6 +418,7 @@
    			if($(obj).attr('class') == 'res_R_arrow_bt'){
        			//박스 안보임
        			//$('.res_content_box').css('display', 'none');
+       			$('.res_content_box').children('td').css('opacity', '0');
     			$('.res_content_box').empty()
        			$('.res_content_box').css('height', '0px');
     			//회살표
@@ -414,6 +429,7 @@
        			//이미 열려있다면 이전거 닫기
         		if($('.res_content_box').css('height') != '0px'){
         			//$('.res_content_box').css('display', 'none');
+					$('.res_content_box').children('td').css('opacity', '0');
     				$('.res_content_box').empty()
         			$('.res_content_box').css('height', '0px');
     				//화살표
@@ -434,6 +450,16 @@
            		$(obj).addClass('res_R_arrow_bt');
        			$(obj).removeClass('res_arrow_bt');
        		}	
+			
+			// 클릭한 요소 예약번호 받아오기
+			var reserNum =  $(obj).parent().parent().children('.res_num').text();
+
+			// 요소추가 시간때문에, 셋타임아웃 설정
+			setTimeout(function(){
+				searchResInfo(reserNum,obj);
+			},200)
+			
+
     	}
     	
     	//펫 아이템 추가
@@ -442,17 +468,21 @@
     		//이미 있는 갯수를 세서 갯수를 이용해 id 생성
 			petItemSum = $('.petTB_Item_Box').length;
 			
-			var petTB_Item_Box = '<li>'
-				+'<ul class="petTB_Item_Box">'
+			var petTB_Item_Box = '<li class="pet_item_li">'
+				+'<ul class="petTB_Item_Box" id="petTB_Item_'+petItemSum+'">'
 				+'<li><input name="petname" class="petTB_Item" type="text" placeholder="이름"></li>'
-				+'<li><select name="petsex" class="petTB_Item"><option>male</option><option>female</option></select></li>'
-				+'<li><select name="petroom" class="petTB_Item" onchange=""><option value="Deluxe">Deluxe(소형견)</option><option value="Sweet">Suite(중형견)</option><option value="Superior">Superior(대형견)</option></select></li>'
-				+'<li><select name="beauty" class="petTB_Item" onchange=""><option value="N">이용안함</option><option value="Clipping">Clipping</option><option value="Scissoring">Scissoring</option></select></li>'
-				+'<li><span class="spaT">SPA</span><input name="spa" class="petTB_Item" type="checkbox" value="Y"><input type="hidden" name="spa"  id="" value="N"/></li>'
+				+'<li><select name="petsex" class="petTB_Item"><option value="male" >male</option><option value="female">female</option></select></li>'
+				+'<li><select name="petroom" class="petTB_Item" onchange="change_form()"><option value="Deluxe">Deluxe(소형견)</option><option value="Sweet">Sweet(중형견)</option><option value="Superior">Superior(대형견)</option></select></li>'
+				+'<li><select name="beauty" class="petTB_Item" onchange="change_form()"><option value="N">이용안함</option><option value="Clipping">Clipping</option><option value="Scissoring">Scissoring</option></select></li>'
+				+'<li><span class="spaT">SPA</span><input name="spa" class="petTB_Item spaCK" type="checkbox" value="Y" onchange="change_form()"><input type="hidden" name="spa"  id="" value="N"/></li>'
 				+'<li><input type="image" id="petTB_Item_Delete" class="petUsed" onclick="petItemDelet(this)" value="예약취소"></li>'
 				+'</ul>'
 				+'</li>'
 			$(petTB_Item_Box).insertBefore($('.petTB_Item_Box_Add').parent());
+
+			//표함수
+			change_form()
+
 			//let $box1 = $('.box1').clone();
 			//$('.box_wrapper').append($box1);
     	}
@@ -460,6 +490,8 @@
     	//펫 테이블 삭제
 		function petItemDelet(obj){
 			$(obj).parent().parent().parent().remove();
+			//표함수
+			change_form()
 		}
 		
 		//테이블안에 요소 추가.
@@ -468,19 +500,33 @@
 				//조건문 빨리 두번 눌러서 뜨면 안되는 경우
 				if($(obj).attr('class')!='res_arrow_bt'){
 					$('.res_content_box').append(petTableInfo);
+					$('.res_content_box').children('td').animate({opacity: "1"}, 500);
 				}
-					
-			}, 500);
+			}, 200);
 		}
 		
 		//페이징 ajax
 		function reslistPage(P){ 
-			console.log(P);
+			
+			var searchMap = new Object();
+		    //input 안 정보 가지고 오기
+		    var search_op = $('#search_op').val();
+		    var keyword = $('#keyword').val();
+
+		    
+			searchMap.P=P;
+		    searchMap.search_op = search_op;
+		    searchMap.keyword = keyword;
+		    searchMap.state_ck=state_ck;
+		    searchMap.sort_ck=sort_ck;
+			
 			$.ajax({
 				url : "/ResPageAjax.do",
 				type : "post",
-				dataType : "text",
-				data : {"P" : P},
+				dataType: "text",
+		        processData: true,
+		        contentType: "application/json; charset=UTF-8",
+		        data: JSON.stringify(searchMap),
 				cache : false
 		    }).done(function(result) {
 				//임시 html생성 임시로 만든 div태그안에 넣어서 보관
@@ -488,12 +534,20 @@
 				
 				//page/ResPageAjax.jsp에 요소인 테이블의 ID indexListAjax를 불러온다.
 				var contents = html.find("#indexListAjax").html();
+				$("#res_List_Tb").html(contents);
 				console.log(contents);
 				//테이블에 html로 만든 것들 넣기
-				$("#res_List_Tb").html(contents);
+				
 				
 				//새로생긴 html 부분에 상세보기 저장하고 닫기
 				petTClose();
+				
+				//페이징
+				var pageNumber = html.find("#PageAjax").html();
+				$("#page_num").html(pageNumber);
+				
+				
+				
 				
 			}).fail(function (jqXHR, textStatus, errorThrown) {
 				console.log("에러");
@@ -502,21 +556,157 @@
 				console.log(errorThrown);
 			});
 		}
+
+		
+
+		$(document).ready(function(){
+		    
+		    //getAllList();
+
+		    //검색창에 엔터 눌렀을때
+		    $("#keyword").keydown(function(key) {
+		        //13번은 엔터키
+		        if (key.keyCode == 13) {
+		        	reslistPage(0);
+		        }
+		    });
+		    
+		    //체크박스 눌렀을때
+		    $('input[type=checkbox]').change(function(){
+		        searchOption();
+		    });
+		    $('input[type=radio]').change(function(){
+		    	searchOption();
+		    });
+
+//		    $('html').click(function(e){
+//		    	if($(e.target).parents('.list_tb').length < 1){
+//		            deleteTr();
+//		        }
+//		    });
+		});
+		
+		//체크박스 옵션
+		function searchOption(){
+
+		    //체크된 값 받아오기
+		    $('.res_option input[type=checkbox]').each(function (index) {
+		        if($('#Complete').is(":checked")==true){
+		            state_ck.Complete='Y';
+		        }else{delete state_ck.Complete;}
+		        if($('#Before').is(":checked")==true){
+		        	state_ck.Before='N';
+		        }else{delete state_ck.Before;}
+		        if($('#Cancel').is(":checked")==true){
+		        	state_ck.Cancel='C';
+		        }else{delete state_ck.Cancel;}
+		    });
+		    
+		    sort_ck=$('.sort_option input[name="sort"]:checked').val();
+		    
+		    console.log(state_ck)
+		    console.log(sort_ck)
+
+		    //체크박스 클릭 시 검색
+		    reslistPage(0);
+
+		}
+		
+		// 상세 tr 에 데이터 출력
+		function searchResInfo(reserNum,obj){
+			$('.pet_item_li').remove();
+
+			$.ajax({
+    			url:'/SearchReservationNum.do',
+    			method:'post',
+    			data:{ "reserNum": reserNum },
+    			type:'post',
+    			async:true,
+    			dataType:'json',
+    			success:function(data){
+					//console.log(data);
+
+					//CheckIn, CheckOut
+					var st= data.reservation.res_st.substring(0, 10);
+					var ed= data.reservation.res_end.substring(0, 10);
+					$('#res_st').val(st);
+					$('#res_end').val(ed);
+					
+					console.log(data.reservation.res_st);
+					console.log(st);
+
+					//요청사항
+					$('#pet_Comment').val(data.reservation.res_comment)
+
+
+					// //펫테이블
+					for(i=0;i<data.petservice.length;i++){
+						pet_Add(obj);
+						$("#petTB_Item_"+(i+1)+" input[name='petname']").val(data.petservice[i].pet_name)
+						$("#petTB_Item_"+(i+1)+" select[name='petsex']").val(data.petservice[i].pet_gender).prop("selected", true);
+						$("#petTB_Item_"+(i+1)+" select[name='petroom']").val(data.petservice[i].room_grade).prop("selected", true);
+						$("#petTB_Item_"+(i+1)+" select[name='beauty']").val(data.petservice[i].service_beauty).prop("selected", true);
+						if(data.petservice[i].service_spa.startsWith('Y')){
+							$("#petTB_Item_"+(i+1)+" .spaCK").prop('checked',true);
+						}
+					}
+					//표 함수
+					change_form()
+				}
+			});
+		}
+
+		//표 함수
+		function change_form(){
+			
+			var sr =0, mr =0, lr =0;
+			var sc =0, mc =0, lc =0;
+			var ss =0, ms =0, ls =0;
+			var ssp =0, msp =0, lsp =0;
+
+			$('.pet_Cost_table').find('td').empty(); //이전 표 안 데이터 지우기
+
+			$(".pet_item_li").each(function(){
 				
-				
+				//소형견
+				if($(this).find("select[name='petroom']").val() == "Deluxe"){
+					sr++;
+					if($(this).find("select[name='beauty']").val()=='Clipping'){ sc++; }
+					else if($(this).find("select[name='beauty']").val()=='Scissoring'){ ss++; }
+					if($(this).find(".spaCK").is(':checked')){ ssp++; }
+				}//중형견
+				else if($(this).find("select[name='petroom']").val() == "Sweet"){
+					mr++;
+					if($(this).find("select[name='beauty']").val()=='Clipping'){ mc++; }
+					else if($(this).find("select[name='beauty']").val()=='Scissoring'){ ms++; }
+					if($(this).find(".spaCK").is(':checked')){ msp++; }
+				}//대형견
+				else if($(this).find("select[name='petroom']").val() == "Superior"){
+					lr++;
+					if($(this).find("select[name='beauty']").val()=='Clipping'){ lc++; }
+					else if($(this).find("select[name='beauty']").val()=='Scissoring'){ ls++; }
+					if($(this).find(".spaCK").is(':checked')){ lsp++; }
+				}
+			})
+
+			$('.sr').append(sr); $('.sc').append(sc); $('.ss').append(ss); $('.ssp').append(ssp);
+			$('.mr').append(mr); $('.mc').append(mc); $('.ms').append(ms); $('.msp').append(msp);
+			$('.lr').append(lr); $('.lc').append(lc); $('.ls').append(ls); $('.lsp').append(lsp);
+		}
+
     </script>
 </head>
 <body>
     
             <div class="list_wrap">
                 <div class="list_option">
-                    <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="search()" >
+                    <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="reslistPage(0)" >
                         <select name="search_op" id="search_op" aria-label="search">
-                            <option value="search_id">예약자</option>
-                            <option value="search_name">예약번호</option>
+                            <option value="search_name">예약자</option>
+                            <option value="search_res_num">예약번호</option>
                         </select>
                         <input type="text" name="keyword" id="keyword" class="search_txt" placeholder="검색">
-                        <button type="button" class="seh_icon" onclick="search()" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
+                        <button type="button" class="seh_icon" onclick="reslistPage(0)" ><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg></button>
                     </div>
                     <div class="sort_option">
                         <label><input type="radio" name="sort" id="sort_num" value="sort_num" checked="checked">예약번호 순</label>
@@ -526,9 +716,9 @@
                     <div class="hr"></div>
                     <div class="res_option">
                         예약상태 :
-                        <label><input type="checkbox" name="State" id="res_complete" value="complete">이용완료</label>
-                        <label><input type="checkbox" name="State" id="res_before" value="before">이용전</label>
-                        <label><input type="checkbox" name="State" id="res_cancel" value="cancel">취소</label>
+                        <label><input type="checkbox" name="state" id="Complete" value="Complete">이용완료</label>
+                        <label><input type="checkbox" name="state" id="Before" value="Before">이용전</label>
+                        <label><input type="checkbox" name="state" id="Cancel" value="Cancel">취소</label>
                     </div>
                 </div>
 				<span class="res_Item_Num">총 ${item_res}개의 예약</span>
@@ -585,9 +775,9 @@
 				            					<li><span class="check_Date">Check Out</span></li>
 				            				</ul>
 				            				<ul>
-				            					<li><input type="date"></li>
+				            					<li><input type="date" name="res_st" id="res_st"></li>
 				            					<li class="date_Cal_Text"><span id="dateCalText">2박</span></li>
-				            					<li><input type="date"></li>
+				            					<li><input type="date" name="res_end" id="res_end"></li>
 				            				</ul>	
 				            			<li>
 				            			<br>
@@ -603,25 +793,25 @@
 													    <th>SP</th>
 													  </tr>
 													  <tr>
-													    <th>소</td>
-													    <td clss="sr">0</td>
-													    <td clss="sc">0</td>
-													    <td clss="ss">0</td>
-													    <td clss="ssp">0</td>
+													    <th>소</th>
+													    <td class="sr">0</td>
+													    <td class="sc">0</td>
+													    <td class="ss">0</td>
+													    <td class="ssp">0</td>
 													  </tr>
 													  <tr>
-													    <th>중</td>
-													    <td clss="mr">0</td>
-													    <td clss="mc">0</td>
-													    <td clss="ms">0</td>
-													    <td clss="msp">0</td>
+													    <th>중</th>
+													    <td class="mr">0</td>
+													    <td class="mc">0</td>
+													    <td class="ms">0</td>
+													    <td class="msp">0</td>
 													  </tr>
 													  <tr>
-													    <th>대</td>
-													    <td clss="lr">0</td>
-													    <td clss="lc">0</td>
-													    <td clss="ls">0</td>
-													    <td clss="lsp">0</td>
+													    <th>대</th>
+													    <td class="lr">0</td>
+													    <td class="lc">0</td>
+													    <td class="ls">0</td>
+													    <td class="lsp">0</td>
 													  </tr>
 													</table>
 												</li>
@@ -666,33 +856,59 @@
                     
                 </table>
                 
-                <!-- 페이지기능 -->
-                
-                <!-- 페이지당 10개의 예약을 출력한다. -->
-                                
-           	 	<!-- 페이지 만큼 나누어떨어지지만 그대로 계산하면 1페이지 더 생성되므로 주의 -->
-                <c:if test="${item_res % 10 != 0 and item_res > 10}">
-					<c:set var="PI" value="${item_res / 10}" scope="request"/>
-									</c:if>
+                <!-- 페이지수 구하기 -->
+				<c:if test="${item_res % 10 != 0 and item_res > 10}"><!-- 나머지가 있을경우 1페이지가 더 필요하다. ex)68, 62 개 아이템은 7페이지 -->
 				
-				 <!-- 페이지 만큼 나누어떨어지지만 그대로 계산하면 1페이지 더 생성되므로 주의 -->
-				<c:if test="${item_res % 10 == 0 and item_res > 10}">
-					<c:set var="PI" value="${item_res / 10-1}" scope="request"/>
+					<c:set var="Float" value="${item_res / 10}"/> <!-- 페이지수 구하기. 소수점으로 나누기 때문에 정수로 바꿔야함 -->
+					<fmt:parseNumber var="PI" value="${Float+(1-(Float%1))%1}" integerOnly="true" scope="request"/> <!-- 소수점올림 -->
+					
 				</c:if>
-		
+				
+				<!-- 10으로 나누어떨어짐 70개 = 7페이지-->
+				<c:if test="${item_res % 10 == 0 and item_res > 10}">
+					<fmt:parseNumber var="PI" value="${item_res/10}" integerOnly="true" scope="request"/>
+				</c:if>
+				
 				<!-- 아이템이 적어 페이지를 만들 이유가 없음 -->
 				<c:if test="${item_res <= 10}">
-					<c:set var="PI" value="${0}" scope="request"/>
+					<c:set var="PI" value="${0}" scope="request" />
 				</c:if>
 				
 				
-                <div class="page_num">
-	                <li class="pageNO" onClick="pageDown()">pre</li>
-		            <c:forEach varStatus="i" begin="0" end="${PI}">
-					<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
-						<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
-					</c:forEach>
-	                <li class="pageNO" onClick="pageUP()">next</li>
+                <div id="page_num" class="page_num">
+	                <c:choose>
+					 	<c:when test="${PI > 5}">
+					 		<c:forEach varStatus="i" begin="1" end="5">
+							<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
+								<c:choose>
+								 	<c:when test="${P == i.count-1}">
+								 		<!-- 현재페이지 색표시 총페이지 -->
+								 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count-1})">${i.count}</li>
+								 	</c:when>
+								 	<c:otherwise>
+								 		<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
+								 	</c:otherwise>
+								</c:choose>
+							</c:forEach>
+								<li class="pageNO pageUp" onClick="pageUP()">next</li>
+					 	</c:when>
+					 	<c:otherwise>
+					 		<c:forEach varStatus="i" begin="1" end="${PI}">
+							<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
+								<c:choose>
+								 	<c:when test="${P == i.count-1}">
+								 		<!-- 현재페이지 색표시 총페이지 -->
+								 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count-1})">${i.count}</li>
+								 	</c:when>
+								 	<c:otherwise>
+								 		<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
+								 	</c:otherwise>
+								</c:choose>
+							</c:forEach>
+					 	</c:otherwise>
+					</c:choose>
+
+	                
                 </div>
             </div>
             

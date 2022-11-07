@@ -3,6 +3,7 @@ package com.myboot.reservation.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,12 +88,78 @@ public  class ReservationControllerImpl implements ReservationController{
 	}
 	
 	@Override
-	@RequestMapping(value= "/reservationUpdate.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value= "/reservationUpdate.do", method = {RequestMethod.POST})
 	public ModelAndView reservationUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
+		
+		//유저 정보
+		HttpSession session=request.getSession();
+		UserVO userVO = (UserVO) session.getAttribute("user");
+				
+		//날짜 포맷
+		String checkinDate = (String) request.getParameter("checkinDate");//스트링 데이터로 변환하기 포멧
+		String checkoutDate = (String) request.getParameter("checkoutDate");//
+		
+		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy. MM. dd");
+		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
+		// String 타입을 Date 타입으로 변환
+		Date checkinDate_format = dtFormat.parse(checkinDate);
+		Date checkoutDate_format = dtFormat.parse(checkoutDate);
+		String StresNum = request.getParameter("resNum");
+		// 예약 정보
+		int resNum = Integer.parseInt(StresNum);
+		String petcomment = (String) request.getParameter("petcomment");
+		String costResult = (String) request.getParameter("totalcost");
+		
+		//petserviceTB
+		String[] petName = request.getParameterValues("petname");
+		String[] petGender = request.getParameterValues("petsex");
+		String[] petRoom = request.getParameterValues("petroom");
+		String[] petBeauty = request.getParameterValues("beauty");
+		String[] petSpa = request.getParameterValues("spa");
 
+		//테스트
+		System.out.println("예약번호============="+resNum);
+			
+		//pet서비스 vo List만들기
+		List<PetserviceVO> petServiceList = new ArrayList<PetserviceVO>();
+
+		for(int i=0;i<petName.length;i++) {
+			
+			if(petName[i] != null && petName[i] != "") {
+				
+				PetserviceVO petserVO = new PetserviceVO();
+				petserVO.setRes_num(resNum);
+				petserVO.setId(userVO.getId());
+				petserVO.setPet_name(petName[i]);
+				petserVO.setPet_gender(petGender[i]);
+				petserVO.setRoom_grade(petRoom[i]);
+				petserVO.setService_beauty(petBeauty[i]);
+				petserVO.setService_spa(petSpa[i]);
+				//test
+				System.out.println(petserVO);
+				//add
+				petServiceList.add(petserVO);
+		
+			}
+		}
+		
+		ReservationVO reserVO = new ReservationVO();
+		//예약 vo
+		reserVO.setRes_num(resNum);
+		reserVO.setRes_st(checkinDate_format);
+		reserVO.setRes_end(checkoutDate_format);
+		reserVO.setRes_comment(petcomment);
+		reserVO.setTotalCost(costResult);
+		
+		//데이터 베이스
+		resService.updateReservation(reserVO);
+		//삭제
+		resService.deletePetserviceList(StresNum);
+		//이후 삽입
+		resService.addPetService(petServiceList);
+		
+		ModelAndView mav = new ModelAndView("redirect:/mypage/checkReserve.do");
 		return mav;
 		
 	}
@@ -202,6 +269,7 @@ public  class ReservationControllerImpl implements ReservationController{
 		
 		return mav;
 	}
+	
 	
 	//예약 번호로 예약 찾기 
 	@ResponseBody 

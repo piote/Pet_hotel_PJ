@@ -33,6 +33,7 @@
 		        var scrolled = $window.scrollTop() >= pageOffsetTop;
 		        $header.toggleClass('down', scrolled);
 		        $nav.toggleClass('nav_down', scrolled);
+				$('header').css('left', 0-$(this).scrollLeft());
 		    });
 		})
 	    

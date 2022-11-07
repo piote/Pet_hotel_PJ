@@ -1,7 +1,9 @@
 package com.myboot.user.service;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,8 +12,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 
 import com.myboot.user.dao.UserDAO;
+
 import com.myboot.user.vo.UserVO;
 
 @Service("userService")
@@ -84,10 +89,10 @@ public class UserServiceImpl implements UserService {
 	    return userDAO.updateUser(userVO);
 	}
 	
-	@Override
-	public UserVO findUser(UserVO id) throws DataAccessException{
-		return userDAO.selectUserById(id);
-	}
+//	@Override
+//	public UserVO findUser(UserVO id) throws DataAccessException{
+//		return userDAO.selectUserById(id);
+//	}
   
   // 회원 탈퇴
 	@Override
@@ -113,5 +118,7 @@ public class UserServiceImpl implements UserService {
 	public int addUser(UserVO user) throws Exception {
 		return userDAO.insertNewUser(user);
 	}
-// 로그인 아이디 찾기
+
+
+   
 }

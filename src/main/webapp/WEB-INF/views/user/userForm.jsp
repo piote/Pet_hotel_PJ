@@ -206,20 +206,22 @@ img {
 	width: 100px;
 	height: 100px;
 	position: absolute;
-	top: 215px;
-	right: 80px;
+	top: 205px;
+	right: 100px;
+	border: 1px solid #000;
+	border-radius: 50%;
 }
 
 input.upload-name {
 	position: absolute;
 	top: 321px;
-	right: 30px;
+	right: 72px;
 }
 
 input#imageFileName {
 	position: absolute;
 	top: 350px;
-	right: -90px;
+	right: -50px;
 }
 </style>
 <title>회원가입 화면</title>
@@ -232,38 +234,58 @@ input#imageFileName {
         // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
         function checkValue()
         {
-            if(!document.userInfo.id.value){
+        	var form = document.userInfo;
+        	
+        	
+            if(!form.id.value){
                 alert("아이디를 입력하세요.");
                 return false;
             }
-            if(document.userInfo.idcheck.value=="false"){
+            if(form.id.value.length <4 || form.id.value.length >12 ){
+            	alert('아이디는 4~12자 이내로 입력해주세요');
+            	form.id.select();
+            	form.id.focus();
+            	return;
+            }
+            for(var i=0; i<form.id.value.length; i++){
+            	var ch = form.id.value.charAt(i);
+            	if ((ch<'a'|| ch> 'z')){
+            		alert('아이디는 영문 소문자로만 입력이 가능합니다.')
+            		form.id.select();
+                	form.id.focus();
+                	return;
+            	}
+            }
+            if(form.idcheck.value=="false"){
                 alert("아이디 중복확인 해주세요.");
                 return false;
             }
             
-            if(!document.userInfo.pw.value){
+            if(!form.pw.value){
                 alert("비밀번호를 입력하세요.");
                 return false;
             }
             
             // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
-            if(document.userInfo.pw.value != document.userInfo.passwordcheck.value ){
+            if(form.pw.value != document.userInfo.passwordcheck.value ){
                 alert("비밀번호를 동일하게 입력하세요.");
                 return false;
             }
-            if(!document.userInfo.name.value){
+            if(!form.name.value){
                 alert("이름을 입력하세요.");
                 return false;
             }
-            if(!document.userInfo.email.value){
+            if(!form.email.value){
                 alert("email를 입력하세요.");
                 return false;
             }
-            if(!document.userInfo.tel.value){
+          
+            
+            if(!form.tel.value){
                 alert("휴대전화번호를 입력하세요.");
                 return false;
             }
-            if(!document.userInfo.birth.value){
+            if(!form.birth.value){
                 alert("생년월일을 입력하세요.");
                 return false;
             }
@@ -401,8 +423,8 @@ input#imageFileName {
 <body>
 	<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
 
-	<form method="post" action="${contextPath}/addUser.do" name="userInfo"
-		id="userInfo" onsubmit="return checkValue()">
+	<form method="post" action="${contextPath}/adduserprofil_pic.do" name="userInfo"
+		id="userInfo" onsubmit="return checkValue()" enctype="multipart/form-data">
 		<div class="root">
 			<div class="signin-wrapper form active">
 				<div class="form-wrapper">

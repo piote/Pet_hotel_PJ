@@ -1,10 +1,13 @@
 package com.myboot.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.validation.Errors;
+
 
 import com.myboot.user.vo.UserVO;
 
@@ -27,7 +30,7 @@ public interface UserService {
 // 회원 정보 수정
 	public int modMember(UserVO userVO) throws DataAccessException; 
 	
-	public UserVO findUser(UserVO user) throws DataAccessException;
+//	public UserVO findUser(UserVO user) throws DataAccessException;
 	
 // 회원 탈퇴	
 	public int retiring(String id) throws DataAccessException;
@@ -36,6 +39,7 @@ public interface UserService {
 	public int addUser(UserVO userVO) throws Exception;
 //	회원가입 아이디중복 검사 기능
 	 public int overlappedID(UserVO userVO) throws Exception;
+	
 	
 }
 	

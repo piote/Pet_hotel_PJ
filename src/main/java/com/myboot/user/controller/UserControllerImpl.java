@@ -5,16 +5,24 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.myboot.user.service.UserService;
 import com.myboot.user.vo.UserVO;
@@ -181,6 +190,7 @@ public class UserControllerImpl implements UserController{
 		String tel_sub=request.getParameter("tel_sub");
 		String message=request.getParameter("message");
 		String birth=request.getParameter("birth");
+		
 		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date formatDate = dtFormat.parse(birth);
 		System.out.println(birth);
@@ -207,6 +217,8 @@ public class UserControllerImpl implements UserController{
 		return mav;
 		
 	}
+	
+
 
 //	회원가입 id 중복 확인 기능
 	 @ResponseBody // 값 변환을 위해 꼭 필요함
@@ -407,28 +419,128 @@ public class UserControllerImpl implements UserController{
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
+	
+	
+//	프로필 이미지
+	@Override
+	@RequestMapping(value="/adduserprofil_pic.do" ,method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity adduserprofil_pic(MultipartHttpServletRequest multipartRequest, 
+	HttpServletResponse response) throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		
+//		Map<String,Object> userMap = new HashMap<String, Object>();
+//		Enumeration enu=multipartRequest.getParameterNames();
+//		while(enu.hasMoreElements()){
+//			String name=(String)enu.nextElement();
+//			String value=multipartRequest.getParameter(name);
+//			userMap.put(name,value);
+//		}
+//		String id_ = (String) userMap.get("id");
+		
+		String message;
+		ResponseEntity resEnt=null;
+		
+		int result = 0;
+		String id= multipartRequest.getParameter("id");
+		String pw= multipartRequest.getParameter("pw");
+		String name= multipartRequest.getParameter("name");
+		String email=multipartRequest.getParameter("email");
+		String mail2=multipartRequest.getParameter("mail2");
+		String tel=multipartRequest.getParameter("tel");
+		String tel_sub=multipartRequest.getParameter("tel_sub");
+		String message_=multipartRequest.getParameter("message");
+		String birth=multipartRequest.getParameter("birth");
+		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date formatDate = dtFormat.parse(birth);
+		System.out.println(birth);
+		
+		UserVO userVO= new UserVO();
+		userVO.setId(id);
+		userVO.setPw(pw);
+		userVO.setName(name);
+		userVO.setEmail(email+mail2);
+		userVO.setTel(tel);
+		userVO.setTel_sub(tel_sub);
+		userVO.setMessage(message_);
+		if(message_==null || message_==""){
+			userVO.setMessage("N");
+			System.out.println("N");
+		}
+		userVO.setBirth(formatDate);
+		System.out.println(userVO.getId()+userVO.getPw()+userVO.getName()+userVO.getEmail()+userVO.getTel()+userVO.getTel_sub()+userVO.getMessage()+userVO.getBirth());
+		
+		String imageFileName= upload(multipartRequest, id);
+		
+		
+		//============================================realPath 받아오기
+		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
+		String path = realPath+"resources\\user\\user_image";
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			result = userService.addUser(userVO);
+			if(imageFileName!=null && imageFileName.length()!=0) {
+				File srcFile = new File(path+ "\\" + "temp"+ "\\" + imageFileName);
+				File destDir = new File(path);
+				FileUtils.moveFileToDirectory(srcFile, destDir,true);
+			}
+	
+			message = "<script>";
+			message += " alert('회원가입을 축하합니다');";
+			message += " location.href='"+multipartRequest.getContextPath()+"/main.do'; ";
+			message +=" </script>";
+		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		}catch(Exception e) {
+			File srcFile = new File(path+"\\"+"temp"+"\\"+imageFileName);
+			srcFile.delete();
+			message = " <script>";
+			message +=" alert('오류가 발생했습니다. 다시 시도해 주세요');');";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/userForm.do'; ";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return resEnt;
+	}
+	
+	
 	//한개 이미지 업로드하기
-		private String upload(MultipartHttpServletRequest multipartRequest) throws Exception{
+		private String upload(MultipartHttpServletRequest multipartRequest, String id) throws Exception{
 			String imageFileName= null;
 			Iterator<String> fileNames = multipartRequest.getFileNames();
+			String fileType = multipartRequest.getMultipartContentType("imageFileName");
+			String picFileName =null;
 			
-			//세션에 있는 경로를 받아온다
-			HttpSession session = multipartRequest.getSession();
-			String path = (String) session.getAttribute("realPath")+"resources\\questions\\questions_image";
+			
+			//============================================realPath 받아오기
+			String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
+			String path = realPath+"resources\\user\\user_image";
 			
 			while(fileNames.hasNext()){
 				String fileName = fileNames.next();
+							
 				MultipartFile mFile = multipartRequest.getFile(fileName);
 				imageFileName=mFile.getOriginalFilename();
+				System.out.println(imageFileName);
+				
+				String picfileType = imageFileName.substring(imageFileName.lastIndexOf("."));
+				System.out.println(picfileType);
+				
+				picFileName = id + picfileType;
+				System.out.println(picFileName);
+				
 				File file = new File(path +"\\"+"temp"+"\\" + fileName);
 				if(mFile.getSize()!=0){ //File Null Check
 					if(!file.exists()){ //경로상에 파일이 존재하지 않을 경우
 						file.getParentFile().mkdirs();  //경로에 해당하는 디렉토리들을 생성
-						mFile.transferTo(new File(path +"\\"+"temp"+ "\\"+imageFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
+						mFile.transferTo(new File(path +"\\"+"temp"+ "\\"+picFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
 					}
 				}
 			}
-			return imageFileName;
+			return picFileName;
 		}
+		
 }
 

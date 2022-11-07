@@ -1,7 +1,7 @@
-*{
-   padding: 0;
-   margin: 0;
-   box-sizing: border-box;
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 /* #wrap { */
 /*    width: 100%; */
@@ -10,185 +10,216 @@
 /*    border: 1px solid black; */
 /* } */
 #container {
-   width: 100%;
-   height: 1080px;
-   margin: 0 auto;
+	width: 100%;
+	height: 1080px;
+	margin: 0 auto;
 }
+
+img {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	left: -10px;
+}
+
 h2 {
-   text-align: left;
-   margin: 20px auto;
-   width: 1050px;
+	text-align: left;
+	margin: 20px auto;
+	width: 1050px;
 }
+
 a {
-    text-decoration: none;
-    color: black;
+	text-decoration: none;
+	color: black;
 }
-p {
-    font-size: 14px;
+
+/* 맨위 회원 정보*/
+.mypage_info {
+	width: 1050px;
+	height: 220px;
+	border: 1px solid rgba(200, 200, 200, 0.5);
+	position: relative;
+	margin: 0 auto;
 }
-.mypage_info{
-   width: 1050px;
-   height: 220px;
-   border: 1px solid rgba(200,200,200,0.5);
-   position: relative;
-   margin: 0 auto;
-}
+
 .img_info {
-    margin-left: 60px;
-    margin-top: 32px;
-    width: 150px;
-    height: 150px;
+	margin-left: 60px;
+	margin-top: 32px;
+	width: 150px;
+	height: 150px;
 }
-.mypage_info td:nth-child(2){
-    height: 180px;
-    position: relative;
-    top: 13px;
-    left: 60px;
-    padding: 10px;
-    border-left: 1px solid rgba(200, 200, 200, 0.5);
+
+.benefit {
+	position: relative;
+	left: 40px;
+	width: 80px;
+	height: 80px;
 }
-.mypage_info td:nth-child(3){
+
+.mypage_info td:nth-child(2) {
+	height: 180px;
+	position: relative;
+	top: 13px;
+	left: 60px;
+	padding: 10px;
+	border-left: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+.mypage_info td:nth-child(3) {
 	display: inline-block;
 	width: 310px;
-    height: 180px;
-    position: relative;
-    top: 13px;
-    left: 30px;
-    padding: 10px;
+	height: 180px;
+	position: relative;
+	top: 13px;
+	left: 30px;
+	padding: 10px;
 }
-.mypage_info td:nth-child(3) h4,p{
-    display: block;
-    margin-left: 50px;
+
+.mypage_info td:nth-child(4) {
+	height: 180px;
+	position: relative;
+	left: 50px;
+	top: 11px;
+	border-left: 1px solid rgba(200, 200, 200, 0.5);
 }
-.mypage_info td:nth-child(4){
-    height: 180px;
-    position: relative;
-    left: 105px;
-    top: 11px;
-    border-left: 1px solid rgba(200, 200, 200, 0.5);
+
+.user_info {
+	display: block;
+	top: 40px;
+	margin-left: 60px;
+	padding: 10px;
+	position: relative;
 }
 
 .mypage_info td:nth-child(5) {
-    display: inline-block;
-    position: relative;
-    font-size: 13px;
-    padding: 10px;
-    left: 190px;
-    top: -20px
+	display: inline-block;
+	position: relative;
+	font-size: 13px;
+	left: 110px;
+	top: -20px
 }
 
-.mypage_info td:nth-child(5) a{
+.mypage_info td:nth-child(5) a {
 	padding-left: 30px
 }
 
 .mypage_info td:nth-child(6) {
-    display: block;
-    position: relative;
-    font-size: 13px;
-    margin-left: 50px;
-    padding: 10px;
-    top: 5px;
-    left: 140px;
+	display: block;
+	position: relative;
+	font-size: 13px;
+	margin-left: 50px;
+	margin-top: 15px;
+	top: 10px;
+	left: 60px;
 }
 
-.mypage_info td:nth-child(6) a{
+.mypage_info td:nth-child(6) a {
 	padding-left: 30px
 }
-.img_membership {
-    position: relative;
-    right: -45px;
-    width: 30px;
-    height: 30px;
-}
+
 .membership {
-    position: relative;
-    right: -40px;
-    top: -23px;
-    font-size: 18px;
+	position: relative;
+	right: -40px;
+	top: -23px;
+	font-size: 18px;
 }
 
-#reserve{
+/* 예약 리스트*/
+#reserve {
 	width: 1050px;
 	height: 70px;
 	margin: 0 auto;
-    position: relative;
-    top: 40px;
-    margin-top: 40px;
+	position: relative;
+	top: 40px;
+	margin-top: 40px;
 }
+
 #reserve a {
-    position: absolute;
-    top: 10px;
-    right: 0px;
+	position: absolute;
+	top: 10px;
+	right: 0px;
 }
-#reserve a img{
-	display : inline;
-    width: 15px;
-    height: 15px;
+
+#reserve a img {
+	display: inline;
+	width: 15px;
+	height: 15px;
 }
-.mypage_reserve{
-    width: 1050px;
-    height: 50px;
-    line-height: 30px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
-    margin: 0 auto;
-    background-color: rgb(231, 226, 219);
+
+.mypage_reserve {
+	width: 1050px;
+	height: 50px;
+	line-height: 30px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+	margin: 0 auto;
+	background-color: rgb(231, 226, 219);
 }
+
 .reserve-center {
 	width: 1050px;
 	height: 40px;
 }
-.reserve-list td {
-    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
-    text-align: center;
-    width: 1050px;
-    height: 30px;
-    position: relative;
-    top: 10px;
-}
-.reserve-center td{
-   text-align: center;
 
+.reserve-list td {
+	border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+	text-align: center;
+	width: 1050px;
+	height: 30px;
+	position: relative;
+	top: 10px;
 }
-#review{
+
+.reserve-center td {
+	text-align: center;
+}
+
+/* 리뷰 리스트*/
+#review {
 	width: 1050px;
 	height: 70px;
-   	margin: 0 auto;
-    position: relative;
-    top: 40px;
-    margin-top: 150px;
+	margin: 0 auto;
+	position: relative;
+	top: 40px;
+	margin-top: 150px;
 }
+
 #review a {
-    position: absolute;
-    top: 10px;
-    right: 0px;
+	position: absolute;
+	top: 10px;
+	right: 0px;
 }
+
 #review a img {
-	display : inline;
-    width: 15px;
-    height: 15px;
+	display: inline;
+	width: 15px;
+	height: 15px;
 }
-.mypage_review{
-    width: 1050px;
-    height: 50px;
-    line-height: 30px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
-    margin: 0 auto;
-       background-color: rgb(231, 226, 219);
+
+.mypage_review {
+	width: 1050px;
+	height: 50px;
+	line-height: 30px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+	margin: 0 auto;
+	background-color: rgb(231, 226, 219);
 }
+
 .review-center {
 	width: 1050px;
 	height: 40px;
 }
+
 .review-list td {
-    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
-    text-align: center;
-    width: 1050px;
-    height: 30px;
-    position: relative;
-    top: 10px;
+	border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+	text-align: center;
+	width: 1050px;
+	height: 30px;
+	position: relative;
+	top: 10px;
 }
-.review-center td{
-   text-align: center;
+
+.review-center td {
+	text-align: center;
 }

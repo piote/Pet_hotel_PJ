@@ -15,9 +15,8 @@
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="${contextPath}/resources/css/checkReserve.css">
+    <script type="text/javascript" src="${contextPath}/resources/js/checkReserve.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.min.js"></script>
-	<link rel="stylesheet" href="sweetalert2.min.css">
 	
 	<!-- 예약 수정 -->
 	<link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
@@ -26,146 +25,59 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     
+    <style>
+    	.petUsed{
+        	content:url("${contextPath}/resources/img/close.png");
+        }
+    </style>
     <script type="text/javascript" src="${contextPath}/resources/js/reservationCalUpdate.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservationUpdate.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/js/reservationUpdateAjaxP.js"></script>
     <!-- 예약 수정 end-->
     
-	<script type="text/javascript">
-		$( "#datepicker" ).datepicker({
-		 	dateFormat: "yy-mm-dd",
-		 	showOtherMonths: true,
-		 	showMonthAfterYear: true,
-			showButtonPanel: false,
-			changeMonth: true,
-			changeYear: true,
-			showOn: "both",
-			buttonImage: "${contextPath}/resources/img/cale.png",
-			buttonImageOnly: true,
-			buttonText: "Select date",
-			closeText: "닫기",
-			nextText: '다음 달',
-		 	prevText: '이전 달',
-		 	dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-		 	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-		 	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-// 		 	maxDate: 1,
-		 	onClose: function(selectedDate){
-                var eleId = $(this).attr("id");
-                var optionName = "";
-
-                if(eleId.indexOf("StartDate") > 0) {
-                    eleId = eleId.replace("StartDate", "EndDate");
-                    optionName = "minDate";
-                } else {
-                    eleId = eleId.replace("EndDate", "StartDate");
-                    optionName = "maxDate";
-                }
-
-                $("#"+eleId).datepicker( "option", optionName, selectedDate );        
-                $(".searchDate").find(".chkbox2").removeClass("on"); 
-		 	}
-		});
+    <style>
+		#lay_pop{
+			position:absolute;
+			z-index:500;
+			width:69%;
+			height:800px;
+			overflow-y:scroll;
+			display:none;
+			background-color:#ffffff;
+			border:2px solid #cccccc; 
+			text-align: center;
+			}
 		
-// 		$('#datepicker').datepicker('setDate', 'today');
+		#pop_content {
+			text-align: center;
+			margin-top:60px;
+	        display: inline-block;
+			}
 		
-		$(function(){
-			$.datepicker.setDefaults({
-				dateFormat: "yy-mm-dd",
-			 	showOtherMonths: true,
-			 	showMonthAfterYear: true,
-				showButtonPanel: false,
-				changeMonth: true,
-				changeYear: true,
-				showOn: "both",
-				buttonImage: "${contextPath}/resources/img/cale.png",
-				buttonImageOnly: true,
-				buttonText: "Select date",
-				closeText: "닫기",
-				nextText: '다음 달',
-			 	prevText: '이전 달',
-			 	dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-			 	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-			 	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			 	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-// 			 	maxDate: 1,
-			 	onClose: function(selectedDate){
-                    var eleId = $(this).attr("id");
-                    var optionName = "";
-
-                    if(eleId.indexOf("StartDate") > 0) {
-                        eleId = eleId.replace("StartDate", "EndDate");
-                        optionName = "minDate";
-                    } else {
-                        eleId = eleId.replace("EndDate", "StartDate");
-                        optionName = "maxDate";
-                    }
-
-                    $("#"+eleId).datepicker( "option", optionName, selectedDate );        
-                    $(".searchDate").find(".chkbox2").removeClass("on"); 
-			 	}
-			});
-			$("#startDate").datepicker();
-			$("#endDate").datepicker();
-            $(".dateclick").dateclick();
-            $(".searchDate").schDate(); 
-// 			$("#startDate").datepicker('setDate', 'today');
-// 			$("#endDate").datepicker('setDate', '+1D');
-		});
-		
-		jQuery.fn.schDate = function(){
-           var $obj = $(this);
-           var $chk = $obj.find("input[type=radio]");
-           $chk.click(function(){                
-               $('input:not(:checked)').parent(".chkbox2").removeClass("on");
-               $('input:checked').parent(".chkbox2").addClass("on");                    
-           });
-       };
-
-       // DateClick
-       jQuery.fn.dateclick = function(){
-           var $obj = $(this);
-           $obj.click(function(){
-               $(this).parent().find("input").focus();
-           });
-           
-       }    
-       
-       function setSearchDate(start){
-
-           var num = start.substring(0,1);
-           var str = start.substring(1,2);
-
-           var today = new Date();
-
-           //var year = today.getFullYear();
-           //var month = today.getMonth() + 1;
-           //var day = today.getDate();
-           
-           var endDate = $.datepicker.formatDate('yy-mm-dd', today);
-           $('#endDate').val(endDate);
-           
-           if(str == 'd'){
-               today.setDate(today.getDate() - num);
-           }else if (str == 'w'){
-               today.setDate(today.getDate() - (num*7));
-           }else if (str == 'm'){
-               today.setMonth(today.getMonth() - num);
-               today.setDate(today.getDate() + 1);
-           }
-
-           var startDate = $.datepicker.formatDate('yy-mm-dd', today);
-           $('#startDate').val(startDate);
-                   
-           // 종료일은 시작일 이전 날짜 선택하지 못하도록 비활성화
-           $("#endDate").datepicker( "option", "minDate", startDate );
-           
-           // 시작일은 종료일 이후 날짜 선택하지 못하도록 비활성화
-           $("#startDate").datepicker( "option", "maxDate", endDate );
-			goSearch();
-       }
+		#pop_content ul li{
+			text-align: center;
+	        display: inline-block;
+			}
 			
+		#all_body{
+			position:absolute;
+		    /* pointer-events: none; */
+			z-index:100;
+			display:none;
+			filter:alpha(opacity=50);
+			opacity:0.5;
+		 	-moz-opacity:0.5;
+			background-color:#000000;
+			left:0;
+			top:0;
+		}
+		
+		.search_form{
+			overflow: hidden;
+		}
+    </style>
+    
+	<script type="text/javascript">
 	$(document).ready(function () {
 		
     	if(${startDate != null && startDate !="" && endDate != null && endDate != ""} ){
@@ -191,60 +103,30 @@
 		});
 	});
 	
-    function goSearch(){
-/* 		var searchWord = $("input[user_name=searchWord]").val().trim();
-		var colName = $("#colName").val();
-		
-		if( "" == colName){
-			alert("검색조건을 선택하세요.");
-			$("input[name=searchWord]").val("");
-			$("input[name=searchWord]").focus();
-			return;
-		}else if ("" == searchWord){
-			alert("검색어를 입력해 주세요.");
-			return;
-		} */
-		
-		var frm = document.searchFrm;
-		frm.method = "GET";
-		frm.action = "checkReserve.do";
-		frm.submit();
-		
-	}
-    function fn_cancel_reserve(res_num){
-    	Swal.fire({
-            title: '정말로 예약을 취소 하시겠습니까?',
-            text: "예약을 취소하시면 다시 되돌릴 수 없습니다.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: 'black',
-            cancelButtonColor: 'lightgray',
-            confirmButtonText: 'Yes'
-            }).then((result) => {
-            if (result.isConfirmed) {
-        		var formObj=document.createElement("form");
-        		var i_reserve_num = document.createElement("input"); 
-        	    
-        	    i_reserve_num.name = "res_num";
-        	    i_reserve_num.value = res_num;
-        		
-        	    formObj.appendChild(i_reserve_num);
-        	    document.body.appendChild(formObj); 
-                Swal.fire('예약 취소 완료.',)
-        	    formObj.method = "post";
-        	    formObj.action ="${contextPath}/mypage/cancelMyReserve.do";
-			    setTimeout(() => formObj.submit(), 1000);
-            }
-        })
-    }
+    $(document).on("click",function(e){
+    	console.log($("#all_body").is(e.target));
+    	console.log(!$("#lay_pop").is(e.target));
+    	console.log($("#lay_pop").css('display')!='none'  && !$("#lay_pop").is(e.target));
+    	console.log($("#lay_pop").css('display'))
+    	
+    	if($("#all_body").is(e.target)) {
+	    		$("#all_body").css({opacity:0});
+	    		$("#all_body").css({display:"none"});
+	    		$("#lay_pop").css({display:"none"});
+	    		console.log($("#lay_pop").css("display"));
+    		}
+    	
+    });
+    
 	</script>
 </head>
 <body>
+<div id="all_body"></div>
 	<div id="wrap">
 		 <div id="container">
 			<h2>예약 조회</h2>
 			<div id="searchFrm">
-				<form name="searchFrm">
+				<form name="searchFrm" class="search_form">
 					<div>
                         <ul class="searchDate">
                             <li>
@@ -412,10 +294,13 @@
 			 </div>
 		</div>
 	</div>
+	
 	<!--예약 업뎃  -->
-	<div id="lay_pop">
+	<div id="lay_pop" class="lay_pop">
+		<form id="reservationUpdateForm" action="${contextPath}/reservationUpdate.do" method="post">
 			<div id="pop_content">
 			<h1 id="asd">예약 변경</h1>
+			<input type="hidden" name="resNum" id="resNum">
 			<br>
 				<ul>
 		        	<li id="checkinBox" class="reservationBox">
@@ -580,7 +465,9 @@
 	    </div>
 	    
 	    <div class="btn_pet2">
-	    	<input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />	                               		
+	    
+	    	<input type='button' value='요청사항' id="btn_pet2_1" onclick="addtext()" />	              
+	    	<a href="javascript:;" id="pop_end1" onclick="reservationSubmit()">수정</a>                 		
 	    	<a href="javascript:;" id="pop_end1" onclick="layerClose('lay_pop','all_body')">완료</a>
 	    </div>
 
@@ -591,7 +478,10 @@
 	        <!-- <input type="text" name="petcomment"> -->
         </div>
 		<br><br>
+		</form>
 		</div>
+		
+
 		<!--예약 업뎃  -->
 </body>
 </html>

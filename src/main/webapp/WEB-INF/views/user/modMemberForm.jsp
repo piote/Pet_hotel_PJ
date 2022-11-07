@@ -69,7 +69,7 @@
 						     idInput.setAttribute("value", id);
 						     form.appendChild(idInput);
 						     document.body.appendChild(form);
-						     setTimeout(() => form.submit(), 20000);
+						     setTimeout(() => form.submit(), 2000);
 							 //form.submit();
 						  }
 						})
@@ -166,12 +166,12 @@
                                     <div class="head-cell"><span class="empha">*</span>가입일</div>
                                 </th>
 					           <td>
-					           		<div class="col-cell"><input class="txtBox" id="readonly" type="text" name="joinDate" size="20" value="${user.joinDate}"  readonly/></div>
+					           		<input class="txtBox" id="readonly" type="text" name="joinDate" size="20" value="${user.joinDate}"  readonly/>
 					           </td>
 				         </tr>
 				     </table>  
 				     </div>
-				     		<p><span class="symbol">*</span>아이디, 이름, 가입일은 수정이 불가능합니다.</p>
+				     		<div class= "letter"><p><span class="symbol">*</span>아이디, 이름, 가입일은 수정이 불가능합니다.</p></div>
 			         <div class= "btn_footer">		    
 							<input type="submit" class="btn1" name="modbtn" value="수정하기" onClick= "mod()">
 					        <a href= "${contextPath}/modMemberForm.do"><input class="btn2" type="button" name="cal_1" value="수정취소" onClick= "cal();"></a>

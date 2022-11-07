@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myboot.mypage.dao.MyPageDAO;
+import com.myboot.reservation.vo.ReservationVO;
+import com.myboot.review.vo.ReviewVO;
 
 @Service("myPageService")
 public class MyPageServiceImpl implements MyPageService {
@@ -15,14 +17,14 @@ public class MyPageServiceImpl implements MyPageService {
 	private MyPageDAO myPageDAO;
 	
 	@Override
-	public List listMyReserve(String user_id) throws Exception{
+	public List<ReservationVO> listMyReserve(String user_id) throws Exception{
 		return myPageDAO.selectMyReservesList(user_id);
 	}
 
 	@Override
 	public Map listMyDetailReserve(Map paraMap, String startDate, String endDate) throws Exception{
 		Map myReserveMap = new HashMap();
-		List myReserveList = null;
+		List<ReservationVO> myReserveList = null;
 		int totReserves=0;
 		if((startDate==null || startDate=="") && (endDate==null || endDate=="")) {
 			myReserveList = myPageDAO.selectAllMyReservesList(paraMap);
@@ -38,7 +40,7 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 	
 	@Override
-	public List listMyReview(String user_id) throws Exception{
+	public List<ReviewVO> listMyReview(String user_id) throws Exception{
 		return myPageDAO.selectMyReviewList(user_id);
 	}
 	

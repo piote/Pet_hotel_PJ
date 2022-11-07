@@ -2,7 +2,6 @@ package com.myboot.admin.reservation.controller;
 
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +30,7 @@ import com.myboot.user.vo.UserVO;
 @Controller("adminresController")
 public  class AdminResControllerImpl implements AdminResController{
 
+	private static final String String = null;
 	@Autowired
 	private AdminResService adminresService;
 	@Autowired
@@ -91,7 +90,7 @@ public  class AdminResControllerImpl implements AdminResController{
 	}
 		
 	
-	//예약 불러오기       //dao list > 배열로 만드는데 필요한 값만 들고오기
+	//예약 불러오기       
 	@ResponseBody
 	@RequestMapping(value= "/admin/adminResList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView ResReed(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -105,38 +104,53 @@ public  class AdminResControllerImpl implements AdminResController{
 		mav.addObject("totalresnum",totalresnum);
 		
 		
-		
 		//예약데이터
 		List<AdminResFullVO> adminResReed = adminresService.adminAllResList();   //
 		
 		mav.addObject("adminResReed",adminResReed);  //
 		
-		
 		String  viewName= (String)request.getAttribute("viewName");   //페이지 이동
 		mav.setViewName(viewName);
 		
 		return mav;   //
-		
-		
+
 	}
 		
 	@RequestMapping(value= "/ResPageAjax.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String ResPageAjax(@RequestParam(value ="P", required = false) String Page, Model model) throws Exception {
+	public String ResPageAjax(@RequestBody Map<String,Object> searchMap, Model model) throws Exception {
 		//@ModelAttribute("P") String Page
 		//List<AdminResFullVO> adminResReed = adminresService.adminAllResList();
 		
-		List list = adminresService.adminAllResList();  
-	    model.addAttribute("list", list);
-	    model.addAttribute("P", Integer.parseInt(Page));
+		System.out.println(searchMap); 
+		
+		int Page = (int) searchMap.get("P");
+		
+		Map<String,String> state_ck = (Map<String, String>) searchMap.get("state_ck");
+		
+		Map<String, String> searchOption = new HashMap<String, String>();
+		
+		searchOption.put("search_op", (String) searchMap.get("search_op"));
+		searchOption.put("keyword", (String) searchMap.get("keyword"));
+		
+		if(state_ck.size()<4 || state_ck.size()>0) {
+			int i=1;
+			for(String key : state_ck.keySet()) {
+				searchOption.put("state"+i,state_ck.get(key));
+				i++;
+			}
+		}
+		System.out.println(searchOption);
+		
+		
+		//List list = adminresService.adminAllResList();  
+		List<AdminResFullVO> searchadminResList; 
+		searchadminResList= adminresService.searchResList(searchOption);
+		
+	    model.addAttribute("list", searchadminResList);
+	    model.addAttribute("P", Page);
 	   
-	      
 	    return "/page/ResPageAjax";
 	  }
-	
-	
-	
-	
-	
 	
 	
 	@ResponseBody
@@ -193,22 +207,19 @@ public  class AdminResControllerImpl implements AdminResController{
 	public List<AdminResFullVO> adminResListById(@RequestBody Map<String,Object> searchMap,
 			  HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
-		System.out.println(searchMap);
+		System.out.println(searchMap); 
 		
-		Map<String,String> State_ck = (Map<String, String>) searchMap.get("State_ck");
+		Map<String,String> state_ck = (Map<String, String>) searchMap.get("state_ck");
 		
 		Map<String, String> searchOption = new HashMap<String, String>();
 		
 		searchOption.put("search_op", (String) searchMap.get("search_op"));
-		searchOption.put("index", (String) searchMap.get("index"));
-		if(searchMap.get("res_ck")!=null) {
-			searchOption.put("res_state", (String) searchMap.get("res_ck"));
-		}
+		searchOption.put("keyword", (String) searchMap.get("keyword"));
 		
-		if(State_ck.size()<3 || State_ck.size()>0) {
+		if(state_ck.size()<4 || state_ck.size()>0) {
 			int i=1;
-			for(String key : State_ck.keySet()) {
-				searchOption.put("State"+i,State_ck.get(key));
+			for(String key : state_ck.keySet()) {
+				searchOption.put("state"+i,state_ck.get(key));
 				i++;
 			}
 		}
