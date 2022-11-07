@@ -121,13 +121,13 @@
 	    ORDER BY 
 	    <choose>
 	    	<when test="sort_ck=='sort_num'">
-	    		res.reservation_num asc
+	    		res.reservation_num desc
 	    	</when>
 	        <when test="sort_ck=='sort_res'">
 	    		res.reservation_st asc
 	    	</when>
 	        <when test="sort_ck=='sort_pay'">
-	    		res.pay_time asc
+	    		res.pay_time desc
 	    	</when>
 	    </choose>
   </select>
