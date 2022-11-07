@@ -6,6 +6,14 @@ header{
     transition: all 0.3s;
     z-index: 100;
 }
+@media (max-width:1270px) {
+    header{
+        width: 1270px; height: 160px;
+        position: fixed;
+        transition: width 0.3s, margin-top 0.3s, background-color 0.3s;
+        z-index: 100;
+    }
+}
 
 /* header scroll */
 .down{
