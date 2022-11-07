@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.myboot.admin.reservation.vo.AdminResFullVO;
+
+
 @Mapper
 @Repository("adminresDAO")
 public interface AdminResDAO {
@@ -19,6 +22,8 @@ public interface AdminResDAO {
 	
 	 //관리자 예약수정 예약불러오기
 	 public List adminSelectRes(String reserNum) throws DataAccessException;
+	 public AdminResFullVO SearchReservationNum(String reserNum) throws DataAccessException;
+	 public List<AdminResFullVO> SearchPetServiceByResNum(String reserNum) throws DataAccessException;
 	
 	 //관리자 예약수정 펫 테이블 추가
 	 public List adminSelectPet(String reserNum) throws DataAccessException;

@@ -225,5 +225,23 @@
 	</select>
  	 -->
  
+ 	<!--예약 번호로 예약불러오기  -->
+	<select id="SearchReservationNum" resultMap="adminresfullResult" parameterType="String">
+		<![CDATA[
+		SELECT RESERVATION_NUM, RESERVATION_ST, RESERVATION_END, USER_ID, RS_COMMENT, TOTAL_COST, PAY_TIME, RESERVATION_STATE 
+		FROM TB_RESERVATION
+		WHERE RESERVATION_NUM = ${reserNum}
+		ORDER BY RESERVATION_NUM DESC
+		]]>
+	</select>
+	<!--예약 번호로 펫서비스 불러오기 -->
+	<select id="SearchPetServiceByResNum" resultMap="adminresfullResult" parameterType="String">
+		<![CDATA[
+		SELECT * 
+		FROM TB_PETSERVICE
+		WHERE RESERVATION_NUM = ${reserNum}
+		ORDER BY RESERVATION_NUM DESC
+		]]>
+	</select>
     
 </mapper>
