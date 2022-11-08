@@ -68,6 +68,16 @@ h5 {
 	box-shadow: 10px 5px 10px #a89c86;
 	position: relative;
 }
+#profil_card{
+    width: 198px;
+    height: 247px;
+    background-color: green;
+    position: absolute;
+    top: 175px;
+    right: 20px;
+
+}
+
 
 .form-wrapper button {
 	cursor: pointer;
@@ -158,9 +168,6 @@ h5 {
 	right: 30px;
 	font-weight: 400;
 }
-#overlappedID:hover{
- opacity: 0.9;
-}
 
 .olmessagef {
 	color: red;
@@ -204,28 +211,34 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 }
 
 img {
-	display: block;
-	margin: 0;
-	padding: 0;
-	width: 100px;
-	height: 100px;
-	position: absolute;
-	top: 205px;
-	right: 100px;
-	border: 1px solid #000;
-	border-radius: 50%;
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 90px;
+    height: 90px;
+    position: relative;
+    top: -90px;
+    right: -50px;
+    border: 1px solid #000;
+    border-radius: 50%;
 }
 
 input.upload-name {
-	position: absolute;
-	top: 321px;
-	right: 72px;
+	position: relative;
+    top: 181px;
+    right: -11px;
 }
 
 input#imageFileName {
-	position: absolute;
-	top: 350px;
-	right: -50px;
+	position: relative;
+    top: 191px;
+    right: -9px;
+}
+input#profil_id {
+    width: 100px;
+    height: 28px;
+    position: relative;
+    top: 100px;
 }
 </style>
 <title>회원가입 화면</title>
@@ -411,9 +424,9 @@ input#imageFileName {
 	         	reader.readAsDataURL(input.files[0]);
       		}
   		}
-
+       
     </script>
-
+      
 </head>
 <body>
 	<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
@@ -428,11 +441,14 @@ input#imageFileName {
 
 					<input type="text" id="user_id" name="id" placeholder="UserID"
 						class="form-field" maxlength="20" required autofocus required>
+				<div id="profil_card">
 					<ul>
 						<li class="atc_imageFile">
 							<div class="imageFile_wrap">
 								<input class="upload-name" spellcheck="false" value="프로필 사진"
-									onchange="readURL(this);" disabled> <input type="file"
+									onchange="readURL(this);" disabled> 
+								<input type="text" id="profil_id" placeholder="UserID" class="form-field" maxlength="20" >
+								<input type="file"
 									id="imageFileName" name="imageFileName"
 									onchange="readURL(this);" /> <img id="preview"
 									src="${contextPath}/resources/img/user.png" height=350
@@ -440,6 +456,7 @@ input#imageFileName {
 							</div>
 						</li>
 					</ul>
+				</div>
 					<button id="overlappedID" type="button" onclick="lappedID()">중복확인</button>
 					<input type="hidden" id="idcheck" value="false"> 
 					<span id="olmessage"></span>
