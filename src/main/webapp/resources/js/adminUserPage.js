@@ -6,10 +6,13 @@ let globalCurrentPage=1; //현재 페이지
 let user_data = []; 
 var grade_ck={};
 var res_ck;
+let contextPath;
 
 $(document).ready(function(){
     
     getAllList();
+
+    
 
     //검색창에 엔터 눌렀을때
     $("#keyword").keydown(function(key) {
@@ -290,6 +293,7 @@ function deleteTr(){
 
 // 한줄 생성 함수
 function modHtml(obj){
+    getContextPath()
         // 눌러진 화살표의 번호 받아오기
         var num = $(obj).data('num');
 
@@ -321,18 +325,24 @@ function modHtml(obj){
         }
         var html =
             '<td colspan="2">'+
+                '<div class="profil">'+
+                    '<img id="preview" src="'+contextPath+'/resources/user/user_image/'+user_data[num].img_name+'" alt="'+user_data[num].id+'profil" onerror="this.src=\''+contextPath+'/resources/img/user.png\';">'+
+                '</div>'+
+                '<input id="profil_img_name" type="file" name="img_name" onchange="readURL(this);">'+
+            '</td>'+
+            '<td colspan="2">'+
                 '<span class="info_box info_id">아이디 : <input type="text" name="id" id="id" value= "'+user_data[num].id+'" readonly></span>'+
                 '<span class="info_box info_pw">비밀번호 : <input type="text" name="pw" id="pw" value= "'+user_data[num].pw+'"></span>'+
                 '<span class="info_box info_name">이름 : <input type="text" name="name" id="name" value= "'+user_data[num].name+'"></span>'+
                 '<span class="info_box info_birth">생년월일 : <input type="date" name="birth_string" id="birth" value= "'+birth_s+'"></span>'+
             '</td>'+
-            '<td colspan="3">'+
+            '<td colspan="2">'+
                 '<span class="info_box info_email">이메일 : <input type="text" name="email" id="email" value="'+user_data[num].email+'"></span>'+
                 '<span class="info_box info_tel">휴대전화 : <input type="text" name="tel" id="tel" value="'+user_data[num].tel+'" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13" ></span>'+
                 '<span class="info_box info_tel_sub">비상전화 : <input type="text" name="tel_sub" id="tel_sub" value="'+tel_sub_s+'" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13" ></span>'+
                 '<span class="info_box info_message">메세지 수신여부 : '+message_s+
             '</td>'+
-            '<td colspan="2">'+
+            '<td colspan="1">'+
                 '<span class="info_box info_grand">멤버쉽 등급 :&nbsp;<svg class="crown" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:'+crown_color+'"><path d="M3 16l-3-10 7.104 4 4.896-8 4.896 8 7.104-4-3 10h-18zm0 2v4h18v-4h-18z"/></svg>&nbsp; '+user_data[num].grade+'</span>';
                 
             var active = user_data[num].active;
@@ -422,3 +432,22 @@ const autoHyphen2 = (target) => {
       .replace(/[^0-9]/g, '')
      .replace(/^(\d{0,3})(\d{3,4})(\d{4,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
    }
+
+function getContextPath() {
+    contextPath = $('#contextPath').val();
+    console.log($('#contextPath').val());
+    console.log(contextPath);
+}
+
+//프로필 이미지 미리보기
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var fileName = $("#profil_img_name").val();
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#preview').attr('src', e.target.result);
+        }
+        //$(".upload-name").val(fileName);
+        reader.readAsDataURL(input.files[0]);
+    }
+} 

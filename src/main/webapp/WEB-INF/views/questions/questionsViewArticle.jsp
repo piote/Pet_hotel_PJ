@@ -241,7 +241,7 @@
 		 form.submit();
 	 }
 	 
-	//이미지파일 추가
+	//이미지파일 미리보기
 	 function readURL(input) {
 	     if (input.files && input.files[0]) {
 	    	 var fileName = $("#i_imageFileName").val();

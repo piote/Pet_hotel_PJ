@@ -44,26 +44,28 @@ public class AdminUserControllerImpl implements AdminUserController {
 		HttpSession session = request.getSession();
 		userVO = (UserVO) session.getAttribute("user");
 		
-		response.setCharacterEncoding("EUC-KR");
-		if(userVO!=null) {
-			System.out.println(userVO);
-			System.out.println(userVO.getId());
-			
-			if(userVO.getId().equals("admin")) {
-				System.out.println("관리자");
-				mav.setViewName("/admin/adminUserList");
-				return mav;
-			}
-		}
+//		response.setCharacterEncoding("EUC-KR");
+//		if(userVO!=null) {
+//			System.out.println(userVO);
+//			System.out.println(userVO.getId());
+//			
+//			if(userVO.getId().equals("admin")) {
+//				System.out.println("관리자");
+//				mav.setViewName("/admin/adminUserList");
+//				return mav;
+//			}
+//		}
+//		
+//		PrintWriter writer = response.getWriter();
+//	    writer.println("<script type='text/javascript'>");
+//	    writer.println("alert('권한이 없습니다.');");
+//	    writer.println("history.back();");
+//	    writer.println("</script>");
+//	    writer.flush();
+//	    return null;
 		
-		PrintWriter writer = response.getWriter();
-	    writer.println("<script type='text/javascript'>");
-	    writer.println("alert('권한이 없습니다.');");
-	    writer.println("history.back();");
-	    writer.println("</script>");
-	    writer.flush();
-	    return null;
-		
+	    mav.setViewName("/admin/adminUserList");
+		return mav;
 	  }
 	
 //	@Override
