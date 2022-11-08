@@ -11,6 +11,6 @@ public interface IntroduceController {
 	public ModelAndView introduceView (HttpServletRequest request, HttpServletResponse response) 
 	throws Exception;
 	
-	public ModelAndView modintroduce (MultipartHttpServletRequest multipartRequest, HttpServletResponse response) 
+	public ResponseEntity modintroduce (MultipartHttpServletRequest multipartRequest, HttpServletResponse response) 
 	throws Exception;
 }
