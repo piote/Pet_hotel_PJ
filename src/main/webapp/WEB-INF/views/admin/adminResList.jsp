@@ -512,13 +512,13 @@
 		    //input 안 정보 가지고 오기
 		    var search_op = $('#search_op').val();
 		    var keyword = $('#keyword').val();
-
 		    
 			searchMap.P=P;
 		    searchMap.search_op = search_op;
 		    searchMap.keyword = keyword;
 		    searchMap.state_ck=state_ck;
 		    searchMap.sort_ck=sort_ck;
+//		    searchMap.res_state=res_state;
 			
 			$.ajax({
 				url : "/ResPageAjax.do",
@@ -800,6 +800,30 @@
 			}
 		}
 
+		//예약취소
+		function updateRes2() {
+			
+		var con_test = confirm("예약을 취소하시겠습니까?");
+		
+		if(con_test == true) {   //취소
+			alert("예약이 취소되었습니다.");
+			
+//			$.ajax({
+//				url:"/ResPageAjax.do", 
+//				type:'post',
+//				async:'true',
+//				dataType:'json',
+//				success:function(data){
+//					res_state='C'
+//			}
+			
+		}else if(con_test == false) {  //유지
+			alert("예약이 취소되지 않았습니다.");
+		}
+			return;
+			
+		}
+		
     </script>
 </head>
 <body>
@@ -951,9 +975,9 @@
 				            				</ul>
 				            			</li>
 				            			<li class="petTB_Bt_Box">
-				            				<button>예약 수정</button>
-				            				<button>예약 취소</button>
-				            				<button>예약 확인</button>
+				            				<button type="button" onclick="javascript:updateRes1();">예약 수정</button>
+				            				<button type="button" onclick="javascript:updateRes2();">예약 취소</button>
+				            				<button type="button" onclick="javascript:updateRes3();">예약 확인</button>
 				            			</li>
 				            		</ul>
 				            	</td>

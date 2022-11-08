@@ -58,10 +58,6 @@ public  class AdminResControllerImpl implements AdminResController{
 		
 	}
 	
-	
-	
-	
-	
 	@Override
 //	@RequestMapping("/admin/adminResList.do")
 	public ModelAndView ResList(HttpServletRequest request, HttpServletResponse response) throws Exception{

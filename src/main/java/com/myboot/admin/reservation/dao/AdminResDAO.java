@@ -34,6 +34,9 @@ public interface AdminResDAO {
 	 //관리자 예약수정 펫테이블 추가(변경)
 	 public void adminUpdatePet(Map petserviceMap) throws DataAccessException;
 	 
+	 //관리자 예약수정 예약변경(펫 추가)
+	 public void adminInsertPet(Map petserviceMap) throws DataAccessException;
+	 
 	 //관리자 예약관리 예약변경(펫 삭제)
 	 public void adminDeletePet(String petNum) throws DataAccessException;
 	 

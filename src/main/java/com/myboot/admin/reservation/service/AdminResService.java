@@ -19,6 +19,8 @@ public interface AdminResService {
 	
 	public void updatePetList(Map petserviceMap) throws Exception;
 	
+	public void insertPetList(Map petserviceMap) throws Exception;
+	
 	public void deletePetList(String petNum) throws Exception;
 	
 	public int adminTotalResNum() throws Exception;

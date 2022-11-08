@@ -57,6 +57,11 @@ public class AdminResServiceImpl implements AdminResService{
 	}
 	
 	@Override
+	public void insertPetList(Map petserviceMap) throws Exception{
+		adminresDAO.adminInsertPet(petserviceMap);
+	}
+	
+	@Override
 	public void deletePetList(String petNum) throws Exception{
 		adminresDAO.adminDeletePet(petNum);
 	}
