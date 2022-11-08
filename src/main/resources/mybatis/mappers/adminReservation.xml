@@ -78,7 +78,7 @@
 	    left join tb_user  
 	    ON res.user_id = tb_user.user_id
 	    GROUP BY res.reservation_num,res.reservation_st, res.reservation_end, res.pay_time, res.total_cost, res.reservation_state, tb_user.user_name
-	    ORDER BY RESERVATION_NUM ASC
+	    ORDER BY res.pay_time desc
 	]]>
   </select>
   
@@ -118,8 +118,21 @@
 			</choose>
 	    </where>
 	    GROUP BY res.reservation_num,res.reservation_st, res.reservation_end, res.pay_time, res.total_cost, res.reservation_state, tb_user.user_name
-	    ORDER BY RESERVATION_NUM ASC
-	    
+	    ORDER BY 
+	    <choose>
+	    	<when test="sort_ck=='sort_num'">
+	    		res.reservation_num desc
+	    	</when>
+	        <when test="sort_ck=='sort_res'">
+	    		res.reservation_st asc
+	    	</when>
+<!-- 	        <when test="sort_ck=='sort_pay'"> -->
+<!-- 	    		res.pay_time desc -->
+<!-- 	    	</when> -->
+	    	<otherwise>
+	    		res.pay_time desc
+	    	</otherwise>
+	    </choose>
   </select>
   
   

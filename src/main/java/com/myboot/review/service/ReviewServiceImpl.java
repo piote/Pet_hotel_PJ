@@ -46,10 +46,10 @@ public class ReviewServiceImpl implements ReviewService {
 			Map myReviewMap = new HashMap();
 			List<ReviewVO> myReviewList = reviewDAO.selectAllMyReviewList(pagingMap);
 			
-			int totReserves = reviewDAO.selectTotReserves();
+			int totReview = reviewDAO.selectTotReview();
 
 			myReviewMap.put("myReviewList", myReviewList);
-			myReviewMap.put("totReserves", totReserves);
+			myReviewMap.put("totReview", totReview);
 			// articlesMap.put("totArticles", 170);
 			return myReviewMap;
 		}
@@ -60,14 +60,10 @@ public class ReviewServiceImpl implements ReviewService {
 			Map reviewMap = new HashMap();
 			ReviewVO reviewVO = reviewDAO.selectReview(reviewNO);
 			
-			System.out.println(reviewVO+"=======================리뷰");//=====================================================
-			List<ImageVO> imageFileList = reviewDAO.selectImageFileList(reviewNO);
-			
-			
-			System.out.println(imageFileList.get(0).getImageFileName()+"=======================리뷰");
+			System.out.println(reviewVO+"=======================리뷰reviewVO");//=====================================================
+
 			reviewMap.put("review", reviewVO);
-			
-			reviewMap.put("imageFileList", imageFileList);
+
 			return reviewMap;
 		}	
 		

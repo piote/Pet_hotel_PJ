@@ -390,7 +390,7 @@
     	
     	var state_ck = {};
     	var sort_ck = null;
-    
+
     	window.onload = function () {
     		petTClose()
 
@@ -627,11 +627,17 @@
 					//console.log(data);
 
 					//CheckIn, CheckOut
-					// var st= data.reservation.res_st.substring(0, 10);
-					// var ed= data.reservation.res_end.substring(0, 10);
-					$('#res_st').val(data.reservation.res_st);
-					$('#res_end').val(data.reservation.res_end);
-
+					var st= data.reservation.res_st;
+					var ed= data.reservation.res_end;
+					$('#res_st').val(st);
+					$('#res_end').val(ed);
+					
+					$('#dateCalText').text(dateCal(st, ed)+'박');	
+					$('#dateCalText').val(dateCal(st, ed));	
+					
+					$('#res_TotalCost').text(data.reservation.totalCost.toLocaleString()+' 원');
+					$('#res_TotalCost').val(data.reservation.totalCost);
+					$(".membershipImg").val('');
 					//요청사항
 					$('#pet_Comment').val(data.reservation.res_comment)
 
@@ -652,6 +658,30 @@
 				}
 			});
 		}
+		//숙박일 구하기
+		function dateCal(indate, outdate) {
+
+            var date = new Date(indate);
+
+            var year = date.getFullYear();
+            var month = date.getMonth();
+            var day = date.getDate();
+
+            var stDate = new Date(year, month, day);
+
+            var date = new Date(outdate);
+
+            var year = date.getFullYear();
+            var month = date.getMonth();
+            var day = date.getDate();
+
+            var endDate = new Date(year, month, day);
+
+            var btMs = endDate.getTime() - stDate.getTime();
+            var btDay = btMs / (1000 * 60 * 60 * 24);
+            
+            return btDay;
+        }
 
 		//표 함수
 		function change_form(){
@@ -689,6 +719,85 @@
 			$('.sr').append(sr); $('.sc').append(sc); $('.ss').append(ss); $('.ssp').append(ssp);
 			$('.mr').append(mr); $('.mc').append(mc); $('.ms').append(ms); $('.msp').append(msp);
 			$('.lr').append(lr); $('.lc').append(lc); $('.ls').append(ls); $('.lsp').append(lsp);
+			
+			
+			console.log($("#res_st").val());
+			//날짜 계산
+			if($("input[name='res_st']").val() != null && $("input[name='res_end']").val() != null){
+				var st = $("input[name='res_st']").val();
+				var ed = $("input[name='res_end']").val();
+
+				if(dateCal(st, ed) <= 0){
+	            	alert("숙박일 1일 이상")
+	            	$("input[name='res_st']").val();
+	            	$("input[name='res_end']").val();
+	            }
+				
+				$('#dateCalText').text(dateCal(st, ed)+'박');	
+				$('#dateCalText').val(dateCal(st, ed));	
+			}
+			
+			
+			//가격계산
+			var total = sr * 35000 + mr * 45000 + lr * 55000 ;
+			dayCal = $('#dateCalText').val();
+	        total *= dayCal;
+	        total += sc * 35000 + mc * 45000 + lc * 60000 + ss * 70000 + ms * 80000 + ls * 100000;
+	        total += ssp * 50000 + msp * 80000 + lsp * 120000;
+	        
+	        
+	        $("#res_TotalCost").text(membership(total).toLocaleString()  + ' 원');
+		}
+		
+		
+		
+		function membership(total) {//조건 이미 할인된 가격을 불러올것
+			//맴버쉽 없는 초기상태 계산
+			if($(".membershipImg").val()==""|| $(".membershipImg").val()==null){
+	       		var disTotal = $("#res_TotalCost").val();
+	       	 	dis = (total-disTotal)/(total/100)//할인율 자릿수 높아서 대강 계산해도 ok
+	       	 	console.log(disTotal);
+	        	console.log(dis);
+	        
+	        	if(dis == 2){
+					$(".membershipImg").val("Bronze");
+					console.log($(".membershipImg").attr('src', '/resources/img/bronze_medal.png'));
+				}else if(dis == 5){
+					$(".membershipImg").val("Silver");
+					console.log($(".membershipImg").attr('src', '/resources/img/silver_medal.png'));
+				}else if(dis == 10){
+					$(".membershipImg").val("Gold");
+					console.log($(".membershipImg").attr('src', '/resources/img/gold_medal.png'));
+				}else{
+					$(".membershipImg").val("");
+					console.log($(".membershipImg").attr('src', '/resources/img/none.png'));
+				}
+				
+			}
+	              
+	        if($(".membershipImg").val()=='Gold' && total != 0){
+				var disTotal = total * (1 - 10 / 100);//10퍼 할인
+				$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
+				$("#totalcost").val(disTotal);
+				return disTotal;
+			
+	        }else if($(".membershipImg").val()=='Silver' && total != 0){
+				var disTotal = total * (1 - 5 / 100);//5퍼 할인
+				$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
+				$("#totalcost").val(disTotal);
+				return disTotal;
+			
+			}else if($(".membershipImg").val()=='Bronze' && total != 0){
+				var disTotal = total * (1 - 2 / 100);//2퍼 할인
+				$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
+				$("#totalcost").val(disTotal);
+				return disTotal;
+			}else{
+				//0원일시
+				$(".totalcost").text(total.toLocaleString()  + ' 원');
+				$("#totalcost").val(total);
+				return total;
+			}
 		}
 
     </script>
@@ -707,8 +816,8 @@
                     </div>
                     <div class="sort_option">
                         <label><input type="radio" name="sort" id="sort_num" value="sort_num" checked="checked">예약번호 순</label>
-                        <label><input type="radio" name="sort" id="sort_res" value="sort_res">예약일 순</label>
-                        <label><input type="radio" name="sort" id="sort_pay" value="sort_pay">주문일 순</label>
+                        <label><input type="radio" name="sort" id="sort_res" value="sort_res" checked="checked">예약일 순</label>
+                        <label><input type="radio" name="sort" id="sort_pay" value="sort_pay" checked="checked">주문일 순</label>
                     </div>
                     <div class="hr"></div>
                     <div class="res_option">
@@ -772,9 +881,9 @@
 				            					<li><span class="check_Date">Check Out</span></li>
 				            				</ul>
 				            				<ul>
-				            					<li><input type="date" name="res_st" id="res_st"></li>
-				            					<li class="date_Cal_Text"><span id="dateCalText">2박</span></li>
-				            					<li><input type="date" name="res_end" id="res_end"></li>
+				            					<li><input type="date" name="res_st" id="res_st" onchange="change_form()"></li>
+				            					<li class="date_Cal_Text"><span id="dateCalText">0박</span></li>
+				            					<li><input type="date" name="res_end" id="res_end" onchange="change_form()"></li>
 				            				</ul>	
 				            			<li>
 				            			<br>
@@ -812,7 +921,7 @@
 													  </tr>
 													</table>
 												</li>
-				            					<li><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">2,000,000원</span></li>
+				            					<li><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">0원</span></li>
 				            				</ul>
 				            				<br>
 				            				<ul>

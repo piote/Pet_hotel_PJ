@@ -84,12 +84,11 @@
 
 	<update id="updateReview" parameterType="java.util.Map">
 		update tb_review
-		set review_title=#{review_title},
-		review_con=#{review_con}
-		<if test="imageFileName!='' and imageFileName!=null">
-			, imageFileName=#{imageFileName}
+		set review_title=#{title}
+		<if test="review_image_url !='resources/review/review_image/'+reviewNO+'/'">
+			, review_image_url=#{review_image_url}
 		</if>
-		where review_num=#{review_num}
+		where review_num=#{reviewNO}
 	</update>
 	
 	
@@ -167,7 +166,7 @@
 			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url, ROOM_GRADE  
 				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image_url, ROOM_GRADE 
 						from TB_REVIEW
-						
+						where user_id = #{user_id}	
 	                    START WITH  parentNO is null
 						CONNECT BY PRIOR review_num = parentNO
 						ORDER SIBLINGS BY review_num DESC)

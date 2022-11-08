@@ -133,7 +133,7 @@
 			   </td>
 			   <td>
 			     <input  type= "hidden"   name="originalFileName" value="${review.image}" />
-			    <img src="${contextPath}/${review.image}" id="preview"  /><br>
+			    <img src="${contextPath}/${review.image}" id="preview" width="450" /><br>
 			   </td>   
 			  </tr>  
 			  <tr>
@@ -153,7 +153,7 @@
    </td>
    <td>
      <input  type= "hidden"   name="originalFileName" value="${review.image }" />
-    <img src="${contextPath}/${review.image}" id="preview"  /><br>
+    <img src="${contextPath}/${review.image}" width="150" height="150" id="preview" /><br>
    </td>   
   </tr>  
   <tr>

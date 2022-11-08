@@ -74,7 +74,7 @@
             justify-content: center;
         }
         .txt1{
-            width: 150px;
+            width: 171px;
         }
         .txt1 p:nth-child(1){
             font-size: 15px;
@@ -86,7 +86,7 @@
             font-weight: 800;
         }
         .txt2{
-            width: 170px;
+            width: 191px;
         }
         .txt2 p:nth-child(2){
             font-size: 15px;
@@ -122,6 +122,14 @@
             background-color: #D9D9D9;
             margin-top: 60px;
         }
+        
+        #normal_medal {
+		    width: 20px;
+		    height: 3px;
+		    background-color: #D9D9D9;
+		    margin-top: 100px;
+	    }
+    
         .grade_box img{
             width: 60px; height: 60px;
             margin-top: 30px;
@@ -282,6 +290,11 @@
             $('.modal-wrap').show();
             $('#count').empty();
             $('#count_').empty();
+            $('#count_bronze').empty();
+            $('#count_silver').empty();
+            $('#count_gold').empty();
+            $('.modal_mygrade borderbox').empty();
+            
             var count ;
             
             $.ajax({
@@ -305,38 +318,41 @@
                 		var next = 20 - count;
                 	}
                 	
-                	
-                	
                 	$('#count_').append(next);
                 	
-                    },
+                	if(count<5) {
+                		var front = 5 - count;
+ 	               		$('#count_bronze').append(front);
+                	}else{
+                		$('#count_bronze').append(' - ');
+                	}
+                	
+                	if(count<10){
+                		var front = 10 - count;
+                		$('#count_silver').append(front);
+                	}else{
+                		$('#count_silver').append(' - ');
+                	}
+                	
+                	if(count<20) {
+                		var front = 20 - count;
+                		$('#count_gold').append(front);
+                	}else{
+                		$('#count_gold').append(' - ');
+                	}
+                  },
+                    
                 error :function(){
                     alert("request error!");
                     }
             });
             
         }
-        
-
         function popClose(){
             $('.modal-bg').hide();
             $('.modal-wrap').hide();
         }
     </script>
-
-<%-- 	<c:choose>
-					<c:when test="${result=='passwordFailed' }">
-				 		  <script> 
-						    window.onload=function SweetAlert(){
-						    	Swal.fire({
-							    	  icon: 'error',
-							    	  title: '',
-							    	  text: '비밀번호가 틀립니다.다시 입력하세요!!',
-							    	})
-						    }
-					  	  </script>
-					</c:when>
-				</c:choose> --%>
 </head>
 <body>
     <div class="membership">
@@ -348,14 +364,62 @@
             <img src="${contextPath}/resources/img/bonus_icon.png" alt="bonus_icon">
         </div>
         <div class="membership_box borderbox">
-            <img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
+        	<c:choose>
+		        <c:when test="${user.grade eq 'Bronze'}">
+	            	<img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
+	            </c:when>
+	            <c:when test="${user.grade eq 'Silver'}">
+	            	<img src="${contextPath}/resources/img/silver_medal.png" alt="silver_medal">
+	            </c:when>
+	            <c:when test="${user.grade eq 'Gold'}">
+	            	<img src="${contextPath}/resources/img/gold_medal.png" alt="gold_medal">
+	            </c:when>
+	             <c:otherwise>
+	             	<div id="normal_medal"></div>
+	             </c:otherwise>
+            </c:choose>
             <div class="txt1">
                 <p>${user.name} 님의 멤버쉽 등급은</p>
-                <p>"${user.grade}"</p>
+                <p>${user.grade}</p>
+             <%--  <c:choose>
+                <c:when test="${user.grade == 'Bronze'}">
+                	<p>Bronze</p>
+                </c:when>
+                <c:when test="${user.grade == 'Silver'}">
+                	<p>Silver</p>
+                </c:when>
+                <c:when test="${user.grade == 'Gold'}">
+                	<p>Gold</p>
+                </c:when>
+                <c:otherwise>
+                	<p>Normal</p>
+                </c:otherwise>
+              </c:choose> --%>
             </div>
             <div class="txt2">
-                <p class="smallfont" >연간 이용횟수 5회 이상</p>
-                <p>1회 이용금액의 <span class="orange">2%</span>할인</p>
+                <c:choose>
+		            <c:when test="${user.grade == 'Bronze'}">
+		                <p class="smallfont">연간 이용횟수 5회 이상</p>
+	                	<p>1회 이용금액의 <span class="orange">2%</span> 할인</p>
+		            </c:when>
+	                <c:when test="${user.grade == 'Silver'}">
+		                <p class="smallfont">연관 이용횟수 10회 이상</p>
+		                <p>
+		                    1회 이용금액의 <span class="orange">5%</span> 할인<br>
+		                    미용서비스 <span class="orange">1회</span> 제공
+	                	</p>
+	                </c:when>
+	                 <c:when test="${user.grade == 'Gold'}">
+		                <p class="smallfont">연간 이용횟수 20회 이상</p>
+		                <p>
+		                    1회 이용금액의 <span class="orange">10%</span> 할인<br>
+		                    미용 및 목욕서비스 <span class="orange">각 1회</span> 제공
+		                </p>
+	                </c:when>
+	                <c:otherwise>
+		               	<p class="smallfont">연간 이용횟수 5회 미만</p>
+		            </c:otherwise>
+	            </c:choose>
             </div>
             <button type="button" onclick="popUp('${user.id}')">멤버쉽 더 알아보기 ></button>
         </div>
@@ -400,11 +464,32 @@
         <div class="modal-wrap_in">
             <div class="modal_title">
                 <p>${user.name}님의 멤버쉽 등급은</p>
-                <p>"${user.grade}"</p>
+                <p>${user.grade}</p>
             </div>
             <div class="modal_mygrade borderbox" >
-                <p class="smallfont">연관 이용횟수 5회 이상</p>
-                <p>1회 이용금액의 <span class="orange">2%</span> 할인</p>
+	            <c:choose>
+		            <c:when test="${user.grade == 'Bronze'}">
+		                <p class="smallfont">연간 이용횟수 5회 이상</p>
+	                	<p>1회 이용금액의 <span class="orange">2%</span> 할인</p>
+		            </c:when>
+	                <c:when test="${user.grade == 'Silver'}">
+		                <p class="smallfont">연관 이용횟수 10회 이상</p>
+		                <p>
+		                    1회 이용금액의 <span class="orange">5%</span> 할인<br>
+		                    미용서비스 <span class="orange">1회</span> 제공
+	                	</p>
+	                </c:when>
+	                 <c:when test="${user.grade == 'Gold'}">
+		                <p class="smallfont">연간 이용횟수 20회 이상</p>
+		                <p>
+		                    1회 이용금액의 <span class="orange">10%</span> 할인<br>
+		                    미용 및 목욕서비스 <span class="orange">각 1회</span> 제공
+		                </p>
+	                </c:when>
+	                <c:otherwise>
+		               	<p class="smallfont">연간 이용횟수 5회 미만</p>
+		            </c:otherwise>
+	            </c:choose>
             </div>
             <div class="graph_wrap">
                 <p>총 <span id="count">7</span>회 이용</p>
@@ -422,19 +507,19 @@
                     <img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
                     <p>Bronze</p>
                     <p class="smallfont">연간 이용횟수 5회 이상</p>
-                    <p class="grade_count_info">앞으로 <span id="count_bronze" class="b">3회</span></p>
+                    <p class="grade_count_info">앞으로 <span id="count_bronze" class="b">3</span>회</p>
                 </div>
                 <div class="info_box borderbox">
                     <img src="${contextPath}/resources/img/silver_medal.png" alt="bronze_medal">
                     <p>Silver</p>
                     <p class="smallfont">연간 이용횟수 10회 이상</p>
-                    <p class="grade_count_info">앞으로 <span id="count_silver" class="b">3회</span></p>
+                    <p class="grade_count_info">앞으로 <span id="count_silver" class="b">3</span>회</p>
                 </div>
                 <div class="info_box borderbox">
                     <img src="${contextPath}/resources/img/gold_medal.png" alt="bronze_medal">
                     <p>Gold</p>
                     <p class="smallfont">연간 이용횟수 20회 이상</p>
-                    <p class="grade_count_info">앞으로 <span id="count_gold" class="b">3회</span></p>
+                    <p class="grade_count_info">앞으로 <span id="count_gold" class="b">3</span>회</p>
                 </div>
             </div>
         </div>
