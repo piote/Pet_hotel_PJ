@@ -174,6 +174,11 @@
         .pageNOW{
             color: red;
         }
+        
+        .pageNumberF{/* 페이징 숫자.*/
+        	/*  */
+        }
+        
         .select_number{
             color: #030303;
         }
@@ -799,7 +804,23 @@
 				return total;
 			}
 		}
-
+		//페이징 next PI 총 페이지수. P 현재페이지-1  5씩 페이지 증가 끝이면 PI-1로 페이지 이동
+		function pageUP(PI,P) {
+			
+			if(P<PI-5){
+				reslistPage(P+5);			
+			}else{
+				reslistPage(PI-1);	
+			}
+		}
+		
+		function pageDown(P) {
+			if(P>4){
+				reslistPage(P-5);			
+			}else{
+				reslistPage(0);	
+			}
+		}
     </script>
 </head>
 <body>
@@ -989,14 +1010,14 @@
 								<c:choose>
 								 	<c:when test="${P == i.count-1}">
 								 		<!-- 현재페이지 색표시 총페이지 -->
-								 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count-1})">${i.count}</li>
+								 		<li class="pageNO pageNOW pageNumberF" onClick="reslistPage(${i.count-1})">${i.count}</li>
 								 	</c:when>
 								 	<c:otherwise>
-								 		<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
+								 		<li class="pageNO pageNumberF" onClick="reslistPage(${i.count-1})">${i.count}</li>
 								 	</c:otherwise>
 								</c:choose>
 							</c:forEach>
-								<li class="pageNO pageUp" onClick="pageUP()">next</li>
+								<li class="pageNO pageUp" onClick="pageUP(${PI},${P})">next</li>
 					 	</c:when>
 					 	<c:otherwise>
 					 		<c:forEach varStatus="i" begin="1" end="${PI}">
@@ -1004,10 +1025,10 @@
 								<c:choose>
 								 	<c:when test="${P == i.count-1}">
 								 		<!-- 현재페이지 색표시 총페이지 -->
-								 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count-1})">${i.count}</li>
+								 		<li class="pageNO pageNOW pageNumberF" onClick="reslistPage(${i.count-1})">${i.count}</li>
 								 	</c:when>
 								 	<c:otherwise>
-								 		<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
+								 		<li class="pageNO pageNumberF" onClick="reslistPage(${i.count-1})">${i.count}</li>
 								 	</c:otherwise>
 								</c:choose>
 							</c:forEach>
