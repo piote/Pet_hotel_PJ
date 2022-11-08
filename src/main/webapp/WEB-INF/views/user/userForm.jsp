@@ -65,6 +65,7 @@ h5 {
 	padding: 20px 0;
 	margin: 20px auto;
 	border-radius: 15px;
+	box-shadow: 10px 5px 10px #a89c86;
 	position: relative;
 }
 
@@ -157,6 +158,9 @@ h5 {
 	right: 30px;
 	font-weight: 400;
 }
+#overlappedID:hover{
+ opacity: 0.9;
+}
 
 .olmessagef {
 	color: red;
@@ -241,21 +245,12 @@ input#imageFileName {
                 alert("아이디를 입력하세요.");
                 return false;
             }
-            if(form.id.value.length <4 || form.id.value.length >12 ){
-            	alert('아이디는 4~12자 이내로 입력해주세요');
-            	form.id.select();
-            	form.id.focus();
-            	return false;
+            var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+            if( !idReg.test( $("input[name=id]").val() ) ) {
+                alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+                return false;
             }
-            for(var i=0; i<form.id.value.length; i++){
-            	var ch = form.id.value.charAt(i);
-            	if ((ch<'a'|| ch> 'z')){
-            		alert('아이디는 영문 소문자로만 입력이 가능합니다.')
-            		form.id.select();
-                	form.id.focus();
-                	return false;
-            	}
-            }
+  
             if(form.idcheck.value=="false"){
                 alert("아이디 중복확인 해주세요.");
                 return false;
@@ -423,8 +418,9 @@ input#imageFileName {
 <body>
 	<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
 
-	<form method="post" action="${contextPath}/adduserprofil_pic.do" name="userInfo"
-		id="userInfo" onsubmit="return checkValue()" enctype="multipart/form-data">
+	<form method="post" action="${contextPath}/adduserprofil_pic.do"
+		name="userInfo" id="userInfo" onsubmit="return checkValue()"
+		enctype="multipart/form-data">
 		<div class="root">
 			<div class="signin-wrapper form active">
 				<div class="form-wrapper">
@@ -436,41 +432,37 @@ input#imageFileName {
 						<li class="atc_imageFile">
 							<div class="imageFile_wrap">
 								<input class="upload-name" spellcheck="false" value="프로필 사진"
-									 onchange="readURL(this);" disabled>
-								<input type="file" id="imageFileName" name="imageFileName"
-									onchange="readURL(this);" /> <img id="preview" src="${contextPath}/resources/img/user.png"
-									height=350
+									onchange="readURL(this);" disabled> <input type="file"
+									id="imageFileName" name="imageFileName"
+									onchange="readURL(this);" /> <img id="preview"
+									src="${contextPath}/resources/img/user.png" height=350
 									onerror="this.src='${contextPath}/resources/img/no_img.png'" />
 							</div>
 						</li>
 					</ul>
 					<button id="overlappedID" type="button" onclick="lappedID()">중복확인</button>
-					<input type="hidden" id="idcheck" value="false"> <span
-						id="olmessage"></span> <input type="password" name="pw" id="pw"
-						maxlength="50" class="form-field" placeholder="UserPw"> <input
-						type="password" name="passwordcheck" id="passwordcheck"
-						maxlength="50" class="form-field" placeholder="UserPwCheck"
-						onkeyup="passConfirm()"> <span id="confirmMsg"></span><br>
-
-					<input type="text" name="name" maxlength="20" class="form-field"
-						placeholder="UserName"> <input type="text" name="email"
-						maxlength="30" class="form-field" placeholder="UserEmail">
+					<input type="hidden" id="idcheck" value="false"> 
+					<span id="olmessage"></span>
+					<input type="password" name="pw" id="pw" maxlength="50" class="form-field" placeholder="UserPw">
+					<input type="password" name="passwordcheck" id="passwordcheck" maxlength="50" class="form-field" placeholder="UserPwCheck" onkeyup="passConfirm()"> <span id="confirmMsg"></span>
+					<br>
+					<input type="text" name="name" maxlength="20" class="form-field" placeholder="UserName"> <input type="text" name="email" maxlength="30" class="form-field" placeholder="UserEmail">
 					<select name="mail2" class="form-field mail2">
 						<option>@naver.com</option>
 						<option>@daum.net</option>
 						<option>@gmail.com</option>
 						<option>@nate.com</option>
-					</select> <input type="date" name="birth" class="form-field"
-						data-placeholder="UserBirth" required aria-required="true"
-						value={startDateValue} className={styles.selectDay}
-						onchange={startDateValueHandler}> <input type="number"
-						name="tel" id="tel" placeholder="핸드폰번호 입력" maxlength="13"
-						class="form-field phone" ng-focus="chkPhoneType('focus')"
-						ng-blur="chkPhoneType('blur');" min="0" required> <input
-						type="number" name="tel_sub" id="tel_sub"
-						placeholder="비상시 핸드폰번호 입력" maxlength="13" class="form-field phone"
-						ng-focus="chkPhoneType('focus')" ng-blur="chkPhoneType('blur');"
-						min="0" required> <label class="message_label">
+					</select> 
+					<input type="date" name="birth" class="form-field" data-placeholder="UserBirth" required aria-required="true"
+						 className={styles.selectDay}> 
+						
+					<input type="number" name="tel" id="tel" placeholder="핸드폰번호 입력" maxlength="13" class="form-field phone" ng-focus="chkPhoneType('focus')"
+						ng-blur="chkPhoneType('blur');" min="0" required> 
+						
+					<input type="number" name="tel_sub" id="tel_sub" placeholder="비상시 핸드폰번호 입력" maxlength="13" class="form-field phone"
+						ng-focus="chkPhoneType('focus')" ng-blur="chkPhoneType('blur');" min="0" required>
+						
+					<label class="message_label">
 						이메일수신 발송에 동의하십니까?<input type="checkbox" name="message" value="Y">
 					</label>
 
