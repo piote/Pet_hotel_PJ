@@ -463,14 +463,23 @@
         }   
 
         var slider_num = 1;
-        var slider_count = 3;
+        var slider_count = 2;
         
         function slider_left(){
             --slider_num;
             if(slider_num<=0){
-                slider_num=3;
+                slider_num=slider_count;
             }
-            $('[s_num-data="'+(slider_num+1)+'"]').removeClass('able_slider');
+            $('.slider').removeClass('able_slider');
+            $('[s_num-data="'+slider_num+'"]').addClass('able_slider');
+            console.log(slider_num)
+        }
+        function slider_right(){
+            ++slider_num;
+            if(slider_num>slider_count){
+                slider_num=1;
+            }
+            $('.slider').removeClass('able_slider');
             $('[s_num-data="'+slider_num+'"]').addClass('able_slider');
             console.log(slider_num)
         }
@@ -482,7 +491,7 @@
 
   <div class="slider_wrap">
     <svg id="left_arrow" class="slider_arrow" onclick="slider_left()" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M20 .755l-14.374 11.245 14.374 11.219-.619.781-15.381-12 15.391-12 .609.755z"/></svg>
-    <svg id="right_arrow" class="slider_arrow" onclick="slider_wrap()" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z"/></svg>
+    <svg id="right_arrow" class="slider_arrow" onclick="slider_right()" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z"/></svg>
     <div class="txt_wrap">
         <p>Anitel</p>
         <p>펫 호텔 서비스</p>
