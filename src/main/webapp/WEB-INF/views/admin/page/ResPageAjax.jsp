@@ -40,10 +40,11 @@
 		</tr>      			
 	</c:forEach>
 	<!--상세보기용  -->
-             <tr id="res_content_box" class="res_content_box">
+                    <tr id="res_content_box" class="res_content_box">
 				            	<td colspan="3">
 				            		<ul>
 				            			<li class="res_Date_Veiw_Box">
+				            				<input type="hidden" id="view_Res_Num">
 				            				<ul>
 				            					<li><span class="check_Date">Check In</span></li>
 				            					<li class="date_Cal_Text"></li>
@@ -122,7 +123,7 @@
 				            			<li class="petTB_Bt_Box">
 				            				<button>예약 수정</button>
 				            				<button>예약 취소</button>
-				            				<button>예약 확인</button>
+				            				<button onclick="resCheck(${P})">예약 확인</button>
 				            			</li>
 				            		</ul>
 				            	</td>

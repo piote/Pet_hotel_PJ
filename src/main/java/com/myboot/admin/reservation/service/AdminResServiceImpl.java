@@ -60,7 +60,7 @@ public class AdminResServiceImpl implements AdminResService{
 	public void deletePetList(String petNum) throws Exception{
 		adminresDAO.adminDeletePet(petNum);
 	}
-	
+	//예약 횟수
 	@Override
 	public int adminTotalResNum() throws Exception{
 		int adminTotalResNum = 0;
@@ -87,4 +87,12 @@ public class AdminResServiceImpl implements AdminResService{
 		return adminresDAO.SearchPetServiceByResNum(reserNum);
 	}
 	
+	//예약완료 횟수
+	@Override
+	public int adminTotalYResCount(String userID) throws Exception{
+		int userYResTotalNum = 0;
+		userYResTotalNum = adminresDAO.adminTotalYResCount(userID);
+		return userYResTotalNum;
+	}
+
 }

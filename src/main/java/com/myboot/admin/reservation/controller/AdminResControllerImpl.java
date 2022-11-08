@@ -256,5 +256,36 @@ public  class AdminResControllerImpl implements AdminResController{
 		return reservationMap;
 	}
 	
+	
+	@ResponseBody 
+	@RequestMapping(value= "/ReservaitionCheckY.do", method = RequestMethod.POST)
+	public String ReservaitionCheck(
+			@RequestParam(value ="res_num", required = false) String res_num,
+			@RequestParam(value ="user_Id", required = false) String user_Id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
+				
+		System.out.println(res_num);
+
+		//예약 확인 변경
+		adminresService.updateResStateY(res_num);
+		//예약 횟수 조회
+		int Ycount = adminresService.adminTotalYResCount(user_Id);
+		
+		//맴버쉽 상승
+		if(Ycount >= 20) {
+			//adminresService.userMembershipUpdate("Gold");
+		}else if(Ycount >= 10) {
+			//Silver
+		}else if(Ycount >= 5) {
+			//Bronze
+		}else {
+			//Normal
+		}
+	
+		return res_num;
+	}
+	
+	
+	
 }
 
