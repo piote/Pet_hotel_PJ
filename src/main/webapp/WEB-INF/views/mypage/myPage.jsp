@@ -32,6 +32,7 @@
 		                  		<img src="${contextPath}/resources/img/gold_medal.png" width="60px" height="60px" class="benefit">
 		                  </c:when>
 		                  <c:otherwise>
+		                  		<div class="normal_medal"></div>
 		                  </c:otherwise>
 	                  </c:choose>
                   </td>

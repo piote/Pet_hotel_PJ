@@ -124,6 +124,15 @@ a {
 	font-size: 18px;
 }
 
+.normal_medal {
+    width: 30px;
+    height: 3px;
+    background-color: #D9D9D9;
+    margin-left: 25px;
+    position: relative;
+    left: 20px;
+}
+
 /* 예약 리스트*/
 #reserve {
 	width: 1050px;
