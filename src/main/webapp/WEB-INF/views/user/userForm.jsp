@@ -65,6 +65,7 @@ h5 {
 	padding: 20px 0;
 	margin: 20px auto;
 	border-radius: 15px;
+	box-shadow: 10px 5px 10px #a89c86;
 	position: relative;
 }
 
@@ -157,6 +158,9 @@ h5 {
 	right: 30px;
 	font-weight: 400;
 }
+#overlappedID:hover{
+ opacity: 0.9;
+}
 
 .olmessagef {
 	color: red;
@@ -244,7 +248,7 @@ input#imageFileName {
             var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
             if( !idReg.test( $("input[name=id]").val() ) ) {
                 alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
-                return;
+                return false;
             }
   
             if(form.idcheck.value=="false"){
