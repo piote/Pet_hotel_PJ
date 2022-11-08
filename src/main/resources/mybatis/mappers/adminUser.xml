@@ -79,13 +79,21 @@
    </select>
    
     <!-- 회원 정보 수정 -->
- 	<update id="adminUpdateUser" parameterType="userVO">
+ 	<update id="adminUpdateUser" parameterType="java.util.Map">
    		<![CDATA[
    			 update TB_USER
 	     	 set USER_PW= #{pw}, USER_NAME= #{name}, USER_EMAIL=#{email}, USER_TEL=#{tel}, USER_TEL_SUB=#{tel_sub},
-	     	 USER_MESSAGE=#{message}, USER_BIRTH=#{birth}
+	     	 USER_MESSAGE=#{message}, USER_BIRTH=#{birth}]]>
+	     	 <choose>
+	     	 	<when test="img_name!=null and img_name!=''">
+	     	 		,IMG_NAME = #{img_name}
+	     	 	</when>
+	     	 	<otherwise>
+	     	 		,IMG_NAME = null
+	     	 	</otherwise>
+	     	 </choose>
 	    	 where USER_ID=#{id}
-   		]]>
+   		
    	  </update>
    	  
    	  <!-- 회원탈퇴/활성화  -->

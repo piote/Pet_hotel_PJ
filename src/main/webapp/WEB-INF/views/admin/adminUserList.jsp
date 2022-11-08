@@ -292,7 +292,7 @@
                 <label><input type="checkbox" name="reservation" id="res_X" value="X">X</label>
             </div>
         </div>
-        <form name="modUserForm" action="${contextPath}/modMember.do" method="post">
+        <form name="modUserForm" action="${contextPath}/modMember.do" method="post enctype="multipart/form-data">
             <table class="list_tb">
                 <tr class="tb_title">
                     <td class="user_id">아이디</td>
