@@ -300,6 +300,10 @@ function modHtml(obj){
         var birth = user_data[num].birth;
         var birth_s = birth.substring(0, 10);
 
+        //캐시로 이미지가 안변하는것을 방지하기위해
+        //의미없는 숫자를 붙이려고 선언한 변수
+        var tmpDate = new Date();
+
         var message = user_data[num].message;
         if(message.substring(0, 1)=='Y'){
             var message_s = '&nbsp;&nbsp;&nbsp;<input type="radio" name="message" value="Y" checked="checked" >&nbsp;Y &nbsp;&nbsp;<input type="radio" name="message" value="N">&nbsp;N</span>'
@@ -326,9 +330,10 @@ function modHtml(obj){
         var html =
             '<td colspan="2">'+
                 '<div class="profil">'+
-                    '<img id="preview" src="'+contextPath+'/resources/user/user_image/'+user_data[num].img_name+'" alt="'+user_data[num].id+'profil" onerror="this.src=\''+contextPath+'/resources/img/user.png\';">'+
+                    '<img id="preview" src="'+contextPath+'/resources/user/user_image/'+user_data[num].img_name+"?"+tmpDate.getTime()+'" alt="'+user_data[num].id+'profil" onerror="this.src=\''+contextPath+'/resources/img/user.png\';">'+
                 '</div>'+
                 '<input id="profil_img_name" type="file" name="img_name" onchange="readURL(this);">'+
+                '<input id="old_img_name" type="hidden" name="old_img_name" value="'+user_data[num].img_name+'">'+
             '</td>'+
             '<td colspan="2">'+
                 '<span class="info_box info_id">아이디 : <input type="text" name="id" id="id" value= "'+user_data[num].id+'" readonly></span>'+
@@ -362,12 +367,16 @@ function modUser(){
     var result = confirm("수정하시겠습니까?");
     if(result){
             var queryString = $("form[name=modUserForm]").serialize() ;
+            var formData = new FormData($("form[name=modUserForm]")[0]);
             console.log(queryString +' '+ $('form[name=modUserForm]'))
             $.ajax({
                 type : 'post',
                 url : '/adminModUser.do',
-                data : queryString,
+                enctype: 'multipart/form-data',
+                data : formData,
                 dataType : 'json',
+                processData: false,
+	            contentType: false,
                 success : function(data){
                 //총데이터 수 저장
                 totalData = data.length;

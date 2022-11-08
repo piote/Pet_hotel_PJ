@@ -31,8 +31,8 @@ public class AdminUserServiceImpl implements AdminUserService {
 	
 	//유저수정
 	@Override
-	public int UpdateUser(UserVO userVO) throws Exception{
-		return adminUserDAO.adminUpdateUser(userVO);
+	public int UpdateUser(Map userMap) throws Exception{
+		return adminUserDAO.adminUpdateUser(userMap);
 	}
 	
 	//활성화
