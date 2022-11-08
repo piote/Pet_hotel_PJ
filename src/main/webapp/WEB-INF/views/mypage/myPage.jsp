@@ -18,7 +18,14 @@
             <table>
                <tr>
                   <td>
-                     <img class="img_info" src="${contextPath}/resources/img/user.png" alt="회원이미지">
+                  	<c:choose>
+                  		<c:when test="${not empty user.img_name }">
+				  	 		<img class="img_info" src="${contextPath}/resources/user/user_image/${user.img_name}" alt="회원 이미지">	
+                  		</c:when>
+                  		<c:otherwise>
+                  			<img class="img_info" src="${contextPath}/resources/img/user.png" alt="회원이미지">
+                  		</c:otherwise>
+                  	</c:choose>
                   </td>
                   <td>
 	      	          <c:choose>
