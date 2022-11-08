@@ -53,6 +53,18 @@
     font-weight: 500;
 }
 
+.modCon table td label {
+	display: inline-block;
+    width: 100px;
+    height: 25px;
+    border: 1px solid #aaa;
+    border-radius: 7px;
+    background-color: #fff;
+    font-size: 13px;
+    line-height: 25px;
+    text-align: center;
+    color: #444;
+}
 .modCon .head-cell .empha {
     position: absolute;
     top: 6px;
@@ -67,23 +79,50 @@
  }
  
 #preview {
-	display: block;
+	/* display: block;
     margin: 0;
     padding: 0;
     width: 100px;
     height: 100px;
     top: 205px;
-    right: 100px;
+    right: 100px; */
     border: 1px solid #000;
-    border-radius: 50%;
+    border-radius: 10%;
+    margin-top: 20px;
+    height: 130px;
+    margin-left: 10px;
 }
  
 input#imageFileName {
 	margin-left: 200px;
     margin-top: 35px;
     position: absolute;
-    top: 313px;
+    top: 301px;
     text-align: center;
+}
+
+/* input.upload-name {
+	position: absolute;
+	top: 370px;
+	right: 72px;
+	margin-top: 65px;
+	left: 658px;
+	text-align: center;
+	margin-left: 200px;
+    margin-top: 70px;
+    position: absolute;
+    top: 301px;
+    text-align: center;
+} */
+
+.upload-name {
+	 display: inline-block;
+    height: 30px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: none;
+    width: 78%;
+    color: #999999;
 }
  
 .modCon th, .modCon td {
@@ -95,18 +134,33 @@ input#imageFileName {
     padding: 13px;
     vertical-align: middle;
 }
+
+.modCon td .fileMod{
+	height: auto;
+    /* padding-left: 20px; */
+    box-sizing: border-box;
+    padding: 10px;
+}
 /* .modCon td .idpw-info {
     vertical-align: middle;
 } */
 
+.modCon td .fileMod input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
 
 .modCon tr p{
 	margin:5px 0;
 	width: 150px;
 }
 
-.modCon tr input{margin:5px 0;}
-.modCon tr .txtBox{width:300px;}
+/* .modCon tr input{margin:5px 0;} */
+.modCon tr .txtBox{width:370px;}
 .btn1{
 	display: inline-block;
     width: 200px;
