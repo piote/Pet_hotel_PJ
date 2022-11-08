@@ -245,7 +245,7 @@ input#imageFileName {
             	alert('아이디는 4~12자 이내로 입력해주세요');
             	form.id.select();
             	form.id.focus();
-            	return;
+            	return false;
             }
             for(var i=0; i<form.id.value.length; i++){
             	var ch = form.id.value.charAt(i);
@@ -253,7 +253,7 @@ input#imageFileName {
             		alert('아이디는 영문 소문자로만 입력이 가능합니다.')
             		form.id.select();
                 	form.id.focus();
-                	return;
+                	return false;
             	}
             }
             if(form.idcheck.value=="false"){
