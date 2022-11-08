@@ -348,27 +348,11 @@
             });
             
         }
-        
-
         function popClose(){
             $('.modal-bg').hide();
             $('.modal-wrap').hide();
         }
     </script>
-
-<%-- 	<c:choose>
-					<c:when test="${result=='passwordFailed' }">
-				 		  <script> 
-						    window.onload=function SweetAlert(){
-						    	Swal.fire({
-							    	  icon: 'error',
-							    	  title: '',
-							    	  text: '비밀번호가 틀립니다.다시 입력하세요!!',
-							    	})
-						    }
-					  	  </script>
-					</c:when>
-				</c:choose> --%>
 </head>
 <body>
     <div class="membership">
