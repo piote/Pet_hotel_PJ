@@ -105,7 +105,7 @@
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewDetail_3.jsp" />
 	</definition>		
 	 
-	 <definition name="reviewForm" extends="baseLayout">
+	 <definition name="/review/reviewForm" extends="baseLayout">
 	      <put-attribute name="title" value="리뷰 쓰기" />
 	      <put-attribute name="body" value="/WEB-INF/views/review/reviewForm.jsp" />
 	</definition>	

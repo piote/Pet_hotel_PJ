@@ -115,7 +115,7 @@
 				FROM tb_reservation res
 				left join tb_petservice pet
                 on res.RESERVATION_NUM = pet.RESERVATION_NUM
-               
+                where res.user_id = #{user_id}	
                 GROUP BY ROWNUM, res.RESERVATION_NUM, res.RESERVATION_ST, res.USER_ID, res.RESERVATION_STATE
 				order by RESERVATION_ST asc)        
                     where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
@@ -202,7 +202,7 @@
 			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url,ROOM_GRADE
 				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image_url,ROOM_GRADE
 						from TB_REVIEW
-						where ROOM_GRADE = 'Superior'
+						where ROOM_GRADE = 'Suite'
 	                    START WITH  parentNO is null
 						CONNECT BY PRIOR review_num = parentNO
 						ORDER SIBLINGS BY review_num DESC)
@@ -219,7 +219,7 @@
 			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url,ROOM_GRADE
 				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image_url,ROOM_GRADE
 						from TB_REVIEW
-						where ROOM_GRADE = 'Sweet'
+						where ROOM_GRADE = 'Superior'
 	                    START WITH  parentNO is null
 						CONNECT BY PRIOR review_num = parentNO
 						ORDER SIBLINGS BY review_num DESC)
