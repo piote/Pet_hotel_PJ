@@ -166,7 +166,7 @@
 			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url, ROOM_GRADE  
 				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image_url, ROOM_GRADE 
 						from TB_REVIEW
-						
+						where user_id = #{user_id}	
 	                    START WITH  parentNO is null
 						CONNECT BY PRIOR review_num = parentNO
 						ORDER SIBLINGS BY review_num DESC)

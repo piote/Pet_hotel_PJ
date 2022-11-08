@@ -88,7 +88,7 @@
          </div>
          <div id="review">  
             <h3>최근 나의 후기</h3>
-            <a href="${contextPath}/mypage/checkReview.do"><img src="${contextPath}/resources/img/plus.png" alt="더보기">more</a>
+            <a href="${contextPath}/review/checkReview.do"><img src="${contextPath}/resources/img/plus.png" alt="더보기">more</a>
          </div>
          <div class="mypage_review">
             <table>
