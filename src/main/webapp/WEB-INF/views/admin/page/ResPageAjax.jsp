@@ -166,49 +166,49 @@
 				<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다. -->
 				<c:choose>
 				 	<c:when test="${i.count-1 == P}">
-				 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count-1})">${i.count}</li>
+				 		<li class="pageNO pageNOW  pageNumberF" onClick="reslistPage(${i.count-1})">${i.count}</li>
 				 	</c:when>
 				 	<c:otherwise>
-				 		<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
+				 		<li class="pageNO  pageNumberF" onClick="reslistPage(${i.count-1})">${i.count}</li>
 				 	</c:otherwise>
 				</c:choose>			
 			</c:forEach>
-			<li class="pageNO pageUp" onClick="pageUP()">next</li>
+			<li class="pageNO pageUp" onClick="pageUP(${PI},${P})">next</li>
 		</div>
 	</c:when>
 
 	<c:when test="${P >= 3 && PI > P + 3}">
 	<!-- 현재페이지가 4이상 이고 마직막페이지 2 이하다. -->
 		<div id="PageAjax" class="PageAjax">
-			<li class="pageNO pageDown" onClick="pageDown()">pre</li>
+			<li class="pageNO pageDown" onClick="pageDown(${P})">pre</li>
 			<c:forEach varStatus="i" begin="${1}" end="${5}"><!-- 페이지는 5가지만 표시한다. 수에 맞춰 이동-->			
 				
 				<c:choose>
 				 	<c:when test="${P + i.count - 3 == P}">
-				 		<li class="pageNO pageNOW" onClick="reslistPage(${P + i.count - 3})">${P + i.count - 2}</li>
+				 		<li class="pageNO pageNOW  pageNumberF" onClick="reslistPage(${P + i.count - 3})">${P + i.count - 2}</li>
 				 	</c:when>
 				 	<c:otherwise>
-				 		<li class="pageNO" onClick="reslistPage(${P + i.count - 3})">${P + i.count - 2}</li>
+				 		<li class="pageNO  pageNumberF" onClick="reslistPage(${P + i.count - 3})">${P + i.count - 2}</li>
 				 	</c:otherwise>
 				</c:choose>		
 			</c:forEach>
-			<li class="pageNO pageUp" onClick="pageUP()">next</li>
+			<li class="pageNO pageUp" onClick="pageUP(${PI},${P})">next</li>
 		</div>
 	</c:when>
 
 	<c:when test="${P >= 3 && PI-3 <= P && PI > P && PI>5}"><!-- 현재페이지가 4이상이고 최대페이지 또는 최대페이지랑 가까울때 페이지 수가6이상일때 -->
 		
 		<div id="PageAjax" class="PageAjax">
-			<li class="pageNO pageDown" onClick="pageDown()">pre</li>
+			<li class="pageNO pageDown" onClick="pageDown(${P})">pre</li>
 			<c:forEach varStatus="i" begin="${1}" end="${5}">
 				<!-- 값을 보낼때 페이지 정보를 보내서 다시 불러오면 몇페이지인지 확인한다.-->
 				<c:choose>
 				 	<c:when test="${PI - 6 + i.count == P}">
 				 		<!-- 현재페이지 색표시 총페이지 7이고 현재 5페이지 일때 PI=6 -->
-				 		<li class="pageNO pageNOW" onClick="reslistPage(${PI - 6 + i.count})">${PI - 5 + i.count}</li>
+				 		<li class="pageNO pageNOW  pageNumberF" onClick="reslistPage(${PI - 6 + i.count})">${PI - 5 + i.count}</li>
 				 	</c:when>
 				 	<c:otherwise>
-				 		<li class="pageNO" onClick="reslistPage(${PI - 6 + i.count})">${PI - 5 + i.count}</li>
+				 		<li class="pageNO  pageNumberF" onClick="reslistPage(${PI - 6 + i.count})">${PI - 5 + i.count}</li>
 				 	</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -222,10 +222,10 @@
 				<c:choose>
 				 	<c:when test="${P == i.count-1}">
 				 		<!-- 현재페이지 색표시 총페이지 -->
-				 		<li class="pageNO pageNOW" onClick="reslistPage(${i.count-1})">${i.count}</li>
+				 		<li class="pageNO pageNOW  pageNumberF" onClick="reslistPage(${i.count-1})">${i.count}</li>
 				 	</c:when>
 				 	<c:otherwise>
-				 		<li class="pageNO" onClick="reslistPage(${i.count-1})">${i.count}</li>
+				 		<li class="pageNO  pageNumberF" onClick="reslistPage(${i.count-1})">${i.count}</li>
 				 	</c:otherwise>
 				</c:choose>
 			</c:forEach>

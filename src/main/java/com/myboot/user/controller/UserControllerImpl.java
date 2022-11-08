@@ -383,6 +383,12 @@ public class UserControllerImpl implements UserController{
 			
 			result = userService.modMember(user);
 			HttpSession session = request.getSession();
+			
+			UserVO oldUserVO = (UserVO) session.getAttribute("user");
+			user.setGrade(oldUserVO.getGrade());
+			
+			System.out.println(user);
+			
 			session.removeAttribute("user");
 			session.setAttribute("user",user);
     		ModelAndView mav = new ModelAndView();
@@ -471,7 +477,7 @@ public class UserControllerImpl implements UserController{
 		System.out.println(userVO.getId()+userVO.getPw()+userVO.getName()+userVO.getEmail()+userVO.getTel()+userVO.getTel_sub()+userVO.getMessage()+userVO.getBirth());
 		
 		String imageFileName= upload(multipartRequest, id);
-		
+		userVO.setImg_name(imageFileName);
 		
 		//============================================realPath 받아오기
 		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
@@ -524,6 +530,10 @@ public class UserControllerImpl implements UserController{
 				MultipartFile mFile = multipartRequest.getFile(fileName);
 				imageFileName=mFile.getOriginalFilename();
 				System.out.println(imageFileName);
+				
+				if(imageFileName==null || imageFileName=="") {
+					return "";
+				}
 				
 				String picfileType = imageFileName.substring(imageFileName.lastIndexOf("."));
 				System.out.println(picfileType);
