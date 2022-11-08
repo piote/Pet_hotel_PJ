@@ -20,7 +20,7 @@ public class UserVO {
 	private Date birth;
 	private String joinDate;
 	private String grade;
-	
+	private String img_name;
 
 	public UserVO() {
 		System.out.println("userVO 호출");
