@@ -234,7 +234,7 @@
 								<td>
 									<c:choose>
 										<c:when test="${reserves.res_state == 'N'}">
-											<a onclick="popup(${reserves.res_num })"<%-- href="${contextPath}/reservationUpdate.do?reservation_num=${reserves.res_num }" --%>>
+											<a onclick="popup(${reserves.res_num })">
 												<img src="${contextPath}/resources/img/revision.png"/>
 											</a>
 										</c:when>
