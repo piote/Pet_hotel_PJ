@@ -95,7 +95,7 @@
 	 
 	</head>
 	<body>
-		<form method="post" action="${contextPath}/modMember.do"> 
+		<form method="post" action="${contextPath}/modMember.do" enctype="multipart/form-data"> 
 		   <div id="wrap">
 			   	<section class="container">
 				   	<div class="petitle">
@@ -120,11 +120,12 @@
                                     <div class="head-cell"><span class="empha">*</span>프로필</div>
                                 </th>
                                 <td>
-                                		<img id="preview" src="#" height=100 onerror="this.src='${contextPath}/resources/img/no_img.png'"/>
+                                		<img id="preview" src="${contextPath}/resources/user/user_image/${user.img_name}" height=100 onerror="this.src='${contextPath}/resources/img/no_img.png'"/>
                                 	<div class="fileMod">
 	                               		<label for="imageFileName">이미지 파일</label>
 				                		<input class="upload-name" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL(this);"  disabled >
 					                	<input type="file" id="imageFileName" name="imageFileName"  onchange="readURL(this);"/>
+					                	<input  type= "hidden"   name="oldFileName" value="${user.img_name}" />
 					                </div>
 			                	</td>
 					           <%--  <td>
