@@ -314,10 +314,12 @@
                 		var next = 5 - count;
                 	}else if(count<10){
                 		var next = 10 - count;
-                	}else {
+                	}else if(count<20){
                 		var next = 20 - count;
+                	}else{
+                		var next = 0;
                 	}
-                	
+           
                 	$('#count_').append(next);
                 	
                 	if(count<5) {
