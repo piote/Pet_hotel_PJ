@@ -101,7 +101,6 @@
 				   	<div class="petitle">
 				   	<h3><img src="${contextPath}/resources/img/petel.png" alt="정보수정">&nbsp;회원 정보 수정</h3></div>
 			      <div class="modCon">
-				     <!-- <table border="1" width="50%" height="80%"> -->
 				     <table>
 				         <tr>
 					            <th>

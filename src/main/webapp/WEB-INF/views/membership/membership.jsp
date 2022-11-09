@@ -309,7 +309,6 @@
                 	count=data.count;
                 	console.log(data.count);
                 	$('#count').append(count);
-                	
                 	if(count<5){
                 		var next = 5 - count;
                 	}else if(count<10){
