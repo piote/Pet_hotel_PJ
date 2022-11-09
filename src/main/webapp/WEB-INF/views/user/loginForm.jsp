@@ -62,6 +62,7 @@ h5 {
   padding: 20px 0;
   margin: 20px auto;
   border-radius: 15px;
+  box-shadow: 10px 5px 10px #a89c86;
 }
 .form-wrapper button {
   cursor: pointer;

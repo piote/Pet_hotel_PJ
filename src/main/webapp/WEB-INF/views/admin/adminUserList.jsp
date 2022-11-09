@@ -174,6 +174,7 @@
             height: 0;
             transition: height 0.3s;
             overflow: hidden;
+            position: relative;
         }
         #addTr button{
             width: 60px; height: 25px;
@@ -195,14 +196,38 @@
             opacity: 0;
         }
         #addTr td:nth-child(2){
-            padding-left: 100px;
+            /* padding-left: 100px; */
         }
         #addTr td:nth-child(2) .info_box input[type=text]{
             width: 70%;
         }
         #addTr td:nth-child(3){
-            padding-left: 70px;
+            /* padding-left: 70px; */
             padding-right: 35px;
+        }
+        #addTr td:nth-child(4){
+            position: absolute;
+            top: 100px;
+            width: 190px;
+            right: 10px;
+        }
+        .profil{
+            width: 150px;
+            height: 150px;
+            background-color: aliceblue;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 2px 2px 5px #00000030;
+            margin: 0 auto;
+        }
+        .profil img{
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+        input[type=file]{
+            width: 180px;
+            margin-top: 20px;
         }
         .info_box{
             width: 100%; height: auto;
@@ -240,6 +265,7 @@
     </style>
 </head>
 <body>
+    <input id="contextPath" type="hidden" value="${contextPath}" name="contextPath">
     <div class="list_wrap">
         <div class="list_option">
             <div class="search_wrap" id="searchForm" name="searchForm" onSubmit="search()" >
@@ -266,7 +292,7 @@
                 <label><input type="checkbox" name="reservation" id="res_X" value="X">X</label>
             </div>
         </div>
-        <form name="modUserForm" action="${contextPath}/modMember.do" method="post">
+        <form name="modUserForm" action="${contextPath}/modMember.do" method="post enctype="multipart/form-data">
             <table class="list_tb">
                 <tr class="tb_title">
                     <td class="user_id">아이디</td>

@@ -102,7 +102,7 @@
    		<![CDATA[
    			 update TB_USER
 	     	 set user_pw= #{pw}, user_email=#{email}, user_tel=#{tel}, user_tel_sub=#{tel_sub},
-	     	 user_message=#{message}, USER_BIRTH=#{birth}
+	     	 user_message=#{message}, USER_BIRTH=#{birth}, user_img_name=#{img_name}
 	    	 where user_id=#{id}
    		]]>
    	  </update>

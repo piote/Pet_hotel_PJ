@@ -383,6 +383,12 @@ public class UserControllerImpl implements UserController{
 			
 			result = userService.modMember(user);
 			HttpSession session = request.getSession();
+			
+			UserVO oldUserVO = (UserVO) session.getAttribute("user");
+			user.setGrade(oldUserVO.getGrade());
+			
+			System.out.println(user);
+			
 			session.removeAttribute("user");
 			session.setAttribute("user",user);
     		ModelAndView mav = new ModelAndView();
@@ -419,7 +425,6 @@ public class UserControllerImpl implements UserController{
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
-	
 	
 //	프로필 이미지
 	@Override

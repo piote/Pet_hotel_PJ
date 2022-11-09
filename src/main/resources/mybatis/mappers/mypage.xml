@@ -23,12 +23,9 @@
 	<result property="res_end" column="reservation_end" />
 	<result property="res_state" column="reservation_state" />
 	<result property="res_num" column="reservation_num" />
-	<result property="user_name" column="user_name" />
-	<result property="user_tel" column="user_tel" />
 	<result property="pet_name" column="pet_name" />
     <result property="user_id" column="user_id" />
    	<result property="payTime" column="PAY_TIME" />
- 	<result property="pet_num" column="PET_NUM" />
 </resultMap> 
 
 
