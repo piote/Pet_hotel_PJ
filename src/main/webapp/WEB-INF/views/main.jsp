@@ -70,6 +70,9 @@
         .slider[s_num-data="2"]{
             background-image: url('${contextPath}/resources/img/slidermain_2.png');
         }
+        .slider[s_num-data="3"]{
+            background-image: url('${contextPath}/resources/img/slidermain_3.png');
+        }
         .txt_wrap{
             width: 1000px;
             height: 230px;
@@ -421,6 +424,11 @@
                     }
             });
             
+            setInterval(function(){
+                slider_right();
+            },5000);
+
+
         });
         function inputReviewData(){
         	 $('#review_info').empty();
@@ -463,7 +471,7 @@
         }   
 
         var slider_num = 1;
-        var slider_count = 2;
+        var slider_count = 3;
         
         function slider_left(){
             --slider_num;
@@ -500,7 +508,7 @@
     <div class="slider_con">
         <div class="slider able_slider" s_num-data="1"></div>
         <div class="slider" s_num-data="2"></div>
-        <!-- <div class="slider" s_num-data="3" ></div> -->
+        <div class="slider" s_num-data="3"></div>
     </div>
   </div>
 

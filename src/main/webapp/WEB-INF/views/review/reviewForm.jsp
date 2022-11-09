@@ -17,40 +17,244 @@
 <html>
 <head>
 <style>
-
-#reviewForm fieldset{
+	
+ 	.fd1 {
     display: inline-block;
     direction: rtl;
     border:0;
     }
-
     #reviewForm fieldset legend{
         text-align: right;
     }
-    
-    #reviewForm input[type=radio]{
+    .fd1 >input {
         display: none;
     }
-    
-    #reviewForm label{
+    .fd1 > label{
         font-size: 2em;
         color: transparent;
         text-shadow: 0 0 0 #f0f0f0;
-        text-shadow: 0 0 0 rgba(211, 211, 211, 0.8);
-        
+        text-shadow: 0 0 0 rgba(211, 211, 211, 0.8);  
     }
-    #reviewForm label:hover{
+    .fd1 > label:hover{
         text-shadow: 0 0 0 rgba(255, 211, 0, 0.66);
     }
-    #reviewForm label:hover ~ label{
+    .fd1 > label:hover ~ label{
         text-shadow: 0 0 0 rgba(255, 211, 0, 0.66);
     }
-    #reviewForm input[type=radio]:checked ~ label{
+    .fd1 > input:checked ~ label{
         text-shadow: 0 0 0 rgba(255, 211, 0, 0.66);
     }
-  
-	
+
+    
+    .div {
+    	  width: 1270px;
+    	  height: 600px;
+    	  
+
+    	  margin-left: 17%;
+    	    margin-top: 14%;
+    	}
+    	      
+
+    	table {
+    	  width: 100%;
+
+    	}
+
+    	.w_tr1 >td{
+    	  border-bottom: 1px solid #ddd;
+    	}
+
+    	.but {
+    	  margin-top: 30px;
+    	  position: absolute;
+    	  right: 25%;
+    	}
+
+    
+    	.fd2 > label {
+    		  font-size: 18px;
+        	  line-height: 2rem;
+        	  padding: 0.2em 0.4em;
+    	}
+    	span {
+    	  vertical-align: middle;
+    	}
+
+    	.fd2 > label > input{
+    	  vertical-align: middle;
+    	  appearance: none;
+    	  border: max(2px, 0.1em) solid gray;
+    	  border-radius: 50%;
+    	  width: 1.25em;
+    	  height: 1.25em;
+    	  transition: border 0.3s ease-in-out;
+    	}
+
+    	.fd2 > label > input:checked {
+    	  border: 0.4em solid tomato;
+    	}
+
+    	.fd2 > label > input:focus-visible {
+    	  outline-offset: max(2px, 0.1em);
+    	  outline: max(2px, 0.1em) dotted tomato;
+    	}
+
+    	.fd2 > label > input:hover {
+    	  box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+    	  cursor: pointer;
+    	}
+
+    	.fd2 > label > input:disabled {
+    	  background-color: lightgray;
+    	  box-shadow: none;
+    	  opacity: 0.7;
+    	  cursor: not-allowed;
+    	}
+
+    	.fd2 > label > input:disabled + span {
+    	  opacity: 0.7;
+    	  cursor: not-allowed;
+    	}
+
+    	/* Global CSS */
+    	.fd2 {
+    	  display: flex;
+    	  justify-content: center;
+    	  border: none;
+    	  margin: 0;
+    	  padding: 40px 20px;
+    	  float: right;
+    	}
+
+    	*,
+    	*::before,
+    	*::after {
+    	  box-sizing: border-box;
+    	}
+
+
+    	.atc_content textarea{
+    	            box-sizing: border-box;
+    	            width: 100%; min-height:300px;
+    	            resize: none;
+    	            border: 0;
+    	            background-color: #eee;
+    	            font-size: 15px;
+    	            padding: 20px;
+    	            transition: background-color 0.2s;
+    	           
+    	            -ms-overflow-style: none; /* IE and Edge */
+    	    		scrollbar-width: none; /* Firefox */
+    	        }
+    	        .atc_content textarea::placeholder{
+    	            color: #909090;
+    	        }
+    	        .atc_content textarea:focus{
+    	            background-color: rgb(228, 228, 228);
+    	            outline: none;
+    	        }
+    		   	.atc_content textarea::-webkit-scrollbar {
+    			    display: none; /* Chrome, Safari, Opera*/
+    			}
+
+    	#questionscommentLengh{      
+    	  text-align: right;
+    	        	}
+    	.id {
+    	  float: left;
+    	}
+    	.d_file{
+    	 	background-color:  white;
+    	    border: 2px solid #adb5bd;
+    	    width: 90px; height: 30px;
+    	    line-height: 30px;
+    	    color: black; 
+    	    text-align: center;
+    	    text-decoration: none;
+    	    display: inline-block;
+    	    font-size:14px;
+    	    margin: 4px 2px;
+    	    transition-duration: 0.4s;
+    	    cursor: pointer;
+    	    border-radius: 5%;
+    		float: left;
+    	}
+    	 .image {
+    		  	background-color:  white;
+        	    border: 2px solid #adb5bd;
+        	    width: 90px; height: 30px;
+        	    line-height: 30px;
+        	    color: black; 
+        	    text-align: center;
+        	    text-decoration: none;
+        	    display: inline-block;
+        	    font-size:14px;
+        	    margin: 4px 2px;
+        	    transition-duration: 0.4s;
+        	    cursor: pointer;
+        	    border-radius: 5%;
+        	    float: left;
+    	 }
+    	 .image:hover {
+    		 	background-color: #adb5bd;
+    	  	    color: white;
+    	 }
+    	 
+    	.star {
+    	  float: right;
+    	}
+    	.back {
+    	 	background-color:  white;
+    	    border: 2px solid #adb5bd;
+    	    width: 90px; height: 30px;
+    	    line-height: 30px;
+    	    color: black; 
+    	    text-align: center;
+    	    text-decoration: none;
+    	    display: inline-block;
+    	    font-size:14px;
+    	    margin: 4px 2px;
+    	    transition-duration: 0.4s;
+    	    cursor: pointer;
+    	    border-radius: 5%;
+    	  float: right;
+    	  margin-right: 10px;
+    	}
+    	.back:hover {
+		 	background-color: #adb5bd;
+	  	    color: white;
+    	}
+    	.questionsCommentInfo {
+    	 	background-color:  white;
+    	    border: 2px solid #adb5bd;
+    	    width: 90px; height: 30px;
+    	    line-height: 30px;
+    	    color: black; 
+    	    text-align: center;
+    	    text-decoration: none;
+    	    display: inline-block;
+    	    font-size:14px;
+    	    margin: 4px 2px;
+    	    transition-duration: 0.4s;
+    	    cursor: pointer;
+    	    border-radius: 5%;
+    	  float: right !important;
+    	}   
+    
+    	.questionsCommentInfo:hover {
+    	 	background-color: #adb5bd;
+	  	    color: white;
+    	}
+    
+    
+    
 </style>
+
+
+
+
+
 <meta charset="UTF-8">
 
 
@@ -69,95 +273,95 @@
       }
   }  
   function backToList(obj){0
-    obj.action="${contextPath}/review/reviewDetail_1.do";
+    obj.action="${contextPath}/review/reviewBoard.do";
     obj.submit();
   }
   
-  var cnt=1;
+
   function fn_addFile(){
-	  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
-	  cnt++;
+	  $("#d_file").append("<br>"+"<input type='file' name='file' />");
+	  
   }  
-  var Cell3 = newRow.insertCell();
+
+  
+  
   
 </script>
 <!--  <title>글쓰기창</title> -->
 </head>
 <body>
-<h1 style="text-align:center">글쓰기</h1>
-  <form name="reviewForm" id="reviewForm" method="post"   action="${contextPath}/review/addNewReview.do"   enctype="multipart/form-data">
-    <table border="0" align="center">
 
-      	 <tr>		
-					<td align="right"> 작성자</td>
-					<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${user.id }" readonly/> 
-					<input type="hidden" name="res_num" value="${res_num}"/> 
-					</td>
-		 </tr>
-		 
-		 
-		 
-	     <tr>
-			   <td align="right">글제목: </td>
-			   <td colspan="2"><input type="text" size="67"  maxlength="500" name="title" /></td>
-		 </tr>
-	 		<tr>
-				<td align="right" valign="top">
-						<span class="text-bold">별점을 선택해주세요</span>
-				  
-				</td>
-				<td colspan=2>
-					
-						<fieldset>
+<div class="div"> 
+<h2 style="text-align:left">리뷰 쓰기</h2>
+
+ <form name="reviewForm" id="reviewForm" method="post"   action="${contextPath}/review/addNewReview.do"   enctype="multipart/form-data">
+
+    <table class="table2">
+      <tr class="w_tr1">
+      <td>
+        <p class="id">${user.id}</p>
+        <input type="hidden" name="res_num" value="${res_num}"/>
+        <input type="hidden" name="rec" value="0"/> 
+      </td>
+      <td align="center"> 
+        <fieldset class="fd1">
 							
-							<input type="radio" name="rate" class="rate" value="5" checked="checked" id="rate1"><label
-								for="rate1">★</label>
-							<input type="radio" name="rate" class="rate" value="4" id="rate2"><label
-								for="rate2">★</label>
-							<input type="radio" name="rate" class="rate" value="3" id="rate3"><label
-								for="rate3">★</label>
-							<input type="radio" name="rate" class="rate" value="2" id="rate4"><label
-								for="rate4">★</label>
-							<input type="radio" name="rate" class="rate" value="1" id="rate5"><label
-								for="rate5">★</label>
-							<c:if test="rate==null">
-								
-							</c:if>
-						</fieldset>
-                </td>
-     </tr>	
- 	<tr>
-	<td align="right" valign="top"><br>추천: </td>
-	<td colspan=2><textarea name="rec" rows="10" cols="65" maxlength="50"></textarea> </td>
-</tr>
-	
-		<select name="ROOM_GRADE" ><option value="Deluxe">Deluxe(소형견)</option><option value="Suite">Suite(중형견)</option><option value="Superior">Superior(대형견)</option></select>
-	
+        <input type="radio" name="rate" class="rate" value="5" checked="checked" id="rate1"><label
+          for="rate1">★</label>
+        <input type="radio" name="rate" class="rate" value="4" id="rate2"><label
+          for="rate2">★</label>
+        <input type="radio" name="rate" class="rate" value="3" id="rate3"><label
+          for="rate3">★</label>
+        <input type="radio" name="rate" class="rate" value="2" id="rate4"><label
+          for="rate4">★</label>
+        <input type="radio" name="rate" class="rate" value="1" id="rate5"><label
+          for="rate5">★</label>
+        <c:if test="rate==null">
+          
+        </c:if>
+      </fieldset>    
+    </td>
+      <td>
+        <fieldset class="fd2">
+          <label>
+            <input type="radio" name="ROOM_GRADE" value="Deluxe" checked />
+            <span>Deluxe</span>
+          </label>
+        
+          <label>
+            <input type="radio" name="ROOM_GRADE" value="Suite" />
+            <span>Suite</span>
+          </label>
+        
+          <label>
+            <input type="radio" name="ROOM_GRADE" value="Superior"  />
+            <span>Superior</span>
+          </label>
+        </fieldset> 
 
-     <tr>
-		<!--  <td align="right">이미지파일 첨부:  </td>
-			  <td><input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
-			  <td><img  id="preview" src="#" alt="이미지 파일"  width=200 height=200/></td> -->
-			  
-			  
- 			  <td align="right">이미지파일 첨부</td> 
- 			  <td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td> 
-				
-				
-	   </tr>
-	   <tr>
-	      <td colspan="4"><div id="d_file"></div></td>
-	   </tr>
-	    <tr>
-	      <td align="right"> </td>
-	      <td colspan="2">
-	       <input type="submit" id="save" value="글쓰기" />
-	       <input type=button value="목록보기"onClick="backToList(this.form)" />
-	      </td>
-     </tr>
+
+      </td>
+      </tr>
+      
+      <tr> 
+      <td colspan="3" class="atc_content">
+        <textarea id="questionsCommendBox"name="title" spellcheck="false" maxlength="1000" placeholder="리뷰를 입력해주세요." onkeydown="resize(this)" onkeyup="resize(this)"></textarea>
+        
+        <div id="questionscommentLengh">
+        <button type="button" class="image" value="파일 추가" onClick="fn_addFile(); this.onclick=null;">파일 추가 </button>   
+        <button class="questionsCommentInfo" type="submit" value="리뷰 등록" >리뷰 등록</button>
+        <button class="back" value="목록보기"onClick="backToList(this.form)" > 목록 보기</button>
+        </div>
+      </td>
+      </tr>
+      <tr>
+      <td colspan="3"><div id="d_file"></div></td>
+      </tr>
     </table>
-  </form>
   
-
+   
+   
+  
+    </div>
 </body>
 </html>

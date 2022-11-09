@@ -249,11 +249,16 @@
 	         
 	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td> 
 	         <td class="w_td" width="20%" rowspan="2">               
-	               <c:if test="${review.image != null}"> 
-	       
+	           <c:choose>
+	           
+	         <c:when test="${review.image != null}"> 
 	                   <a href="${contextPath}/${review.image}" rel="prettyPhoto" title="This is the description"><img class="re_image" src="${contextPath}/${review.image}" width="150" height="150" alt="This is the title" />
-	                   
-	                </c:if>
+	                </c:when>
+	               
+	                <c:otherwise>
+	                </c:otherwise>
+	           </c:choose>   
+	               
 	         </td>
 	          <td class="w_td w_date"  width="15%" >${reviewDate}</td>
 	          </tr>      
