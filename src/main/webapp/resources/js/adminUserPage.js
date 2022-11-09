@@ -334,6 +334,7 @@ function modHtml(obj){
                 '</div>'+
                 '<input id="profil_img_name" type="file" name="img_name" onchange="readURL(this);">'+
                 '<input id="old_img_name" type="hidden" name="old_img_name" value="'+user_data[num].img_name+'">'+
+            	'<div class="bt_removeImg" onclick="removeImg()" >이미지삭제</div>'+
             '</td>'+
             '<td colspan="2">'+
                 '<span class="info_box info_id">아이디 : <input type="text" name="id" id="id" value= "'+user_data[num].id+'" readonly></span>'+
@@ -460,3 +461,8 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 } 
+
+function removeImg(){
+    $("#old_img_name").val('');
+    $("#preview").attr('src','');
+}
