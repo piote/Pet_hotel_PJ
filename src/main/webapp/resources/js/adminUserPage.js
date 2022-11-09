@@ -449,20 +449,51 @@ function getContextPath() {
     console.log(contextPath);
 }
 
-//프로필 이미지 미리보기
+//프로필 이미지 미리보기+확장자체크
 function readURL(input) {
+    //파일이 있으면 실행
     if (input.files && input.files[0]) {
+        //파일경로를 (input[type=file]의 값) fileName에 저장
         var fileName = $("#profil_img_name").val();
         var reader = new FileReader();
-        reader.onload = function (e) {
-            $('#preview').attr('src', e.target.result);
+
+        //경로를 뺀 파일이름이 저장
+        var realfileName = fileName.split('\\').pop().toLowerCase();
+        
+        //checkFileName 실행 후 값이 true이면 실행
+        if(checkFileName(realfileName)){
+            reader.onload = function (e) { 
+                $('#preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }else{
+            //checkFileName false면 받아온 파일 값 지우기
+            $("#profil_img_name").val("");
         }
-        //$(".upload-name").val(fileName);
-        reader.readAsDataURL(input.files[0]);
+        
     }
 } 
 
+//이미 등록된 프로필 삭제
 function removeImg(){
     $("#old_img_name").val('');
     $("#preview").attr('src','');
+}
+
+function checkFileName(str){
+ 
+    //확장자 체크
+    var ext =  str.split('.').pop().toLowerCase();
+    if($.inArray(ext, ['bmp', 'jpg', 'png', 'jpeg', 'gif']) == -1) {
+        alert(ext+'파일은 업로드 하실 수 없습니다.');
+        return false;
+    }
+ 
+    //파일명 길이 체크
+    if(str.length>=70){
+        alert('파일명이 너무 길어 업로드 하실 수 없습니다.');
+        return false;
+    }
+    return true;
+
 }
