@@ -828,9 +828,7 @@
 				var res_num = $("#view_Res_Num").val();
 				//userId 받도록 만들기 jsp
 				var user_Id = $("#view_User_Id").val();
-				
-				
-				
+
 				
 				$.ajax({
 	    			url:'/ReservaitionCheckY.do',
@@ -838,12 +836,14 @@
 	    			data:{ "res_num": res_num,
 	    					"user_Id": user_Id },
 	    			type:'post',
-	    			async:true,
 	    			dataType:'json',
 	    			success:function(data){
 	    				alert("예약이 확인 되었습니다.");
 	    				reslistPage(P);
-					}
+					},
+					error : function(error) {
+				        alert("Error!");
+				    }		
 				});
 			}	
 		}

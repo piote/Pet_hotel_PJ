@@ -1,5 +1,6 @@
 package com.myboot.admin.reservation.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -93,6 +94,15 @@ public class AdminResServiceImpl implements AdminResService{
 		int userYResTotalNum = 0;
 		userYResTotalNum = adminresDAO.adminTotalYResCount(userID);
 		return userYResTotalNum;
+	}
+	
+	//맴버십 변경
+	@Override
+	public void userMembershipUpdate(String userId) throws Exception {
+		System.out.println(userId);
+		
+		adminresDAO.userMembershipUpdate(userId);	
+		System.out.println("end");
 	}
 
 }

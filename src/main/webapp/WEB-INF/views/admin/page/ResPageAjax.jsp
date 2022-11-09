@@ -45,6 +45,7 @@
 				            		<ul>
 				            			<li class="res_Date_Veiw_Box">
 				            				<input type="hidden" id="view_Res_Num">
+				            				<input type="hidden" id="view_User_Id">
 				            				<ul>
 				            					<li><span class="check_Date">Check In</span></li>
 				            					<li class="date_Cal_Text"></li>

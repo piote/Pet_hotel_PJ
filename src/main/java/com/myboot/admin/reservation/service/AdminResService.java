@@ -33,4 +33,6 @@ public interface AdminResService {
 
 	public int adminTotalYResCount(String userID) throws Exception;
 
+	public void userMembershipUpdate(String string) throws Exception;
+
 }
