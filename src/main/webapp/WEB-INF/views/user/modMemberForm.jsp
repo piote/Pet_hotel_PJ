@@ -103,18 +103,6 @@
 			      <div class="modCon">
 				     <!-- <table border="1" width="50%" height="80%"> -->
 				     <table>
-				     	<%-- <tr>
-					            <th>
-                                    <div class="head-cell"><span class="empha">*</span>프로필</div>
-                                </th>
-					            <td>
-					            	<input type="file" id="imageFileName" name="imageFileName"
-									onchange="readURL(this);" /> <img id="preview" src="${contextPath}/resources/img/user.png"
-									height=40
-									onerror="this.src='${contextPath}/resources/img/no_img.png'" />
-					            </td>
-					            
-				         </tr> --%>
 				         <tr>
 					            <th>
                                     <div class="head-cell"><span class="empha">*</span>프로필</div>
@@ -128,14 +116,6 @@
 					                	<input  type= "hidden"   name="oldFileName" value="${user.img_name}" />
 					                </div>
 			                	</td>
-					           <%--  <td>
-					            	<input class="upload-name" spellcheck="false" value="프로필 사진"
-									onchange="readURL(this);" disabled><input class="txtBox" type="file" id="imageFileMod" name="imageFileNameMod" value="${user.img_name }" onchange="readURL(this);" />
-					            	<img id="preview" src="${contextPath}/resources/img/user.png"
-									height=40
-									onerror="this.src='${contextPath}/resources/img/no_img.png'" />
-					            </td> --%>
-					            
 				         </tr>
 				         <tr>
 					            <th>
