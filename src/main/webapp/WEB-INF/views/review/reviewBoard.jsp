@@ -75,23 +75,6 @@
       
      }
 
-   /*  img {width: 25%;
-     height: 350px;
-     object-fit: cover;
-     margin-top: 50px;
-     margin-right: 10px;
-     display: inline;
-     border-radius: 5%;
-     transition: all 0.2s linear;
-   }
-     img {
-          width: 100%; height: 100%;
-          opacity: 0; 
-          transition: all 1s;
-          overflow: hidden;
-          border-radius: 5%;
-      }*/
-
   .img_wrap>a:hover {
         transform: scale(1.2);
         overflow: hidden;
