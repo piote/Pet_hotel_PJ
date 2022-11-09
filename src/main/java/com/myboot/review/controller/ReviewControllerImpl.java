@@ -326,14 +326,20 @@ public class ReviewControllerImpl implements ReviewController {
 		try {
 			System.out.println("in " + path);
 
-			if (imageFileList != null && imageFileList.size() != 0) {
-				imageFileName = imageFileList.get(0);
-				int reviewNO = reviewService.addNewReview(reviewMap, imageFileName);
-				File srcFile = new File(path + "\\" + "temp" + "\\" + imageFileName);
-				File destDir = new File(path + "\\" + reviewNO);
-				// destDir.mkdirs();
-				FileUtils.moveFileToDirectory(srcFile, destDir, true);
-
+			if (imageFileList != null && imageFileList.size() != 0 ) {
+				
+				if (imageFileList.get(0) != null && imageFileList.get(0) != "")  {
+					imageFileName = imageFileList.get(0);
+					int reviewNO = reviewService.addNewReview(reviewMap, imageFileName);
+					
+					File srcFile = new File(path + "\\" + "temp" + "\\" + imageFileName);
+					File destDir = new File(path + "\\" + reviewNO);
+					// destDir.mkdirs();
+					FileUtils.moveFileToDirectory(srcFile, destDir, true);
+					
+				}	else {
+					int reviewNO = reviewService.addNewReview(reviewMap, imageFileName);
+				}
 			} else {
 				int reviewNO = reviewService.addNewReview(reviewMap, imageFileName);
 			}
@@ -444,13 +450,12 @@ public class ReviewControllerImpl implements ReviewController {
 		String path = realPath+"resources\\review\\review_image";
 		
 		
-		List imageFileName= upload(multipartRequest, path);		
+		List imageFileName= upload(multipartRequest, path);	
+		
 		if(imageFileName.get(0) == null || imageFileName.get(0) =="") {
 			File srcFile = new File(path+"\\"+"temp"+"\\"+imageFileName.get(0));
 		      srcFile.delete();
 		}
-		
-		
 		
 		//---------------------------------------------------------------------------------------------
 		
