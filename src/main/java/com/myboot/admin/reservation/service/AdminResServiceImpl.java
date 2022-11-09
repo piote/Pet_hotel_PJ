@@ -1,5 +1,6 @@
 package com.myboot.admin.reservation.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,7 +61,7 @@ public class AdminResServiceImpl implements AdminResService{
 	public void deletePetList(String petNum) throws Exception{
 		adminresDAO.adminDeletePet(petNum);
 	}
-	
+	//예약 횟수
 	@Override
 	public int adminTotalResNum() throws Exception{
 		int adminTotalResNum = 0;
@@ -87,4 +88,21 @@ public class AdminResServiceImpl implements AdminResService{
 		return adminresDAO.SearchPetServiceByResNum(reserNum);
 	}
 	
+	//예약완료 횟수
+	@Override
+	public int adminTotalYResCount(String userID) throws Exception{
+		int userYResTotalNum = 0;
+		userYResTotalNum = adminresDAO.adminTotalYResCount(userID);
+		return userYResTotalNum;
+	}
+	
+	//맴버십 변경
+	@Override
+	public void userMembershipUpdate(String userId) throws Exception {
+		System.out.println(userId);
+		
+		adminresDAO.userMembershipUpdate(userId);	
+		System.out.println("end");
+	}
+
 }
