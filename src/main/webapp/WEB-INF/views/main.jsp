@@ -78,7 +78,7 @@
             height: 230px;
             position: absolute;
             margin-left: 50%; left: -500px;
-            bottom: 100px;
+            bottom: 130px;
         }
         .txt_wrap p:nth-child(1){
             font-size: 75px;
@@ -104,6 +104,32 @@
         }
         .slider_bt:hover{
             background-color: rgba(255, 255, 255,0.5);
+        }
+        .slider_dots{
+            width: 100%; height: 10px;
+            /* background-color: #fff; */
+            position: absolute;
+            bottom: 50px;
+            display: flex;
+            justify-content: center;
+        }
+        .dot{
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: 0 5px;
+            box-shadow: 0px 0px 10px #00000040;
+            opacity: .7;
+            transition: all 0.3s;
+        }
+        .dot:hover{
+            opacity: 1;
+            width: 40px;
+        }
+        .able_dot{
+            opacity: 1;
+            width: 40px;
         }
         /* slider end */
 
@@ -424,9 +450,17 @@
                     }
             });
             
+            //슬라이드메인배너 이동
             setInterval(function(){
                 slider_right();
             },5000);
+            
+            for(i=1;i<=slider_count;i++){
+                $('.slider_dots').append('<div class="dot" d_num-data="'+i+'"></div>');
+            }
+
+            $('.dot[d_num-data="'+slider_num+'"]').addClass('able_dot');
+
 
 
         });
@@ -505,6 +539,7 @@
         <p>펫 호텔 서비스</p>
         <a class="slider_bt" href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservationForm.do','${contextPath}/loginForm.do')" >예약하기 ></a>
     </div>
+    <div class="slider_dots"></div>
     <div class="slider_con">
         <div class="slider able_slider" s_num-data="1"></div>
         <div class="slider" s_num-data="2"></div>
