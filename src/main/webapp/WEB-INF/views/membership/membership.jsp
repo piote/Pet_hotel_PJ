@@ -77,7 +77,7 @@
             width: 171px;
         }
         .txt1 p:nth-child(1){
-            font-size: 15px;
+            font-size: 13px;
             color: #666;
         }
         .txt1 p:nth-child(2){
