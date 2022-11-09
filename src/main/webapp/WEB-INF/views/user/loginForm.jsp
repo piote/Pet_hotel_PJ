@@ -127,6 +127,24 @@ h5 {
 	  </script>
 	</c:when>
 </c:choose>  
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/icons.css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/loadingoverlay.min.js"></script>
+
+<script type="text/javascript">
+
+if(!confirm("등록하시겠습니까?")){
+		return false;
+} 
+	
+$.LoadingOverlay("show", {
+	background       : "rgba(0, 0, 0, 0.5)",
+	image            : "",
+	maxSize          : 60,
+	fontawesome      : "fa fa-spinner fa-pulse fa-fw",
+	fontawesomeColor : "#FFFFFF",
+});
+
+</script>
 </head>
 
 <body>

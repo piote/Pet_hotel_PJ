@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%
 request.setCharacterEncoding("UTF-8");
@@ -11,6 +12,8 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+
 <style type="text/css">
 .root {
 	display: flex;
@@ -68,6 +71,17 @@ h5 {
 	box-shadow: 10px 5px 10px #a89c86;
 	position: relative;
 }
+#profil_card{
+    width: 198px;
+    height: 247px;
+    background-color:#be5b03 ;
+    position: absolute;
+    border-radius: 15px;
+    top: 175px;
+    right: 20px;
+
+}
+
 
 .form-wrapper button {
 	cursor: pointer;
@@ -154,20 +168,17 @@ h5 {
 	width: 30%;
 	height: 35px;
 	position: absolute;
-	top: 130px;
+	top: 125px;
 	right: 30px;
 	font-weight: 400;
-}
-#overlappedID:hover{
- opacity: 0.9;
 }
 
 .olmessagef {
 	color: red;
 	position: absolute;
-	top: 184px;
+	
 	right: 300px;
-	top: 178px;
+	top: 175px;
 	left: 40px;
 	width: 400px;
 }
@@ -175,9 +186,9 @@ h5 {
 .olmessaget {
 	color: blue;
 	position: absolute;
-	top: 184px;
+	
 	right: 300px;
-	top: 178px;
+	top: 175spx;
 	left: 40px;
 	width: 400px;
 }
@@ -204,28 +215,40 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 }
 
 img {
-	display: block;
-	margin: 0;
-	padding: 0;
-	width: 100px;
-	height: 100px;
-	position: absolute;
-	top: 205px;
-	right: 100px;
-	border: 1px solid #000;
-	border-radius: 50%;
+ display: block;
+    margin: 0;
+    padding: 0;
+    width: 90px;
+    height: 90px;
+    position: relative;
+    top: -90px;
+    right: -50px;
+   
+    border-radius: 50%;
+}
+input#a {
+    width: 100px;
+    height: 36px;
+    position: relative;
+    top: 113px;
 }
 
 input.upload-name {
-	position: absolute;
-	top: 321px;
-	right: 72px;
+	position: relative;
+    top: 189px;
+    right: -14px;
 }
 
 input#imageFileName {
-	position: absolute;
-	top: 350px;
-	right: -50px;
+	position: relative;
+    top: 125px;
+    right: -12px;
+}
+input#profil_id {
+    width: 100px;
+    height: 28px;
+    position: relative;
+    top: 100px;
 }
 </style>
 <title>회원가입 화면</title>
@@ -300,6 +323,15 @@ input#imageFileName {
     		success: function (data) {
     			 if(!document.userInfo.id.value){
     	                alert("아이디를 입력하세요.");
+    	                return false;
+    	            }
+    			 var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+    	            if( !idReg.test( $("input[name=id]").val() ) ) {
+    	                alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+    	                $("#olmessage").text("영어로 작성해주세요.");
+    	    			$("#olmessage").addClass("olmessagef");
+    	    			$("#olmessage").removeClass("olmessaget");
+    	    			$("#idcheck").attr("value","false");
     	                return false;
     	            }
     		if(data == 1) {
@@ -411,9 +443,21 @@ input#imageFileName {
 	         	reader.readAsDataURL(input.files[0]);
       		}
   		}
-
     </script>
+       <script>
+        $("#b").keydown(function(){
 
+            $('#a').val($(this).val());
+
+        });
+
+        $("#b").change(function(){
+
+            $('#a').val($(this).val());
+
+        });
+        </script>
+      
 </head>
 <body>
 	<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
@@ -428,25 +472,27 @@ input#imageFileName {
 
 					<input type="text" id="user_id" name="id" placeholder="UserID"
 						class="form-field" maxlength="20" required autofocus required>
+				<div id="profil_card">
+				
 					<ul>
 						<li class="atc_imageFile">
 							<div class="imageFile_wrap">
 								<input class="upload-name" spellcheck="false" value="프로필 사진"
-									onchange="readURL(this);" disabled> <input type="file"
-									id="imageFileName" name="imageFileName"
-									onchange="readURL(this);" /> <img id="preview"
-									src="${contextPath}/resources/img/user.png" height=350
-									onerror="this.src='${contextPath}/resources/img/no_img.png'" />
+									onchange="readURL(this);" disabled> 
+								<input type="text" id="a" placeholder="이름" class="form-field" maxlength="20" >
+								<input type="file" id="imageFileName" name="imageFileName" onchange="readURL(this);" />
+								<img id="preview" src="${contextPath}/resources/img/user.png" height=350 onerror="this.src='${contextPath}/resources/img/no_img.png'" />
 							</div>
 						</li>
 					</ul>
+				</div>
 					<button id="overlappedID" type="button" onclick="lappedID()">중복확인</button>
 					<input type="hidden" id="idcheck" value="false"> 
 					<span id="olmessage"></span>
 					<input type="password" name="pw" id="pw" maxlength="50" class="form-field" placeholder="UserPw">
 					<input type="password" name="passwordcheck" id="passwordcheck" maxlength="50" class="form-field" placeholder="UserPwCheck" onkeyup="passConfirm()"> <span id="confirmMsg"></span>
 					<br>
-					<input type="text" name="name" maxlength="20" class="form-field" placeholder="UserName"> <input type="text" name="email" maxlength="30" class="form-field" placeholder="UserEmail">
+					<input type="text" id="b" name="name" maxlength="20" class="form-field" placeholder="UserName"> <input type="text" name="email" maxlength="30" class="form-field" placeholder="UserEmail">
 					<select name="mail2" class="form-field mail2">
 						<option>@naver.com</option>
 						<option>@daum.net</option>
