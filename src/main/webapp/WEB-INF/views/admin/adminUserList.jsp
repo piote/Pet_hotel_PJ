@@ -226,9 +226,21 @@
             object-fit: cover;
         }
         input[type=file]{
-            width: 180px;
+            width: 170px;
             margin-top: 20px;
         }
+        .bt_removeImg{
+	        width: 70px; height: 20px;
+		    margin: 0 auto; margin-top: 10px;
+		    border: 1px solid #999;
+		    border-radius: 20px;
+		    line-height: 20px;
+		    font-size: 6px;
+		    cursor: pointer;
+		}
+		.bt_removeImg:hover{
+		background-color: #eee;
+		}
         .info_box{
             width: 100%; height: auto;
             /* background-color: #eee; */
