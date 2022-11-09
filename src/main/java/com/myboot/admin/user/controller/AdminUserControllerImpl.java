@@ -200,7 +200,6 @@ public class AdminUserControllerImpl implements AdminUserController {
 		      }else {
 		    	  user.put(name,value);
 		      }
-		      
 		   }
 		
 		int result = 0;
@@ -231,11 +230,14 @@ public class AdminUserControllerImpl implements AdminUserController {
 			result = adminUserService.UpdateUser(user);
 			if(imageFileName!=null && imageFileName.length()!=0) {
 				
-				//if()
-				File oldFile = new File(path+"\\"+user.get("old_img_name"));
-				oldFile.delete();
-				
 				File srcFile = new File(path+ "\\" + "temp"+ "\\" + imageFileName);
+				
+				File oldFile = new File(path+ "\\" +imageFileName);
+				
+				if(oldFile.exists()) {
+					oldFile.delete();
+				}
+				
 				File destDir = new File(path);
 				FileUtils.moveFileToDirectory(srcFile, destDir,true);
 			}
