@@ -540,7 +540,7 @@
 				//page/ResPageAjax.jsp에 요소인 테이블의 ID indexListAjax를 불러온다.
 				var contents = html.find("#indexListAjax").html();
 				$("#res_List_Tb").html(contents);
-				console.log(contents);
+
 				//테이블에 html로 만든 것들 넣기
 				
 				
@@ -629,8 +629,11 @@
     			async:true,
     			dataType:'json',
     			success:function(data){
-					//console.log(data);
-
+    				
+    				//resNum
+    				
+    				$('#view_Res_Num').val(reserNum);
+    				$('#view_User_Id').val(data.reservation.id);
 					//CheckIn, CheckOut
 					var st= data.reservation.res_st;
 					var ed= data.reservation.res_end;
@@ -725,8 +728,6 @@
 			$('.mr').append(mr); $('.mc').append(mc); $('.ms').append(ms); $('.msp').append(msp);
 			$('.lr').append(lr); $('.lc').append(lc); $('.ls').append(ls); $('.lsp').append(lsp);
 			
-			
-			console.log($("#res_st").val());
 			//날짜 계산
 			if($("input[name='res_st']").val() != null && $("input[name='res_end']").val() != null){
 				var st = $("input[name='res_st']").val();
@@ -760,10 +761,8 @@
 			//맴버쉽 없는 초기상태 계산
 			if($(".membershipImg").val()==""|| $(".membershipImg").val()==null){
 	       		var disTotal = $("#res_TotalCost").val();
-	       	 	dis = (total-disTotal)/(total/100)//할인율 자릿수 높아서 대강 계산해도 ok
-	       	 	console.log(disTotal);
-	        	console.log(dis);
-	        
+	       	 	dis = (total-disTotal)/(total/100)//할인율
+	       	 	
 	        	if(dis == 2){
 					$(".membershipImg").val("Bronze");
 					console.log($(".membershipImg").attr('src', '/resources/img/bronze_medal.png'));
@@ -813,13 +812,47 @@
 				reslistPage(PI-1);	
 			}
 		}
-		
+		//페이징 pre P 현재페이지-1  5씩 페이지 감소 끝이면 최초 0페이지 이동
 		function pageDown(P) {
 			if(P>4){
 				reslistPage(P-5);			
 			}else{
 				reslistPage(0);	
 			}
+		}
+		//예약확인
+		function resCheck(P){
+			//
+			var result = confirm("예약을 완료하시겠습니까?");
+			if(result){
+				var res_num = $("#view_Res_Num").val();
+				//userId 받도록 만들기 jsp
+				var user_Id = $("#view_User_Id").val();
+
+				
+				$.ajax({
+	    			url:'/ReservaitionCheckY.do',
+	    			method:'post',
+	    			data:{ "res_num": res_num,
+	    					"user_Id": user_Id },
+	    			type:'post',
+	    			dataType:'json',
+	    			success:function(data){
+	    				alert("예약이 확인 되었습니다.");
+	    				reslistPage(P);
+					},
+					error : function(error) {
+				        alert("Error!");
+				    }		
+				});
+			}	
+		}
+		//수정하기 -> 수정 확인
+		function resMod(res_num){
+			
+		}
+		function resModCheck(res_num){
+			
 		}
     </script>
 </head>
@@ -896,6 +929,8 @@
 				            	<td colspan="3">
 				            		<ul>
 				            			<li class="res_Date_Veiw_Box">
+				            				<input type="hidden" id="view_Res_Num">
+				            				<input type="hidden" id="view_User_Id">
 				            				<ul>
 				            					<li><span class="check_Date">Check In</span></li>
 				            					<li class="date_Cal_Text"></li>
@@ -974,7 +1009,7 @@
 				            			<li class="petTB_Bt_Box">
 				            				<button>예약 수정</button>
 				            				<button>예약 취소</button>
-				            				<button>예약 확인</button>
+				            				<button onclick="resCheck(${P})">예약 확인</button>
 				            			</li>
 				            		</ul>
 				            	</td>

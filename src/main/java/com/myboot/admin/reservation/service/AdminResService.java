@@ -30,5 +30,9 @@ public interface AdminResService {
 	
 	public AdminResFullVO SearchReservationNum(String reserNum);
 	public List<AdminResFullVO> SearchPetServiceByResNum(String reserNum);
-	
+
+	public int adminTotalYResCount(String userID) throws Exception;
+
+	public void userMembershipUpdate(String string) throws Exception;
+
 }

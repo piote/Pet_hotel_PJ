@@ -142,7 +142,7 @@
   <!-- 관리자 예약수정 예약불러오기 -->
   <select id="adminSelectRes" resultMap="adminresfullResult" parameterType="String">
   	<![CDATA[
-		SELECT res.reservation_st, res.reservation_end, res.total_cost, res.rs_comment 
+		SELECT res.USER_ID, res.reservation_st, res.reservation_end, res.total_cost, res.rs_comment 
 	    FROM tb_reservation res 
 	    left JOIN tb_petservice pet
 	    ON res.reservation_num = pet.reservation_num
@@ -208,19 +208,43 @@
 	]]>
   </select>
   
-  <!-- 관리자 예약취소 상태변경 -->
-  <update id="adminUpdateSTC" parameterType="String">
-	 update tb_reservation
-	 set reservation_state='C'
-	 where reservation_num=#{RESERVATION_NUM}
-  </update>	
+  	<!-- 관리자 예약관리 예약완료갯수 -->
+  	<select id="adminTotalYResCount" resultType="int" parameterType="String">
+  	<![CDATA[
+		SELECT COUNT(reservation_num)
+		FROM tb_reservation
+		where reservation_state = 'Y' and user_id = #{user_id}
+	]]>
+  	</select>
   
-  <!-- 관리자 예약확인 멤버쉽카운팅 -->
-  <update id="adminUpdateSTY" parameterType="String">
-	 update tb_reservation
-	 set reservation_state='Y'
-	 where reservation_num=#{RESERVATION_NUM}
-  </update>	
+  	<!-- 관리자 예약취소 상태변경 -->
+  	<update id="adminUpdateSTC" parameterType="String">
+		update tb_reservation
+		set reservation_state='C'
+		where reservation_num=#{RESERVATION_NUM}
+  	</update>	
+  
+  	<!-- 관리자 예약확인 멤버쉽카운팅 -->
+  	<update id="adminUpdateSTY" parameterType="String">
+		update tb_reservation
+		set reservation_state='Y'
+		where reservation_num=#{RESERVATION_NUM}
+  	</update>	
+  
+  	<!-- 관리자 예약확인 유저 멤버십 수정 -->
+	<update id="userMembershipUpdate" parameterType="String">
+		<![CDATA[
+		 	update TB_USER
+		    set USER_GRADE = 
+	        case
+	            when (SELECT COUNT(reservation_num) FROM tb_reservation where reservation_state = 'Y' and user_id = #{id} ) >= 20 then 'Gold'
+	            when (SELECT COUNT(reservation_num) FROM tb_reservation where reservation_state = 'Y' and user_id = #{id} ) >= 10 then 'Silver'
+	            when (SELECT COUNT(reservation_num) FROM tb_reservation where reservation_state = 'Y' and user_id = #{id} ) >= 5 then 'Bronze'
+	            else 'Normal'
+	        end
+			where user_id= #{id}
+		]]>
+	</update>	
   
 	<!-- 
 	<select id="serchReservationNum" resultMap="resfullResult">수정중
@@ -237,7 +261,7 @@
 		]]>
 	</select>
  	 -->
- 
+
  	<!--예약 번호로 예약불러오기  -->
 	<select id="SearchReservationNum" resultMap="adminresfullResult" parameterType="String">
 		<![CDATA[
