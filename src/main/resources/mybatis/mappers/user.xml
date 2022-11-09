@@ -16,13 +16,14 @@
       <result property="birth" column="USER_BIRTH" />
       <result property="joinDate" column="JOINDATE" />
       <result property="grade" column="USER_GRADE" />
+      <result property="img_name" column="IMG_NAME" />
    </resultMap> 
 <!-- 로그인 기능 -->
 	<select id="loginById" resultType="userVO" parameterType="userVO" >
 	<![CDATA[
 		select USER_ID as id, USER_PW as pw, USER_NAME as name, USER_EMAIL as email,
 	      USER_TEL as tel, USER_TEL_SUB as tel_sub, USER_MESSAGE as message,
-	      USER_BIRTH as birth, JOINDATE, USER_GRADE as grade
+	      USER_BIRTH as birth, JOINDATE, USER_GRADE as grade, IMG_NAME
 	      from tb_user
 	      where USER_ID=#{id} AND USER_PW=#{pw} AND ACTIVE='Y'
 	]]>
@@ -85,8 +86,8 @@
    	<insert id="insertNewUser" parameterType="userVO">
    		<![CDATA[
     		insert into TB_USER(USER_ID, USER_PW, USER_NAME, USER_EMAIL,
-	      USER_TEL, USER_TEL_SUB, USER_MESSAGE,USER_BIRTH) 
-    		values(#{id},#{pw},#{name},#{email},#{tel},#{tel_sub},#{message},#{birth}) 
+	      USER_TEL, USER_TEL_SUB, USER_MESSAGE,USER_BIRTH,IMG_NAME) 
+    		values(#{id},#{pw},#{name},#{email},#{tel},#{tel_sub},#{message},#{birth},#{img_name}) 
     	]]> 
    	</insert>
    
@@ -97,15 +98,22 @@
 <!--    	</insert> -->
 
  		<!-- 회원 정보 수정 -->
- 	<update id="updateUser" parameterType="userVO">
+ 	<update id="updateUser" parameterType="java.util.Map">
    		<![CDATA[
    			 update TB_USER
 	     	 set user_pw= #{pw}, user_email=#{email}, user_tel=#{tel}, user_tel_sub=#{tel_sub},
-	     	 user_message=#{message}, USER_BIRTH=#{birth}
+	     	 user_message=#{message}, USER_BIRTH=#{birth},img_name=#{img_name}
 	    	 where user_id=#{id}
    		]]>
    	  </update>
-   	  
+   	  <!-- <update id="updateUser" parameterType="userVO">
+   		<![CDATA[
+   			 update TB_USER
+	     	 set user_pw= #{pw}, user_email=#{email}, user_tel=#{tel}, user_tel_sub=#{tel_sub},
+	     	 user_message=#{message}, USER_BIRTH=#{birth}, user_img_name=#{img_name}
+	    	 where user_id=#{id}
+   		]]>
+   	  </update> -->
 <!--    	  <select id="selectUserById" resultType="userVO"  parameterType="String" >
       <![CDATA[
          select * from TB_USER
@@ -128,4 +136,5 @@
    		]]>
    	</delete>
 
+	
 </mapper>

@@ -79,14 +79,23 @@
 				   .replace(/[^0-9]/g, '')
 				  .replace(/^(\d{0,3})(\d{3,4})(\d{4,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
 				}
-			/* function mod() {
-				alert("정보수정이 완료 됐습니다.")
-			} */
+			
+			 function readURL(input) {
+		      		if (input.files && input.files[0]) {
+		      			var fileName = $("#imageFileName").val();
+				      	var reader = new FileReader();
+				      	reader.onload = function (e) {
+				        	$('#preview').attr('src', e.target.result);
+			          	}
+				      	$(".upload-name").val(fileName);
+			         	reader.readAsDataURL(input.files[0]);
+		      		}
+		  		}
 	 </script>
 	 
 	</head>
 	<body>
-		<form method="post" action="${contextPath}/modMember.do"> 
+		<form method="post" action="${contextPath}/modMember.do" enctype="multipart/form-data"> 
 		   <div id="wrap">
 			   	<section class="container">
 				   	<div class="petitle">
@@ -94,6 +103,40 @@
 			      <div class="modCon">
 				     <!-- <table border="1" width="50%" height="80%"> -->
 				     <table>
+				     	<%-- <tr>
+					            <th>
+                                    <div class="head-cell"><span class="empha">*</span>프로필</div>
+                                </th>
+					            <td>
+					            	<input type="file" id="imageFileName" name="imageFileName"
+									onchange="readURL(this);" /> <img id="preview" src="${contextPath}/resources/img/user.png"
+									height=40
+									onerror="this.src='${contextPath}/resources/img/no_img.png'" />
+					            </td>
+					            
+				         </tr> --%>
+				         <tr>
+					            <th>
+                                    <div class="head-cell"><span class="empha">*</span>프로필</div>
+                                </th>
+                                <td>
+                                		<img id="preview" src="${contextPath}/resources/user/user_image/${user.img_name}" height=100 onerror="this.src='${contextPath}/resources/img/no_img.png'"/>
+                                	<div class="fileMod">
+	                               		<label for="imageFileName">이미지 파일</label>
+				                		<input class="upload-name" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL(this);"  disabled >
+					                	<input type="file" id="imageFileName" name="imageFileName"  onchange="readURL(this);"/>
+					                	<input  type= "hidden"   name="oldFileName" value="${user.img_name}" />
+					                </div>
+			                	</td>
+					           <%--  <td>
+					            	<input class="upload-name" spellcheck="false" value="프로필 사진"
+									onchange="readURL(this);" disabled><input class="txtBox" type="file" id="imageFileMod" name="imageFileNameMod" value="${user.img_name }" onchange="readURL(this);" />
+					            	<img id="preview" src="${contextPath}/resources/img/user.png"
+									height=40
+									onerror="this.src='${contextPath}/resources/img/no_img.png'" />
+					            </td> --%>
+					            
+				         </tr>
 				         <tr>
 					            <th>
                                     <div class="head-cell"><span class="empha">*</span>아이디</div>

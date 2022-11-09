@@ -3,6 +3,8 @@ package com.myboot.user.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -332,62 +334,90 @@ public class UserControllerImpl implements UserController{
 				
     @Override
 	@RequestMapping(value="/modMember.do" ,method = RequestMethod.POST)
-	public ModelAndView modMember(@ModelAttribute("user") UserVO user, 
-		HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ResponseEntity modMember(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception{
     		
     	int result = 0;
-//			request.setCharacterEncoding("utf-8");
-//			
-//			String id= request.getParameter("id");
-//			String pw= request.getParameter("pw");
-//			String name= request.getParameter("name");
-//			String email=request.getParameter("email");
-//			String tel=request.getParameter("tel");
-//			String tel_sub=request.getParameter("tel_sub");
-//			String message=request.getParameter("message");
-//			String birth=request.getParameter("birth");
-//			SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
-//			Date formatDate = dtFormat.parse(birth);
-//			System.out.println(birth);
-//		
-//		
-//			UserVO userVO= new UserVO();
-//			userVO.setId(id);
-//			userVO.setPw(pw);
-//			userVO.setName(name);
-//			userVO.setEmail(email);
-//			userVO.setTel(tel);
-//			userVO.setTel_sub(tel_sub);
-//			userVO.setMessage(message);
-//			if(message==null || message==""){
-//				userVO.setMessage("N");
-//				System.out.println("N");
-//			}
-//			userVO.setBirth(formatDate);
-			System.out.println(userVO.getId()+userVO.getPw()+userVO.getName()+userVO.getEmail()+userVO.getTel()+userVO.getTel_sub()+userVO.getMessage()+userVO.getBirth());
-			
-			String birth=request.getParameter("birth_string");
-			SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
-			Date formatDate = dtFormat.parse(birth);
-			user.setBirth(formatDate);
-
-//			String joinDate=request.getParameter("joinDate_string");
-//			SimpleDateFormat dtFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-//			Date formatDate1 = dtFormat1.parse(birth);
-//			user.setBirth(formatDate1);
-			
-			if(user.getMessage()==null || user.getMessage()==""){
-				user.setMessage("N");
-				System.out.println("N");
-			}
-			
+			Map<String,Object> user = new HashMap<String, Object>();
+		
+		   Enumeration enu=multipartRequest.getParameterNames();
+		   
+		   while(enu.hasMoreElements()){
+		      String name=(String)enu.nextElement();
+		      String value=multipartRequest.getParameter(name);
+		      user.put(name,value);
+		      
+		   }
+		
+		String birth=multipartRequest.getParameter("birth_string");
+		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date formatDate = dtFormat.parse(birth);
+		user.put("birth",formatDate);
+		
+		if(user.get("message")==null || user.get("message")==""){
+			user.put("message","N");
+			System.out.println("N");
+		}
+		
+		String imageFileName= upload(multipartRequest, (String) user.get("id"));
+		
+		if(imageFileName!=null&&imageFileName!="") {
+			user.put("img_name", imageFileName);
+		}else {
+			user.put("img_name", (String) user.get("oldFileName"));
+		}
+		
+		//============================================realPath 받아오기
+		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
+		String path = realPath+"resources\\user\\user_image";
+		
+		String message = null;
+		ResponseEntity resEnt=null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
 			result = userService.modMember(user);
-			HttpSession session = request.getSession();
+			HttpSession session = multipartRequest.getSession();
+			UserVO oldUserVO = (UserVO) session.getAttribute("user");
+			UserVO newUserVO = new UserVO();
+			newUserVO.setId((String) user.get("id"));
+			newUserVO.setPw((String) user.get("pw"));
+			
+			userVO = userService.login(newUserVO);
+			
+//			user.setGrade(oldUserVO.getGrade());
+			
+			System.out.println(userVO);
 			session.removeAttribute("user");
-			session.setAttribute("user",user);
-    		ModelAndView mav = new ModelAndView();
-    		mav.setViewName("redirect:/mypage/myPage.do");
-		return mav;
+			session.setAttribute("user",userVO);
+			
+			if(imageFileName!=null && imageFileName.length()!=0) {
+				
+				File oldFile = new File(path+"\\"+user.get("oldFileName"));
+				if(oldFile.exists()) {
+					oldFile.delete();
+				}
+				
+				File srcFile = new File(path+ "\\" + "temp"+ "\\" + imageFileName);
+				File destDir = new File(path);
+				FileUtils.moveFileToDirectory(srcFile, destDir,true);
+			}
+	
+			message = "<script>";
+			message += " alert('정보 수정 했습니다.');";
+			message += " location.href='"+multipartRequest.getContextPath()+"/mypage/myPage.do'; ";
+			message +=" </script>";
+		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		}catch(Exception e) {
+			File srcFile = new File(path+"\\"+"temp"+"\\"+imageFileName);
+			srcFile.delete();
+			message = " <script>";
+			message +=" alert('오류가 발생했습니다. 다시 시도해 주세요');');";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/modMemberForm.do'; ";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return resEnt;
 	}
 	
 	@RequestMapping(value = "/modMemberForm.do", method =  RequestMethod.GET)
@@ -419,7 +449,6 @@ public class UserControllerImpl implements UserController{
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
-	
 	
 //	프로필 이미지
 	@Override
@@ -471,7 +500,7 @@ public class UserControllerImpl implements UserController{
 		System.out.println(userVO.getId()+userVO.getPw()+userVO.getName()+userVO.getEmail()+userVO.getTel()+userVO.getTel_sub()+userVO.getMessage()+userVO.getBirth());
 		
 		String imageFileName= upload(multipartRequest, id);
-		
+		userVO.setImg_name(imageFileName);
 		
 		//============================================realPath 받아오기
 		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
@@ -524,6 +553,10 @@ public class UserControllerImpl implements UserController{
 				MultipartFile mFile = multipartRequest.getFile(fileName);
 				imageFileName=mFile.getOriginalFilename();
 				System.out.println(imageFileName);
+				
+				if(imageFileName==null || imageFileName=="") {
+					return "";
+				}
 				
 				String picfileType = imageFileName.substring(imageFileName.lastIndexOf("."));
 				System.out.println(picfileType);
