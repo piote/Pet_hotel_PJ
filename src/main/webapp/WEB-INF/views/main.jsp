@@ -424,6 +424,11 @@
                     }
             });
             
+            setInterval(function(){
+                slider_right();
+            },5000);
+
+
         });
         function inputReviewData(){
         	 $('#review_info').empty();
