@@ -28,7 +28,7 @@ public interface UserService {
 //public UserVO pwUser(String pw) throws DataAccessException;
 		
 // 회원 정보 수정
-	public int modMember(UserVO userVO) throws DataAccessException; 
+	public int modMember(Map user) throws DataAccessException; 
 	
 //	public UserVO findUser(UserVO user) throws DataAccessException;
 	

@@ -1,6 +1,7 @@
 package com.myboot.user.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
@@ -18,7 +19,7 @@ public interface UserDAO {
 //	 public UserVO pwUser(String pw) throws DataAccessException;
 	 
 	 // 회원 정보 수정
-	 public int updateUser(UserVO userVO) throws DataAccessException;
+	 public int updateUser(Map user) throws DataAccessException;
 	 
 //	 public UserVO selectUserById(UserVO id) throws DataAccessException;
 	 
