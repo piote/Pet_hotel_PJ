@@ -254,5 +254,29 @@ public  class AdminResControllerImpl implements AdminResController{
 		return reservationMap;
 	}
 	
+	
+	@ResponseBody 
+	@RequestMapping(value= "/ReservaitionCheckY.do", method = RequestMethod.POST)
+	public String ReservaitionCheck(
+			@RequestParam(value ="res_num", required = false) String res_num,
+			@RequestParam(value ="user_Id", required = false) String user_Id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
+				
+		System.out.println(res_num);
+
+		//예약 확인 변경
+		adminresService.updateResStateY(res_num);
+
+		//맴버쉽 상승
+		//변경-> 유저 id로 예약 횟수 조회후 그에 맞춰 맴버십 변환
+		
+		adminresService.userMembershipUpdate(user_Id);
+
+	
+		return res_num;
+	}
+	
+	
+	
 }
 
