@@ -65,10 +65,6 @@
     	  border-bottom: 1px solid #ddd;
     	}
 
-    	.but_image{
-
-    	  float: left;
-    	}
     	.but {
     	  margin-top: 30px;
     	  position: absolute;
