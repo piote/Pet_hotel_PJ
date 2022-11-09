@@ -268,9 +268,7 @@ public  class AdminResControllerImpl implements AdminResController{
 
 		//예약 확인 변경
 		adminresService.updateResStateY(res_num);
-		//예약 횟수 조회
-		//int Ycount = adminresService.adminTotalYResCount(user_Id);
-		
+
 		//맴버쉽 상승
 		//변경-> 유저 id로 예약 횟수 조회후 그에 맞춰 맴버십 변환
 		
