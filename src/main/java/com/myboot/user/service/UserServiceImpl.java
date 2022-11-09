@@ -85,8 +85,8 @@ public class UserServiceImpl implements UserService {
 
   // 회원 정보 수정
 	@Override
-	public int modMember(UserVO userVO) throws DataAccessException {
-	    return userDAO.updateUser(userVO);
+	public int modMember(Map user) throws DataAccessException {
+	    return userDAO.updateUser(user);
 	}
 	
 //	@Override

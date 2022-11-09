@@ -37,8 +37,7 @@ public interface UserController {
 				HttpServletRequest request, HttpServletResponse response)  throws Exception;
         
 	// 회원 정보 수정
-	public ModelAndView modMember( @ModelAttribute("user") UserVO user,
-			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ResponseEntity modMember(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 //	public ModelAndView modMember(@RequestParam(value= "user", required=false) UserVO user,
 //			RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	// 회원 탈퇴
