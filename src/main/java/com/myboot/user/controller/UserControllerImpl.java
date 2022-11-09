@@ -426,7 +426,6 @@ public class UserControllerImpl implements UserController{
 		return mav;
 	}
 	
-	
 //	프로필 이미지
 	@Override
 	@RequestMapping(value="/adduserprofil_pic.do" ,method = RequestMethod.POST)
