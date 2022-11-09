@@ -55,7 +55,7 @@
 
 .modCon table td label {
 	display: inline-block;
-    width: 100px;
+    width: 96px;
     height: 25px;
     border: 1px solid #aaa;
     border-radius: 7px;
@@ -64,6 +64,8 @@
     line-height: 25px;
     text-align: center;
     color: #444;
+    position: absolute;
+    margin-top: 7px;
 }
 .modCon .head-cell .empha {
     position: absolute;
@@ -90,7 +92,7 @@
     border-radius: 10%;
     margin-top: 20px;
     height: 130px;
-    margin-left: 10px;
+    margin-left: 85px;
 }
  
 input#imageFileName {
@@ -121,8 +123,10 @@ input#imageFileName {
     padding: 0 10px;
     vertical-align: middle;
     border: none;
-    width: 78%;
+    width: 16%;
     color: #999999;
+    margin-left: 180px;
+    margin-top: -39px;
 }
  
 .modCon th, .modCon td {
@@ -152,6 +156,20 @@ input#imageFileName {
     padding: 0;
     overflow: hidden;
     border: 0;
+}
+
+.bt_removeImg {
+    width: 70px;
+    height: 22px;
+    /* margin: 0 auto; */
+    margin-top: 10px;
+    margin-left: 104px;
+    border: 1px solid #999;
+    border-radius: 20px;
+    line-height: 20px;
+    font-size: 10px;
+    cursor: pointer;
+    text-align: center;
 }
 
 .modCon tr p{

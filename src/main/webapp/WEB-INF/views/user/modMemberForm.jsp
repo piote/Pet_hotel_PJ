@@ -91,6 +91,11 @@
 			         	reader.readAsDataURL(input.files[0]);
 		      		}
 		  		}
+			 
+			 function removeImg(){
+				    $("#oldFileName").val('');
+				    $("#preview").attr('src','');
+				}
 	 </script>
 	 
 	</head>
@@ -101,20 +106,7 @@
 				   	<div class="petitle">
 				   	<h3><img src="${contextPath}/resources/img/petel.png" alt="정보수정">&nbsp;회원 정보 수정</h3></div>
 			      <div class="modCon">
-				     <!-- <table border="1" width="50%" height="80%"> -->
 				     <table>
-				     	<%-- <tr>
-					            <th>
-                                    <div class="head-cell"><span class="empha">*</span>프로필</div>
-                                </th>
-					            <td>
-					            	<input type="file" id="imageFileName" name="imageFileName"
-									onchange="readURL(this);" /> <img id="preview" src="${contextPath}/resources/img/user.png"
-									height=40
-									onerror="this.src='${contextPath}/resources/img/no_img.png'" />
-					            </td>
-					            
-				         </tr> --%>
 				         <tr>
 					            <th>
                                     <div class="head-cell"><span class="empha">*</span>프로필</div>
@@ -122,20 +114,12 @@
                                 <td>
                                 		<img id="preview" src="${contextPath}/resources/user/user_image/${user.img_name}" height=100 onerror="this.src='${contextPath}/resources/img/no_img.png'"/>
                                 	<div class="fileMod">
-	                               		<label for="imageFileName">이미지 파일</label>
+	                               		<label for="imageFileName">이미지 파일</label><div class="bt_removeImg" onclick="removeImg()" >이미지삭제</div>
 				                		<input class="upload-name" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL(this);"  disabled >
 					                	<input type="file" id="imageFileName" name="imageFileName"  onchange="readURL(this);"/>
-					                	<input  type= "hidden"   name="oldFileName" value="${user.img_name}" />
+					                	<input id="oldFileName" type= "hidden"   name="oldFileName" value="${user.img_name}" />
 					                </div>
 			                	</td>
-					           <%--  <td>
-					            	<input class="upload-name" spellcheck="false" value="프로필 사진"
-									onchange="readURL(this);" disabled><input class="txtBox" type="file" id="imageFileMod" name="imageFileNameMod" value="${user.img_name }" onchange="readURL(this);" />
-					            	<img id="preview" src="${contextPath}/resources/img/user.png"
-									height=40
-									onerror="this.src='${contextPath}/resources/img/no_img.png'" />
-					            </td> --%>
-					            
 				         </tr>
 				         <tr>
 					            <th>
