@@ -285,6 +285,33 @@
     </style>
 
     <script>
+    //로그인시 등급 표시
+	    $(function(){
+	        var my_grade = "${user.grade}"
+	        if( my_grade == "Normal"){
+	            $("#normal").addClass('my_grade');
+	        }
+	    }); 
+	    $(function(){
+	        var my_grade = "${user.grade}"
+	        if( my_grade == "Bronze"){
+	            $("#bronze").addClass('my_grade');
+	        }
+	    });
+	    $(function(){
+	        var my_grade = "${user.grade}"
+	        if( my_grade == "Silver"){
+	            $("#silver").addClass('my_grade');
+	        }
+	    });
+	    $(function(){
+	        var my_grade = "${user.grade}"
+	        if( my_grade == "Gold"){
+	            $("#gold").addClass('my_grade');
+	        }
+	    });
+	    
+	    //팝업창 클릭시 나오는 등급
         function popUp(id){
             $('.modal-bg').show();
             $('.modal-wrap').show();
@@ -431,7 +458,7 @@
                 <p>Normal</p>
                 <p class="smallfont">연간 이용횟수 5회 미만</p>
             </div>
-            <div id="bronze" class="grade_box borderbox my_grade">
+            <div id="bronze" class="grade_box borderbox">
                 <img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
                 <p>Bronze</p>
                 <p class="smallfont">연간 이용횟수 5회 이상</p>

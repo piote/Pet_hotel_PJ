@@ -392,7 +392,7 @@ public class UserControllerImpl implements UserController{
 			
 			if(imageFileName!=null && imageFileName.length()!=0) {
 				
-				File oldFile = new File(path+"\\"+user.get("oldFileName"));
+				File oldFile = new File(path+"\\"+imageFileName);
 				if(oldFile.exists()) {
 					oldFile.delete();
 				}

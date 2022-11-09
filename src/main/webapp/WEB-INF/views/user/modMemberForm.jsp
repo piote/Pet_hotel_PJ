@@ -91,6 +91,11 @@
 			         	reader.readAsDataURL(input.files[0]);
 		      		}
 		  		}
+			 
+			 function removeImg(){
+				    $("#oldFileName").val('');
+				    $("#preview").attr('src','');
+				}
 	 </script>
 	 
 	</head>
@@ -109,10 +114,10 @@
                                 <td>
                                 		<img id="preview" src="${contextPath}/resources/user/user_image/${user.img_name}" height=100 onerror="this.src='${contextPath}/resources/img/no_img.png'"/>
                                 	<div class="fileMod">
-	                               		<label for="imageFileName">이미지 파일</label>
+	                               		<label for="imageFileName">이미지 파일</label><div class="bt_removeImg" onclick="removeImg()" >이미지삭제</div>
 				                		<input class="upload-name" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL(this);"  disabled >
 					                	<input type="file" id="imageFileName" name="imageFileName"  onchange="readURL(this);"/>
-					                	<input  type= "hidden"   name="oldFileName" value="${user.img_name}" />
+					                	<input id="oldFileName" type= "hidden"   name="oldFileName" value="${user.img_name}" />
 					                </div>
 			                	</td>
 				         </tr>
