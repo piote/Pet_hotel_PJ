@@ -523,7 +523,6 @@
 		    searchMap.keyword = keyword;
 		    searchMap.state_ck=state_ck;
 		    searchMap.sort_ck=sort_ck;
-//		    searchMap.res_state=res_state;
 			
 			$.ajax({
 				url : "/ResPageAjax.do",
@@ -663,6 +662,7 @@
 				}
 			});
 		}
+	
 		//숙박일 구하기
 		function dateCal(indate, outdate) {
 
@@ -804,33 +804,62 @@
 				return total;
 			}
 		}
-<<<<<<< HEAD
 
 		//예약취소
-		function updateRes2() {
+		function updateRes2(P) {   //P인지 url인지 
 			
 		var con_test = confirm("예약을 취소하시겠습니까?");
+		var res_num  = res_num
+		var user_id  = user_id
 		
-		if(con_test == true) {   //취소
-			alert("예약이 취소되었습니다.");
+		if(con_test == true) {   //취소	
 			
-//			$.ajax({
-//				url:"/ResPageAjax.do", 
-//				type:'post',
-//				async:'true',
-//				dataType:'json',
-//				success:function(data){
-//					res_state='C'
-//			}
+			$.ajax({                 
+				url:"/updateRes.do",
+				type:('{res_num}', res_num),
+					 ('{user_id}', user_id),
+				async:true,
+				dataType:'json',
+				success:function(data){
+					alert("예약이 취소되었습니다.");
+					reslistpage(0);
+					}
+			});
 			
 		}else if(con_test == false) {  //유지
 			alert("예약이 취소되지 않았습니다.");
 		}
-			return;
-			
-		}
 		
-=======
+		return;
+			
+			
+			
+//		var con_test = confirm("예약을 취소하시겠습니까?");
+//		
+//			if(con_test == true) {   //취소	
+//				alert("예약이 취소되었습니다.");
+//				
+//				$.ajax({
+//					url:"/ResPageAjax.do",
+//					type:'post',
+//					async:true,
+//					dataType:'json',
+//					success:function(data){
+//						var resst_up = ${reservation.res_state}
+//						
+//						if(resState == 'N') {
+//							change.resState =='C'
+//						}
+//					}
+//				});
+//				
+//			}else if(con_test == false) {  //유지
+//				alert("예약이 취소되지 않았습니다.");
+//			}
+//			
+//			return;
+		}
+
 		//페이징 next PI 총 페이지수. P 현재페이지-1  5씩 페이지 증가 끝이면 PI-1로 페이지 이동
 		function pageUP(PI,P) {
 			
@@ -848,7 +877,7 @@
 				reslistPage(0);	
 			}
 		}
->>>>>>> master
+
     </script>
 </head>
 <body>
@@ -1001,7 +1030,7 @@
 				            			</li>
 				            			<li class="petTB_Bt_Box">
 				            				<button type="button" onclick="javascript:updateRes1();">예약 수정</button>
-				            				<button type="button" onclick="javascript:updateRes2();">예약 취소</button>
+				            				<button type="button" onclick="javascript:updateRes2(${P});">예약 취소</button>
 				            				<button type="button" onclick="javascript:updateRes3();">예약 확인</button>
 				            			</li>
 				            		</ul>

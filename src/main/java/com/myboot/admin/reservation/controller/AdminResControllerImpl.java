@@ -127,9 +127,12 @@ public  class AdminResControllerImpl implements AdminResController{
 		
 		Map<String, String> searchOption = new HashMap<String, String>();
 		
+//		Map<String, String> resst_up = new HashMap<String, String>();
+		
 		searchOption.put("search_op", (String) searchMap.get("search_op"));
 		searchOption.put("sort_ck", (String) searchMap.get("sort_ck"));
 		searchOption.put("keyword", (String) searchMap.get("keyword"));
+		
 		
 		if(state_ck.size()<4 || state_ck.size()>0) {
 			int i=1;
@@ -139,7 +142,6 @@ public  class AdminResControllerImpl implements AdminResController{
 			}
 		}
 		System.out.println(searchOption);
-		
 		
 		//List list = adminresService.adminAllResList();  
 		List<AdminResFullVO> searchadminResList; 
