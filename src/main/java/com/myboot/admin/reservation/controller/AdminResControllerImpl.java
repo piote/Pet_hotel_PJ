@@ -65,10 +65,6 @@ public  class AdminResControllerImpl implements AdminResController{
 		
 	}
 	
-	
-	
-	
-	
 	@Override
 //	@RequestMapping("/admin/adminResList.do")
 	public ModelAndView ResList(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -138,9 +134,12 @@ public  class AdminResControllerImpl implements AdminResController{
 		
 		Map<String, String> searchOption = new HashMap<String, String>();
 		
+//		Map<String, String> resst_up = new HashMap<String, String>();
+		
 		searchOption.put("search_op", (String) searchMap.get("search_op"));
 		searchOption.put("sort_ck", (String) searchMap.get("sort_ck"));
 		searchOption.put("keyword", (String) searchMap.get("keyword"));
+		
 		
 		if(state_ck.size()<4 || state_ck.size()>0) {
 			int i=1;
@@ -150,7 +149,6 @@ public  class AdminResControllerImpl implements AdminResController{
 			}
 		}
 		System.out.println(searchOption);
-		
 		
 		//List list = adminresService.adminAllResList();  
 		List<AdminResFullVO> searchadminResList; 
@@ -284,7 +282,6 @@ public  class AdminResControllerImpl implements AdminResController{
 	
 		return res_num;
 	}
-	
 
 	@ResponseBody 
 	@RequestMapping(value= "/adminResUpdate.do", method = {RequestMethod.POST})
@@ -363,6 +360,22 @@ public  class AdminResControllerImpl implements AdminResController{
 
 		return "1234";
 	}
+
+	@ResponseBody 
+	@RequestMapping(value= "/ReservaitionCheckC.do", method = RequestMethod.POST)
+	public String ReservaitionCheck2(
+			@RequestParam(value ="res_num", required = false) String res_num,
+			@RequestParam(value ="user_Id", required = false) String user_Id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
+				
+		System.out.println(res_num);
+
+		//예약 취소 변경
+		adminresService.updateResStateC(res_num);
+
+		return res_num;
+	}
+	
 	
 	
 }

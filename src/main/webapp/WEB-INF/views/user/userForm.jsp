@@ -177,7 +177,6 @@ h5 {
 .olmessagef {
 	color: red;
 	position: absolute;
-	
 	right: 300px;
 	top: 175px;
 	left: 40px;
@@ -187,9 +186,8 @@ h5 {
 .olmessaget {
 	color: blue;
 	position: absolute;
-	
 	right: 300px;
-	top: 175spx;
+	top: 175px;
 	left: 40px;
 	width: 400px;
 }
@@ -247,6 +245,8 @@ input#imageFileName {
 	position: relative;
     top: 125px;
     right: -12px;
+    box-sizing: border-box;
+    width: 155px;
 }
 input#profil_id {
     width: 100px;

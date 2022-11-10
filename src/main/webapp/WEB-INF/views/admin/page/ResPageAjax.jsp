@@ -40,100 +40,95 @@
 		</tr>      			
 	</c:forEach>
 	<!--상세보기용  -->
-   <tr id="res_content_box" class="res_content_box">
-
-		<td colspan="3">
-			<form id="resForm" method="post" onsubmit="return false">
-		    		<ul>
-		    			<li class="res_Date_Veiw_Box">
-		    				<input type="hidden" id="view_Res_Num" name="view_Res_Num">
-		    				<input type="hidden" id="view_User_Id" name="view_User_Id">
-		    				<ul>
-		    					<li><span class="check_Date">Check In</span></li>
-		    					<li class="date_Cal_Text"></li>
-		    					<li><span class="check_Date">Check Out</span></li>
-		    				</ul>
-		    				<ul>
-		    					<li><input type="date" name="res_st" id="res_st" onchange="change_form()"></li>
-		    					<li class="date_Cal_Text"><span id="dateCalText">0박</span></li>
-		    					<li><input type="date" name="res_end" id="res_end" onchange="change_form()"></li>
-		    				</ul>	
-		    			<li>
-		    			<br>
-		    			<li>
-		    				<ul class="pet_Cost_Box">
-		    					<li>
-		     					<table class="pet_Cost_table">
-									  <tr>
-									    <th>*</th>
-									    <th>R</th>
-									    <th>C</th>
-									    <th>S</th>
-									    <th>SP</th>
-									  </tr>
-									  <tr>
-									    <th>소</th>
-									    <td class="sr">0</td>
-									    <td class="sc">0</td>
-									    <td class="ss">0</td>
-									    <td class="ssp">0</td>
-									  </tr>
-									  <tr>
-									    <th>중</th>
-									    <td class="mr">0</td>
-									    <td class="mc">0</td>
-									    <td class="ms">0</td>
-									    <td class="msp">0</td>
-									  </tr>
-									  <tr>
-									    <th>대</th>
-									    <td class="lr">0</td>
-									    <td class="lc">0</td>
-									    <td class="ls">0</td>
-									    <td class="lsp">0</td>
-									  </tr>
-									</table>
-								</li>
-    						<li><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">0원</span><input type="hidden" name="view_TotalCost" id="view_TotalCost"></li>
-						</ul>
-						<br>
-						<ul>
-							<li class="pet_Comment_Box">
-								<textarea id="pet_Comment" name="petcomment" spellcheck="false" maxlength="500" placeholder="요청사항을 적어주세요." onkeyup="petcommentTextLength(this);" rows="3"></textarea>
-											<span id="pet_Comment_Info">0</span>/500
-										</li>
-									</ul>
-								<li>
-							</ul>
-							<ul>
-								<li><li>
-							</ul>
-							</form>
-						</td>
-					<td colspan="5">
-					<form id="petForm" method="post" onsubmit="return false">
-					<ul>
-						<li class="petTB_List_Box">
-							<ul  class="petTB_List">
-									            					
-								<li>
-									<ul class="petTB_Item_Box petTB_Item_Box_Add">
-										<li onclick="pet_Add(this);">
-										<input type="image" id="petTB_Item_Add" class="petAdd_Bt" value="펫 추가" >
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-					<li class="petTB_Bt_Box">
-						<button onclick="resMod(${P})">예약 수정</button>
-					<button>예약 취소</button>
-					<button onclick="resCheck(${P})">예약 확인</button>
-							</li>
-						</ul>
-						</form>
-					</td>
-					</tr>
+                    <tr id="res_content_box" class="res_content_box">
+				            	<td colspan="3">
+				            		<ul>
+				            			<li class="res_Date_Veiw_Box">
+				            				<input type="hidden" id="view_Res_Num" name="view_Res_Num">
+		    								<input type="hidden" id="view_User_Id" name="view_User_Id">
+				            				<ul>
+				            					<li><span class="check_Date">Check In</span></li>
+				            					<li class="date_Cal_Text"></li>
+				            					<li><span class="check_Date">Check Out</span></li>
+				            				</ul>
+				            				<ul>
+				            					<li><input type="date" name="res_st" id="res_st" onchange="change_form()"></li>
+				            					<li class="date_Cal_Text"><span id="dateCalText">0박</span></li>
+				            					<li><input type="date" name="res_end" id="res_end" onchange="change_form()"></li>
+				            				</ul>	
+				            			<li>
+				            			<br>
+				            			<li>
+				            				<ul class="pet_Cost_Box">
+				            					<li>
+					            					<table class="pet_Cost_table">
+													  <tr>
+													    <th>*</th>
+													    <th>R</th>
+													    <th>C</th>
+													    <th>S</th>
+													    <th>SP</th>
+													  </tr>
+													  <tr>
+													    <th>소</th>
+													    <td class="sr">0</td>
+													    <td class="sc">0</td>
+													    <td class="ss">0</td>
+													    <td class="ssp">0</td>
+													  </tr>
+													  <tr>
+													    <th>중</th>
+													    <td class="mr">0</td>
+													    <td class="mc">0</td>
+													    <td class="ms">0</td>
+													    <td class="msp">0</td>
+													  </tr>
+													  <tr>
+													    <th>대</th>
+													    <td class="lr">0</td>
+													    <td class="lc">0</td>
+													    <td class="ls">0</td>
+													    <td class="lsp">0</td>
+													  </tr>
+													</table>
+												</li>
+				            					<li><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">0원</span></li>
+				            				</ul>
+				            				<br>
+				            				<ul>
+				            					<li class="pet_Comment_Box">
+				            						<textarea id="pet_Comment" name="petcomment" spellcheck="false" maxlength="500" placeholder="요청사항을 적어주세요." onkeyup="petcommentTextLength(this);" rows="3"></textarea>
+				            						<span id="pet_Comment_Info">0</span>/500
+				            					</li>
+				            				</ul>
+				            			<li>
+				            		</ul>
+				            		<ul>
+				            			<li><li>
+				            		</ul>
+				            	</td>
+				            	<td colspan="5">
+				            		<ul>
+				            			<li class="petTB_List_Box">
+				            				<ul  class="petTB_List">
+				            						            					
+				            					<li>
+				            						<ul class="petTB_Item_Box petTB_Item_Box_Add">
+				            							<li onclick="pet_Add(this);">
+				            								<input type="image" id="petTB_Item_Add" class="petAdd_Bt" value="펫 추가" >
+				            							</li>
+				            						</ul>
+				            					</li>
+				            				</ul>
+				            			</li>
+				            			<li class="petTB_Bt_Box">
+				            				<button onclick="resMod(${P})">예약 수정</button>
+				            				<button onclick="resCheck2(${P})">예약 취소</button>
+ 											<button onclick="resCheck(${P})">예약 확인</button>
+				            			</li>
+				            		</ul>
+				            	</td>
+				            </tr>
 </table>
 
 
