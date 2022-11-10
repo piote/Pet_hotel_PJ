@@ -101,8 +101,8 @@
 	    		</when>
 	    	</choose>
 	    	<choose>
-<!-- 				<when test="(state1!='' and state1!=null) or (state2!='' and state2!=null) or (state3!='' and state3!=null)"> -->
-			    <when test="(state1!='' and state1!=null) or (state2!='' and state2!=null)">
+				<when test="(state1!='' and state1!=null) or (state2!='' and state2!=null) or (state3!='' and state3!=null)">
+			    <!-- <when test="(state1!='' and state1!=null) or (state2!='' and state2!=null)"> -->
 					AND(
 					<if test="state1!='' and state1!=null">
 						res.reservation_state=#{state1}
@@ -110,9 +110,9 @@
 					<if test="state2!='' and state2!=null">
 						OR res.reservation_state=#{state2}
 					</if>
-<!-- 					<if test="state3!='' and state3!=null"> -->
-<!-- 						OR res.reservation_state=#{state3} -->
-<!-- 					</if> -->
+					<if test="state3!='' and state3!=null">
+							OR res.reservation_state=#{state3}
+					</if>
 					)
 				</when>
 			</choose>

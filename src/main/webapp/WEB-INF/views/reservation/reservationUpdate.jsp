@@ -13,9 +13,6 @@
     <meta charset="UTF-8">
     <title>호텔 예약 수정</title>
     <style>
-        /* * {
-            margine: 10%
-        } */
 
         #reservationForm {
             align-items: center;
@@ -555,8 +552,6 @@
     			}
     		});
     	}
-    	
-    
     	    	
     </script>
 

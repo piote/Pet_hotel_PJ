@@ -13,10 +13,7 @@
     <meta charset="UTF-8">
     <title>호텔 예약</title>
     <style>
-        /*  {
-            margine: 10%
-        } */
-
+    
         #reservationForm {
             align-items: center;
         }
@@ -283,6 +280,7 @@
             top: 10px;
         }
 
+        /* 맴버쉽 */
         .membership {
             display: block;
             width: 2300px;

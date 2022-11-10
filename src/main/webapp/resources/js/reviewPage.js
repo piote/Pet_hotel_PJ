@@ -28,7 +28,6 @@ $(document).ready(function(){
 
 });
    
-
 function getAllList(){
 	console.log($("#user_id").val());
 	
@@ -104,7 +103,6 @@ function clickNO(pageNo){
     
     console.log(totalData);
 
-
     var html = '<tr class="tb_title">'
                 +'<td class="res_num">No</td>'
                 +'<td class="res_date">Date</td>'
@@ -171,9 +169,4 @@ function pageDown(totPageNo){
     page_num_view(totalData);
     
 }
-
-
-
-
-
 
