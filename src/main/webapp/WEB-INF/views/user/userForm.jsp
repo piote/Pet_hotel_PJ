@@ -247,6 +247,8 @@ input#imageFileName {
 	position: relative;
     top: 125px;
     right: -12px;
+    box-sizing: border-box;
+    width: 155px;
 }
 input#profil_id {
     width: 100px;
