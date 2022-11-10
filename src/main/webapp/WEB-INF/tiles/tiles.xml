@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+
 	<definition name="baseLayout"  template="/WEB-INF/views/common/layout.jsp">
       <put-attribute name="title" value="Anitel" />
       <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
@@ -194,11 +195,7 @@
 	      <put-attribute name="title" value="관리자페이지_예약정보" />
 	      <put-attribute name="body" value="/WEB-INF/views/admin/adminResList.jsp" />
 	</definition>
-	<!-- 관리자 페이지 테스트-->
-	<definition name="/admin/adminResListT" extends="adminLayout">
-	      <put-attribute name="title" value="관리자페이지_예약정보TTT" />
-	      <put-attribute name="body" value="/WEB-INF/views/admin/adminResListT.jsp" />
-	</definition>
+
 	<!-- 페이징용 페이지 -->
 	<definition name="/page/ResPageAjax" template="/WEB-INF/views/admin/page/ResPageAjax.jsp"/>
 
