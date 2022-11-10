@@ -2,7 +2,9 @@ package com.myboot.admin.reservation.controller;
 
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,7 @@ import com.myboot.admin.reservation.service.AdminResService;
 import com.myboot.admin.reservation.vo.AdminPetserviceVO;
 import com.myboot.admin.reservation.vo.AdminResFullVO;
 import com.myboot.admin.reservation.vo.AdminReservationVO;
+import com.myboot.reservation.service.ReservationService;
 import com.myboot.reservation.vo.PetserviceVO;
 import com.myboot.reservation.vo.ReservationVO;
 import com.myboot.user.vo.UserVO;
@@ -35,6 +38,10 @@ public  class AdminResControllerImpl implements AdminResController{
 	private static final String String = null;
 	@Autowired
 	private AdminResService adminresService;
+	
+	@Autowired
+	private ReservationService resService;
+	
 	@Autowired
 	private AdminResFullVO adminresfullVO;
 	@Autowired
@@ -275,7 +282,85 @@ public  class AdminResControllerImpl implements AdminResController{
 	
 		return res_num;
 	}
-	
+
+	@ResponseBody 
+	@RequestMapping(value= "/adminResUpdate.do", method = {RequestMethod.POST})
+	public String adminReservationUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		
+		
+		
+
+		//유저 정보
+		
+		String user_Id = request.getParameter("user_Id");
+
+		//날짜 포맷
+		String checkinDate = request.getParameter("res_st");//스트링 데이터로 변환하기 포멧
+		String checkoutDate = request.getParameter("res_end");//
+		
+		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
+		// String 타입을 Date 타입으로 변환
+		Date checkinDate_format = newDtFormat.parse(checkinDate);
+		Date checkoutDate_format = newDtFormat.parse(checkoutDate);
+		// 예약 정보
+		String StresNum = request.getParameter("res_num");
+		int resNum = Integer.parseInt(StresNum);
+		
+		String petcomment = request.getParameter("pet_Comment");
+		String costResult = request.getParameter("view_TotalCost");
+		
+		//petserviceTB ajax array 는 []를 붙여야함
+		String[] petName = request.getParameterValues("petname[]");
+		String[] petGender = request.getParameterValues("petsex[]");
+		String[] petRoom = request.getParameterValues("petroom[]");
+		String[] petBeauty = request.getParameterValues("beauty[]");
+		String[] petSpa = request.getParameterValues("spa[]");
+
+		//테스트
+		System.out.println("예약번호============="+resNum);
+			
+		//pet서비스 vo List만들기
+		List<PetserviceVO> petServiceList = new ArrayList<PetserviceVO>();
+
+		for(int i=0;i<petName.length;i++) {
+			
+			if(petName[i] != null && petName[i] != "") {
+				
+				PetserviceVO petserVO = new PetserviceVO();
+				petserVO.setRes_num(resNum);
+				petserVO.setId(user_Id);
+				petserVO.setPet_name(petName[i]);
+				petserVO.setPet_gender(petGender[i]);
+				petserVO.setRoom_grade(petRoom[i]);
+				petserVO.setService_beauty(petBeauty[i]);
+				petserVO.setService_spa(petSpa[i]);
+				//test
+				System.out.println(petserVO);
+				//add
+				petServiceList.add(petserVO);
+		
+			}
+		}
+		
+		ReservationVO reserVO = new ReservationVO();
+		//예약 vo
+		reserVO.setRes_num(resNum);
+		reserVO.setRes_st(checkinDate_format);
+		reserVO.setRes_end(checkoutDate_format);
+		reserVO.setRes_comment(petcomment);
+		reserVO.setTotalCost(costResult);
+		
+		//데이터 베이스
+		resService.updateReservation(reserVO);
+		//삭제
+		resService.deletePetserviceList(StresNum);
+		//이후 삽입
+		resService.addPetService(petServiceList);
+
+		return "1234";
+	}
+
 	@ResponseBody 
 	@RequestMapping(value= "/ReservaitionCheckC.do", method = RequestMethod.POST)
 	public String ReservaitionCheck2(
