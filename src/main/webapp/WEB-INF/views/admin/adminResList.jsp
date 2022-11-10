@@ -784,25 +784,21 @@
 	              
 	        if($(".membershipImg").val()=='Gold' && total != 0){
 				var disTotal = total * (1 - 10 / 100);//10퍼 할인
-				$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
-				$("#totalcost").val(disTotal);
+				$("#view_TotalCost").val(disTotal);
 				return disTotal;
 			
 	        }else if($(".membershipImg").val()=='Silver' && total != 0){
 				var disTotal = total * (1 - 5 / 100);//5퍼 할인
-				$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
-				$("#totalcost").val(disTotal);
+				$("#view_TotalCost").val(disTotal);
 				return disTotal;
 			
 			}else if($(".membershipImg").val()=='Bronze' && total != 0){
 				var disTotal = total * (1 - 2 / 100);//2퍼 할인
-				$(".totalcost").text(total.toLocaleString()  + ' 원'+'=>'+disTotal.toLocaleString()  + ' 원');
-				$("#totalcost").val(disTotal);
+				$("#view_TotalCost").val(disTotal);
 				return disTotal;
 			}else{
 				//0원일시
-				$(".totalcost").text(total.toLocaleString()  + ' 원');
-				$("#totalcost").val(total);
+				$("#view_TotalCost").val(total);
 				return total;
 			}
 		}
@@ -1126,7 +1122,7 @@
 													  </tr>
 													</table>
 												</li>
-				            					<li><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">0원</span></li>
+				            					<li><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">0원</span><input type="hidden" name="view_TotalCost" id="view_TotalCost"></li>
 				            				</ul>
 				            				<br>
 				            				<ul>

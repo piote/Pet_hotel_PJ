@@ -40,12 +40,14 @@
 		</tr>      			
 	</c:forEach>
 	<!--상세보기용  -->
+                   <!--상세보기용  -->
                     <tr id="res_content_box" class="res_content_box">
 				            	<td colspan="3">
 				            		<ul>
 				            			<li class="res_Date_Veiw_Box">
 				            				<input type="hidden" id="view_Res_Num" name="view_Res_Num">
-		    								<input type="hidden" id="view_User_Id" name="view_User_Id">
+				            				<input type="hidden" id="view_User_Id" name="view_User_Id">
+				            				<input type="hidden" id="view_Res_State">
 				            				<ul>
 				            					<li><span class="check_Date">Check In</span></li>
 				            					<li class="date_Cal_Text"></li>
@@ -92,7 +94,7 @@
 													  </tr>
 													</table>
 												</li>
-				            					<li><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">0원</span></li>
+				            					<li><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">0원</span><input type="hidden" name="view_TotalCost" id="view_TotalCost"></li>
 				            				</ul>
 				            				<br>
 				            				<ul>
@@ -124,7 +126,7 @@
 				            			<li class="petTB_Bt_Box">
 				            				<button onclick="resMod(${P})">예약 수정</button>
 				            				<button onclick="resCheck2(${P})">예약 취소</button>
- 											<button onclick="resCheck(${P})">예약 확인</button>
+				            				<button onclick="resCheck(${P})">예약 확인</button>
 				            			</li>
 				            		</ul>
 				            	</td>
