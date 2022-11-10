@@ -118,6 +118,7 @@
             border-collapse: collapse;
             width: 1000px;
             text-align: center;
+            table-layout: fixed;
         }
         .list_tb tr{
             height: 40px;
@@ -193,7 +194,7 @@
         	height: 0px;
         	width: 100%;
         	overflow:hidden;
-        	background-color: #bbb;
+        	background-color: white;
         	
         	transition: height 0.6s;
         }
@@ -216,16 +217,11 @@
         	width: 8%;
         }
         
-        .pet_Cost_Box{
-        	text-align: left;
-        	margin-left: 40px;
-        }
-        
         .pet_Cost_table{
         	border:2px solid black;
         	border-collapse:collapse;
         	height: 85px;
-   	 		width: 230px;
+   	 		width: 80%;
     		text-align: center;
     		margin: 0 auto;
         	
@@ -246,27 +242,35 @@
         	
         }
         
+        .membership{
+        	text-align: left;
+        	margin-left:160px
+        }
+        
         .membershipImg{
         	display: inline;
 		    vertical-align: middle;
 		    width: 15px;
 		    height: 15px;
         }
+        
         .pet_Comment_Box{
+        	text-align: center;
+        }
+        
+        .comleng{
         	text-align: right;
+        	margin-right: 21px;
         }
         
         #pet_Comment{
         	resize: none;
-        	width: 90%;
+        	width: 80%;
         }
-        
-       
                 
         .petTB_List_Box{
         	overflow: hidden;
-        	border: 1px solid black;
-        	background-color: gainsboro;
+        	background-color: white;
         	height:220px;
         	width: 96%;
 		    margin: 0 auto;
@@ -296,10 +300,10 @@
         .petTB_Item_Box{
         	height: 150px;
 		    width: 125px;
-		    border: 2px solid black;
-		    border-radius: 15%;
+		    border: 1px solid gray;
+		    border-radius: 5%;
 		    padding: 15px;
-		    background-color: lightgrey;
+		    background-color: #F0F0F0;
 		    overflow: hidden;
         }
         
@@ -321,10 +325,10 @@
         .petTB_Item_Box_Add{
         	height: 150px;
     		width: 125px;
-		    border: 2px solid black;
-    		border-radius: 15%;
+		    border: 1px solid gray;
+    		border-radius: 5%;
     		padding: 15px;
-		    background-color: lightgrey;
+		    background-color: #F0F0F0;
 		    overflow: hidden;
 
         }
@@ -388,7 +392,35 @@
         	
         }
 
+        .adminRes_bt {
+            color: #444444;
+            background: #F3F3F3;
+            border: 1px #DADADA solid;
+            margin-left : 2px
+            border-radius: 2px;
+            font-weight: bold;
+            font-size: 9pt;
+            outline: none;
+        }
+
+        .adminRes_bt:hover {
+            border: 1px #C6C6C6 solid;
+            box-shadow: 1px 1px 1px #EAEAEA;
+            color: #333333;
+            background: #F7F7F7;
+        }
+
+        .adminRes_bt:active {
+            box-shadow: inset 1px 1px 1px #DFDFDF;
+        }
         
+        #pet_Comment_Info {
+            text-align: right;
+        }
+        
+        #res_TotalCost {
+            text-align: right;
+        }
     </style>
     
     <script>	
@@ -955,7 +987,7 @@
 					                <td class="res_cost">${reservation.totalCost}</td>
 					                <td id="resState_${reservation.res_num}" class="resState">${reservation.res_state}</td>
 					                <td class="res_modBt res_modBt_bt" onclick="">
-					                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
+					                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)" >
 					                </td>					  
 				            	</tr>
                     			
@@ -979,11 +1011,13 @@
 				            				<input type="hidden" id="view_Res_Num">
 				            				<input type="hidden" id="view_User_Id">
 				            				<input type="hidden" id="view_Res_State">
+				            				<br>
 				            				<ul>
 				            					<li><span class="check_Date">Check In</span></li>
 				            					<li class="date_Cal_Text"></li>
 				            					<li><span class="check_Date">Check Out</span></li>
 				            				</ul>
+				            				<br>
 				            				<ul>
 				            					<li><input type="date" name="res_st" id="res_st" onchange="change_form()"></li>
 				            					<li class="date_Cal_Text"><span id="dateCalText">0박</span></li>
@@ -991,9 +1025,8 @@
 				            				</ul>	
 				            			<li>
 				            			<br>
-				            			<li>
+				            			<li class="petCostBox">
 				            				<ul class="pet_Cost_Box">
-				            					<li>
 					            					<table class="pet_Cost_table">
 													  <tr>
 													    <th>*</th>
@@ -1003,37 +1036,41 @@
 													    <th>SP</th>
 													  </tr>
 													  <tr>
-													    <th>소</th>
+													    <th>소형</th>
 													    <td class="sr">0</td>
 													    <td class="sc">0</td>
 													    <td class="ss">0</td>
 													    <td class="ssp">0</td>
 													  </tr>
 													  <tr>
-													    <th>중</th>
+													    <th>중형</th>
 													    <td class="mr">0</td>
 													    <td class="mc">0</td>
 													    <td class="ms">0</td>
 													    <td class="msp">0</td>
 													  </tr>
 													  <tr>
-													    <th>대</th>
+													    <th>대형</th>
 													    <td class="lr">0</td>
 													    <td class="lc">0</td>
 													    <td class="ls">0</td>
 													    <td class="lsp">0</td>
 													  </tr>
 													</table>
-												</li>
-				            					<li><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">0원</span></li>
+												<br>
+				            					<span class="membership"><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">0원</span>
 				            				</ul>
 				            				<br>
 				            				<ul>
 				            					<li class="pet_Comment_Box">
 				            						<textarea id="pet_Comment" name="petcomment" spellcheck="false" maxlength="500" placeholder="요청사항을 적어주세요." onkeyup="petcommentTextLength(this);" rows="3"></textarea>
-				            						<span id="pet_Comment_Info">0</span>/500
+				            						<br>
 				            					</li>
+			            						<li class="comleng">
+			            							<span class="comleng"><span id="pet_Comment_Info">0</span>/500</span>
+			            						</li>
 				            				</ul>
+				            				<br>
 				            			<li>
 				            		</ul>
 				            		<ul>
@@ -1054,10 +1091,11 @@
 				            					</li>
 				            				</ul>
 				            			</li>
+				            			<br>
 				            			<li class="petTB_Bt_Box">
-				            				<button>예약 수정</button>
-				            				<button onclick="resCheck2(${P})">예약 취소</button>
-				            				<button onclick="resCheck(${P})">예약 확인</button>
+				            				<button class="adminRes_bt">예약 수정</button>
+				            				<button class="adminRes_bt" onclick="resCheck2(${P})">예약 취소</button>
+				            				<button class="adminRes_bt" onclick="resCheck(${P})">예약 확인</button>
 				            			</li>
 				            		</ul>
 				            	</td>
