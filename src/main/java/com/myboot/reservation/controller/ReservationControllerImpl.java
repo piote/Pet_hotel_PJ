@@ -38,11 +38,7 @@ public  class ReservationControllerImpl implements ReservationController{
 	@Autowired
 	private PetserviceVO petVO;
 	
-//	@RequestMapping("/reservation.do") 
-//		public String ReservationMain(Model model){
-// 		
-//		return "reservationMain"; 
-//    	}
+	
 	@Override
 	@RequestMapping(value= "/reservationForm.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView reservationMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -118,9 +114,6 @@ public  class ReservationControllerImpl implements ReservationController{
 		String[] petBeauty = request.getParameterValues("beauty");
 		String[] petSpa = request.getParameterValues("spa");
 
-		//테스트
-		System.out.println("예약번호============="+resNum);
-			
 		//pet서비스 vo List만들기
 		List<PetserviceVO> petServiceList = new ArrayList<PetserviceVO>();
 
@@ -164,20 +157,6 @@ public  class ReservationControllerImpl implements ReservationController{
 		
 	}
 	
-	@ResponseBody
-	@RequestMapping("/resList.do") 
-	public List resListGet(Model model){
-		List ResList = null;
-		try {
-			ResList = resService.listReservation();
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-			
-		return ResList;
-	}
-	
 	//예약 하기
 	@Override
 	@RequestMapping(value= "/reservationAdd.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -196,22 +175,15 @@ public  class ReservationControllerImpl implements ReservationController{
 			request.setAttribute("stmsgcheck", "1");
 			request.setAttribute("stmsg", "비정상적인 접근입니다!");
 			mav.setViewName("forward:/main.do");
-			//mav.setViewName("redirect:/main.do");
+			//mav.setViewName("redirect:/main.do"); //redirect는 값을 못넘김 
 			return mav;
 		}
-		
-		
-		
 
-		
 		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy. MM. dd");
 		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
 		// String 타입을 Date 타입으로 변환
 		Date checkinDate_format = dtFormat.parse(checkinDate);
 		Date checkoutDate_format = dtFormat.parse(checkoutDate);
-		// Date타입의 변수를 새롭게 지정한 포맷으로 변환 Date 타입이기만 하면 되나?
-		//String checkinDate_format_new = newDtFormat.format(checkinDate_format);
-		//String checkoutDate_format_new = newDtFormat.format(checkoutDate_format);
 		//https://junghn.tistory.com/entry/JAVA-자바-날짜-포맷-변경-방법SimpleDateFormat-yyyyMMdd
 		
 		
@@ -269,29 +241,6 @@ public  class ReservationControllerImpl implements ReservationController{
 		
 		return mav;
 	}
-	
-	
-//	//예약 번호로 예약 찾기 
-//	@ResponseBody 
-//	@RequestMapping(value= "/SearchReservationNum.do", method = RequestMethod.POST)
-//	public HashMap SearchReservationNum(
-//			@RequestParam(value ="reserNum", required = false) String reserNum,
-//			  HttpServletRequest request, HttpServletResponse response) throws Exception{
-//			
-//		ReservationVO reser; 
-//		List<PetserviceVO> reserP; 
-//		
-//		reser = resService.SearchReservationNum(reserNum);
-//		reserP = resService.SearchPetServiceByResNum(reserNum);
-//		
-//		HashMap reservationMap = new HashMap();
-//		
-//		reservationMap.put("reservation", reser);//예약 테이블
-//		reservationMap.put("petservice", reserP);//펫 서비스 테이블 들
-//		
-//		return reservationMap;
-//	}
-
 	
 }
 

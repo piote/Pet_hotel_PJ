@@ -136,6 +136,13 @@ function calendarMaker(target, date) {
                 $(".custom_calendar_table .to_day").removeClass("to_day");
             }
         });
+        //마우스 사라지면 색 표시 제거
+        $(".custom_calendar_table").on("mouseout", ".CalDate", function () {
+                  
+                $(".custom_calendar_table .select_day").removeClass("select_day");
+                $(".custom_calendar_table .to_day").removeClass("to_day");
+ 
+        });
 
         //일자 선택 클릭시
 

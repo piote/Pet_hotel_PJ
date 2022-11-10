@@ -169,8 +169,6 @@ function calendarMaker(target, date) {
                     end_day = new Date(selectDay);
                     console.log("end select = " + $(this).text());
 
-
-
                     if (start_day < end_day) {
                         console.log("start_day < end_day");
 
@@ -287,7 +285,6 @@ function calendarMaker(target, date) {
                     costTB(servicemap, true)
                 }
             }
-
 
         });
     }
