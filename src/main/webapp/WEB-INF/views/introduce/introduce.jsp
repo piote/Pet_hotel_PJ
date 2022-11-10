@@ -72,6 +72,8 @@
                 document.getElementById("bt_onoff4").style.display="block";
                 document.getElementById("bt_onoff5").style.display="block";
                 document.getElementById("bt_onoff6").style.display="block";
+                document.getElementById("verycau").style.display="block";
+                document.getElementById("verycau").style.color="red";
 			}
 			/* 버튼닫기 버튼을 눌렀을 때의 동작 */ 
 			function fn_close(obj) {
@@ -108,6 +110,7 @@
 				document.getElementById("bt_onoff4").style.display="none";
 				document.getElementById("bt_onoff5").style.display="none";
 				document.getElementById("bt_onoff6").style.display="none";
+				document.getElementById("verycau").style.display="none";
 			}
 			/* 이미지 업로드를 하기 위함  */
 			function readURL1(input) {
@@ -180,9 +183,20 @@
         <style>       	        	        
             /* common 공용 시작 */
             /* 관리자 수정 버튼 시작 */
+            #verycau {
+			    position: relative;
+			    display: none;
+			    top: -200px;
+			    left: 830px;
+			    width: 375px;
+			    height: 34px;
+			    font-size: 23px;
+    		}
             /* 버튼 누르기 전  */
             #tr_btn {
             	position: relative;
+            	top: -15px;
+   				left: 55px;
             }
 			#bt_onoff1 {
         		position: relative;
@@ -211,7 +225,9 @@
             /* 버튼 누른 후  */
             #tr_btn_modify {
             	display: none;
-            	position: relative;
+				position: relative;
+				top: -45px;
+				left: 55px;
             }
             .button {
              	background-color: white;
@@ -692,6 +708,7 @@
     	<form name="frmIntroduce" method="post" action="${contextPath}" enctype="multipart/form-data">	
 		    <section class="header_box_back"></section>
     		<table border="0" align="center">
+    			<p id="verycau">이름이 중복된 사진은 등록하지 마세요.</p>
     			<!-- 관리자 모드로 접근하면 나타나는 수정 버튼 생성 및 시작 -->
     			<tr id="tr_btn_modify" align="center">
 					<td colspan="3">
@@ -724,6 +741,7 @@
 		                <img src="${contextPath}/resources/introduce/introduce_image/${introduce.intro_num}/${introduce.intro_image1}" alt="호텔" height="600" id="preview1">
 						<!-- 기존의 이미지를 가져오기 -->
  		            	<input type= "hidden" name="originalintro_image1" value="${introduce.intro_image1}" />
+ 		            	<!-- 이미지를 안 넣었을 때는 null이 가기때문에 그걸 original****로 바꿔주는 역할을 controller에서 함  -->
                         <div id="bt_onoff1">
 							<!-- 새로 이미지를 가져오기 -->
 							<input type="file" id="intro_image1" name="intro_image1" onchange="readURL1(this);"/><br>		                        		                
