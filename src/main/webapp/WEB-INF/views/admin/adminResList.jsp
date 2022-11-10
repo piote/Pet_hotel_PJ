@@ -475,14 +475,15 @@
 			
 			var petTB_Item_Box = '<li class="pet_item_li">'
 				+'<ul class="petTB_Item_Box" id="petTB_Item_'+petItemSum+'">'
-				+'<li><input name="petname" class="petTB_Item" type="text" placeholder="이름"></li>'
-				+'<li><select name="petsex" class="petTB_Item"><option value="male" >male</option><option value="female">female</option></select></li>'
-				+'<li><select name="petroom" class="petTB_Item" onchange="change_form()"><option value="Deluxe">Deluxe(소형견)</option><option value="Sweet">Sweet(중형견)</option><option value="Superior">Superior(대형견)</option></select></li>'
-				+'<li><select name="beauty" class="petTB_Item" onchange="change_form()"><option value="N">이용안함</option><option value="Clipping">Clipping</option><option value="Scissoring">Scissoring</option></select></li>'
-				+'<li><span class="spaT">SPA</span><input name="spa" class="petTB_Item spaCK" type="checkbox" value="Y" onchange="change_form()"><input type="hidden" name="spa"  id="" value="N"/></li>'
+				+'<li><input name="petname" class="petTB_Item petnameINPUT" type="text" placeholder="이름"></li>'
+				+'<li><select name="petsex" class="petTB_Item petsexINPUT"><option value="male" >male</option><option value="female">female</option></select></li>'
+				+'<li><select name="petroom" class="petTB_Item petroomINPUT" onchange="change_form()"><option value="Deluxe">Deluxe(소형견)</option><option value="Sweet">Sweet(중형견)</option><option value="Superior">Superior(대형견)</option></select></li>'
+				+'<li><select name="beauty" class="petTB_Item beautyINPUT" onchange="change_form()"><option value="N">이용안함</option><option value="Clipping">Clipping</option><option value="Scissoring">Scissoring</option></select></li>'
+				+'<li><span class="spaT">SPA</span><input id="spaY'+petItemSum+'" name="spa" class="petTB_Item spaCK" type="checkbox" value="Y" onchange="change_form()"><input type="hidden" name="spa"  id="spaN'+petItemSum+'" value="N"/></li>'
 				+'<li><input type="image" id="petTB_Item_Delete" class="petUsed" onclick="petItemDelet(this)" value="예약취소"></li>'
 				+'</ul>'
 				+'</li>'
+				
 			$(petTB_Item_Box).insertBefore($('.petTB_Item_Box_Add').parent());
 
 			//표함수
@@ -645,6 +646,8 @@
 					
 					$('#res_TotalCost').text(data.reservation.totalCost.toLocaleString()+' 원');
 					$('#res_TotalCost').val(data.reservation.totalCost);
+					$('#view_TotalCost').val(data.reservation.totalCost);
+					
 					$(".membershipImg").val('');
 					//요청사항
 					$('#pet_Comment').val(data.reservation.res_comment)
@@ -734,7 +737,7 @@
 				var ed = $("input[name='res_end']").val();
 
 				if(dateCal(st, ed) <= 0){
-	            	alert("숙박일 1일 이상")
+	            	alert("숙박일 1일 이상 선택해주세요")
 	            	$("input[name='res_st']").val();
 	            	$("input[name='res_end']").val();
 	            }
@@ -847,10 +850,109 @@
 				});
 			}	
 		}
-		//수정하기 -> 수정 확인
-		function resMod(res_num){
-			
+		
+		function getFormatDate(date){
+		    var year = date.getFullYear();              //yyyy
+		    var month = (1 + date.getMonth());          //M
+		    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+		    var day = date.getDate();                   //d
+		    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+		    return  year + '-' + month + '-' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
 		}
+		
+		//수정하기 -> 수정 확인
+		function resMod(P){
+			//
+			
+			var resState = $("#resState_"+res_num).text();
+				
+			if(resState == 'Y') {
+				alert("이미 완료된 예약은 수정 할 수 없습니다.");
+			}else if(resState == 'C') {
+				alert("이미 취소된 예약은 수정 할 수 없습니다.");
+			}
+			
+			var result = confirm('예약을 변경하시겠습니까?');
+			if(result){
+				var res_num = $('#view_Res_Num').val();
+				var user_Id = $('#view_User_Id').val();
+				
+				var nowDate = getFormatDate(new Date());
+				console.log(nowDate);
+				var res_st = $('#res_st').val();
+				if(res_st == null || res_st == ''){
+					return alert("체크인 날짜를 선택해주세요.");
+				}else if(res_st <= nowDate){
+					return alert("체크인 날짜가 이미 지난 날짜입니다.");
+				}
+				console.log(res_st<nowDate);
+				
+				var res_end = $('#res_end').val();
+				if(res_end == null || res_end == ''){
+					return alert("체크인아웃 날짜를 선택해주세요.");
+				}else if(res_end <= nowDate){
+					return alert("체크아웃 날짜가 이미 지난 날짜입니다.");
+				}else if(res_end <= res_st){
+					return alert("체크아웃 날짜가 체크인 날짜보다 뒤에 있어야합니다.");
+				}
+				
+				var view_TotalCost = $('#view_TotalCost').val();
+				var pet_Comment = $('#pet_Comment').val();
+				var Box_Number= $('.petTB_Item_Box').size();//boxadd가 포함되어있음
+				var petname = [];
+				var petsex = [];
+				var petroom = [];
+				var beauty = [];
+				var spa = [];
+				
+				for(var boxIndex = 1; boxIndex < Box_Number ;boxIndex++){
+					var box = $('#petTB_Item_'+boxIndex)
+					petname.push(box.find('.petnameINPUT').val());
+					if(petname[boxIndex-1] == null || petname[boxIndex-1] == ''){
+						return alert("펫 이름을 작성해주세요.");
+					}
+					
+					petsex.push(box.find('.petsexINPUT').val());
+					petroom.push(box.find('.petroomINPUT').val());
+					beauty.push(box.find('.beautyINPUT').val());
+					if(box.find('.spaCK').prop('checked')){
+						spa.push('Y');	
+					}else{
+						spa.push('N');
+					}
+	
+				}
+				
+				$.ajax({
+	    			url:'/adminResUpdate.do',
+	    			method:'post',
+	    			data:{
+	    				"res_num":res_num,
+	    				"user_Id":user_Id,
+	    				"res_st":res_st,
+	    				"res_end":res_end,
+	    				"view_TotalCost":view_TotalCost,
+	    				"pet_Comment":pet_Comment,
+	    				"petname":petname,
+	    				"petsex":petsex,
+	    				"petroom":petroom,
+	    				"beauty":beauty,
+	    				"spa":spa
+	    				
+	    				
+	    			},
+	    			dataType:'JSON',
+	    			success:function(data){
+	    				alert("예약이 변경 되었습니다.");
+	    				reslistPage(P);
+					},
+					error : function(error) {
+				      alert("Error!");
+				   }		
+				});
+			}	
+		}
+		
 		function resModCheck(res_num){
 			
 		}
@@ -906,7 +1008,7 @@
 					                <td class="res_petCount">${reservation.total_pet}마리</td>
 					                <td class="res_payTime">${reservation.payTime}</td>
 					                <td class="res_cost">${reservation.totalCost}</td>
-					                <td class="resState">${reservation.res_state}</td>
+					                <td id="resState_${reservation.res_num}" class="resState">${reservation.res_state}</td>
 					                <td class="res_modBt res_modBt_bt" onclick="">
 					                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
 					                </td>					  
@@ -926,96 +1028,100 @@
                     
                     <!--상세보기용  -->
                     <tr id="res_content_box" class="res_content_box">
-				            	<td colspan="3">
-				            		<ul>
-				            			<li class="res_Date_Veiw_Box">
-				            				<input type="hidden" id="view_Res_Num">
-				            				<input type="hidden" id="view_User_Id">
-				            				<ul>
-				            					<li><span class="check_Date">Check In</span></li>
-				            					<li class="date_Cal_Text"></li>
-				            					<li><span class="check_Date">Check Out</span></li>
-				            				</ul>
-				            				<ul>
-				            					<li><input type="date" name="res_st" id="res_st" onchange="change_form()"></li>
-				            					<li class="date_Cal_Text"><span id="dateCalText">0박</span></li>
-				            					<li><input type="date" name="res_end" id="res_end" onchange="change_form()"></li>
-				            				</ul>	
-				            			<li>
-				            			<br>
-				            			<li>
-				            				<ul class="pet_Cost_Box">
-				            					<li>
-					            					<table class="pet_Cost_table">
-													  <tr>
-													    <th>*</th>
-													    <th>R</th>
-													    <th>C</th>
-													    <th>S</th>
-													    <th>SP</th>
-													  </tr>
-													  <tr>
-													    <th>소</th>
-													    <td class="sr">0</td>
-													    <td class="sc">0</td>
-													    <td class="ss">0</td>
-													    <td class="ssp">0</td>
-													  </tr>
-													  <tr>
-													    <th>중</th>
-													    <td class="mr">0</td>
-													    <td class="mc">0</td>
-													    <td class="ms">0</td>
-													    <td class="msp">0</td>
-													  </tr>
-													  <tr>
-													    <th>대</th>
-													    <td class="lr">0</td>
-													    <td class="lc">0</td>
-													    <td class="ls">0</td>
-													    <td class="lsp">0</td>
-													  </tr>
-													</table>
-												</li>
-				            					<li><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">0원</span></li>
-				            				</ul>
-				            				<br>
-				            				<ul>
-				            					<li class="pet_Comment_Box">
-				            						<textarea id="pet_Comment" name="petcomment" spellcheck="false" maxlength="500" placeholder="요청사항을 적어주세요." onkeyup="petcommentTextLength(this);" rows="3"></textarea>
-				            						<span id="pet_Comment_Info">0</span>/500
-				            					</li>
-				            				</ul>
-				            			<li>
-				            		</ul>
-				            		<ul>
-				            			<li><li>
-				            		</ul>
-				            	</td>
-				            	<td colspan="5">
-				            		<ul>
-				            			<li class="petTB_List_Box">
-				            				<ul  class="petTB_List">
-				            						            					
-				            					<li>
-				            						<ul class="petTB_Item_Box petTB_Item_Box_Add">
-				            							<li onclick="pet_Add(this);">
-				            								<input type="image" id="petTB_Item_Add" class="petAdd_Bt" value="펫 추가" >
-				            							</li>
-				            						</ul>
-				            					</li>
-				            				</ul>
-				            			</li>
-				            			<li class="petTB_Bt_Box">
-				            				<button>예약 수정</button>
-				            				<button>예약 취소</button>
-				            				<button onclick="resCheck(${P})">예약 확인</button>
-				            			</li>
-				            		</ul>
-				            	</td>
-				            </tr>
-                    
-                    
+
+			            	<td colspan="3">
+			            		<form id="resForm" method="post" onsubmit="return false">
+			            		<ul>
+			            			<li class="res_Date_Veiw_Box">
+			            				<input type="hidden" id="view_Res_Num" name="view_Res_Num">
+			            				<input type="hidden" id="view_User_Id" name="view_User_Id">
+			            				<ul>
+			            					<li><span class="check_Date">Check In</span></li>
+			            					<li class="date_Cal_Text"></li>
+			            					<li><span class="check_Date">Check Out</span></li>
+			            				</ul>
+			            				<ul>
+			            					<li><input type="date" name="res_st" id="res_st" onchange="change_form()"></li>
+			            					<li class="date_Cal_Text"><span id="dateCalText">0박</span></li>
+			            					<li><input type="date" name="res_end" id="res_end" onchange="change_form()"></li>
+			            				</ul>	
+			            			<li>
+			            			<br>
+			            			<li>
+			            				<ul class="pet_Cost_Box">
+			            					<li>
+				            					<table class="pet_Cost_table">
+												  <tr>
+												    <th>*</th>
+												    <th>R</th>
+												    <th>C</th>
+												    <th>S</th>
+												    <th>SP</th>
+												  </tr>
+												  <tr>
+												    <th>소</th>
+												    <td class="sr">0</td>
+												    <td class="sc">0</td>
+												    <td class="ss">0</td>
+												    <td class="ssp">0</td>
+												  </tr>
+												  <tr>
+												    <th>중</th>
+												    <td class="mr">0</td>
+												    <td class="mc">0</td>
+												    <td class="ms">0</td>
+												    <td class="msp">0</td>
+												  </tr>
+												  <tr>
+												    <th>대</th>
+												    <td class="lr">0</td>
+												    <td class="lc">0</td>
+												    <td class="ls">0</td>
+												    <td class="lsp">0</td>
+												  </tr>
+												</table>
+											</li>
+			            					<li><img class="membershipImg" src="${contextPath}/resources/img/gold_medal.png"> TotalCost = <span id="res_TotalCost">0원</span><input type="hidden" name="view_TotalCost" id="view_TotalCost"></li>
+			            				</ul>
+			            				<br>
+			            				<ul>
+			            					<li class="pet_Comment_Box">
+			            						<textarea id="pet_Comment" name="petcomment" spellcheck="false" maxlength="500" placeholder="요청사항을 적어주세요." onkeyup="petcommentTextLength(this);" rows="3"></textarea>
+			            						<span id="pet_Comment_Info">0</span>/500
+			            					</li>
+			            				</ul>
+			            			<li>
+			            		</ul>
+			            		<ul>
+			            			<li><li>
+			            		</ul>
+			            		</form>
+			            	</td>
+			            	<td colspan="5">
+			            	<form id="petForm" method="post" onsubmit="return false">
+			            		<ul>
+			            			<li class="petTB_List_Box">
+			            				<ul  class="petTB_List">
+			            						            					
+			            					<li>
+			            						<ul class="petTB_Item_Box petTB_Item_Box_Add">
+			            							<li onclick="pet_Add(this);">
+			            								<input type="image" id="petTB_Item_Add" class="petAdd_Bt" value="펫 추가" >
+			            							</li>
+			            						</ul>
+			            					</li>
+			            				</ul>
+			            			</li>
+			            			<li class="petTB_Bt_Box">
+			            				<button onclick="resMod(${P})">예약 수정</button>
+			            				<button>예약 취소</button>
+			            				<button onclick="resCheck(${P})">예약 확인</button>
+			            			</li>
+			            		</ul>
+			            		</form>
+			            	</td>
+		            	</tr>
+
                 </table>
                 
                 <!-- 페이지수 구하기 -->
