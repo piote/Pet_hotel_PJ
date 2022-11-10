@@ -380,7 +380,7 @@
             var num = $(obj).data('num');
 
             if(num==1){
-                location.href='${contextPath}/reviewBoard.do';
+                location.href='${contextPath}/review/reviewBoard.do';
             }else{
                 $('.pic[data-num="1"]').remove();
                 $('.pic[data-num="2"]').attr('data-num',1);

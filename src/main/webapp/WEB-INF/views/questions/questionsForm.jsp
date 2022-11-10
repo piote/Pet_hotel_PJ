@@ -175,7 +175,7 @@
     </style>
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
-    //글자수세기
+        //글자수세기
         window.onload = function (){
          $("#questionsCommendBox").on('keyup', function (event) {
 	        var currentString = $("#questionsCommendBox").val()
@@ -194,11 +194,18 @@
       		if (input.files && input.files[0]) {
       			var fileName = $("#imageFileName").val();
 		      	var reader = new FileReader();
-		      	reader.onload = function (e) {
-		        	$('#preview').attr('src', e.target.result);
-	          	}
-		      	$(".upload-name").val(fileName);
-	         	reader.readAsDataURL(input.files[0]);
+
+                var realfileName = fileName.split('\\').pop().toLowerCase();
+
+                if(checkFileName(realfileName)){
+                    reader.onload = function (e) { 
+                        $('#preview').attr('src', e.target.result);
+                    }
+                    $(".upload-name").val(fileName);
+                    reader.readAsDataURL(input.files[0]);
+                }else{
+                    $("#imageFileName").val("");
+                }
       		}
   		}
         
@@ -207,6 +214,22 @@
             obj.style.height = '1px';
             obj.style.height = (12 + obj.scrollHeight) + 'px';
 		}
+
+        function checkFileName(str){
+            //확장자 체크
+            var ext =  str.split('.').pop().toLowerCase();
+            if($.inArray(ext, ['bmp', 'jpg', 'png', 'jpeg', 'gif']) == -1) {
+                alert(ext+'파일은 업로드 하실 수 없습니다.');
+                return false;
+            }
+
+            //파일명 길이 체크
+            if(str.length>=70){
+                alert('파일명이 너무 길어 업로드 하실 수 없습니다.');
+                return false;
+            }
+            return true;
+        }
     </script>
 </head>
 <body>

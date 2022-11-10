@@ -72,14 +72,15 @@ h5 {
 	position: relative;
 }
 #profil_card{
-    width: 198px;
+   width: 198px;
     height: 247px;
-    background-color:#be5b03 ;
     position: absolute;
-    border-radius: 15px;
+    border-radius: 10px;
     top: 175px;
     right: 20px;
 
+    box-sizing: border-box;
+    box-shadow: 2px 2px 8px #00000020;
 }
 
 
@@ -229,8 +230,11 @@ img {
 input#a {
     width: 100px;
     height: 36px;
+    text-align: center;
+    font-size: large;
     position: relative;
-    top: 113px;
+    top: 107px;
+    right: 5px;
 }
 
 input.upload-name {
@@ -378,6 +382,14 @@ input#profil_id {
         	  
             $(".phone").focus(focused); //input에 focus일 때
             $(".phone").blur(blured);   //focus out일 때
+            
+            $("#b").keydown(function(){
+                $('#a').val($(this).val());
+            });
+
+            $("#b").change(function(){
+                $('#a').val($(this).val());
+            });
           })
 
         function focused(){
@@ -444,19 +456,6 @@ input#profil_id {
       		}
   		}
     </script>
-       <script>
-        $("#b").keydown(function(){
-
-            $('#a').val($(this).val());
-
-        });
-
-        $("#b").change(function(){
-
-            $('#a').val($(this).val());
-
-        });
-        </script>
       
 </head>
 <body>
