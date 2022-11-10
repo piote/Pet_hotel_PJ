@@ -135,10 +135,6 @@
 	    </choose>
   </select>
   
-  
-  
-  
-  
   <!-- 관리자 예약수정 예약불러오기 -->
   <select id="adminSelectRes" resultMap="adminresfullResult" parameterType="String">
   	<![CDATA[
@@ -160,12 +156,6 @@
         where RESERVATION_NUM = #{RESERVATION_NUM}
 	]]>
   </select>
-  
-  
-  
-  
-  
-  
   
   <!-- 관리자 예약수정 예약불러오기(변경) -->
   <update id="adminUpdateRes" parameterType="java.util.Map">  
@@ -189,6 +179,20 @@
 	SERVICE_SPA = #{SERVICE_SPA}
 	where PET_NUM = #{PET_NUM}
   </update>
+  
+  <!-- 관리자 예약수정 예약변경(펫 추가) -->
+  <insert id="adminInsertPet" parameterType="java.util.Map">
+	<![CDATA[
+		INSERT into tb_petservice
+		PET_NUM = #{PET_NUM},
+		set PET_NAME = #{PET_NAME},
+		PET_GENDER = #{PET_GENDER},
+		ROOM_GRADE = #{ROOM_GRADE},
+		SERVICE_BEAUTY = #{SERVICE_BEAUTY},
+		SERVICE_SPA = #{SERVICE_SPA}
+		where PET_NUM = #{PET_NUM}
+	]]>      
+  </insert>
   
   <!-- 관리자 예약관리 예약변경(펫 삭제) -->
   <delete id="adminDeletePet" parameterType="String">
@@ -271,6 +275,7 @@
 		ORDER BY RESERVATION_NUM DESC
 		]]>
 	</select>
+	
 	<!--예약 번호로 펫서비스 불러오기 -->
 	<select id="SearchPetServiceByResNum" resultMap="adminresfullResult" parameterType="String">
 		<![CDATA[
