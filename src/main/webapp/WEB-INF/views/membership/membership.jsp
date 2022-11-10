@@ -402,27 +402,13 @@
 	            <c:when test="${user.grade eq 'Gold'}">
 	            	<img src="${contextPath}/resources/img/gold_medal.png" alt="gold_medal">
 	            </c:when>
-	             <c:otherwise>
-	             	<div id="normal_medal"></div>
-	             </c:otherwise>
+	            <c:otherwise>
+	                <div id="normal_medal"></div>
+	            </c:otherwise>
             </c:choose>
             <div class="txt1">
                 <p>${user.name} 님의 멤버쉽 등급은</p>
                 <p>${user.grade}</p>
-             <%--  <c:choose>
-                <c:when test="${user.grade == 'Bronze'}">
-                	<p>Bronze</p>
-                </c:when>
-                <c:when test="${user.grade == 'Silver'}">
-                	<p>Silver</p>
-                </c:when>
-                <c:when test="${user.grade == 'Gold'}">
-                	<p>Gold</p>
-                </c:when>
-                <c:otherwise>
-                	<p>Normal</p>
-                </c:otherwise>
-              </c:choose> --%>
             </div>
             <div class="txt2">
                 <c:choose>
@@ -437,7 +423,7 @@
 		                    미용서비스 <span class="orange">1회</span> 제공
 	                	</p>
 	                </c:when>
-	                 <c:when test="${user.grade == 'Gold'}">
+	                <c:when test="${user.grade == 'Gold'}">
 		                <p class="smallfont">연간 이용횟수 20회 이상</p>
 		                <p>
 		                    1회 이용금액의 <span class="orange">10%</span> 할인<br>
@@ -507,7 +493,7 @@
 		                    미용서비스 <span class="orange">1회</span> 제공
 	                	</p>
 	                </c:when>
-	                 <c:when test="${user.grade == 'Gold'}">
+	                <c:when test="${user.grade == 'Gold'}">
 		                <p class="smallfont">연간 이용횟수 20회 이상</p>
 		                <p>
 		                    1회 이용금액의 <span class="orange">10%</span> 할인<br>
@@ -550,8 +536,7 @@
                     <p class="grade_count_info">앞으로 <span id="count_gold" class="b">3</span>회</p>
                 </div>
             </div>
-        </div>
-        
+        </div>  
     </div>
 </body>
 </html>
