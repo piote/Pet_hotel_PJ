@@ -523,7 +523,6 @@
 		    searchMap.keyword = keyword;
 		    searchMap.state_ck=state_ck;
 		    searchMap.sort_ck=sort_ck;
-//		    searchMap.res_state=res_state;
 			
 			$.ajax({
 				url : "/ResPageAjax.do",
@@ -821,15 +820,24 @@
 				reslistPage(0);	
 			}
 		}
+		
 		//예약확인
 		function resCheck(P){
 			//
-			var result = confirm("예약을 완료하시겠습니까?");
+			var result = confirm("예약을 확인하시겠습니까?");
+			
 			if(result){
 				var res_num = $("#view_Res_Num").val();
 				//userId 받도록 만들기 jsp
 				var user_Id = $("#view_User_Id").val();
-
+				
+				var resState = $("#resState_"+res_num).text();
+				
+				if(resState == 'Y') {
+					alert("이미 완료된 예약입니다.");
+				}else if(resState == 'C') {
+					alert("이미 취소된 예약입니다.");
+				}else {
 				
 				$.ajax({
 	    			url:'/ReservaitionCheckY.do',
@@ -839,15 +847,52 @@
 	    			type:'post',
 	    			dataType:'json',
 	    			success:function(data){
-	    				alert("예약이 확인 되었습니다.");
+	    				alert("예약이 확인되었습니다.");
 	    				reslistPage(P);
 					},
 					error : function(error) {
 				        alert("Error!");
 				    }		
 				});
+				}
 			}	
 		}
+		
+		//예약취소
+		function resCheck2(P){
+			//
+			var result = confirm("예약을 취소하시겠습니까?");
+			if(result){
+				var res_num = $("#view_Res_Num").val();
+				//userId 받도록 만들기 jsp
+				var user_Id = $("#view_User_Id").val();
+				var resState = $("#resState_"+res_num).text();
+
+				if(resState == 'Y') {
+					alert("이미 완료된 예약입니다.");
+				}else if(resState == 'C') {
+					alert("이미 취소된 예약입니다.");
+				}else {
+					$.ajax({
+		    			url:'/ReservaitionCheckC.do',
+		    			method:'post',
+		    			data:{ "res_num": res_num,
+		    					"user_Id": user_Id },
+		    			type:'post',
+		    			dataType:'json',
+		    			success:function(data){
+		    				alert("예약이 취소되었습니다.");
+		    				reslistPage(P);
+						},
+						error : function(error) {
+					        console.log("Error!");
+					    }		
+					});
+				}
+				
+			}	
+		}
+		
 		//수정하기 -> 수정 확인
 		function resMod(res_num){
 			
@@ -907,7 +952,7 @@
 					                <td class="res_petCount">${reservation.total_pet}마리</td>
 					                <td class="res_payTime">${reservation.payTime}</td>
 					                <td class="res_cost">${reservation.totalCost}</td>
-					                <td class="resState">${reservation.res_state}</td>
+					                <td id="resState_${reservation.res_num}" class="resState">${reservation.res_state}</td>
 					                <td class="res_modBt res_modBt_bt" onclick="">
 					                    <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)">
 					                </td>					  
@@ -932,6 +977,7 @@
 				            			<li class="res_Date_Veiw_Box">
 				            				<input type="hidden" id="view_Res_Num">
 				            				<input type="hidden" id="view_User_Id">
+				            				<input type="hidden" id="view_Res_State">
 				            				<ul>
 				            					<li><span class="check_Date">Check In</span></li>
 				            					<li class="date_Cal_Text"></li>
@@ -1009,7 +1055,7 @@
 				            			</li>
 				            			<li class="petTB_Bt_Box">
 				            				<button>예약 수정</button>
-				            				<button>예약 취소</button>
+				            				<button onclick="resCheck2(${P})">예약 취소</button>
 				            				<button onclick="resCheck(${P})">예약 확인</button>
 				            			</li>
 				            		</ul>

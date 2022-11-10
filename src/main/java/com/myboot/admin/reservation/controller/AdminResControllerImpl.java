@@ -276,6 +276,21 @@ public  class AdminResControllerImpl implements AdminResController{
 		return res_num;
 	}
 	
+	@ResponseBody 
+	@RequestMapping(value= "/ReservaitionCheckC.do", method = RequestMethod.POST)
+	public String ReservaitionCheck2(
+			@RequestParam(value ="res_num", required = false) String res_num,
+			@RequestParam(value ="user_Id", required = false) String user_Id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
+				
+		System.out.println(res_num);
+
+		//예약 취소 변경
+		adminresService.updateResStateC(res_num);
+
+		return res_num;
+	}
+	
 	
 	
 }
