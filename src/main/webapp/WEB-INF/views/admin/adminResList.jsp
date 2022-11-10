@@ -803,6 +803,39 @@
 				return total;
 			}
 		}
+<<<<<<< Updated upstream
+=======
+
+		//예약취소
+		function updateRes2(P) {   //P인지 url인지 
+			
+		var con_test = confirm("예약을 취소하시겠습니까?");
+		var res_num  = res_num
+		var user_id  = user_id
+		
+		if(con_test == true) {   //취소	
+			
+			$.ajax({                 
+				url:"/updateRes.do",
+				type:('{res_num}', res_num),
+					 ('{user_id}', user_id),
+				async:true,
+				dataType:'json',
+				success:function(data){
+					alert("예약이 취소되었습니다.");
+					reslistpage(0);
+					}
+			});
+			
+		}else if(con_test == false) {  //유지
+			alert("예약이 취소되지 않았습니다.");
+		}
+		
+		return;
+			
+		}
+
+>>>>>>> Stashed changes
 		//페이징 next PI 총 페이지수. P 현재페이지-1  5씩 페이지 증가 끝이면 PI-1로 페이지 이동
 		function pageUP(PI,P) {
 			
