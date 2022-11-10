@@ -35,7 +35,6 @@ function reservationSubmit(obj){
     		$("#all_body").css("height",height);
     		$("#all_body").css("opacity","0.5");
     		
-
     	}
     	function popup(resnum){
     		pushLayer();
@@ -49,10 +48,7 @@ function reservationSubmit(obj){
     		resetRow();
     		
     	}
-    	
-    	
-    	
-    	
+    	 	
     	function reservationSubmit(){
     		var form = $("#reservationUpdateForm");
 			if($("#checkoutDate").val() != null && $("#checkoutDate").val() != ""){//날짜가 있으면

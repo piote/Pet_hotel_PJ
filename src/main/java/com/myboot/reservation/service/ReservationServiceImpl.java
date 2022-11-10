@@ -18,14 +18,7 @@ import com.myboot.reservation.vo.ReservationVO;
 public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	private ReservationDAO reservationDAO;
-
-	//테스트용, 예약된 것들을 조회
-	@Override
-	public List listReservation() throws Exception {
-		List ResList = null;
-		ResList = reservationDAO.selectReservationList();
-		return ResList;
-	}
+	
 	@Override
 	public int addReservation(ReservationVO reservationVO) throws Exception {
 		return reservationDAO.insertReservation(reservationVO);
@@ -46,10 +39,12 @@ public class ReservationServiceImpl implements ReservationService {
 	
 		return reservationDAO.SearchReservationNum(reserNum);
 	}
+	
 	@Override
 	public List<PetserviceVO> SearchPetServiceByResNum(String reserNum) {
 		return reservationDAO.SearchPetServiceByResNum(reserNum);
 	}
+	
 	@Override
 	public int updateReservation(ReservationVO resVO)throws Exception {
 		
@@ -62,23 +57,4 @@ public class ReservationServiceImpl implements ReservationService {
 		return reservationDAO.deletePetserviceList(reserNum);
 	}
 	
-//	@Override
-//	public int modMember(MemberVO member) throws Exception {
-//		return memberDAO.updateMember(member);
-//	}
-//	
-//	@Override
-//	public MemberVO findMember(String id) throws DataAccessException {
-//	    return memberDAO.selectMemberById(id);
-//	}
-//
-//
-//	@Override
-//	public int removeMember(String id) throws Exception {
-//		return memberDAO.deleteMember(id);
-//	}
-//	
-//	public MemberVO login(MemberVO memberVO) throws Exception{
-//		return memberDAO.loginById(memberVO);
-//	}
 }
