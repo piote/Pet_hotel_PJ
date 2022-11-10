@@ -38,10 +38,10 @@ public interface AdminResDAO {
 	 //관리자 예약관리 예약갯수
 	 public int adminTotalResNum(int reserNum) throws DataAccessException;
 	 
-	 //관리자 예약취소 상태변경
+	 //관리자 예약취소 상태변경C
 	 public void adminUpdateSTC(String reserNum) throws DataAccessException;
 	 
-	 //관리자 예약확인 멤버쉽카운팅
+	 //관리자 예약확인 상태변경Y 멤버쉽카운팅
 	 public void adminUpdateSTY(String reserNum) throws DataAccessException;
 
 	//관리자 예약수정 예약불러오기

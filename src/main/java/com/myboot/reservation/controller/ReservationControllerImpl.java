@@ -37,12 +37,7 @@ public  class ReservationControllerImpl implements ReservationController{
 	private ReservationVO resVO;
 	@Autowired
 	private PetserviceVO petVO;
-	
-//	@RequestMapping("/reservation.do") 
-//		public String ReservationMain(Model model){
-// 		
-//		return "reservationMain"; 
-//    	}
+
 	@Override
 	@RequestMapping(value= "/reservationForm.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView reservationMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -269,29 +264,6 @@ public  class ReservationControllerImpl implements ReservationController{
 		
 		return mav;
 	}
-	
-	
-//	//예약 번호로 예약 찾기 
-//	@ResponseBody 
-//	@RequestMapping(value= "/SearchReservationNum.do", method = RequestMethod.POST)
-//	public HashMap SearchReservationNum(
-//			@RequestParam(value ="reserNum", required = false) String reserNum,
-//			  HttpServletRequest request, HttpServletResponse response) throws Exception{
-//			
-//		ReservationVO reser; 
-//		List<PetserviceVO> reserP; 
-//		
-//		reser = resService.SearchReservationNum(reserNum);
-//		reserP = resService.SearchPetServiceByResNum(reserNum);
-//		
-//		HashMap reservationMap = new HashMap();
-//		
-//		reservationMap.put("reservation", reser);//예약 테이블
-//		reservationMap.put("petservice", reserP);//펫 서비스 테이블 들
-//		
-//		return reservationMap;
-//	}
-
 	
 }
 

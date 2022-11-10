@@ -10,22 +10,23 @@
 <c:set var="P"  value="${P}" />
 
 
+<div id="ajaxresitemnum">
+<span class="res_Item_Num">총 ${item_res}개의 예약</span> 
+</div>
+
 
 <table id="indexListAjax">
-	
-<tr class="tb_title">
-<td class="res_num">예약번호</td>
-<td class="res_name">예약자</td>
-<td class="res_Date">예약일</td>
-<td class="res_petCount">총 마리수</td>
-<td class="res_payTime">주문일</td>
-<td class="res_cost">총 가격</td>
-<td class="resState">예약상태</td>
-<td class="res_modBt"></td>
-</tr>
-<c:choose>
-<c:when test="${resList != null}">
 
+	<tr class="tb_title">
+		<td class="res_num">예약번호</td>
+		<td class="res_name">예약자</td>
+		<td class="res_Date">예약일</td>
+		<td class="res_petCount">총 마리수</td>
+		<td class="res_payTime">주문일</td>
+		<td class="res_cost">총 가격</td>
+		<td class="resState">예약상태</td>
+		<td class="res_modBt"></td>
+	</tr>
 	<c:forEach var="reservation" items="${resList}" varStatus="status" begin="${P*10}" end="${P*10+9}">
 		<tr>
  			<td class="res_num">${reservation.res_num}</td>
@@ -39,10 +40,9 @@
                 <img class="res_arrow_bt" alt="button" src="${contextPath}/resources/img/Arrow.png" onclick="closeResContentBox(this)" >
             </td>					  
     	</tr>
-		
 	</c:forEach>
 
-<!--상세보기용  -->
+	<!--상세보기용  -->
                 <tr id="res_content_box" class="res_content_box">
 					<td colspan="3">
 						<ul>

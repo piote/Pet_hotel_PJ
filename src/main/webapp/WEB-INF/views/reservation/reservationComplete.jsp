@@ -13,9 +13,6 @@
     <meta charset="UTF-8">
     <title>호텔 예약완료</title>
     <style>
-        /* * {
-            margine: 10%
-        } */
 
         #reservationForm{
             align-items: center;

@@ -551,6 +551,7 @@
 		    var search_op = $('#search_op').val();
 		    var keyword = $('#keyword').val();
 		    
+		    
 			searchMap.P=P;
 		    searchMap.search_op = search_op;
 		    searchMap.keyword = keyword;
@@ -579,11 +580,13 @@
 				//새로생긴 html 부분에 상세보기 저장하고 닫기
 				petTClose();
 				
+				
 				//페이징
 				var pageNumber = html.find("#PageAjax").html();
 				$("#page_num").html(pageNumber);
 				
-				
+				var resitemNum = html.find("#ajaxresitemnum").html();
+				$("#ajaxresitemnum").html(resitemNum);
 				
 				
 			}).fail(function (jqXHR, textStatus, errorThrown) {
@@ -1057,8 +1060,9 @@
 					<label><input type="checkbox" name="state" id="Cancel" value="Cancel">취소</label>
 				</div>
 			</div>
-			<span class="res_Item_Num">총 ${item_res}개의 예약</span>
-				
+			<div id="ajaxresitemnum">
+			<span class="res_Item_Num">총 ${item_res}개의 예약</span> 
+			</div>
 			<!-- 테이블 -->
 			<table id="res_List_Tb" class="list_tb">
 				<tr class="tb_title">
@@ -1200,7 +1204,7 @@
                     
                     
             </table>
-                
+            
                 <!-- 페이지수 구하기 -->
 				<c:if test="${item_res % 10 != 0 and item_res > 10}"><!-- 나머지가 있을경우 1페이지가 더 필요하다. ex)68, 62 개 아이템은 7페이지 -->
 				

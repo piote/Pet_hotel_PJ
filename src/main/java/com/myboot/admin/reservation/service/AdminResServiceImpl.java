@@ -88,6 +88,7 @@ public class AdminResServiceImpl implements AdminResService{
 	public AdminResFullVO SearchReservationNum(String reserNum) {
 		return adminresDAO.SearchReservationNum(reserNum);
 	}
+	
 	@Override
 	public List<AdminResFullVO> SearchPetServiceByResNum(String reserNum) {
 		return adminresDAO.SearchPetServiceByResNum(reserNum);

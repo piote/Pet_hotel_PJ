@@ -196,13 +196,11 @@
             opacity: 0;
         }
         #addTr td:nth-child(2){
-            /* padding-left: 100px; */
         }
         #addTr td:nth-child(2) .info_box input[type=text]{
             width: 70%;
         }
         #addTr td:nth-child(3){
-            /* padding-left: 70px; */
             padding-right: 35px;
         }
         #addTr td:nth-child(4){
@@ -243,7 +241,6 @@
 		}
         .info_box{
             width: 100%; height: auto;
-            /* background-color: #eee; */
             display: flex;
             line-height: 30px;
             margin-bottom: 10px;
