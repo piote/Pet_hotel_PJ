@@ -863,18 +863,18 @@
 		//수정하기 -> 수정 확인
 		function resMod(P){
 			//
-			
+			var res_num = $('#view_Res_Num').val();
 			var resState = $("#resState_"+res_num).text();
 				
 			if(resState == 'Y') {
-				alert("이미 완료된 예약은 수정 할 수 없습니다.");
+				return alert("이미 완료된 예약은 수정 할 수 없습니다.");
 			}else if(resState == 'C') {
-				alert("이미 취소된 예약은 수정 할 수 없습니다.");
+				return alert("이미 취소된 예약은 수정 할 수 없습니다.");
 			}
 			
 			var result = confirm('예약을 변경하시겠습니까?');
 			if(result){
-				var res_num = $('#view_Res_Num').val();
+				
 				var user_Id = $('#view_User_Id').val();
 				
 				var nowDate = getFormatDate(new Date());
