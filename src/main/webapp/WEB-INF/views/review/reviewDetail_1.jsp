@@ -204,6 +204,8 @@
  
  
  
+ 
+ 
  </script>
  
  
@@ -277,9 +279,10 @@
 	         </td>
 	         
 	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td> 
+	        
 	         <td class="w_td" width="20%" rowspan="2">               
 	           <c:choose>
-	           
+	          
 	         <c:when test="${review.image != null}"> 
 	                   <a href="${contextPath}/${review.image}" rel="prettyPhoto" title="This is the description"><img class="re_image" src="${contextPath}/${review.image}" width="150" height="150" alt="This is the title" />
 	                </c:when>
@@ -295,6 +298,7 @@
 	          <td class="w_td" align=center >
 	          <input type="hidden" id="reviewNO" name="reviewNO" value="${review.reviewNO }"/>
 	          <input type="hidden" id="review_id" name="id" value="${review.id }"/>
+	          
 	          ${review.id}
 	          </td>	
 	          <td class="w_td" align=center >
