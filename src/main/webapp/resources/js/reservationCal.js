@@ -78,8 +78,6 @@ function calendarMaker(target, date) {
     $(target).find("#custom_set_date").append(tag);
     calMoveEvtFn();
 
-
-
     //년과 달을 입력받아 달력 테이블 생성
     function assembly(year, month) {
         var calendar_html_code =
@@ -111,11 +109,7 @@ function calendarMaker(target, date) {
 
 
     function calMoveEvtFn() {
-        //전달 클릭
-        // $(".custom_calendar_table").on("click", ".prev", function () {
-        //     nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate());
-        //     calendarMaker($(target), nowDate);
-        // });
+
         if (new Date() < nowDate) {
             $(".custom_calendar_table").on("click", ".prev", function () {
                 nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate());
@@ -144,6 +138,13 @@ function calendarMaker(target, date) {
                 $(".custom_calendar_table .select_day").removeClass("select_day");
                 $(".custom_calendar_table .to_day").removeClass("to_day");
             }
+        });
+        //마우스 사라지면 색 표시 제거
+        $(".custom_calendar_table").on("mouseout", ".CalDate", function () {
+                  
+                $(".custom_calendar_table .select_day").removeClass("select_day");
+                $(".custom_calendar_table .to_day").removeClass("to_day");
+ 
         });
 
         //일자 선택 클릭시
@@ -180,7 +181,6 @@ function calendarMaker(target, date) {
                             console.log(between_day);
                         }
 
-
                     }
 					
                     $("#end_dayBox").text(end_day.toLocaleDateString());
@@ -190,7 +190,6 @@ function calendarMaker(target, date) {
                     //차수출력
                     dateCal(start_day, end_day);
 
-
                 } else if (start_day == null && end_day == null && $("#end_dayBox").text() == "0000. 00. 00.") {
 
                     $(this).addClass("start_day");
@@ -199,7 +198,7 @@ function calendarMaker(target, date) {
                     //텍스트에 날짜 정보
 
                     $("#start_dayBox").text(start_day.toLocaleDateString());
-                    $("#checkinDate").val(start_day.toLocaleDateString());//===========================================
+                    $("#checkinDate").val(start_day.toLocaleDateString());
 					
                     //checkout 날짜 선택
                 } else if (start_day != null && end_day == null && start_day < selectDay) {
@@ -221,14 +220,10 @@ function calendarMaker(target, date) {
 
                     }
 
-
-
                     $("#end_dayBox").text(end_day.toLocaleDateString());
-                    $("#checkoutDate").val(end_day.toLocaleDateString());//===========================================
+                    $("#checkoutDate").val(end_day.toLocaleDateString());
                     //차수 출력
                     dateCal(start_day, end_day);
-
-
 
                 } else {
                     //오류일 경우 초기화 
@@ -247,6 +242,7 @@ function calendarMaker(target, date) {
                     
                     //달력 초기화 
                     // $(".custom_calendar_table").remove();
+                    
                     //박수 초기화
                     $("#dateResult").text("Reservation Detail");
                     $("#dateResult").val('');
@@ -272,7 +268,6 @@ function calendarMaker(target, date) {
                 var day = date.getDate();
 
                 var stDate = new Date(year, month, day);
-
 
                 var date = new Date(outdate);
 
