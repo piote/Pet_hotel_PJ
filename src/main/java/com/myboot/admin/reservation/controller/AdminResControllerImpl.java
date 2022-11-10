@@ -95,7 +95,8 @@ public  class AdminResControllerImpl implements AdminResController{
 	}
 		
 	
-	//예약 불러오기       
+	//예약 불러오기  
+	@Override
 	@ResponseBody
 	@RequestMapping(value= "/admin/adminResList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView ResReed(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -120,26 +121,18 @@ public  class AdminResControllerImpl implements AdminResController{
 		return mav;   //
 
 	}
-		
+	@Override
 	@RequestMapping(value= "/ResPageAjax.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String ResPageAjax(@RequestBody Map<String,Object> searchMap, Model model) throws Exception {
-		//@ModelAttribute("P") String Page
-		//List<AdminResFullVO> adminResReed = adminresService.adminAllResList();
-		
-		System.out.println(searchMap); 
-		
+
 		int Page = (int) searchMap.get("P");
 		
 		Map<String,String> state_ck = (Map<String, String>) searchMap.get("state_ck");
-		
 		Map<String, String> searchOption = new HashMap<String, String>();
-		
-//		Map<String, String> resst_up = new HashMap<String, String>();
 		
 		searchOption.put("search_op", (String) searchMap.get("search_op"));
 		searchOption.put("sort_ck", (String) searchMap.get("sort_ck"));
 		searchOption.put("keyword", (String) searchMap.get("keyword"));
-		
 		
 		if(state_ck.size()<4 || state_ck.size()>0) {
 			int i=1;
@@ -148,9 +141,7 @@ public  class AdminResControllerImpl implements AdminResController{
 				i++;
 			}
 		}
-		System.out.println(searchOption);
 		
-		//List list = adminresService.adminAllResList();  
 		List<AdminResFullVO> searchadminResList; 
 		searchadminResList= adminresService.searchResList(searchOption);
 		
@@ -160,87 +151,8 @@ public  class AdminResControllerImpl implements AdminResController{
 	    return "/page/ResPageAjax";
 	  }
 	
-	
-	@ResponseBody
-	@RequestMapping("/adminresList.do") 
-	public List adminresListGet(Model model){
-		List adminResList = null;
-		try {
-			adminResList = adminresService.adminAllResList();
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-			
-		return adminResList;
-	}
-	
-	//예약 수정
+	//예약 번호로 예약 찾기
 	@Override
-	@RequestMapping(value= "/adminresUpdate.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView adminResUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		//예약 정보
-		HttpSession session = request.getSession();
-		AdminResFullVO adminresfullVO = (AdminResFullVO) session.getAttribute("adminreslist");
-		
-		//날짜 포맷
-		String checkinDate = (String) request.getParameter("checkinDate");
-		String checkoutDate = (String) request.getParameter("checkoutDate");
-		
-		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy. MM. dd");
-		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
-		// String 타입을 Date 타입으로 변환
-		Date checkinDate_format = dtFormat.parse(checkinDate);
-		Date checkoutDate_format = dtFormat.parse(checkoutDate);
-		
-		String petcomment = (String) request.getParameter("petcomment");
-		String costResult = (String) request.getParameter("totalcost");
-		
-		//petserviceTB
-		String[] petName = request.getParameterValues("petname");
-		String[] petGender = request.getParameterValues("petsex");
-		String[] petRoom = request.getParameterValues("petroom");
-		String[] petBeauty = request.getParameterValues("beauty");
-		String[] petSpa = request.getParameterValues("spa");
-		
-		
-		return null;
-		
-	}
-	
-	//id나 예약번호로 예약검색   
-	@ResponseBody 
-	@RequestMapping(value= "/adminSearchRes.do", method = RequestMethod.POST)
-	public List<AdminResFullVO> adminResListById(@RequestBody Map<String,Object> searchMap,
-			  HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
-		System.out.println(searchMap); 
-		
-		Map<String,String> state_ck = (Map<String, String>) searchMap.get("state_ck");
-		
-		Map<String, String> searchOption = new HashMap<String, String>();
-		
-		searchOption.put("search_op", (String) searchMap.get("search_op"));
-		searchOption.put("keyword", (String) searchMap.get("keyword"));
-		
-		if(state_ck.size()<4 || state_ck.size()>0) {
-			int i=1;
-			for(String key : state_ck.keySet()) {
-				searchOption.put("state"+i,state_ck.get(key));
-				i++;
-			}
-		}
-		
-		System.out.println(searchOption);
-
-		List<AdminResFullVO> searchadminResList; 
-		searchadminResList= adminresService.searchResList(searchOption);
-		
-		return searchadminResList;
-	}
-	
-	//예약 번호로 예약 찾기 
 	@ResponseBody 
 	@RequestMapping(value= "/SearchReservationNum.do", method = RequestMethod.POST)
 	public HashMap SearchReservationNum(
@@ -261,7 +173,7 @@ public  class AdminResControllerImpl implements AdminResController{
 		return reservationMap;
 	}
 	
-	
+	@Override
 	@ResponseBody 
 	@RequestMapping(value= "/ReservaitionCheckY.do", method = RequestMethod.POST)
 	public String ReservaitionCheck(
@@ -278,18 +190,30 @@ public  class AdminResControllerImpl implements AdminResController{
 		//변경-> 유저 id로 예약 횟수 조회후 그에 맞춰 맴버십 변환
 		
 		adminresService.userMembershipUpdate(user_Id);
-
 	
 		return res_num;
 	}
+	
+	@Override
+	@ResponseBody 
+	@RequestMapping(value= "/ReservaitionCheckC.do", method = RequestMethod.POST)
+	public String ReservaitionCheck2(
+			@RequestParam(value ="res_num", required = false) String res_num,
+			@RequestParam(value ="user_Id", required = false) String user_Id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
+				
+		System.out.println(res_num);
 
+		//예약 취소 변경
+		adminresService.updateResStateC(res_num);
+
+		return res_num;
+	}
+
+	@Override
 	@ResponseBody 
 	@RequestMapping(value= "/adminResUpdate.do", method = {RequestMethod.POST})
 	public String adminReservationUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		
-		
-		
 
 		//유저 정보
 		
@@ -317,9 +241,6 @@ public  class AdminResControllerImpl implements AdminResController{
 		String[] petBeauty = request.getParameterValues("beauty[]");
 		String[] petSpa = request.getParameterValues("spa[]");
 
-		//테스트
-		System.out.println("예약번호============="+resNum);
-			
 		//pet서비스 vo List만들기
 		List<PetserviceVO> petServiceList = new ArrayList<PetserviceVO>();
 
@@ -359,24 +280,7 @@ public  class AdminResControllerImpl implements AdminResController{
 		resService.addPetService(petServiceList);
 
 		return "1234";
-	}
-
-	@ResponseBody 
-	@RequestMapping(value= "/ReservaitionCheckC.do", method = RequestMethod.POST)
-	public String ReservaitionCheck2(
-			@RequestParam(value ="res_num", required = false) String res_num,
-			@RequestParam(value ="user_Id", required = false) String user_Id,
-			HttpServletRequest request, HttpServletResponse response) throws Exception{
-				
-		System.out.println(res_num);
-
-		//예약 취소 변경
-		adminresService.updateResStateC(res_num);
-
-		return res_num;
-	}
-	
-	
+	}	
 	
 }
 

@@ -37,8 +37,7 @@ public  class ReservationControllerImpl implements ReservationController{
 	private ReservationVO resVO;
 	@Autowired
 	private PetserviceVO petVO;
-	
-	
+
 	@Override
 	@RequestMapping(value= "/reservationForm.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView reservationMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
