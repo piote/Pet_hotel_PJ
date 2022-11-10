@@ -44,7 +44,6 @@ function addRow() {
 
     // Cell에 텍스트 추가
 
-
     Cell1.innerHTML = '<input name="petname" class="pet_status" id="Pet_Name' + petTableNum + '" type="textbox" style="text-align:center; width:80%;">';
     Cell2.innerHTML = '<select name="petsex" class="pet_status" id="Pet_Sex' + petTableNum + '" onchange="handleOnChange(this)"><option>male</option><option>female</option></select>';
     Cell3.innerHTML = '<select name="petroom" class="pet_status" id="Pet_Room' + petTableNum + '" onchange="handleOnChange(this)"><option value="Deluxe">Deluxe(소형견)</option><option value="Sweet">Suite(중형견)</option><option value="Superior">Superior(대형견)</option></select>';
@@ -78,13 +77,9 @@ function addRow() {
         console.log('총 테이블' + totalTableNum);
     });
 
-
-
-
     petTableNum++;
     totalTableNum++;
     console.log('총 테이블' + totalTableNum);
-
 
 }
 
@@ -122,7 +117,6 @@ function pet_table_event(petTableNum) {
     });
     //미용 이벤트
     $('#pet_Beauty' + petTableNum).change(this, function () {
-
 
         petmap.set($(this).attr('id'), $(this).val());
 
@@ -211,42 +205,42 @@ function costTB(petserviceMap, datecheck) {
             sr++;
             if (list[3] == null) {//미용
 
-            } else if (list[3] == 'Clipping') {     // 12:20 수정
+            } else if (list[3] == 'Clipping') {   
                 sbc++;
-            } else if (list[3] == 'Scissoring') {     // 12:20 수정
+            } else if (list[3] == 'Scissoring') {    
                 sbs++;
             }
 
-            if (list[4] == true) {//스파       // 12:20 수정
+            if (list[4] == true) {//스파     
                 ss++;
             }
 
-        } else if (list[2] == 'Sweet') {//중형     // 12:20 수정
+        } else if (list[2] == 'Sweet') {//중형 
             mr++;
 
-            if (list[3] == null) {//미용       // 12:20 수정
+            if (list[3] == null) {//미용       
  
-            } else if (list[3] == 'Clipping') {      // 12:20 수정
+            } else if (list[3] == 'Clipping') {  
                 mbc++;
-            } else if (list[3] == 'Scissoring') {      // 12:20 수정
+            } else if (list[3] == 'Scissoring') { 
                 mbs++;
             }
 
-            if (list[4] == true) {//스파       // 12:20 수정
+            if (list[4] == true) {//스파    
                 ms++;
             }
-        } else if (list[2] == 'Superior') {//대형     // 12:20 수정
+        } else if (list[2] == 'Superior') {//대형 
             lr++;
 
             if (list[3] == null) {//미용
 
-            } else if (list[3] == 'Clipping') {      // 12:20 수정
+            } else if (list[3] == 'Clipping') { 
                 lbc++;
-            } else if (list[3] == 'Scissoring') {      // 12:20 수정
+            } else if (list[3] == 'Scissoring') {
                 lbs++;
             }
 
-            if (list[4] == true) {//스파        // 12:20 수정
+            if (list[4] == true) {//스파
                 ls++;
             }
         }

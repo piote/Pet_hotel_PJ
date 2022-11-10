@@ -14,31 +14,25 @@ import com.myboot.reservation.vo.ReservationVO;
 @Mapper
 @Repository("reservationDAO")
 public interface ReservationDAO {
-	 public List selectReservationList() throws DataAccessException;
-	 
 	 // 예약, 펫 서비스 등록
 	 public int insertReservation(ReservationVO ReservationVO) throws DataAccessException;
+	 
 	 public int insertPetserviceList(List<PetserviceVO> petserviceList) throws DataAccessException;
+	 
 	 // 사용가능한 예약 번호 
 	 public int useReservationNum() throws DataAccessException;
 
-	public ReservationVO SearchReservationNum(String reserNum) throws DataAccessException;
+	 //예약번호 검색
+	 public ReservationVO SearchReservationNum(String reserNum) throws DataAccessException;
 
-	public List<PetserviceVO> SearchPetServiceByResNum(String reserNum) throws DataAccessException;
-	// 이용 횟수 불려오기
-	public int membershipCount(String id) throws DataAccessException;
+	 //예약번호로 펫 테이블 검색
+	 public List<PetserviceVO> SearchPetServiceByResNum(String reserNum) throws DataAccessException;
+	 
+	 // 이용 횟수 불려오기
+	 public int membershipCount(String id) throws DataAccessException;
 	
-	public int deletePetserviceList(String res_Num) throws DataAccessException;
+	 public int deletePetserviceList(String res_Num) throws DataAccessException;
 	
-	public int updateReservation(ReservationVO resVO) throws DataAccessException;
-//	 
-//	 public int updateMember(MemberVO memberVO) throws DataAccessException ;
-//	 
-//	 public MemberVO selectMemberById(String id);
-//	 	 
-//	 public int deleteMember(String id) throws DataAccessException;
-//	 public MemberVO loginById(MemberVO memberVO) throws DataAccessException;
-//	 
-//	
+	 public int updateReservation(ReservationVO resVO) throws DataAccessException;
 
 }
