@@ -32,6 +32,9 @@ public class errorController implements ErrorController {
             if(statusCode == HttpStatus.METHOD_NOT_ALLOWED.value()){
                 return VIEW_PATH + "404";
             }
+            if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()){
+                return VIEW_PATH + "404";
+            }
         }
         return "error";
     }
