@@ -521,8 +521,6 @@
 			//표함수
 			change_form()
 
-			//let $box1 = $('.box1').clone();
-			//$('.box_wrapper').append($box1);
     	}
     	
     	//펫 테이블 삭제

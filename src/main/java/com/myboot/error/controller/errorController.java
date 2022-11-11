@@ -24,7 +24,13 @@ public class errorController implements ErrorController {
                 return VIEW_PATH + "404";
             }
             if(statusCode == HttpStatus.FORBIDDEN.value()){
-                return VIEW_PATH + "500";
+                return VIEW_PATH + "404";
+            }
+            if(statusCode == HttpStatus.BAD_REQUEST.value()){
+                return VIEW_PATH + "404";
+            }
+            if(statusCode == HttpStatus.METHOD_NOT_ALLOWED.value()){
+                return VIEW_PATH + "404";
             }
         }
         return "error";
