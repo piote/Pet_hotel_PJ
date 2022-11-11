@@ -54,21 +54,17 @@ function addRow() {
         petmap.delete('pet_Beauty' + $(this).attr('id'));
         petmap.delete('pet_Spa' + $(this).attr('id'));
         
-        console.log('service' + $(this).attr('id'));
         servicemap.delete('service' + $(this).attr('id'));
         costTB(servicemap, false);//삭제한 결과 출력
 
         //html에서 제거
         $(this).parent().parent().remove();
         totalTableNum--;
-        //콘솔 테스트
-        console.log(petmap);
-        console.log('총 테이블' + totalTableNum);
+
     });
 
     petTableNum++;
     totalTableNum++;
-    console.log('총 테이블' + totalTableNum);
 
 }
 
@@ -79,7 +75,6 @@ function pet_table_event(petTableNum) {
         petmap.set($(this).attr('id'), $(this).val());
 
         if (tablecheck(this)) {
-            console.log(costresult(this));
             costTB(costresult(this),true);
         }
     });
@@ -89,7 +84,6 @@ function pet_table_event(petTableNum) {
         petmap.set($(this).attr('id'), $(this).val());
 
         if (tablecheck(this)) {
-            console.log(costresult(this));
             costTB(costresult(this),true);
         }
     });
@@ -100,7 +94,6 @@ function pet_table_event(petTableNum) {
         petmap.set($(this).attr('id'), $(this).val());
 
         if (tablecheck(this)) {
-            console.log(costresult(this));
             costTB(costresult(this),true);
         }
     });
@@ -111,7 +104,6 @@ function pet_table_event(petTableNum) {
         petmap.set($(this).attr('id'), $(this).val());
 
         if (tablecheck(this)) {
-            console.log(costresult(this));
             costTB(costresult(this),true);
         }
     });
@@ -128,7 +120,6 @@ function pet_table_event(petTableNum) {
 		
 		//결과창
         if (tablecheck(this)) {
-            console.log(costresult(this));
             costTB(costresult(this),true);
         }
     });
@@ -137,7 +128,6 @@ function pet_table_event(petTableNum) {
 //테이블 확인 이름이 입력되었는가.
 function tablecheck(petTableElement) {
     var tbnum = $(petTableElement).parent().parent().attr('id').substr(5);
-    console.log('Pet_Name-' + tbnum + petmap.get('Pet_Name' + tbnum) + 'Pet_Sex-' + tbnum + petmap.get('Pet_Sex' + tbnum))
 
     //기본 값 세팅
     if (petmap.get('Pet_Sex' + tbnum) == null) {
@@ -148,7 +138,6 @@ function tablecheck(petTableElement) {
     }
 
     if (petmap.get('Pet_Name' + tbnum) != null && petmap.get('Pet_Sex' + tbnum) != null) {
-        console.log("table_OK")
         return 1;
     } else {
         alert("이름을 입력해 주세요.");
@@ -163,9 +152,8 @@ function costresult(petTableElement) {
     var tbnum = $(petTableElement).parent().parent().attr('id').substr(5);
 
     var petservice = [petmap.get('Pet_Name' + tbnum), petmap.get('Pet_Sex' + tbnum), petmap.get('Pet_Room' + tbnum), petmap.get('pet_Beauty' + tbnum), petmap.get('pet_Spa' + tbnum), tbnum];
-    console.log(petservice);
+    
     servicemap.set('service' + tbnum, petservice);
-    console.log(servicemap);
 
     return servicemap;
 }
@@ -283,7 +271,6 @@ function costTB(petserviceMap, datecheck) {
         total += sbc * 35000 + mbc * 45000 + lbc * 60000 + sbs * 70000 + mbs * 80000 + lbs * 100000;
         total += ss * 50000 + ms * 80000 + ls * 120000;
         $(".totalcost").text(total.toLocaleString()  + ' 원');
-        console.log($("#membership").val());
 
         
         if($("#membership").val()=='Gold' && total != 0){
