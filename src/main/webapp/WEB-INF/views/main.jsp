@@ -78,7 +78,7 @@
             height: 230px;
             position: absolute;
             margin-left: 50%; left: -500px;
-            bottom: 100px;
+            bottom: 130px;
         }
         .txt_wrap p:nth-child(1){
             font-size: 75px;
@@ -104,6 +104,27 @@
         }
         .slider_bt:hover{
             background-color: rgba(255, 255, 255,0.5);
+        }
+        .slider_dots{
+            width: 100%; height: 10px;
+            position: absolute;
+            bottom: 55px;
+            display: flex;
+            justify-content: center;
+        }
+        .dot{
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: 0 5px;
+            border: 1px solid #00000050;
+            transition: width 0.3s;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        .dot:hover, .able_dot{
+            width: 30px;
         }
         /* slider end */
 
@@ -392,15 +413,17 @@
 
             }
         }
-
-        // 리뷰js
         
         var totalReviewData;
         var review_data=[];
         var now_reviewNum=0;
 
+        var toggle = true;
+        let interval = setInterval(slider_right, 5000);
+
         $(function(){
 
+            // 리뷰js
             $('#review_info').empty();
 
             $.ajax({
@@ -424,10 +447,34 @@
                     }
             });
             
-            setInterval(function(){
-                slider_right();
-            },5000);
 
+            //슬라이드메인배너 이동
+            interval;
+            
+
+            //슬라이드 갯수에 맞게 dot 생성
+            for(i=1;i<=slider_count;i++){
+                $('.slider_dots').append('<div class="dot" d_num-data="'+i+'" onclick="slider_click('+i+')"></div>');
+            }
+            $('.dot[d_num-data="'+slider_num+'"]').addClass('able_dot');
+            
+
+            // dot에 마우스 오버시 인터벌 중지
+            $(".dot").mouseover(function(){
+                clearInterval(interval);
+            });
+            $(".dot").mouseout(function(){
+                interval = setInterval(slider_right, 5000);
+            });
+
+            //페이지를 보고있을때만 인터벌 실행
+            jQuery(window).blur(function(){
+                clearInterval(interval);
+            });
+            jQuery(window).focus(function(){
+                clearInterval(interval);
+                interval = setInterval(slider_right, 5000);
+            });
 
         });
         function inputReviewData(){
@@ -470,27 +517,49 @@
             }
         }   
 
-        var slider_num = 1;
-        var slider_count = 3;
+        var slider_num = 1; //현재 슬라이드 위치
+        var slider_count = 3; //슬라이드 갯수
         
+        // < 화살표 이벤트
         function slider_left(){
+            clearInterval(interval);
             --slider_num;
             if(slider_num<=0){
                 slider_num=slider_count;
             }
             $('.slider').removeClass('able_slider');
+            $('.dot').removeClass('able_dot');
             $('[s_num-data="'+slider_num+'"]').addClass('able_slider');
+            $('[d_num-data="'+slider_num+'"]').addClass('able_dot');
             console.log(slider_num)
+            interval = setInterval(slider_right, 5000);
         }
+        // > 화살표 이벤트
         function slider_right(){
+            clearInterval(interval);
             ++slider_num;
             if(slider_num>slider_count){
                 slider_num=1;
             }
             $('.slider').removeClass('able_slider');
+            $('.dot').removeClass('able_dot');
             $('[s_num-data="'+slider_num+'"]').addClass('able_slider');
+            $('[d_num-data="'+slider_num+'"]').addClass('able_dot');
             console.log(slider_num)
+            interval = setInterval(slider_right, 5000);
         }
+        // dot 클릭 이벤트
+        function slider_click(num){
+            clearInterval(interval);
+            slider_num=num;
+            $('.slider').removeClass('able_slider');
+            $('.dot').removeClass('able_dot');
+            $('[s_num-data="'+slider_num+'"]').addClass('able_slider');
+            $('[d_num-data="'+slider_num+'"]').addClass('able_dot');
+            console.log(slider_num)
+            interval = setInterval(slider_right, 5000);
+        }
+
 
     </script>
 
@@ -505,6 +574,7 @@
         <p>펫 호텔 서비스</p>
         <a class="slider_bt" href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservationForm.do','${contextPath}/loginForm.do')" >예약하기 ></a>
     </div>
+    <div class="slider_dots"></div>
     <div class="slider_con">
         <div class="slider able_slider" s_num-data="1"></div>
         <div class="slider" s_num-data="2"></div>
