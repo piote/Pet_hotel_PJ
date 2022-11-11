@@ -45,19 +45,15 @@
 					    }
 					  });
 					  
-/* 					  $("#password").focus(function(){
+					  $("#password").focus(function(){
 					  		$('.eyes').show();
 					  	}); //input에 focus일 때
 					  	
 					  $('html').click(function(e){
-						  console.log($(e.target).hasClass('pw_change'));
-						  console.log($(e.target));
-					    	if($(e.target).hasClass('pw_change')){
-					    		$("#password").blur(function(){
-					    			$('.eyes').hide();
-					  			});   //focus out일 때
+					    	if($(e.target).parents('.pw_change').length < 1 && !$(e.target).hasClass('pw_change')){
+					    		$('.eyes').hide();
 					        }
-					  }); */
+					  }); 
 					  	
 			            
 					  
