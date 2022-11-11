@@ -1,5 +1,6 @@
 package com.myboot.review.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.Action;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 
 import com.myboot.review.vo.ReviewVO;
@@ -36,6 +38,14 @@ public  interface ReviewService {
 	public Map listMyDetailReview(Map pagingMap) throws Exception;
 
 	public Map viewReview(int reviewNO) throws Exception;
+
+	public int selectReviewLike(int reviewNO)throws Exception;
+
+	public List<ReviewVO> selectReviewLikeCheck(Map reviewNO)throws Exception;
+
+	public void insert_like(HashMap<String, Object> hashMap) throws Exception;
+
+	public void delete_like(HashMap<String, Object> hashMap)throws Exception;
 	
 	
 	
