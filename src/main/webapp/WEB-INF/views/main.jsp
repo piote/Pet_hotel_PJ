@@ -413,15 +413,17 @@
 
             }
         }
-
-        // 리뷰js
         
         var totalReviewData;
         var review_data=[];
         var now_reviewNum=0;
 
+        var toggle = true;
+        let interval = setInterval(slider_right, 5000);
+
         $(function(){
 
+            // 리뷰js
             $('#review_info').empty();
 
             $.ajax({
@@ -445,18 +447,34 @@
                     }
             });
             
+
             //슬라이드메인배너 이동
-            setInterval(function(){
-                slider_right();
-            },5000);
+            interval;
             
+
             //슬라이드 갯수에 맞게 dot 생성
             for(i=1;i<=slider_count;i++){
                 $('.slider_dots').append('<div class="dot" d_num-data="'+i+'" onclick="slider_click('+i+')"></div>');
             }
             $('.dot[d_num-data="'+slider_num+'"]').addClass('able_dot');
+            
 
+            // dot에 마우스 오버시 인터벌 중지
+            $(".dot").mouseover(function(){
+                clearInterval(interval);
+            });
+            $(".dot").mouseout(function(){
+                interval = setInterval(slider_right, 5000);
+            });
 
+            //페이지를 보고있을때만 인터벌 실행
+            jQuery(window).blur(function(){
+                clearInterval(interval);
+            });
+            jQuery(window).focus(function(){
+                clearInterval(interval);
+                interval = setInterval(slider_right, 5000);
+            });
 
         });
         function inputReviewData(){
@@ -504,6 +522,7 @@
         
         // < 화살표 이벤트
         function slider_left(){
+            clearInterval(interval);
             --slider_num;
             if(slider_num<=0){
                 slider_num=slider_count;
@@ -513,9 +532,11 @@
             $('[s_num-data="'+slider_num+'"]').addClass('able_slider');
             $('[d_num-data="'+slider_num+'"]').addClass('able_dot');
             console.log(slider_num)
+            interval = setInterval(slider_right, 5000);
         }
         // > 화살표 이벤트
         function slider_right(){
+            clearInterval(interval);
             ++slider_num;
             if(slider_num>slider_count){
                 slider_num=1;
@@ -525,15 +546,18 @@
             $('[s_num-data="'+slider_num+'"]').addClass('able_slider');
             $('[d_num-data="'+slider_num+'"]').addClass('able_dot');
             console.log(slider_num)
+            interval = setInterval(slider_right, 5000);
         }
         // dot 클릭 이벤트
         function slider_click(num){
+            clearInterval(interval);
             slider_num=num;
             $('.slider').removeClass('able_slider');
             $('.dot').removeClass('able_dot');
             $('[s_num-data="'+slider_num+'"]').addClass('able_slider');
             $('[d_num-data="'+slider_num+'"]').addClass('able_dot');
             console.log(slider_num)
+            interval = setInterval(slider_right, 5000);
         }
 
 
