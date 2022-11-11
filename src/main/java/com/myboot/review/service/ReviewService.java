@@ -46,6 +46,8 @@ public  interface ReviewService {
 	public void insert_like(HashMap<String, Object> hashMap) throws Exception;
 
 	public void delete_like(HashMap<String, Object> hashMap)throws Exception;
+
+	Map listMyDetailReview2(Map pagingMap) throws Exception;
 	
 	
 	

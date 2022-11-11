@@ -42,7 +42,7 @@ public interface ReviewDAO {
 	public void insert_like(HashMap<String, Object> hashMap) throws DataAccessException;
 	public void delete_like(HashMap<String, Object> hashMap) throws DataAccessException;
 
-
+	public List selectAllMyReviewList2(Map pagingMap)throws DataAccessException;
 
 
 }

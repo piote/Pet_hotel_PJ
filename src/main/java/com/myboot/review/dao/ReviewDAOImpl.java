@@ -69,8 +69,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 		List<ReviewVO> myReviewList = sqlSession.selectList("com.myboot.review.dao.ReviewDAO.selectAllMyReviewList", pagingMap);
 		return myReviewList;																	
 	}
-	
-	
+	public List selectAllMyReviewList2(Map pagingMap){
+		List<ReviewVO> myReviewList = sqlSession.selectList("com.myboot.review.dao.ReviewDAO.selectAllMyReviewList2", pagingMap);
+		return myReviewList;																	
+	}
+
 	public int selectNewReviewNO() {
 		return sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectNewReviewNO");
 	}							 //("mapper.review.selectNewReviewNO");
