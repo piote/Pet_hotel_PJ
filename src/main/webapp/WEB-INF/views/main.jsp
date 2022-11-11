@@ -107,9 +107,8 @@
         }
         .slider_dots{
             width: 100%; height: 10px;
-            /* background-color: #fff; */
             position: absolute;
-            bottom: 50px;
+            bottom: 55px;
             display: flex;
             justify-content: center;
         }
@@ -119,17 +118,13 @@
             background-color: #fff;
             border-radius: 10px;
             margin: 0 5px;
-            box-shadow: 0px 0px 10px #00000040;
-            opacity: .7;
-            transition: all 0.3s;
+            border: 1px solid #00000050;
+            transition: width 0.3s;
+            box-sizing: border-box;
+            cursor: pointer;
         }
-        .dot:hover{
-            opacity: 1;
-            width: 40px;
-        }
-        .able_dot{
-            opacity: 1;
-            width: 40px;
+        .dot:hover, .able_dot{
+            width: 30px;
         }
         /* slider end */
 
@@ -455,10 +450,10 @@
                 slider_right();
             },5000);
             
+            //슬라이드 갯수에 맞게 dot 생성
             for(i=1;i<=slider_count;i++){
-                $('.slider_dots').append('<div class="dot" d_num-data="'+i+'"></div>');
+                $('.slider_dots').append('<div class="dot" d_num-data="'+i+'" onclick="slider_click('+i+')"></div>');
             }
-
             $('.dot[d_num-data="'+slider_num+'"]').addClass('able_dot');
 
 
@@ -504,27 +499,43 @@
             }
         }   
 
-        var slider_num = 1;
-        var slider_count = 3;
+        var slider_num = 1; //현재 슬라이드 위치
+        var slider_count = 3; //슬라이드 갯수
         
+        // < 화살표 이벤트
         function slider_left(){
             --slider_num;
             if(slider_num<=0){
                 slider_num=slider_count;
             }
             $('.slider').removeClass('able_slider');
+            $('.dot').removeClass('able_dot');
             $('[s_num-data="'+slider_num+'"]').addClass('able_slider');
+            $('[d_num-data="'+slider_num+'"]').addClass('able_dot');
             console.log(slider_num)
         }
+        // > 화살표 이벤트
         function slider_right(){
             ++slider_num;
             if(slider_num>slider_count){
                 slider_num=1;
             }
             $('.slider').removeClass('able_slider');
+            $('.dot').removeClass('able_dot');
             $('[s_num-data="'+slider_num+'"]').addClass('able_slider');
+            $('[d_num-data="'+slider_num+'"]').addClass('able_dot');
             console.log(slider_num)
         }
+        // dot 클릭 이벤트
+        function slider_click(num){
+            slider_num=num;
+            $('.slider').removeClass('able_slider');
+            $('.dot').removeClass('able_dot');
+            $('[s_num-data="'+slider_num+'"]').addClass('able_slider');
+            $('[d_num-data="'+slider_num+'"]').addClass('able_dot');
+            console.log(slider_num)
+        }
+
 
     </script>
 
