@@ -89,20 +89,14 @@ public class ReviewControllerImpl implements ReviewController {
 		 JSONObject obj = new JSONObject();
 		 
 		 HttpSession session = request.getSession();
-		 
 		 UserVO userVO = (UserVO) session.getAttribute("user");
-		 
 		 String id = userVO.getId();
-		 
-		 System.out.println(id + "----아이디  체크 ");
 		 
 		 HashMap <String, Object> hashMap = new HashMap<String, Object>(); 
 		 hashMap.put("reviewNO", reviewNO);
 		 hashMap.put("id", id);
-		 
-		
-		 List<ReviewVO> like_checkList = reviewService.selectReviewLikeCheck(hashMap);
 
+		 List<ReviewVO> like_checkList = reviewService.selectReviewLikeCheck(hashMap);
 		 String like_check = ""; 
 		 
 		 if(like_checkList.size() == 0) {
@@ -115,72 +109,89 @@ public class ReviewControllerImpl implements ReviewController {
 			 //좋아요가 Y 일시 좋아요 딜리트
 			 System.out.println("삭제");
 			 reviewService.delete_like(hashMap);
-			 
 		 }
 		 
 		 int like_cnt = reviewService.selectReviewLike(reviewNO);
-		 
-		 
+
 		 obj.put("like_check", like_check);
 		 obj.put("like_cnt", like_cnt);
-		 
-		 System.out.println(like_check + "----좋아요 체크 ");
-		 System.out.println(like_cnt  + "----좋아요 카운트 " );
-		 
+
 		 return obj.toString();
 	 }
 	
 	
 	
-	@RequestMapping(value = "/review/reviewDetail_2.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView reviewDetail_2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	 @RequestMapping(value = "/review/reviewDetail_2.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView reviewDetail_2(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		String _section = request.getParameter("section");
-		String _pageNum = request.getParameter("pageNum");
-		int section = Integer.parseInt(((_section == null) ? "1" : _section));
-		int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
-		Map<String, Integer> pagingMap = new HashMap<String, Integer>();
-		pagingMap.put("section", section);
-		pagingMap.put("pageNum", pageNum);
-		Map reviewMap = reviewService.reviewDetail_2(pagingMap);
+			HttpSession session=request.getSession();
+			session=request.getSession();
+			
+		
+			String _section = request.getParameter("section");
+			String _pageNum = request.getParameter("pageNum");
+			int section = Integer.parseInt(((_section == null) ? "1" : _section));
+			int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+			Map<String, Object> pagingMap = new HashMap<String, Object>();
+			pagingMap.put("section", section);
+			pagingMap.put("pageNum", pageNum);
+		
+			if(session.getAttribute("user") != null) {
+				UserVO userVO = (UserVO) session.getAttribute("user");
+				String user_id = userVO.getId();
+				pagingMap.put("user_id", user_id);
+			}
+			
+			Map reviewMap = reviewService.reviewDetail_2(pagingMap);
+			
+			reviewMap.put("section", section);
+			reviewMap.put("pageNum", pageNum);
+			// request.setAttribute("reviewMap",reviewMap );
+				
+			String viewName = (String) request.getAttribute("viewName");
 
-		reviewMap.put("section", section);
-		reviewMap.put("pageNum", pageNum);
-		// request.setAttribute("reviewMap",reviewMap );
+			ModelAndView mav = new ModelAndView(viewName);
+			mav.addObject("reviewMap", reviewMap);
 
-		String viewName = (String) request.getAttribute("viewName");
+			return mav;
 
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("reviewMap", reviewMap);
+		}
 
-		return mav;
+	 @RequestMapping(value = "/review/reviewDetail_3.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView reviewDetail_3(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-	}
+			HttpSession session=request.getSession();
+			session=request.getSession();
+			
+		
+			String _section = request.getParameter("section");
+			String _pageNum = request.getParameter("pageNum");
+			int section = Integer.parseInt(((_section == null) ? "1" : _section));
+			int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+			Map<String, Object> pagingMap = new HashMap<String, Object>();
+			pagingMap.put("section", section);
+			pagingMap.put("pageNum", pageNum);
+		
+			if(session.getAttribute("user") != null) {
+				UserVO userVO = (UserVO) session.getAttribute("user");
+				String user_id = userVO.getId();
+				pagingMap.put("user_id", user_id);
+			}
+			
+			Map reviewMap = reviewService.reviewDetail_3(pagingMap);
+			
+			reviewMap.put("section", section);
+			reviewMap.put("pageNum", pageNum);
+			// request.setAttribute("reviewMap",reviewMap );
+				
+			String viewName = (String) request.getAttribute("viewName");
 
-	@RequestMapping(value = "/review/reviewDetail_3.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView reviewDetail_3(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			ModelAndView mav = new ModelAndView(viewName);
+			mav.addObject("reviewMap", reviewMap);
 
-		String _section = request.getParameter("section");
-		String _pageNum = request.getParameter("pageNum");
-		int section = Integer.parseInt(((_section == null) ? "1" : _section));
-		int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
-		Map<String, Integer> pagingMap = new HashMap<String, Integer>();
-		pagingMap.put("section", section);
-		pagingMap.put("pageNum", pageNum);
-		Map reviewMap = reviewService.reviewDetail_3(pagingMap);
+			return mav;
 
-		reviewMap.put("section", section);
-		reviewMap.put("pageNum", pageNum);
-		// request.setAttribute("reviewMap",reviewMap );
-
-		String viewName = (String) request.getAttribute("viewName");
-
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("reviewMap", reviewMap);
-
-		return mav;
-
-	}
+		}
 
 	
 	@RequestMapping(value = "/review/reviewForm.do", method = { RequestMethod.GET, RequestMethod.POST })
