@@ -270,53 +270,131 @@
  
 	
 	
-		<select id="selectAllReviewList2" parameterType="java.util.Map"
+			<select id="selectAllReviewList2" parameterType="java.util.Map"
 		resultMap="reviewResult">  
-<![CDATA[
+
 	SELECT * FROM ( 
-			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url,ROOM_GRADE
-				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image_url,ROOM_GRADE
-						from TB_REVIEW
-						where ROOM_GRADE = 'Suite'
-	                    START WITH  parentNO is null
-						CONNECT BY PRIOR review_num = parentNO
-						ORDER SIBLINGS BY review_num DESC
-							    <choose>
-					    	<when test="sort =='sort_num'">
-					    		review_Date desc
-					    	</when>
-					        <when test="sort =='sort_rec'">
-					    		review_rec asc
-					    	</when>
-							<otherwise>
-					    		 review_num desc
-					    	</otherwise>
-					    </choose>
-					 	)
+			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url, ROOM_GRADE, 
+				<if test= "user_id != null"> 
+					user_review_flg,  
+				</if>
+			 	like_cnt 
+				from (select LEVEL as LVL,  
+						RE.review_num,  
+						RE.review_title, 
+						RE.user_id, 
+						RE.review_Date ,
+						RE.review_rec ,
+						RE.review_star, 
+						RE.review_image_url, 
+						RE.ROOM_GRADE,
+						
+						<!-- 로그인 유무를 판단하고 user_review_flg는 유저가 좋아요를 눌렸는지 판단하는 플래그가 됨  -->
+						<if test= "user_id != null"> 
+							case when like_user_table.review_num IS NULL THEN 'N' ELSE 'Y' END AS user_review_flg,
+						</if>
+						
+						like_table.like_cnt as like_cnt
+				
+						from TB_REVIEW RE
+						
+			 			<!-- like_cnt 좋아요 갯수 총 카운트  -->
+						left join 
+						(
+						  SELECT review_num, count(0) as like_cnt
+						  FROM TB_LIKE 
+						  GROUP BY review_num
+						)  
+						like_table ON like_table.review_num = RE.review_num
+					
+					
+						
+						<if test= "user_id != null"> 
+							left join 
+							(
+							  SELECT review_num
+							  FROM TB_LIKE
+							  WHERE user_id =  #{user_id}
+							)  
+							like_user_table ON like_user_table.review_num = RE.review_num
+						</if>
+			
+						
+				
+						where RE.ROOM_GRADE = 'Suite' 
+						
+	                    START WITH  RE.parentNO is null
+						CONNECT BY PRIOR RE.review_num = RE.parentNO
+						ORDER SIBLINGS BY RE.review_num desc)
+						
 						)                         
 					    where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
 							
-						]]>
+						
 	</select>
 	
-		<select id="selectAllReviewList3" parameterType="java.util.Map"
+<select id="selectAllReviewList3" parameterType="java.util.Map"
 		resultMap="reviewResult">  
-<![CDATA[
+
 	SELECT * FROM ( 
-			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url,ROOM_GRADE
-				from (select LEVEL as LVL,  review_num,  review_title, user_id, review_Date ,review_rec ,review_star, review_image_url,ROOM_GRADE
-						from TB_REVIEW
-						where ROOM_GRADE = 'Superior'
-	                    START WITH  parentNO is null
-						CONNECT BY PRIOR review_num = parentNO
-						ORDER SIBLINGS BY review_num DESC)
+			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id, review_Date ,review_rec , review_star, review_image_url, ROOM_GRADE, 
+				<if test= "user_id != null"> 
+					user_review_flg,  
+				</if>
+			 	like_cnt 
+				from (select LEVEL as LVL,  
+						RE.review_num,  
+						RE.review_title, 
+						RE.user_id, 
+						RE.review_Date ,
+						RE.review_rec ,
+						RE.review_star, 
+						RE.review_image_url, 
+						RE.ROOM_GRADE,
+						
+						<!-- 로그인 유무를 판단하고 user_review_flg는 유저가 좋아요를 눌렸는지 판단하는 플래그가 됨  -->
+						<if test= "user_id != null"> 
+							case when like_user_table.review_num IS NULL THEN 'N' ELSE 'Y' END AS user_review_flg,
+						</if>
+						
+						like_table.like_cnt as like_cnt
+				
+						from TB_REVIEW RE
+						
+			 			<!-- like_cnt 좋아요 갯수 총 카운트  -->
+						left join 
+						(
+						  SELECT review_num, count(0) as like_cnt
+						  FROM TB_LIKE 
+						  GROUP BY review_num
+						)  
+						like_table ON like_table.review_num = RE.review_num
+					
+					
+						
+						<if test= "user_id != null"> 
+							left join 
+							(
+							  SELECT review_num
+							  FROM TB_LIKE
+							  WHERE user_id =  #{user_id}
+							)  
+							like_user_table ON like_user_table.review_num = RE.review_num
+						</if>
+			
+						
+				
+						where RE.ROOM_GRADE = 'Superior' 
+						
+	                    START WITH  RE.parentNO is null
+						CONNECT BY PRIOR RE.review_num = RE.parentNO
+						ORDER SIBLINGS BY RE.review_num desc)
+						
 						)                         
-					    	where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
+					    where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
 							
-						]]>
-	</select>
-	
-	
+						
+	</select>	
 	
 	
 
