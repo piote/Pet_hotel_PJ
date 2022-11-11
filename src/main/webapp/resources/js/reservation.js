@@ -210,7 +210,7 @@ function costTB(petserviceMap, datecheck) {
 
             if (list[3] == null) {//미용 x
  
-            } else if (list[3] == 'Clipping') {x
+            } else if (list[3] == 'Clipping') {
                 mbc++;
             } else if (list[3] == 'Scissoring') { 
                 mbs++;
