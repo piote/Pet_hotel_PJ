@@ -129,6 +129,7 @@ public  class AdminResControllerImpl implements AdminResController{
 		return mav;   //
 
 	}
+	
 	@Override
 	@RequestMapping(value= "/ResPageAjax.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String ResPageAjax(@RequestBody Map<String,Object> searchMap, Model model) throws Exception {
