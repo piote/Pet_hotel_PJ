@@ -58,11 +58,12 @@ public class MyPageControllerImpl implements MyPageController {
         	
         String colName = request.getParameter("colName");
         String searchWord = request.getParameter("searchWord");
-        
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
+        
 		UserVO userVO=(UserVO)session.getAttribute("user");
 		String user_id = userVO.getId();
+		
 		session.removeAttribute("startDate");
 		session.removeAttribute("endDate");
 		
@@ -90,7 +91,7 @@ public class MyPageControllerImpl implements MyPageController {
 		
         String viewName=(String)request.getAttribute("viewName");
         ModelAndView mav = new ModelAndView(viewName);
-        if(!"user_name".equals(colName) && !"pet_name".equals(colName) && !"user_tel".equals(colName)) {
+        if(!"pet_name".equals(colName)) {
         	mav.addObject("colName", colName);
         }else {
         	mav.addObject("colName", colName);

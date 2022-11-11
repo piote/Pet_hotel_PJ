@@ -83,24 +83,18 @@ public class UserServiceImpl implements UserService {
 	}	
 	
 
-  // 회원 정보 수정
+	// 회원 정보 수정
 	@Override
 	public int modMember(Map user) throws DataAccessException {
 	    return userDAO.updateUser(user);
 	}
-	
-//	@Override
-//	public UserVO findUser(UserVO id) throws DataAccessException{
-//		return userDAO.selectUserById(id);
-//	}
-  
-  // 회원 탈퇴
+	// 회원 탈퇴
 	@Override
 	public int retiring(String id) throws DataAccessException {
 		return  userDAO.deleteUser(id);
 	}
 	
- // 비밀번호 한번 더 입력
+	// 비밀번호 한번 더 입력
 	
 	@Override
 	public UserVO password(UserVO  userVO) throws Exception{

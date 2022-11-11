@@ -1,6 +1,7 @@
 package com.myboot.review.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,6 +80,25 @@ public class ReviewDAOImpl implements ReviewDAO {
 		List resList = sqlSession.selectList("com.myboot.review.dao.ReviewDAO.selectAllResList", userId);
 		return resList;
   }
+	@Override
+	public int selectReviewLike(int reviewNO) throws DataAccessException {
+		return sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectReviewLike", reviewNO);
+	}
+	@Override
+	public List<ReviewVO> selectReviewLikeCheck(Map reviewNO) throws DataAccessException{
+		return sqlSession.selectList("com.myboot.review.dao.ReviewDAO.selectReviewLikeCheck", reviewNO);
+	}
+	
+	@Override
+	public void insert_like(HashMap<String, Object> hashMap)throws DataAccessException{
+		sqlSession.insert("com.myboot.review.dao.ReviewDAO.insert_like",hashMap);
+	}
+	
+	@Override
+	public void delete_like(HashMap<String, Object> hashMap)throws DataAccessException{
+		sqlSession.insert("com.myboot.review.dao.ReviewDAO.delete_like",hashMap);
+	}
+	
 	
 	@Override
 	public ReviewVO selectReview(int reviewNO) throws DataAccessException {
