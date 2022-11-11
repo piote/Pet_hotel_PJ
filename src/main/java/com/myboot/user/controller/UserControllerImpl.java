@@ -253,6 +253,13 @@ public class UserControllerImpl implements UserController{
 			                  @RequestParam(value= "action", required=false) String action,
 			                  HttpServletRequest request, 
 			                  HttpServletResponse response) throws Exception {
+		if(request.getHeader("REFERER") == null) {
+			request.setAttribute("stmsgcheck", "1");
+			request.setAttribute("stmsg", "비정상적인 접근입니다!");
+			ModelAndView mav = new ModelAndView("forward:/main.do");
+			return mav;
+		}
+		
 		String viewName = (String)request.getAttribute("viewName");
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action); 
@@ -403,6 +410,12 @@ public class UserControllerImpl implements UserController{
 			                  @RequestParam(value= "action", required=false) String action,
 			                  HttpServletRequest request, 
 			                  HttpServletResponse response) throws Exception {
+		if(request.getHeader("REFERER") == null) {
+			request.setAttribute("stmsgcheck", "1");
+			request.setAttribute("stmsg", "비정상적인 접근입니다!");
+			ModelAndView mav = new ModelAndView("forward:/main.do");
+			return mav;
+		}
 		String viewName = (String)request.getAttribute("viewName");
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action); 
