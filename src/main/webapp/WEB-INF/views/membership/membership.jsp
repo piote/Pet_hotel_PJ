@@ -231,11 +231,13 @@
             position: relative;
         }
         #graph{
-            width: calc(100% / 10 * 7);
+            /* width: calc(100% / 10 * 7); */
+            width: 0;
             height: 100%;
             background-color: #FFA96A;
             position: absolute;
             left: 0;
+            transition: width 0.5s;
         }
         .graph_txt{
             margin-top: 10px;
@@ -321,6 +323,7 @@
             $('#count_silver').empty();
             $('#count_gold').empty();
             $('.modal_mygrade borderbox').empty();
+            $('.graph_txt p').empty();
             
             var count ;
             
@@ -338,12 +341,22 @@
                 	$('#count').append(count);
                 	if(count<5){
                 		var next = 5 - count;
+                        $('#graph').width('calc(100% / 5 * '+count+' )');
+                        $('.graph_txt p:nth-child(1)').append('Normal');
+                        $('.graph_txt p:nth-child(2)').append('Bronze');
                 	}else if(count<10){
                 		var next = 10 - count;
+                        $('#graph').width('calc(100% / 10 * '+count+' )');
+                        $('.graph_txt p:nth-child(1)').append('Bronze');
+                        $('.graph_txt p:nth-child(2)').append('Silver');
                 	}else if(count<20){
                 		var next = 20 - count;
+                        $('#graph').width('calc(100% / 20 * '+count+' )');
+                        $('.graph_txt p:nth-child(1)').append('Silver');
+                        $('.graph_txt p:nth-child(2)').append('Gold');
                 	}else {
                 		var next = 0
+                        $('#graph').width('100%');
                 	}
                 	
                 	$('#count_').append(next);
@@ -379,6 +392,7 @@
         function popClose(){
             $('.modal-bg').hide();
             $('.modal-wrap').hide();
+            $('#graph').width(0);
         }
     </script>
 </head>
@@ -511,8 +525,8 @@
                     <div id="graph"></div>
                 </div>
                 <div class="graph_txt">
-                    <p class="smallfont">Bronze</p>
-                    <p class="smallfont">Silver</p>
+                    <p class="smallfont"></p>
+                    <p class="smallfont"></p>
                 </div>
             </div>
             <p class="grade_count">다음 단계까지 <span id="count_">3</span>회 남았습니다.</p>
