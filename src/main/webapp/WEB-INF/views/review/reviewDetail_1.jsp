@@ -183,9 +183,32 @@
  
  $(document).ready(function(){
      $("a[rel^='prettyPhoto']").prettyPhoto();
-   });
+     
+     var sort_ck = null;
+     var searchMap = new Object();
+     searchMap.sort_ck=sort_ck;
+     
+     sort_ck=$('.sort_option input[name="sort"]:checked').val();
+     console.log(sort_ck);
+     
+   })
+ 
+
+ 	function changeType(){
+ 		var tmpType = $("input[name='sort']:checked").val();
+ 			// A Type 클릭 시 A 출력, B Type 클릭 시 B 출력
+ 	}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  </script>
+ 
+ 
  </head>
 
  <body>
@@ -209,7 +232,15 @@
 		 
 		 <div class="w_contents_2">
          <br>
-
+        
+         <!-- name 접근으로 value 값 체크 -->
+	         
+	         <div class="sort_option">
+		         <input type="radio" id="sort_data" name="sort" value="sort_data" onchange="changeType()" checked><label for="sort_data" >최신순</label>
+		         <input type="radio" id="sort_rec" name="sort" value="sort_rec" onchange="changeType()"><label for="sort_rec" >좋아요</label>
+	         </div>
+     
+         
          <div>
    
 <form name="frmReview" method="post"  action="${contextPath}"  enctype="multipart/form-data">
@@ -248,9 +279,10 @@
 	         </td>
 	         
 	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td> 
+	        
 	         <td class="w_td" width="20%" rowspan="2">               
 	           <c:choose>
-	           
+	          
 	         <c:when test="${review.image != null}"> 
 	                   <a href="${contextPath}/${review.image}" rel="prettyPhoto" title="This is the description"><img class="re_image" src="${contextPath}/${review.image}" width="150" height="150" alt="This is the title" />
 	                </c:when>
@@ -263,9 +295,23 @@
 	          <td class="w_td w_date"  width="15%" >${reviewDate}</td>
 	          </tr>      
 	      <tr class="w_tr" class="w_tr2">
-	          <td class="w_td" align=center >${review.id}</td>	
+	          <td class="w_td" align=center >
+	          <input type="hidden" id="reviewNO" name="reviewNO" value="${review.reviewNO }"/>
+	          <input type="hidden" id="review_id" name="id" value="${review.id }"/>
+	          
+	          ${review.id}
+	          </td>	
 	          <td class="w_td" align=center >
 	       						${review.rec}
+	       						
+	       					<c:choose>
+	       					  <c:when test="${user_id ne null}">
+	       					    <a href='javascript: like_func();'><img src="${contextPath}/resources/img/w_heart.png" id='like_img'></a>
+	       					  </c:when>
+	       					  <c:otherwise>
+	       					    <a href='javascript: notlog();'><img src="${contextPath}/resources/img/w_heart.png"></a>
+	       					  </c:otherwise>
+	       					</c:choose>			
 	          </td>
 	      </tr>  
 	      <tr>
@@ -337,35 +383,12 @@ function fn_modify_article(obj){
 	 obj.submit();
 }
 
-		$(function(){
-			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-			$("#rec_update").click(function(){
-				$.ajax({
-					url: "/expro/RecUpdate.do",
-		            type: "POST",
-		            data: {
-		                no: ${content.board_no},
-		                id: '${id}'
-		            },
-		            success: function () {
-				        recCount();
-		            },
-				})
-			})
+function notlog() {
+	alert("로그인을 해주세요");
+}
+
 			
-			// 게시글 추천수
-		    function recCount() {
-				$.ajax({
-					url: "/expro/RecCount.do",
-		            type: "POST",
-		            data: {
-		                no: ${content.board_no}
-		            },
-		            success: function (count) {
-		            	$(".rec_count").html(count);
-		            },
-				})
-		    };
+		
 		    recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
 </script>
 
