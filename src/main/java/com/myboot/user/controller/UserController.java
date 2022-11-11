@@ -32,18 +32,16 @@ public interface UserController {
 //	public ResponseEntity   overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public int overlappedID(UserVO userVO) throws Exception;
 	
-  // 비밀번호 한번더 입력
+	// 비밀번호 한번더 입력
 	public ModelAndView pw_change(@RequestParam(value= "password", required=false) String password, RedirectAttributes rAttr, 
 				HttpServletRequest request, HttpServletResponse response)  throws Exception;
         
 	// 회원 정보 수정
 	public ResponseEntity modMember(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
-//	public ModelAndView modMember(@RequestParam(value= "user", required=false) UserVO user,
-//			RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)  throws Exception;
+
 	// 회원 탈퇴
 	public ModelAndView retiring(@RequestParam("id") String id, 
 	           HttpServletRequest request, HttpServletResponse response) throws Exception;
-	//public ModelAndView removeUser(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	// 로그인 아이디 찾기
 	public String find_id(HttpServletResponse response,@RequestParam("name") String name, @RequestParam("email") String email, Model md) throws Exception;
