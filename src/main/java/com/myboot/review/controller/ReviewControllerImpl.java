@@ -245,6 +245,34 @@ public class ReviewControllerImpl implements ReviewController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/review/checkReview2.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView checkReview2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+			String viewName = (String) request.getAttribute("viewName");
+			ModelAndView mav = new ModelAndView(viewName);
+			
+			System.out.println(viewName + "------뷰네임") ;
+			String _section = request.getParameter("section");
+			String _pageNum = request.getParameter("pageNum");
+			int section = Integer.parseInt(((_section == null) ? "1" : _section));
+			int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+			 Map pagingMap = new HashMap();
+			pagingMap.put("section", section);
+			pagingMap.put("pageNum", pageNum);
+			
+			Map myReviewMap = reviewService.listMyDetailReview2(pagingMap);
+			
+			myReviewMap.put("section", section);     
+			myReviewMap.put("pageNum", pageNum);     
+			
+			
+			
+			mav.addObject("myReviewMap", myReviewMap);
+		
+		return mav;
+	}
+	
+	
 	
 	@RequestMapping(value="/review/viewReview.do" ,method = RequestMethod.GET)
 	public ModelAndView viewReview(@RequestParam("reviewNO") int reviewNO,

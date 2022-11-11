@@ -178,6 +178,22 @@
 							
 						]]>
 	</select>
+	
+	<select id="selectAllMyReviewList2" parameterType="java.util.Map"
+		resultMap="reviewResult">  
+<![CDATA[
+	SELECT * FROM ( 
+			SELECT ROWNUM as recNum, LVL, review_num,  review_title, user_id,review_Date ,review_rec , review_star, review_image_url, ROOM_GRADE  
+				from (select LEVEL as LVL,  review_num,  review_title, user_id,review_Date ,review_rec ,review_star, review_image_url, ROOM_GRADE 
+						from TB_REVIEW
+	                    START WITH  parentNO is null
+						CONNECT BY PRIOR review_num = parentNO
+						ORDER SIBLINGS BY review_num DESC)
+						)                         
+					    where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
+							
+						]]>
+	</select>
 
 
 

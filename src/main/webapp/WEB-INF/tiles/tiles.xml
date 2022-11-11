@@ -117,6 +117,11 @@
 	      <put-attribute name="body" value="/WEB-INF/views/review/checkReview.jsp" />
 	</definition>	
 	
+	 <definition name="/review/checkReview2" extends="baseLayout">
+	      <put-attribute name="title" value="리뷰 수정" />
+	      <put-attribute name="body" value="/WEB-INF/views/review/checkReview2.jsp" />
+	</definition>
+	
 	<definition name="/review/viewReview" extends="baseLayout">
 	      <put-attribute name="title" value="리뷰 수정" />
 	      <put-attribute name="body" value="/WEB-INF/views/review/viewReview.jsp" />

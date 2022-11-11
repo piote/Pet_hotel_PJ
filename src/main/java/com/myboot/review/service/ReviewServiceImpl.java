@@ -54,6 +54,19 @@ public class ReviewServiceImpl implements ReviewService {
 			return myReviewMap;
 		}
 		
+		@Override
+		public Map listMyDetailReview2(Map pagingMap) throws Exception {
+			Map myReviewMap = new HashMap();
+			List<ReviewVO> myReviewList = reviewDAO.selectAllMyReviewList2(pagingMap);
+			System.out.println("review2");
+			int totReview = reviewDAO.selectTotReview();
+
+			myReviewMap.put("myReviewList", myReviewList);
+			myReviewMap.put("totReview", totReview);
+			// articlesMap.put("totArticles", 170);
+			return myReviewMap;
+		}
+		
 		
 		@Override
 		public Map viewReview(int reviewNO) throws Exception {
