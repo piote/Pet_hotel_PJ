@@ -83,9 +83,16 @@ public  class ReservationControllerImpl implements ReservationController{
 	}
 	
 	@Override
-	@RequestMapping(value= "/reservationUpdate.do", method = {RequestMethod.POST})
+	@RequestMapping(value= "/reservationUpdate.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView reservationUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		//직접 주소입력 제한
+		if(request.getHeader("REFERER") == null) {
+			request.setAttribute("stmsgcheck", "1");
+			request.setAttribute("stmsg", "비정상적인 접근입니다!");
+			ModelAndView mav = new ModelAndView("forward:/main.do");
+			return mav;
+		}
 		
 		//유저 정보
 		HttpSession session=request.getSession();
