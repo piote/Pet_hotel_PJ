@@ -102,6 +102,14 @@ public  class AdminResControllerImpl implements AdminResController{
 	public ModelAndView ResReed(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("user")==null || request.getHeader("REFERER") == null) {
+			request.setAttribute("stmsgcheck", "1");
+			request.setAttribute("stmsg", "비정상적인 접근입니다!");
+			mav.setViewName("forward:/main.do");
+			return mav;
+		}
+		
 		AdminResFullVO adminResList = (AdminResFullVO) session.getAttribute("adminreslist");
 		
 		//총 예약갯수
@@ -158,7 +166,7 @@ public  class AdminResControllerImpl implements AdminResController{
 	public HashMap SearchReservationNum(
 			@RequestParam(value ="reserNum", required = false) String reserNum,
 			  HttpServletRequest request, HttpServletResponse response) throws Exception{
-			
+		
 		AdminResFullVO reser; 
 		List<AdminResFullVO> reserP; 
 		
