@@ -17,7 +17,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+   <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
         <title>시설 소개</title>
         <link rel="stylesheet" href="${contextPath}/resources/css/reset.css">
         <script src="${contextPath}/resources/js/scrollscript.js"></script>
@@ -79,7 +79,18 @@
 				document.getElementById("contents_mod13").style.border="1px solid #030303";	
 				document.getElementById("tr_btn_modify").style.display="block";
                 document.getElementById("tr_btn").style.display="none";
-//				document.getElementById("tr_file_upload").style.display="block";
+                document.getElementById("modcompl").style.color="red";
+             	document.getElementById("fac_re").removeAttribute('href');
+                document.getElementById("rm_re").removeAttribute('href');
+                document.getElementById("cut_re").removeAttribute('href');
+                document.getElementById("spa_re").removeAttribute('href');
+                document.getElementById("in_btposition").style.display="block";
+                document.getElementById("out_btposition").style.display="block";
+                document.getElementById("rm_btposition").style.display="block";
+                document.getElementById("cut_btposition").style.display="block";
+                document.getElementById("spa_btposition").style.display="block";
+                document.getElementById("verycau").style.display="block";
+                document.getElementById("verycau").style.color="red";                
 			}
 			/* 버튼닫기 버튼을 눌렀을 때의 동작 */ 
 			function fn_close(obj) {
@@ -125,20 +136,207 @@
 				document.getElementById("contents_mod13").style.border="1px solid white";	
 				document.getElementById("tr_btn_modify").style.display="none";
 				document.getElementById("tr_btn").style.display="block";
-//				document.getElementById("tr_file_upload").style.display="none";
+                document.getElementById("fac_re").setAttribute('href','#facilitiesindex');
+                document.getElementById("rm_re").setAttribute('href','#roomindex');
+                document.getElementById("cut_re").setAttribute('href','#cutindex');
+                document.getElementById("spa_re").setAttribute('href','#spaindex');
+                document.getElementById("in_btposition").style.display="none";
+                document.getElementById("out_btposition").style.display="none";
+                document.getElementById("rm_btposition").style.display="none";
+                document.getElementById("cut_btposition").style.display="none";
+                document.getElementById("spa_btposition").style.display="none";
+                document.getElementById("verycau").style.display="none";
 			}
+			/* 이미지를 업로드하기 위함  */
+			/* 내부 사진 버튼 시작 1 ~ 4 */
+			function readURL1(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_inimg1").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview1').attr('src', e.target.result);
+			         }
+			         $(".upload-name1").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 } 
+			function readURL2(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_inimg2").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview2').attr('src', e.target.result);
+			         }
+			         $(".upload-name2").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 } 			
+			function readURL3(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_inimg3").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview3').attr('src', e.target.result);
+			         }
+			         $(".upload-name3").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 }
+			function readURL4(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_inimg4").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview4').attr('src', e.target.result);
+			         }
+			         $(".upload-name4").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 } 		
+			/* 내부 사진 버튼 끝 1 ~ 4 */
+			/* 외부 사진 버튼 시작 5 ~ 7 */
+			function readURL5(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_outimg1").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview5').attr('src', e.target.result);
+			         }
+			         $(".upload-name5").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 } 
+			function readURL6(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_outimg2").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview6').attr('src', e.target.result);
+			         }
+			         $(".upload-name6").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 } 			
+			function readURL7(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_outimg3").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview7').attr('src', e.target.result);
+			         }
+			         $(".upload-name7").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 }		
+			/* 외부 사진 버튼 끝 5 ~ 7 */
+			/* 방 사진 버튼 시작 8 ~ 10 */
+			function readURL8(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_rmimg1").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview8').attr('src', e.target.result);
+			         }
+			         $(".upload-name8").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 } 
+			function readURL9(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_rmimg2").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview9').attr('src', e.target.result);
+			         }
+			         $(".upload-name9").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 } 			
+			function readURL10(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_rmimg3").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview10').attr('src', e.target.result);
+			         }
+			         $(".upload-name10").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 }		
+			/* 방 사진 버튼 끝 8 ~ 10 */			
+			/* 커트 사진 버튼 시작 11, 12 */
+			function readURL11(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_cutimg1").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview11').attr('src', e.target.result);
+			         }
+			         $(".upload-name11").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 } 
+			function readURL12(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_cutimg2").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview12').attr('src', e.target.result);
+			         }
+			         $(".upload-name12").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 } 				
+			/* 커트 사진 버튼 끝 11, 12 */
+			/* 스파 사진 버튼 시작 13, 14 */
+			function readURL13(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_spaimg1").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview13').attr('src', e.target.result);
+			         }
+			         $(".upload-name13").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			} 
+			function readURL14(input) {
+			     if (input.files && input.files[0]) {
+			    	 var fileName = $("#fac_spaimg2").val();
+			         var reader = new FileReader();
+			         reader.onload = function (e) {
+			             $('#preview14').attr('src', e.target.result);
+			         }
+			         $(".upload-name14").val(fileName);
+			         reader.readAsDataURL(input.files[0]);
+			     }
+			 } 				
+			/* 스파 사진 버튼 끝 13, 14 */				
  		</script>        
-        <style>
+        <style>     	        	   	
             /* common 공통 시작 */
             /* 관리자 수정 버튼 시작 */
+            #verycau {
+			    position: relative;
+			    display: none;
+			    top: -200px;
+			    left: 830px;
+			    width: 375px;
+			    height: 34px;
+			    font-size: 23px;
+    		}
             /* 버튼 누르기 전  */
             #tr_btn {
             	position: relative;
+				left: 50px;
+    			top: 30px;
             }
             /* 버튼 누른 후  */
             #tr_btn_modify {
             	display: none;
             	position: relative;
+            	left: 50px;
+/*     			top: 30px; */
             }
             .button {
              	background-color: white;
@@ -150,6 +348,46 @@
     			font-size: 20px;
     			position: relative;
             }
+        	#in_btposition {
+    			position: relative;
+    			left: 749px;
+    			top: -888px;
+    			width: 199px;
+   	 			height: 430px;
+    			display: none;
+        	}
+        	#out_btposition {
+    			position: relative;
+    			left: 749px;
+    			top: -888px;
+    			width: 199px;
+   	 			height: 430px;
+   	 			display: none;
+        	}        	
+        	#rm_btposition {
+    			position: relative;
+    			left: 749px;
+    			top: -1282px;
+    			width: 199px;
+   	 			height: 430px;
+   	 			display: none;
+        	}     
+        	#cut_btposition {
+    			position: relative;
+    			left: 749px;
+    			top: -1140px;
+    			width: 199px;
+   	 			height: 430px;
+   	 			display: none;
+        	}  
+        	#spa_btposition {
+    			position: relative;
+    			left: 749px;
+    			top: -1185px;
+    			width: 199px;
+   	 			height: 430px;
+   	 			display: none; 
+        	}                 
             /* 관리자 수정 버튼 끝 */
             /* 공통 섹션 */
             section {
@@ -192,6 +430,11 @@
                 background-color: white;
             }
             /* index 시작 */
+            @media screen and (max-width: 1669px) {
+        		.index {
+        			display: none;
+        		}
+        	}
             .index {
                 margin: 0;
                 list-style: none;
@@ -199,7 +442,7 @@
                 width: 180px;
                 position: fixed;
                 left: 60px;
-                bottom: 300px;
+                bottom: 450px;
                 background-color: rgb(231, 226, 219);
                 /* border: 1px double #e59f5a; */
                 border-radius: 20px;
@@ -882,20 +1125,20 @@
     </head>
     <body>
         <form name="frmFacilities" method="post" action="${contextPath}" enctype="multipart/form-data">	
-        	<section class="header_box_back">
-        	</section>
+        	<section class="header_box_back"></section>
     		<table border="0" align="center">
+        		<p id="verycau">이름이 중복된 사진은 등록하지 마세요.</p>
 				<!-- 관리자 모드로 접근하면 나타나는 수정버튼 생성 및 시작 -->
     			<tr id="tr_btn_modify" align="center">
 					<td colspan="3">
-						<input type="button" class="button" value="수정완료" onClick="fn_modify_facilities(frmFacilities)">
-						<input type="button" class="button" value="수정취소" onClick="backToList(frmFacilities)">
 					    <input type="button" class="button" value="버튼닫기" onClick="fn_close(this.form)">
+						<input type="button" id="modcompl" class="button" value="수정완료" onClick="fn_modify_facilities(frmFacilities)">
+						<input type="button" class="button" value="수정취소" onClick="backToList(frmFacilities)">
 					</td>   
 				</tr>
 				<tr id="tr_btn" align="center">
 				   	<td colspan="1">
-						<c:if test="${member.id == article.id }">
+						<c:if test="${user.id == 'admin'}">
 							<input type="button" class="button" value="수정하기" onClick="fn_enable(this.form)">
 						</c:if>
 				   	</td>
@@ -908,44 +1151,44 @@
                 		<a href="#"><p class="sec_title">목차</p></a>
                 		<ul class="gnb">
 		                    <li>
-		                    	<a href="#facilitiesindex">
+		                    	<a href="#facilitiesindex" id="fac_re">
 		                    		<textarea id="index_mod1" name="fac_idx1" class="index_style" disabled maxlength="5">${facilities.fac_idx1}</textarea>
 		                    	</a>
 		                    </li>
 		                    <li>
-		                    	<a href="#roomindex">
+		                    	<a href="#roomindex" id="rm_re">
 		                    		<textarea id="index_mod2" name="fac_idx2" class="index_style" disabled maxlength="5">${facilities.fac_idx2}</textarea>
 		                    	</a>
 		                    </li>
 		                    <li>
-		                    	<a href="#cutindex">
+		                    	<a href="#cutindex" id="cut_re">
 		                    		<textarea id="index_mod3" name="fac_idx3" class="index_style" disabled maxlength="5">${facilities.fac_idx3}</textarea>
 		                    	</a>
 		                    </li>
 		                    <li>
-		                    	<a href="#spaindex">
+		                    	<a href="#spaindex" id="spa_re">
 		                    		<textarea id="index_mod4" name="fac_idx4" class="index_style" disabled maxlength="5">${facilities.fac_idx4}</textarea>
 		                    	</a>
 		                    </li>
 	                	</ul>
             		</div>
         		</section>
-        		<!-- index 끝 -->
+        		<!-- index 끝 -->        		
         		<!-- facilities_inside 시작 -->
-        		<section class="facilities_inside" id="facilitiesindex">
+        		<section class="facilities_inside" id="facilitiesindex">													
 	            	<div class="scroll_bar">
 	                	<div class="scroll_bar_in"></div>
 	            	</div>
 	            	<div class="roll_banner">
 	                	<div class="roll_banner_in">
-		                    <img src="${contextPath}/resources/img/inside1.PNG" alt="inside1" width="525">
-		                    <input type="hidden" name="fac_inimg1" value="${facilities.fac_inimg1}">
-		                    <img src="${contextPath}/resources/img/inside2.PNG" alt="inside2" width="525">
-		                    <input type="hidden" name="fac_inimg2" value="${facilities.fac_inimg2}">
-		                    <img src="${contextPath}/resources/img/inside3.PNG" alt="inside3" width="500">
-		                    <input type="hidden" name="fac_inimg3" value="${facilities.fac_inimg3}">
-		                    <img src="${contextPath}/resources/img/inside4.PNG" alt="inside4" width="500">
-		                    <input type="hidden" name="fac_inimg4" value="${facilities.fac_inimg4}">
+			                <img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_inimg1}" alt="inside1" width="525" id="preview1">
+	 		            	<input type="hidden" name="originalfac_inimg1" value="${facilities.fac_inimg1}" />
+	   						<img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_inimg2}" alt="inside2" width="525" id="preview2">
+	 		            	<input type="hidden" name="originalfac_inimg2" value="${facilities.fac_inimg2}" />
+	   						<img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_inimg3}" alt="inside3" width="500" id="preview3">
+	 		            	<input type="hidden" name="originalfac_inimg3" value="${facilities.fac_inimg3}" />							
+							<img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_inimg4}" alt="inside4" width="500" id="preview4">
+	 		            	<input type="hidden" name="originalfac_inimg4" value="${facilities.fac_inimg4}" />	
 	                	</div>
 	            	</div>
 	            	<div class="txt_facilities_inside">
@@ -956,6 +1199,34 @@
 		                	<textarea id="contents_mod7" name="fac_incontents" disabled>${facilities.fac_incontents}</textarea>
 		                </p>
 		            </div>
+		            <!-- 내부 시설 사진 관리자 수정 버튼 시작 -->
+        			<section id="in_btposition">
+		        		<div>
+		        			<p>내부 1번 사진</p>
+							<input type="file" id="fac_inimg1" name="fac_inimg1" onchange="readURL1(this);"/><br>		                        		                
+							<label for="fac_inimg1">파일 경로</label>
+							<input class="upload-name1" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL1(this);" disabled />
+						</div><br>
+		        		<div>
+		        			<p>내부 2번 사진</p>
+							<input type="file" id="fac_inimg2" name="fac_inimg2" onchange="readURL2(this);"/><br>		                        		                
+							<label for="fac_inimg2">파일 경로</label>
+							<input class="upload-name2" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL2(this);" disabled />
+						</div><br>
+		        		<div>
+		        			<p>내부 3번 사진</p>
+							<input type="file" id="fac_inimg3" name="fac_inimg3" onchange="readURL3(this);"/><br>		                        		                
+							<label for="fac_inimg3">파일 경로</label>
+							<input class="upload-name3" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL3(this);" disabled />
+						</div><br>
+		        		<div>
+		        			<p>내부 4번 사진</p>
+							<input type="file" id="fac_inimg4" name="fac_inimg4" onchange="readURL4(this);"/><br>		                        		                
+							<label for="fac_inimg4">파일 경로</label>
+							<input class="upload-name4" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL4(this);" disabled />
+						</div>	
+					</section>
+					<!-- 내부 시설 사진 관리자 수정 버튼 끝 -->	
 	        	</section>
         		<!-- facilities_inside 끝 -->
         		<!-- facilities_outside 시작 -->
@@ -965,12 +1236,12 @@
             		</div>
             		<div class="roll_banner">
                 		<div class="roll_banner_in">
-		                    <img src="${contextPath}/resources/img/outside1.jpg" alt="outside1" width="600">
-		                    <input type="hidden" name="fac_outimg1" value="${facilities.fac_outimg1}">
-		                    <img src="${contextPath}/resources/img/outside2.jpg" alt="outside2" width="600">
-		                    <input type="hidden" name="fac_outimg2" value="${facilities.fac_outimg2}">
-		                    <img src="${contextPath}/resources/img/outside3.jpg" alt="outside3" width="600">
-		                    <input type="hidden" name="fac_outimg3" value="${facilities.fac_outimg3}">
+			                <img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_outimg1}" alt="outside1" width="600" id="preview5">
+	 		            	<input type="hidden" name="originalfac_outimg1" value="${facilities.fac_outimg1}" />  
+			                <img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_outimg2}" alt="outside2" width="600" id="preview6">
+	 		            	<input type="hidden" name="originalfac_outimg2" value="${facilities.fac_outimg2}" /> 
+			                <img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_outimg3}" alt="outside3" width="600" id="preview7">
+	 		            	<input type="hidden" name="originalfac_outimg3" value="${facilities.fac_outimg3}" /> 	 		            		 		            	  
                 		</div>
             		</div>
             		<div class="txt_facilities_outside">
@@ -981,107 +1252,183 @@
 		                	<textarea id="contents_mod8" name="fac_outcontents" disabled>${facilities.fac_outcontents}</textarea>
 		                </p>	
             		</div>
+		            <!-- 외부 시설 사진 관리자 수정 버튼 시작 -->
+        			<section id="out_btposition">
+		        		<div>
+		        			<p>외부 1번 사진</p>
+							<input type="file" id="fac_outimg1" name="fac_outimg1" onchange="readURL5(this);"/><br>		                        		                
+							<label for="fac_inimg1">파일 경로</label>
+							<input class="upload-name5" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL5(this);" disabled />
+						</div><br>
+		        		<div>
+		        			<p>외부 2번 사진</p>
+							<input type="file" id="fac_outimg2" name="fac_outimg2" onchange="readURL6(this);"/><br>		                        		                
+							<label for="fac_outimg2">파일 경로</label>
+							<input class="upload-name6" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL6(this);" disabled />
+						</div><br>
+		        		<div>
+		        			<p>외부 3번 사진</p>
+							<input type="file" id="fac_outimg3" name="fac_outimg3" onchange="readURL7(this);"/><br>		                        		                
+							<label for="fac_outimg3">파일 경로</label>
+							<input class="upload-name7" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL7(this);" disabled />
+						</div>
+					</section>
+					<!-- 외부 시설 사진 관리자 수정 버튼 끝 -->            		
         		</section>
         		<!-- facilities_outside 끝 -->
-        <!-- room 시작 -->
-        <section class="room" id="roomindex">
-            <div class="scroll_bar_no">
-                <div class="scroll_bar_in_no"></div>
-            </div>
-            <p class="caution">
-            	<textarea id="caution_mod1" name="fac_rmcau" disabled>${facilities.fac_rmcau}</textarea>
-            </p>
-            <div class="roll_banner_no">
-                <div class="roll_banner_in_no">
-                    <img src="${contextPath}/resources/img/deluxe.jpg" alt="deluxe" width="400">
-                    <input type="hidden" name="fac_rmimg1" value="${facilities.fac_rmimg1}">
-                    <img src="${contextPath}/resources/img/suite.jpg" alt="suite" width="400">
-                    <input type="hidden" name="fac_rmimg2" value="${facilities.fac_rmimg2}">
-                    <img src="${contextPath}/resources/img/superior.PNG" alt="superior" width="400">
-                    <input type="hidden" name="fac_rmimg3" value="${facilities.fac_rmimg3}">
-                </div>
-            </div>
-            <div class="txt_deluxe">
-                <p class="sec_title">
-                	<textarea id="title_mod9" name="fac_rmtitle1" disabled maxlength="10">${facilities.fac_rmtitle1}</textarea>	
-                </p>
-                <p class="sec_p">
-                	<textarea id="contents_mod9" name="fac_rmcontents1" disabled>${facilities.fac_rmcontents1}</textarea>                        
-                </p>
-            </div>
-            <div class="txt_suite">
-                <p class="sec_title">
-                	<textarea id="title_mod10" name="fac_rmtitle2" disabled maxlength="10">${facilities.fac_rmtitle2}</textarea>
-                </p>
-                <p class="sec_p">
-                	<textarea id="contents_mod10" name="fac_rmcontents2" disabled>${facilities.fac_rmcontents2}</textarea>                              
-                </p>
-            </div>
-            <div class="txt_superior">
-                <p class="sec_title">
-                	<textarea id="title_mod11" name="fac_rmtitle3" disabled maxlength="10">${facilities.fac_rmtitle3}</textarea>
-                </p>
-                <p class="sec_p">
-                	<textarea id="contents_mod11" name="fac_rmcontents3" disabled>${facilities.fac_rmcontents3}</textarea>                              
-                </p>
-            </div>
-        </section>
-        <!-- room 끝 -->   
-        <!-- cut 시작 -->
-        <section class="cut" id="cutindex">
-            <div class="scroll_bar_cut">
-                <div class="scroll_bar_in_cut"></div>
-            </div>
-            <div class="roll_banner_cut">
-                <div class="roll_banner_in_cut">
-                    <img src="${contextPath}/resources/img/cut1.jpg" alt="cut1" width="400">
-                    <input type="hidden" name="fac_cutimg1" value="${facilities.fac_cutimg1}">
-                </div>
-            </div>
-            <div class="cut_price">
-                <img src="${contextPath}/resources/img/cut2.PNG" alt="" width="650">
-                <input type="hidden" name="fac_cutimg2" value="${facilities.fac_cutimg2}">
-            </div>
-            <div class="txt_cut">
-                <p class="sec_title">
-                	<textarea id="title_mod12" name="fac_cuttitle" disabled maxlength="25">${facilities.fac_cuttitle}</textarea>
-				</p>
-                <p class="sec_p">
-                	<textarea id="contents_mod12" name="fac_cutcontents" disabled>${facilities.fac_cutcontents}</textarea>                           
-                </p>
-            </div>
-        </section>
-        <!-- cut 끝 -->            
-        <!-- spa 시작 -->
-        <section class="spa" id="spaindex">
-            <div class="scroll_bar_spa">
-                <div class="scroll_bar_in_spa"></div>
-            </div>
-            <div class="spa_move">
-                <div class="roll_banner_spa">
-                    <div class="roll_banner_in_spa">
-                        <img src="${contextPath}/resources/img/spa2.PNG" alt="spa1" width="400">
-                        <input type="hidden" name="fac_spaimg2" value="${facilities.fac_spaimg2}">
-                    </div>     
-                </div>
-                <div class="spa_price">
-                    <img src="${contextPath}/resources/img/spa1.jpg" alt="" width="400">
-                    <input type="hidden" name="fac_spaimg1" value="${facilities.fac_spaimg1}">
-                </div>
-                <div class="txt_spa">
-                    <p class="sec_title">
-                    	<textarea id="title_mod13" name="fac_spatitle" disabled maxlength="10">${facilities.fac_spatitle}</textarea>
-                    </p>
-                    <p class="sec_p">
-                    	<textarea id="contents_mod13" name="fac_spacontents" disabled>${facilities.fac_spacontents}</textarea>
-                    </p>
-                </div>
-            </div>
-            <p class="caution2">
-            	<textarea id="caution_mod2" name="fac_spacau" disabled>${facilities.fac_spacau}</textarea>
-            </p>
-        </section>
-        <!-- spa 끝 -->
+		        <!-- room 시작 -->
+		        <section class="room" id="roomindex">
+		            <div class="scroll_bar_no">
+		                <div class="scroll_bar_in_no"></div>
+		            </div>
+		            <p class="caution">
+		            	<textarea id="caution_mod1" name="fac_rmcau" disabled>${facilities.fac_rmcau}</textarea>
+		            </p>
+		            <div class="roll_banner_no">
+		                <div class="roll_banner_in_no">
+							<img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_rmimg1}" alt="deluxe" width="400" id="preview8">
+	 		            	<input type="hidden" name="originalfac_rmimg1" value="${facilities.fac_rmimg1}" /> 		                
+							<img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_rmimg2}" alt="suite" width="400" id="preview9">
+	 		            	<input type="hidden" name="originalfac_rmimg2" value="${facilities.fac_rmimg2}" /> 			                
+							<img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_rmimg3}" alt="superior" width="400" id="preview10">
+	 		            	<input type="hidden" name="originalfac_rmimg3" value="${facilities.fac_rmimg3}" /> 		                
+		                </div>
+		            </div>
+		            <div class="txt_deluxe">
+		                <p class="sec_title">
+		                	<textarea id="title_mod9" name="fac_rmtitle1" disabled maxlength="10">${facilities.fac_rmtitle1}</textarea>	
+		                </p>
+		                <p class="sec_p">
+		                	<textarea id="contents_mod9" name="fac_rmcontents1" disabled>${facilities.fac_rmcontents1}</textarea>                        
+		                </p>
+		            </div>
+		            <div class="txt_suite">
+		                <p class="sec_title">
+		                	<textarea id="title_mod10" name="fac_rmtitle2" disabled maxlength="10">${facilities.fac_rmtitle2}</textarea>
+		                </p>
+		                <p class="sec_p">
+		                	<textarea id="contents_mod10" name="fac_rmcontents2" disabled>${facilities.fac_rmcontents2}</textarea>                              
+		                </p>
+		            </div>
+		            <div class="txt_superior">
+		                <p class="sec_title">
+		                	<textarea id="title_mod11" name="fac_rmtitle3" disabled maxlength="10">${facilities.fac_rmtitle3}</textarea>
+		                </p>
+		                <p class="sec_p">
+		                	<textarea id="contents_mod11" name="fac_rmcontents3" disabled>${facilities.fac_rmcontents3}</textarea>                              
+		                </p>
+		            </div>
+		            <!-- 방 사진 관리자 수정 버튼 시작 -->
+        			<section id="rm_btposition">
+		        		<div>
+		        			<p>방 1번 사진</p>
+							<input type="file" id="fac_rmimg1" name="fac_rmimg1" onchange="readURL8(this);"/><br>		                        		                
+							<label for="fac_rmimg1">파일 경로</label>
+							<input class="upload-name8" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL8(this);" disabled />
+						</div><br>
+		        		<div>
+		        			<p>방 2번 사진</p>
+							<input type="file" id="fac_rmimg2" name="fac_rmimg2" onchange="readURL9(this);"/><br>		                        		                
+							<label for="fac_rmimg2">파일 경로</label>
+							<input class="upload-name9" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL9(this);" disabled />
+						</div><br>
+		        		<div>
+		        			<p>방 3번 사진</p>
+							<input type="file" id="fac_rmimg3" name="fac_rmimg3" onchange="readURL10(this);"/><br>		                        		                
+							<label for="fac_rmimg3">파일 경로</label>
+							<input class="upload-name10" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL10(this);" disabled />
+						</div>
+					</section>
+					<!-- 방 사진 관리자 수정 버튼 끝 -->		            
+		        </section>
+		        <!-- room 끝 -->   
+		        <!-- cut 시작 -->
+		        <section class="cut" id="cutindex">
+		            <div class="scroll_bar_cut">
+		                <div class="scroll_bar_in_cut"></div>
+		            </div>
+		            <div class="roll_banner_cut">
+		                <div class="roll_banner_in_cut">
+		                    <img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_cutimg1}" alt="cut1" width="400" id="preview11">
+	 		            	<input type="hidden" name="originalfac_cutimg1" value="${facilities.fac_cutimg1}" /> 
+		                </div>
+		            </div>
+		            <div class="cut_price">
+		                <img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_cutimg2}" alt="cut2" width="650" height="266" id="preview12">
+	 		        	<input type="hidden" name="originalfac_cutimg2" value="${facilities.fac_cutimg2}" /> 		                
+		            </div>
+		            <div class="txt_cut">
+		                <p class="sec_title">
+		                	<textarea id="title_mod12" name="fac_cuttitle" disabled maxlength="25">${facilities.fac_cuttitle}</textarea>
+						</p>
+		                <p class="sec_p">
+		                	<textarea id="contents_mod12" name="fac_cutcontents" disabled>${facilities.fac_cutcontents}</textarea>                           
+		                </p>
+		            </div>
+		            <!-- 커트 사진 관리자 수정 버튼 시작 -->
+		            <section id="cut_btposition">
+			        	<div>
+			        		<p>커트 1번 사진</p>
+							<input type="file" id="fac_cutimg1" name="fac_cutimg1" onchange="readURL11(this);"/><br>		                        		                
+							<label for="fac_cutimg1">파일 경로</label>
+							<input class="upload-name11" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL11(this);" disabled />
+						</div><br>
+			        	<div>
+			        		<p>커트 2번 사진</p>
+							<input type="file" id="fac_cutimg2" name="fac_cutimg2" onchange="readURL12(this);"/><br>		                        		                
+							<label for="fac_cutimg2">파일 경로</label>
+							<input class="upload-name12" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL12(this);" disabled />
+						</div>
+					</section>
+					<!-- 커트 사진 관리자 수정 버튼 끝 -->		            
+		        </section>
+		        <!-- cut 끝 -->            
+		        <!-- spa 시작 -->
+		        <section class="spa" id="spaindex">
+		            <div class="scroll_bar_spa">
+		                <div class="scroll_bar_in_spa"></div>
+		            </div>
+		            <div class="spa_move">
+		                <div class="roll_banner_spa">
+		                    <div class="roll_banner_in_spa">
+		                    	<img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_spaimg2}" alt="spa2" width="400" height="173" id="preview13">
+	 		            		<input type="hidden" name="originalfac_spaimg2" value="${facilities.fac_spaimg2}" /> 		                        
+		                    </div>     
+		                </div>
+		                <div class="spa_price">
+		                    <img src="${contextPath}/resources/facilities/facilities_image/${facilities.fac_num}/${facilities.fac_spaimg1}" alt="spa1" width="400" height="600" id="preview14">
+	 		            	<input type="hidden" name="originalfac_spaimg1" value="${facilities.fac_spaimg1}" /> 
+		                </div>
+		                <div class="txt_spa">
+		                    <p class="sec_title">
+		                    	<textarea id="title_mod13" name="fac_spatitle" disabled maxlength="10">${facilities.fac_spatitle}</textarea>
+		                    </p>
+		                    <p class="sec_p">
+		                    	<textarea id="contents_mod13" name="fac_spacontents" disabled>${facilities.fac_spacontents}</textarea>
+		                    </p>
+		                </div>
+		            </div>
+		            <p class="caution2">
+		            	<textarea id="caution_mod2" name="fac_spacau" disabled>${facilities.fac_spacau}</textarea>
+		            </p>
+		            <!-- 스파 사진 관리자 수정 버튼 시작 -->
+		            <section id="spa_btposition">
+			        	<div>
+			        		<p>스파 1번 사진</p>
+							<input type="file" id="fac_spaimg1" name="fac_spaimg1" onchange="readURL13(this);"/><br>		                        		                
+							<label for="fac_spaimg1">파일 경로</label>
+							<input class="upload-name13" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL13(this);" disabled />
+						</div><br>
+			        	<div>
+			        		<p>스파 2번 사진</p>
+							<input type="file" id="fac_spaimg2" name="fac_spaimg2" onchange="readURL14(this);"/><br>		                        		                
+							<label for="fac_spaimg2">파일 경로</label>
+							<input class="upload-name14" spellcheck="false" value="첨부파일" placeholder="첨부파일" onchange="readURL14(this);" disabled />
+						</div>
+					</section>
+					<!-- 스파 사진 관리자 수정 버튼 끝 -->
+		        </section>
+		        <!-- spa 끝 -->
        		</table>  
 		</form>
     </body>

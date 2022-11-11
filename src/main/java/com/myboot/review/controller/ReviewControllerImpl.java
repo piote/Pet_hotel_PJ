@@ -49,13 +49,24 @@ public class ReviewControllerImpl implements ReviewController {
 	@RequestMapping(value = "/review/reviewDetail_1.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView reviewDetail_1(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		HttpSession session=request.getSession();
+		session=request.getSession();
+		
+	
 		String _section = request.getParameter("section");
 		String _pageNum = request.getParameter("pageNum");
 		int section = Integer.parseInt(((_section == null) ? "1" : _section));
 		int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
-		Map<String, Integer> pagingMap = new HashMap<String, Integer>();
+		Map<String, Object> pagingMap = new HashMap<String, Object>();
 		pagingMap.put("section", section);
 		pagingMap.put("pageNum", pageNum);
+	
+		if(session.getAttribute("user") != null) {
+			UserVO userVO = (UserVO) session.getAttribute("user");
+			String user_id = userVO.getId();
+			pagingMap.put("user_id", user_id);
+		}
+		
 		Map reviewMap = reviewService.reviewDetail_1(pagingMap);
 		
 		reviewMap.put("section", section);
@@ -470,8 +481,6 @@ public class ReviewControllerImpl implements ReviewController {
 	    try {
 	       reviewService.modReview(reviewMap);
 	       if(imageFileName.get(0) != "" && imageFileName.get(0) != null) {
-	    	  
-	    	   
 	    	   
 	    	 String originalFileName = (String)reviewMap.get("originalFileName");
 		     System.out.println(originalFileName);

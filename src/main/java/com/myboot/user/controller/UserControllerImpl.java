@@ -309,29 +309,7 @@ public class UserControllerImpl implements UserController{
 			
 	}
 	
-	// 회원 정보 수정
-
-//    @Override
-//	@RequestMapping(value="/modMember.do" , method = RequestMethod.GET)
-//	public ModelAndView modMember(@RequestParam(value= "user", required=false) UserVO user,
-//									RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)  throws Exception {
-//    		ModelAndView mav = new ModelAndView();
-//			HttpSession session = request.getSession();
-//			userVO = (UserVO) session.getAttribute("user");
-//			System.out.println(userVO);
-//			//userVO = userService.password(userVO);
-//			//String userPw =userVO.getPw();
-//			
-//			
-//			if (userVO.equals(user)) {
-//				System.out.println("성공");
-//				
-//				mav.setViewName("redirect:/mypage/myPage.do");
-//			}
-//			
-//				return mav;
-//    }
-				
+	// 회원 정보 수정				
     @Override
 	@RequestMapping(value="/modMember.do" ,method = RequestMethod.POST)
 	public ResponseEntity modMember(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception{
@@ -346,7 +324,7 @@ public class UserControllerImpl implements UserController{
 		      String value=multipartRequest.getParameter(name);
 		      user.put(name,value);
 		      
-		   }
+		}
 		
 		String birth=multipartRequest.getParameter("birth_string");
 		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -392,7 +370,7 @@ public class UserControllerImpl implements UserController{
 			
 			if(imageFileName!=null && imageFileName.length()!=0) {
 				
-				File oldFile = new File(path+"\\"+user.get("oldFileName"));
+				File oldFile = new File(path+"\\"+imageFileName);
 				if(oldFile.exists()) {
 					oldFile.delete();
 				}

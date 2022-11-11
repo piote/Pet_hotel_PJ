@@ -19,6 +19,8 @@ public interface AdminResService {
 	
 	public void updatePetList(Map petserviceMap) throws Exception;
 	
+	public void insertPetList(Map petserviceMap) throws Exception;
+	
 	public void deletePetList(String petNum) throws Exception;
 	
 	public int adminTotalResNum() throws Exception;
@@ -27,8 +29,12 @@ public interface AdminResService {
 	
 	public void updateResStateY(String reserNum) throws Exception;
 	
-	
 	public AdminResFullVO SearchReservationNum(String reserNum);
-	public List<AdminResFullVO> SearchPetServiceByResNum(String reserNum);
 	
+	public List<AdminResFullVO> SearchPetServiceByResNum(String reserNum);
+
+	public int adminTotalYResCount(String userID) throws Exception;
+
+	public void userMembershipUpdate(String string) throws Exception;
+
 }

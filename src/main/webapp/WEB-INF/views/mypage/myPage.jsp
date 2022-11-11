@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"
     isELIgnored="false"%> 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	 
-<%
- response.setHeader("Cache-Control","no-cache");
- response.setHeader("Pragma","no-cache");
- response.setDateHeader("Expires",0);
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <!DOCTYPE html>
 <html>
@@ -14,6 +10,13 @@
    <link rel="stylesheet" href="${contextPath}/resources/css/mypage.css">
    <meta charset="utf-8"  />
    <title>마이페이지</title>
+   <script type="text/javascript">
+   		$(document).ready(function (){           
+		        $('.img_info').attr('src',function () { 
+		        	return $(this).attr('src') + "?a=" + Math.random() 
+		        });
+		});
+   </script>
 </head>
 <body>
    <div id="wrap">

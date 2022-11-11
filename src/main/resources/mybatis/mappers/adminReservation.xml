@@ -101,8 +101,8 @@
 	    		</when>
 	    	</choose>
 	    	<choose>
-<!-- 				<when test="(state1!='' and state1!=null) or (state2!='' and state2!=null) or (state3!='' and state3!=null)"> -->
-			    <when test="(state1!='' and state1!=null) or (state2!='' and state2!=null)">
+				<when test="(state1!='' and state1!=null) or (state2!='' and state2!=null) or (state3!='' and state3!=null)">
+			    <!-- <when test="(state1!='' and state1!=null) or (state2!='' and state2!=null)"> -->
 					AND(
 					<if test="state1!='' and state1!=null">
 						res.reservation_state=#{state1}
@@ -110,9 +110,9 @@
 					<if test="state2!='' and state2!=null">
 						OR res.reservation_state=#{state2}
 					</if>
-<!-- 					<if test="state3!='' and state3!=null"> -->
-<!-- 						OR res.reservation_state=#{state3} -->
-<!-- 					</if> -->
+					<if test="state3!='' and state3!=null">
+							OR res.reservation_state=#{state3}
+					</if>
 					)
 				</when>
 			</choose>
@@ -135,14 +135,10 @@
 	    </choose>
   </select>
   
-  
-  
-  
-  
   <!-- 관리자 예약수정 예약불러오기 -->
   <select id="adminSelectRes" resultMap="adminresfullResult" parameterType="String">
   	<![CDATA[
-		SELECT res.reservation_st, res.reservation_end, res.total_cost, res.rs_comment 
+		SELECT res.USER_ID, res.reservation_st, res.reservation_end, res.total_cost, res.rs_comment 
 	    FROM tb_reservation res 
 	    left JOIN tb_petservice pet
 	    ON res.reservation_num = pet.reservation_num
@@ -160,12 +156,6 @@
         where RESERVATION_NUM = #{RESERVATION_NUM}
 	]]>
   </select>
-  
-  
-  
-  
-  
-  
   
   <!-- 관리자 예약수정 예약불러오기(변경) -->
   <update id="adminUpdateRes" parameterType="java.util.Map">  
@@ -190,6 +180,20 @@
 	where PET_NUM = #{PET_NUM}
   </update>
   
+  <!-- 관리자 예약수정 예약변경(펫 추가) -->
+  <insert id="adminInsertPet" parameterType="java.util.Map">
+	<![CDATA[
+		INSERT into tb_petservice
+		PET_NUM = #{PET_NUM},
+		set PET_NAME = #{PET_NAME},
+		PET_GENDER = #{PET_GENDER},
+		ROOM_GRADE = #{ROOM_GRADE},
+		SERVICE_BEAUTY = #{SERVICE_BEAUTY},
+		SERVICE_SPA = #{SERVICE_SPA}
+		where PET_NUM = #{PET_NUM}
+	]]>      
+  </insert>
+  
   <!-- 관리자 예약관리 예약변경(펫 삭제) -->
   <delete id="adminDeletePet" parameterType="String">
     <![CDATA[
@@ -208,19 +212,43 @@
 	]]>
   </select>
   
-  <!-- 관리자 예약취소 상태변경 -->
-  <update id="adminUpdateSTC" parameterType="String">
-	 update tb_reservation
-	 set reservation_state='C'
-	 where reservation_num=#{RESERVATION_NUM}
-  </update>	
+  	<!-- 관리자 예약관리 예약완료갯수 -->
+  	<select id="adminTotalYResCount" resultType="int" parameterType="String">
+  	<![CDATA[
+		SELECT COUNT(reservation_num)
+		FROM tb_reservation
+		where reservation_state = 'Y' and user_id = #{user_id}
+	]]>
+  	</select>
   
-  <!-- 관리자 예약확인 멤버쉽카운팅 -->
-  <update id="adminUpdateSTY" parameterType="String">
-	 update tb_reservation
-	 set reservation_state='Y'
-	 where reservation_num=#{RESERVATION_NUM}
-  </update>	
+  	<!-- 관리자 예약취소 상태변경 -->
+  	<update id="adminUpdateSTC" parameterType="String">
+		update tb_reservation
+		set reservation_state='C'
+		where reservation_num=#{RESERVATION_NUM}
+  	</update>	
+  
+  	<!-- 관리자 예약확인 멤버쉽카운팅 -->
+  	<update id="adminUpdateSTY" parameterType="String">
+		update tb_reservation
+		set reservation_state='Y'
+		where reservation_num=#{RESERVATION_NUM}
+  	</update>	
+  
+  	<!-- 관리자 예약확인 유저 멤버십 수정 -->
+	<update id="userMembershipUpdate" parameterType="String">
+		<![CDATA[
+		 	update TB_USER
+		    set USER_GRADE = 
+	        case
+	            when (SELECT COUNT(reservation_num) FROM tb_reservation where reservation_state = 'Y' and user_id = #{id} ) >= 20 then 'Gold'
+	            when (SELECT COUNT(reservation_num) FROM tb_reservation where reservation_state = 'Y' and user_id = #{id} ) >= 10 then 'Silver'
+	            when (SELECT COUNT(reservation_num) FROM tb_reservation where reservation_state = 'Y' and user_id = #{id} ) >= 5 then 'Bronze'
+	            else 'Normal'
+	        end
+			where user_id= #{id}
+		]]>
+	</update>	
   
 	<!-- 
 	<select id="serchReservationNum" resultMap="resfullResult">수정중
@@ -237,7 +265,7 @@
 		]]>
 	</select>
  	 -->
- 
+
  	<!--예약 번호로 예약불러오기  -->
 	<select id="SearchReservationNum" resultMap="adminresfullResult" parameterType="String">
 		<![CDATA[
@@ -247,6 +275,7 @@
 		ORDER BY RESERVATION_NUM DESC
 		]]>
 	</select>
+	
 	<!--예약 번호로 펫서비스 불러오기 -->
 	<select id="SearchPetServiceByResNum" resultMap="adminresfullResult" parameterType="String">
 		<![CDATA[

@@ -23,6 +23,8 @@ public class ReviewVO {
 	private String ROOM_GRADE;
 	private int rating;
 	private String imageFileName;
+	private int like_cnt;
+	private String user_review_flg;
 	
     //예약
 	private int res_num;
@@ -40,6 +42,9 @@ public class ReviewVO {
     private String colName;
 	
     private String pet_name;
+    
+    
+    
 	
 	
 	public ReviewVO() {

@@ -106,15 +106,6 @@ public class AdminUserControllerImpl implements AdminUserController {
 //		
 //	}
 	
-	@RequestMapping("/admin/adminResListT.do")
-	public ModelAndView ResListT(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		ModelAndView mav = new ModelAndView();
-		System.out.println("관리자");
-		mav.setViewName("/admin/adminResListT");
-		return mav;
-		
-	}
-	
 	//모든 유저목록 출력 ( 첫 호출 )
 	@ResponseBody 
 	@RequestMapping(value= "/returnAllUser.do", method = RequestMethod.GET)

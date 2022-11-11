@@ -28,7 +28,6 @@ $(document).ready(function(){
 
 });
    
-
 function getAllList(){
 	console.log($("#user_id").val());
 	
@@ -104,7 +103,6 @@ function clickNO(pageNo){
     
     console.log(totalData);
 
-
     var html = '<tr class="tb_title">'
                 +'<td class="res_num">No</td>'
                 +'<td class="res_date">Date</td>'
@@ -141,7 +139,7 @@ function clickNO(pageNo){
         
         html += '<td class="res_date">'+joinDate_s+'</td>';
         html += '<td class="pet_name">'+review_data[listNO].pet_name+'</td>';
- 		html += '<td class="res_sta">'+ review_data[listNO].res_state+'</td>';
+ 		html += '<td class="res_sta">'+ (review_data[listNO].res_state == 'Y'?"예약 완료":'')  +'</td>';
  		if  (review_data[listNO].res_num === review_data[listNO].re_num)   {
 				html += '<td class="re_review">'+'<a href="#" onclick="callFunction();" style="color:#999999">'+'리뷰쓰기' +'</td>';
               } else if (review_data[listNO].res_state === 'Y'){
@@ -171,9 +169,4 @@ function pageDown(totPageNo){
     page_num_view(totalData);
     
 }
-
-
-
-
-
 

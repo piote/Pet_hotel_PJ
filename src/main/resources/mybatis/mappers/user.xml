@@ -106,21 +106,6 @@
 	    	 where user_id=#{id}
    		]]>
    	  </update>
-   	  <!-- <update id="updateUser" parameterType="userVO">
-   		<![CDATA[
-   			 update TB_USER
-	     	 set user_pw= #{pw}, user_email=#{email}, user_tel=#{tel}, user_tel_sub=#{tel_sub},
-	     	 user_message=#{message}, USER_BIRTH=#{birth}, user_img_name=#{img_name}
-	    	 where user_id=#{id}
-   		]]>
-   	  </update> -->
-<!--    	  <select id="selectUserById" resultType="userVO"  parameterType="String" >
-      <![CDATA[
-         select * from TB_USER
-         where user_id=#{id}
-      ]]>
-	 </select>	 -->
-   	  
    	  
    	<!-- 회원 탈퇴 -->
 <!-- 	<delete id="deleteUser" parameterType="String"> -->

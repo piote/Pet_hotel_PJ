@@ -22,11 +22,11 @@
                 var eleId = $(this).attr("id");
                 var optionName = "";
 
-                if(eleId.indexOf("StartDate") > 0) {
-                    eleId = eleId.replace("StartDate", "EndDate");
+                if(eleId.indexOf("startDate") > 0) {
+                    eleId = eleId.replace("startDate", "endDate");
                     optionName = "minDate";
                 } else {
-                    eleId = eleId.replace("EndDate", "StartDate");
+                    eleId = eleId.replace("endDate", "startDate");
                     optionName = "maxDate";
                 }
 
@@ -61,11 +61,11 @@
                     var eleId = $(this).attr("id");
                     var optionName = "";
 
-                    if(eleId.indexOf("StartDate") > 0) {
-                        eleId = eleId.replace("StartDate", "EndDate");
+                    if(eleId.indexOf("startDate") > 0) {
+                        eleId = eleId.replace("startDate", "endDate");
                         optionName = "minDate";
                     } else {
-                        eleId = eleId.replace("EndDate", "StartDate");
+                        eleId = eleId.replace("endDate", "startDate");
                         optionName = "maxDate";
                     }
 
@@ -75,6 +75,24 @@
 			});
 			$("#startDate").datepicker();
 			$("#endDate").datepicker();
+            //시작일.
+            $('#startDate').datepicker("option","onClose", function( selectedDate ) {    
+                // 시작일 datepicker가 닫힐때
+                // 종료일의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+                $("#endDate").datepicker( "option", "minDate", selectedDate );
+                $(".searchDate").find(".chkbox2").removeClass("on");
+            });
+            
+
+            //종료일.
+            $('#endDate').datepicker("option","onClose", function( selectedDate ) {    
+                // 종료일 datepicker가 닫힐때
+                // 시작일의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+                $("#startDate").datepicker( "option", "maxDate", selectedDate );
+                $(".searchDate").find(".chkbox2").removeClass("on");
+            });
+            
+
             $(".dateclick").dateclick();
             $(".searchDate").schDate(); 
 // 			$("#startDate").datepicker('setDate', 'today');
@@ -155,7 +173,7 @@
 		frm.submit();
 		
 	}
-	
+
 // 취소 기능
     function fn_cancel_reserve(res_num){
     	Swal.fire({

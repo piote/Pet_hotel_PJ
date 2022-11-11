@@ -285,6 +285,33 @@
     </style>
 
     <script>
+    //로그인시 등급 표시
+	    $(function(){
+	        var my_grade = "${user.grade}"
+	        if( my_grade == "Normal"){
+	            $("#normal").addClass('my_grade');
+	        }
+	    }); 
+	    $(function(){
+	        var my_grade = "${user.grade}"
+	        if( my_grade == "Bronze"){
+	            $("#bronze").addClass('my_grade');
+	        }
+	    });
+	    $(function(){
+	        var my_grade = "${user.grade}"
+	        if( my_grade == "Silver"){
+	            $("#silver").addClass('my_grade');
+	        }
+	    });
+	    $(function(){
+	        var my_grade = "${user.grade}"
+	        if( my_grade == "Gold"){
+	            $("#gold").addClass('my_grade');
+	        }
+	    });
+	    
+	    //팝업창 클릭시 나오는 등급
         function popUp(id){
             $('.modal-bg').show();
             $('.modal-wrap').show();
@@ -309,13 +336,14 @@
                 	count=data.count;
                 	console.log(data.count);
                 	$('#count').append(count);
-                	
                 	if(count<5){
                 		var next = 5 - count;
                 	}else if(count<10){
                 		var next = 10 - count;
-                	}else {
+                	}else if(count<20){
                 		var next = 20 - count;
+                	}else {
+                		var next = 0
                 	}
                 	
                 	$('#count_').append(next);
@@ -374,27 +402,13 @@
 	            <c:when test="${user.grade eq 'Gold'}">
 	            	<img src="${contextPath}/resources/img/gold_medal.png" alt="gold_medal">
 	            </c:when>
-	             <c:otherwise>
-	             	<div id="normal_medal"></div>
-	             </c:otherwise>
+	            <c:otherwise>
+	                <div id="normal_medal"></div>
+	            </c:otherwise>
             </c:choose>
             <div class="txt1">
                 <p>${user.name} 님의 멤버쉽 등급은</p>
                 <p>${user.grade}</p>
-             <%--  <c:choose>
-                <c:when test="${user.grade == 'Bronze'}">
-                	<p>Bronze</p>
-                </c:when>
-                <c:when test="${user.grade == 'Silver'}">
-                	<p>Silver</p>
-                </c:when>
-                <c:when test="${user.grade == 'Gold'}">
-                	<p>Gold</p>
-                </c:when>
-                <c:otherwise>
-                	<p>Normal</p>
-                </c:otherwise>
-              </c:choose> --%>
             </div>
             <div class="txt2">
                 <c:choose>
@@ -409,7 +423,7 @@
 		                    미용서비스 <span class="orange">1회</span> 제공
 	                	</p>
 	                </c:when>
-	                 <c:when test="${user.grade == 'Gold'}">
+	                <c:when test="${user.grade == 'Gold'}">
 		                <p class="smallfont">연간 이용횟수 20회 이상</p>
 		                <p>
 		                    1회 이용금액의 <span class="orange">10%</span> 할인<br>
@@ -430,7 +444,7 @@
                 <p>Normal</p>
                 <p class="smallfont">연간 이용횟수 5회 미만</p>
             </div>
-            <div id="bronze" class="grade_box borderbox my_grade">
+            <div id="bronze" class="grade_box borderbox">
                 <img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
                 <p>Bronze</p>
                 <p class="smallfont">연간 이용횟수 5회 이상</p>
@@ -479,7 +493,7 @@
 		                    미용서비스 <span class="orange">1회</span> 제공
 	                	</p>
 	                </c:when>
-	                 <c:when test="${user.grade == 'Gold'}">
+	                <c:when test="${user.grade == 'Gold'}">
 		                <p class="smallfont">연간 이용횟수 20회 이상</p>
 		                <p>
 		                    1회 이용금액의 <span class="orange">10%</span> 할인<br>
@@ -522,8 +536,7 @@
                     <p class="grade_count_info">앞으로 <span id="count_gold" class="b">3</span>회</p>
                 </div>
             </div>
-        </div>
-        
+        </div>  
     </div>
 </body>
 </html>
