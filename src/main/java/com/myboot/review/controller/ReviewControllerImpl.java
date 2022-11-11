@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myboot.mypage.service.MyPageService;
 import com.myboot.review.service.ReviewService;
-import com.myboot.review.vo.ImageVO;
 import com.myboot.review.vo.ReviewVO;
 import com.myboot.user.vo.UserVO;
 
@@ -82,6 +82,56 @@ public class ReviewControllerImpl implements ReviewController {
 
 	}
 
+	 @ResponseBody
+	  @RequestMapping(value="/like/like.do", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	  public String like(@RequestParam(value ="review_num", required = false) int reviewNO,
+			  HttpServletRequest request, HttpServletResponse response) throws Exception{
+		 JSONObject obj = new JSONObject();
+		 
+		 HttpSession session = request.getSession();
+		 
+		 UserVO userVO = (UserVO) session.getAttribute("user");
+		 
+		 String id = userVO.getId();
+		 
+		 System.out.println(id + "----아이디  체크 ");
+		 
+		 HashMap <String, Object> hashMap = new HashMap<String, Object>(); 
+		 hashMap.put("reviewNO", reviewNO);
+		 hashMap.put("id", id);
+		 
+		
+		 List<ReviewVO> like_checkList = reviewService.selectReviewLikeCheck(hashMap);
+
+		 String like_check = ""; 
+		 
+		 if(like_checkList.size() == 0) {
+			 like_check = "N";
+			 //좋아요가 N 일시 좋아요 인서트
+			 System.out.println("추가");
+			 reviewService.insert_like(hashMap); 
+		 }else {
+			 like_check = "Y";
+			 //좋아요가 Y 일시 좋아요 딜리트
+			 System.out.println("삭제");
+			 reviewService.delete_like(hashMap);
+			 
+		 }
+		 
+		 int like_cnt = reviewService.selectReviewLike(reviewNO);
+		 
+		 
+		 obj.put("like_check", like_check);
+		 obj.put("like_cnt", like_cnt);
+		 
+		 System.out.println(like_check + "----좋아요 체크 ");
+		 System.out.println(like_cnt  + "----좋아요 카운트 " );
+		 
+		 return obj.toString();
+	 }
+	
+	
+	
 	@RequestMapping(value = "/review/reviewDetail_2.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView reviewDetail_2(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -312,7 +362,7 @@ public class ReviewControllerImpl implements ReviewController {
 		//realPath
 		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
 		String path = realPath+"resources\\review\\review_image";
-
+	
 		UserVO userVO = (UserVO) session.getAttribute("user");
 		String id = userVO.getId();
 		reviewMap.put("id", id);

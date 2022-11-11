@@ -30,6 +30,7 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'javax.servlet:jstl:1.2'
+	implementation 'org.json:json:20160810'
 	
 	//implementation fileTree dir:'libs',include: ['*.jar']
 	//implementation files 'libs/ojdbc6.jar'

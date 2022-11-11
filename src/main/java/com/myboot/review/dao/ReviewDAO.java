@@ -1,5 +1,6 @@
 package com.myboot.review.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,12 @@ public interface ReviewDAO {
 	public List<ReviewVO> selectAllMyReviewList(Map pagingMap);
 	
 	public ReviewVO selectReview(int reviewNO) throws DataAccessException;
+	public int selectReviewLike(int reviewNO) throws DataAccessException;
+	public List<ReviewVO> selectReviewLikeCheck(Map reviewNO) throws DataAccessException;
+	public void insert_like(HashMap<String, Object> hashMap) throws DataAccessException;
+	public void delete_like(HashMap<String, Object> hashMap) throws DataAccessException;
+
+
 
 
 }

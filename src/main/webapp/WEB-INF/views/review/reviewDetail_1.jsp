@@ -154,6 +154,15 @@
   }
   .re_image {
 	  border-radius: 5%;
+	  
+  }
+  .Y_heart{
+	  content:url("${contextPath}/resources/img/r_heart.png");
+	
+  }
+  
+  .N_heart{
+	  content:url("${contextPath}/resources/img/w_heart.png");
   }
   
 
@@ -200,6 +209,47 @@
  	}
  
  
+ 
+ /* 좋아요 */
+ function like_func(N){
+
+   var reviewNO = $('#reviewNO_'+N).val();
+
+   $.ajax({
+     url: "/like/like.do",
+     type: "POST",
+     cache: false,
+     dataType: "json",
+     data:  {"review_num":reviewNO},
+     
+     success: function(data) {
+            
+             //좋아요 이미지 변경 
+       if(data. like_check == 'N'){
+         
+         $("#like_img_"+N).removeClass('N_heart');
+         $("#like_img_"+N).addClass('Y_heart');
+         
+       } else {
+         
+         $("#like_img_"+N).removeClass('Y_heart');
+         $("#like_img_"+N).addClass('N_heart');
+         
+       } 
+
+       console.log(data.like_cnt);
+       
+       $('#like_cnt_'+N).text(data.like_cnt);
+       $('#like_check').html(data.like_check);
+       
+       
+     },
+     error: function(request, status, error){
+       alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+     }
+   });
+ }
+
  
  
  
@@ -278,13 +328,14 @@
 	                </c:if>   
 	         </td>
 	         
-	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td> 
-	        
+	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title} ${reviewNum.count}</div></td> 
+	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.like_cnt}</div></td> 
+	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.user_review_flg}</div></td> 
 	         <td class="w_td" width="20%" rowspan="2">               
 	           <c:choose>
 	          
 	         <c:when test="${review.image != null}"> 
-	                   <a href="${contextPath}/${review.image}" rel="prettyPhoto" title="This is the description"><img class="re_image" src="${contextPath}/${review.image}" width="150" height="150" alt="This is the title" />
+	                   <a href="${contextPath}/${review.image}" rel="prettyPhoto" title="This is the description"><img class="re_image " src="${contextPath}/${review.image}" width="150" height="150" alt="This is the title" />
 	                </c:when>
 	               
 	                <c:otherwise>
@@ -296,20 +347,21 @@
 	          </tr>      
 	      <tr class="w_tr" class="w_tr2">
 	          <td class="w_td" align=center >
-	          <input type="hidden" id="reviewNO" name="reviewNO" value="${review.reviewNO }"/>
-	          <input type="hidden" id="review_id" name="id" value="${review.id }"/>
+	          <input type="hidden" id="reviewNO_${reviewNum.count}" name="reviewNO" value="${review.reviewNO }"/>
+	          <input type="hidden" id="review_id_${reviewNum.count}" name="id" value="${review.id }"/>
+	          
 	          
 	          ${review.id}
 	          </td>	
 	          <td class="w_td" align=center >
-	       						${review.rec}
+	       						
 	       						
 	       					<c:choose>
-	       					  <c:when test="${user_id ne null}">
-	       					    <a href='javascript: like_func();'><img src="${contextPath}/resources/img/w_heart.png" id='like_img'></a>
+	       					  <c:when test="${null != isLogOn}">
+	       					    <a href='javascript: like_func(${reviewNum.count});' id = "${reviewNum.count}"><img src="" id='like_img_${reviewNum.count}'  class="like_img ${review.user_review_flg}_heart" ><span id="like_cnt_${reviewNum.count}">${review.like_cnt}</span></a>
 	       					  </c:when>
 	       					  <c:otherwise>
-	       					    <a href='javascript: notlog();'><img src="${contextPath}/resources/img/w_heart.png"></a>
+	       					    <a href='javascript: notlog(${reviewNum.count});' id = "${reviewNum.count}"><img src="${contextPath}/resources/img/w_heart.png"><span>${review.like_cnt}</span></a>
 	       					  </c:otherwise>
 	       					</c:choose>			
 	          </td>
@@ -389,7 +441,7 @@ function notlog() {
 
 			
 		
-		    recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+		 
 </script>
 
 
