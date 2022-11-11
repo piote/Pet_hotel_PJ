@@ -108,12 +108,6 @@
    	  </update>
    	  
    	<!-- 회원 탈퇴 -->
-<!-- 	<delete id="deleteUser" parameterType="String"> -->
-<!--    		<![CDATA[ -->
-<!--    			delete from TB_USER -->
-<!--    			where user_id=#{id} -->
-<!--    		]]> -->
-<!--    	</delete> -->
 	<delete id="deleteUser" parameterType="String">
    		<![CDATA[
    			update TB_USER

@@ -26,25 +26,7 @@
 			
 					element.checked = true;
 				}
-		
-				/* function deleteUser(url,id) {
-					if(window.confirm("탈퇴하시겠습니까?")){
-
-						var form = document.createElement("form");
-						form.setAttribute("method", "post");
-						form.setAttribute("action", url);
-						var idInput = document.createElement("input");
-						idInput.setAttribute("type","hidden");
-						idInput.setAttribute("name","id");
-						idInput.setAttribute("value", id);
-						
-						form.appendChild(idInput);
-						document.body.appendChild(form);
-						form.submit();
-						
-					}
-				} 
-				*/
+	
 				function deleteUser(url,id){
 					Swal.fire({
 						title: '확실합니까?',
