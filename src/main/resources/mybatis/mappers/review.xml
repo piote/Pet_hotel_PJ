@@ -200,6 +200,7 @@
 						RE.review_image_url, 
 						RE.ROOM_GRADE,
 						
+						<!-- 로그인 유무를 판단하고 user_review_flg는 유저가 좋아요를 눌렸는지 판단하는 플래그가 됨  -->
 						<if test= "user_id != null"> 
 							case when like_user_table.review_num IS NULL THEN 'N' ELSE 'Y' END AS user_review_flg,
 						</if>
@@ -207,7 +208,8 @@
 						like_table.like_cnt as like_cnt
 				
 						from TB_REVIEW RE
-			
+						
+			 			<!-- like_cnt 좋아요 갯수 총 카운트  -->
 						left join 
 						(
 						  SELECT review_num, count(0) as like_cnt
@@ -216,6 +218,8 @@
 						)  
 						like_table ON like_table.review_num = RE.review_num
 					
+					
+						
 						<if test= "user_id != null"> 
 							left join 
 							(
@@ -240,8 +244,30 @@
 						
 	</select>
 
+	
+	   	 
+	<select id="selectReviewLike" parameterType="int"
+		resultType="int">  
+<![CDATA[
+        SELECT count(0) as like_cnt
+						  FROM TB_LIKE 
+                          where review_num = #{reviewNO}
+ 
+						]]>
+	</select>
 
+	<select id="selectReviewLikeCheck" parameterType="java.util.Map"
+		resultType="int">  
+<![CDATA[
+ 			SELECT review_num
+                      FROM TB_LIKE
+					  WHERE user_id =  #{id} and review_num = #{reviewNO}
 
+ 
+						]]>
+	</select>
+
+ 
 	
 	
 		<select id="selectAllReviewList2" parameterType="java.util.Map"
@@ -339,7 +365,7 @@
 	
 	<!-- 좋아요 기능 구현 -->
 	
-  <insert id="like_check" parameterType="HashMap">
+  <insert id="insert_like" parameterType="HashMap">
 	
 	insert into TB_LIKE 
 	(
@@ -354,17 +380,17 @@
 	  SELECT CASE WHEN MAX(likeNO) IS NULL THEN 1 ELSE MAX(likeNO) + 1 END
       FROM TB_LIKE
       ), 
-	 #{user_id}, 
-	 #{review_num}
+	 #{id}, 
+	 #{reviewNO}
 	 )
 
   </insert>
   
   
-  <delete id="like_check_cancel" parameterType="HashMap">
+  <delete id="delete_like" parameterType="HashMap">
 
      delete from TB_LIKE
-     where user_id = #{user_id} and review_num = #{review_num}
+     where user_id = #{id} and review_num = #{reviewNO}
 
   </delete>
 	 

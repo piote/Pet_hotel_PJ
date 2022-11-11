@@ -198,6 +198,11 @@
 
 	<!-- 페이징용 페이지 -->
 	<definition name="/page/ResPageAjax" template="/WEB-INF/views/admin/page/ResPageAjax.jsp"/>
+	
+	<definition name="/errors/404" template="/WEB-INF/errors/404.jsp"/>
+	
+	<definition name="/errors/500" template="/WEB-INF/errors/404.jsp"/>
+
 
 
 </tiles-definitions>

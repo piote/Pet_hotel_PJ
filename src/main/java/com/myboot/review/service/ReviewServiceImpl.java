@@ -80,6 +80,27 @@ public class ReviewServiceImpl implements ReviewService {
 		// articlesMap.put("totArticles", 170);
 		return myReserveMap;
 	}
+	@Override
+	public int selectReviewLike(int reviewNO)throws Exception {
+		int like_cnt = reviewDAO.selectReviewLike(reviewNO);
+		return like_cnt;
+	}
+	
+	@Override
+	public List<ReviewVO> selectReviewLikeCheck(Map reviewNO)throws Exception {
+		 List<ReviewVO> like_check = reviewDAO.selectReviewLikeCheck(reviewNO);
+		return like_check;
+	}
+	@Override
+	public void insert_like(HashMap<String, Object> hashMap) throws Exception {
+		reviewDAO.insert_like(hashMap);
+	}
+	
+	@Override
+	public void delete_like(HashMap<String, Object> hashMap) throws Exception {
+		reviewDAO.delete_like(hashMap);
+	}
+	
 	
 	@Override
 	public Map reviewDetail_1(Map pagingMap) throws Exception {
