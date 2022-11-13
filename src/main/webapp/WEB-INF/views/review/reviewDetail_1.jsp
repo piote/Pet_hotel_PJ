@@ -11,6 +11,7 @@
  <c:set  var="totReview"  value="${reviewMap.totReview}" />
  <c:set  var="section"  value="${reviewMap.section}" />
  <c:set  var="pageNum"  value="${reviewMap.pageNum}" />
+ <c:set  var="sort"  value="${reviewMap.sort}" />
 
  
  <!--
@@ -214,14 +215,10 @@
      console.log(sort_ck);
      
    })
- 
 
- 	function changeType(){
- 		var tmpType = $("input[name='sort']:checked").val();
- 			// A Type 클릭 시 A 출력, B Type 클릭 시 B 출력
+ 	function changeType(type){
+	 	window.location.href = "/review/reviewDetail_1.do?" + "sort="+ type ;
  	}
- 
- 
  
  /* 좋아요 */
  function like_func(N){
@@ -298,12 +295,20 @@
         
          <!-- name 접근으로 value 값 체크 -->
 	         
-	         <div class="sort_option">
-		         <input type="radio" id="sort_data" name="sort" value="sort_data" onchange="changeType()" checked><label for="sort_data" >최신순</label>
-		         <input type="radio" id="sort_rec" name="sort" value="sort_rec" onchange="changeType()"><label for="sort_rec" >좋아요</label>
-	         </div>
-     
-         
+         	<c:choose>
+         		<c:when test = "${sort == 'rec'}">
+			         <div class="sort_option">
+				         <input type="radio" id="sort_data" name="sort" value="sort_data" onchange="changeType('data')"  ><label for="sort_data" >최신순</label></input>
+				         <input type="radio" id="sort_rec" name="sort" value="sort_rec" onchange="changeType('rec')" checked><label for="sort_rec" >좋아요</label></input>
+			         </div>
+	         	</c:when>
+	         	<c:otherwise>
+		         	 <div class="sort_option">
+				         <input type="radio" id="sort_data" name="sort" value="sort_data" onchange="changeType('data')" checked ><label for="sort_data" >최신순</label></input>
+				         <input type="radio" id="sort_rec" name="sort" value="sort_rec" onchange="changeType('rec')" ><label for="sort_rec" >좋아요</label></input>
+			         </div>
+	         	</c:otherwise>
+	         </c:choose>
          <div>
    
 <form name="frmReview" method="post"  action="${contextPath}"  enctype="multipart/form-data">

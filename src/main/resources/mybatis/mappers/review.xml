@@ -222,9 +222,7 @@
 						</if>
 						
 						like_table.like_cnt as like_cnt
-				
 						from TB_REVIEW RE
-						
 			 			<!-- like_cnt 좋아요 갯수 총 카운트  -->
 						left join 
 						(
@@ -233,9 +231,7 @@
 						  GROUP BY review_num
 						)  
 						like_table ON like_table.review_num = RE.review_num
-					
-					
-						
+								
 						<if test= "user_id != null"> 
 							left join 
 							(
@@ -245,19 +241,25 @@
 							)  
 							like_user_table ON like_user_table.review_num = RE.review_num
 						</if>
-			
-						
-				
+
 						where RE.ROOM_GRADE = 'Deluxe' 
-						
 	                    START WITH  RE.parentNO is null
 						CONNECT BY PRIOR RE.review_num = RE.parentNO
-						ORDER SIBLINGS BY RE.review_num desc)
+						ORDER SIBLINGS BY		
 						
+						 <choose>
+					    	<when test="sort == 'data'" >
+					    		RE.review_Date desc
+					    	</when>
+					
+					    	<otherwise>
+					    		like_table.like_cnt desc
+					    	</otherwise>
+				 		  </choose>
+						)	
 						)                         
 					    where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
-							
-						
+					    
 	</select>
 
 	

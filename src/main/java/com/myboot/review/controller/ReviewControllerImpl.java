@@ -55,11 +55,18 @@ public class ReviewControllerImpl implements ReviewController {
 	
 		String _section = request.getParameter("section");
 		String _pageNum = request.getParameter("pageNum");
+		
+		String sort = request.getParameter("sort");
+		if(sort == null) {
+			sort = "data";
+		}
+		
 		int section = Integer.parseInt(((_section == null) ? "1" : _section));
 		int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
 		Map<String, Object> pagingMap = new HashMap<String, Object>();
 		pagingMap.put("section", section);
 		pagingMap.put("pageNum", pageNum);
+		pagingMap.put("sort", sort);
 	
 		if(session.getAttribute("user") != null) {
 			UserVO userVO = (UserVO) session.getAttribute("user");
@@ -71,6 +78,7 @@ public class ReviewControllerImpl implements ReviewController {
 		
 		reviewMap.put("section", section);
 		reviewMap.put("pageNum", pageNum);
+		reviewMap.put("sort", sort);
 		// request.setAttribute("reviewMap",reviewMap );
 			
 		String viewName = (String) request.getAttribute("viewName");
