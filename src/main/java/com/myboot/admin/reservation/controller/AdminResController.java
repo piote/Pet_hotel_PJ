@@ -19,9 +19,7 @@ import com.myboot.admin.reservation.vo.AdminResFullVO;
 public interface AdminResController {
 	
 	public ModelAndView ResList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
-	public ModelAndView ResReed(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
+
 	public ModelAndView adminResMain(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public String adminReservationUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception;
