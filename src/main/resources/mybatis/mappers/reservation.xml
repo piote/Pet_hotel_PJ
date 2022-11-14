@@ -55,7 +55,12 @@
 	
 	 <select id="useReservationNum" resultType="int">
 		<![CDATA[
-		SELECT MAX(RESERVATION_NUM)+1 FROM TB_RESERVATION
+		SELECT 
+    		case
+        		when MAX(RESERVATION_NUM)+1 != null then 0
+       	 		else 0
+    		end 
+		FROM TB_RESERVATION
 		]]>
 	</select>
 	
