@@ -158,6 +158,11 @@
       	  <put-attribute name="title" value="마이페이지" />
       	  <put-attribute name="body" value="/WEB-INF/views/mypage/myPage.jsp" />
    </definition>
+      
+   <definition name="/mypage/checkReserve" extends="baseLayout">
+      	  <put-attribute name="title" value="예약내역" />
+      	  <put-attribute name="body" value="/WEB-INF/views/mypage/checkReserve.jsp" />
+   </definition>
    
    <!-- 멤버쉽 안내 -->
    
@@ -165,12 +170,6 @@
       <put-attribute name="title" value="멤버쉽 안내" />
       <put-attribute name="body" value="/WEB-INF/views/membership/membership.jsp" />
    </definition>
-   
-   <definition name="/mypage/checkReserve" extends="baseLayout">
-      	  <put-attribute name="title" value="예약내역" />
-      	  <put-attribute name="body" value="/WEB-INF/views/mypage/checkReserve.jsp" />
-   </definition>
-   
    <!-- 문의게시판 -->
    
    <definition name="/questions/questionsList" extends="baseLayout">
