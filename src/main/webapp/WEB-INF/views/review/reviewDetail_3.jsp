@@ -327,11 +327,11 @@
         <table align="right" class="w_review2">
       
         <c:choose>
-        <c:when test="${reviewList ==null }" >
+        <c:when test="${empty reviewList}" >
           <tr  height="10">
             <td colspan="4">
                <p align="center">
-                  <b><span style="font-size:15pt;">등록된 글이 없습니다.</span></b>
+                  <b><span style="font-size:15pt;">등록된 리뷰가 없습니다.</span></b>
               </p>
             </td>  
           </tr>

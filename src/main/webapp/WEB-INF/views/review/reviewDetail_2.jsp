@@ -329,11 +329,11 @@
         <table align="right" class="w_review2">
       
         <c:choose>
-        <c:when test="${reviewList ==null }" >
+        <c:when test="${empty reviewList}" >
           <tr  height="10">
             <td colspan="4">
                <p align="center">
-                  <b><span style="font-size:15pt;">등록된 글이 없습니다.</span></b>
+                  <b><span style="font-size:15pt;">등록된 리뷰가 없습니다.</span></b>
               </p>
             </td>  
           </tr>
@@ -360,8 +360,7 @@
 	                </c:if>   
 	         </td>
 	         
-	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}
-	         -------${review.user_review_flg}</div></td> 
+	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td> 
 	  
 	         <td class="w_td" width="20%" rowspan="2">               
 	           <c:choose>

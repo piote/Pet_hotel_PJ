@@ -128,11 +128,11 @@ h2 {
    <td >삭제</td>
 </tr>
 <c:choose>
-<c:when test="${reviewList ==null }" >
+<c:when test="${empty reviewList}" >
   <tr  height="10">
     <td colspan="6">
        <p align="center">
-          <b><span style="font-size:9pt;">등록된 글이 없습니다.</span></b>
+          <b><span style="font-size:9pt;">등록하신 리뷰가 없습니다.</span></b>
       </p>
     </td>  
   </tr>
