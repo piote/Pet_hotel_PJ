@@ -76,7 +76,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	public int selectNewReviewNO() {
 		return sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectNewReviewNO");
-	}							 //("mapper.review.selectNewReviewNO");
+	}							
 	
 	
 	@Override public List selectAllResList(String userId) {
