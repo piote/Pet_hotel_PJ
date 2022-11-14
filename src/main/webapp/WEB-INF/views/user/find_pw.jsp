@@ -25,7 +25,7 @@
 <title>비밀번호 찾기</title>
 </head>
 <body>
-<form name="frm" method="post"  action="${contextPath}/login.do">
+
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
