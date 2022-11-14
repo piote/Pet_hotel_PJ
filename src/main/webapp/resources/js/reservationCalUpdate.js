@@ -49,7 +49,6 @@ function calendarMaker(target, date) {
         var month = nowDate.getMonth() + 1;
         $(target).empty().append(assembly(year, month));
     } else {
-        console.error($(target).length + "custom_calendar Target is empty!!!");
         return;
     }
 
@@ -159,21 +158,17 @@ function calendarMaker(target, date) {
 
                     //
                     start_day = new Date($("#start_dayBox").text());
-                    console.log(start_day)
 
                     $(this).addClass("end_day");
 
                     end_day = new Date(selectDay);
-                    console.log("end select = " + $(this).text());
 
                     if (start_day < end_day) {
-                        console.log("start_day < end_day");
 
                         settingDay = new Date(start_day)
                         //선택 날짜 사이에 날짜를 지정하여 녹색으로 표시
                         for (between_day = 1; between_day < end_day.getDate(); between_day++) {
                             $("#CalDate" + between_day).addClass("between_day");
-                            console.log(between_day);
                         }
 
                     }
@@ -189,7 +184,6 @@ function calendarMaker(target, date) {
 
                     $(this).addClass("start_day");
                     start_day = new Date(selectDay);
-                    console.log("start select = " + $(this).text());
                     //텍스트에 날짜 정보
 
                     $("#start_dayBox").text(start_day.toLocaleDateString());
@@ -201,12 +195,10 @@ function calendarMaker(target, date) {
                     end_day = new Date(selectDay);
 
                     $(this).addClass("end_day");
+                    
+                    
+                    //비교할때 숫자로 바꾸기start_day < end_day
 
-                    console.log(end_day);
-                    console.log("end select = " + $(this).text());
-                    //비교할때 숫자로 바꾸기
-
-                    console.log("start_day < end_day");
                     settingDay = new Date(start_day)
                     //선택 날짜 사이에 날짜를 지정하여 표시
                     for (between_day = new Date(settingDay.setDate(settingDay.getDate() + 1)); between_day < end_day; between_day.setDate(between_day.getDate() + 1)) {
@@ -245,7 +237,6 @@ function calendarMaker(target, date) {
                     
                 }
 
-                console.log(selectDay.toLocaleDateString());
             }else{
                 //미래가 아닐경우.
                 alert("이후의 날짜를 선택하여 주세요");
