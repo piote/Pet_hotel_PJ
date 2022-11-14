@@ -22,10 +22,6 @@ public class UserVO {
 	private String grade;
 	private String img_name;
 
-	public UserVO() {
-		System.out.println("userVO 호출");
-	}
-	
 	
 }
 

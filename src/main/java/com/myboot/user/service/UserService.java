@@ -25,13 +25,10 @@ public interface UserService {
 	
 // 비밀번호 한번 더 입력
 	public UserVO password(UserVO  userVO) throws Exception;
-//public UserVO pwUser(String pw) throws DataAccessException;
 		
 // 회원 정보 수정
 	public int modMember(Map user) throws DataAccessException; 
-	
-//	public UserVO findUser(UserVO user) throws DataAccessException;
-	
+
 // 회원 탈퇴	
 	public int retiring(String id) throws DataAccessException;
 	

@@ -65,21 +65,16 @@ function addRow() {
         petmap.delete('pet_Beauty' + $(this).attr('id'));
         petmap.delete('pet_Spa' + $(this).attr('id'));
         
-        console.log('service' + $(this).attr('id'));
         servicemap.delete('service' + $(this).attr('id'));
         costTB(servicemap, false);//삭제한 결과 출력
 
         //html에서 제거
         $(this).parent().parent().remove();
         totalTableNum--;
-        //콘솔 테스트
-        console.log(petmap);
-        console.log('총 테이블' + totalTableNum);
     });
 
     petTableNum++;
     totalTableNum++;
-    console.log('총 테이블' + totalTableNum);
 
 }
 
@@ -90,7 +85,6 @@ function pet_table_event(petTableNum) {
         petmap.set($(this).attr('id'), $(this).val());
 
         if (tablecheck(this)) {
-            console.log(costresult(this));
             costTB(costresult(this),true);
         }
     });
@@ -100,7 +94,6 @@ function pet_table_event(petTableNum) {
         petmap.set($(this).attr('id'), $(this).val());
 
         if (tablecheck(this)) {
-            console.log(costresult(this));
             costTB(costresult(this),true);
         }
     });
@@ -111,7 +104,6 @@ function pet_table_event(petTableNum) {
         petmap.set($(this).attr('id'), $(this).val());
 
         if (tablecheck(this)) {
-            console.log(costresult(this));
             costTB(costresult(this),true);
         }
     });
@@ -121,7 +113,6 @@ function pet_table_event(petTableNum) {
         petmap.set($(this).attr('id'), $(this).val());
 
         if (tablecheck(this)) {
-            console.log(costresult(this));
             costTB(costresult(this),true);
         }
     });
@@ -138,7 +129,6 @@ function pet_table_event(petTableNum) {
 		
 		//결과창
         if (tablecheck(this)) {
-            console.log(costresult(this));
             costTB(costresult(this),true);
         }
     });
@@ -147,7 +137,6 @@ function pet_table_event(petTableNum) {
 //테이블 확인 이름이 입력되었는가.
 function tablecheck(petTableElement) {
     var tbnum = $(petTableElement).parent().parent().attr('id').substr(5);
-    console.log('Pet_Name-' + tbnum + petmap.get('Pet_Name' + tbnum) + 'Pet_Sex-' + tbnum + petmap.get('Pet_Sex' + tbnum))
 
     //기본 값 세팅
     if (petmap.get('Pet_Sex' + tbnum) == null) {
@@ -158,7 +147,6 @@ function tablecheck(petTableElement) {
     }
 
     if (petmap.get('Pet_Name' + tbnum) != null && petmap.get('Pet_Sex' + tbnum) != null) {
-        console.log("table_OK")
         return 1;
     } else {
         alert("이름을 입력해 주세요.");
@@ -173,9 +161,7 @@ function costresult(petTableElement) {
     var tbnum = $(petTableElement).parent().parent().attr('id').substr(5);
 
     var petservice = [petmap.get('Pet_Name' + tbnum), petmap.get('Pet_Sex' + tbnum), petmap.get('Pet_Room' + tbnum), petmap.get('pet_Beauty' + tbnum), petmap.get('pet_Spa' + tbnum), tbnum];
-    console.log(petservice);
     servicemap.set('service' + tbnum, petservice);
-    console.log(servicemap);
 
     return servicemap;
 }
@@ -298,24 +284,23 @@ function costTB(petserviceMap, datecheck) {
 		if($("#membership").val()==""|| $("#membership").val()==null){
        		var disTotal = $("#totalcost").val();
        	 	dis = (total-disTotal)/(total/100)//할인율 자릿수 높아서 대강 계산해도 ok
-        	console.log(dis);
         
         	if(dis == 2){
 				$("#membership").val("Bronze");
-				console.log($("#bronzeimg").attr('src', '/resources/img/bronze_medal.png'));
+				$("#bronzeimg").attr('src', '/resources/img/bronze_medal.png');
 				$(".membership").text("Bronze Membership : Discount 2%");
 				
 			}else if(dis == 5){
 				$("#membership").val("Silver");
-				console.log($("#bronzeimg").attr('src', '/resources/img/silver_medal.png'));
+				$("#bronzeimg").attr('src', '/resources/img/silver_medal.png');
 				$(".membership").text("Silver Membership : Discount 5%");
 			}else if(dis == 10){
 				$("#membership").val("Gold");
-				console.log($("#bronzeimg").attr('src', '/resources/img/gold_medal.png'));
+				$("#bronzeimg").attr('src', '/resources/img/gold_medal.png');
 				$(".membership").text("Gold Membership : Discount 10%");
 			}else{
 				$("#membership").val("");
-				console.log($("#bronzeimg").attr('src', '/resources/img/none.png'));
+				$("#bronzeimg").attr('src', '/resources/img/none.png');
 				$(".membership").text("");
 			}
 			

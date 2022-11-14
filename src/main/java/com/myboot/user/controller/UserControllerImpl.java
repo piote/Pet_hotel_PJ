@@ -284,18 +284,14 @@ public class UserControllerImpl implements UserController{
 			System.out.println(userVO);
 			System.out.println(password);
 			System.out.println(userVO.getPw());
-			//userVO = userService.password(userVO);
 			String userPw =userVO.getPw();
 			//날짜 포맷    			
     		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
-			/* SimpleDateFormat newDtFormat1 = new SimpleDateFormat("yyyy-MM-dd"); */
     		
     		// String 타입을 Date 타입으로 변환
-			/* Date joinDate_format = newDtFormat.parse(userVO.getBirth()); */
     		String strNowDate = newDtFormat.format(userVO.getBirth());
-			/* String strNowDate1 = newDtFormat1.format(userVO.getJoinDate()) */;
     		session.setAttribute("birth", strNowDate);
-			/* session.setAttribute("joinDate", strNowDate1); */
+
     	
     		
 			
@@ -304,9 +300,6 @@ public class UserControllerImpl implements UserController{
 				
 				mav.setViewName("redirect:/modMemberForm.do");	
 			
-				//String viewName=(String)request.getAttribute("viewName");
-				//mav = new ModelAndView(viewName);
-				
 			}else {
 				rAttr.addAttribute("result","passwordFailed");
 				mav.setViewName("redirect:/pw_changeForm.do");
@@ -368,9 +361,7 @@ public class UserControllerImpl implements UserController{
 			newUserVO.setPw((String) user.get("pw"));
 			
 			userVO = userService.login(newUserVO);
-			
-//			user.setGrade(oldUserVO.getGrade());
-			
+					
 			System.out.println(userVO);
 			session.removeAttribute("user");
 			session.setAttribute("user",userVO);
