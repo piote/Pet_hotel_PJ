@@ -224,13 +224,12 @@
 						like_table.like_cnt as like_cnt
 						from TB_REVIEW RE
 			 			<!-- like_cnt 좋아요 갯수 총 카운트  -->
-						left join 
-						(
-						  SELECT review_num, count(0) as like_cnt
-						  FROM TB_LIKE 
-						  GROUP BY review_num
-						)  
-						like_table ON like_table.review_num = RE.review_num
+						left join (
+                                  SELECT review_num, count(0) as like_cnt 
+                                  FROM TB_LIKE 
+                                  GROUP BY review_num     
+                                )like_table ON like_table.review_num = RE.review_num
+                              
 								
 						<if test= "user_id != null"> 
 							left join 
@@ -249,11 +248,15 @@
 						
 						 <choose>
 					    	<when test="sort == 'data'" >
-					    		RE.review_Date desc
+					    		RE.review_Date desc NULLS LAST
 					    	</when>
 					
+					    	<when test="sort == 'rec'" >
+					    		like_table.like_cnt desc NULLS LAST
+					    	</when>
+					    	
 					    	<otherwise>
-					    		like_table.like_cnt desc
+					    		RE.review_Date desc NULLS LAST
 					    	</otherwise>
 				 		  </choose>
 						)	
@@ -262,32 +265,6 @@
 					    
 	</select>
 
-	
-	   	 
-	<select id="selectReviewLike" parameterType="int"
-		resultType="int">  
-<![CDATA[
-        SELECT count(0) as like_cnt
-						  FROM TB_LIKE 
-                          where review_num = #{reviewNO}
- 
-						]]>
-	</select>
-
-	<select id="selectReviewLikeCheck" parameterType="java.util.Map"
-		resultType="int">  
-<![CDATA[
- 			SELECT review_num
-                      FROM TB_LIKE
-					  WHERE user_id =  #{id} and review_num = #{reviewNO}
-
- 
-						]]>
-	</select>
-
- 
-	
-	
 			<select id="selectAllReviewList2" parameterType="java.util.Map"
 		resultMap="reviewResult">  
 
@@ -343,8 +320,22 @@
 						
 	                    START WITH  RE.parentNO is null
 						CONNECT BY PRIOR RE.review_num = RE.parentNO
-						ORDER SIBLINGS BY RE.review_num desc)
+						ORDER SIBLINGS BY 
 						
+						 <choose>
+					    	<when test="sort == 'data'" >
+					    		RE.review_Date desc NULLS LAST
+					    	</when>
+					
+					    	<when test="sort == 'rec'" >
+					    		like_table.like_cnt desc NULLS LAST
+					    	</when>
+					    	
+					    	<otherwise>
+					    		RE.review_Date desc NULLS LAST
+					    	</otherwise>
+				 		  </choose>
+						)
 						)                         
 					    where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
 							
@@ -406,13 +397,52 @@
 						
 	                    START WITH  RE.parentNO is null
 						CONNECT BY PRIOR RE.review_num = RE.parentNO
-						ORDER SIBLINGS BY RE.review_num desc)
+						ORDER SIBLINGS BY
 						
+						 <choose>
+					    	<when test="sort == 'data'" >
+					    		RE.review_Date desc NULLS LAST
+					    	</when>
+					
+					    	<when test="sort == 'rec'" >
+					    		like_table.like_cnt desc NULLS LAST
+					    	</when>
+					    	
+					    	<otherwise>
+					    		RE.review_Date desc NULLS LAST
+					    	</otherwise>
+				 		  </choose>
+						)
 						)                         
 					    where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10
 							
 						
 	</select>	
+	
+	
+	<select id="selectReviewLike" parameterType="int"
+		resultType="int">  
+<![CDATA[
+        SELECT count(0) as like_cnt
+						  FROM TB_LIKE 
+                          where review_num = #{reviewNO}
+ 
+						]]>
+	</select>
+
+	<select id="selectReviewLikeCheck" parameterType="java.util.Map"
+		resultType="int">  
+<![CDATA[
+ 			SELECT review_num
+                      FROM TB_LIKE
+					  WHERE user_id =  #{id} and review_num = #{reviewNO}
+
+ 
+						]]>
+	</select>
+
+ 
+	
 	
 	
 

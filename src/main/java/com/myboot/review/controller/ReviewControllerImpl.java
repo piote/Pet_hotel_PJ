@@ -52,7 +52,6 @@ public class ReviewControllerImpl implements ReviewController {
 		HttpSession session=request.getSession();
 		session=request.getSession();
 		
-	
 		String _section = request.getParameter("section");
 		String _pageNum = request.getParameter("pageNum");
 		
@@ -60,7 +59,6 @@ public class ReviewControllerImpl implements ReviewController {
 		if(sort == null) {
 			sort = "data";
 		}
-		
 		int section = Integer.parseInt(((_section == null) ? "1" : _section));
 		int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
 		Map<String, Object> pagingMap = new HashMap<String, Object>();
@@ -79,7 +77,7 @@ public class ReviewControllerImpl implements ReviewController {
 		reviewMap.put("section", section);
 		reviewMap.put("pageNum", pageNum);
 		reviewMap.put("sort", sort);
-		// request.setAttribute("reviewMap",reviewMap );
+		
 			
 		String viewName = (String) request.getAttribute("viewName");
 
@@ -138,11 +136,17 @@ public class ReviewControllerImpl implements ReviewController {
 		
 			String _section = request.getParameter("section");
 			String _pageNum = request.getParameter("pageNum");
+			
+			String sort = request.getParameter("sort");
+			if(sort == null) {
+				sort = "data";
+			}
 			int section = Integer.parseInt(((_section == null) ? "1" : _section));
 			int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
 			Map<String, Object> pagingMap = new HashMap<String, Object>();
 			pagingMap.put("section", section);
 			pagingMap.put("pageNum", pageNum);
+			pagingMap.put("sort", sort);
 		
 			if(session.getAttribute("user") != null) {
 				UserVO userVO = (UserVO) session.getAttribute("user");
@@ -154,7 +158,8 @@ public class ReviewControllerImpl implements ReviewController {
 			
 			reviewMap.put("section", section);
 			reviewMap.put("pageNum", pageNum);
-			// request.setAttribute("reviewMap",reviewMap );
+			reviewMap.put("sort", sort);
+		
 				
 			String viewName = (String) request.getAttribute("viewName");
 
@@ -174,11 +179,19 @@ public class ReviewControllerImpl implements ReviewController {
 		
 			String _section = request.getParameter("section");
 			String _pageNum = request.getParameter("pageNum");
+			
+			String sort = request.getParameter("sort");
+			if(sort == null) {
+				sort = "data";
+			}
+			
 			int section = Integer.parseInt(((_section == null) ? "1" : _section));
 			int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
 			Map<String, Object> pagingMap = new HashMap<String, Object>();
+			
 			pagingMap.put("section", section);
 			pagingMap.put("pageNum", pageNum);
+			pagingMap.put("sort", sort);
 		
 			if(session.getAttribute("user") != null) {
 				UserVO userVO = (UserVO) session.getAttribute("user");
@@ -190,6 +203,7 @@ public class ReviewControllerImpl implements ReviewController {
 			
 			reviewMap.put("section", section);
 			reviewMap.put("pageNum", pageNum);
+			reviewMap.put("sort", sort);
 			// request.setAttribute("reviewMap",reviewMap );
 				
 			String viewName = (String) request.getAttribute("viewName");
@@ -255,11 +269,15 @@ public class ReviewControllerImpl implements ReviewController {
 	
 	@RequestMapping(value = "/review/checkReview2.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView checkReview2(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+			HttpSession session=request.getSession();
+			session=request.getSession();
+			
 			String viewName = (String) request.getAttribute("viewName");
 			ModelAndView mav = new ModelAndView(viewName);
 			
-			System.out.println(viewName + "------뷰네임") ;
+			UserVO userVO = (UserVO) session.getAttribute("user");
+			String user_id = userVO.getId();
+			
 			String _section = request.getParameter("section");
 			String _pageNum = request.getParameter("pageNum");
 			int section = Integer.parseInt(((_section == null) ? "1" : _section));
@@ -267,12 +285,13 @@ public class ReviewControllerImpl implements ReviewController {
 			 Map pagingMap = new HashMap();
 			pagingMap.put("section", section);
 			pagingMap.put("pageNum", pageNum);
+			pagingMap.put("user_id", user_id);
 			
 			Map myReviewMap = reviewService.listMyDetailReview2(pagingMap);
 			
 			myReviewMap.put("section", section);     
 			myReviewMap.put("pageNum", pageNum);     
-			
+			myReviewMap.put("user_id", user_id);
 			
 			
 			mav.addObject("myReviewMap", myReviewMap);
@@ -284,7 +303,7 @@ public class ReviewControllerImpl implements ReviewController {
 	
 	@RequestMapping(value="/review/viewReview.do" ,method = RequestMethod.GET)
 	public ModelAndView viewReview(@RequestParam("reviewNO") int reviewNO,
-			  HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
 		System.out.println(reviewNO);
 		
@@ -301,35 +320,6 @@ public class ReviewControllerImpl implements ReviewController {
 		
 	}
 	   
-
-	
-	/*
-	   @RequestMapping("/review/reviewBoard.do")
-	   public String review(Model model) {
-	      System.out.println("리뷰");
-	      return "/review/reviewBoard";
-	   }
-	*/
-	/*
-	@RequestMapping(value = "/review/reviewBoard.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView reviewBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
-		Map<String, Integer> resMap = new HashMap<String, Integer>();
-	
-		Map myReserveMap = reviewService.listMyDetailReserve(resMap);
-
-		UserVO userVO = (UserVO) session.getAttribute("user");	
-		String user_id = userVO.getId();
-		myReserveMap.put("user_id", user_id);
-		
-		String viewName = (String) request.getAttribute("viewName");
-		
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("myReserveMap", myReserveMap);
-
-		return mav;
-	}
-*/
 	
 	@RequestMapping(value = "/review/reviewBoard.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView reviewBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -364,6 +354,7 @@ public class ReviewControllerImpl implements ReviewController {
 		}
 		return mav;
 	}
+	
 	//
 	@ResponseBody 
 	@RequestMapping(value= "/returnAllRes.do", method = RequestMethod.GET)
@@ -374,14 +365,6 @@ public class ReviewControllerImpl implements ReviewController {
 	}
 	
 	
-	
-	/*
-	 * @RequestMapping("/reviewDetail_1.do") public String detail_1(Model model){
-	 * System.out.println("리뷰"); return "reviewDetail_1"; }
-	 */
-
-	// 다중 이미지 글 추가하기
-
 	// @Override
 	@RequestMapping(value = "/review/addNewReview.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -477,18 +460,6 @@ public class ReviewControllerImpl implements ReviewController {
 		return resEnt;
 	}
 	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	@RequestMapping(value = "/review/removeReview.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -583,15 +554,10 @@ public class ReviewControllerImpl implements ReviewController {
 		     System.out.println(originalFileName);
 		     File oldFile = new File(realPath+originalFileName);//1   + 234  
 		     oldFile.delete();
-//	    	   if( "resources/review/review_image" + "\\" +reviewNO+ "\\" + imageFileName.get(0) != originalFileName) {
-//	    		   
-//	    	   }
+
 	         File srcFile = new File(path + "\\" + "temp" + "\\" + imageFileName.get(0));
 	         File destDir = new File(path + "\\" + reviewNO);//123   + 4
 	         FileUtils.moveFileToDirectory(srcFile, destDir, true);
-	         
-	         //String originalFileName = (String)reviewMap.get("originalFileName");
-
 	         
 	       }	
 	       message = "<script>";
@@ -619,9 +585,6 @@ public class ReviewControllerImpl implements ReviewController {
 	
 	private List<String> upload(MultipartHttpServletRequest multipartRequest, String path) throws Exception {
 		
-//		String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
-//		path = realPath+"resources\\review\\review_image";
-		
 		List<String> fileList= new ArrayList<String>();
 		System.out.println(fileList);
 		
@@ -648,16 +611,9 @@ public class ReviewControllerImpl implements ReviewController {
 
 	@Override
 	public String reviewForm(Model model) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
-	
-	
-	
-	
-	
 //	메인페이지 리뷰조회
 	@ResponseBody
 	@RequestMapping(value = "/returnReview.do", method = RequestMethod.GET)

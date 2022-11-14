@@ -132,12 +132,15 @@ h2 {
   <tr  height="10">
     <td colspan="6">
        <p align="center">
-          <b><span style="font-size:9pt;">등록된 글이 없습니다.</span></b>
+          <b><span style="font-size:15pt;">등록된 글이 없습니다.</span></b>
       </p>
     </td>  
   </tr>
 </c:when>
-<c:when test="${reviewList != null }" >
+
+
+
+<c:when test="${reviewList != null && user_id == 'admin'}" >
   <c:forEach  var="review" items="${reviewList }" varStatus="reviewNum" >
   <fmt:formatDate var="reviewDate" value="${review.date}" pattern="yyyy.MM.dd"/>
    <tr align="center">
@@ -153,6 +156,17 @@ h2 {
 	  
   </c:forEach>
    </c:when>
+   
+   <c:otherwise >
+   <tr  height="10">
+     <td colspan="6">
+        <p align="center">
+           <b><span style="font-size:15pt;">관리자 계정으로 로그인 해주세요.</span></b>
+       </p>
+     </td>  
+   </tr>
+   </c:otherwise>
+   
   </c:choose>    
 </table>
 </div>
