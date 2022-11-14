@@ -184,7 +184,7 @@ public class ReviewControllerImpl implements ReviewController {
 		return mav;
 
 	}
-	  //AJAX 
+//AJAX 
 	  @ResponseBody
 	  @RequestMapping(value="/like/like.do", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	  public String like(@RequestParam(value ="review_num", required = false) int reviewNO,
@@ -205,12 +205,12 @@ public class ReviewControllerImpl implements ReviewController {
 		 
 		 if(like_checkList.size() == 0) {
 			 like_check = "N";
-			 //좋아요가 N 일시 좋아요 누르면 인서트
+		     //좋아요가 N 일시 좋아요 누르면 인서트
 			 System.out.println("추가");
 			 reviewService.insert_like(hashMap); 
 		 }else {
 			 like_check = "Y";
-			 //좋아요가 Y 일시 좋아요 누르면 딜리트
+	    	 //좋아요가 Y 일시 좋아요 누르면 딜리트
 			 System.out.println("삭제");
 			 reviewService.delete_like(hashMap);
 		 }
@@ -261,7 +261,7 @@ public class ReviewControllerImpl implements ReviewController {
 		return mav;
 	}
 	
-	//관리자용 리뷰 조회 컨트롤러
+//관리자용 리뷰 조회 컨트롤러
 	@RequestMapping(value = "/review/checkReview2.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView checkReview2(HttpServletRequest request, HttpServletResponse response) throws Exception {
 			HttpSession session=request.getSession();
@@ -367,6 +367,7 @@ public class ReviewControllerImpl implements ReviewController {
 		
 		multipartRequest.setCharacterEncoding("utf-8");
 		String imageFileName = null;
+		String ROOM_GRADE = null;
 
 		Map reviewMap = new HashMap();
 		
@@ -397,6 +398,9 @@ public class ReviewControllerImpl implements ReviewController {
 		reviewMap.put("parentNO", parentNO);
 
 		List<String> fileList = upload(multipartRequest, path);
+	
+		ROOM_GRADE = (String) reviewMap.get("ROOM_GRADE");
+		
 		
 		List<String> imageFileList = new ArrayList<String>();
 		if (fileList != null && fileList.size() != 0) {
@@ -430,10 +434,20 @@ public class ReviewControllerImpl implements ReviewController {
 			} else {
 				int reviewNO = reviewService.addNewReview(reviewMap, imageFileName);
 			}
-
+			
 			message = "<script>";
 			message += " alert('새글을 추가했습니다.');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/review/reviewDetail_1.do'; ";
+			String nextpage = null;
+		
+			if(ROOM_GRADE.equals("Suite")) {
+				nextpage = "2";
+			} else if (ROOM_GRADE.equals("Superior")) {
+				nextpage = "3";
+			} else {
+				nextpage = "1";
+			}
+	
+			message += " location.href='" + multipartRequest.getContextPath() + "/review/reviewDetail_"+nextpage+".do'; ";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 
@@ -478,6 +492,7 @@ public class ReviewControllerImpl implements ReviewController {
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 
 		try {
+			reviewService.delete_like_by_reviewNO(reviewNO);
 			reviewService.removeReview(reviewNO);
 			File destDir = new File(path + "\\" + reviewNO);
 			FileUtils.deleteDirectory(destDir);

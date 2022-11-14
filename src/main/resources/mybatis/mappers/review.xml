@@ -512,6 +512,13 @@
 
   </insert>
   
+    <delete id="delete_like_by_reviewNO" parameterType="HashMap">
+
+     delete from TB_LIKE
+     where review_num = #{reviewNO}
+
+  </delete>
+  
   
   <delete id="delete_like" parameterType="HashMap">
 

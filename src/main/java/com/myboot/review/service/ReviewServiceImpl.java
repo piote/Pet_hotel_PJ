@@ -114,6 +114,10 @@ public class ReviewServiceImpl implements ReviewService {
 		reviewDAO.delete_like(hashMap);
 	}
 	
+	public void delete_like_by_reviewNO(int hashMap)throws Exception {
+		reviewDAO.delete_like_by_reviewNO(hashMap);
+	}
+	
 	
 	@Override
 	public Map reviewDetail_1(Map pagingMap) throws Exception {

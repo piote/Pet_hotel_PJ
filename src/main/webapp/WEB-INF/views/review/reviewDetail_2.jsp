@@ -360,8 +360,7 @@
 	                </c:if>   
 	         </td>
 	         
-	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}
-	         -------${review.user_review_flg}</div></td> 
+	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td> 
 	  
 	         <td class="w_td" width="20%" rowspan="2">               
 	           <c:choose>
