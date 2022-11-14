@@ -53,10 +53,7 @@
 					    	if($(e.target).parents('.pw_change').length < 1 && !$(e.target).hasClass('pw_change')){
 					    		$('.eyes').hide();
 					        }
-					  }); 
-					  	
-			            
-					  
+					  }); 				 				  
 					});
 				</script>
 	</head>
