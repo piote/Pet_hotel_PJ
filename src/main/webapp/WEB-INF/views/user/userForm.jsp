@@ -22,16 +22,12 @@ request.setCharacterEncoding("UTF-8");
 }
 
 .signin-wrapper {
-	flex-grow: 1;
-	background: #d5d5d5;
-	transition: all 0.32s ease-in;
-}
 
-.signup-wrapper {
-	flex-grow: 1;
-	background: #0F3758;
-	transition: all 0.32s ease-in-out;
-}
+	background: #d5d5d5;
+
+} 
+
+
 
 .active {
 	flex-grow: 6;

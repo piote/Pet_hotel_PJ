@@ -42,15 +42,6 @@ public class ReviewVO {
     private String colName;
 	
     private String pet_name;
-    
-    
-    
-	
-	
-	public ReviewVO() {
-		System.out.println("reviewVO 호출");
-	}
-	
 	
 	
 }
