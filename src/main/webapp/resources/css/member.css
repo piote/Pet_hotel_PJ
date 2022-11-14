@@ -7,18 +7,15 @@
 }
 
 #wrap{
-	/* width: 1920px; */
 	width: 100%;
     margin: 0 auto;
 }
 
 .container{
- 	/* width: 1200px; */
  	width: 100%;
     margin: 50px auto;
 }
 .container h3{
-	/* text-align: center; */
 	display: block;
 	font-size:23px;
 	padding: 14px 0;
@@ -83,13 +80,6 @@
  }
  
 #preview {
-	/* display: block;
-    margin: 0;
-    padding: 0;
-    width: 100px;
-    height: 100px;
-    top: 205px;
-    right: 100px; */
     border: 1px solid #000;
     border-radius: 10%;
     margin-top: 20px;
@@ -104,20 +94,6 @@ input#imageFileName {
     top: 301px;
     text-align: center;
 }
-
-/* input.upload-name {
-	position: absolute;
-	top: 370px;
-	right: 72px;
-	margin-top: 65px;
-	left: 658px;
-	text-align: center;
-	margin-left: 200px;
-    margin-top: 70px;
-    position: absolute;
-    top: 301px;
-    text-align: center;
-} */
 
 .upload-name {
 	 display: inline-block;
@@ -176,7 +152,6 @@ input#imageFileName {
 	width: 150px;
 }
 
-/* .modCon tr input{margin:5px 0;} */
 .modCon tr .txtBox{width:370px;}
 .btn1{
 	display: inline-block;
@@ -189,6 +164,7 @@ input#imageFileName {
     background-color: #31363d;
     border-radius: 5px; 
 }
+
 .btn2{
 	display: inline-block;
     width: 200px;
@@ -198,6 +174,7 @@ input#imageFileName {
     font-size: 15px;
     border-radius: 5px;  
 }
+
 .btn3{
 	display: inline-block;
     width: 150px;
@@ -210,21 +187,21 @@ input#imageFileName {
     border-radius: 5px;    
     
 }
-/* .bnt3 > a:hover{background: #ccc;}
 
-.modCon > ul{margin-top: 30px;} */
 .letter{
 	color: #030303;
     margin: 0 auto;
     font-size: 17px;
     width: 1025px;
-	}
+}
+	
 .letter .symbol{
 	position: relative;
     left: -10px;
 	font-size: 14px;
     color: #f8574f;
 }
+
 #readonly {
 	background: #ddd;
 	border: none;
@@ -236,30 +213,35 @@ input#imageFileName {
     padding-bottom: 30px;
 
 }
+
 .btn_footer1 {
 	padding-top: 30px;
     text-align: center;
     padding-bottom: 30px;
 	margin-left: 900px;
 }
+
 .btn1:hover {
     background-color: #fff;
     color: #000;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
+
 .btn2:hover {
     background-color: #000;
     color: #fff;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
+
 .btn3:hover {
     background-color: #fff;
     color: #000;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
+
 .swal2-popup {
     display: none;
     position: relative;
