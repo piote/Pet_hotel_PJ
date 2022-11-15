@@ -188,9 +188,9 @@
             }).then((result) => {
             if (result.isConfirmed) {
         		var formObj=document.createElement("form");
-        		var i_reserve_num = document.createElement("input"); ;
+        		var i_reserve_num = document.createElement("input"); 
 
-        		Swal.fire('예약 취소 완료.',)
+        		Swal.fire('예약 취소 완료.')
         	    
         	    i_reserve_num.type = "hidden";
         	    i_reserve_num.name = "res_num";
