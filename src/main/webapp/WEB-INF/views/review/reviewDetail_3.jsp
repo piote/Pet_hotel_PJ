@@ -309,7 +309,7 @@
 
          <div class="w_contents_1">
              <img class="re_room1" src="${contextPath}/resources/img/pet_room_2.PNG" alt="대형견 룸">
-             <p class="re_p1">Deluxe</p>
+             <p class="re_p1">Superior</p>
 
          </div>
 
