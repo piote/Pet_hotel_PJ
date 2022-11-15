@@ -316,13 +316,15 @@ input#profil_id {
     		data: {id: id},
     		success: function (data) {
     			 if(!document.userInfo.id.value){
-    	                alert("아이디를 입력하세요.");
+    				 $("#olmessage").text("아이디를 입력하세요.");
+    				 $("#olmessage").addClass("olmessagef");
+    	    		 $("#olmessage").removeClass("olmessaget");
     	                return false;
     	            }
     			 var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
     	            if( !idReg.test( $("input[name=id]").val() ) ) {
-    	                alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
-    	                $("#olmessage").text("영어로 작성해주세요.");
+    	               // alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+    	                $("#olmessage").text("6~20자 문자+숫자여야 합니다.");
     	    			$("#olmessage").addClass("olmessagef");
     	    			$("#olmessage").removeClass("olmessaget");
     	    			$("#idcheck").attr("value","false");
@@ -364,6 +366,7 @@ input#profil_id {
 	}
         
         // 취소 버튼 클릭시 로그인 화면으로 이동
+        function goLoginForm()
        {
             location.href="loginForm.do";     
         }
@@ -495,7 +498,7 @@ input#profil_id {
 						ng-blur="chkPhoneType('blur');" min="0" required> 
 						
 					<input type="number" name="tel_sub" id="tel_sub" placeholder="비상시 핸드폰번호 입력" maxlength="13" class="form-field phone"
-						ng-focus="chkPhoneType('focus')" ng-blur="chkPhoneType('blur');" min="0" required>
+						ng-focus="chkPhoneType('focus')" ng-blur="chkPhoneType('blur');" min="0" >
 						
 					<label class="message_label">
 						이메일수신 발송에 동의하십니까?<input type="checkbox" name="message" value="Y">
