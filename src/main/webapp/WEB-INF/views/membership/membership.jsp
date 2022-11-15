@@ -64,6 +64,11 @@
             display: flex;
             justify-content: space-around;
         }
+        .nologin{
+            color: #666;
+            font-size: 15px;
+            line-height: 208px;
+        }
         .membership_box img{
             width: 75px; height: 75px;
             margin-top: 65px;
@@ -405,52 +410,65 @@
                 연간 이용횟수에 따라 할인 프로그램을 제공하고 있습니다.</p>
             <img src="${contextPath}/resources/img/bonus_icon.png" alt="bonus_icon">
         </div>
+        
+
         <div class="membership_box borderbox">
-        	<c:choose>
-		        <c:when test="${user.grade eq 'Bronze'}">
-	            	<img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
-	            </c:when>
-	            <c:when test="${user.grade eq 'Silver'}">
-	            	<img src="${contextPath}/resources/img/silver_medal.png" alt="silver_medal">
-	            </c:when>
-	            <c:when test="${user.grade eq 'Gold'}">
-	            	<img src="${contextPath}/resources/img/gold_medal.png" alt="gold_medal">
-	            </c:when>
-	            <c:otherwise>
-	                <div id="normal_medal"></div>
-	            </c:otherwise>
+
+            <c:choose>
+
+                <c:when test="${isLogOn =='true'}">
+                    <c:choose>
+                        <c:when test="${user.grade eq 'Bronze'}">
+                            <img src="${contextPath}/resources/img/bronze_medal.png" alt="bronze_medal">
+                        </c:when>
+                        <c:when test="${user.grade eq 'Silver'}">
+                            <img src="${contextPath}/resources/img/silver_medal.png" alt="silver_medal">
+                        </c:when>
+                        <c:when test="${user.grade eq 'Gold'}">
+                            <img src="${contextPath}/resources/img/gold_medal.png" alt="gold_medal">
+                        </c:when>
+                        <c:otherwise>
+                            <div id="normal_medal"></div>
+                        </c:otherwise>
+                    </c:choose>
+                    <div class="txt1">
+                        <p>${user.name} 님의 멤버십 등급은</p>
+                        <p>${user.grade}</p>
+                    </div>
+                    <div class="txt2">
+                        <c:choose>
+                            <c:when test="${user.grade == 'Bronze'}">
+                                <p class="smallfont">연간 이용횟수 5회 이상</p>
+                                <p>1회 이용금액의 <span class="orange">2%</span> 할인</p>
+                            </c:when>
+                            <c:when test="${user.grade == 'Silver'}">
+                                <p class="smallfont">연관 이용횟수 10회 이상</p>
+                                <p>
+                                    1회 이용금액의 <span class="orange">5%</span> 할인<br>
+                                    미용서비스 <span class="orange">1회</span> 제공
+                                </p>
+                            </c:when>
+                            <c:when test="${user.grade == 'Gold'}">
+                                <p class="smallfont">연간 이용횟수 20회 이상</p>
+                                <p>
+                                    1회 이용금액의 <span class="orange">10%</span> 할인<br>
+                                    미용 및 목욕서비스 <span class="orange">각 1회</span> 제공
+                                </p>
+                            </c:when>
+                            <c:otherwise>
+                                <p class="smallfont">연간 이용횟수 5회 미만</p>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                    <button type="button" onclick="popUp('${user.id}')">멤버십 더 알아보기 ></button>
+                </c:when>
+                <c:otherwise>
+                    <p class="nologin">로그인 후 조회 가능합니다.</p>
+                </c:otherwise>
             </c:choose>
-            <div class="txt1">
-                <p>${user.name} 님의 멤버십 등급은</p>
-                <p>${user.grade}</p>
-            </div>
-            <div class="txt2">
-                <c:choose>
-		            <c:when test="${user.grade == 'Bronze'}">
-		                <p class="smallfont">연간 이용횟수 5회 이상</p>
-	                	<p>1회 이용금액의 <span class="orange">2%</span> 할인</p>
-		            </c:when>
-	                <c:when test="${user.grade == 'Silver'}">
-		                <p class="smallfont">연관 이용횟수 10회 이상</p>
-		                <p>
-		                    1회 이용금액의 <span class="orange">5%</span> 할인<br>
-		                    미용서비스 <span class="orange">1회</span> 제공
-	                	</p>
-	                </c:when>
-	                <c:when test="${user.grade == 'Gold'}">
-		                <p class="smallfont">연간 이용횟수 20회 이상</p>
-		                <p>
-		                    1회 이용금액의 <span class="orange">10%</span> 할인<br>
-		                    미용 및 목욕서비스 <span class="orange">각 1회</span> 제공
-		                </p>
-	                </c:when>
-	                <c:otherwise>
-		               	<p class="smallfont">연간 이용횟수 5회 미만</p>
-		            </c:otherwise>
-	            </c:choose>
-            </div>
-            <button type="button" onclick="popUp('${user.id}')">멤버십 더 알아보기 ></button>
         </div>
+
+        
         <div class="grade_wrap">
             <p>등급별 혜택</p>
             <div id="normal" class="grade_box borderbox">
