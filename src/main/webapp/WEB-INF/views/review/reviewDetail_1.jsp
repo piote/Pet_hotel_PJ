@@ -12,7 +12,6 @@
  <c:set  var="section"  value="${reviewMap.section}" />
  <c:set  var="pageNum"  value="${reviewMap.pageNum}" />
  <c:set  var="sort"  value="${reviewMap.sort}" />
-
  
  
  <%
@@ -23,248 +22,275 @@
  <html>
 
  <head>
- 
- <script src="${contextPath}/resources/js/jquery.js" type="text/javascript" charset="utf-8"></script>
- <link rel="stylesheet" href="${contextPath}/resources/css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
- <script src="${contextPath}/resources/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+
+     <script src="${contextPath}/resources/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+     <link rel="stylesheet" href="${contextPath}/resources/css/prettyPhoto.css" type="text/css" media="screen"
+         charset="utf-8" />
+     <script src="${contextPath}/resources/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 
 
-   
-   
 
-  
-<style>
-   .all {
-       
-       margin-top: 250px;
-       height: 2200px;
-   }
-  
- .w_review {
-	  margin-top: -40px;
-	  text-align: left; font-size: 25px;
-	  margin-left: 17%;
-	  
-  	}
-       
-      #under {
-	margin-top: 10px;
-	border: 2px solid gray;
-	width: 215px;
-    margin-left: 17%;
-   
-  }
-      .w_a {
-          text-decoration: none;
-          color: black;
-          font-size: 25px;
-      }   
 
-      .w_contents_1 {
-    	    width: 18.5%;
-    	    margin-left: 17%;
-    	    height: 100%;
-    	    
-    	    position: absolute;
-    	    left: 0%;
-    	    display: inline-block;
-    	    
-    	  }
 
-    	  .w_contents_2 {
-    	    width:47.5%;
-    	    
-    	    height: auto;
-    	    
-    	    position: absolute;
-    	    right: 17%;
-    	    
-    	  }
-    	  .re_room1 {
-    	  text-align: center;
-    	  border-radius: 5%;
 
-    	  }
-    	  .re_p1 {
-    	    font-size: 30px;
-    	    text-align: center;
-    	    margin-top: 10px;
+     <style>
+         .all {
 
-    	  }
+             margin-top: 250px;
+             height: 2200px;
+         }
 
-    	  .cls2 {
-    		  left: 30%;
-    		  margin-top: 1900px;
-    		  position: absolute;
-    		  font-size: 20px;
-    		
-    		  }
-    	   
-    	  .no-uline {text-decoration:none;}
+         .w_review {
+             margin-top: -40px;
+             text-align: left;
+             font-size: 25px;
+             margin-left: 17%;
 
-  .w_review2 {
-	  width:90%;
-	    border:1px;
-	    font-size: 17px;
-	    border-collapse: collapse;
-	    padding: 5px;
-  }
+         }
 
-  .w_tr {
-            width: 100% !important;  
-            height: 40px;
-     
-            border-collapse: collapse;
-        } 
+         #under {
+             margin-top: 10px;
+             border: 2px solid gray;
+             width: 215px;
+             margin-left: 17%;
 
-  .w_tr>.w_td {
-   
-    font-size: 15px ;
-    height: 75px;
-    
-  }
-  .w_date{
-	  text-align: center;
-	  
-  }
-  
-  .w_margin1 {
-	  border-top: 0px solid #ddd;
-  }
- 
-  .w_margin3 {
-	  border-bottom: 50px solid #fff;
-  }
-  .w_star {
-	  width:100%;
-	  height: 23px;
-  }
-  .w_td_title{
-	  margin-left: 50px;
-	  margin-right: 50px;
-  }
-  
-  
-  
-  .w_tdz1 {
-	  height: 15px;
-	  border-bottom: 1px solid #ddd;
-  }
-  .w_tdz2 {
-	  height: 15px;
-	  
-  }
-  .re_image {
-	  border-radius: 5%;
-	  
-  }
-  .Y_heart{
-	  background-image: url("${contextPath}/resources/img/r2_heart.png");
-	  background-repeat: round;
-	  width: 85px;
-	  margin-left: 10px;
-	  height: 35px;
-	
-  }
-  
-  .N_heart{
-	  background-image: url("${contextPath}/resources/img/w2_heart.png");
-	  background-repeat: round;
-	  width: 85px;
-	  margin-left: 10px;
-	  height: 35px;
-  }
-  
-  .heart_span{
-	  line-height: 35px;
-	  margin-left: 25px;
-	    
-  }
-  .sort {
-	  top: 36%;
-	  position: absolute;
-	  right: 17%;
-  }
+         }
 
-  
-  </style> 
- 
- <meta charset="UTF-8">
- 
- <title>리뷰</title>
- 
- <script type="text/javascript">
- 
- function fn_remove_review(url,reviewNO){
-	 var form = document.createElement("form");
-	 form.setAttribute("method", "post");
-	 form.setAttribute("action", url);
-     var reviewNOInput = document.createElement("input");
-     reviewNOInput.setAttribute("type","hidden");
-     reviewNOInput.setAttribute("name","reviewNO");
-     reviewNOInput.setAttribute("value", reviewNO);
-	 
-     form.appendChild(reviewNOInput);
-     document.body.appendChild(form);
-     form.submit();
- 
- }
- 
- $(document).ready(function(){
-     $("a[rel^='prettyPhoto']").prettyPhoto();
-     
-     var sort_ck = null;
-     var searchMap = new Object();
-     searchMap.sort_ck=sort_ck;
-     
-     sort_ck=$('.sort_option input[name="sort"]:checked').val();
+         .w_a {
+             text-decoration: none;
+             color: black;
+             font-size: 25px;
+         }
 
-     
-   })
+         .w_contents_1 {
+             width: 18.5%;
+             margin-left: 17%;
+             height: 100%;
 
- 	function changeType(type){
-	 	window.location.href = "/review/reviewDetail_1.do?" + "sort="+ type ;
- 	}
- 
- /* 좋아요 */
- function like_func(N){
+             position: absolute;
+             left: 0%;
+             display: inline-block;
 
-   var reviewNO = $('#reviewNO_'+N).val();
+         }
 
-   $.ajax({
-     url: "/like/like.do",
-     type: "POST",
-     cache: false,
-     dataType: "json",
-     data:  {"review_num":reviewNO},
-     
-     success: function(data) {
-            
-             //좋아요 이미지 변경 
-       if(data. like_check == 'N'){
-         
-         $("#like_img_"+N).removeClass('N_heart');
-         $("#like_img_"+N).addClass('Y_heart');
-         
-       } else {
-         
-         $("#like_img_"+N).removeClass('Y_heart');
-         $("#like_img_"+N).addClass('N_heart');
-         
-       } 
+         .w_contents_2 {
+             width: 47.5%;
 
-       console.log(data.like_cnt);
-       
-       $('#like_cnt_'+N).text(data.like_cnt);
-       $('#like_check').html(data.like_check);
-       
-       
-     },
-     error: function(request, status, error){
-       alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-     }
-   });
- }
+             height: 100%;
+
+             position: absolute;
+             right: 17%;
+
+         }
+
+         .re_room1 {
+             text-align: center;
+             border-radius: 5%;
+
+         }
+
+         .re_p1 {
+             font-size: 30px;
+             text-align: center;
+             margin-top: 10px;
+
+         }
+
+         .cls2 {
+
+             left: 30%;
+             margin-top: 1900px;
+             position: absolute;
+             font-size: 20px;
+         }
+
+         .no-uline {
+             text-decoration: none;
+         }
+
+         .w_review2 {
+             width: 90%;
+             border: 1px;
+             font-size: 17px;
+             border-collapse: collapse;
+             padding: 5px;
+         }
+
+         .w_tr {
+             width: 100% !important;
+             height: 40px;
+
+             border-collapse: collapse;
+         }
+
+         .w_tr>.w_td {
+
+             font-size: 15px;
+             height: 75px;
+
+         }
+
+         .w_date {
+             text-align: center;
+
+         }
+
+         .w_margin1 {
+             border-top: 0px solid #ddd;
+         }
+
+         .w_margin3 {
+             border-bottom: 50px solid #fff;
+         }
+
+         .w_star {
+             width: 100%;
+             height: 23px;
+         }
+
+         .w_td_title {
+             margin-left: 50px;
+             margin-right: 50px;
+         }
+
+
+
+         .w_tdz1 {
+             height: 15px;
+             border-bottom: 1px solid #ddd;
+         }
+
+         .w_tdz2 {
+             height: 15px;
+
+         }
+
+         .re_image {
+             border-radius: 5%;
+
+         }
+
+         .Y_heart {
+             background-image: url("${contextPath}/resources/img/r2_heart.png");
+             background-repeat: round;
+             width: 85px;
+             margin-left: 10px;
+             height: 35px;
+
+         }
+
+         .N_heart {
+             background-image: url("${contextPath}/resources/img/w2_heart.png");
+             background-repeat: round;
+             width: 85px;
+             margin-left: 10px;
+             height: 35px;
+         }
+
+         .heart_span {
+             line-height: 35px;
+             margin-left: 25px;
+
+         }
+
+         .sort {
+             top: 36%;
+             position: absolute;
+             right: 17%;
+         }
+     </style>
+
+     <meta charset="UTF-8">
+
+     <title>리뷰</title>
+
+     <script type="text/javascript">
+
+         function fn_remove_review(url, reviewNO) {
+             var form = document.createElement("form");
+             form.setAttribute("method", "post");
+             form.setAttribute("action", url);
+             var reviewNOInput = document.createElement("input");
+             reviewNOInput.setAttribute("type", "hidden");
+             reviewNOInput.setAttribute("name", "reviewNO");
+             reviewNOInput.setAttribute("value", reviewNO);
+
+             form.appendChild(reviewNOInput);
+             document.body.appendChild(form);
+             form.submit();
+
+         }
+
+         $(document).ready(function () {
+             $("a[rel^='prettyPhoto']").prettyPhoto();
+
+             var sort_ck = null;
+             var searchMap = new Object();
+             searchMap.sort_ck = sort_ck;
+
+             sort_ck = $('.sort_option input[name="sort"]:checked').val();
+             console.log(sort_ck);
+
+         })
+
+
+         function changeType() {
+             var tmpType = $("input[name='sort']:checked").val();
+             // A Type 클릭 시 A 출력, B Type 클릭 시 B 출력
+         }
+
+
+         function changeType(type) {
+             window.location.href = "/review/reviewDetail_2.do?" + "sort=" + type;
+         }
+
+
+         /* 좋아요 */
+         function like_func(N) {
+
+             var reviewNO = $('#reviewNO_' + N).val();
+
+             $.ajax({
+                 url: "/like/like.do",
+                 type: "POST",
+                 cache: false,
+                 dataType: "json",
+                 data: { "review_num": reviewNO },
+
+                 success: function (data) {
+
+                     //좋아요 이미지 변경 
+                     if (data.like_check == 'N') {
+
+                         $("#like_img_" + N).removeClass('N_heart');
+                         $("#like_img_" + N).addClass('Y_heart');
+
+                     } else {
+
+                         $("#like_img_" + N).removeClass('Y_heart');
+                         $("#like_img_" + N).addClass('N_heart');
+
+                     }
+
+                     console.log(data.like_cnt);
+
+                     $('#like_cnt_' + N).text(data.like_cnt);
+                     $('#like_check').html(data.like_check);
+
+
+                 },
+                 error: function (request, status, error) {
+                     alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                 }
+             });
+         }
+
+
+
+
+
+
+
      </script>
 
 
@@ -279,12 +305,12 @@
 
          <br><br><br><br>
 
-         <h2 class="w_review"><a class="w_a" href="${contextPath}/review/reviewBoard.do">Deluxe Review</a></h2>
+         <h2 class="w_review"><a class="w_a" href="${contextPath}/review/reviewBoard.do">Suite Review</a></h2>
          <p id="under"></p>
          <br><br><br>
 
          <div class="w_contents_1">
-             <img class="re_room1" src="${contextPath}/resources/img/pet_room_1.jpg" alt="소형견 룸">
+             <img class="re_room1" src="${contextPath}/resources/img/pet_room_3.jpg" alt="중형견 룸">
              <p class="re_p1">Deluxe</p>
 
          </div>
@@ -313,8 +339,6 @@
 
          <div class="w_contents_2">
              <br>
-
-
 
              <div>
 
@@ -354,7 +378,7 @@
                                          </td>
 
                                          <td class="w_td" width="50%" rowspan="2">
-                                             <div class="w_td_title">${review.title} </div>
+                                             <div class="w_td_title">${review.title}</div>
                                          </td>
 
                                          <td class="w_td" width="20%" rowspan="2">
@@ -408,6 +432,9 @@
                                                              <span class="heart_span">${review.like_cnt}</span>
                                                          </div>
                                                      </a>
+
+
+
                                                  </c:otherwise>
                                              </c:choose>
                                          </td>
@@ -434,6 +461,9 @@
 
              <br><br><br><br><br>
 
+
+
+
              <div class="cls2">
                  <c:if test="${totReview != null }">
                      <c:choose>
@@ -442,15 +472,15 @@
                              <c:forEach var="page" begin="1" end="10" step="1">
                                  <c:if test="${section >1 && page==1 }">
                                      <a class="no-uline"
-                                         href="${contextPath }/review/reviewDetail_1.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&sort=${sort}">&nbsp;
+                                         href="${contextPath }/review/reviewDetail_2.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&sort=${sort}">&nbsp;
                                          pre </a>
                                  </c:if>
                                  <a class="no-uline"
-                                     href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}&sort=${sort}">${(section-1)*10
+                                     href="${contextPath }/review/reviewDetail_2.do?section=${section}&pageNum=${page}&sort=${sort}">${(section-1)*10
                                      +page } </a>
                                  <c:if test="${page ==10 }">
                                      <a class="no-uline"
-                                         href="${contextPath }/review/reviewDetail_1.do?section=${section+1}&pageNum=${section*10+1}&sort=${sort}">&nbsp;
+                                         href="${contextPath }/review/reviewDetail_2.do?section=${section+1}&pageNum=${section*10+1}&sort=${sort}">&nbsp;
                                          next</a>
                                  </c:if>
                              </c:forEach>
@@ -468,12 +498,12 @@
                                  <c:choose>
                                      <c:when test="${page==pageNum }">
                                          <a class="sel-page"
-                                             href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}&sort=${sort}">${page
+                                             href="${contextPath }/review/reviewDetail_2.do?section=${section}&pageNum=${page}&sort=${sort}">${page
                                              } </a>
                                      </c:when>
                                      <c:otherwise>
                                          <a class="no-uline"
-                                             href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}&sort=${sort}">${page
+                                             href="${contextPath }/review/reviewDetail_2.do?section=${section}&pageNum=${page}&sort=${sort}">${page
                                              } </a>
                                      </c:otherwise>
                                  </c:choose>
@@ -483,13 +513,7 @@
                  </c:if>
              </div>
 
-
-
-
          </div>
-
-
-
 
          <script>
              function fn_modify_article(obj) {
