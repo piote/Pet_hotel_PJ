@@ -207,7 +207,7 @@ public  class ReservationControllerImpl implements ReservationController{
 
 		//데이터 베이스 - 예약번호 찾기
 		int resNum = resService.useReservationNum();
-		System.out.println("예약번호============="+resNum);
+
 			
 		//pet서비스 vo List만들기
 		List<PetserviceVO> petServiceList = new ArrayList<PetserviceVO>();

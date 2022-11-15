@@ -34,14 +34,15 @@ import com.myboot.user.vo.UserVO;
 
 @Controller("adminresController")
 public  class AdminResControllerImpl implements AdminResController{
-
+	
+	//Service
 	private static final String String = null;
 	@Autowired
 	private AdminResService adminresService;
-	
 	@Autowired
 	private ReservationService resService;
 	
+	//VO
 	@Autowired
 	private AdminResFullVO adminresfullVO;
 	@Autowired
@@ -65,41 +66,11 @@ public  class AdminResControllerImpl implements AdminResController{
 		
 	}
 	
-	@Override
-//	@RequestMapping("/admin/adminResList.do")
-	public ModelAndView ResList(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		ModelAndView mav = new ModelAndView();
-		HttpSession session = request.getSession();
-		userVO = (UserVO) session.getAttribute("user");
-		
-		response.setCharacterEncoding("EUC-KR");
-		if(userVO!=null) {
-			System.out.println(userVO);
-			System.out.println(userVO.getId());
-			
-			if(userVO.getId().equals("admin")) {
-				System.out.println("관리자");
-				mav.setViewName("/admin/adminResList");
-				return mav;
-			}
-		}
-		
-		PrintWriter writer = response.getWriter();
-		writer.println("<script type='text/javascript'>");
-		writer.println("alert('권한이 없습니다.');");
-		writer.println("history.back();");
-		writer.println("</script>");
-		writer.flush();
-		return null;
-		
-	}
-		
-	
 	//예약 불러오기  
 	@Override
 	@ResponseBody
 	@RequestMapping(value= "/admin/adminResList.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView ResReed(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView ResList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		
@@ -158,7 +129,7 @@ public  class AdminResControllerImpl implements AdminResController{
 	    model.addAttribute("P", Page);
 	   
 	    return "/page/ResPageAjax";
-	  }
+	}
 	
 	//예약 번호로 예약 찾기
 	@Override
@@ -274,6 +245,7 @@ public  class AdminResControllerImpl implements AdminResController{
 		}
 		
 		ReservationVO reserVO = new ReservationVO();
+		
 		//예약 vo
 		reserVO.setRes_num(resNum);
 		reserVO.setRes_st(checkinDate_format);

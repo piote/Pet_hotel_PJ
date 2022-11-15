@@ -297,7 +297,9 @@
     	    transition-duration: 0.4s;
     	    cursor: pointer;
     	    border-radius: 5%;
-    	    position: absolute; right: 20%; top: 35%;
+    	    position: absolute; 
+    	    right: 17%;
+    	    top: 35%;
     	
         }
      

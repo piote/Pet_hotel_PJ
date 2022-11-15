@@ -178,6 +178,11 @@
 	  margin-left: 25px;
 	    
   }
+  .sort {
+	  top: 36%;
+	  position: absolute;
+	  right: 17%;
+  }
 
   
   </style> 
@@ -221,6 +226,10 @@
  			// A Type 클릭 시 A 출력, B Type 클릭 시 B 출력
  	}
  
+ 
+ function changeType(type){
+	 	window.location.href = "/review/reviewDetail_2.do?" + "sort="+ type ;
+	}
  
  
  /* 좋아요 */
@@ -293,28 +302,38 @@
 
 		 </div>
 		 
+		 <!-- name 접근으로 value 값 체크 -->
+	       <div class="sort">  
+      	<c:choose>
+      		<c:when test = "${sort == 'rec'}">
+			         <div class="sort_option">
+				         <input type="radio" id="sort_data" name="sort" value="sort_data" onchange="changeType('data')"  ><label for="sort_data" >최신순</label></input>
+				         <input type="radio" id="sort_rec" name="sort" value="sort_rec" onchange="changeType('rec')" checked><label for="sort_rec" >좋아요</label></input>
+			         </div>
+	         	</c:when>
+	         	<c:otherwise>
+		         	 <div class="sort_option">
+				         <input type="radio" id="sort_data" name="sort" value="sort_data" onchange="changeType('data')" checked ><label for="sort_data" >최신순</label></input>
+				         <input type="radio" id="sort_rec" name="sort" value="sort_rec" onchange="changeType('rec')" ><label for="sort_rec" >좋아요</label></input>
+			         </div>
+	         	</c:otherwise>
+	         </c:choose>
+	        </div>
+		 
 		 <div class="w_contents_2">
          <br>
-        
-         <!-- name 접근으로 value 값 체크 -->
-	         
-	         <div class="sort_option">
-		         <input type="radio" id="sort_data" name="sort" value="sort_data" onchange="changeType()" checked><label for="sort_data" >최신순</label>
-		         <input type="radio" id="sort_rec" name="sort" value="sort_rec" onchange="changeType()"><label for="sort_rec" >좋아요</label>
-	         </div>
-     
-         
+  
          <div>
    
 <form name="frmReview" method="post"  action="${contextPath}"  enctype="multipart/form-data">
         <table align="right" class="w_review2">
       
         <c:choose>
-        <c:when test="${reviewList ==null }" >
+        <c:when test="${empty reviewList}" >
           <tr  height="10">
             <td colspan="4">
                <p align="center">
-                  <b><span style="font-size:15pt;">등록된 글이 없습니다.</span></b>
+                  <b><span style="font-size:15pt;">등록된 리뷰가 없습니다.</span></b>
               </p>
             </td>  
           </tr>
@@ -341,8 +360,7 @@
 	                </c:if>   
 	         </td>
 	         
-	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}
-	         -------${review.user_review_flg}</div></td> 
+	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td> 
 	  
 	         <td class="w_td" width="20%" rowspan="2">               
 	           <c:choose>
@@ -424,11 +442,11 @@
 	       <c:when test="${totReview >100 }">  <!-- 글 개수가 100 초과인경우 -->
 		      <c:forEach   var="page" begin="1" end="10" step="1" >
 		         <c:if test="${section >1 && page==1 }">
-		          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&sort=${sort}">&nbsp; pre </a>
 		         </c:if>
-		          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}&sort=${sort}">${(section-1)*10 +page } </a>
 		         <c:if test="${page ==10 }">
-		          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section+1}&pageNum=${section*10+1}&sort=${sort}">&nbsp; next</a>
 		         </c:if>
 		      </c:forEach>
 	       </c:when>
@@ -442,10 +460,10 @@
 		      <c:forEach   var="page" begin="1" end="${totReview/10 +1}" step="1" >
 		         <c:choose>
 		           <c:when test="${page==pageNum }">
-		            <a class="sel-page"  href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}">${page } </a>
+		            <a class="sel-page"  href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}&sort=${sort}">${page } </a>
 		          </c:when>
 		          <c:otherwise>
-		            <a class="no-uline"  href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}">${page } </a>
+		            <a class="no-uline"  href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}&sort=${sort}">${page } </a>
 		          </c:otherwise>
 		        </c:choose>
 		      </c:forEach>
