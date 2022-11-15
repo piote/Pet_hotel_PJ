@@ -12,7 +12,7 @@ import lombok.Data;
 public class PetserviceVO {
 	private int pet_num;
 	private int res_num;
-	private String id;//유저아이디
+	private String id;      //유저아이디
 	private String pet_name;
 	private String pet_gender;
 	private String room_grade;

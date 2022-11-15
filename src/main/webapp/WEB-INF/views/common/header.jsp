@@ -76,7 +76,7 @@
                 <a href="${contextPath}/review/reviewBoard.do" class="menu">리뷰게시판</a>
             </div>
             <div class="l_menu menu_wrap">
-                <a href="${contextPath}/membership.do" class="menu">멤버쉽</a>
+                <a href="${contextPath}/membership.do" class="menu">멤버십</a>
                 <a href="${contextPath}/questions/questionsList.do" class="menu">고객센터</a>
             </div>
         </nav>

@@ -399,7 +399,7 @@
 <body>
     <div class="membership">
         <div class="title">
-            <h2>Anitel 멤버쉽 안내</h2>
+            <h2>Anitel 멤버십 안내</h2>
             <div></div>
             <p class="smallfont">고객님께 더 만족스러운 서비스를 제공하기 위해<br>
                 연간 이용횟수에 따라 할인 프로그램을 제공하고 있습니다.</p>
@@ -421,7 +421,7 @@
 	            </c:otherwise>
             </c:choose>
             <div class="txt1">
-                <p>${user.name} 님의 멤버쉽 등급은</p>
+                <p>${user.name} 님의 멤버십 등급은</p>
                 <p>${user.grade}</p>
             </div>
             <div class="txt2">
@@ -449,7 +449,7 @@
 		            </c:otherwise>
 	            </c:choose>
             </div>
-            <button type="button" onclick="popUp('${user.id}')">멤버쉽 더 알아보기 ></button>
+            <button type="button" onclick="popUp('${user.id}')">멤버십 더 알아보기 ></button>
         </div>
         <div class="grade_wrap">
             <p>등급별 혜택</p>
@@ -491,7 +491,7 @@
         </div>
         <div class="modal-wrap_in">
             <div class="modal_title">
-                <p>${user.name}님의 멤버쉽 등급은</p>
+                <p>${user.name}님의 멤버십 등급은</p>
                 <p>${user.grade}</p>
             </div>
             <div class="modal_mygrade borderbox" >

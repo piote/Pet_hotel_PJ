@@ -18,9 +18,9 @@ public class AdminResFullVO {
 	private java.sql.Date payTime;
 	private String res_state;
 	
-	
-	//
+	//펫 총 마리 수
 	private int total_pet;
+	
 	//pet
 	private int pet_num;
 	private String pet_name;
