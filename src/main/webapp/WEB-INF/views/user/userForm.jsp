@@ -318,7 +318,7 @@ input#profil_id {
     		$.ajax({
     		type: "get",
     		async: false,
-    		url: "http://localhost:8090/idCheck",
+    		url: "/idCheck",
     		data: {id: id},
     		success: function (data) {
     			 if(!document.userInfo.id.value){
