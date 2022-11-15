@@ -41,7 +41,7 @@ public class ReviewControllerImpl implements ReviewController {
 	private ReviewService reviewService;
 	private MyPageService myPageService;
 	private ReviewVO reviewVO;
-
+    //리뷰 상세 조회 페이지
 	@Override
 	@RequestMapping(value = "/review/reviewDetail_1.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView reviewDetail_1(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -171,6 +171,81 @@ public class ReviewControllerImpl implements ReviewController {
 
 		}
 
+	   
+		@RequestMapping(value = "/review/checkReview.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView checkReview(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+			HttpSession session=request.getSession();
+			session=request.getSession();
+			
+			String viewName = (String) request.getAttribute("viewName");
+			ModelAndView mav = new ModelAndView(viewName);
+			
+			if(session.getAttribute("user") != null) {
+				UserVO userVO = (UserVO) session.getAttribute("user");
+				String user_id = userVO.getId();
+				
+				
+				String _section = request.getParameter("section");
+				String _pageNum = request.getParameter("pageNum");
+				int section = Integer.parseInt(((_section == null) ? "1" : _section));
+				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+				
+				Map pagingMap = new HashMap();
+				
+				pagingMap.put("section", section);
+				pagingMap.put("pageNum", pageNum);
+				pagingMap.put("user_id", user_id);
+				
+				Map myReviewMap = reviewService.listMyDetailReview(pagingMap);
+				
+				myReviewMap.put("section", section);     
+				myReviewMap.put("pageNum", pageNum);     
+				myReviewMap.put("user_id", user_id);	
+				
+				mav.addObject("myReviewMap", myReviewMap);
+			}
+			return mav;
+		}
+	//리뷰 상세 조회 페이지 끝
+		
+		
+		
+	//관리자용 리뷰 조회 컨트롤러
+		@RequestMapping(value = "/review/checkReview2.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView checkReview2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+				HttpSession session=request.getSession();
+				session=request.getSession();
+				
+				String viewName = (String) request.getAttribute("viewName");
+				ModelAndView mav = new ModelAndView(viewName);
+				
+				UserVO userVO = (UserVO) session.getAttribute("user");
+				String user_id = userVO.getId();
+				
+				String _section = request.getParameter("section");
+				String _pageNum = request.getParameter("pageNum");
+				int section = Integer.parseInt(((_section == null) ? "1" : _section));
+				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+				
+				Map pagingMap = new HashMap();
+				
+				pagingMap.put("section", section);
+				pagingMap.put("pageNum", pageNum);
+				pagingMap.put("user_id", user_id);
+				
+				Map myReviewMap = reviewService.listMyDetailReview2(pagingMap);
+				
+				myReviewMap.put("section", section);     
+				myReviewMap.put("pageNum", pageNum);     
+				myReviewMap.put("user_id", user_id);
+				
+				mav.addObject("myReviewMap", myReviewMap);
+			
+			return mav;
+		}
+	 
+	//리뷰 CRUD
 	
 	@RequestMapping(value = "/review/reviewForm.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView reviewForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -184,182 +259,7 @@ public class ReviewControllerImpl implements ReviewController {
 		return mav;
 
 	}
-//AJAX 
-	  @ResponseBody
-	  @RequestMapping(value="/like/like.do", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
-	  public String like(@RequestParam(value ="review_num", required = false) int reviewNO,
-			  HttpServletRequest request, HttpServletResponse response) throws Exception{
-		 
-		 JSONObject obj = new JSONObject();
-		 
-		 HttpSession session = request.getSession();
-		 UserVO userVO = (UserVO) session.getAttribute("user");
-		 String id = userVO.getId();
-		 
-		 HashMap <String, Object> hashMap = new HashMap<String, Object>(); 
-		 hashMap.put("reviewNO", reviewNO);
-		 hashMap.put("id", id);
-
-		 List<ReviewVO> like_checkList = reviewService.selectReviewLikeCheck(hashMap);
-		 String like_check = ""; 
-		 
-		 if(like_checkList.size() == 0) {
-			 like_check = "N";
-		     //좋아요가 N 일시 좋아요 누르면 인서트
-			 System.out.println("추가");
-			 reviewService.insert_like(hashMap); 
-		 }else {
-			 like_check = "Y";
-	    	 //좋아요가 Y 일시 좋아요 누르면 딜리트
-			 System.out.println("삭제");
-			 reviewService.delete_like(hashMap);
-		 }
-		 
-		 int like_cnt = reviewService.selectReviewLike(reviewNO);
-
-		 obj.put("like_check", like_check);
-		 obj.put("like_cnt", like_cnt);
-
-		 return obj.toString();
-	 }
 	
-	
-	   
-	@RequestMapping(value = "/review/checkReview.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView checkReview(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		HttpSession session=request.getSession();
-		session=request.getSession();
-		
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		
-		if(session.getAttribute("user") != null) {
-			UserVO userVO = (UserVO) session.getAttribute("user");
-			String user_id = userVO.getId();
-			
-			
-			String _section = request.getParameter("section");
-			String _pageNum = request.getParameter("pageNum");
-			int section = Integer.parseInt(((_section == null) ? "1" : _section));
-			int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
-			
-			Map pagingMap = new HashMap();
-			
-			pagingMap.put("section", section);
-			pagingMap.put("pageNum", pageNum);
-			pagingMap.put("user_id", user_id);
-			
-			Map myReviewMap = reviewService.listMyDetailReview(pagingMap);
-			
-			myReviewMap.put("section", section);     
-			myReviewMap.put("pageNum", pageNum);     
-			myReviewMap.put("user_id", user_id);	
-			
-			mav.addObject("myReviewMap", myReviewMap);
-		}
-		return mav;
-	}
-	
-//관리자용 리뷰 조회 컨트롤러
-	@RequestMapping(value = "/review/checkReview2.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView checkReview2(HttpServletRequest request, HttpServletResponse response) throws Exception {
-			HttpSession session=request.getSession();
-			session=request.getSession();
-			
-			String viewName = (String) request.getAttribute("viewName");
-			ModelAndView mav = new ModelAndView(viewName);
-			
-			UserVO userVO = (UserVO) session.getAttribute("user");
-			String user_id = userVO.getId();
-			
-			String _section = request.getParameter("section");
-			String _pageNum = request.getParameter("pageNum");
-			int section = Integer.parseInt(((_section == null) ? "1" : _section));
-			int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
-			
-			Map pagingMap = new HashMap();
-			
-			pagingMap.put("section", section);
-			pagingMap.put("pageNum", pageNum);
-			pagingMap.put("user_id", user_id);
-			
-			Map myReviewMap = reviewService.listMyDetailReview2(pagingMap);
-			
-			myReviewMap.put("section", section);     
-			myReviewMap.put("pageNum", pageNum);     
-			myReviewMap.put("user_id", user_id);
-			
-			mav.addObject("myReviewMap", myReviewMap);
-		
-		return mav;
-	}
-	
-	
-	
-	@RequestMapping(value="/review/viewReview.do" ,method = RequestMethod.GET)
-	public ModelAndView viewReview(@RequestParam("reviewNO") int reviewNO,
-		HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
-		String viewName = (String)request.getAttribute("viewName");
-		
-		Map reviewMap=reviewService.viewReview(reviewNO);
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName(viewName);
-		mav.addObject("reviewMap", reviewMap);
-		
-		return mav;
-	}
-	   
-	
-	@RequestMapping(value = "/review/reviewBoard.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView reviewBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		HttpSession session=request.getSession();
-		session=request.getSession();
-		
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		
-		if(session.getAttribute("user") != null) {
-			UserVO userVO = (UserVO) session.getAttribute("user");
-			String user_id = userVO.getId();
-			
-			String _section = request.getParameter("section");
-			String _pageNum = request.getParameter("pageNum");
-			int section = Integer.parseInt(((_section == null) ? "1" : _section));
-			int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
-			
-			Map pagingMap = new HashMap();
-			
-			pagingMap.put("section", section);
-			pagingMap.put("pageNum", pageNum);
-			pagingMap.put("user_id", user_id);
-			
-			Map myReserveMap = reviewService.listMyDetailReserve(pagingMap);
-			
-			myReserveMap.put("section", section);
-			myReserveMap.put("pageNum", pageNum);
-			myReserveMap.put("user_id", user_id);	
-			
-			mav.addObject("myReserveMap", myReserveMap);
-		}
-		return mav;
-	}
-	
-	
-	@ResponseBody 
-	@RequestMapping(value= "/returnAllRes.do", method = RequestMethod.GET)
-	public List returnAllReview(@RequestParam(value ="userId", required = false) String userId,
-			    HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
-		List allRes =  reviewService.listRes(userId);
-		return allRes;
-	}
-	
-	
-	// @Override
 	@RequestMapping(value = "/review/addNewReview.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity addNewReview(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
@@ -415,8 +315,7 @@ public class ReviewControllerImpl implements ReviewController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-			System.out.println("in " + path);
-
+			
 			if (imageFileList != null && imageFileList.size() != 0 ) {
 				
 				if (imageFileList.get(0) != null && imageFileList.get(0) != "")  {
@@ -556,7 +455,6 @@ public class ReviewControllerImpl implements ReviewController {
 	       if(imageFileName.get(0) != "" && imageFileName.get(0) != null) {
 	    	   
 	    	 String originalFileName = (String)reviewMap.get("originalFileName");
-		     System.out.println(originalFileName);
 		     File oldFile = new File(realPath+originalFileName);//1   + 234  
 		     oldFile.delete();
 
@@ -582,11 +480,110 @@ public class ReviewControllerImpl implements ReviewController {
 	    }
 	    return resEnt;
 	  }
+	  //리뷰 CRUD 끝
+	
+	  //AJAX 
+	  @ResponseBody
+	  @RequestMapping(value="/like/like.do", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	  public String like(@RequestParam(value ="review_num", required = false) int reviewNO,
+			  HttpServletRequest request, HttpServletResponse response) throws Exception{
+		 
+		 JSONObject obj = new JSONObject();
+		 
+		 HttpSession session = request.getSession();
+		 UserVO userVO = (UserVO) session.getAttribute("user");
+		 String id = userVO.getId();
+		 
+		 HashMap <String, Object> hashMap = new HashMap<String, Object>(); 
+		 hashMap.put("reviewNO", reviewNO);
+		 hashMap.put("id", id);
+
+		 List<ReviewVO> like_checkList = reviewService.selectReviewLikeCheck(hashMap);
+		 String like_check = ""; 
+		 
+		 if(like_checkList.size() == 0) {
+			 like_check = "N";
+		     //좋아요가 N 일시 좋아요 누르면 인서트
+			 reviewService.insert_like(hashMap); 
+		 }else {
+			 like_check = "Y";
+	    	 //좋아요가 Y 일시 좋아요 누르면 딜리트
+			 reviewService.delete_like(hashMap);
+		 }
+		 
+		 int like_cnt = reviewService.selectReviewLike(reviewNO);
+
+		 obj.put("like_check", like_check);
+		 obj.put("like_cnt", like_cnt);
+
+		 return obj.toString();
+	 }
 	
 	
 	
 	
 	
+	
+	@RequestMapping(value="/review/viewReview.do" ,method = RequestMethod.GET)
+	public ModelAndView viewReview(@RequestParam("reviewNO") int reviewNO,
+		HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		String viewName = (String)request.getAttribute("viewName");
+		
+		Map reviewMap=reviewService.viewReview(reviewNO);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName(viewName);
+		mav.addObject("reviewMap", reviewMap);
+		
+		return mav;
+	}
+	   
+	//리뷰 게시판 목록
+	@RequestMapping(value = "/review/reviewBoard.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView reviewBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		HttpSession session=request.getSession();
+		session=request.getSession();
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		if(session.getAttribute("user") != null) {
+			UserVO userVO = (UserVO) session.getAttribute("user");
+			String user_id = userVO.getId();
+			
+			String _section = request.getParameter("section");
+			String _pageNum = request.getParameter("pageNum");
+			int section = Integer.parseInt(((_section == null) ? "1" : _section));
+			int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+			
+			Map pagingMap = new HashMap();
+			
+			pagingMap.put("section", section);
+			pagingMap.put("pageNum", pageNum);
+			pagingMap.put("user_id", user_id);
+			
+			Map myReserveMap = reviewService.listMyDetailReserve(pagingMap);
+			
+			myReserveMap.put("section", section);
+			myReserveMap.put("pageNum", pageNum);
+			myReserveMap.put("user_id", user_id);	
+			
+			mav.addObject("myReserveMap", myReserveMap);
+		}
+		return mav;
+	}
+	
+	
+	@ResponseBody 
+	@RequestMapping(value= "/returnAllRes.do", method = RequestMethod.GET)
+	public List returnAllReview(@RequestParam(value ="userId", required = false) String userId,
+			    HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		List allRes =  reviewService.listRes(userId);
+		return allRes;
+	}
 	
 	private List<String> upload(MultipartHttpServletRequest multipartRequest, String path) throws Exception {
 		
@@ -618,6 +615,7 @@ public class ReviewControllerImpl implements ReviewController {
 		return null;
 	}
 
+	
 //	메인페이지 리뷰조회
 	@ResponseBody
 	@RequestMapping(value = "/returnReview.do", method = RequestMethod.GET)
