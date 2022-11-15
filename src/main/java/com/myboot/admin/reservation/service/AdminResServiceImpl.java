@@ -66,6 +66,7 @@ public class AdminResServiceImpl implements AdminResService{
 	public void deletePetList(String petNum) throws Exception{
 		adminresDAO.adminDeletePet(petNum);
 	}
+	
 	//예약 횟수
 	@Override
 	public int adminTotalResNum() throws Exception{

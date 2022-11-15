@@ -13,7 +13,7 @@ public class ResFullVO {
 	private int res_num;
 	private String res_st;
 	private String res_end;
-	private String id;//유저아이디
+	private String id;      //유저아이디
 	private String res_comment;
 	private String totalCost;
 	private String payTime;
