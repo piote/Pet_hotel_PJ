@@ -231,11 +231,13 @@
             position: relative;
         }
         #graph{
-            width: calc(100% / 10 * 7);
+            /* width: calc(100% / 10 * 7); */
+            width: 0;
             height: 100%;
             background-color: #FFA96A;
             position: absolute;
             left: 0;
+            transition: width 0.5s;
         }
         .graph_txt{
             margin-top: 10px;
@@ -321,6 +323,7 @@
             $('#count_silver').empty();
             $('#count_gold').empty();
             $('.modal_mygrade borderbox').empty();
+            $('.graph_txt p').empty();
             
             var count ;
             
@@ -338,12 +341,22 @@
                 	$('#count').append(count);
                 	if(count<5){
                 		var next = 5 - count;
+                        $('#graph').width('calc(100% / 5 * '+count+' )');
+                        $('.graph_txt p:nth-child(1)').append('Normal');
+                        $('.graph_txt p:nth-child(2)').append('Bronze');
                 	}else if(count<10){
                 		var next = 10 - count;
+                        $('#graph').width('calc(100% / 10 * '+count+' )');
+                        $('.graph_txt p:nth-child(1)').append('Bronze');
+                        $('.graph_txt p:nth-child(2)').append('Silver');
                 	}else if(count<20){
                 		var next = 20 - count;
+                        $('#graph').width('calc(100% / 20 * '+count+' )');
+                        $('.graph_txt p:nth-child(1)').append('Silver');
+                        $('.graph_txt p:nth-child(2)').append('Gold');
                 	}else {
                 		var next = 0
+                        $('#graph').width('100%');
                 	}
                 	
                 	$('#count_').append(next);
@@ -379,13 +392,14 @@
         function popClose(){
             $('.modal-bg').hide();
             $('.modal-wrap').hide();
+            $('#graph').width(0);
         }
     </script>
 </head>
 <body>
     <div class="membership">
         <div class="title">
-            <h2>Anitel 멤버쉽 안내</h2>
+            <h2>Anitel 멤버십 안내</h2>
             <div></div>
             <p class="smallfont">고객님께 더 만족스러운 서비스를 제공하기 위해<br>
                 연간 이용횟수에 따라 할인 프로그램을 제공하고 있습니다.</p>
@@ -407,7 +421,7 @@
 	            </c:otherwise>
             </c:choose>
             <div class="txt1">
-                <p>${user.name} 님의 멤버쉽 등급은</p>
+                <p>${user.name} 님의 멤버십 등급은</p>
                 <p>${user.grade}</p>
             </div>
             <div class="txt2">
@@ -435,7 +449,7 @@
 		            </c:otherwise>
 	            </c:choose>
             </div>
-            <button type="button" onclick="popUp('${user.id}')">멤버쉽 더 알아보기 ></button>
+            <button type="button" onclick="popUp('${user.id}')">멤버십 더 알아보기 ></button>
         </div>
         <div class="grade_wrap">
             <p>등급별 혜택</p>
@@ -477,7 +491,7 @@
         </div>
         <div class="modal-wrap_in">
             <div class="modal_title">
-                <p>${user.name}님의 멤버쉽 등급은</p>
+                <p>${user.name}님의 멤버십 등급은</p>
                 <p>${user.grade}</p>
             </div>
             <div class="modal_mygrade borderbox" >
@@ -511,8 +525,8 @@
                     <div id="graph"></div>
                 </div>
                 <div class="graph_txt">
-                    <p class="smallfont">Bronze</p>
-                    <p class="smallfont">Silver</p>
+                    <p class="smallfont"></p>
+                    <p class="smallfont"></p>
                 </div>
             </div>
             <p class="grade_count">다음 단계까지 <span id="count_">3</span>회 남았습니다.</p>

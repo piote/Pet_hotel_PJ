@@ -22,52 +22,138 @@ public class ReviewServiceImpl implements ReviewService {
 	ReviewDAO reviewDAO;
 	MyPageDAO myPageDAO;
 	
-	/*
-	 * @Override public List<ReviewVO> reviewDetail_1() throws Exception{
-	 * List<ReviewVO> reviewList = reviewDAO.selectAllReviewList(); return
-	 * reviewList; }
-	 */
+	//리뷰게시판 조회
+	@Override
+	public Map reviewDetail_1(Map pagingMap) throws Exception {
+		Map reviewMap = new HashMap();
+		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList(pagingMap);
+		
+		int totReview = reviewDAO.selectTotReview();
+
+		reviewMap.put("reviewList", reviewList);
+		reviewMap.put("totReview", totReview);
 	
+		return reviewMap;
+	}
+	
+	@Override
+	public Map reviewDetail_2(Map pagingMap) throws Exception {
+		Map reviewMap = new HashMap();
+		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList2(pagingMap);
+		
+		int totReview = reviewDAO.selectTotReview();
+
+		reviewMap.put("reviewList", reviewList);
+		reviewMap.put("totReview", totReview);
+	
+		return reviewMap;
+	}
+	
+	@Override
+	public Map reviewDetail_3(Map pagingMap) throws Exception {
+		Map reviewMap = new HashMap();
+		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList3(pagingMap);
+		
+		int totReview = reviewDAO.selectTotReview();
+
+		reviewMap.put("reviewList", reviewList);
+		reviewMap.put("totReview", totReview);
+	
+		return reviewMap;
+	}
+	
+	@Override
+	public Map checkReview(Map pagingMap) throws Exception {
+		Map reviewMap = new HashMap();
+		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList(pagingMap);
+		
+		int totReview = reviewDAO.selectTotReview();
+
+		reviewMap.put("reviewList", reviewList);
+		reviewMap.put("totReview", totReview);
+	
+		return reviewMap;
+	}
+	//리뷰게시판 끝
+	
+	
+	//마이페이지 내 리뷰 조회
+	@Override
+	public Map listMyDetailReview(Map pagingMap) throws Exception {
+		Map myReviewMap = new HashMap();
+		List<ReviewVO> myReviewList = reviewDAO.selectAllMyReviewList(pagingMap);
+		int totReview = reviewDAO.selectTotReview();
+
+		myReviewMap.put("myReviewList", myReviewList);
+		myReviewMap.put("totReview", totReview);
+		
+		return myReviewMap;
+	}
+	
+	@Override
+	public Map listMyDetailReview2(Map pagingMap) throws Exception {
+		Map myReviewMap = new HashMap();
+		List<ReviewVO> myReviewList = reviewDAO.selectAllMyReviewList2(pagingMap);
+		int totReview = reviewDAO.selectTotReview();
+
+		myReviewMap.put("myReviewList", myReviewList);
+		myReviewMap.put("totReview", totReview);
+
+		return myReviewMap;
+	}
+	
+	//CRUD
+	@Override
+	public Map viewReview(int reviewNO) throws Exception {
+		Map reviewMap = new HashMap();
+		ReviewVO reviewVO = reviewDAO.selectReview(reviewNO);
+		
+		reviewMap.put("review", reviewVO);
+
+		return reviewMap;
+	}
+	
+	@Override
+	public int addNewReview(Map reviewMap, String fileName) throws Exception {
+		int reviewNO = reviewDAO.selectNewReviewNO();
+		
+		reviewMap.put("reviewNO", reviewNO);
+		
+		if (fileName != null) {
+			String fileUrl = "resources/review/review_image" + "/" + reviewNO + "/" + fileName;
+			reviewMap.put("review_image_url", fileUrl);
+			reviewDAO.insertNewReview(reviewMap);
+			reviewMap.put("reviewNO", reviewNO);
+		} else {
+			reviewDAO.insertNewReview(reviewMap);
+		}
+
+		return reviewNO;
+	}
+	
+	@Override
+	public void modReview(Map reviewMap) throws Exception {
+		reviewDAO.updateReview(reviewMap);
+	}
+
+	@Override
+	public void removeReview(int reviewNO) throws Exception {
+		reviewDAO.deleteReview(reviewNO);
+	}
+	//CRUD 끝 
+	
+	
+	//예약 확인 
 	@Override
 	public List listMyReserve(String user_id) throws Exception{
 		return myPageDAO.selectMyReservesList(user_id);
 	}
-	
-	//전체 리스트
-		@Override
-		public List listRes(String userId) throws Exception {
-			List resList = null;
-			resList = reviewDAO.selectAllResList(userId);
-			return resList;
-		}
-	
-		@Override
-		public Map listMyDetailReview(Map pagingMap) throws Exception {
-			Map myReviewMap = new HashMap();
-			List<ReviewVO> myReviewList = reviewDAO.selectAllMyReviewList(pagingMap);
-			
-			int totReview = reviewDAO.selectTotReview();
-
-			myReviewMap.put("myReviewList", myReviewList);
-			myReviewMap.put("totReview", totReview);
-			// articlesMap.put("totArticles", 170);
-			return myReviewMap;
-		}
-		
-		
-		@Override
-		public Map viewReview(int reviewNO) throws Exception {
-			Map reviewMap = new HashMap();
-			ReviewVO reviewVO = reviewDAO.selectReview(reviewNO);
-			
-			System.out.println(reviewVO+"=======================리뷰reviewVO");//=====================================================
-
-			reviewMap.put("review", reviewVO);
-
-			return reviewMap;
-		}	
-		
-	
+	@Override
+	public List listRes(String userId) throws Exception {
+		List resList = null;
+		resList = reviewDAO.selectAllResList(userId);
+		return resList;
+	}
 	@Override
 	public Map listMyDetailReserve(Map pagingMap) throws Exception {
 		Map myReserveMap = new HashMap();
@@ -79,7 +165,10 @@ public class ReviewServiceImpl implements ReviewService {
 		myReserveMap.put("totReserves", totReserves);
 		// articlesMap.put("totArticles", 170);
 		return myReserveMap;
-	}
+	}		
+		
+	//좋아요 기능 
+	
 	@Override
 	public int selectReviewLike(int reviewNO)throws Exception {
 		int like_cnt = reviewDAO.selectReviewLike(reviewNO);
@@ -101,84 +190,9 @@ public class ReviewServiceImpl implements ReviewService {
 		reviewDAO.delete_like(hashMap);
 	}
 	
-	
-	@Override
-	public Map reviewDetail_1(Map pagingMap) throws Exception {
-		Map reviewMap = new HashMap();
-		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList(pagingMap);
-		
-		int totReview = reviewDAO.selectTotReview();
-
-		reviewMap.put("reviewList", reviewList);
-		reviewMap.put("totReview", totReview);
-		// articlesMap.put("totArticles", 170);
-		return reviewMap;
+	public void delete_like_by_reviewNO(int hashMap)throws Exception {
+		reviewDAO.delete_like_by_reviewNO(hashMap);
 	}
-	
-	@Override
-	public Map reviewDetail_2(Map pagingMap) throws Exception {
-		Map reviewMap = new HashMap();
-		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList2(pagingMap);
-		
-		int totReview = reviewDAO.selectTotReview();
-
-		reviewMap.put("reviewList", reviewList);
-		reviewMap.put("totReview", totReview);
-		// articlesMap.put("totArticles", 170);
-		return reviewMap;
-	}
-	@Override
-	public Map reviewDetail_3(Map pagingMap) throws Exception {
-		Map reviewMap = new HashMap();
-		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList3(pagingMap);
-		
-		int totReview = reviewDAO.selectTotReview();
-
-		reviewMap.put("reviewList", reviewList);
-		reviewMap.put("totReview", totReview);
-		// articlesMap.put("totArticles", 170);
-		return reviewMap;
-	}
-	@Override
-	public Map checkReview(Map pagingMap) throws Exception {
-		Map reviewMap = new HashMap();
-		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList(pagingMap);
-		
-		int totReview = reviewDAO.selectTotReview();
-
-		reviewMap.put("reviewList", reviewList);
-		reviewMap.put("totReview", totReview);
-		// articlesMap.put("totArticles", 170);
-		return reviewMap;
-	}
-	
-	
-
-	@Override
-	public int addNewReview(Map reviewMap, String fileName) throws Exception {
-		int reviewNO = reviewDAO.selectNewReviewNO();
-		reviewMap.put("reviewNO", reviewNO);
-		
-		if (fileName != null) {
-			String fileUrl = "resources/review/review_image" + "/" + reviewNO + "/" + fileName;
-			reviewMap.put("review_image_url", fileUrl);
-			reviewDAO.insertNewReview(reviewMap);
-			reviewMap.put("reviewNO", reviewNO);
-		} else {
-			reviewDAO.insertNewReview(reviewMap);
-		}
-
-		return reviewNO;
-	}
-
-//다중 이미지 추가하기	
-
-
-	@Override
-	public void removeReview(int reviewNO) throws Exception {
-		reviewDAO.deleteReview(reviewNO);
-	}
-	
 	
 	//	메인페이지 리뷰조회
 	@Override
@@ -187,12 +201,4 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewList;
 	}
 
-	@Override
-	public void modReview(Map reviewMap) throws Exception {
-		reviewDAO.updateReview(reviewMap);
-	}
-	
-	
-	
-	
 }
