@@ -15,4 +15,5 @@ public interface ReservationController {
 	public ModelAndView reservationAdd( HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView reservationUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	public String reservationComplete(Model model);
+
 }

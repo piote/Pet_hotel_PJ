@@ -1,12 +1,9 @@
 package com.myboot.reservation.vo;
 
-import org.springframework.stereotype.Component;
-
-import com.myboot.mypage.vo.MyPageVO;
-
 import java.util.Date;
 
-import org.apache.ibatis.type.Alias;
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 
 @Data

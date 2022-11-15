@@ -153,7 +153,7 @@ function clickNO(pageNo){
 	   		html += '<td class="re_review">'+'<a href='+ a_tag +review_data[listNO].res_num +'">'+'리뷰쓰기' +'</td>';
 	   }else {
 			html += ' ';
-		}
+	   }
        
         html += '</tr>';  
     }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myboot.mypage.service.MyPageService;
-import com.myboot.mypage.vo.MyPageVO;
 import com.myboot.reservation.vo.ReservationVO;
 import com.myboot.review.vo.ReviewVO;
 import com.myboot.user.vo.UserVO;

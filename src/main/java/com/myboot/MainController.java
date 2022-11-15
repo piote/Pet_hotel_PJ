@@ -17,9 +17,4 @@ public  class MainController {
   public String hello(Model model){
 	return "main";
   }
-  @RequestMapping("/membership.do")
-  public String membership(Model model){
-	  return "membership";
-  }
-  
 }

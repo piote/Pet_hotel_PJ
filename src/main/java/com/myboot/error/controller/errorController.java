@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-//@Controller
+@Controller
 public class errorController implements ErrorController {
     private String VIEW_PATH = "/errors/";
 

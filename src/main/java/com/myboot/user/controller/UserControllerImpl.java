@@ -291,9 +291,6 @@ public class UserControllerImpl implements UserController{
     		// String 타입을 Date 타입으로 변환
     		String strNowDate = newDtFormat.format(userVO.getBirth());
     		session.setAttribute("birth", strNowDate);
-
-    	
-    		
 			
 			if (userPw.equals(password)) {
 				System.out.println("성공");
