@@ -245,8 +245,6 @@
 										<c:when test="${reserves.res_state == 'N'}">
 											<input type="image" src="${contextPath}/resources/img/close.png" onClick="fn_cancel_reserve('${reserves.res_num}')" value="예약취소"  />
 										</c:when>
-										<c:otherwise>
-										</c:otherwise>
 									</c:choose>
 							    </td>	
 							</tr>
