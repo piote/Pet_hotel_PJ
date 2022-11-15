@@ -440,11 +440,11 @@
 	       <c:when test="${totReview >100 }">  <!-- 글 개수가 100 초과인경우 -->
 		      <c:forEach   var="page" begin="1" end="10" step="1" >
 		         <c:if test="${section >1 && page==1 }">
-		          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&sort=${sort}">&nbsp; pre </a>
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_3.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&sort=${sort}">&nbsp; pre </a>
 		         </c:if>
-		          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}&sort=${sort}">${(section-1)*10 +page } </a>
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_3.do?section=${section}&pageNum=${page}&sort=${sort}">${(section-1)*10 +page } </a>
 		         <c:if test="${page ==10 }">
-		          <a class="no-uline" href="${contextPath }/review/reviewDetail_1.do?section=${section+1}&pageNum=${section*10+1}&sort=${sort}">&nbsp; next</a>
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_3.do?section=${section+1}&pageNum=${section*10+1}&sort=${sort}">&nbsp; next</a>
 		         </c:if>
 		      </c:forEach>
 	       </c:when>
@@ -458,10 +458,10 @@
 		      <c:forEach   var="page" begin="1" end="${totReview/10 +1}" step="1" >
 		         <c:choose>
 		           <c:when test="${page==pageNum }">
-		            <a class="sel-page"  href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}&sort=${sort}">${page } </a>
+		            <a class="sel-page"  href="${contextPath }/review/reviewDetail_3.do?section=${section}&pageNum=${page}&sort=${sort}">${page } </a>
 		          </c:when>
 		          <c:otherwise>
-		            <a class="no-uline"  href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}&sort=${sort}">${page } </a>
+		            <a class="no-uline"  href="${contextPath }/review/reviewDetail_3.do?section=${section}&pageNum=${page}&sort=${sort}">${page } </a>
 		          </c:otherwise>
 		        </c:choose>
 		      </c:forEach>

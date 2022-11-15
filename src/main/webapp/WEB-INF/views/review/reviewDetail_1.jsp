@@ -217,7 +217,7 @@
      searchMap.sort_ck=sort_ck;
      
      sort_ck=$('.sort_option input[name="sort"]:checked').val();
-     console.log(sort_ck);
+
      
    })
 
