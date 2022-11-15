@@ -298,239 +298,209 @@
 
  <body>
 
-
-     <div class="all">
-
-
-
-         <br><br><br><br>
-
-         <h2 class="w_review"><a class="w_a" href="${contextPath}/review/reviewBoard.do">Suite Review</a></h2>
-         <p id="under"></p>
-         <br><br><br>
-
-         <div class="w_contents_1">
-             <img class="re_room1" src="${contextPath}/resources/img/pet_room_3.jpg" alt="중형견 룸">
-             <p class="re_p1">Deluxe</p>
-
-         </div>
-
-         <!-- name 접근으로 value 값 체크 -->
-         <div class="sort">
-             <c:choose>
-                 <c:when test="${sort == 'rec'}">
-                     <div class="sort_option">
-                         <input type="radio" id="sort_data" name="sort" value="sort_data"
-                             onchange="changeType('data')"><label for="sort_data">최신순</label></input>
-                         <input type="radio" id="sort_rec" name="sort" value="sort_rec" onchange="changeType('rec')"
-                             checked><label for="sort_rec">좋아요</label></input>
-                     </div>
-                 </c:when>
-                 <c:otherwise>
-                     <div class="sort_option">
-                         <input type="radio" id="sort_data" name="sort" value="sort_data" onchange="changeType('data')"
-                             checked><label for="sort_data">최신순</label></input>
-                         <input type="radio" id="sort_rec" name="sort" value="sort_rec"
-                             onchange="changeType('rec')"><label for="sort_rec">좋아요</label></input>
-                     </div>
-                 </c:otherwise>
-             </c:choose>
-         </div>
-
-         <div class="w_contents_2">
-             <br>
-
-             <div>
-
-                 <form name="frmReview" method="post" action="${contextPath}" enctype="multipart/form-data">
-                     <table align="right" class="w_review2">
-
-                         <c:choose>
-                             <c:when test="${empty reviewList}">
-                                 <tr height="10">
-                                     <td colspan="4">
-                                         <p align="center">
-                                             <b><span style="font-size:15pt;">등록된 리뷰가 없습니다.</span></b>
-                                         </p>
-                                     </td>
-                                 </tr>
-                             </c:when>
-                             <c:when test="${reviewList !=null }">
-                                 <c:forEach var="review" items="${reviewList }" varStatus="reviewNum">
-                                     <fmt:formatDate var="reviewDate" value="${review.date}" pattern="yyyy.MM.dd" />
-                                     <tr class="w_tr w_margin1">
-                                         <td class="w_td" width="15%">
-                                             <c:if test="${review.rate==5}">
-                                                 <img src="${contextPath}/resources/img/star_5.png" class="w_star">
-                                             </c:if>
-                                             <c:if test="${review.rate==4}">
-                                                 <img src="${contextPath}/resources/img/star_4.png" class="w_star">
-                                             </c:if>
-                                             <c:if test="${review.rate==3}">
-                                                 <img src="${contextPath}/resources/img/star_3.png" class="w_star">
-                                             </c:if>
-                                             <c:if test="${review.rate==2}">
-                                                 <img src="${contextPath}/resources/img/star_2.png" class="w_star">
-                                             </c:if>
-                                             <c:if test="${review.rate==1}">
-                                                 <img src="${contextPath}/resources/img/star_1.png" class="w_star">
-                                             </c:if>
-                                         </td>
-
-                                         <td class="w_td" width="50%" rowspan="2">
-                                             <div class="w_td_title">${review.title}</div>
-                                         </td>
-
-                                         <td class="w_td" width="20%" rowspan="2">
-                                             <c:choose>
-
-                                                 <c:when test="${review.image != null}">
-                                                     <a href="${contextPath}/${review.image}" rel="prettyPhoto"
-                                                         title="This is the description"><img class="re_image "
-                                                             src="${contextPath}/${review.image}" width="150"
-                                                             height="150" alt="This is the title" />
-                                                 </c:when>
-
-                                                 <c:otherwise>
-                                                 </c:otherwise>
-                                             </c:choose>
-
-                                         </td>
-                                         <td class="w_td w_date" width="15%">${reviewDate}</td>
-                                     </tr>
-                                     <tr class="w_tr" class="w_tr2">
-                                         <td class="w_td" align=center>
-                                             <input type="hidden" id="reviewNO_${reviewNum.count}" name="reviewNO"
-                                                 value="${review.reviewNO }" />
-                                             <input type="hidden" id="review_id_${reviewNum.count}" name="id"
-                                                 value="${review.id }" />
-                                             <input type="hidden" id="" name="id" value="${review.like_cnt}" />
-                                             <input type="hidden" id="" name="id" value="${review.user_review_flg}" />
+<div class="all">
+	
 
 
-                                             ${review.id}
-                                         </td>
-                                         <td class="w_td" align=center>
+	<br><br><br><br>
+	
+	<h2 class="w_review"><a class="w_a" href="${contextPath}/review/reviewBoard.do" >Suite Review</a></h2>
+		<p id="under"></p>
+		<br><br><br>
+	
+		 <div class="w_contents_1">
+		   <img class="re_room1" src="${contextPath}/resources/img/pet_room_3.jpg" alt="중형견 룸">
+            <p class="re_p1">Deluxe</p>
+
+		 </div>
+		 
+		 <!-- name 접근으로 value 값 체크 -->
+	       <div class="sort">  
+      	<c:choose>
+      		<c:when test = "${sort == 'rec'}">
+			         <div class="sort_option">
+				         <input type="radio" id="sort_data" name="sort" value="sort_data" onchange="changeType('data')"  ><label for="sort_data" >최신순</label></input>
+				         <input type="radio" id="sort_rec" name="sort" value="sort_rec" onchange="changeType('rec')" checked><label for="sort_rec" >좋아요</label></input>
+			         </div>
+	         	</c:when>
+	         	<c:otherwise>
+		         	 <div class="sort_option">
+				         <input type="radio" id="sort_data" name="sort" value="sort_data" onchange="changeType('data')" checked ><label for="sort_data" >최신순</label></input>
+				         <input type="radio" id="sort_rec" name="sort" value="sort_rec" onchange="changeType('rec')" ><label for="sort_rec" >좋아요</label></input>
+			         </div>
+	         	</c:otherwise>
+	         </c:choose>
+	        </div>
+		 
+		 <div class="w_contents_2">
+         <br>
+  
+         <div>
+   
+<form name="frmReview" method="post"  action="${contextPath}"  enctype="multipart/form-data">
+        <table align="right" class="w_review2">
+      
+        <c:choose>
+        <c:when test="${empty reviewList}" >
+          <tr  height="10">
+            <td colspan="4">
+               <p align="center">
+                  <b><span style="font-size:15pt;">등록된 리뷰가 없습니다.</span></b>
+              </p>
+            </td>  
+          </tr>
+        </c:when>
+        <c:when test="${reviewList !=null }" >
+          <c:forEach  var="review" items="${reviewList }" varStatus="reviewNum" >
+          <fmt:formatDate var="reviewDate" value="${review.date}" pattern="yyyy.MM.dd"/>
+          	 <tr class="w_tr w_margin1">
+	         <td class="w_td" width="15%">  	
+	          		<c:if test="${review.rate==5}">
+	                    <img src="${contextPath}/resources/img/star_5.png" class="w_star">   
+	                </c:if> 
+	                <c:if test="${review.rate==4}">
+	                    <img src="${contextPath}/resources/img/star_4.png" class="w_star" >    
+	                </c:if>
+	                <c:if test="${review.rate==3}">
+	                    <img src="${contextPath}/resources/img/star_3.png" class="w_star">    
+	                </c:if>    
+	                <c:if test="${review.rate==2}">
+	                    <img src="${contextPath}/resources/img/star_2.png" class="w_star">    
+	                </c:if>  
+	                <c:if test="${review.rate==1}">
+	                    <img src="${contextPath}/resources/img/star_1.png" class="w_star">    
+	                </c:if>   
+	         </td>
+	         
+	         <td class="w_td" width="50%" rowspan="2"><div class="w_td_title" >${review.title}</div></td> 
+	  
+	         <td class="w_td" width="20%" rowspan="2">               
+	           <c:choose>
+	          
+	         <c:when test="${review.image != null}"> 
+	                   <a href="${contextPath}/${review.image}" rel="prettyPhoto" title="This is the description"><img class="re_image " src="${contextPath}/${review.image}" width="150" height="150" alt="This is the title" />
+	                </c:when>
+	               
+	                <c:otherwise>
+	                </c:otherwise>
+	           </c:choose>   
+	               
+	         </td>
+	          <td class="w_td w_date"  width="15%" >${reviewDate}</td>
+	          </tr>      
+	      <tr class="w_tr" class="w_tr2">
+	          <td class="w_td" align=center >
+	          <input type="hidden" id="reviewNO_${reviewNum.count}" name="reviewNO" value="${review.reviewNO }"/>
+	          <input type="hidden" id="review_id_${reviewNum.count}" name="id" value="${review.id }"/>
+	          <input type="hidden" id="" name="id" value="${review.like_cnt}"/>
+	          <input type="hidden" id="" name="id" value="${review.user_review_flg}"/>
+
+	          
+	          ${review.id}
+	          </td>	
+	          <td class="w_td" align=center >
+	       						
+	       						
+	       					<c:choose>
+	       					  <c:when test="${null != isLogOn && isLogOn != 'false'}">
+	       					    <a href='javascript: like_func(${reviewNum.count});' id = "${reviewNum.count}">
+	       					    	<div id='like_img_${reviewNum.count}' class="like_img ${review.user_review_flg}_heart Y_heart">
+		       					    	<span id="like_cnt_${reviewNum.count}" class="heart_span" >${review.like_cnt}</span>
+		       					    </div>
+	       					    </a>
+	       					  </c:when>
+	    
+	       					  <c:otherwise>
+	       					    <a href='javascript: notlog(${reviewNum.count});' id = "${reviewNum.count}">  
+		       					    <div class="N_heart"> 
+		       					    	<span class="heart_span">${review.like_cnt}</span>
+			       					</div>
+		       					</a>
+	       					  
+		       					
+	       						
+	       					    </c:otherwise>
+	       					</c:choose>			
+	          </td>
+	      </tr>  
+	      <tr>
+	      	<td class="w_tdz1" colspan="4">  </td>
+	      
+	      </tr>
+	      <tr>
+	      <td class="w_tdz2" colspan="4"></td>
+	      </tr>
+    
+    </c:forEach>
+  </c:when>
+ </c:choose>    
+     </table>
+     </form>       
+     
+	
+     
+       </div>
+
+    
+       
+		<br><br><br><br><br>
+
+		
 
 
-                                             <c:choose>
-                                                 <c:when test="${null != isLogOn && isLogOn != 'false'}">
-                                                     <a href='javascript: like_func(${reviewNum.count});'
-                                                         id="${reviewNum.count}">
-                                                         <div id='like_img_${reviewNum.count}'
-                                                             class="like_img ${review.user_review_flg}_heart Y_heart">
-                                                             <span id="like_cnt_${reviewNum.count}"
-                                                                 class="heart_span">${review.like_cnt}</span>
-                                                         </div>
-                                                     </a>
-                                                 </c:when>
+	<div class="cls2">
+	<c:if test="${totReview != null }" >
+	     <c:choose>
+	       <c:when test="${totReview >100 }">  <!-- 글 개수가 100 초과인경우 -->
+		      <c:forEach   var="page" begin="1" end="10" step="1" >
+		         <c:if test="${section >1 && page==1 }">
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_2.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&sort=${sort}">&nbsp; pre </a>
+		         </c:if>
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_2.do?section=${section}&pageNum=${page}&sort=${sort}">${(section-1)*10 +page } </a>
+		         <c:if test="${page ==10 }">
+		          <a class="no-uline" href="${contextPath }/review/reviewDetail_2.do?section=${section+1}&pageNum=${section*10+1}&sort=${sort}">&nbsp; next</a>
+		         </c:if>
+		      </c:forEach>
+	       </c:when>
+	       <c:when test="${totReview ==100 }" >  <!--등록된 글 개수가 100개인경우  -->
+		      <c:forEach   var="page" begin="1" end="10" step="1" >
+		        <a class="no-uline"  href="#">${page } </a>
+		      </c:forEach>
+	       </c:when>
+	       
+	       <c:when test="${totReview< 100 }" >   <!--등록된 글 개수가 100개 미만인 경우  -->
+		      <c:forEach   var="page" begin="1" end="${totReview/10 +1}" step="1" >
+		         <c:choose>
+		           <c:when test="${page==pageNum }">
+		            <a class="sel-page"  href="${contextPath }/review/reviewDetail_2.do?section=${section}&pageNum=${page}&sort=${sort}">${page } </a>
+		          </c:when>
+		          <c:otherwise>
+		            <a class="no-uline"  href="${contextPath }/review/reviewDetail_2.do?section=${section}&pageNum=${page}&sort=${sort}">${page } </a>
+		          </c:otherwise>
+		        </c:choose>
+		      </c:forEach>
+	       </c:when>
+	     </c:choose>
+	   </c:if>
+	 </div>    
 
-                                                 <c:otherwise>
-                                                     <a href='javascript: notlog(${reviewNum.count});'
-                                                         id="${reviewNum.count}">
-                                                         <div class="N_heart">
-                                                             <span class="heart_span">${review.like_cnt}</span>
-                                                         </div>
-                                                     </a>
+</div>
 
+<script>
+function fn_modify_article(obj){
+	 obj.action="${contextPath}/board/modArticle.do";
+	 obj.submit();
+}
 
+function notlog() {
+	alert("로그인을 해주세요");
+}
 
-                                                 </c:otherwise>
-                                             </c:choose>
-                                         </td>
-                                     </tr>
-                                     <tr>
-                                         <td class="w_tdz1" colspan="4"> </td>
-
-                                     </tr>
-                                     <tr>
-                                         <td class="w_tdz2" colspan="4"></td>
-                                     </tr>
-
-                                 </c:forEach>
-                             </c:when>
-                         </c:choose>
-                     </table>
-                 </form>
-
-
-
-             </div>
-
-
-
-             <br><br><br><br><br>
-
-
-
-
-             <div class="cls2">
-                 <c:if test="${totReview != null }">
-                     <c:choose>
-                         <c:when test="${totReview >100 }">
-                             <!-- 글 개수가 100 초과인경우 -->
-                             <c:forEach var="page" begin="1" end="10" step="1">
-                                 <c:if test="${section >1 && page==1 }">
-                                     <a class="no-uline"
-                                         href="${contextPath }/review/reviewDetail_2.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&sort=${sort}">&nbsp;
-                                         pre </a>
-                                 </c:if>
-                                 <a class="no-uline"
-                                     href="${contextPath }/review/reviewDetail_2.do?section=${section}&pageNum=${page}&sort=${sort}">${(section-1)*10
-                                     +page } </a>
-                                 <c:if test="${page ==10 }">
-                                     <a class="no-uline"
-                                         href="${contextPath }/review/reviewDetail_2.do?section=${section+1}&pageNum=${section*10+1}&sort=${sort}">&nbsp;
-                                         next</a>
-                                 </c:if>
-                             </c:forEach>
-                         </c:when>
-                         <c:when test="${totReview ==100 }">
-                             <!--등록된 글 개수가 100개인경우  -->
-                             <c:forEach var="page" begin="1" end="10" step="1">
-                                 <a class="no-uline" href="#">${page } </a>
-                             </c:forEach>
-                         </c:when>
-
-                         <c:when test="${totReview< 100 }">
-                             <!--등록된 글 개수가 100개 미만인 경우  -->
-                             <c:forEach var="page" begin="1" end="${totReview/10 +1}" step="1">
-                                 <c:choose>
-                                     <c:when test="${page==pageNum }">
-                                         <a class="sel-page"
-                                             href="${contextPath }/review/reviewDetail_2.do?section=${section}&pageNum=${page}&sort=${sort}">${page
-                                             } </a>
-                                     </c:when>
-                                     <c:otherwise>
-                                         <a class="no-uline"
-                                             href="${contextPath }/review/reviewDetail_2.do?section=${section}&pageNum=${page}&sort=${sort}">${page
-                                             } </a>
-                                     </c:otherwise>
-                                 </c:choose>
-                             </c:forEach>
-                         </c:when>
-                     </c:choose>
-                 </c:if>
-             </div>
-
-         </div>
-
-         <script>
-             function fn_modify_article(obj) {
-                 obj.action = "${contextPath}/board/modArticle.do";
-                 obj.submit();
-             }
-
-             function notlog() {
-                 alert("로그인을 해주세요");
-             }
+			
+		
+		 
+</script>
 
 
-
-
-         </script>
-
-
- </body>
-
- </html>
+</body>
+</html>

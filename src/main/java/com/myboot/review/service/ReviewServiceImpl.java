@@ -32,7 +32,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 		reviewMap.put("reviewList", reviewList);
 		reviewMap.put("totReview", totReview);
-		// articlesMap.put("totArticles", 170);
+	
 		return reviewMap;
 	}
 	
@@ -201,7 +201,4 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewList;
 	}
 
-	
-	
-	
 }
