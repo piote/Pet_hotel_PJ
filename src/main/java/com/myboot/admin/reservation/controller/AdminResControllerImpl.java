@@ -34,14 +34,15 @@ import com.myboot.user.vo.UserVO;
 
 @Controller("adminresController")
 public  class AdminResControllerImpl implements AdminResController{
-
+	
+	//Service
 	private static final String String = null;
 	@Autowired
 	private AdminResService adminresService;
-	
 	@Autowired
 	private ReservationService resService;
 	
+	//VO
 	@Autowired
 	private AdminResFullVO adminresfullVO;
 	@Autowired
@@ -128,7 +129,7 @@ public  class AdminResControllerImpl implements AdminResController{
 	    model.addAttribute("P", Page);
 	   
 	    return "/page/ResPageAjax";
-	  }
+	}
 	
 	//예약 번호로 예약 찾기
 	@Override
@@ -244,6 +245,7 @@ public  class AdminResControllerImpl implements AdminResController{
 		}
 		
 		ReservationVO reserVO = new ReservationVO();
+		
 		//예약 vo
 		reserVO.setRes_num(resNum);
 		reserVO.setRes_st(checkinDate_format);

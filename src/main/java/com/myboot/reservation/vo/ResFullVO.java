@@ -2,9 +2,6 @@ package com.myboot.reservation.vo;
 
 import org.springframework.stereotype.Component;
 
-import com.myboot.mypage.vo.MyPageVO;
-
-import org.apache.ibatis.type.Alias;
 import lombok.Data;
 
 @Data
@@ -13,7 +10,7 @@ public class ResFullVO {
 	private int res_num;
 	private String res_st;
 	private String res_end;
-	private String id;//유저아이디
+	private String id;      //유저아이디
 	private String res_comment;
 	private String totalCost;
 	private String payTime;

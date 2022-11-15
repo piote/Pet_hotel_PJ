@@ -13,276 +13,288 @@
  <c:set  var="pageNum"  value="${reviewMap.pageNum}" />
 
  
- <!--
+ 
  <%
    request.setCharacterEncoding("UTF-8");
  %>  
- -->
+
  <!DOCTYPE html>
  <html>
+
  <head>
- 
- <script src="${contextPath}/resources/js/jquery.js" type="text/javascript" charset="utf-8"></script>
- <link rel="stylesheet" href="${contextPath}/resources/css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
- <script src="${contextPath}/resources/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+
+     <script src="${contextPath}/resources/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+     <link rel="stylesheet" href="${contextPath}/resources/css/prettyPhoto.css" type="text/css" media="screen"
+         charset="utf-8" />
+     <script src="${contextPath}/resources/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 
 
-   
-   
 
-  
-<style>
-   .all {
-       
-       margin-top: 250px;
-       height: 2200px;
-   }
-  
- .w_review {
-	  margin-top: -40px;
-	  text-align: left; font-size: 25px;
-	  margin-left: 17%;
-	  
-  	}
-       
-      #under {
-	margin-top: 10px;
-	border: 2px solid gray;
-	width: 215px;
-    margin-left: 17%;
-   
-  }
-      .w_a {
-          text-decoration: none;
-          color: black;
-          font-size: 25px;
-      }   
 
-      .w_contents_1 {
-    	    width: 18.5%;
-    	    margin-left: 17%;
-    	    height: 100%;
-    	    
-    	    position: absolute;
-    	    left: 0%;
-    	    display: inline-block;
-    	    
-    	  }
 
-    	  .w_contents_2 {
-    	    width:47.5%;
-    	    
-    	    height: 100%;
-    	    
-    	    position: absolute;
-    	    right: 17%;
-    	    
-    	  }
-    	  .re_room1 {
-    	  text-align: center;
-    	  border-radius: 5%;
 
-    	  }
-    	  .re_p1 {
-    	    font-size: 30px;
-    	    text-align: center;
-    	    margin-top: 10px;
+     <style>
+         .all {
 
-    	  }
+             margin-top: 250px;
+             height: 2200px;
+         }
 
-    	  .cls2 {
-    		  
-    		  left: 30%;
-    		  margin-top: 1900px;
-    		  position: absolute;
-    		  font-size: 20px;
-    		  }
-    	   
-    	  .no-uline {text-decoration:none;}
+         .w_review {
+             margin-top: -40px;
+             text-align: left;
+             font-size: 25px;
+             margin-left: 17%;
 
-  .w_review2 {
-	  width:90%;
-	    border:1px;
-	    font-size: 17px;
-	    border-collapse: collapse;
-	    padding: 5px;
-  }
+         }
 
-  .w_tr {
-            width: 100% !important;  
-            height: 40px;
-     
-            border-collapse: collapse;
-        } 
+         #under {
+             margin-top: 10px;
+             border: 2px solid gray;
+             width: 215px;
+             margin-left: 17%;
 
-  .w_tr>.w_td {
-   
-    font-size: 15px ;
-    height: 75px;
-    
-  }
-  .w_date{
-	  text-align: center;
-	  
-  }
-  
-  .w_margin1 {
-	  border-top: 0px solid #ddd;
-  }
- 
-  .w_margin3 {
-	  border-bottom: 50px solid #fff;
-  }
-  .w_star {
-	  width:100%;
-	  height: 23px;
-  }
-  .w_td_title{
-	  margin-left: 50px;
-	  margin-right: 50px;
-  }
-  
-  
-  
-  .w_tdz1 {
-	  height: 15px;
-	  border-bottom: 1px solid #ddd;
-  }
-  .w_tdz2 {
-	  height: 15px;
-	  
-  }
-  .re_image {
-	  border-radius: 5%;
-	  
-  }
-  .Y_heart{
-	  background-image: url("${contextPath}/resources/img/r2_heart.png");
-	  background-repeat: round;
-	  width: 85px;
-	  margin-left: 10px;
-	  height: 35px;
-	
-  }
-  
-  .N_heart{
-	  background-image: url("${contextPath}/resources/img/w2_heart.png");
-	  background-repeat: round;
-	  width: 85px;
-	  margin-left: 10px;
-	  height: 35px;
-  }
-  
-  .heart_span{
-	  line-height: 35px;
-	  margin-left: 25px;
-	    
-  }
-  .sort {
-	  top: 36%;
-	  position: absolute;
-	  right: 17%;
-  }
+         }
 
-  
-  </style> 
- 
- <meta charset="UTF-8">
- 
- <title>리뷰</title>
- 
- <script type="text/javascript">
- 
- function fn_remove_review(url,reviewNO){
-	 var form = document.createElement("form");
-	 form.setAttribute("method", "post");
-	 form.setAttribute("action", url);
-     var reviewNOInput = document.createElement("input");
-     reviewNOInput.setAttribute("type","hidden");
-     reviewNOInput.setAttribute("name","reviewNO");
-     reviewNOInput.setAttribute("value", reviewNO);
-	 
-     form.appendChild(reviewNOInput);
-     document.body.appendChild(form);
-     form.submit();
- 
- }
- 
- $(document).ready(function(){
-     $("a[rel^='prettyPhoto']").prettyPhoto();
-     
-     var sort_ck = null;
-     var searchMap = new Object();
-     searchMap.sort_ck=sort_ck;
-     
-     sort_ck=$('.sort_option input[name="sort"]:checked').val();
-     console.log(sort_ck);
-     
-   })
- 
+         .w_a {
+             text-decoration: none;
+             color: black;
+             font-size: 25px;
+         }
 
- 	function changeType(){
- 		var tmpType = $("input[name='sort']:checked").val();
- 			// A Type 클릭 시 A 출력, B Type 클릭 시 B 출력
- 	}
- 
- function changeType(type){
-	 	window.location.href = "/review/reviewDetail_3.do?" + "sort="+ type ;
-	}
- 
- /* 좋아요 */
- function like_func(N){
+         .w_contents_1 {
+             width: 18.5%;
+             margin-left: 17%;
+             height: 100%;
 
-   var reviewNO = $('#reviewNO_'+N).val();
+             position: absolute;
+             left: 0%;
+             display: inline-block;
 
-   $.ajax({
-     url: "/like/like.do",
-     type: "POST",
-     cache: false,
-     dataType: "json",
-     data:  {"review_num":reviewNO},
-     
-     success: function(data) {
-            
-             //좋아요 이미지 변경 
-       if(data. like_check == 'N'){
-         
-         $("#like_img_"+N).removeClass('N_heart');
-         $("#like_img_"+N).addClass('Y_heart');
-         
-       } else {
-         
-         $("#like_img_"+N).removeClass('Y_heart');
-         $("#like_img_"+N).addClass('N_heart');
-         
-       } 
+         }
 
-       console.log(data.like_cnt);
-       
-       $('#like_cnt_'+N).text(data.like_cnt);
-       $('#like_check').html(data.like_check);
-       
-       
-     },
-     error: function(request, status, error){
-       alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-     }
-   });
- }
+         .w_contents_2 {
+             width: 47.5%;
 
- 
- 
- 
- 
- 
- 
- </script>
- 
- 
+             height: 100%;
+
+             position: absolute;
+             right: 17%;
+
+         }
+
+         .re_room1 {
+             text-align: center;
+             border-radius: 5%;
+
+         }
+
+         .re_p1 {
+             font-size: 30px;
+             text-align: center;
+             margin-top: 10px;
+
+         }
+
+         .cls2 {
+
+             left: 30%;
+             margin-top: 1900px;
+             position: absolute;
+             font-size: 20px;
+         }
+
+         .no-uline {
+             text-decoration: none;
+         }
+
+         .w_review2 {
+             width: 90%;
+             border: 1px;
+             font-size: 17px;
+             border-collapse: collapse;
+             padding: 5px;
+         }
+
+         .w_tr {
+             width: 100% !important;
+             height: 40px;
+
+             border-collapse: collapse;
+         }
+
+         .w_tr>.w_td {
+
+             font-size: 15px;
+             height: 75px;
+
+         }
+
+         .w_date {
+             text-align: center;
+
+         }
+
+         .w_margin1 {
+             border-top: 0px solid #ddd;
+         }
+
+         .w_margin3 {
+             border-bottom: 50px solid #fff;
+         }
+
+         .w_star {
+             width: 100%;
+             height: 23px;
+         }
+
+         .w_td_title {
+             margin-left: 50px;
+             margin-right: 50px;
+         }
+
+
+
+         .w_tdz1 {
+             height: 15px;
+             border-bottom: 1px solid #ddd;
+         }
+
+         .w_tdz2 {
+             height: 15px;
+
+         }
+
+         .re_image {
+             border-radius: 5%;
+
+         }
+
+         .Y_heart {
+             background-image: url("${contextPath}/resources/img/r2_heart.png");
+             background-repeat: round;
+             width: 85px;
+             margin-left: 10px;
+             height: 35px;
+
+         }
+
+         .N_heart {
+             background-image: url("${contextPath}/resources/img/w2_heart.png");
+             background-repeat: round;
+             width: 85px;
+             margin-left: 10px;
+             height: 35px;
+         }
+
+         .heart_span {
+             line-height: 35px;
+             margin-left: 25px;
+
+         }
+
+         .sort {
+             top: 36%;
+             position: absolute;
+             right: 17%;
+         }
+     </style>
+
+     <meta charset="UTF-8">
+
+     <title>리뷰</title>
+
+     <script type="text/javascript">
+
+         function fn_remove_review(url, reviewNO) {
+             var form = document.createElement("form");
+             form.setAttribute("method", "post");
+             form.setAttribute("action", url);
+             var reviewNOInput = document.createElement("input");
+             reviewNOInput.setAttribute("type", "hidden");
+             reviewNOInput.setAttribute("name", "reviewNO");
+             reviewNOInput.setAttribute("value", reviewNO);
+
+             form.appendChild(reviewNOInput);
+             document.body.appendChild(form);
+             form.submit();
+
+         }
+
+         $(document).ready(function () {
+             $("a[rel^='prettyPhoto']").prettyPhoto();
+
+             var sort_ck = null;
+             var searchMap = new Object();
+             searchMap.sort_ck = sort_ck;
+
+             sort_ck = $('.sort_option input[name="sort"]:checked').val();
+             console.log(sort_ck);
+
+         })
+
+
+         function changeType() {
+             var tmpType = $("input[name='sort']:checked").val();
+             // A Type 클릭 시 A 출력, B Type 클릭 시 B 출력
+         }
+
+         function changeType(type) {
+             window.location.href = "/review/reviewDetail_3.do?" + "sort=" + type;
+         }
+
+         /* 좋아요 */
+         function like_func(N) {
+
+             var reviewNO = $('#reviewNO_' + N).val();
+
+             $.ajax({
+                 url: "/like/like.do",
+                 type: "POST",
+                 cache: false,
+                 dataType: "json",
+                 data: { "review_num": reviewNO },
+
+                 success: function (data) {
+
+                     //좋아요 이미지 변경 
+                     if (data.like_check == 'N') {
+
+                         $("#like_img_" + N).removeClass('N_heart');
+                         $("#like_img_" + N).addClass('Y_heart');
+
+                     } else {
+
+                         $("#like_img_" + N).removeClass('Y_heart');
+                         $("#like_img_" + N).addClass('N_heart');
+
+                     }
+
+                     console.log(data.like_cnt);
+
+                     $('#like_cnt_' + N).text(data.like_cnt);
+                     $('#like_check').html(data.like_check);
+
+
+                 },
+                 error: function (request, status, error) {
+                     alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                 }
+             });
+         }
+
+
+
+
+
+
+
+     </script>
+
+
  </head>
 
  <body>
-
 
 <div class="all">
 	

@@ -17,7 +17,6 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
         <title>시설 소개</title>
         <link rel="stylesheet" href="${contextPath}/resources/css/reset.css">
         <script src="${contextPath}/resources/js/scrollscript.js"></script>
@@ -89,8 +88,6 @@
                 document.getElementById("rm_btposition").style.display="block";
                 document.getElementById("cut_btposition").style.display="block";
                 document.getElementById("spa_btposition").style.display="block";
-                document.getElementById("verycau").style.display="block";
-                document.getElementById("verycau").style.color="red";                
 			}
 			/* 버튼닫기 버튼을 눌렀을 때의 동작 */ 
 			function fn_close(obj) {
@@ -145,7 +142,6 @@
                 document.getElementById("rm_btposition").style.display="none";
                 document.getElementById("cut_btposition").style.display="none";
                 document.getElementById("spa_btposition").style.display="none";
-                document.getElementById("verycau").style.display="none";
 			}
 			/* 이미지를 업로드하기 위함  */
 			/* 내부 사진 버튼 시작 1 ~ 4 */
@@ -316,15 +312,6 @@
         <style>     	        	   	
             /* common 공통 시작 */
             /* 관리자 수정 버튼 시작 */
-            #verycau {
-			    position: relative;
-			    display: none;
-			    top: -200px;
-			    left: 830px;
-			    width: 375px;
-			    height: 34px;
-			    font-size: 23px;
-    		}
             /* 버튼 누르기 전  */
             #tr_btn {
             	position: relative;
@@ -336,7 +323,7 @@
             	display: none;
             	position: relative;
             	left: 50px;
-/*     			top: 30px; */
+     			top: 30px;
             }
             .button {
              	background-color: white;
@@ -1127,7 +1114,6 @@
         <form name="frmFacilities" method="post" action="${contextPath}" enctype="multipart/form-data">	
         	<section class="header_box_back"></section>
     		<table border="0" align="center">
-        		<p id="verycau">이름이 중복된 사진은 등록하지 마세요.</p>
 				<!-- 관리자 모드로 접근하면 나타나는 수정버튼 생성 및 시작 -->
     			<tr id="tr_btn_modify" align="center">
 					<td colspan="3">
