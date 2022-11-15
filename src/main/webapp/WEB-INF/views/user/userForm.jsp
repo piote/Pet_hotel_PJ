@@ -20,15 +20,9 @@ request.setCharacterEncoding("UTF-8");
 	width: 100%;
 	height: 100%;
 }
-
 .signin-wrapper {
-
 	background: #d5d5d5;
-
 } 
-
-
-
 .active {
 	flex-grow: 6;
 }
@@ -370,7 +364,7 @@ input#profil_id {
 	}
         
         // 취소 버튼 클릭시 로그인 화면으로 이동
-        function goLoginForm() {
+       {
             location.href="loginForm.do";     
         }
         
