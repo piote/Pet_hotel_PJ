@@ -241,7 +241,7 @@
 
 
          function changeType(type) {
-             window.location.href = "/review/reviewDetail_2.do?" + "sort=" + type;
+             window.location.href = "/review/reviewDetail_1.do?" + "sort=" + type;
          }
 
 
@@ -305,12 +305,12 @@
 
          <br><br><br><br>
 
-         <h2 class="w_review"><a class="w_a" href="${contextPath}/review/reviewBoard.do">Suite Review</a></h2>
+         <h2 class="w_review"><a class="w_a" href="${contextPath}/review/reviewBoard.do">Deluxe Review</a></h2>
          <p id="under"></p>
          <br><br><br>
 
          <div class="w_contents_1">
-             <img class="re_room1" src="${contextPath}/resources/img/pet_room_3.jpg" alt="중형견 룸">
+             <img class="re_room1" src="${contextPath}/resources/img/pet_room_1.jpg" alt="소형견 룸">
              <p class="re_p1">Deluxe</p>
 
          </div>
@@ -472,15 +472,15 @@
                              <c:forEach var="page" begin="1" end="10" step="1">
                                  <c:if test="${section >1 && page==1 }">
                                      <a class="no-uline"
-                                         href="${contextPath }/review/reviewDetail_2.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&sort=${sort}">&nbsp;
+                                         href="${contextPath }/review/reviewDetail_1.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&sort=${sort}">&nbsp;
                                          pre </a>
                                  </c:if>
                                  <a class="no-uline"
-                                     href="${contextPath }/review/reviewDetail_2.do?section=${section}&pageNum=${page}&sort=${sort}">${(section-1)*10
+                                     href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}&sort=${sort}">${(section-1)*10
                                      +page } </a>
                                  <c:if test="${page ==10 }">
                                      <a class="no-uline"
-                                         href="${contextPath }/review/reviewDetail_2.do?section=${section+1}&pageNum=${section*10+1}&sort=${sort}">&nbsp;
+                                         href="${contextPath }/review/reviewDetail_1.do?section=${section+1}&pageNum=${section*10+1}&sort=${sort}">&nbsp;
                                          next</a>
                                  </c:if>
                              </c:forEach>
@@ -498,12 +498,12 @@
                                  <c:choose>
                                      <c:when test="${page==pageNum }">
                                          <a class="sel-page"
-                                             href="${contextPath }/review/reviewDetail_2.do?section=${section}&pageNum=${page}&sort=${sort}">${page
+                                             href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}&sort=${sort}">${page
                                              } </a>
                                      </c:when>
                                      <c:otherwise>
                                          <a class="no-uline"
-                                             href="${contextPath }/review/reviewDetail_2.do?section=${section}&pageNum=${page}&sort=${sort}">${page
+                                             href="${contextPath }/review/reviewDetail_1.do?section=${section}&pageNum=${page}&sort=${sort}">${page
                                              } </a>
                                      </c:otherwise>
                                  </c:choose>
