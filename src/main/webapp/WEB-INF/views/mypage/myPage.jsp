@@ -53,12 +53,12 @@
                   </td>
                   <td>
                      <h3 class="user_info">${user.name }님</h3>
-                     <p class="user_info">멤버쉽 등급은 <b>${user.grade}</b>입니다.</p>
+                     <p class="user_info">멤버십 등급은 <b>${user.grade}</b>입니다.</p>
                   </td>
                   <td></td>
                   <td>
                      <a href="${contextPath}/pw_changeForm.do"><img src="${contextPath}/resources/img/identification-card.png" alt="정보수정">정보 수정</a>
-                     <a href="${contextPath}/membership.do"><img src="${contextPath}/resources/img/crown.png" alt="멤버쉽">멤버쉽</a>
+                     <a href="${contextPath}/membership.do"><img src="${contextPath}/resources/img/crown.png" alt="멤버십">멤버십</a>
                   </td>
                   <td>
                      <a href="${contextPath}/mypage/checkReserve.do"><img src="${contextPath}/resources/img/checklist.png" alt="예약 내역">예약 내역</a>

@@ -167,7 +167,7 @@
    <!-- 멤버쉽 안내 -->
    
    <definition name="membership" extends="baseLayout">
-      <put-attribute name="title" value="멤버쉽 안내" />
+      <put-attribute name="title" value="멤버십 안내" />
       <put-attribute name="body" value="/WEB-INF/views/membership/membership.jsp" />
    </definition>
    <!-- 문의게시판 -->
