@@ -73,11 +73,9 @@ public class IntroduceControllerImpl implements IntroduceController {
 	            introduceMap.put(key,original);
 	        }
 	    }
-//		introduceMap.put("imageFileName", imageFileName);
 	    String message;
 	    ResponseEntity resEnt = null;
 	    String imageFileName = null;
-//	    ============================================ realPath 받아오기
 	    String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
 	    String path = realPath+"resources\\introduce\\introduce_image";
 	         
@@ -96,9 +94,11 @@ public class IntroduceControllerImpl implements IntroduceController {
 	    				FileUtils.copyFile(srcFile, destFile,true);
 	    			} else {
 	    				srcFile = new File(path+"\\"+"temp"+"\\"+imageFileName);
+	    				File src2File = new File(path+"\\"+i_Num+"\\"+imageFileName);
 	    				File destDir = new File(path+"\\"+i_Num);
-//						destDir.mkdirs();
-	    				FileUtils.moveFileToDirectory(srcFile, destDir,true);
+	    				if(!src2File.exists()) {
+	    					FileUtils.moveFileToDirectory(srcFile, destDir,true);
+	    				}
 	    			}
 	    		}
 	    	}
@@ -119,13 +119,11 @@ public class IntroduceControllerImpl implements IntroduceController {
 	    	}
 	    	return resEnt;
 		}
-//	  	다중이미지 업로드
+
 		private Map<String,String> upload(MultipartHttpServletRequest multipartRequest) 
 		throws Exception {
-//			List<String> fileList= new ArrayList<String>();
 			Map<String,String>fileMap = new HashMap<String,String>();
 			Iterator<String> fileNames = multipartRequest.getFileNames();
-//			============================================ realPath 받아오기
 			String realPath = multipartRequest.getSession().getServletContext().getRealPath("");
 			String path = realPath+"resources\\introduce\\introduce_image";
 
@@ -133,10 +131,9 @@ public class IntroduceControllerImpl implements IntroduceController {
 				String fileName = fileNames.next();
 				MultipartFile mFile = multipartRequest.getFile(fileName);
 				String originalFileName = mFile.getOriginalFilename();
-//				fileList.add(originalFileName);
 				fileMap.put(fileName, originalFileName);
-				File file = new File(path +"\\"+"temp"+"\\" + fileName);
-				if(mFile.getSize()!=0) { // File Null Check
+				File file = new File(path +"\\"+"temp"+"\\" + originalFileName);
+				if(mFile.getSize()!=0) {
 					if(!file.exists()) {
 						file.getParentFile().mkdirs();
 						mFile.transferTo(new File(path +"\\"+"temp"+ "\\"+originalFileName)); 
