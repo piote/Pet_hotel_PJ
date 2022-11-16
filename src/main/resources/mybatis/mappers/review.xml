@@ -220,10 +220,21 @@
 
 	</select>
 
-	<select id="selectTotReview" resultType="int">
+	<select id="selectTotReview" resultType="int" parameterType="String">
 	  <![CDATA[
 	  	select count(review_num) from tb_review
+	  	where ROOM_GRADE = #{grade}
 	  ]]>
+	</select>
+	
+	<select id="selectTotReview_user" resultType="int" parameterType="String">
+
+	  	select count(review_num) from tb_review 
+	  	<if test="user_id != 'admin'">
+	  		where user_id = #{user_id}
+	  	</if>
+	  	
+
 	</select>
 
 	<select id="selectAllReviewList" parameterType="java.util.Map"

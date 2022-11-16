@@ -27,12 +27,11 @@ public class ReviewServiceImpl implements ReviewService {
 	public Map reviewDetail_1(Map pagingMap) throws Exception {
 		Map reviewMap = new HashMap();
 		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList(pagingMap);
-		
-		int totReview = reviewDAO.selectTotReview();
-
+		int totReview = reviewDAO.selectTotReview("Deluxe");
+		System.out.println(reviewList);
 		reviewMap.put("reviewList", reviewList);
 		reviewMap.put("totReview", totReview);
-	
+		
 		return reviewMap;
 	}
 	
@@ -41,7 +40,7 @@ public class ReviewServiceImpl implements ReviewService {
 		Map reviewMap = new HashMap();
 		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList2(pagingMap);
 		
-		int totReview = reviewDAO.selectTotReview();
+		int totReview = reviewDAO.selectTotReview("Suite");
 
 		reviewMap.put("reviewList", reviewList);
 		reviewMap.put("totReview", totReview);
@@ -54,7 +53,7 @@ public class ReviewServiceImpl implements ReviewService {
 		Map reviewMap = new HashMap();
 		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList3(pagingMap);
 		
-		int totReview = reviewDAO.selectTotReview();
+		int totReview = reviewDAO.selectTotReview("Superior");
 
 		reviewMap.put("reviewList", reviewList);
 		reviewMap.put("totReview", totReview);
@@ -62,18 +61,18 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewMap;
 	}
 	
-	@Override
-	public Map checkReview(Map pagingMap) throws Exception {
-		Map reviewMap = new HashMap();
-		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList(pagingMap);
-		
-		int totReview = reviewDAO.selectTotReview();
-
-		reviewMap.put("reviewList", reviewList);
-		reviewMap.put("totReview", totReview);
-	
-		return reviewMap;
-	}
+//	@Override
+//	public Map checkReview(Map pagingMap) throws Exception {
+//		Map reviewMap = new HashMap();
+//		List<ReviewVO> reviewList = reviewDAO.selectAllReviewList(pagingMap);
+//		
+//		int totReview = reviewDAO.selectTotReview();
+//
+//		reviewMap.put("reviewList", reviewList);
+//		reviewMap.put("totReview", totReview);
+//	
+//		return reviewMap;
+//	}
 	//리뷰게시판 끝
 	
 	
@@ -82,7 +81,8 @@ public class ReviewServiceImpl implements ReviewService {
 	public Map listMyDetailReview(Map pagingMap) throws Exception {
 		Map myReviewMap = new HashMap();
 		List<ReviewVO> myReviewList = reviewDAO.selectAllMyReviewList(pagingMap);
-		int totReview = reviewDAO.selectTotReview();
+		
+		int totReview = reviewDAO.selectTotReview_user((String) pagingMap.get("user_id")); // 내것만 조회 
 
 		myReviewMap.put("myReviewList", myReviewList);
 		myReviewMap.put("totReview", totReview);
@@ -94,8 +94,8 @@ public class ReviewServiceImpl implements ReviewService {
 	public Map listMyDetailReview2(Map pagingMap) throws Exception {
 		Map myReviewMap = new HashMap();
 		List<ReviewVO> myReviewList = reviewDAO.selectAllMyReviewList2(pagingMap);
-		int totReview = reviewDAO.selectTotReview();
-
+		int totReview = reviewDAO.selectTotReview_user((String) pagingMap.get("user_id")); //전체 조회
+		
 		myReviewMap.put("myReviewList", myReviewList);
 		myReviewMap.put("totReview", totReview);
 

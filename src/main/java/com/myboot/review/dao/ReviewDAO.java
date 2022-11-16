@@ -23,7 +23,8 @@ public interface ReviewDAO {
 	public List selectAllMyReviewList2(Map pagingMap) throws DataAccessException;
 	
 //페이징
-	public int selectTotReview() throws DataAccessException;
+	public int selectTotReview(String grade) throws DataAccessException;
+	public int selectTotReview_user(String user_id) throws DataAccessException;
 	public int selectTotReserves() throws DataAccessException;
 	
 //CRUD
