@@ -295,7 +295,6 @@
             }
         }
         function backToList(obj) {
-            0
             obj.action = "${contextPath}/review/reviewBoard.do";
             obj.submit();
         }
