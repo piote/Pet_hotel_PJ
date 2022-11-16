@@ -324,7 +324,7 @@ input#profil_id {
     			 var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
     	            if( !idReg.test( $("input[name=id]").val() ) ) {
     	               // alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
-    	                $("#olmessage").text("6~20자 문자+숫자여야 합니다.");
+    	                $("#olmessage").text("6~20자 영문자+숫자여야 합니다.");
     	    			$("#olmessage").addClass("olmessagef");
     	    			$("#olmessage").removeClass("olmessaget");
     	    			$("#idcheck").attr("value","false");
