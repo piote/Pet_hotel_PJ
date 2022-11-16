@@ -10,6 +10,16 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+	<script>
+		function fn_checkReserve(isLogOn,checkReserve,loginForm){
+		  	if(isLogOn != '' && isLogOn != 'false'){
+		    	location.href=checkReserve;
+		  	}else{
+		   		alert("로그인 후 예약해주세요.")
+		    	location.href=loginForm+'?action=/mypage/checkReserve.do';
+		  	}
+		}
+	</script>
 </head>
 <body>
   <footer>
@@ -31,8 +41,8 @@
             <ul>
                 <li class="min_title">서비스</li>
                 <li><a href="javascript:fn_reservationForm('${isLogOn}','${contextPath}/reservationForm.do','${contextPath}/loginForm.do')">호텔 예약</a></li>
-                <li><a href="#">예약 조회</a></li>
-                <li><a href="${contextPath}/reviewBoard.do">고객 리뷰</a></li>
+                <li><a href="javascript:fn_checkReserve('${isLogOn}','${contextPath}/mypage/checkReserve.do','${contextPath}/loginForm.do')">예약 조회</a></li>
+                <li><a href="${contextPath}/review/reviewBoard.do">고객 리뷰</a></li>
             </ul>
             <div class="h_hr"></div>
             <ul>
@@ -46,7 +56,6 @@
                 <li class="min_title">지원</li>
                 <li><a href="${contextPath}/questions/questionsList.do">고객 센터</a></li>
                 <li><a href="tel:000-0000-0000">전화 상담</a></li>
-                <li><a href="${contextPath}/questions/questionsList.do">카카오톡 상담</a></li>
             </ul>
         </div>
         <div class="hr"></div>
