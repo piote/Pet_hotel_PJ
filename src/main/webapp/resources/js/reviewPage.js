@@ -135,7 +135,7 @@ function clickNO(pageNo){
         
         var joinDate = review_data[listNO].res_st;
         var joinDate_s = joinDate.substring(0, 10);
-        var a_tag = '"http://localhost:8090/review/reviewForm.do?res_num=';
+        var a_tag = '"/review/reviewForm.do?res_num=';
         
         html += '<td class="res_date">'+joinDate_s+'</td>';
         html += '<td class="pet_name">'+review_data[listNO].pet_name+'</td>';
