@@ -157,7 +157,7 @@
 									<div class="head-cell"><span class="empha">*</span>비상전화</div>
 								</th>
 								<td>
-									<div class="col-cell"><input class="txtBox" type="text" name="tel_sub" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13" placeholder="전화번호를 입력하세요!" value="${user.tel_sub}" required></div>
+									<div class="col-cell"><input class="txtBox" type="text" name="tel_sub" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" oninput="autoHyphen2(this)"  maxlength="13" placeholder="전화번호를 입력하세요!" value="${user.tel_sub}" ></div>
 								</td>
 							</tr>
 							<tr>
