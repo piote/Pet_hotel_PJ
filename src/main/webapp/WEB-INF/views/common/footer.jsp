@@ -15,7 +15,7 @@
 		  	if(isLogOn != '' && isLogOn != 'false'){
 		    	location.href=checkReserve;
 		  	}else{
-		   		alert("로그인 후 예약해주세요.")
+		   		alert("로그인 해주세요.")
 		    	location.href=loginForm+'?action=/mypage/checkReserve.do';
 		  	}
 		}
