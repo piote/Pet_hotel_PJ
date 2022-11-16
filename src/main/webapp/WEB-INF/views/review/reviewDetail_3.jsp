@@ -459,8 +459,25 @@
 
              <br><br><br><br><br>
 
-
-
+             
+             <!-- 페이지수 구하기 -->
+				<c:if test="${totReview % 10 != 0 and totReview > 10}"><!-- 나머지가 있을경우 1페이지가 더 필요하다. ex)68, 62 개 아이템은 7페이지 -->
+				
+					<c:set var="Float" value="${totReview / 10}"/> <!-- 페이지수 구하기. 소수점으로 나누기 때문에 정수로 바꿔야함 -->
+					<fmt:parseNumber var="PNum" value="${Float+(1-(Float%1))%1}" integerOnly="true" scope="request"/> <!-- 소수점올림 -->
+					
+				</c:if>
+				
+				<!-- 10으로 나누어떨어짐 70개 = 7페이지-->
+				<c:if test="${totReview % 10 == 0 and totReview > 10}">
+					<fmt:parseNumber var="PNum" value="${totReview/10}" integerOnly="true" scope="request"/>
+				</c:if>
+				
+				<!-- 아이템이 적어 페이지를 만들 이유가 없음 -->
+				<c:if test="${totReview <= 10}">
+					<c:set var="PNum" value="${0}" scope="request" />
+				</c:if>
+             
 
              <div class="cls2">
                  <c:if test="${totReview != null }">
@@ -492,7 +509,7 @@
 
                          <c:when test="${totReview< 100 }">
                              <!--등록된 글 개수가 100개 미만인 경우  -->
-                             <c:forEach var="page" begin="1" end="${totReview/10 +1}" step="1">
+                             <c:forEach var="page" begin="1" end="${PNum}" step="1">
                                  <c:choose>
                                      <c:when test="${page==pageNum }">
                                          <a class="sel-page"
