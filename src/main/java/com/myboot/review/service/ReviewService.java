@@ -21,7 +21,7 @@ public  interface ReviewService {
 	public Map reviewDetail_1(Map pagingMap) throws Exception;
 	public Map reviewDetail_2(Map pagingMap) throws Exception;
 	public Map reviewDetail_3(Map pagingMap) throws Exception;
-	public Map checkReview(Map pagingMap) throws Exception;
+	//public Map checkReview(Map pagingMap) throws Exception;
 	
 	//마이페이지 내 리뷰 조회
 	public Map listMyDetailReview(Map pagingMap) throws Exception;

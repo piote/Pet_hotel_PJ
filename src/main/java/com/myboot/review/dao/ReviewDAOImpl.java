@@ -55,8 +55,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 	
 	//페이징 	
 	@Override
-	public int selectTotReview() throws DataAccessException {
-		int totReview = sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectTotReview");
+	public int selectTotReview(String grade) throws DataAccessException {
+		int totReview = sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectTotReview", grade);
 		return totReview;
 	}
 	
@@ -64,6 +64,12 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public int selectTotReserves() throws DataAccessException {
 		int totReserves = sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectTotReserves");
 		return totReserves;
+	}
+	
+	@Override
+	public int selectTotReview_user(String user_id) throws DataAccessException {
+		int totReview = sqlSession.selectOne("com.myboot.review.dao.ReviewDAO.selectTotReview_user", user_id);
+		return totReview;
 	}
 	
 	
